@@ -1,0 +1,38 @@
+---
+title: Probabilistic method in combinatorics
+section: Theorems
+section_slug: 93-theorems
+slug: probabilistic-method-in-combinatorics
+attributed_to: [erdos]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [ramsey-theory, axiomatic-foundations-of-probability, graph-theory-and-number-theory]
+applications: [error-correcting-codes, cybersecurity-anomaly-detection]
+tags: [combinatorics, probability, Erdős, existence-proof]
+year_introduced: '1947'
+summary: A method for proving the existence of combinatorial objects by showing they occur with positive probability in a random construction — without explicitly constructing them.
+---
+
+
+
+## What it says
+
+The probabilistic method works as follows: to show that a combinatorial object with a desired property $P$ exists, define a random process and show that $\Pr[\text{object has property } P] > 0$. Since the probability is positive, at least one such object must exist.
+
+**Erdős's classic example (1947):** There exists a graph on $n$ vertices with no clique or independent set of size $2\log_2 n$. Proof: take a random graph where each edge is included independently with probability $\frac{1}{2}$. Compute the expected number of cliques/independent sets of size $k = 2\log_2 n$ by linearity of expectation. Show this expectation is less than 1, so with positive probability no such set exists, so such a graph exists.
+
+## History
+
+[Erdős](/mathematicians/erdos) introduced the probabilistic method in his 1947 paper on Ramsey theory. He used it repeatedly to prove existence results that no constructive proof could match. The method has since become one of the main tools in combinatorics and theoretical computer science.
+
+## Why it matters
+
+The probabilistic method proves existence without construction. This is philosophically striking — you can know something exists without knowing what it looks like. In practice, the method often gives the best-known bounds in extremal combinatorics: how large or small can a combinatorial structure be? It also underpins the theory of randomised algorithms: a randomised algorithm that succeeds with positive probability shows a deterministic solution exists (though finding it efficiently may be another matter).
+
+## Real-world applications
+
+[Error-correcting codes](/applications/error-correcting-codes) — random linear codes achieve the channel capacity by the probabilistic method. [Cybersecurity](/applications/cybersecurity-anomaly-detection) uses randomised methods throughout.
+
+## Where you'll meet it
+
+The probabilistic method appears in Year 3 combinatorics. See the [Modern Mathematics era](/history/09-modern-mathematics).

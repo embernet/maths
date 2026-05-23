@@ -1,0 +1,304 @@
+---
+/**
+ * /[section_slug]/[topic_slug] — topic page.
+ * Renders the MDX content via glob import + applies TopicLayout.
+ * v1.1: adds Theorems and Applications sections to right sidebar.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import Quiz from '../../components/Quiz.astro';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+export async function getStaticPaths() {
+  const contentDir = join(process.cwd(), 'content');
+  if (!existsSync(contentDir)) return [];
+  const paths = [];
+
+  for (const sectionEntry of readdirSync(contentDir)) {
+    const sectionPath = join(contentDir, sectionEntry);
+    if (!statSync(sectionPath).isDirectory()) continue;
+    if (
+      sectionEntry === '00-welcome' ||
+      sectionEntry === '91-mathematicians' ||
+      sectionEntry === '92-resources' ||
+      sectionEntry === '93-theorems' ||
+      sectionEntry === '94-applications'
+    ) continue;
+
+    for (const topicEntry of readdirSync(sectionPath)) {
+      const topicPath = join(sectionPath, topicEntry);
+      if (!statSync(topicPath).isDirectory()) continue;
+      if (!existsSync(join(topicPath, 'index.mdx'))) continue;
+      paths.push({ params: { section_slug: sectionEntry, topic_slug: topicEntry } });
+    }
+  }
+  return paths;
+}
+
+const { section_slug, topic_slug } = Astro.params;
+const topicDir = join(process.cwd(), 'content', section_slug!, topic_slug!);
+const mdxPath = join(topicDir, 'index.mdx');
+
+function parseFrontmatter(fp: string): Record<string, unknown> {
+  let text = '';
+  try { text = readFileSync(fp, 'utf8'); } catch { return {}; }
+  if (!text.startsWith('---')) return {};
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+// Theorem title lookup
+const slugMapPath = join(process.cwd(), 'content/93-theorems/_slug-map.json');
+let slugMap: Record<string, { title: string }> = {};
+if (existsSync(slugMapPath)) {
+  try { slugMap = JSON.parse(readFileSync(slugMapPath, 'utf8')); } catch { /* ignore */ }
+}
+
+const theoremDir = join(process.cwd(), 'content/93-theorems');
+function getTheoremTitle(slug: string): string {
+  const mdxP = join(theoremDir, `${slug}.mdx`);
+  if (existsSync(mdxP)) {
+    const fm = parseFrontmatter(mdxP);
+    if (fm.title) return fm.title as string;
+  }
+  return slugMap[slug]?.title ?? slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+const fm = parseFrontmatter(mdxPath);
+const title = (fm.title as string) ?? topic_slug!;
+const section = (fm.section as string) ?? '';
+const sectionSlug = section_slug!;
+const tags = (fm.tags as string[]) ?? [];
+const prerequisites = (fm.prerequisites as string[]) ?? [];
+const related = (fm.related as string[]) ?? [];
+const mathematicians = (fm.mathematicians as string[]) ?? [];
+const reading_time_min = fm.reading_time_min as number | undefined;
+const summary = fm.summary as string | undefined;
+
+// v1.1 fields
+const theorems = (fm.theorems as string[]) ?? [];
+const applications = (fm.applications as string[]) ?? [];
+
+// Load colocated quiz.json if present
+const quizPath = join(topicDir, 'quiz.json');
+let quizData: unknown = null;
+if (existsSync(quizPath)) {
+  try { quizData = JSON.parse(readFileSync(quizPath, 'utf8')); } catch { /* skip */ }
+}
+
+// Load MDX via glob
+const topicPages = await import.meta.glob('/content/**/**/index.mdx');
+const matchKey = `/content/${section_slug}/${topic_slug}/index.mdx`;
+let Content: unknown = null;
+if (topicPages[matchKey]) {
+  const mod = await topicPages[matchKey]() as { default: unknown };
+  Content = mod.default;
+}
+---
+
+<BaseLayout title={title} description={summary}>
+  <div class="topic-page-wrapper">
+    <article class="prose-content topic-article" aria-label={title}>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true"> › </span>
+        <a href={`/${sectionSlug}`}>{section || sectionSlug}</a>
+        <span aria-hidden="true"> › </span>
+        <span aria-current="page">{title}</span>
+      </nav>
+
+      <header class="topic-header">
+        {section && <span class="section-badge">{section}</span>}
+        <h1>{title}</h1>
+        <div class="topic-meta">
+          {reading_time_min && (
+            <span class="reading-chip">⏱ {reading_time_min} min read</span>
+          )}
+          {tags.length > 0 && (
+            <div class="tag-list" aria-label="Tags">
+              {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+            </div>
+          )}
+        </div>
+        {prerequisites.length > 0 && (
+          <p class="prereq-note">
+            <strong>Prerequisites:</strong>{' '}
+            {prerequisites.map((slug, i) => (
+              <>
+                <a href={`/${sectionSlug}/${slug}`}>{slug.replace(/^\d+-/, '').replace(/-/g, ' ')}</a>
+                {i < prerequisites.length - 1 ? ', ' : ''}
+              </>
+            ))}
+          </p>
+        )}
+      </header>
+
+      {Content ? (
+        <div class="topic-body">
+          <Content />
+        </div>
+      ) : (
+        <p class="empty-note">Content for this topic is being prepared.</p>
+      )}
+
+      {quizData && (
+        <section class="quiz-island no-print" aria-label="Check your understanding">
+          <Quiz quizData={quizData} />
+        </section>
+      )}
+    </article>
+
+    <div class="sidebar-column">
+      <Sidebar related={related} mathematicians={mathematicians} sectionSlug={sectionSlug} />
+
+      {theorems.length > 0 && (
+        <aside class="topic-sidebar theorems-sidebar no-print" aria-label="Theorems on this page">
+          <h2 class="sidebar-heading">Theorems on this page</h2>
+          <ul class="sidebar-list">
+            {theorems.map((tSlug) => (
+              <li>
+                <a href={`/theorems/${tSlug}`}>{getTheoremTitle(tSlug)}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+
+      {applications.length > 0 && (
+        <aside class="topic-sidebar applications-sidebar no-print" aria-label="Real-world applications">
+          <h2 class="sidebar-heading">Real-world applications</h2>
+          <ul class="sidebar-list">
+            {applications.map((appSlug) => (
+              <li>
+                <a href={`/applications/${appSlug}`}>
+                  {appSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .topic-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+  @media (min-width: 1024px) {
+    .topic-page-wrapper { flex-direction: row; padding: 0 2rem; }
+    .topic-article { flex: 1 1 0; min-width: 0; }
+  }
+
+  .sidebar-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (min-width: 1024px) {
+    .sidebar-column { flex-shrink: 0; }
+  }
+
+  .breadcrumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 1.25rem; }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .topic-header { margin-bottom: 1.5rem; }
+
+  .topic-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .prereq-note {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  .topic-body { margin-top: 0.5rem; }
+
+  .quiz-island {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .empty-note { color: var(--color-muted); font-style: italic; }
+
+  /* Additional sidebars */
+  .topic-sidebar {
+    width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.25rem 1rem;
+    font-size: 0.92rem;
+  }
+  @media (min-width: 1024px) {
+    .topic-sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+      width: 220px;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+  }
+
+  .sidebar-heading {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.65rem;
+  }
+
+  .sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .sidebar-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+    padding: 0.2rem 0;
+    font-size: 0.88rem;
+    transition: color 0.12s;
+  }
+  .sidebar-list a:hover { color: var(--color-accent); }
+</style>

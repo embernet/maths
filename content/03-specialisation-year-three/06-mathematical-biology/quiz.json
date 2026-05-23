@@ -1,0 +1,36 @@
+{
+  "topic_slug": "06-mathematical-biology",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "In the SIR epidemic model, the basic reproductive number $R_0$ determines:",
+      "options": [
+        {"id": "a", "text": "Whether an epidemic grows ($R_0 > 1$) or dies out ($R_0 < 1$).", "correct": true, "explanation": "$R_0$ is the expected number of secondary infections from one case in a fully susceptible population. Above 1 the epidemic grows; below 1 it decays. The herd immunity threshold is $1 - 1/R_0$."},
+        {"id": "b", "text": "The fraction of the population that will eventually be infected.", "correct": false, "explanation": "The final size of the epidemic (fraction ultimately infected) is given by a separate equation, not directly by $R_0$ alone."},
+        {"id": "c", "text": "The peak number of infectious individuals.", "correct": false, "explanation": "The peak occurs when $\\dot{I} = 0$, i.e. when $S = \\gamma/\\beta = N/R_0$. This depends on $R_0$ and the initial susceptible population, but $R_0$ alone does not give the peak."},
+        {"id": "d", "text": "The duration of the epidemic.", "correct": false, "explanation": "Duration depends on the recovery rate $\\gamma$ and the dynamics of the outbreak, not directly on $R_0$."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Turing's 1952 mechanism for pattern formation requires:",
+      "options": [
+        {"id": "a", "text": "A short-range activator and a long-range inhibitor, with the inhibitor diffusing much faster.", "correct": true, "explanation": "The key requirement for Turing instability is $D_v \\gg D_u$: fast-diffusing inhibitor and slow-diffusing activator. Uniform states destabilise to periodic patterns when this is combined with appropriate reaction kinetics."},
+        {"id": "b", "text": "A chaotic dynamical system.", "correct": false, "explanation": "Turing patterns arise from a linear instability of a homogeneous steady state, not from chaos. The analysis uses linear stability theory."},
+        {"id": "c", "text": "Both species diffusing at the same rate.", "correct": false, "explanation": "Equal diffusion rates are exactly what prevents Turing instability. The instability requires differential diffusion rates."},
+        {"id": "d", "text": "An externally imposed spatial gradient.", "correct": false, "explanation": "The remarkable feature of Turing's mechanism is spontaneous symmetry breaking — patterns emerge from a spatially uniform state without any external gradient."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "In the Lotka-Volterra predator-prey model, the interior equilibrium (positive prey and predator populations):",
+      "options": [
+        {"id": "a", "text": "Is a centre: solutions form closed orbits around it.", "correct": true, "explanation": "Linearisation gives purely imaginary eigenvalues (a centre in the linearisation), and the conserved quantity confirms true closed orbits in the nonlinear system. Both populations oscillate perpetually."},
+        {"id": "b", "text": "Is a stable spiral: populations converge to the equilibrium.", "correct": false, "explanation": "Stable spirals arise in modified Lotka-Volterra models with damping, but the basic Lotka-Volterra model gives a centre, not a stable spiral."},
+        {"id": "c", "text": "Is an unstable saddle point.", "correct": false, "explanation": "Saddle points are unstable in all directions except one. The interior equilibrium of Lotka-Volterra is neutrally stable (centre)."},
+        {"id": "d", "text": "Does not exist when both species are present.", "correct": false, "explanation": "The interior equilibrium exists at $(y^*, x^*) = (\\alpha/\\beta, \\gamma/\\delta)$ whenever all parameters are positive."}
+      ]
+    }
+  ]
+}

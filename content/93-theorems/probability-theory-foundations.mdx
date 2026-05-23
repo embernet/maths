@@ -1,0 +1,39 @@
+---
+title: probability theory foundations
+section: Theorems
+section_slug: 93-theorems
+slug: probability-theory-foundations
+attributed_to: [pascal]
+era: 04-renaissance-and-symbolic-algebra
+appears_in: [01-foundations-year-one/04-probability-and-statistics]
+related_theorems: [bayes-theorem, axiomatic-foundations-of-probability, law-of-large-numbers, pascal-s-triangle]
+applications: [gambling-and-game-theory, actuarial-science, epidemiological-modelling]
+tags: [probability, history, Pascal, combinatorics]
+year_introduced: '1654'
+summary: The famous correspondence between Pascal and Fermat solving the problem of points — the founding moment of mathematical probability theory.
+---
+
+
+## What it says
+
+In 1654, Pascal and Fermat exchanged letters solving the **problem of points**: two players are playing a fair game; each round one player wins; the first to reach $n$ wins gets the prize. If the game is interrupted, how should the prize be divided fairly?
+
+Solution: calculate, for each player, the probability that they would have won if the game had continued. Divide the prize proportionally.
+
+For example, if Player A needs 2 more wins and Player B needs 3: the game would last at most $2 + 3 - 1 = 4$ more rounds. Player A wins if she gets $\geq 2$ of the remaining rounds. The probability of each outcome is computed using binomial coefficients from [Pascal's triangle](/theorems/pascal-s-triangle).
+
+## History
+
+[Pascal](/mathematicians/pascal) and Fermat solved the problem of points in a correspondence that effectively launched probability theory as a mathematical discipline. Pascal combined the result with work on expected value and combinatorics in his *Traité du triangle arithmétique* (1654). Huygens published the first textbook on probability in 1657.
+
+## Why it matters
+
+Pascal and Fermat invented the framework for computing probabilities and expectations — the foundation of all subsequent probability theory. Their key insight was that a fair division depends on *future probabilities*, not on past outcomes. This was a new way of thinking about fairness, risk, and uncertainty.
+
+## Real-world applications
+
+[Gambling and game theory](/applications/gambling-and-game-theory) descends directly from the problem of points. [Actuarial science](/applications/actuarial-science) and [epidemiological modelling](/applications/epidemiological-modelling) use the probabilistic framework Pascal and Fermat founded.
+
+## Where you'll meet it
+
+The problem of points is introduced as historical context in Year 1 probability. See the [Renaissance and Symbolic Algebra era](/history/04-renaissance-and-symbolic-algebra) and [Axiomatic foundations of probability](/theorems/axiomatic-foundations-of-probability) for the modern treatment.

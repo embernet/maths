@@ -1,0 +1,42 @@
+---
+title: Quantum Computing Algorithms
+section: Real-world applications
+section_slug: 94-applications
+slug: quantum-computing-algorithms
+domains: [computer-science, physics, mathematics]
+uses_theorems: [fourier-transform, galois-theory, group-theory-permutation-groups, modular-arithmetic-and-number-theory]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/01-abstract-algebra, 03-specialisation-year-three/01-galois-theory, 03-specialisation-year-three/02-functional-analysis]
+related_applications: [rsa-public-key-cryptography, error-correcting-codes, digital-signatures]
+tags: [quantum-computing, Fourier, group-theory, applied]
+real_world_examples: [Shor's algorithm threatening RSA, Grover's search algorithm, Quantum simulation of chemistry, Quantum error correction]
+summary: Shor's algorithm breaks RSA by computing a hidden period in a group using the quantum Fourier transform — the deepest known application of group theory to computing.
+---
+
+
+## The application
+
+A sufficiently large quantum computer running Shor's algorithm could factorise any 2048-bit integer in hours, breaking all current RSA-based internet security. This threat has triggered a global transition to **post-quantum cryptography**. The mathematics behind Shor's algorithm is the quantum Fourier transform over cyclic groups, combined with the order-finding problem from elementary number theory — pure undergraduate mathematics translated into quantum mechanics.
+
+## The maths behind it
+
+**Shor's algorithm** reduces integer factorisation to **order-finding**: given $a$ and $n$, find the smallest positive integer $r$ such that $a^r \equiv 1 \pmod{n}$ (the multiplicative order of $a$ mod $n$). If $r$ is even and $a^{r/2} \not\equiv -1 \pmod{n}$, then $\gcd(a^{r/2} \pm 1, n)$ gives a non-trivial factor of $n$ with high probability. This is the classical reduction, requiring only Fermat's little theorem and basic modular arithmetic.
+
+The quantum speedup comes from **phase estimation** and the **quantum Fourier transform** (QFT). The state of a quantum system is a vector in a Hilbert space $\mathbb{C}^{2^n}$ (for $n$ qubits). Quantum gates are unitary transformations (elements of $U(2^n)$). The QFT is the standard discrete Fourier transform applied to quantum amplitudes:
+
+$$|j\rangle \mapsto \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i jk / N} |k\rangle, \quad N = 2^n.$$
+
+Shor's circuit prepares a superposition over all possible exponents, applies modular exponentiation as a quantum oracle, and uses the QFT to extract the period $r$ from the resulting interference pattern in $O((\log n)^2 \log\log n)$ quantum operations — exponentially faster than any known classical algorithm.
+
+**Group theory** enters more generally: the **hidden subgroup problem** asks for a subgroup $H$ of a group $G$ given only black-box access to a function that is constant on cosets of $H$. Shor's algorithm solves this for $G = \mathbb{Z}/N\mathbb{Z}$; the general framework extends to other groups, connecting quantum computing to the representation theory developed in abstract algebra courses.
+
+## A concrete example
+
+No quantum computer of sufficient scale to run Shor's algorithm against real cryptographic keys exists yet (as of 2026). The record factorisation by quantum means is $21 = 3 \times 7$. However, cryptographic standards bodies (NIST published post-quantum standards in 2024) have already mandated migration to lattice-based and hash-based cryptographic schemes that are believed resistant to quantum attack, on the assumption that large quantum computers are coming within decades.
+
+## History of the application
+
+Peter Shor published his algorithm in 1994, immediately after the discovery that quantum computers could provide superpolynomial speedups (building on Deutsch, 1985, and Simon, 1994). The connection to the quantum Fourier transform and group theory was made explicit by Kitaev (1995) and has since become the central organising principle of quantum algorithm design.
+
+## Links
+
+The group theory and modular arithmetic foundations are in [Abstract Algebra](/02-core-year-two/01-abstract-algebra). Galois theory, which classifies extensions of finite fields, is in [Galois Theory](/03-specialisation-year-three/01-galois-theory). The Fourier transform is in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). The Hilbert space setting is [Functional Analysis](/03-specialisation-year-three/02-functional-analysis). The application this most directly threatens is [RSA and Public-Key Cryptography](/applications/rsa-public-key-cryptography).

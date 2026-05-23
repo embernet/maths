@@ -1,0 +1,36 @@
+{
+  "topic_slug": "07-stochastic-processes",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "A stochastic process $\\{M_n\\}$ is a martingale if:",
+      "options": [
+        {"id": "a", "text": "$E[M_{n+1} \\mid \\mathcal{F}_n] = M_n$ for all $n$.", "correct": true, "explanation": "This is the defining martingale property: given everything known up to time $n$, the best forecast of the next value is the current value. No systematic drift."},
+        {"id": "b", "text": "$M_n \\to \\infty$ almost surely.", "correct": false, "explanation": "A martingale can converge or diverge. The convergence theorem says bounded martingales converge, but unbounded ones need not."},
+        {"id": "c", "text": "$M_{n+1} - M_n$ is always positive.", "correct": false, "explanation": "That would make $M_n$ a submartingale (non-decreasing on average), not a martingale."},
+        {"id": "d", "text": "The increments $M_{n+1} - M_n$ are i.i.d.", "correct": false, "explanation": "Independent identically distributed increments characterise a random walk, which is a martingale but not the only kind."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The quadratic variation of standard Brownian motion $[W]_t$ over $[0,t]$ is:",
+      "options": [
+        {"id": "a", "text": "$t$.", "correct": true, "explanation": "Brownian motion has quadratic variation $[W]_t = t$ — a non-trivial result. For smooth functions, quadratic variation is zero. The non-zero quadratic variation is what forces the Itô correction term in Itô's lemma."},
+        {"id": "b", "text": "$0$.", "correct": false, "explanation": "Zero quadratic variation is the property of smooth (differentiable) functions. Brownian paths are nowhere differentiable and have quadratic variation $t$."},
+        {"id": "c", "text": "$W_t^2$.", "correct": false, "explanation": "$W_t^2 - t$ is a martingale (not $W_t^2$ itself). The quadratic variation is the deterministic quantity $t$, not the random variable $W_t^2$."},
+        {"id": "d", "text": "$\\sqrt{t}$.", "correct": false, "explanation": "$E[|W_t|] = \\sqrt{2t/\\pi}$, and the standard deviation of $W_t$ is $\\sqrt{t}$, but the quadratic variation itself is the deterministic quantity $t$."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The optional stopping theorem for martingales says:",
+      "options": [
+        {"id": "a", "text": "Under mild conditions, $E[M_\\tau] = E[M_0]$ for a stopping time $\\tau$.", "correct": true, "explanation": "The expected value at a stopping time equals the initial expected value. This formalises the intuition that no stopping strategy can improve expected winnings in a fair game."},
+        {"id": "b", "text": "There always exists a stopping time that maximises $E[M_\\tau]$.", "correct": false, "explanation": "The theorem says $E[M_\\tau] = E[M_0]$ — you cannot do better than the initial expected value, so no stopping time strictly improves it."},
+        {"id": "c", "text": "Martingales always converge to a finite limit.", "correct": false, "explanation": "The martingale convergence theorem gives convergence for $L^1$-bounded martingales. General martingales need not converge (a symmetric random walk returns to any level infinitely often)."},
+        {"id": "d", "text": "The stopped process $M_{n \\wedge \\tau}$ is a supermartingale.", "correct": false, "explanation": "The stopped process $M_{n \\wedge \\tau}$ is itself a martingale (if $M_n$ is), not just a supermartingale."}
+      ]
+    }
+  ]
+}

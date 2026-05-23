@@ -1,0 +1,46 @@
+---
+title: Seismic Imaging and Oil Exploration
+section: Real-world applications
+section_slug: 94-applications
+slug: seismic-imaging-oil-exploration
+domains: [earth-science, engineering, mathematics]
+uses_theorems: [fourier-transform, fourier-series]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/08-differential-equations-advanced, 04-advanced-topics-year-four/03-advanced-pdes]
+related_applications: [medical-imaging-mri-ct, gravitational-wave-detection, weather-forecasting]
+tags: [inverse-problems, PDEs, wave-equations, applied]
+real_world_examples: [Oil and gas reservoir mapping, Carbon capture site assessment, Earthquake early-warning systems, Archaeological site detection]
+summary: Sending sound waves into the earth and listening to the echoes is an inverse problem — recovering a picture of the subsurface from measurements at the surface using wave equations and Fourier methods.
+---
+
+
+## The application
+
+Geophysicists map underground rock formations — oil reservoirs, aquifers, fault zones — by generating controlled seismic waves (explosions, vibrating trucks, or airguns at sea) and measuring how they reflect and refract off subsurface interfaces. Recovering the velocity and density structure of the earth from measurements at the surface is an **inverse problem**: given the output of the wave equation (the recorded seismograms), infer the coefficients (the earth's properties). The mathematics involves PDEs, Fourier analysis, and computational inverse problem theory.
+
+## The maths behind it
+
+Seismic waves propagate according to the **acoustic wave equation**:
+
+$$\frac{1}{v(\mathbf{x})^2} \frac{\partial^2 p}{\partial t^2} = \nabla^2 p + s(\mathbf{x}, t),$$
+
+where $p(\mathbf{x},t)$ is pressure, $v(\mathbf{x})$ the spatially varying wave speed, and $s$ the seismic source. The **forward problem** — computing $p$ at the surface given $v(\mathbf{x})$ and $s$ — is a well-posed PDE problem, solved by finite-difference or finite-element discretisation.
+
+The **inverse problem** — recovering $v(\mathbf{x})$ from surface measurements $p_{\text{obs}}$ — is ill-posed: small perturbations in the data can cause large changes in the inferred velocity. The standard approach is **full waveform inversion** (FWI): minimise
+
+$$J(v) = \frac{1}{2}\|p_{\text{calc}}(v) - p_{\text{obs}}\|^2,$$
+
+over all velocity models $v(\mathbf{x})$. The gradient $\nabla_v J$ is computed using the **adjoint state method** — a clever application of the chain rule (backpropagation in disguise) that avoids explicitly forming the Jacobian. The gradient is obtained by solving the forward wave equation twice (forward in time for $p$, backward in time for the adjoint field) and cross-correlating.
+
+**Fourier methods** appear at multiple scales: the recorded time-series at each receiver is Fourier-transformed to separate different frequency components; migration algorithms work in the frequency-wavenumber domain; stochastic models for the source wavelet use spectral estimation.
+
+## A concrete example
+
+A modern marine seismic survey deploys a vessel towing an airgun array (source) and up to 12 km of hydrophone streamers (receivers). A single 3D survey over an oil field might acquire $10^{12}$ bytes of data. Processing the data from raw traces to a subsurface image takes weeks on a computing cluster, with the FWI gradient computation constituting the dominant cost.
+
+## History of the application
+
+Seismic reflection was first used for oil exploration in the 1920s. The mathematical framework for migration (moving seismic events to their true subsurface locations) was developed by Claerbout at Stanford in the 1970s, using the connection between the wave equation and downward continuation in the frequency-wavenumber domain. Full waveform inversion was formulated by Lailly and Tarantola in 1983.
+
+## Links
+
+The wave equation and PDE methods are in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes) and [Advanced PDEs](/04-advanced-topics-year-four/03-advanced-pdes). Fourier methods for the data processing are in the same PDE module. The inverse problem framework connects to [Advanced Differential Equations](/03-specialisation-year-three/08-differential-equations-advanced). See also [Medical Imaging: MRI and CT](/applications/medical-imaging-mri-ct) for a related inverse problem.

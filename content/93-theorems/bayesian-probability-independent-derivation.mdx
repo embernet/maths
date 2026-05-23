@@ -1,0 +1,41 @@
+---
+title: Bayesian probability (independent derivation)
+section: Theorems
+section_slug: 93-theorems
+slug: bayesian-probability-independent-derivation
+attributed_to: [laplace]
+era: 05-the-calculus-revolution
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [bayes-theorem, foundational-paper-on-inverse-probability, axiomatic-foundations-of-probability]
+applications: [medical-diagnosis-screening, machine-learning-bayesian-inference, epidemiological-modelling]
+tags: [probability, Bayesian, Laplace, statistics]
+year_introduced: '1774'
+summary: Laplace's independent derivation of Bayesian probability and the principle of inverse probability — more systematic and more widely applied than Bayes's original essay.
+---
+
+
+## What it says
+
+[Laplace](/mathematicians/laplace) independently derived the theorem of inverse probability (now called Bayes' theorem) in 1774, several years after Bayes's posthumous paper. Laplace's formulation was clearer and more general:
+
+$$P(\text{cause} \mid \text{effect}) \propto P(\text{effect} \mid \text{cause}) \cdot P(\text{cause})$$
+
+He applied it to practical problems: estimating the true value of a physical quantity from multiple measurements, estimating birth rates from census data, and assessing the probability of events from historical frequencies. His **rule of succession** estimated the probability that the sun will rise tomorrow given that it has risen every day for recorded history.
+
+Laplace also developed the **method of moments** and showed that the posterior distribution, with a flat prior and many observations, concentrates around the maximum likelihood estimate — an early version of what is now called the Bernstein–von Mises theorem.
+
+## History
+
+Laplace was a far more prolific developer of Bayesian methods than Bayes himself. Much of what we call "Bayesian statistics" in practice was first systematically applied by Laplace.
+
+## Why it matters
+
+Laplace showed that probability theory can be used for inference — reasoning from effects back to causes — not just for computing frequencies. This is the Bayesian programme, and it underpins modern probabilistic machine learning.
+
+## Real-world applications
+
+[Medical diagnosis](/applications/medical-diagnosis-screening), [Bayesian machine learning](/applications/machine-learning-bayesian-inference), and [epidemiological modelling](/applications/epidemiological-modelling) all implement Laplace's inverse probability approach.
+
+## Where you'll meet it
+
+Bayesian probability appears in Year 1 and Year 2 statistics. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

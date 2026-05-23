@@ -1,0 +1,81 @@
+---
+title: Probability and Statistical Inference
+section: 'Core Mathematics: Year Two'
+section_slug: 02-core-year-two
+year: 2
+order: 5
+tags: [probability, statistics, inference, likelihood, CLT, hypothesis-testing, estimation]
+prerequisites:
+- 04-probability-and-statistics
+related:
+- 07-stochastic-processes
+- 02-measure-and-lebesgue-integration
+mathematicians: [fisher, kolmogorov, bayes, laplace]
+reading_time_min: 11
+summary: 'Year Two probability deepens the Year One foundations: rigorous estimation theory, the Cramér-Rao bound, the Neyman-Pearson framework, and the beginnings of measure-theoretic probability.'
+theorems: [maximum-likelihood-estimation, the-fisher-information-matrix, analysis-of-variance-anova, experimental-design-randomisation-blocking-factorial-design, axiomatic-foundations-of-probability, bayes-theorem]
+applications: [clinical-trials-design, census-and-survey-statistics, cybersecurity-anomaly-detection, actuarial-science]
+---
+
+
+Year One probability gave you the tools — probability spaces, random variables, standard distributions, the Central Limit Theorem. Year Two asks harder questions. How do you quantify the precision of an estimate? What is the best possible estimator for a parameter, and is there a fundamental limit? How should you choose between two statistical hypotheses? The answers are among the most elegant results in applied mathematics.
+
+## Estimation theory
+
+Given observations $X_1, \ldots, X_n$ from a distribution with unknown parameter $\theta$, an **estimator** $\hat{\theta} = T(X_1, \ldots, X_n)$ is a function of the data that estimates $\theta$. Key properties:
+
+- **Unbiasedness**: $E[\hat{\theta}] = \theta$. The estimator is "right on average."
+- **Consistency**: $\hat{\theta} \to \theta$ in probability as $n \to \infty$.
+- **Efficiency**: the variance of $\hat{\theta}$ is as small as possible.
+
+The **Cramér-Rao lower bound** gives a fundamental limit on estimator variance. Define the **Fisher information**:
+
+$$I(\theta) = E\!\left[\left(\frac{\partial}{\partial\theta} \log f(X;\theta)\right)^2\right] = -E\!\left[\frac{\partial^2}{\partial\theta^2} \log f(X;\theta)\right].$$
+
+For any unbiased estimator $\hat{\theta}$:
+
+$$\text{Var}(\hat{\theta}) \ge \frac{1}{n\, I(\theta)}.$$
+
+An estimator achieving this bound is called **efficient**. Maximum likelihood estimators are asymptotically efficient — they achieve the Cramér-Rao bound as $n \to \infty$.
+
+## Maximum likelihood estimation
+
+[Fisher's](/mathematicians/fisher) maximum likelihood principle: choose $\hat{\theta}$ to maximise the **likelihood** $L(\theta) = \prod_{i=1}^n f(x_i; \theta)$, or equivalently the **log-likelihood** $\ell(\theta) = \sum_{i=1}^n \log f(x_i; \theta)$.
+
+For a Normal sample $X_1, \ldots, X_n \sim N(\mu, \sigma^2)$, the MLE is $\hat{\mu} = \bar{X}$ and $\hat{\sigma}^2 = \frac{1}{n}\sum(X_i - \bar{X})^2$ (the biased version — note $n$ not $n-1$). The sample variance $S^2 = \frac{1}{n-1}\sum(X_i - \bar{X})^2$ is the unbiased estimator.
+
+**Sufficiency**: a statistic $T(X_1, \ldots, X_n)$ is **sufficient** for $\theta$ if the conditional distribution of the data given $T$ does not depend on $\theta$. Sufficiency captures all the information in the data relevant to $\theta$. The **Rao-Blackwell theorem** says you can always improve an estimator by conditioning on a sufficient statistic.
+
+## Hypothesis testing: the Neyman-Pearson framework
+
+A **hypothesis test** specifies a null hypothesis $H_0$ and an alternative $H_1$. The test statistic divides the sample space into an **acceptance region** and a **rejection (critical) region**.
+
+Two types of error:
+- **Type I** (false positive): rejecting $H_0$ when it is true. Probability: $\alpha$ (the significance level).
+- **Type II** (false negative): accepting $H_0$ when $H_1$ is true. Probability: $\beta$ (complementary to the **power** $1-\beta$).
+
+The **Neyman-Pearson lemma** gives the most powerful test of a simple null against a simple alternative at level $\alpha$: use the **likelihood ratio test**, rejecting $H_0$ when
+
+$$\Lambda = \frac{L(\theta_1; x)}{L(\theta_0; x)} > c_\alpha,$$
+
+where $c_\alpha$ is chosen so that $P(\Lambda > c_\alpha \mid H_0) = \alpha$.
+
+This is optimal: no other test of level $\alpha$ has higher power. The Neyman-Pearson lemma is the foundation for many standard tests — the $z$-test, $t$-test, $F$-test — which can all be derived as likelihood ratio tests.
+
+## Markov chains: a preview
+
+Year Two probability typically introduces **Markov chains**: stochastic processes $X_0, X_1, X_2, \ldots$ where the future depends on the past only through the present:
+
+$$P(X_{n+1} = j \mid X_n = i, X_{n-1} = i_{n-1}, \ldots) = P(X_{n+1} = j \mid X_n = i) = p_{ij}.$$
+
+The matrix $P = (p_{ij})$ is the **transition matrix**. Markov chains model queues, random walks, Google's PageRank, and the Metropolis algorithm in Bayesian computation. The key long-run question: does the chain have a **stationary distribution** $\pi = \pi P$, and does it converge to $\pi$ regardless of the starting state? For irreducible aperiodic chains on finite state spaces: yes.
+
+## Real-world applications
+
+Where this turns up in the world: [Clinical trials](/applications/clinical-trials-design) are designed using the power calculations and Neyman-Pearson framework developed in this module — the sample sizes for COVID-19 vaccine trials were computed using exactly these methods. [Census and survey statistics](/applications/census-and-survey-statistics) use maximum likelihood and regression estimators to produce the national employment statistics you read in the news. [Cybersecurity anomaly detection](/applications/cybersecurity-anomaly-detection) applies the likelihood ratio test from this course to streams of network traffic to identify intrusions.
+
+## Towards rigorous probability
+
+Year One probability was largely computational. The limit of this approach appears when you need to work with continuous-time processes, non-standard distributions, or probability theory in infinite dimensions.
+
+The rigorous foundation — [Kolmogorov's](/mathematicians/kolmogorov) 1933 axiomatisation using measure theory — treats probability as a special case of Lebesgue integration. A probability measure is simply a normalised measure on a $\sigma$-algebra; random variables are measurable functions; expectation is the Lebesgue integral. This framework, developed in Year Three alongside measure theory, is what makes stochastic calculus, martingale theory, and financial mathematics rigorous.

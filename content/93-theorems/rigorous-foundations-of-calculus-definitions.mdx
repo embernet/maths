@@ -1,0 +1,40 @@
+---
+title: Rigorous foundations of calculus (ε–δ definitions)
+section: Theorems
+section_slug: 93-theorems
+slug: rigorous-foundations-of-calculus-definitions
+attributed_to: [cauchy]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [cauchy-sequences, mean-value-theorem, bolzanoweierstrass-theorem, dedekind-cuts-rigorous-construction-of-real-numbers]
+applications: []
+tags: [analysis, epsilon-delta, limits, continuity, foundations]
+year_introduced: 1821 (Cauchy); fully refined by Weierstrass c. 1860
+summary: The ε–δ definition of limits and continuity that replaced informal infinitesimals with precise logical statements — the language of all modern analysis.
+---
+
+
+
+## What it says
+
+The **limit** $\lim_{x \to a} f(x) = L$ means: for every $\varepsilon > 0$ there exists $\delta > 0$ such that $0 < |x - a| < \delta$ implies $|f(x) - L| < \varepsilon$.
+
+A function $f$ is **continuous** at $a$ if $\lim_{x \to a} f(x) = f(a)$ — the limit exists and equals the function value.
+
+A function $f$ is **uniformly continuous** on $[a, b]$ if the $\delta$ can be chosen independently of $a$: for every $\varepsilon > 0$ there exists $\delta > 0$ such that $|x - y| < \delta$ implies $|f(x) - f(y)| < \varepsilon$ for all $x, y$.
+
+## History
+
+Before the nineteenth century, calculus used "infinitesimals" — quantities that were smaller than any positive number but not zero. This was effective in practice but logically murky; Berkeley had ridiculed the concept in 1734 as "ghosts of departed quantities." [Cauchy](/mathematicians/cauchy) in *Cours d'analyse* (1821) replaced infinitesimals with the $\varepsilon$-$\delta$ framework for the first time in print. [Weierstrass](/mathematicians/weierstrass) sharpened and formalised the approach in his Berlin lectures from the 1860s, removing all lingering imprecision.
+
+## Why it matters
+
+The $\varepsilon$-$\delta$ language is not just pedantry — it is what makes proofs possible. With it, you can prove that $\sqrt{x}$ is uniformly continuous on $[0, 1]$. Without it, you are waving your hands. The framework also revealed new phenomena: functions continuous everywhere but differentiable nowhere ([Weierstrass's function](/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere)), space-filling curves, and the crucial distinction between pointwise and uniform convergence.
+
+## Real-world applications
+
+Every numerical analysis result about error bounds and convergence rates uses $\varepsilon$-$\delta$-style reasoning.
+
+## Where you'll meet it
+
+The $\varepsilon$-$\delta$ definition is introduced in Year 1 analysis and deployed throughout Year 2 real analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

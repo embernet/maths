@@ -1,0 +1,38 @@
+---
+title: Cryptocurrency and Blockchain
+section: Real-world applications
+section_slug: 94-applications
+slug: cryptocurrency-blockchain
+domains: [computer-science, finance, cryptography]
+uses_theorems: [fermat-s-little-theorem, modular-arithmetic-and-number-theory, axiomatic-foundations-of-probability]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/01-abstract-algebra, 04-advanced-topics-year-four/01-algebraic-geometry]
+related_applications: [digital-signatures, rsa-public-key-cryptography, error-correcting-codes]
+tags: [cryptography, probability, elliptic-curves, applied]
+real_world_examples: [Bitcoin and Ethereum transactions, NFT ownership records, Decentralised finance (DeFi) protocols, Supply chain tracking]
+summary: Bitcoin's security rests on the discrete logarithm problem for elliptic curves over finite fields — algebraic geometry at the heart of a global financial network.
+---
+
+
+## The application
+
+A blockchain is a distributed ledger maintained without any central authority: transactions are broadcast to a peer-to-peer network, grouped into blocks, and each block is cryptographically linked to the previous one via a hash function. The security of the system rests on three mathematical pillars: elliptic-curve cryptography (for signatures), cryptographic hash functions (for the chain linkage), and probability theory (for the proof-of-work consensus mechanism).
+
+## The maths behind it
+
+**Elliptic-curve signatures (ECDSA)**: Bitcoin uses the elliptic curve secp256k1 over $\mathbb{F}_p$ where $p = 2^{256} - 2^{32} - 977$. The curve equation is $y^2 = x^3 + 7 \pmod{p}$. The group of points $E(\mathbb{F}_p)$ has order $n \approx p$ (by Hasse's theorem: $|n - p - 1| \leq 2\sqrt{p}$). A private key is an integer $d \in [1, n-1]$; the public key is the point $Q = dG$, where $G$ is the generator point. Security rests on the **elliptic curve discrete logarithm problem** (ECDLP): given $G$ and $Q$, recover $d$. No sub-exponential algorithm for ECDLP over general curves is known.
+
+**Cryptographic hash functions**: SHA-256 maps any input to a 256-bit output in a way that is collision-resistant (hard to find two inputs with the same hash) and preimage-resistant (hard to invert). Each block header contains the hash of the previous block, creating a chain: altering any block changes its hash and invalidates all subsequent blocks.
+
+**Proof of work**: to add a block, a miner must find a nonce $x$ such that $\text{SHA256}(\text{SHA256}(\text{header} \| x)) < T$ (a target $T$). Since SHA-256 outputs are uniformly distributed (modelled as a random oracle), each trial succeeds with probability $T / 2^{256}$. Finding a valid nonce is a Bernoulli trial with success probability $p \approx T/2^{256}$; the number of trials needed is geometrically distributed with mean $1/p$. The network adjusts $T$ every 2016 blocks to target a 10-minute average block time.
+
+## A concrete example
+
+The Bitcoin network (as of 2026) performs on the order of $5 \times 10^{20}$ SHA-256 operations per second — the "hash rate". At a current difficulty target, the expected number of trials to find a valid block is roughly $5 \times 10^{22}$, requiring ~100 seconds of network-wide computation. A single attacker would need to match the entire network's computational power to reliably alter the chain — the 51% attack.
+
+## History of the application
+
+Satoshi Nakamoto published the Bitcoin whitepaper in 2008 and released the software in 2009. The cryptographic building blocks — elliptic curve cryptography (Koblitz and Miller, 1985), SHA-256 (NIST, 2001), Merkle trees (Merkle, 1979), and hash cash proof-of-work (Back, 1997) — all predate Bitcoin. Nakamoto's contribution was combining them into a decentralised consensus protocol.
+
+## Links
+
+The elliptic curve theory is rooted in [Abstract Algebra](/02-core-year-two/01-abstract-algebra) and [Algebraic Geometry](/04-advanced-topics-year-four/01-algebraic-geometry). Modular arithmetic and finite field arithmetic are in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra). The probability of mining difficulty connects to [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). See also [Digital Signatures](/applications/digital-signatures) and [RSA and Public-Key Cryptography](/applications/rsa-public-key-cryptography).

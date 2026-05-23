@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const about = await import('../../content/98-about/index.mdx');
+const Content = about.default;
+const fm = about.frontmatter ?? {};
+const title = fm.title ?? 'About';
+const summary = fm.summary;
+---
+
+<BaseLayout title={title} description={summary}>
+  <div class="prose-content about-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <h1>{title}</h1>
+    <Content />
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page { padding: 1.5rem 1rem 4rem; max-width: 64ch; }
+  .breadcrumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 1.25rem; }
+  .breadcrumb a { color: var(--color-primary); }
+</style>

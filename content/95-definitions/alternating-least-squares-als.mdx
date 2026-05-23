@@ -1,0 +1,18 @@
+---
+title: 'Alternating least squares (ALS)'
+section: Definitions
+section_slug: 95-definitions
+slug: alternating-least-squares-als
+tags: [applied]
+first_seen_in: '94-applications/recommender-systems.mdx'
+mentioned_in: ['94-applications/recommender-systems']
+summary: 'Quick definition of Alternating least squares (ALS) from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Alternating least squares (ALS)** solves it by alternating: fix $V$ and solve for each $\mathbf{u}_i$ (a standard ridge regression problem), then fix $U$ and solve for each $\mathbf{v}_j$. Each sub-problem is a linear least-squares problem solvable in closed form: $\mathbf{u}_i = (V_\Omega^T V_\Omega + \lambda I)^{-1} V_\Omega^T \mathbf{r}_i$, where $V_\Omega$ contains the item vectors for items rated by user $i$ and $\mathbf{r}_i$ the corresponding ratings. The **Cauchy–Schwarz inequality** bounds the inner products $\mathbf{u}_i \cdot \mathbf{v}_j$ and guarantees that predictions are bounded when $U, V$ are bounded.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

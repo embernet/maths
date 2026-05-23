@@ -1,0 +1,30 @@
+---
+title: Ronald A. Fisher
+section: Mathematician Profiles
+section_slug: 91-mathematicians
+slug: fisher
+born: '1890-02-17'
+died: '1962-07-29'
+origin: East Finchley, London, England
+worked_in: ['Rothamsted, England', Cambridge, 'Adelaide, Australia']
+known_for: [maximum-likelihood-estimation, analysis-of-variance-anova, experimental-design-randomisation-blocking-factorial-design, the-fisher-information-matrix, population-genetics-modern-synthesis]
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+tags: [statistics, probability, history]
+hook: 'He is arguably the most influential statistician who ever lived, and also the most controversial — his contributions to scientific methodology are foundational, and his views on eugenics were deeply harmful. The p-value, ANOVA, maximum likelihood, experimental design: all are largely his creation.'
+---
+
+
+
+Fisher created much of modern statistics. Working at the Rothamsted agricultural research station in the 1920s, confronted with decades of messy agricultural data and no adequate statistical tools, he developed the methods that remain central to empirical science.
+
+**Maximum likelihood estimation** (MLE) is Fisher's most fundamental contribution to statistical theory. Given a parametric model with parameter $\theta$ and observed data $x$, the likelihood function $L(\theta; x) = P(x; \theta)$ measures how probable the data is under different parameter values. The maximum likelihood estimate $\hat{\theta}$ maximises $L$ over $\theta$. MLE has optimal asymptotic properties (consistency, efficiency) and is the workhorse of statistical estimation.
+
+**Analysis of variance (ANOVA)** partitions the total variation in a dataset into components attributable to different sources — treatment effects, blocking factors, random error. It provides a principled framework for experiments with multiple factors and is the standard tool for analysing experimental data across biology, medicine, psychology, and agriculture.
+
+His 1925 *Statistical Methods for Research Workers* and 1935 *The Design of Experiments* codified the principles of **randomised controlled experiments**: the importance of randomisation (to eliminate systematic bias), replication (to estimate error), and blocking (to control for confounding). These principles are now so standard that they are often not attributed to anyone; they are Fisher's.
+
+The **Fisher information** $I(\theta) = -\mathbb{E}\left[\frac{\partial^2}{\partial\theta^2}\log f(X;\theta)\right]$ quantifies how much information a random variable carries about the parameter $\theta$. The **Cramér–Rao bound** states that no unbiased estimator can have variance less than $1/I(\theta)$, making the Fisher information the fundamental limit on estimation precision.
+
+Fisher also contributed critically to population genetics: his 1918 paper "The Correlation between Relatives on the Supposition of Mendelian Inheritance" reconciled Mendelian genetics with biometric observations and established that continuous variation (height, weight) could arise from many Mendelian genes — resolving a controversy that had divided biologists for a decade.
+
+His legacy is complicated. He was a prominent advocate of eugenics and a late dissenter from the causal interpretation of the smoking–cancer link (his objections were funded in part by tobacco companies). These positions sit uncomfortably alongside the statistical tools that are among the most used in quantitative biology and medicine.

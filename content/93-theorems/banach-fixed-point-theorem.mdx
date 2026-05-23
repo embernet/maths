@@ -1,0 +1,43 @@
+---
+title: Banach fixed-point theorem
+section: Theorems
+section_slug: 93-theorems
+slug: banach-fixed-point-theorem
+attributed_to: [banach]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [cauchy-sequences, banach-spaces, hahn-banach-theorem, intermediate-value-theorem-first-rigorous-proof]
+applications: [weather-forecasting, climate-modelling, robotics-and-control, machine-learning-deep-neural-networks]
+tags: [functional-analysis, fixed-points, contraction, iteration]
+year_introduced: '1922'
+summary: A contraction mapping on a complete metric space has exactly one fixed point, found by iterated application of the map — the theorem that justifies iterative algorithms.
+---
+
+
+
+## What it says
+
+Let $(X, d)$ be a complete metric space and $T: X \to X$ a **contraction**: there exists $0 \leq k < 1$ such that $d(T(x), T(y)) \leq k\, d(x, y)$ for all $x, y \in X$.
+
+Then:
+1. $T$ has a **unique fixed point** $x^* \in X$ with $T(x^*) = x^*$.
+2. For any starting point $x_0$, the iteration $x_{n+1} = T(x_n)$ converges to $x^*$.
+3. The error bound: $d(x_n, x^*) \leq \frac{k^n}{1-k}\, d(x_1, x_0)$.
+
+The sequence $(x_n)$ is Cauchy (since $T$ is a contraction), and by completeness it converges.
+
+## History
+
+[Banach](/mathematicians/banach) proved the theorem in his 1922 doctoral thesis, as a clean unifying result for many iterative procedures that mathematicians had been using without a general framework. The proof is constructive — it tells you how to find the fixed point and how fast you converge.
+
+## Why it matters
+
+The Banach fixed-point theorem is the universal justification for iterative numerical methods. Solve $f(x) = 0$ by writing it as $x = T(x)$ and iterating. Solve an ODE by Picard iteration. Verify that Newton's method converges near a simple root. All these rest on the same underlying theorem. It also proves the existence and uniqueness theorem for ODEs (Picard–Lindelöf) — arguably the most important existence theorem in applied mathematics.
+
+## Real-world applications
+
+[Weather forecasting](/applications/weather-forecasting) and [climate modelling](/applications/climate-modelling) solve large ODE/PDE systems iteratively — the contraction mapping theorem guarantees convergence. [Robotics](/applications/robotics-and-control) uses fixed-point iterations for inverse kinematics. [Machine learning](/applications/machine-learning-deep-neural-networks) gradient descent analyses often use contraction-mapping style arguments.
+
+## Where you'll meet it
+
+The Banach fixed-point theorem appears in Year 2 real analysis and Year 3 functional analysis. See the [Modern Mathematics era](/history/09-modern-mathematics).

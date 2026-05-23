@@ -1,0 +1,40 @@
+---
+title: Hahn–Banach theorem
+section: Theorems
+section_slug: 93-theorems
+slug: hahnbanach-theorem
+attributed_to: [banach]
+era: 07-the-structural-turn
+appears_in: []
+related_theorems: [banach-spaces, banach-fixed-point-theorem, founding-functional-analysis, hilbert-spaces]
+applications: []
+tags: [functional-analysis, linear-algebra, Banach, extension-theorems]
+year_introduced: 1927–1929
+summary: A linear functional defined on a subspace of a normed vector space can always be extended to the whole space without increasing its norm — a cornerstone of functional analysis.
+---
+
+
+
+## What it says
+
+Let $X$ be a real normed vector space, $Y \subseteq X$ a subspace, and $f: Y \to \mathbb{R}$ a bounded linear functional with $\|f\| \leq 1$. The **Hahn–Banach theorem** guarantees the existence of a bounded linear extension $F: X \to \mathbb{R}$ satisfying $F|_Y = f$ and $\|F\| = \|f\|$.
+
+Equivalently: any continuous linear functional on a subspace extends to a continuous linear functional on the whole space with the same operator norm.
+
+A complex version holds as well, and there is a geometric form: any convex set and a point not in it can be separated by a hyperplane.
+
+## History
+
+Hans Hahn proved the real version in 1927; [Banach](/mathematicians/banach) independently proved the same result in 1929. Both built on earlier work by Eduard Helly (1912). Banach's development appeared in his landmark 1932 monograph *Théorie des opérations linéaires*, which systematised functional analysis as a coherent discipline.
+
+## Why it matters
+
+The Hahn–Banach theorem guarantees that there are always "enough" continuous linear functionals to separate points and distinguish subspaces — without it, the dual space of a normed space could be trivial. It underpins the entire dual space theory and virtually every result in functional analysis that involves constructing functionals. It is one of the three foundational pillars of Banach space theory, alongside the open mapping theorem and the uniform boundedness principle.
+
+## Real-world applications
+
+The geometric form (separation of convex sets) appears in the theory of linear programming, optimisation, and support vector machines, where hyperplane separability is the central idea.
+
+## Where you'll meet it
+
+The Hahn–Banach theorem appears in Year 4 functional analysis alongside [Banach spaces](/theorems/banach-spaces) and [Hilbert spaces](/theorems/hilbert-spaces). See the [Structural Turn era](/history/07-the-structural-turn).

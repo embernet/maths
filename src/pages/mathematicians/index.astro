@@ -1,0 +1,171 @@
+---
+/**
+ * /mathematicians/ — alphabetical roster of all mathematician pages.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const mathDir = join(process.cwd(), 'content/91-mathematicians');
+
+interface MathEntry {
+  slug: string;
+  title: string;
+  born?: string;
+  died?: string;
+  hook?: string;
+  knownFor?: string[];
+  href: string;
+  sortKey: string;
+}
+
+const entries: MathEntry[] = [];
+
+if (existsSync(mathDir)) {
+  for (const file of readdirSync(mathDir)) {
+    if (extname(file) !== '.mdx') continue;
+    const slug = basename(file, '.mdx');
+    if (slug === 'index') continue;
+
+    const fm = parseFrontmatter(join(mathDir, file));
+    if (!fm || !fm.title) continue;
+
+    entries.push({
+      slug,
+      title: fm.title,
+      born: fm.born,
+      died: fm.died,
+      hook: fm.hook,
+      knownFor: fm.known_for ?? [],
+      href: `/mathematicians/${slug}`,
+      sortKey: (fm.title as string).replace(/^(Sir|Dr|Prof) /, ''),
+    });
+  }
+}
+
+entries.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+// Group alphabetically
+const grouped: Record<string, MathEntry[]> = {};
+for (const e of entries) {
+  const letter = e.sortKey[0]?.toUpperCase() ?? '#';
+  if (!grouped[letter]) grouped[letter] = [];
+  grouped[letter].push(e);
+}
+
+function parseFrontmatter(filePath: string): Record<string, unknown> | null {
+  let text: string;
+  try { text = readFileSync(filePath, 'utf8'); } catch { return null; }
+  if (!text.startsWith('---')) return null;
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return null;
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1, -1).split(',').map((v) => v.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+---
+
+<BaseLayout title="Mathematicians" description="An alphabetical roster of the mathematicians whose work shaped the undergraduate curriculum.">
+  <div class="prose-content math-roster">
+    <h1>Mathematicians</h1>
+    <p class="roster-intro">
+      The men and women whose ideas make up the undergraduate mathematics curriculum —
+      listed alphabetically with short biographical sketches.
+    </p>
+
+    {entries.length === 0 ? (
+      <p class="empty-note">Biographical pages are being prepared. Check back soon.</p>
+    ) : (
+      Object.entries(grouped).map(([letter, group]) => (
+        <section class="alpha-group" id={`letter-${letter}`} aria-label={`Mathematicians: ${letter}`}>
+          <h2 class="alpha-heading" aria-hidden="true">{letter}</h2>
+          <ul class="math-list">
+            {group.map((m) => (
+              <li class="math-entry">
+                <a href={m.href} class="math-name">{m.title}</a>
+                {(m.born || m.died) && (
+                  <span class="math-dates">
+                    {m.born ? m.born.slice(0, 4) : '?'}–{m.died ? m.died.slice(0, 4) : ''}
+                  </span>
+                )}
+                {m.hook && <p class="math-hook">{m.hook}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .math-roster { padding: 2rem 1rem 4rem; }
+
+  .roster-intro {
+    color: var(--color-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  .empty-note {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  .alpha-group { margin-top: 2rem; }
+
+  .alpha-heading {
+    font-size: 1.4rem;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .math-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .math-entry {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.75rem;
+  }
+
+  .math-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  .math-dates {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+  }
+
+  .math-hook {
+    flex: 0 0 100%;
+    font-size: 0.88rem;
+    color: #444;
+    margin: 0.1rem 0 0;
+    font-style: italic;
+    line-height: 1.5;
+  }
+</style>

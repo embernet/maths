@@ -1,0 +1,42 @@
+---
+title: 'Signal Processing: JPEG and MP3'
+section: Real-world applications
+section_slug: 94-applications
+slug: signal-processing-jpeg-mp3
+domains: [computer-science, engineering, telecommunications]
+uses_theorems: [fourier-series, fourier-transform, hilbert-spaces]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/02-functional-analysis]
+related_applications: [medical-imaging-mri-ct, radar-and-sonar, data-compression]
+tags: [signal-processing, Fourier, wavelets, compression, applied]
+real_world_examples: [JPEG image compression on every website, MP3 and AAC audio streaming, 'Video codecs (H.264, HEVC)', Digital television]
+summary: JPEG images and MP3 audio files exist because human perception is insensitive to most Fourier coefficients — discarding them gives compression with no perceptible loss.
+---
+
+
+## The application
+
+Every photograph you see on the web is almost certainly a JPEG. Every song streamed from Spotify or Apple Music is encoded in AAC or MP3. Both formats achieve compression factors of ten or more with little perceptible degradation, by exploiting a deep fact: the information in signals is concentrated in a small number of frequency components, and humans are deaf or blind to the rest.
+
+## The maths behind it
+
+**JPEG compression** operates on $8 \times 8$ pixel blocks. Each block is treated as a discrete function sampled on a $64$-point grid, and the **discrete cosine transform** (DCT) is applied:
+
+$$F(u, v) = \frac{2}{N} C(u) C(v) \sum_{x=0}^{N-1}\sum_{y=0}^{N-1} f(x,y)\cos\!\left(\frac{(2x+1)u\pi}{2N}\right)\cos\!\left(\frac{(2y+1)v\pi}{2N}\right),$$
+
+where $C(0) = 1/\sqrt{2}$, $C(k) = 1$ otherwise. This decomposes the image block into $64$ cosine basis functions at different spatial frequencies. Natural images have most energy in the low-frequency (smooth) components. High-frequency coefficients are quantised coarsely (or set to zero), and the quantised values are then Huffman-coded. The DCT is a real-valued, closely related variant of the discrete Fourier transform.
+
+**MP3 compression** uses the **modified discrete cosine transform** (MDCT) to decompose audio into frequency sub-bands, combined with a **psychoacoustic model** that determines which sub-bands are masked by louder nearby frequencies (the human auditory system ignores masked components). Discarding masked coefficients provides the compression, and the remaining ones are encoded with quantisation levels chosen to keep quantisation noise below the masking threshold.
+
+More recent image codecs (JPEG2000, WebP, HEIF) use **wavelet bases** instead of pure cosines: wavelets are localised in both time (or space) and frequency, which better represents sharp edges and transient events.
+
+## A concrete example
+
+A typical 12-megapixel smartphone photograph has a raw size of about 36 MB. A JPEG encoding at quality 85 reduces this to roughly 3–5 MB — a factor of 7–12 — with a difference invisible to the eye at normal viewing distances. The entire process, from pixel values to compressed file, involves only integer arithmetic applied to $8 \times 8$ blocks, making it fast enough to run in real time on a mobile processor.
+
+## History of the application
+
+Fourier's 1807 decomposition idea took 175 years to reach consumer electronics. The DCT was proposed by Nasir Ahmed in 1972 as a more efficient alternative to the DFT for real-valued signals. The JPEG standard was finalised in 1992; MP3 was released by the Fraunhofer Society in 1993, triggering the digital music revolution. The Fast Fourier Transform algorithm (Cooley and Tukey, 1965) was a necessary precursor — without it, computing the transforms in real time would be impossible.
+
+## Links
+
+Fourier series and the Fourier transform are developed in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). The Hilbert space framework that explains why orthogonal bases work so well is in [Functional Analysis](/03-specialisation-year-three/02-functional-analysis). See also the related application [Medical Imaging: MRI and CT](/applications/medical-imaging-mri-ct), which uses Fourier methods for reconstruction rather than compression.

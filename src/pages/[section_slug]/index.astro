@@ -1,0 +1,214 @@
+---
+/**
+ * /[section_slug] — section index page.
+ * Shows the section title, blurb, and a grid of child topic summaries.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { join, extname } from 'node:path';
+
+export async function getStaticPaths() {
+  const contentDir = join(process.cwd(), 'content');
+  if (!existsSync(contentDir)) return [];
+
+  const paths = [];
+  for (const entry of readdirSync(contentDir)) {
+    const ep = join(contentDir, entry);
+    if (!statSync(ep).isDirectory()) continue;
+    // Exclude welcome (handled by root) and known single-page appendices
+    if (entry === '00-welcome') continue;
+    // Include all sections that have a _section.json or are appendix sections
+    paths.push({ params: { section_slug: entry } });
+  }
+  return paths;
+}
+
+const { section_slug } = Astro.params;
+const contentDir = join(process.cwd(), 'content');
+const sectionDir = join(contentDir, section_slug!);
+
+function parseFrontmatter(fp: string): Record<string, unknown> {
+  let text = '';
+  try { text = readFileSync(fp, 'utf8'); } catch { return {}; }
+  if (!text.startsWith('---')) return {};
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+// Load section config
+let sectionTitle = section_slug!.replace(/^\d+-/, '').replace(/-/g, ' ');
+let sectionBlurb = '';
+const sectionJsonPath = join(sectionDir, '_section.json');
+if (existsSync(sectionJsonPath)) {
+  try {
+    const sec = JSON.parse(readFileSync(sectionJsonPath, 'utf8'));
+    if (sec.title) sectionTitle = sec.title;
+    if (sec.blurb) sectionBlurb = sec.blurb;
+  } catch { /* ignore */ }
+}
+
+// Collect child topic pages (subdirectories with index.mdx)
+interface TopicCard {
+  slug: string;          // original folder name e.g. "01-algebra-and-linear-algebra"
+  topicSlug: string;     // stripped slug e.g. "algebra-and-linear-algebra"
+  title: string;
+  summary?: string;
+  tags?: string[];
+  reading_time_min?: number;
+  href: string;
+  order: number;
+}
+
+const topics: TopicCard[] = [];
+
+if (existsSync(sectionDir)) {
+  for (const sub of readdirSync(sectionDir)) {
+    const subPath = join(sectionDir, sub);
+    if (!statSync(subPath).isDirectory()) continue;
+    const mdxPath = join(subPath, 'index.mdx');
+    if (!existsSync(mdxPath)) {
+      // History / appendix pages may also use index.mdx
+      continue;
+    }
+    const fm = parseFrontmatter(mdxPath);
+    if (!fm.title) continue;
+    const orderMatch = sub.match(/^(\d+)/);
+    const order = orderMatch ? parseInt(orderMatch[1]) : 999;
+    topics.push({
+      slug: sub,
+      topicSlug: sub.replace(/^\d+-/, ''),
+      title: fm.title as string,
+      summary: fm.summary as string | undefined,
+      tags: fm.tags as string[] | undefined,
+      reading_time_min: fm.reading_time_min as number | undefined,
+      href: `/${section_slug}/${sub}`,
+      order,
+    });
+  }
+}
+topics.sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout title={sectionTitle} description={sectionBlurb || `Topics covered in ${sectionTitle}.`}>
+  <div class="prose-content section-index">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{sectionTitle}</span>
+    </nav>
+
+    <h1>{sectionTitle}</h1>
+    {sectionBlurb && <p class="section-blurb">{sectionBlurb}</p>}
+
+    {topics.length === 0 ? (
+      <p class="empty-note">Topics are being prepared. Check back soon.</p>
+    ) : (
+      <ol class="topic-list" aria-label={`Topics in ${sectionTitle}`}>
+        {topics.map((t) => (
+          <li class="topic-card">
+            <a href={t.href} class="topic-card-link">
+              <div class="topic-card-inner">
+                <span class="topic-card-title">{t.title}</span>
+                {t.reading_time_min && (
+                  <span class="reading-chip">{t.reading_time_min} min</span>
+                )}
+              </div>
+              {t.summary && <p class="topic-card-summary">{t.summary}</p>}
+              {t.tags && t.tags.length > 0 && (
+                <div class="topic-card-tags" aria-hidden="true">
+                  {t.tags.slice(0, 4).map((tag) => (
+                    <span class="tag-pill">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </a>
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .section-index { padding: 1.5rem 1rem 4rem; }
+  .breadcrumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 1.25rem; }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .section-blurb {
+    font-size: 1.05rem;
+    color: var(--color-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+
+  .empty-note { color: var(--color-muted); font-style: italic; }
+
+  .topic-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .topic-card { }
+
+  .topic-card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: #fff;
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .topic-card-link:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(26,58,82,0.08);
+  }
+
+  .topic-card-inner {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .topic-card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  .topic-card-summary {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .topic-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.2rem;
+  }
+</style>

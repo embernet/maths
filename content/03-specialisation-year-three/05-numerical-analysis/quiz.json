@@ -1,0 +1,36 @@
+{
+  "topic_slug": "05-numerical-analysis",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The condition number $\\kappa(A)$ of a matrix measures:",
+      "options": [
+        {"id": "a", "text": "How sensitive the solution $x$ of $Ax = b$ is to perturbations in $b$ or $A$.", "correct": true, "explanation": "Roughly: $\\kappa(A) = \\|A\\|\\|A^{-1}\\|$. If $\\kappa(A) \\approx 10^k$, you lose about $k$ digits of accuracy. Ill-conditioned matrices ($\\kappa \\gg 1$) make linear systems numerically unreliable."},
+        {"id": "b", "text": "The determinant of $A$.", "correct": false, "explanation": "The determinant is not a reliable indicator of conditioning. A matrix with very small determinant may be well-conditioned (e.g., $10^{-100}$ times the identity), and a unit determinant does not imply good conditioning."},
+        {"id": "c", "text": "The number of non-zero eigenvalues of $A$.", "correct": false, "explanation": "The rank (number of non-zero eigenvalues for symmetric matrices) is a different concept. A full-rank matrix can still be ill-conditioned."},
+        {"id": "d", "text": "Whether the matrix is positive definite.", "correct": false, "explanation": "Positive definiteness (all eigenvalues positive) is unrelated to the condition number. A positive definite matrix can be very ill-conditioned."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The SVD $A = U\\Sigma V^T$ of a matrix is used in low-rank approximation because:",
+      "options": [
+        {"id": "a", "text": "The best rank-$k$ approximation of $A$ in the spectral (or Frobenius) norm is obtained by keeping only the $k$ largest singular values.", "correct": true, "explanation": "The Eckart-Young theorem: the best rank-$k$ approximation is $A_k = U_k\\Sigma_k V_k^T$ using the top $k$ singular values and corresponding singular vectors."},
+        {"id": "b", "text": "The SVD gives the eigenvalues of $A$.", "correct": false, "explanation": "Singular values are not the same as eigenvalues except for symmetric positive definite matrices. The SVD and eigendecomposition are related but distinct."},
+        {"id": "c", "text": "SVD can only be computed for square matrices.", "correct": false, "explanation": "Every $m \\times n$ matrix has an SVD, square or not. This is one advantage of SVD over eigendecomposition (which requires a square matrix)."},
+        {"id": "d", "text": "It is equivalent to Gaussian elimination.", "correct": false, "explanation": "Gaussian elimination solves linear systems via LU factorisation. SVD is a completely different decomposition, more computationally expensive but numerically more stable."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Stiff ODEs require implicit methods because:",
+      "options": [
+        {"id": "a", "text": "Explicit methods require impractically small step sizes to remain stable when the ODE has components with very different timescales.", "correct": true, "explanation": "Stiffness arises when the ODE has fast-decaying transients alongside slow dynamics. Explicit methods have stability regions that require $h \\lesssim 1/\\lambda_{\\max}$; if $\\lambda_{\\max}$ is large, $h$ must be tiny even if the solution itself is smooth."},
+        {"id": "b", "text": "Stiff ODEs have no analytic solutions.", "correct": false, "explanation": "Many stiff ODEs have closed-form solutions. Stiffness is a numerical property (related to the eigenvalue spread of the Jacobian), not a property of solvability."},
+        {"id": "c", "text": "Implicit methods always give more accurate solutions.", "correct": false, "explanation": "Implicit methods are not uniformly more accurate — they are more stable for stiff problems. For non-stiff ODEs, explicit methods like RK4 are often more efficient."},
+        {"id": "d", "text": "Explicit methods cannot solve ODEs with discontinuous forcing.", "correct": false, "explanation": "Discontinuous forcing is a separate issue. Stiffness is about the magnitude of eigenvalues of the Jacobian, not discontinuities."}
+      ]
+    }
+  ]
+}

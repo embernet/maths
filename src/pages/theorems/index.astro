@@ -1,0 +1,270 @@
+---
+/**
+ * /theorems/ — alphabetical index of all theorem pages, grouped by era.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const theoremDir = join(process.cwd(), 'content/93-theorems');
+
+interface TheoremEntry {
+  slug: string;
+  title: string;
+  summary?: string;
+  era?: string;
+  attributed_to?: string[];
+  year_introduced?: string;
+  href: string;
+  sortKey: string;
+}
+
+function parseFrontmatter(filePath: string): Record<string, unknown> | null {
+  let text: string;
+  try { text = readFileSync(filePath, 'utf8'); } catch { return null; }
+  if (!text.startsWith('---')) return null;
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return null;
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+// Load slug map for fallback titles
+const slugMapPath = join(process.cwd(), 'content/93-theorems/_slug-map.json');
+let slugMap: Record<string, { title: string; attributed_to?: string[] }> = {};
+if (existsSync(slugMapPath)) {
+  try { slugMap = JSON.parse(readFileSync(slugMapPath, 'utf8')); } catch { /* ignore */ }
+}
+
+const entries: TheoremEntry[] = [];
+
+if (existsSync(theoremDir)) {
+  for (const file of readdirSync(theoremDir)) {
+    if (extname(file) !== '.mdx') continue;
+    const slug = basename(file, '.mdx');
+    if (slug === 'index') continue;
+
+    const fm = parseFrontmatter(join(theoremDir, file));
+    const mapEntry = slugMap[slug];
+    const title = (fm?.title as string) ?? mapEntry?.title ?? slug.replace(/-/g, ' ');
+    const attributed_to = (fm?.attributed_to as string[]) ?? mapEntry?.attributed_to ?? [];
+
+    entries.push({
+      slug,
+      title,
+      summary: fm?.summary as string | undefined,
+      era: fm?.era as string | undefined,
+      attributed_to,
+      year_introduced: fm?.year_introduced as string | undefined,
+      href: `/theorems/${slug}`,
+      sortKey: title.replace(/^(The |A |An )/i, ''),
+    });
+  }
+}
+
+// Also add slug-map entries that have no MDX yet (stubs)
+for (const [slug, mapEntry] of Object.entries(slugMap)) {
+  if (entries.some(e => e.slug === slug)) continue;
+  entries.push({
+    slug,
+    title: mapEntry.title,
+    attributed_to: mapEntry.attributed_to ?? [],
+    href: `/theorems/${slug}`,
+    sortKey: mapEntry.title.replace(/^(The |A |An )/i, ''),
+  });
+}
+
+entries.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+// Era labels
+const eraLabels: Record<string, string> = {
+  '01-ancient-origins': 'Ancient Origins',
+  '02-classical-greece': 'Classical Greece',
+  '03-islamic-golden-age': 'Islamic Golden Age',
+  '04-renaissance-and-symbolic-algebra': 'Renaissance & Symbolic Algebra',
+  '05-the-calculus-revolution': 'The Calculus Revolution',
+  '06-the-rigour-revolution': 'The Rigour Revolution',
+  '07-the-structural-turn': 'The Structural Turn',
+  '08-foundations-and-the-twentieth-century-crisis': 'Foundations & the Twentieth-Century Crisis',
+  '09-modern-mathematics': 'Modern Mathematics',
+};
+
+// Group by era
+const byEra: Record<string, TheoremEntry[]> = { '__none__': [] };
+for (const e of entries) {
+  if (e.era) {
+    if (!byEra[e.era]) byEra[e.era] = [];
+    byEra[e.era].push(e);
+  } else {
+    byEra['__none__'].push(e);
+  }
+}
+
+// Sort era keys
+const eraOrder = [
+  '01-ancient-origins',
+  '02-classical-greece',
+  '03-islamic-golden-age',
+  '04-renaissance-and-symbolic-algebra',
+  '05-the-calculus-revolution',
+  '06-the-rigour-revolution',
+  '07-the-structural-turn',
+  '08-foundations-and-the-twentieth-century-crisis',
+  '09-modern-mathematics',
+  '__none__',
+];
+
+const groupedEras = eraOrder.filter(e => byEra[e]?.length > 0);
+const totalCount = entries.length;
+---
+
+<BaseLayout title="Theorems" description="An index of theorems and key results, grouped by mathematical era.">
+  <div class="prose-content theorems-index">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">Theorems</span>
+    </nav>
+
+    <h1>Theorems &amp; Key Results</h1>
+    <p class="index-intro">
+      {totalCount} theorems and results from the undergraduate curriculum, grouped by the era in which they emerged.
+      Each entry links to a dedicated page with statement, history, and real-world applications.
+    </p>
+
+    {groupedEras.map((eraKey) => (
+      <section class="era-group" aria-label={eraKey === '__none__' ? 'Other results' : `Era: ${eraLabels[eraKey] ?? eraKey}`}>
+        <h2 class="era-heading">
+          {eraKey === '__none__'
+            ? 'Other results'
+            : (eraKey !== '__none__'
+              ? <a href={`/90-history/${eraKey}`}>{eraLabels[eraKey] ?? eraKey}</a>
+              : null
+            )
+          }
+        </h2>
+        <ul class="theorem-list">
+          {byEra[eraKey].map((t) => (
+            <li class="theorem-entry">
+              <div class="theorem-main">
+                <a href={t.href} class="theorem-title">{t.title}</a>
+                {t.attributed_to && t.attributed_to.length > 0 && (
+                  <span class="theorem-chips" aria-label="Attributed to">
+                    {t.attributed_to.map((mathSlug) => (
+                      <a href={`/mathematicians/${mathSlug}`} class="math-chip">
+                        {mathSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                      </a>
+                    ))}
+                  </span>
+                )}
+              </div>
+              {t.summary && <p class="theorem-summary">{t.summary}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .theorems-index { padding: 1.5rem 1rem 4rem; }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .index-intro {
+    color: var(--color-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+    max-width: 70ch;
+  }
+
+  .era-group { margin-top: 2.5rem; }
+
+  .era-heading {
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .era-heading a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .era-heading a:hover { color: var(--color-accent); }
+
+  .theorem-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .theorem-entry {}
+
+  .theorem-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.6rem;
+  }
+
+  .theorem-title {
+    font-weight: 500;
+    font-size: 0.97rem;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .theorem-title:hover { color: var(--color-accent); text-decoration: underline; }
+
+  .theorem-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .math-chip {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.73rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .math-chip:hover {
+    background: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
+  }
+
+  .theorem-summary {
+    font-size: 0.86rem;
+    color: var(--color-muted);
+    margin: 0.2rem 0 0;
+    max-width: 70ch;
+    line-height: 1.5;
+    font-style: italic;
+  }
+</style>

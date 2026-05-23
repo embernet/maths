@@ -1,0 +1,44 @@
+---
+title: Data Compression
+section: Real-world applications
+section_slug: 94-applications
+slug: data-compression
+domains: [computer-science, mathematics, engineering]
+uses_theorems: [axiomatic-foundations-of-probability, kolmogorov-complexity-algorithmic-information-theory]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/06-programming-and-discrete-mathematics]
+related_applications: [signal-processing-jpeg-mp3, error-correcting-codes, pagerank-google]
+tags: [information-theory, entropy, algorithms, applied]
+real_world_examples: [ZIP file compression, gzip on the web (HTTP/2), DEFLATE in PNG images, LZ77 algorithm in hardware decoders]
+summary: Claude Shannon proved there is a fundamental limit to how much any data can be compressed — and Huffman coding achieves that limit using probability theory.
+---
+
+
+## The application
+
+Every time you download a web page, transfer a file, or store a document, data compression is reducing the number of bits that need to be transmitted or stored. The mathematics governing how much compression is possible was discovered by Claude Shannon in 1948: the **entropy** of a source sets an absolute lower bound on its compressed size, and Huffman coding and arithmetic coding are provably optimal ways to approach that bound.
+
+## The maths behind it
+
+**Shannon entropy**: for a discrete source producing symbol $i$ with probability $p_i$, the entropy is
+
+$$H = -\sum_i p_i \log_2 p_i \quad \text{(bits per symbol)}.$$
+
+Shannon's source coding theorem states that any uniquely decodable compression scheme requires on average at least $H$ bits per source symbol. No lossless compression can do better. Moreover, for any $\varepsilon > 0$, there exist codes achieving average codeword length less than $H + \varepsilon$.
+
+**Huffman coding** constructs an optimal **prefix-free code** (no codeword is a prefix of another): assign shorter codes to more probable symbols. The algorithm builds a binary tree greedily — repeatedly merging the two lowest-probability symbols into a combined node. The resulting code achieves average length $L$ satisfying $H \le L < H + 1$ bit per symbol. The proof of optimality uses the concavity of $-p\log_2 p$ and the structure of the Kraft inequality for prefix-free codes.
+
+**Arithmetic coding** is more powerful than Huffman for practical sources: it encodes the entire sequence as a single interval $[0,1)$, progressively narrowing the interval as symbols are received. The compressed output is any binary fraction in the final interval. Arithmetic coding achieves average length arbitrarily close to $H$ without the integer-rounding loss of Huffman.
+
+**Lempel-Ziv (LZ77/LZ78) algorithms** underlie ZIP, gzip, and PNG: they replace repeated substrings with references to earlier occurrences. No probability model is needed — the algorithm adapts to the structure of the data automatically. Theoretical analysis shows LZ algorithms are asymptotically optimal for any stationary ergodic source, a result proved using ergodic theory.
+
+## A concrete example
+
+The ZIP format uses the DEFLATE algorithm, combining LZ77 (for repeated-string replacement) and Huffman coding (for the resulting tokens). On typical English text, DEFLATE achieves compression ratios of 2.5–3:1. On already-compressed data (JPEG images, MP3 files) it achieves almost no compression, because those formats have already removed the statistical redundancy that entropy coding exploits.
+
+## History of the application
+
+Claude Shannon's 1948 paper "A Mathematical Theory of Communication" introduced entropy, channel capacity, and the source coding theorem in a single landmark document. David Huffman invented his algorithm in 1952 as a graduate student (as a course project assignment). The LZ algorithms were developed by Abraham Lempel and Jacob Ziv in 1977–78 and remain the dominant approach in general-purpose compression.
+
+## Links
+
+Probability and entropy are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). Combinatorial algorithms and generating functions are in [Programming, Graphs, and Discrete Mathematics](/02-core-year-two/06-programming-and-discrete-mathematics). Kolmogorov complexity — a deeper notion of individual-string compressibility — connects to [Kolmogorov's](/mathematicians/kolmogorov) information-theoretic work. See also [Signal Processing: JPEG and MP3](/applications/signal-processing-jpeg-mp3) for lossy compression.

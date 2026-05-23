@@ -1,0 +1,46 @@
+---
+title: Heat equation
+section: Theorems
+section_slug: 93-theorems
+slug: heat-equation
+attributed_to: [fourier]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [fourier-series, fourier-transform, laplace-equation, calculus-dy-dx-notation-symbol]
+applications: [climate-modelling, weather-forecasting, medical-imaging-mri-ct]
+tags: [PDEs, heat, diffusion, Fourier]
+year_introduced: 1807–1822
+summary: The partial differential equation governing the diffusion of heat — and the equation whose study led Fourier to develop his series decomposition.
+---
+
+
+
+## What it says
+
+The **heat equation** in one spatial dimension is:
+
+$$\frac{\partial u}{\partial t} = \alpha \frac{\partial^2 u}{\partial x^2}$$
+
+where $u(x, t)$ is the temperature at position $x$ and time $t$, and $\alpha > 0$ is the thermal diffusivity.
+
+[Fourier](/mathematicians/fourier)'s insight: solutions can be written as superpositions of harmonics $e^{-\alpha n^2 t} \sin(nx)$. Each mode decays exponentially; high-frequency modes decay fastest, smoothing the temperature distribution over time. The general solution with initial condition $u(x, 0) = f(x)$ is:
+
+$$u(x, t) = \sum_{n=1}^\infty b_n e^{-\alpha n^2 t} \sin(nx)$$
+
+where $b_n$ are the Fourier sine coefficients of $f$.
+
+## History
+
+Fourier presented the heat equation and its Fourier series solution to the Paris Academy in 1807. The paper was rejected at first — Lagrange objected that Fourier series could not represent arbitrary functions. Fourier published the full theory in *Théorie analytique de la chaleur* (1822). The controversy about when and how Fourier series converge drove decades of research in analysis.
+
+## Why it matters
+
+The heat equation is the simplest and most important parabolic PDE. Its solution method — separating variables and expanding in Fourier modes — is the template for solving many PDEs. The same equation (with different physical interpretations of $u$) governs diffusion of chemicals, spread of heat, and the evolution of probability distributions in stochastic processes.
+
+## Real-world applications
+
+[Climate modelling](/applications/climate-modelling) and [weather forecasting](/applications/weather-forecasting) solve diffusion-type equations for heat and moisture in the atmosphere. [MRI](/applications/medical-imaging-mri-ct) involves diffusion-weighted imaging based on the heat equation.
+
+## Where you'll meet it
+
+The heat equation is a central example in Year 2 differential equations. See the [Calculus Revolution era](/history/05-the-calculus-revolution) and [Fourier series](/theorems/fourier-series).

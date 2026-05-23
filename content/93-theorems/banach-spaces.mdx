@@ -1,0 +1,42 @@
+---
+title: Banach spaces
+section: Theorems
+section_slug: 93-theorems
+slug: banach-spaces
+attributed_to: [banach]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [hahn-banach-theorem, banach-fixed-point-theorem, hilbert-spaces, cauchy-sequences, founding-functional-analysis]
+applications: [machine-learning-deep-neural-networks, signal-processing-jpeg-mp3, option-pricing-finance]
+tags: [functional-analysis, normed-spaces, completeness, Banach]
+year_introduced: 1920–1922
+summary: A complete normed vector space — the natural setting for infinite-dimensional analysis, where Cauchy sequences always converge.
+---
+
+
+
+## What it says
+
+A **normed vector space** $(X, \|\cdot\|)$ is a vector space equipped with a norm — a function measuring the "size" of vectors, satisfying positivity, homogeneity, and the triangle inequality.
+
+A **Banach space** is a normed vector space that is complete: every Cauchy sequence converges to a limit in $X$.
+
+Examples: $\mathbb{R}^n$ with any norm; $L^p(\Omega)$ (functions with finite $p$th moment); $C([a,b])$ (continuous functions, with sup norm); the space of bounded linear operators between Banach spaces. A **Hilbert space** is a Banach space whose norm comes from an inner product.
+
+The key theorems: the Hahn–Banach theorem (extension of functionals), the open mapping theorem (surjective bounded linear maps are open), and the uniform boundedness principle (pointwise-bounded families of operators are norm-bounded).
+
+## History
+
+[Banach](/mathematicians/banach) introduced and systematically studied these spaces in his 1920 doctoral thesis and the seminal monograph *Théorie des opérations linéaires* (1932). He and his collaborators in Lwów — working in the Scottish Café from 1935 — recorded open problems in the *Scottish Book*, many of which drove functional analysis for decades.
+
+## Why it matters
+
+Banach spaces are the right setting for infinite-dimensional linear algebra. Many problems in PDEs, optimisation, and approximation theory reduce to: "does this operator on a Banach space have certain properties?" The completeness condition ensures that limits of iterative procedures exist — without it, the whole analytical machinery breaks down.
+
+## Real-world applications
+
+[Machine learning](/applications/machine-learning-deep-neural-networks) optimisation theory uses Banach space analysis. [Signal processing](/applications/signal-processing-jpeg-mp3) function spaces ($L^2$, $L^1$) are Banach spaces. [Option pricing](/applications/option-pricing-finance) uses Banach space methods for existence of risk-neutral measures.
+
+## Where you'll meet it
+
+Banach spaces are introduced in Year 3 functional analysis. See the [Modern Mathematics era](/history/09-modern-mathematics).

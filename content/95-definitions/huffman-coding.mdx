@@ -1,0 +1,18 @@
+---
+title: 'Huffman coding'
+section: Definitions
+section_slug: 95-definitions
+slug: huffman-coding
+tags: [applied]
+first_seen_in: '94-applications/data-compression.mdx'
+mentioned_in: ['94-applications/data-compression']
+summary: 'Quick definition of Huffman coding from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Huffman coding** constructs an optimal **prefix-free code** (no codeword is a prefix of another): assign shorter codes to more probable symbols. The algorithm builds a binary tree greedily — repeatedly merging the two lowest-probability symbols into a combined node. The resulting code achieves average length $L$ satisfying $H \le L < H + 1$ bit per symbol. The proof of optimality uses the concavity of $-p\log_2 p$ and the structure of the Kraft inequality for prefix-free codes.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

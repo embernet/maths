@@ -1,0 +1,18 @@
+---
+title: 'Markov chain'
+section: Definitions
+section_slug: 95-definitions
+slug: markov-chain
+tags: [applied]
+first_seen_in: '94-applications/pagerank-google.mdx'
+mentioned_in: ['94-applications/pagerank-google']
+summary: 'Quick definition of Markov chain from its appearance in the curriculum.'
+---
+
+## Definition
+
+Model the web as a **directed graph**: nodes are pages, an edge from $i$ to $j$ exists if page $i$ has a link to page $j$. Define the **transition matrix** $P$ where $P_{ij} = 1/(\text{out-degree of } i)$ if there is a link $i \to j$, and $0$ otherwise. A random web-surfer following links at random defines a **Markov chain** with transition matrix $P$.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

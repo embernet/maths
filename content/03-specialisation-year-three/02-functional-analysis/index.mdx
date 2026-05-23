@@ -1,0 +1,70 @@
+---
+title: 'Functional Analysis: Banach and Hilbert Spaces'
+section: 'Specialisation: Year Three'
+section_slug: 03-specialisation-year-three
+year: 3
+order: 2
+tags: [functional-analysis, Banach-spaces, Hilbert-spaces, operators, norms, completeness, quantum-mechanics]
+prerequisites:
+- 02-real-analysis-2
+related:
+- 03-measure-and-lebesgue-integration
+- 04-topology
+mathematicians: [banach, hilbert, cauchy]
+reading_time_min: 9
+summary: Functional analysis extends linear algebra to infinite dimensions. The spaces of functions that arise in analysis, PDEs, and quantum mechanics have algebraic and geometric structure that makes them tractable.
+theorems: [banach-spaces, banach-fixed-point-theorem, hahnbanach-theorem, hilbert-spaces, cauchyschwarz-inequality, founding-functional-analysis]
+applications: [medical-imaging-mri-ct, signal-processing-jpeg-mp3, quantum-computing-algorithms]
+---
+
+
+Linear algebra works beautifully in finite dimensions. Functional analysis asks: what survives when the vectors become functions and the spaces become infinite-dimensional? The answer is enough to make the theory of PDEs, quantum mechanics, and signal processing rigorous — but only with the right definitions.
+
+## Normed spaces and Banach spaces
+
+A **normed vector space** is a vector space $V$ with a norm $\|\cdot\| : V \to [0,\infty)$ satisfying:
+1. $\|v\| = 0 \Leftrightarrow v = 0$.
+2. $\|\alpha v\| = |\alpha|\|v\|$ for scalars $\alpha$.
+3. $\|u + v\| \le \|u\| + \|v\|$ (triangle inequality).
+
+A norm induces a metric $d(u, v) = \|u - v\|$. A normed space that is complete as a metric space (every Cauchy sequence converges) is a **Banach space**.
+
+Examples: $\mathbb{R}^n$ with the Euclidean norm; $C([a,b])$ with the supremum norm $\|f\|_\infty = \sup|f(x)|$; the $L^p$ spaces of Lebesgue-integrable functions.
+
+[Stefan Banach](/mathematicians/banach) was a central figure in the Lwów school of mathematics that developed functional analysis in the 1920s and 1930s. The Lwów mathematicians famously gathered at the Scottish Café from 1935 onwards to record theorems and unsolved problems in a shared notebook — the Scottish Book.
+
+## The contraction mapping theorem
+
+The **Banach fixed-point theorem**: if $T : X \to X$ is a **contraction** ($\|Tx - Ty\| \le k\|x - y\|$ for some $k < 1$) on a complete metric space $X$, then $T$ has a unique fixed point, and the iteration $x_{n+1} = Tx_n$ converges to it from any starting point.
+
+This theorem is used everywhere: to prove existence and uniqueness of solutions to ODEs (Picard-Lindelöf theorem), to analyse iterative numerical methods, and to prove the implicit function theorem.
+
+## Hilbert spaces
+
+A **Hilbert space** is a Banach space whose norm comes from an **inner product** $\langle u, v\rangle$: $\|u\|^2 = \langle u, u\rangle$. The inner product allows angles and orthogonality.
+
+The canonical example: $L^2([a,b])$, the space of square-integrable functions, with $\langle f, g\rangle = \int_a^b f(x)g(x)\, dx$. This is the setting for Fourier analysis.
+
+**Cauchy-Schwarz inequality**: $|\langle u, v\rangle| \le \|u\|\|v\|$.
+
+A set $\{e_n\}$ in a Hilbert space is an **orthonormal basis** (complete orthonormal system) if $\langle e_m, e_n\rangle = \delta_{mn}$ and every $f \in H$ can be written as $f = \sum \langle f, e_n\rangle e_n$ (Parseval's theorem: $\|f\|^2 = \sum |\langle f, e_n\rangle|^2$).
+
+The functions $e_n(x) = e^{in\pi x/L}/\sqrt{2L}$ form an orthonormal basis for $L^2([-L,L])$ — this is Fourier series in Hilbert space language.
+
+## Bounded linear operators
+
+A **bounded linear operator** $T : H_1 \to H_2$ satisfies $\|Tv\| \le M\|v\|$ for some $M < \infty$. The **operator norm** is $\|T\| = \sup_{\|v\|=1}\|Tv\|$. Boundedness is the infinite-dimensional analogue of a linear map being a finite matrix.
+
+The **adjoint** $T^*$ of $T$ satisfies $\langle Tv, w\rangle = \langle v, T^*w\rangle$. An operator is **self-adjoint** (Hermitian) if $T = T^*$. Self-adjoint operators have real eigenvalues (the spectral theorem, stated but perhaps not fully proved at this level) — this is the mathematical foundation of quantum mechanics, where observables are self-adjoint operators.
+
+## Real-world applications
+
+Where this turns up in the world: [MRI reconstruction](/applications/medical-imaging-mri-ct) works entirely in Hilbert space — the k-space of an MRI scanner is the Fourier dual space, and the image is recovered by the orthonormal basis expansion you learn here. [Signal processing](/applications/signal-processing-jpeg-mp3) (JPEG, MP3) exploits the fact that sinusoidal functions are an orthonormal basis for $L^2$ — Parseval's theorem in this course explains why energy is preserved by the DCT. [Quantum computing](/applications/quantum-computing-algorithms) states are vectors in a Hilbert space $\mathbb{C}^{2^n}$, and the gates are unitary operators — the spectral theorem for self-adjoint operators is the mathematical foundation.
+
+## Why this matters
+
+Functional analysis is the mathematical foundation of quantum mechanics: the state of a quantum system is a vector in a Hilbert space; observables are self-adjoint operators; measurement outcomes are eigenvalues. Dirac invented his bra-ket notation to handle Hilbert space operations efficiently.
+
+It also underlies the rigorous theory of PDEs: the weak formulation of a PDE (replacing pointwise derivatives with integral identities) lives in a Sobolev space — a Hilbert space of functions whose weak derivatives are square-integrable. Well-posedness results (existence, uniqueness, continuous dependence on data) then follow from functional-analytic theorems like the Lax-Milgram theorem.
+
+[David Hilbert](/mathematicians/hilbert) introduced Hilbert spaces in his study of integral equations around 1910. He would go on to pose his famous 23 problems in 1900, framing the agenda for twentieth-century mathematics — just years before Gödel proved that some of those problems could never be resolved within any consistent formal system.

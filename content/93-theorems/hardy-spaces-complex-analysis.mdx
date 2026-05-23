@@ -1,0 +1,40 @@
+---
+title: Hardy spaces (complex analysis)
+section: Theorems
+section_slug: 93-theorems
+slug: hardy-spaces-complex-analysis
+attributed_to: [hardy]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [banach-spaces, hahn-banach-theorem, cauchys-integral-theorem, fourier-transform]
+applications: [signal-processing-jpeg-mp3, option-pricing-finance]
+tags: [complex-analysis, functional-analysis, Hardy-spaces, Fourier]
+year_introduced: '1915'
+summary: Function spaces on the disc or upper half-plane whose boundary values have integrable powers — the bridge between complex analysis and Fourier analysis on the circle.
+---
+
+
+
+## What it says
+
+The **Hardy space** $H^p(\mathbb{D})$ ($1 \leq p < \infty$) consists of holomorphic functions $f$ on the unit disc $\mathbb{D}$ satisfying:
+
+$$\sup_{0 < r < 1} \int_0^{2\pi} |f(re^{i\theta})|^p \frac{d\theta}{2\pi} < \infty$$
+
+Key results: Every $H^p$ function has boundary values (limits as $r \to 1$) almost everywhere. The boundary values lie in $L^p$ of the circle. The Fourier coefficients of $H^p$ functions are one-sided (only $e^{in\theta}$ with $n \geq 0$). The factorisation theorem (Blaschke products, inner and outer functions) classifies $H^p$ functions by their zeros.
+
+## History
+
+[Hardy](/mathematicians/hardy) introduced the spaces in 1915 while studying integral means of holomorphic functions. He was interested in the boundary behaviour of complex functions — a question in pure analysis. The spaces are now fundamental to several areas: operator theory, interpolation, prediction theory for stationary processes.
+
+## Why it matters
+
+Hardy spaces provide the correct framework for many questions in analysis: which sequences of values can be achieved by a holomorphic function on the disc? What are the analytic functions with a given boundary behaviour? In control theory, Hardy spaces appear as the natural function spaces for input-output systems.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) uses Hardy space theory for Wiener filter analysis and spectral factorisation. [Option pricing](/applications/option-pricing-finance) uses Hardy space methods in the Heston model.
+
+## Where you'll meet it
+
+Hardy spaces appear in Year 4 functional analysis and complex analysis. See the [Modern Mathematics era](/history/09-modern-mathematics).

@@ -1,0 +1,18 @@
+---
+title: 'Arithmetic coding'
+section: Definitions
+section_slug: 95-definitions
+slug: arithmetic-coding
+tags: [applied]
+first_seen_in: '94-applications/data-compression.mdx'
+mentioned_in: ['94-applications/data-compression']
+summary: 'Quick definition of Arithmetic coding from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Arithmetic coding** is more powerful than Huffman for practical sources: it encodes the entire sequence as a single interval $[0,1)$, progressively narrowing the interval as symbols are received. The compressed output is any binary fraction in the final interval. Arithmetic coding achieves average length arbitrarily close to $H$ without the integer-rounding loss of Huffman.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

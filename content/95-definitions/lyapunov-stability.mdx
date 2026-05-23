@@ -1,0 +1,18 @@
+---
+title: 'Lyapunov stability'
+section: Definitions
+section_slug: 95-definitions
+slug: lyapunov-stability
+tags: [applied]
+first_seen_in: '94-applications/robotics-and-control.mdx'
+mentioned_in: ['94-applications/robotics-and-control']
+summary: 'Quick definition of Lyapunov stability from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Lyapunov stability**: a function $V(\mathbf{x}) > 0$ with $V(\mathbf{0}) = 0$ is a **Lyapunov function** if $\dot{V} = (\nabla V) \cdot f(\mathbf{x}, \mathbf{u}) < 0$ along trajectories. If such a $V$ exists, the equilibrium is asymptotically stable — every trajectory starting near $\mathbf{0}$ converges to it. Designing $V$ directly, or using the PID controller (which implicitly builds a Lyapunov function for linear systems), stabilises the system.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

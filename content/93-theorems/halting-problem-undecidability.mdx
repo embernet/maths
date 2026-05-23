@@ -1,0 +1,42 @@
+---
+title: Halting problem (undecidability)
+section: Theorems
+section_slug: 93-theorems
+slug: halting-problem-undecidability
+attributed_to: [turing]
+era: 08-foundations-and-the-twentieth-century-crisis
+appears_in: []
+related_theorems: [turing-machines-theory-of-computation, incompleteness-theorems-1931, cantor-s-diagonal-argument, formal-axiomatic-systems]
+applications: [quantum-computing-algorithms]
+tags: [computation, undecidability, Turing, logic]
+year_introduced: '1936'
+summary: There is no general algorithm that can determine, for an arbitrary program and input, whether the program will halt or run forever.
+---
+
+
+
+## What it says
+
+The **halting problem** asks: given a program $P$ and an input $I$, does $P$ eventually terminate when run on $I$?
+
+**Turing's theorem:** No algorithm can solve the halting problem for all $(P, I)$ pairs.
+
+The proof is a diagonal argument. Suppose a halting oracle $H(P, I)$ exists. Construct a program $D$ that, given any program $P$, runs $H(P, P)$ and then does the opposite of what $H$ predicts for $P$ running on itself. Feeding $D$ to itself generates a contradiction: $D$ halts if and only if it doesn't. So $H$ cannot exist.
+
+This is logically parallel to [Cantor's diagonal argument](/theorems/cantor-s-diagonal-argument) and [Gödel's incompleteness theorem](/theorems/incompleteness-theorems-1931) — all three use self-reference to show a totality claim is impossible.
+
+## History
+
+[Turing](/mathematicians/turing) proved the undecidability of the halting problem in his 1936 paper "On Computable Numbers," which introduced the Turing machine model. The paper was partly motivated by [Hilbert](/mathematicians/hilbert)'s *Entscheidungsproblem* (decision problem): is there an algorithm that determines whether a given mathematical statement is provable? Turing and Church independently showed the answer is no.
+
+## Why it matters
+
+The halting problem is the first and most fundamental limit on computing. It shows that computation is not omnipotent: there are well-posed questions that no algorithm can answer for all inputs. Many practical undecidability results — whether a program is virus-free, whether two programs compute the same function, whether a formal specification is satisfiable — reduce to the halting problem by showing that a solver would imply a halting oracle.
+
+## Real-world applications
+
+Software verification systems and static analysis tools must work around the halting problem — they can check many programs but not all. [Quantum computing](/applications/quantum-computing-algorithms) does not escape the halting problem; quantum Turing machines are subject to the same undecidability results.
+
+## Where you'll meet it
+
+The halting problem appears in Year 3 algorithms and complexity and Year 4 logic. See the [Foundations and Twentieth-Century Crisis era](/history/08-foundations-and-the-twentieth-century-crisis).

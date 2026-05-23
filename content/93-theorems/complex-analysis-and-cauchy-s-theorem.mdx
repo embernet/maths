@@ -1,0 +1,39 @@
+---
+title: Complex analysis and Cauchy's theorem
+section: Theorems
+section_slug: 93-theorems
+slug: complex-analysis-and-cauchy-s-theorem
+attributed_to: [cauchy]
+era: 06-the-rigour-revolution
+appears_in: [02-core-year-two/03-complex-analysis]
+related_theorems: [cauchys-integral-theorem, cauchy-sequences, riemann-zeta-function, euler-s-formula-e-i-cos-i-sin]
+applications: [signal-processing-jpeg-mp3, option-pricing-finance]
+tags: [complex-analysis, holomorphic, Cauchy, integration]
+year_introduced: 1814–1825
+summary: Cauchy's systematic development of complex function theory — the theory of holomorphic functions and their extraordinary properties.
+---
+
+
+## What it says
+
+A function $f: \mathbb{C} \to \mathbb{C}$ is **holomorphic** (complex differentiable) at $z_0$ if the limit $\lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}$ exists as $h \to 0$ through complex values.
+
+This is a much stronger condition than real differentiability because $h$ can approach from any direction in the complex plane. The condition is equivalent to the **Cauchy–Riemann equations**: writing $f = u + iv$, we need $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ and $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$.
+
+A holomorphic function is automatically infinitely differentiable, equal to its Taylor series, and determined by its values on any open set. The **Cauchy integral theorem** and **Cauchy integral formula** then give: $f(z) = \frac{1}{2\pi i} \oint_C \frac{f(w)}{w - z}\,dw$, so function values inside a contour are determined by boundary values alone.
+
+## History
+
+[Cauchy](/mathematicians/cauchy) developed this theory systematically from 1814, motivated by problems in fluid mechanics and the desire to rigorously extend real calculus to the complex plane. His 1825 memoir on definite integrals was the foundation of complex analysis as a field.
+
+## Why it matters
+
+Complex analysis is one of the most beautiful and most powerful branches of mathematics. The constraints imposed by holomorphicity are so strong that complex functions behave in ways real functions never could — they cannot have isolated "flat spots," cannot be bounded without being constant (Liouville's theorem), and are uniquely determined by their boundary values.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) uses contour integration for filter design and system analysis. [Option pricing](/applications/option-pricing-finance) inverts characteristic functions via contour integrals.
+
+## Where you'll meet it
+
+Complex analysis is Year 2. See also [Cauchy's integral theorem](/theorems/cauchys-integral-theorem) and the [Rigour Revolution era](/history/06-the-rigour-revolution).

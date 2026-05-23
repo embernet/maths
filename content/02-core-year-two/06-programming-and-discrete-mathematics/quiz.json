@@ -1,0 +1,36 @@
+{
+  "topic_slug": "06-programming-and-discrete-mathematics",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Euler's theorem says a connected graph has an Eulerian circuit (a closed walk using each edge exactly once) if and only if:",
+      "options": [
+        {"id": "a", "text": "Every vertex has even degree.", "correct": true, "explanation": "Euler proved this in 1736 for the Königsberg bridge problem. At each intermediate vertex you must enter and leave equally often, requiring even degree. The start/end vertex also needs even degree for the circuit to close."},
+        {"id": "b", "text": "The graph is planar.", "correct": false, "explanation": "Planarity is irrelevant to the existence of Eulerian circuits. Many planar graphs have odd-degree vertices and no Eulerian circuit; many non-planar graphs do have one."},
+        {"id": "c", "text": "The graph has no odd cycles.", "correct": false, "explanation": "Having no odd cycles characterises bipartite graphs, not graphs with Eulerian circuits."},
+        {"id": "d", "text": "Every vertex has degree at least 2.", "correct": false, "explanation": "Minimum degree 2 is necessary (degree 1 vertices can't be "passed through") but not sufficient. A vertex of degree 3 makes Eulerian circuits impossible."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "For a connected planar graph with $V$ vertices, $E$ edges, and $F$ faces (including the outer face), Euler's formula gives:",
+      "options": [
+        {"id": "a", "text": "$V - E + F = 2$.", "correct": true, "explanation": "Euler's formula for connected planar graphs. For example, a tetrahedron has $V=4$, $E=6$, $F=4$: $4-6+4=2$ ✓. The quantity $V-E+F$ is called the Euler characteristic."},
+        {"id": "b", "text": "$V + E - F = 2$.", "correct": false, "explanation": "Signs are wrong. The correct relation is $V - E + F = 2$."},
+        {"id": "c", "text": "$V - E + F = 0$.", "correct": false, "explanation": "For a connected planar graph, the Euler characteristic is 2, not 0. The formula $V-E+F=0$ describes a surface of genus 1 (a torus)."},
+        {"id": "d", "text": "$V \\cdot E = F^2$.", "correct": false, "explanation": "No such relation holds generally. The correct relation is additive, not multiplicative."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Newton's method for finding roots of $f(x) = 0$ iterates $x_{n+1} = x_n - f(x_n)/f'(x_n)$. Near a simple root, convergence is:",
+      "options": [
+        {"id": "a", "text": "Quadratic: the number of correct decimal places roughly doubles each step.", "correct": true, "explanation": "Quadratic convergence means $|e_{n+1}| \\le C |e_n|^2$ for some constant $C$. Starting with 1 correct decimal place gives 2, then 4, then 8 — extremely fast in practice."},
+        {"id": "b", "text": "Linear: the error decreases by a constant factor each step.", "correct": false, "explanation": "Linear convergence means $|e_{n+1}| \\le r|e_n|$ for some $r < 1$. Bisection is linearly convergent. Newton's method near a simple root is quadratically convergent."},
+        {"id": "c", "text": "Cubic: the error cubes each step.", "correct": false, "explanation": "Cubic convergence occurs for certain modified Newton methods or Halley's method. Standard Newton's method is quadratic near a simple root."},
+        {"id": "d", "text": "It does not converge without a good initial guess.", "correct": false, "explanation": "True in practice (Newton's method can diverge from bad starting points), but the question asks about convergence behaviour near a root, where quadratic convergence is guaranteed."}
+      ]
+    }
+  ]
+}

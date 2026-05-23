@@ -1,0 +1,18 @@
+---
+title: 'elliptic curve discrete logarithm problem'
+section: Definitions
+section_slug: 95-definitions
+slug: elliptic-curve-discrete-logarithm-problem
+tags: [applied]
+first_seen_in: '94-applications/cryptocurrency-blockchain.mdx'
+mentioned_in: ['94-applications/cryptocurrency-blockchain']
+summary: 'Quick definition of elliptic curve discrete logarithm problem from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Elliptic-curve signatures (ECDSA)**: Bitcoin uses the elliptic curve secp256k1 over $\mathbb{F}_p$ where $p = 2^{256} - 2^{32} - 977$. The curve equation is $y^2 = x^3 + 7 \pmod{p}$. The group of points $E(\mathbb{F}_p)$ has order $n \approx p$ (by Hasse's theorem: $|n - p - 1| \leq 2\sqrt{p}$). A private key is an integer $d \in [1, n-1]$; the public key is the point $Q = dG$, where $G$ is the generator point. Security rests on the **elliptic curve discrete logarithm problem** (ECDLP): given $G$ and $Q$, recover $d$. No sub-exponential algorithm for ECDLP over general curves is known.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

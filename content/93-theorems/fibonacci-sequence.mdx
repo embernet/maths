@@ -1,0 +1,44 @@
+---
+title: Fibonacci sequence
+section: Theorems
+section_slug: 93-theorems
+slug: fibonacci-sequence
+attributed_to: [fibonacci]
+era: 04-renaissance-and-symbolic-algebra
+appears_in: []
+related_theorems: [introduced-hindu-arabic-numerals-to-europe-via-liber-abaci, bernoulli-numbers-jacob]
+applications: [population-dynamics-ecology, machine-learning-deep-neural-networks]
+tags: [sequences, recurrence, Fibonacci, number-theory]
+year_introduced: '1202'
+summary: The sequence 1, 1, 2, 3, 5, 8, 13, … where each term is the sum of the two preceding — arising from a rabbit breeding problem and appearing throughout mathematics and nature.
+---
+
+
+
+## What it says
+
+The Fibonacci sequence is defined by:
+$$F_1 = 1,\quad F_2 = 1,\quad F_n = F_{n-1} + F_{n-2} \text{ for } n \geq 3$$
+
+The first terms: $1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, \ldots$
+
+The ratio of consecutive terms $F_{n+1}/F_n$ converges to the **golden ratio** $\varphi = \frac{1 + \sqrt{5}}{2} \approx 1.618$.
+
+**Binet's formula** gives the $n$th term directly:
+$$F_n = \frac{\varphi^n - \psi^n}{\sqrt{5}}, \quad \psi = \frac{1-\sqrt{5}}{2}$$
+
+## History
+
+[Fibonacci](/mathematicians/fibonacci) introduced the sequence in *Liber Abaci* (1202) as the solution to a problem about rabbit breeding: how many pairs of rabbits are there after $n$ months, if each mature pair breeds one new pair per month? The problem was illustrative; the sequence had appeared earlier in Indian mathematics in the context of rhythmic patterns. The name "Fibonacci sequence" was coined by Édouard Lucas in the nineteenth century.
+
+## Why it matters
+
+The Fibonacci sequence is one of the most-studied sequences in mathematics. It appears in: the branching of plants (phyllotaxis), the spiral patterns of sunflower seeds and pine cones (Fibonacci spirals), the Pascal triangle (the sum of shallow diagonals), and Zeckendorf's theorem (every positive integer is a unique sum of non-consecutive Fibonacci numbers). Its generating function and connections to the golden ratio make it a rich object in combinatorics and number theory.
+
+## Real-world applications
+
+[Population dynamics](/applications/population-dynamics-ecology) models use Fibonacci-type recurrences. Fibonacci search and Fibonacci heaps (a data structure) appear in [algorithm design](/applications/machine-learning-deep-neural-networks).
+
+## Where you'll meet it
+
+The Fibonacci sequence appears in Year 1 algebra and is revisited in combinatorics and number theory. See the [Renaissance and Symbolic Algebra era](/history/04-renaissance-and-symbolic-algebra).

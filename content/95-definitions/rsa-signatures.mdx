@@ -1,0 +1,18 @@
+---
+title: 'RSA signatures'
+section: Definitions
+section_slug: 95-definitions
+slug: rsa-signatures
+tags: [applied]
+first_seen_in: '94-applications/digital-signatures.mdx'
+mentioned_in: ['94-applications/digital-signatures']
+summary: 'Quick definition of RSA signatures from its appearance in the curriculum.'
+---
+
+## Definition
+
+**RSA signatures**: to sign message $m$, compute the hash $h = H(m)$ (where $H$ is a cryptographic hash function such as SHA-256) and compute $\sigma = h^d \bmod n$ using the private exponent $d$. To verify, check that $\sigma^e \equiv H(m) \pmod{n}$ using the public exponent $e$. The correctness follows from the same Euler's theorem argument as RSA encryption.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

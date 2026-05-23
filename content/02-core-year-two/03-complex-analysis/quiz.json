@@ -1,0 +1,46 @@
+{
+  "topic_slug": "03-complex-analysis",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The Cauchy-Riemann equations for $f(z) = u(x,y) + iv(x,y)$ are:",
+      "options": [
+        {"id": "a", "text": "$u_x = v_y$ and $u_y = -v_x$.", "correct": true, "explanation": "These are the Cauchy-Riemann equations. They are necessary (and, with continuity of partials, sufficient) for $f$ to be complex differentiable at a point."},
+        {"id": "b", "text": "$u_x = v_x$ and $u_y = v_y$.", "correct": false, "explanation": "This would say $u$ and $v$ have the same gradient, which has no special significance for complex analysis."},
+        {"id": "c", "text": "$u_{xx} + u_{yy} = 0$ and $v_{xx} + v_{yy} = 0$.", "correct": false, "explanation": "These are the Laplace equations satisfied by $u$ and $v$ — a consequence of the Cauchy-Riemann equations, not the equations themselves."},
+        {"id": "d", "text": "$u_x = -v_y$ and $u_y = v_x$.", "correct": false, "explanation": "The signs are swapped compared to the correct Cauchy-Riemann equations."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Cauchy's theorem states that, for a holomorphic function $f$ on and inside a simple closed contour $\\gamma$:",
+      "options": [
+        {"id": "a", "text": "$\\oint_\\gamma f(z)\\, dz = 0$.", "correct": true, "explanation": "The integral of an analytic function around a closed contour in its domain of holomorphicity is zero. This is one of the most striking theorems in analysis."},
+        {"id": "b", "text": "$\\oint_\\gamma f(z)\\, dz = 2\\pi i\\, f(0)$.", "correct": false, "explanation": "Cauchy's integral formula gives $f(z_0) = \\frac{1}{2\\pi i}\\oint \\frac{f(z)}{z-z_0}dz$. The integrand $f(z)$ alone (without a pole) gives 0 by Cauchy's theorem."},
+        {"id": "c", "text": "$\\oint_\\gamma |f(z)|\\, |dz| = 0$.", "correct": false, "explanation": "The modulus integral $\\int |f||dz|$ is the arc-length integral of $|f|$ and is generally positive."},
+        {"id": "d", "text": "$f$ equals its Taylor series inside $\\gamma$.", "correct": false, "explanation": "True, but that is a separate theorem. Cauchy's theorem is the statement about the vanishing of the contour integral."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The function $f(z) = 1/(z-2)$ has a singularity at $z=2$. What type is it?",
+      "options": [
+        {"id": "a", "text": "A simple pole (pole of order 1).", "correct": true, "explanation": "The Laurent series of $f(z)$ around $z=2$ is just $1/(z-2)$ — a single negative-power term with $n=-1$. This is a pole of order 1 (simple pole). The residue is 1."},
+        {"id": "b", "text": "An essential singularity.", "correct": false, "explanation": "An essential singularity requires infinitely many negative-power terms in the Laurent series. $e^{1/z}$ at $z=0$ is the classic example."},
+        {"id": "c", "text": "A removable singularity.", "correct": false, "explanation": "A removable singularity means $f$ is bounded near the point and can be extended to a holomorphic function there. $1/(z-2) \\to \\infty$ as $z \\to 2$, so it is not removable."},
+        {"id": "d", "text": "A branch point.", "correct": false, "explanation": "Branch points arise for multi-valued functions like $\\sqrt{z}$ or $\\log z$. A simple rational function like $1/(z-2)$ is single-valued."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "Using the residue theorem, $\\int_{-\\infty}^\\infty \\frac{1}{1+x^2}\\,dx$ evaluates to:",
+      "options": [
+        {"id": "a", "text": "$\\pi$.", "correct": true, "explanation": "The integrand $1/(1+z^2) = 1/((z+i)(z-i))$ has simple poles at $z = \\pm i$. Closing in the upper half-plane encloses $z=i$ with residue $1/(2i)$. The integral is $2\\pi i \\cdot 1/(2i) = \\pi$."},
+        {"id": "b", "text": "$2\\pi$.", "correct": false, "explanation": "This is twice the correct answer. The residue at $z=i$ is $1/(2i)$, so the answer is $2\\pi i \\cdot 1/(2i) = \\pi$."},
+        {"id": "c", "text": "$\\pi/2$.", "correct": false, "explanation": "Half the correct answer. The full real-line integral gives $\\pi$; the integral from $0$ to $\\infty$ gives $\\pi/2$."},
+        {"id": "d", "text": "$1$.", "correct": false, "explanation": "Recall $\\frac{d}{dx}\\arctan(x) = 1/(1+x^2)$, and $\\arctan(\\infty) - \\arctan(-\\infty) = \\pi/2 - (-\\pi/2) = \\pi$."}
+      ]
+    }
+  ]
+}

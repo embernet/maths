@@ -1,0 +1,42 @@
+---
+title: Dedekind cuts (rigorous construction of real numbers)
+section: Theorems
+section_slug: 93-theorems
+slug: dedekind-cuts-rigorous-construction-of-real-numbers
+attributed_to: [dedekind]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [cauchy-sequences, bolzanoweierstrass-theorem, intermediate-value-theorem-first-rigorous-proof, cardinality-of-infinite-sets]
+applications: []
+tags: [real-analysis, foundations, real-numbers, completeness]
+year_introduced: '1872'
+summary: The real numbers can be rigorously defined from the rationals by 'cuts' — partitions of ℚ into two sets — giving the reals their completeness property.
+---
+
+
+
+## What it says
+
+A **Dedekind cut** is a partition of $\mathbb{Q}$ into two non-empty sets $(A, B)$ such that:
+- Every element of $A$ is less than every element of $B$
+- $A$ has no greatest element
+
+Each such cut represents a real number: the rationals are the cuts where $B$ has a minimum element; the irrationals are those where neither set has a boundary element in $\mathbb{Q}$. The cut for $\sqrt{2}$, for instance, has $A = \{q \in \mathbb{Q} : q < 0 \text{ or } q^2 < 2\}$.
+
+This construction shows that $\mathbb{R}$ is **complete**: every non-empty set of reals bounded above has a least upper bound (supremum). The completeness axiom — which is the essence of the real number line — is now a theorem, derived from the construction.
+
+## History
+
+[Dedekind](/mathematicians/dedekind) described cuts in *Stetigkeit und irrationale Zahlen* ("Continuity and irrational numbers"), published 1872. He had worked out the idea in 1858 while preparing calculus lectures and feeling dissatisfied with the lack of any rigorous basis for statements like "this function achieves its maximum." [Cantor](/mathematicians/cantor) simultaneously developed a different construction using equivalence classes of Cauchy sequences — both approaches work and are provably equivalent.
+
+## Why it matters
+
+The rigorous construction of $\mathbb{R}$ from $\mathbb{Q}$ settled a foundational question that had nagged analysis for decades: what exactly is a real number? The answer — a Dedekind cut, or equivalence class of Cauchy sequences — seems abstract, but its consequence is concrete: completeness, and with it the Intermediate Value Theorem, the Extreme Value Theorem, and the Bolzano–Weierstrass theorem, all rigorously proved.
+
+## Real-world applications
+
+No direct engineering applications — but the completeness of $\mathbb{R}$ that this construction establishes is what guarantees convergence of every iterative numerical algorithm in science and engineering.
+
+## Where you'll meet it
+
+Dedekind cuts appear in Year 1 foundations and Year 2 real analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

@@ -1,0 +1,39 @@
+---
+/**
+ * Footer.astro — minimal: title + credit + resources link.
+ */
+---
+<footer class="site-footer no-print" role="contentinfo">
+  <div class="footer-inner">
+    <span class="footer-title">The Undergraduate Mathematics Companion</span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <span class="footer-credit">Compiled by a mathematics professor</span>
+    <span class="footer-sep" aria-hidden="true">·</span>
+    <a href="/resources" class="footer-link">Resources</a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 1rem;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.75rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-title { font-weight: 500; color: var(--color-primary); }
+  .footer-sep { opacity: 0.4; }
+  .footer-link { color: var(--color-primary); }
+  .footer-link:hover { color: var(--color-accent); }
+</style>

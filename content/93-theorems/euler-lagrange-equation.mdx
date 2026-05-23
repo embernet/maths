@@ -1,0 +1,36 @@
+        ---
+        title: Euler-Lagrange equation
+        section: Theorems
+        section_slug: 93-theorems
+        slug: euler-lagrange-equation
+        attributed_to: [euler, lagrange]
+        era: 05-the-calculus-revolution
+        appears_in: [02-core-year-two/04-vector-calculus-and-pdes, 04-advanced-topics-year-four/04-mathematical-physics-and-fluids]
+        related_theorems: [calculus-of-variations-jacob-and-johann, brachistochrone-and-early-calculus-johann, noether-s-theorem-symmetry-and-conservation-laws-in-physics]
+        applications: [robotics-and-control, climate-modelling, gravitational-wave-detection]
+        tags: [calculus-of-variations, physics, PDE]
+        year_introduced: "1750s"
+        summary: If $y(x)$ minimises $\int_a^b L(x, y, y')\,dx$, then $\frac{\partial L}{\partial y} - \frac{d}{dx}\frac{\partial L}{\partial y'} = 0$.
+        ---
+
+        The fundamental equation of the calculus of variations. Among all curves $y(x)$ joining two fixed points, the one that minimises (or extremises) the functional $\int_a^b L(x, y, y')\,dx$ satisfies
+
+$$
+\frac{\partial L}{\partial y} - \frac{d}{dx}\frac{\partial L}{\partial y'} = 0.
+$$
+
+## History
+
+[Euler](/mathematicians/euler) derived a geometric form in the 1740s; the young [Lagrange](/mathematicians/lagrange) sent Euler a more elegant variational derivation in 1755, and Euler, generously, withdrew his own paper until Lagrange's was published. The result became the basis of analytical mechanics.
+
+## Why it matters
+
+Lagrangian mechanics rewrites Newton's laws as the Euler-Lagrange equation for the action integral $\int L\,dt$. The form is invariant under any change of coordinates — which is why physicists love it. The same machinery underlies general relativity, gauge theory and modern field theory.
+
+## Real-world applications
+
+Trajectory optimisation in [robotics](/applications/robotics-and-control), shape optimisation in engineering, and every variational PDE in [climate modelling](/applications/climate-modelling) reduces to Euler-Lagrange equations.
+
+## Where you'll meet it
+
+A first encounter in second-year multivariable calculus; full treatment in third-year mechanics or PDE courses.

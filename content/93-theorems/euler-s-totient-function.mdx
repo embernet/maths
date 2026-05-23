@@ -1,0 +1,53 @@
+---
+title: Euler's Totient Function
+section: Theorems
+section_slug: 93-theorems
+slug: euler-s-totient-function
+attributed_to: [euler]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/01-abstract-algebra, 04-advanced-topics-year-four/02-analytic-number-theory]
+related_theorems: [fermat-s-little-theorem, modular-arithmetic-and-number-theory, prime-number-theorem]
+applications: [rsa-public-key-cryptography, digital-signatures, cryptocurrency-blockchain]
+tags: [number-theory, modular-arithmetic, primes]
+year_introduced: 1763 (Euler)
+summary: How many numbers up to $n$ are coprime to $n$ — and why this innocent count became the engine of modern cryptography.
+---
+
+
+Pick a positive integer $n$. **Euler's totient function** $\varphi(n)$ counts how many integers between $1$ and $n$ share no common factor with $n$ — equivalently, how many invertible elements there are in modular arithmetic modulo $n$.
+
+If $p$ is prime, every number from $1$ to $p-1$ is coprime to $p$, so $\varphi(p) = p - 1$. For products of distinct primes $\varphi$ is multiplicative:
+
+$$
+\varphi(pq) = (p-1)(q-1) \qquad \text{when $p, q$ are distinct primes.}
+$$
+
+More generally,
+
+$$
+\varphi(n) = n \prod_{p \mid n}\left(1 - \frac{1}{p}\right).
+$$
+
+The key result attached to $\varphi$ is **Euler's theorem**: if $a$ is coprime to $n$, then
+
+$$
+a^{\varphi(n)} \equiv 1 \pmod{n}.
+$$
+
+When $n$ is prime this reduces to [Fermat's little theorem](/theorems/fermat-s-little-theorem). Euler's theorem is the more general statement and the more useful one for cryptography.
+
+## History
+
+[Leonhard Euler](/mathematicians/euler) introduced the totient in a paper of 1763 and proved his generalisation of Fermat's little theorem the same year. The notation $\varphi$ was Gauss's, introduced in *Disquisitiones Arithmeticae* (1801). For nearly two centuries afterwards the function lived a quiet life inside pure number theory.
+
+## Why it matters
+
+Knowing $\varphi(n)$ tells you the order of the group of units modulo $n$ — and orders of groups are the starting point of group theory. It also gives you the key identity that makes [RSA](/applications/rsa-public-key-cryptography) work: a message $m$ encrypted with public exponent $e$ and decrypted with private exponent $d$ returns to itself because $ed \equiv 1 \pmod{\varphi(n)}$.
+
+## Real-world applications
+
+Every TLS handshake on the web, every SSH connection, every signed software update relies on RSA — and RSA relies on $\varphi$. The security of the scheme rests on the fact that $\varphi(pq)$ is easy to compute *if* you know $p$ and $q$, and extremely hard if you do not.
+
+## Where you'll meet it
+
+In abstract algebra (the order of the group of units mod $n$), in elementary number theory, and again in any advanced course on cryptography.

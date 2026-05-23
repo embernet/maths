@@ -1,0 +1,48 @@
+---
+title: Era 8 — Foundations and the Twentieth-Century Crisis
+section: A Brief History of Mathematics
+section_slug: 90-history
+era_number: 8
+period: c.1870 – 1940
+order: 8
+key_figures: [cantor, hilbert, godel, turing]
+key_developments: [set-theoretic foundations, Russell's paradox, Hilbert's programme, Gödel's incompleteness theorems, computability]
+related_topics: [01-algebra-and-linear-algebra, 02-real-analysis-foundations]
+summary: As mathematics became more rigorous, it confronted questions about its own foundations. Cantor's paradise of infinities, Russell's paradox, Hilbert's programme, and Gödel's shattering proof define the most dramatic episode in the history of mathematical foundations.
+---
+
+
+
+By 1900, mathematicians had reduced virtually all of mathematics to set theory: numbers were constructed from sets; functions were sets of ordered pairs; all of analysis was built on the real numbers, which were constructed from the rationals, which were constructed from the integers, which were constructed from the natural numbers, which were (Frege proposed) sets of sets.
+
+The foundations seemed secure. Then Bertrand Russell found a crack.
+
+## Russell's paradox
+
+[Bertrand Russell](/mathematicians/russell) (1872–1970), working through Frege's *Grundgesetze* (a monumental attempt to derive arithmetic from logic alone), found that Frege's system was inconsistent. The culprit: unrestricted set comprehension — the assumption that any description defines a set. Consider the set of all sets that do not contain themselves: $R = \{S : S \notin S\}$. Does $R$ contain itself? If yes, then $R \notin R$ by definition — a contradiction. If no, then $R \in R$ by definition — also a contradiction.
+
+This is Russell's paradox (1901). Frege, to his enormous credit, replied to Russell's letter with the response: "Your discovery of the contradiction has surprised me beyond words and, I should almost like to say, left me thunderstruck, because it has rocked the ground on which I meant to build arithmetic."
+
+## Hilbert's programme
+
+[David Hilbert](/mathematicians/hilbert) (1862–1943) proposed a systematic response: formalise all of mathematics in a finite set of axioms, prove that the axiom system is consistent (cannot prove contradictions), and prove that it is complete (every mathematical truth can be derived). If this could be done, mathematics would have the same certainty as formal logic.
+
+At the 1900 International Congress of Mathematicians, Hilbert posed 23 open problems whose solutions would shape twentieth-century mathematics. His second problem asked for a proof of the consistency of arithmetic. His confidence was expressed in a famous declaration: "We must know, we will know" — the battle cry of mathematical rationalism.
+
+## Gödel's incompleteness theorems
+
+In 1931, Kurt [Gödel](/mathematicians/godel) (1906–1978), aged twenty-five, proved that Hilbert's programme was impossible.
+
+Gödel showed that any consistent formal system $F$ powerful enough to describe elementary arithmetic must contain statements that are true but unprovable within $F$ — **Gödel's first incompleteness theorem**. Moreover, $F$ cannot prove its own consistency — **Gödel's second incompleteness theorem**. Both results held for any consistent extension of arithmetic.
+
+The proof was a masterpiece of self-reference: Gödel assigned numbers to formal statements and proofs (Gödel numbering), then constructed a statement that effectively says "This statement is not provable in $F$." If the statement is provable, $F$ is inconsistent. If it is not provable, then it is true (since its content is that it is unprovable), but $F$ cannot prove it — incompleteness.
+
+Gödel's theorems did not destroy mathematics. They destroyed a particular *dream* of mathematics — the dream of a complete, self-verifying, finitely-axiomatisable foundation. In practice, mathematicians continued as before. But the philosophical landscape shifted permanently.
+
+## Turing and computability
+
+[Alan Turing](/mathematicians/turing) (1912–1954) attacked Hilbert's *Entscheidungsproblem* (decision problem): is there an algorithm that can decide whether any given mathematical statement is provable? Turing formalised the notion of "algorithm" through the **Turing machine** — an abstract model of computation — and proved that the halting problem (determining whether a Turing machine will eventually halt) is undecidable. No algorithm can solve it.
+
+This result established the mathematical foundation of theoretical computer science. Every modern computer is, in a precise sense, a physical realisation of a Turing machine. Turing went on to break the Enigma code during World War II, write the first paper on artificial intelligence (1950), and produce a 1952 paper on the mathematics of morphogenesis (pattern formation in biology) using reaction-diffusion PDEs. He was prosecuted for homosexuality in 1952, subjected to chemical castration, and died in 1954.
+
+Cantor's paradise, Russell's paradox, Hilbert's programme, Gödel's theorem, Turing's machine: the history of mathematical foundations in seventy years.

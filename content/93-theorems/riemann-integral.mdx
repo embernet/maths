@@ -1,0 +1,44 @@
+---
+title: Riemann integral
+section: Theorems
+section_slug: 93-theorems
+slug: riemann-integral
+attributed_to: [riemann]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [rigorous-foundations-of-calculus-definitions, riemann-zeta-function, fourier-series, uniform-convergence]
+applications: [signal-processing-jpeg-mp3]
+tags: [analysis, integration, Riemann, calculus]
+year_introduced: '1854'
+summary: The first rigorous definition of the integral — the area under a curve defined as the limit of sums of rectangular slices — giving analysis its formal foundation.
+---
+
+
+
+## What it says
+
+Given a bounded function $f: [a,b] \to \mathbb{R}$, a **partition** $P = \{a = x_0 < x_1 < \cdots < x_n = b\}$ determines the **lower** and **upper Darboux sums**
+
+$$L(f,P) = \sum_{i=1}^n m_i(x_i - x_{i-1}), \qquad U(f,P) = \sum_{i=1}^n M_i(x_i - x_{i-1})$$
+
+where $m_i = \inf_{[x_{i-1},x_i]} f$ and $M_i = \sup_{[x_{i-1},x_i]} f$. The function $f$ is **Riemann integrable** if $\sup_P L(f,P) = \inf_P U(f,P)$, and this common value is the Riemann integral $\int_a^b f(x)\,dx$.
+
+Equivalently (Riemann's original formulation): $f$ is integrable if for every $\varepsilon > 0$ there exists $\delta > 0$ such that any Riemann sum $\sum f(x_i^*)(x_i - x_{i-1})$ with partition mesh less than $\delta$ satisfies $|\text{sum} - \int_a^b f| < \varepsilon$.
+
+A bounded function is Riemann integrable if and only if its set of discontinuities has measure zero (Lebesgue's criterion, proved later in 1901).
+
+## History
+
+[Riemann](/mathematicians/riemann) introduced this definition in his 1854 *Habilitationsschrift* on trigonometric series — the same work that launched Riemannian geometry. His motivation was to clarify which functions can be represented by [Fourier series](/theorems/fourier-series). Cauchy had already defined integrals for continuous functions; Riemann extended this to bounded functions with infinitely many discontinuities. Henri Lebesgue's more powerful integration theory (1901) later extended the Riemann integral significantly, though Riemann integration remains the standard first treatment.
+
+## Why it matters
+
+The Riemann integral gave calculus a rigorous foundation: before it, "the area under a curve" was an intuitive but undefined concept. The definition clarifies exactly which functions can be integrated and provides a precise meaning for the Fundamental Theorem of Calculus. Every undergraduate analyst learns the $\varepsilon$–$\delta$ definition; the Riemann integral is its counterpart for integration.
+
+## Real-world applications
+
+Numerical integration methods (rectangle rule, trapezoid rule, Simpson's rule) are discrete approximations to the Riemann integral. These underpin [signal processing](/applications/signal-processing-jpeg-mp3) computations wherever analogue signals are digitised.
+
+## Where you'll meet it
+
+The Riemann integral is core first-year analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

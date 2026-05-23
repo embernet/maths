@@ -1,0 +1,41 @@
+---
+title: Maximum likelihood estimation
+section: Theorems
+section_slug: 93-theorems
+slug: maximum-likelihood-estimation
+attributed_to: [fisher]
+era: 09-modern-mathematics
+appears_in: [02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [the-fisher-information-matrix, analysis-of-variance-anova, gaussian-distribution-normal-distribution, bayes-theorem]
+applications: [clinical-trials-design, machine-learning-deep-neural-networks, medical-diagnosis-screening, census-and-survey-statistics]
+tags: [statistics, estimation, Fisher, inference]
+year_introduced: '1922'
+summary: Choose the parameter value that makes the observed data most probable — Fisher's principle for statistical estimation that underpins most of modern statistics and machine learning.
+---
+
+
+## What it says
+
+Given data $x_1, \ldots, x_n$ from a distribution with parameter $\theta$, the **likelihood** is:
+
+$$L(\theta) = \prod_{i=1}^n p(x_i; \theta)$$
+
+The **maximum likelihood estimate (MLE)** is $\hat{\theta} = \arg\max_\theta L(\theta)$, or equivalently (and numerically more tractable) $\hat{\theta} = \arg\max_\theta \ell(\theta)$ where $\ell = \log L$ is the **log-likelihood**.
+
+Key properties of MLEs: under regularity conditions, they are consistent (converge to the true parameter), asymptotically normal, and asymptotically efficient (achieve the Cramér–Rao lower bound, related to the [Fisher information](/theorems/the-fisher-information-matrix)).
+
+## History
+
+[Fisher](/mathematicians/fisher) published MLE in 1922, following Gauss's earlier use of least squares (a special case of MLE for Gaussian errors). Fisher showed that MLE is optimal in a broad asymptotic sense, unifying many ad hoc estimation methods. His 1925 paper on the theory of estimation established the framework used in statistics to this day.
+
+## Why it matters
+
+MLE is the workhorse of statistical estimation. Linear regression (OLS is MLE for Gaussian errors), logistic regression, neural network training (cross-entropy loss is negative log-likelihood for categorical distributions), and virtually every fitted model in statistics and machine learning is an MLE or a Bayesian approximation to one. Understanding MLE means understanding the foundations of learning from data.
+
+## Real-world applications
+
+[Clinical trials](/applications/clinical-trials-design) use MLE for treatment effect estimates. [Machine learning](/applications/machine-learning-deep-neural-networks) training minimises negative log-likelihood. [Medical diagnosis](/applications/medical-diagnosis-screening) fits diagnostic models by MLE. [Census statistics](/applications/census-and-survey-statistics) use MLE for demographic parameter estimation.
+
+## Where you'll meet it
+
+MLE is introduced in Year 2 statistical inference. See the [Modern Mathematics era](/history/09-modern-mathematics).

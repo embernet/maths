@@ -1,0 +1,42 @@
+---
+title: Riemannian geometry
+section: Theorems
+section_slug: 93-theorems
+slug: riemannian-geometry
+attributed_to: [riemann]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [euclidean-geometry, non-euclidean-geometry-unpublished, riemann-surfaces, poincare-conjecture, foundations-of-geometry]
+applications: [gps-positioning]
+tags: [geometry, differential-geometry, Riemann, general-relativity]
+year_introduced: '1854'
+summary: The study of curved spaces equipped with a metric — Riemann's 1854 lecture generalised Euclidean geometry to arbitrary dimensions, providing the mathematical language for Einstein's general relativity.
+---
+
+
+
+## What it says
+
+A **Riemannian manifold** is a smooth manifold $M$ equipped with a **Riemannian metric** $g$ — a smoothly varying positive-definite inner product $g_p: T_pM \times T_pM \to \mathbb{R}$ on each tangent space. The metric determines:
+
+- **Lengths** of curves: $\ell(\gamma) = \int_a^b \sqrt{g_{\gamma(t)}(\dot\gamma(t), \dot\gamma(t))}\,dt$
+- **Geodesics**: locally length-minimising curves, satisfying $\ddot\gamma^k + \Gamma^k_{ij}\dot\gamma^i\dot\gamma^j = 0$ where $\Gamma^k_{ij}$ are the Christoffel symbols derived from $g$
+- **Curvature**: the Riemann curvature tensor $R^l{}_{ijk}$, whose vanishing characterises flat (locally Euclidean) spaces
+
+Euclidean geometry corresponds to $g_{ij} = \delta_{ij}$, giving zero curvature everywhere.
+
+## History
+
+[Riemann](/mathematicians/riemann) delivered his *Habilitationsvortrag* "On the hypotheses which lie at the foundations of geometry" in Göttingen in June 1854, before Gauss and a general audience. He was 27. The lecture, published posthumously in 1868, introduced the concept of an $n$-dimensional manifold with a variable metric — a complete break from the view that geometry meant flat Euclidean space. Riemann speculated that physical space might have non-zero curvature and that its geometry could depend on the matter within it. This was confirmed 60 years later by Einstein's general theory of relativity.
+
+## Why it matters
+
+Riemannian geometry is the mathematical framework for general relativity, where spacetime is a 4-dimensional Lorentzian manifold (a slight generalisation with indefinite metric) curved by energy and momentum. It also underpins modern differential topology, geometric analysis, and the study of manifolds in all dimensions. The Poincaré conjecture and its resolution by Perelman used Ricci flow — a partial differential equation on the metric of a Riemannian manifold.
+
+## Real-world applications
+
+[GPS and satellite navigation](/applications/gps-and-satellite-navigation) require corrections from general relativity — atomic clocks on satellites tick at different rates because of curved spacetime, and the Riemannian framework makes those corrections precise. Riemannian metrics also appear in statistical manifolds (information geometry) used in machine learning.
+
+## Where you'll meet it
+
+Riemannian geometry appears in Year 4 differential geometry. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

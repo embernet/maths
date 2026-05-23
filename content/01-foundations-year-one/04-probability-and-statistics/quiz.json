@@ -1,0 +1,46 @@
+{
+  "topic_slug": "04-probability-and-statistics",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "A fair die is rolled twice. What is the probability that the sum is 7?",
+      "options": [
+        {"id": "a", "text": "$\\frac{1}{6}$", "correct": true, "explanation": "The pairs summing to 7 are (1,6),(2,5),(3,4),(4,3),(5,2),(6,1) — that is 6 pairs out of $6 \\times 6 = 36$ equally likely outcomes. So the probability is $6/36 = 1/6$."},
+        {"id": "b", "text": "$\\frac{1}{7}$", "correct": false, "explanation": "The sum ranges from 2 to 12, but the outcomes are not equally likely. There are 36 equally likely outcome pairs, not 11 equally likely sums."},
+        {"id": "c", "text": "$\\frac{5}{36}$", "correct": false, "explanation": "5/36 is the probability of rolling a sum of 6 (or 8). For sum 7, there are 6 favourable pairs, not 5."},
+        {"id": "d", "text": "$\\frac{7}{36}$", "correct": false, "explanation": "There are 6 pairs summing to 7, not 7. Check: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1)."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "A test for a rare disease has 99% sensitivity and 99% specificity. The disease affects 0.1% of the population. A person tests positive. What is the approximate probability they have the disease?",
+      "options": [
+        {"id": "a", "text": "About 9%", "correct": true, "explanation": "Using Bayes: $P(D^+|T^+) = P(T^+|D^+)P(D^+)/P(T^+)$. With $P(D^+)=0.001$, $P(T^+|D^+)=0.99$, $P(T^+|D^-)=0.01$: numerator $\\approx 0.00099$; denominator $\\approx 0.00099 + 0.00999 \\approx 0.01098$. Ratio $\\approx 0.09$ or 9%. This counterintuitive result is why screening for rare conditions is tricky."},
+        {"id": "b", "text": "About 99%", "correct": false, "explanation": "This ignores the base rate (how rare the disease is). Even a very accurate test will mostly produce false positives when the disease is rare."},
+        {"id": "c", "text": "About 50%", "correct": false, "explanation": "This might seem like a sensible default but ignores the actual numbers. Bayes' theorem is required."},
+        {"id": "d", "text": "About 0.1%", "correct": false, "explanation": "This is just the base rate — it ignores the test result entirely."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "If $X \\sim N(\\mu, \\sigma^2)$, then $Z = (X - \\mu)/\\sigma$ has which distribution?",
+      "options": [
+        {"id": "a", "text": "$N(0, 1)$ — the standard normal.", "correct": true, "explanation": "Standardising shifts the mean to 0 (subtracting $\\mu$) and scales the standard deviation to 1 (dividing by $\\sigma$). This transformation underlies all standard normal table lookups."},
+        {"id": "b", "text": "$N(\\mu, 1)$.", "correct": false, "explanation": "Dividing by $\\sigma$ changes the variance to 1, but subtracting $\\mu$ also shifts the mean to 0."},
+        {"id": "c", "text": "A $t$-distribution with one degree of freedom.", "correct": false, "explanation": "A $t$-distribution arises when the population variance is unknown and estimated from the sample. Here $\\sigma$ is known."},
+        {"id": "d", "text": "A $\\chi^2$ distribution.", "correct": false, "explanation": "$Z^2$ follows a $\\chi^2_1$ distribution, but $Z$ itself is standard normal."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "The Central Limit Theorem guarantees that, under suitable conditions:",
+      "options": [
+        {"id": "a", "text": "The distribution of the standardised sample mean $\\frac{\\bar{X}_n - \\mu}{\\sigma/\\sqrt{n}}$ converges to $N(0,1)$ as $n \\to \\infty$, regardless of the distribution of the $X_i$.", "correct": true, "explanation": "This is the CLT. The only conditions needed are that the $X_i$ are i.i.d. with finite mean $\\mu$ and finite variance $\\sigma^2$. The original distribution can be anything."},
+        {"id": "b", "text": "The sample mean $\\bar{X}_n$ converges to the population mean $\\mu$ as $n \\to \\infty$.", "correct": false, "explanation": "That is the Law of Large Numbers (not the CLT). The LLN says $\\bar{X}_n \\to \\mu$; the CLT says the scaled fluctuations are normal."},
+        {"id": "c", "text": "The sum of $n$ normal random variables is normal.", "correct": false, "explanation": "True, but that is a special property of the normal distribution, not the CLT. The CLT applies to non-normal distributions."},
+        {"id": "d", "text": "All distributions with large sample size are approximately normal.", "correct": false, "explanation": "It is the distribution of the sample mean (or sum) that becomes approximately normal, not the distribution of individual observations."}
+      ]
+    }
+  ]
+}

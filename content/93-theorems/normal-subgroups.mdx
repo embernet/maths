@@ -1,0 +1,39 @@
+---
+title: Normal subgroups
+section: Theorems
+section_slug: 93-theorems
+slug: normal-subgroups
+attributed_to: [galois]
+era: 07-the-structural-turn
+appears_in: [02-core-year-two/01-abstract-algebra, 03-specialisation-year-three/01-galois-theory]
+related_theorems: [galois-groups, group-theory-permutation-groups, characterisation-of-solvable-polynomials, ideals-in-ring-theory]
+applications: [quantum-computing-algorithms]
+tags: [algebra, groups, normal-subgroups, quotient-groups]
+year_introduced: 1830–1832
+summary: A subgroup closed under conjugation — the condition that allows you to form a quotient group, and a key concept Galois introduced to characterise solvable extensions.
+---
+
+
+## What it says
+
+A subgroup $N \leq G$ is **normal** (written $N \trianglelefteq G$) if $gNg^{-1} = N$ for all $g \in G$. Equivalently, every left coset equals the corresponding right coset: $gN = Ng$.
+
+Normal subgroups are the kernels of group homomorphisms: $N = \ker(\varphi: G \to H)$ is always normal. Conversely, if $N \trianglelefteq G$, the quotient $G/N$ (cosets of $N$) forms a group with operation $(gN)(hN) = (gh)N$.
+
+A group with no non-trivial normal subgroups is **simple**. The simple groups are the "atoms" of group theory; their classification was completed in 2004 — one of the largest proofs in mathematics.
+
+## History
+
+[Galois](/mathematicians/galois) introduced normal subgroups (he called them "proper decompositions") in 1831 precisely to characterise when a field extension can be built by radicals. The concept is indispensable: without it, quotient groups cannot be formed, and the analysis of group structure grinds to a halt.
+
+## Why it matters
+
+Normal subgroups are to groups what ideals are to rings — the right notion of "kernel" that makes quotients possible. The structure of a group is studied by finding its composition series (a sequence of normal subgroups with simple quotients) and understanding the simple groups in the series. The classification of finite simple groups is one of the monuments of twentieth-century mathematics.
+
+## Real-world applications
+
+The theory of normal subgroups appears in [quantum computing algorithms](/applications/quantum-computing-algorithms) via quantum error correction, which uses the structure of specific groups.
+
+## Where you'll meet it
+
+Normal subgroups are introduced in Year 2 abstract algebra and are central to Year 3 Galois theory. See the [Structural Turn era](/history/07-the-structural-turn).

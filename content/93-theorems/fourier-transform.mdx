@@ -1,0 +1,46 @@
+---
+title: Fourier transform
+section: Theorems
+section_slug: 93-theorems
+slug: fourier-transform
+attributed_to: [fourier]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [fourier-series, euler-s-formula-e-i-cos-i-sin, laplace-transform, heat-equation]
+applications: [signal-processing-jpeg-mp3, medical-imaging-mri-ct, radar-and-sonar, gravitational-wave-detection, data-compression]
+tags: [analysis, frequency, transforms, harmonic-analysis]
+year_introduced: 1822 (origins); fully developed through 20th century
+summary: The Fourier transform decomposes a function of time (or space) into its component frequencies — the most important transformation in applied mathematics.
+---
+
+
+
+## What it says
+
+For a function $f: \mathbb{R} \to \mathbb{C}$, the Fourier transform is:
+
+$$\hat{f}(\xi) = \int_{-\infty}^{\infty} f(x)\, e^{-2\pi i \xi x}\, dx$$
+
+The transform maps $f$ from the *time domain* to the *frequency domain*. The inverse transform recovers $f$:
+
+$$f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi)\, e^{2\pi i \xi x}\, d\xi$$
+
+Key property: **Parseval's theorem** $\int |f|^2 = \int |\hat{f}|^2$ — the total energy is preserved. The **convolution theorem**: $\widehat{f * g} = \hat{f} \cdot \hat{g}$ — convolution in time becomes multiplication in frequency.
+
+The **Fast Fourier Transform (FFT)** computes the discrete version in $O(n \log n)$ rather than $O(n^2)$ — one of the most important algorithms ever written.
+
+## History
+
+[Fourier](/mathematicians/fourier) introduced the transformation as part of his heat equation work. The continuous transform was developed through the nineteenth and early twentieth centuries; Plancherel gave the $L^2$ theory in 1910. The FFT algorithm, rediscovered by Cooley and Tukey in 1965, made large-scale Fourier computation practical and triggered a revolution in digital signal processing.
+
+## Why it matters
+
+The Fourier transform is everywhere in physics and engineering because many systems are linear and translation-invariant, and the eigenfunctions of such systems are exactly the complex exponentials $e^{2\pi i \xi x}$. Fourier analysis tells you which frequencies are present in a signal, and the convolution theorem means filtering in time reduces to multiplication in frequency — trivial and fast.
+
+## Real-world applications
+
+[JPEG and MP3](/applications/signal-processing-jpeg-mp3) compression discard perceptually unimportant frequency components. [MRI](/applications/medical-imaging-mri-ct) measures Fourier coefficients of tissue and reconstructs the image. [Radar](/applications/radar-and-sonar) uses the FFT to extract target velocities. [Gravitational-wave detection](/applications/gravitational-wave-detection) at LIGO uses Fourier analysis to extract signals from noisy data. [Data compression](/applications/data-compression) uses transform coding built on the FFT.
+
+## Where you'll meet it
+
+The Fourier transform is introduced in Year 2 differential equations and studied in depth in Year 3 harmonic analysis. See the [Fourier series](/theorems/fourier-series) page for the periodic setting, and the [Calculus Revolution era](/history/05-the-calculus-revolution).

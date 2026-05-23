@@ -1,0 +1,77 @@
+---
+title: Measure Theory and Lebesgue Integration
+section: 'Specialisation: Year Three'
+section_slug: 03-specialisation-year-three
+year: 3
+order: 3
+tags: [measure-theory, Lebesgue-integration, sigma-algebras, convergence-theorems, probability-foundations]
+prerequisites:
+- 02-real-analysis-2
+related:
+- 02-functional-analysis
+- 07-stochastic-processes
+mathematicians: [cantor, kolmogorov, riemann]
+reading_time_min: 9
+summary: Lebesgue integration replaces the Riemann approach with a more powerful theory that handles limits far more gracefully. It is the foundation of modern probability and functional analysis.
+theorems: [axiomatic-foundations-of-probability, ergodic-theory, riemann-integral, early-work-on-infinite-sets, set-theory]
+applications: [option-pricing-finance, machine-learning-bayesian-inference, actuarial-science]
+---
+
+
+
+The Riemann integral, rigorous as it is, has a fundamental weakness: it handles limits badly. The limit of a sequence of Riemann-integrable functions need not be Riemann integrable. Passing limits through integrals requires uncomfortable additional conditions. And Dirichlet's function (1 on rationals, 0 on irrationals) is not Riemann integrable at all, despite being "mostly" zero.
+
+Henri [Lebesgue's](/mathematicians/lebesgue) 1902 doctoral thesis fixed all of this. The key idea is subtle but powerful: instead of partitioning the domain (as Riemann does), partition the range.
+
+## Sigma-algebras and measures
+
+A **$\sigma$-algebra** on a set $X$ is a collection $\mathcal{F}$ of subsets of $X$ satisfying:
+1. $X \in \mathcal{F}$.
+2. If $A \in \mathcal{F}$, then $A^c \in \mathcal{F}$ (closed under complements).
+3. If $A_1, A_2, \ldots \in \mathcal{F}$, then $\bigcup_{n=1}^\infty A_n \in \mathcal{F}$ (closed under countable unions).
+
+A **measure** $\mu : \mathcal{F} \to [0, \infty]$ satisfies $\mu(\emptyset) = 0$ and countable additivity: $\mu(\bigsqcup A_n) = \sum \mu(A_n)$ for pairwise disjoint sets $A_n$.
+
+The **Borel $\sigma$-algebra** on $\mathbb{R}$ is the smallest $\sigma$-algebra containing all open intervals. The **Lebesgue measure** $\lambda$ on $\mathbb{R}$ is the unique measure with $\lambda([a,b]) = b - a$ — it assigns to every interval its length. The Lebesgue measure of the rationals $\lambda(\mathbb{Q}) = 0$ (countable union of measure-zero singletons).
+
+## Measurable functions and the Lebesgue integral
+
+A function $f : X \to \mathbb{R}$ is **measurable** if $\{x : f(x) > t\} \in \mathcal{F}$ for every $t$. This is a mild condition: all continuous functions, all monotone functions, and all pointwise limits of measurable functions are measurable.
+
+The Lebesgue integral is built in stages:
+1. **Indicator functions**: $\int \mathbf{1}_A\, d\mu = \mu(A)$.
+2. **Simple functions** (finite linear combinations of indicators): $\int \sum a_i \mathbf{1}_{A_i}\, d\mu = \sum a_i \mu(A_i)$.
+3. **Non-negative measurable functions**: $\int f\, d\mu = \sup\{\int s\, d\mu : 0 \le s \le f,\ s \text{ simple}\}$.
+4. **General functions**: split into $f = f^+ - f^-$ and integrate positive and negative parts separately.
+
+For Lebesgue-integrable functions ($\int |f|\, d\mu < \infty$), the integral agrees with the Riemann integral whenever the latter exists. But the Lebesgue integral handles far more functions.
+
+## The convergence theorems
+
+These are why Lebesgue integration matters for analysis and probability:
+
+**Monotone Convergence Theorem**: if $0 \le f_1 \le f_2 \le \cdots$ and $f_n \to f$ pointwise, then $\int f_n \to \int f$.
+
+**Dominated Convergence Theorem**: if $f_n \to f$ pointwise and $|f_n| \le g$ for some integrable dominating function $g$, then $\int f_n \to \int f$.
+
+These theorems justify passing limits through integral signs under very mild conditions — something the Riemann theory cannot do without painful extra hypotheses.
+
+**Fubini's theorem**: for non-negative or integrable $f(x,y)$,
+
+$$\int \int f(x,y)\, dx\, dy = \int\!\int f(x,y)\, dy\, dx.$$
+
+The order of integration can be swapped — automatically, without conditions on the region of integration (beyond measurability).
+
+## Lp spaces
+
+For $1 \le p < \infty$, the **$L^p$ space** consists of measurable functions with $\int |f|^p\, d\mu < \infty$, equipped with the norm $\|f\|_p = (\int |f|^p)^{1/p}$. These are Banach spaces. $L^2$ is a Hilbert space and the natural setting for Fourier analysis.
+
+The **Hölder inequality**: $\int |fg|\, d\mu \le \|f\|_p \|g\|_q$ for $1/p + 1/q = 1$.
+
+## Real-world applications
+
+Where this turns up in the world: [Option pricing](/applications/option-pricing-finance) and all of stochastic finance require Lebesgue integration — the Itô integral (the stochastic integral at the heart of Black-Scholes) is defined using measure-theoretic tools unavailable in the Riemann framework. [Bayesian machine learning](/applications/machine-learning-bayesian-inference) integrates over high-dimensional parameter spaces using Lebesgue measure; without the dominated convergence theorem, passing limits through integrals in MCMC convergence proofs would be unjustifiable. The actuarial expected present values for [pension fund management](/applications/actuarial-science) are Lebesgue integrals over lifetime distributions.
+
+## Measure-theoretic probability
+
+With measure theory, probability becomes a special case: a probability space is $(\Omega, \mathcal{F}, P)$ where $P(\Omega) = 1$. Random variables are measurable functions; expectations are Lebesgue integrals. [Kolmogorov's](/mathematicians/kolmogorov) 1933 axiomatisation of probability is precisely this framework. The strong law of large numbers, martingale convergence theorems, and the construction of Brownian motion all depend on Lebesgue-measure tools that have no Riemann-integral counterpart.

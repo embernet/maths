@@ -1,0 +1,40 @@
+---
+title: proof by contradiction
+section: Theorems
+section_slug: 93-theorems
+slug: proof-by-contradiction
+attributed_to: [euclid]
+era: 02-classical-greece
+appears_in: []
+related_theorems: [euclid-s-elements, cantor-s-diagonal-argument, halting-problem-undecidability, discovery-of-irrational-numbers]
+applications: []
+tags: [logic, proof, contradiction, foundations]
+year_introduced: c. 300 BCE
+summary: To prove a statement P, assume ¬P and derive a contradiction — one of the most powerful proof techniques in mathematics.
+---
+
+
+
+## What it says
+
+**Proof by contradiction (reductio ad absurdum):** To prove $P$, assume $\neg P$ (the negation of $P$) and derive a logical contradiction — a statement $Q \wedge \neg Q$. Since a contradiction cannot be true, the assumption $\neg P$ must have been false, so $P$ must be true.
+
+This is one of the three main proof strategies (the others being direct proof and proof by induction). It is particularly useful for proving negative statements ("there is no..."), uniqueness, and irrationality.
+
+**Classic example:** $\sqrt{2}$ is irrational. Assume $\sqrt{2} = p/q$ in lowest terms. Then $2q^2 = p^2$, so $p^2$ is even, so $p$ is even, so $p = 2k$, so $4k^2 = 2q^2$, so $q^2 = 2k^2$, so $q$ is even — contradicting $p/q$ being in lowest terms.
+
+## History
+
+[Euclid](/mathematicians/euclid) used reductio ad absurdum extensively in the *Elements*, including his famous proof that there are infinitely many primes (Book IX, Proposition 20). The technique is as old as Greek mathematics and is explicitly formulated in Aristotle's logic.
+
+## Why it matters
+
+Proof by contradiction is a fundamental logical tool. It underlies [Cantor's diagonal argument](/theorems/cantor-s-diagonal-argument) (the reals are uncountable), [Turing's halting problem](/theorems/halting-problem-undecidability) proof, and countless other results. The technique becomes subtler in constructive mathematics, where existence proofs require exhibiting an object rather than merely deriving a contradiction from its non-existence.
+
+## Real-world applications
+
+No direct applications, but the logical structure of contradiction-based proofs is fundamental to formal verification and automated theorem proving in computer science.
+
+## Where you'll meet it
+
+Proof by contradiction is introduced in Year 1 logic and proof. See the [Classical Greece era](/history/02-classical-greece) and [Euclid's Elements](/theorems/euclid-s-elements).

@@ -1,0 +1,42 @@
+---
+title: 'Machine Learning: Bayesian Inference'
+section: Real-world applications
+section_slug: 94-applications
+slug: machine-learning-bayesian-inference
+domains: [computer-science, statistics, data-science]
+uses_theorems: [bayes-theorem, axiomatic-foundations-of-probability, maximum-likelihood-estimation, gaussian-distribution-normal-distribution]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference, 03-specialisation-year-three/03-measure-and-lebesgue-integration]
+related_applications: [spam-filtering, medical-diagnosis-screening, machine-learning-deep-neural-networks]
+tags: [machine-learning, probability, Bayes, inference, applied]
+real_world_examples: [Bayesian neural networks for uncertainty quantification, Gaussian process models for scientific data, Probabilistic forecasting, Drug trial analysis]
+summary: Bayesian inference gives machine learning models not just a prediction but a calibrated uncertainty — the engine is Bayes' theorem applied at scale.
+---
+
+
+## The application
+
+Deterministic machine learning models tell you what they predict; Bayesian models tell you *how confident they are*. This distinction matters enormously in medicine, finance, and safety-critical systems. A Bayesian neural network that is 90% confident a tumour is malignant conveys something a point prediction cannot. The mathematics is [Bayes](/mathematicians/bayes)'s theorem, combined with probability distributions over model parameters.
+
+## The maths behind it
+
+The core idea is **Bayesian updating**: before seeing data, you specify a **prior** distribution $p(\theta)$ over the model parameters $\theta$. After observing data $\mathcal{D}$, the **posterior** is
+
+$$p(\theta \mid \mathcal{D}) = \frac{p(\mathcal{D} \mid \theta)\, p(\theta)}{p(\mathcal{D})},$$
+
+the direct expression of Bayes' theorem. The term $p(\mathcal{D} \mid \theta)$ is the **likelihood** — the probability of the observed data given the parameters. The denominator $p(\mathcal{D}) = \int p(\mathcal{D} \mid \theta) p(\theta)\, d\theta$ is the **marginal likelihood** (or evidence), which normalises the posterior.
+
+**Conjugate priors** make the posterior analytically tractable. For a Gaussian likelihood with Gaussian prior on the mean, the posterior is Gaussian — its parameters updated by a formula that is a weighted average of prior mean and sample mean, with the weighting determined by precisions. This conjugacy underpins **Gaussian process regression**, where the entire function $f : \mathbb{R}^d \to \mathbb{R}$ is given a Gaussian process prior, and the posterior is an analytically tractable Gaussian process.
+
+When conjugacy is unavailable, inference requires numerical approximation: **Markov chain Monte Carlo** (MCMC) samples from the posterior by constructing a Markov chain with stationary distribution $p(\theta \mid \mathcal{D})$; **variational inference** approximates the posterior by a simpler distribution found by minimising the KL divergence.
+
+## A concrete example
+
+The probabilistic programming language Stan and its derivatives are used across academic research and industry to fit Bayesian models. A hierarchical Bayesian model for clinical trial data might have thousands of parameters — patient-level and population-level — and fitting it via Hamiltonian Monte Carlo (a form of MCMC exploiting gradient information) produces a full posterior distribution over treatment effects, enabling principled uncertainty quantification rather than a single point estimate.
+
+## History of the application
+
+[Bayes](/mathematicians/bayes) proved his theorem posthumously in 1763; [Laplace](/mathematicians/laplace) developed it into a practical framework in the early nineteenth century. Bayesian methods fell out of favour for much of the twentieth century (computational intractability) but revived dramatically in the 1990s when MCMC algorithms became practical on digital computers. The modern probabilistic machine learning era — Gaussian processes, Bayesian deep learning — took hold in the 2000s–2010s.
+
+## Links
+
+Bayes' theorem and conditional probability are introduced in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). The estimation theory and maximum likelihood underpinning Bayesian methods are in [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). The measure-theoretic foundations are in [Measure Theory and Lebesgue Integration](/03-specialisation-year-three/03-measure-and-lebesgue-integration). See also [Medical Diagnosis and Screening](/applications/medical-diagnosis-screening) and [Spam Filtering](/applications/spam-filtering) for simpler Bayesian applications.

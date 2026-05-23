@@ -1,0 +1,18 @@
+---
+title: 'low-rank factorisation'
+section: Definitions
+section_slug: 95-definitions
+slug: low-rank-factorisation
+tags: [applied]
+first_seen_in: '94-applications/recommender-systems.mdx'
+mentioned_in: ['94-applications/recommender-systems']
+summary: 'Quick definition of low-rank factorisation from its appearance in the curriculum.'
+---
+
+## Definition
+
+Let $R$ be an $m \times n$ matrix where $R_{ij}$ is user $i$'s rating of item $j$ (missing if user $i$ has not rated item $j$). The **low-rank factorisation** model approximates $R \approx UV^T$, where $U$ is $m \times k$ (a matrix of $k$-dimensional user latent vectors) and $V$ is $n \times k$ (item latent vectors). The rank $k$ (typically 10–200) is far smaller than $m$ or $n$.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

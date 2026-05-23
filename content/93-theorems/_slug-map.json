@@ -1,0 +1,910 @@
+{
+  "proof-that-the-general-quintic-has-no-radical-solution": {
+    "title": "Proof that the general quintic has no radical solution",
+    "attributed_to": [
+      "abel"
+    ]
+  },
+  "elliptic-integrals-and-elliptic-functions": {
+    "title": "Elliptic integrals and elliptic functions",
+    "attributed_to": [
+      "abel"
+    ]
+  },
+  "abel-s-theorem": {
+    "title": "Abel's theorem",
+    "attributed_to": [
+      "abel"
+    ]
+  },
+  "abelian-groups-posthumous-attribution": {
+    "title": "Abelian groups (posthumous attribution)",
+    "attributed_to": [
+      "abel"
+    ]
+  },
+  "named-algebra-al-jabr": {
+    "title": "Named algebra (al-jabr)",
+    "attributed_to": [
+      "al-khwarizmi"
+    ]
+  },
+  "algorithm-name-derives-from-his": {
+    "title": "Algorithm (name derives from his)",
+    "attributed_to": [
+      "al-khwarizmi"
+    ]
+  },
+  "introduction-of-hindu-arabic-numerals-to-islamic-scholarship": {
+    "title": "Introduction of Hindu-Arabic numerals to Islamic scholarship",
+    "attributed_to": [
+      "al-khwarizmi"
+    ]
+  },
+  "area-of-parabolic-segment-first-convergent-infinite-series": {
+    "title": "Area of parabolic segment (first convergent infinite series)",
+    "attributed_to": [
+      "archimedes"
+    ]
+  },
+  "approximation-of": {
+    "title": "approximation of π",
+    "attributed_to": [
+      "archimedes"
+    ]
+  },
+  "principle-of-levers-and-buoyancy": {
+    "title": "principle of levers and buoyancy",
+    "attributed_to": [
+      "archimedes"
+    ]
+  },
+  "method-of-exhaustion": {
+    "title": "method of exhaustion",
+    "attributed_to": [
+      "archimedes"
+    ]
+  },
+  "banach-spaces": {
+    "title": "Banach spaces",
+    "attributed_to": [
+      "banach"
+    ]
+  },
+  "banachtarski-paradox": {
+    "title": "Banach–Tarski paradox",
+    "attributed_to": [
+      "banach"
+    ]
+  },
+  "hahnbanach-theorem": {
+    "title": "Hahn–Banach theorem",
+    "attributed_to": [
+      "banach"
+    ]
+  },
+  "banach-fixed-point-theorem": {
+    "title": "Banach fixed-point theorem",
+    "attributed_to": [
+      "banach"
+    ]
+  },
+  "founding-functional-analysis": {
+    "title": "Founding functional analysis",
+    "attributed_to": [
+      "banach"
+    ]
+  },
+  "bayes-theorem": {
+    "title": "Bayes' theorem",
+    "attributed_to": [
+      "bayes"
+    ]
+  },
+  "foundational-paper-on-inverse-probability": {
+    "title": "Foundational paper on inverse probability",
+    "attributed_to": [
+      "bayes"
+    ]
+  },
+  "bernoulli-numbers-jacob": {
+    "title": "Bernoulli numbers (Jacob)",
+    "attributed_to": [
+      "bernoulli-family"
+    ]
+  },
+  "brachistochrone-and-early-calculus-johann": {
+    "title": "Brachistochrone and early calculus (Johann)",
+    "attributed_to": [
+      "bernoulli-family"
+    ]
+  },
+  "bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel": {
+    "title": "Bernoulli's equation for fluid flow and kinetic theory (Daniel)",
+    "attributed_to": [
+      "bernoulli-family"
+    ]
+  },
+  "calculus-of-variations-jacob-and-johann": {
+    "title": "Calculus of variations (Jacob and Johann)",
+    "attributed_to": [
+      "bernoulli-family"
+    ]
+  },
+  "bolzanoweierstrass-theorem": {
+    "title": "Bolzano–Weierstrass theorem",
+    "attributed_to": [
+      "bolzano",
+      "weierstrass"
+    ]
+  },
+  "intermediate-value-theorem-first-rigorous-proof": {
+    "title": "Intermediate value theorem (first rigorous proof)",
+    "attributed_to": [
+      "bolzano"
+    ]
+  },
+  "early-work-on-infinite-sets": {
+    "title": "Early work on infinite sets",
+    "attributed_to": [
+      "bolzano"
+    ]
+  },
+  "rigorous-analysis-before-cauchy": {
+    "title": "Rigorous analysis before Cauchy",
+    "attributed_to": [
+      "bolzano"
+    ]
+  },
+  "set-theory": {
+    "title": "Set theory",
+    "attributed_to": [
+      "cantor"
+    ]
+  },
+  "transfinite-numbers": {
+    "title": "Transfinite numbers",
+    "attributed_to": [
+      "cantor"
+    ]
+  },
+  "cantor-s-diagonal-argument": {
+    "title": "Cantor's diagonal argument",
+    "attributed_to": [
+      "cantor"
+    ]
+  },
+  "cardinality-of-infinite-sets": {
+    "title": "Cardinality of infinite sets",
+    "attributed_to": [
+      "cantor"
+    ]
+  },
+  "cantor-set": {
+    "title": "Cantor set",
+    "attributed_to": [
+      "cantor"
+    ]
+  },
+  "published-cubic-and-quartic-formulas": {
+    "title": "Published cubic and quartic formulas",
+    "attributed_to": [
+      "cardano"
+    ]
+  },
+  "first-systematic-use-of-complex-numbers": {
+    "title": "First systematic use of complex numbers",
+    "attributed_to": [
+      "cardano"
+    ]
+  },
+  "rigorous-foundations-of-calculus-definitions": {
+    "title": "Rigorous foundations of calculus (ε–δ definitions)",
+    "attributed_to": [
+      "cauchy"
+    ]
+  },
+  "cauchy-sequences": {
+    "title": "Cauchy sequences",
+    "attributed_to": [
+      "cauchy"
+    ]
+  },
+  "complex-analysis-and-cauchy-s-theorem": {
+    "title": "Complex analysis and Cauchy's theorem",
+    "attributed_to": [
+      "cauchy"
+    ]
+  },
+  "cauchyschwarz-inequality": {
+    "title": "Cauchy–Schwarz inequality",
+    "attributed_to": [
+      "cauchy"
+    ]
+  },
+  "group-theory-permutation-groups": {
+    "title": "Group theory (permutation groups)",
+    "attributed_to": [
+      "cauchy"
+    ]
+  },
+  "dedekind-cuts-rigorous-construction-of-real-numbers": {
+    "title": "Dedekind cuts (rigorous construction of real numbers)",
+    "attributed_to": [
+      "dedekind"
+    ]
+  },
+  "dedekind-domains-algebraic-number-theory": {
+    "title": "Dedekind domains (algebraic number theory)",
+    "attributed_to": [
+      "dedekind"
+    ]
+  },
+  "ideals-in-ring-theory": {
+    "title": "Ideals in ring theory",
+    "attributed_to": [
+      "dedekind"
+    ]
+  },
+  "contributions-to-set-theory-and-foundations": {
+    "title": "Contributions to set theory and foundations",
+    "attributed_to": [
+      "dedekind"
+    ]
+  },
+  "cartesian-coordinates": {
+    "title": "Cartesian coordinates",
+    "attributed_to": [
+      "descartes"
+    ]
+  },
+  "analytic-geometry": {
+    "title": "analytic geometry",
+    "attributed_to": [
+      "descartes",
+      "fermat"
+    ]
+  },
+  "connection-of-algebra-to-geometry": {
+    "title": "connection of algebra to geometry",
+    "attributed_to": [
+      "descartes"
+    ]
+  },
+  "prolific-collaborator-509-direct-collaborators": {
+    "title": "Prolific collaborator (509 direct collaborators)",
+    "attributed_to": [
+      "erdos"
+    ]
+  },
+  "erdos-number": {
+    "title": "Erdős number",
+    "attributed_to": [
+      "erdos"
+    ]
+  },
+  "probabilistic-method-in-combinatorics": {
+    "title": "Probabilistic method in combinatorics",
+    "attributed_to": [
+      "erdos"
+    ]
+  },
+  "ramsey-theory": {
+    "title": "Ramsey theory",
+    "attributed_to": [
+      "erdos"
+    ]
+  },
+  "graph-theory-and-number-theory": {
+    "title": "Graph theory and number theory",
+    "attributed_to": [
+      "erdos"
+    ]
+  },
+  "euclid-s-elements": {
+    "title": "Euclid's Elements",
+    "attributed_to": [
+      "euclid"
+    ]
+  },
+  "euclidean-geometry": {
+    "title": "Euclidean geometry",
+    "attributed_to": [
+      "euclid"
+    ]
+  },
+  "euclid-s-algorithm": {
+    "title": "Euclid's algorithm",
+    "attributed_to": [
+      "euclid"
+    ]
+  },
+  "proof-by-contradiction": {
+    "title": "proof by contradiction",
+    "attributed_to": [
+      "euclid"
+    ]
+  },
+  "euler-s-formula-e-i-cos-i-sin": {
+    "title": "Euler's formula (e^iθ = cos θ + i sin θ)",
+    "attributed_to": [
+      "euler"
+    ]
+  },
+  "graph-theory-konigsberg-bridges": {
+    "title": "Graph theory (Königsberg bridges)",
+    "attributed_to": [
+      "euler"
+    ]
+  },
+  "notation-e-i-f-x-popularised": {
+    "title": "Notation: e, i, f(x), Σ (popularised π)",
+    "attributed_to": [
+      "euler"
+    ]
+  },
+  "most-prolific-mathematician-in-history": {
+    "title": "Most prolific mathematician in history",
+    "attributed_to": [
+      "euler"
+    ]
+  },
+  "fermat-s-last-theorem": {
+    "title": "Fermat's Last Theorem",
+    "attributed_to": [
+      "fermat"
+    ]
+  },
+  "fermat-s-little-theorem": {
+    "title": "Fermat's little theorem",
+    "attributed_to": [
+      "fermat"
+    ]
+  },
+  "proto-calculus": {
+    "title": "proto-calculus",
+    "attributed_to": [
+      "fermat"
+    ]
+  },
+  "introduced-hindu-arabic-numerals-to-europe-via-liber-abaci": {
+    "title": "Introduced Hindu-Arabic numerals to Europe via Liber Abaci",
+    "attributed_to": [
+      "fibonacci"
+    ]
+  },
+  "fibonacci-sequence": {
+    "title": "Fibonacci sequence",
+    "attributed_to": [
+      "fibonacci"
+    ]
+  },
+  "maximum-likelihood-estimation": {
+    "title": "Maximum likelihood estimation",
+    "attributed_to": [
+      "fisher"
+    ]
+  },
+  "analysis-of-variance-anova": {
+    "title": "Analysis of variance (ANOVA)",
+    "attributed_to": [
+      "fisher"
+    ]
+  },
+  "experimental-design-randomisation-blocking-factorial-design": {
+    "title": "Experimental design (randomisation, blocking, factorial design)",
+    "attributed_to": [
+      "fisher"
+    ]
+  },
+  "the-fisher-information-matrix": {
+    "title": "The Fisher information matrix",
+    "attributed_to": [
+      "fisher"
+    ]
+  },
+  "population-genetics-modern-synthesis": {
+    "title": "Population genetics (modern synthesis)",
+    "attributed_to": [
+      "fisher"
+    ]
+  },
+  "fourier-series": {
+    "title": "Fourier series",
+    "attributed_to": [
+      "fourier"
+    ]
+  },
+  "fourier-transform": {
+    "title": "Fourier transform",
+    "attributed_to": [
+      "fourier"
+    ]
+  },
+  "heat-equation": {
+    "title": "Heat equation",
+    "attributed_to": [
+      "fourier"
+    ]
+  },
+  "galois-theory": {
+    "title": "Galois theory",
+    "attributed_to": [
+      "galois"
+    ]
+  },
+  "galois-groups": {
+    "title": "Galois groups",
+    "attributed_to": [
+      "galois"
+    ]
+  },
+  "characterisation-of-solvable-polynomials": {
+    "title": "Characterisation of solvable polynomials",
+    "attributed_to": [
+      "galois"
+    ]
+  },
+  "normal-subgroups": {
+    "title": "Normal subgroups",
+    "attributed_to": [
+      "galois"
+    ]
+  },
+  "gaussian-distribution-normal-distribution": {
+    "title": "Gaussian distribution (normal distribution)",
+    "attributed_to": [
+      "gauss"
+    ]
+  },
+  "modular-arithmetic-and-number-theory": {
+    "title": "Modular arithmetic and number theory",
+    "attributed_to": [
+      "gauss"
+    ]
+  },
+  "non-euclidean-geometry-unpublished": {
+    "title": "Non-Euclidean geometry (unpublished)",
+    "attributed_to": [
+      "gauss"
+    ]
+  },
+  "gauss-s-law-electrostatics": {
+    "title": "Gauss's law (electrostatics)",
+    "attributed_to": [
+      "gauss"
+    ]
+  },
+  "method-of-least-squares": {
+    "title": "Method of least squares",
+    "attributed_to": [
+      "gauss"
+    ]
+  },
+  "incompleteness-theorems-1931": {
+    "title": "Incompleteness theorems (1931)",
+    "attributed_to": [
+      "godel"
+    ]
+  },
+  "completeness-theorem-for-first-order-logic": {
+    "title": "Completeness theorem for first-order logic",
+    "attributed_to": [
+      "godel"
+    ]
+  },
+  "consistency-of-the-continuum-hypothesis-with-zfc": {
+    "title": "Consistency of the continuum hypothesis with ZFC",
+    "attributed_to": [
+      "godel"
+    ]
+  },
+  "contributions-to-modal-logic-and-ontology": {
+    "title": "Contributions to modal logic and ontology",
+    "attributed_to": [
+      "godel"
+    ]
+  },
+  "hardyramanujan-collaboration": {
+    "title": "Hardy–Ramanujan collaboration",
+    "attributed_to": [
+      "hardy"
+    ]
+  },
+  "hardyweinberg-equilibrium-genetics": {
+    "title": "Hardy–Weinberg equilibrium (genetics)",
+    "attributed_to": [
+      "hardy"
+    ]
+  },
+  "hardy-spaces-complex-analysis": {
+    "title": "Hardy spaces (complex analysis)",
+    "attributed_to": [
+      "hardy"
+    ]
+  },
+  "analytic-number-theory": {
+    "title": "Analytic number theory",
+    "attributed_to": [
+      "hardy"
+    ]
+  },
+  "a-mathematician-s-apology": {
+    "title": "A Mathematician's Apology",
+    "attributed_to": [
+      "hardy"
+    ]
+  },
+  "hilbert-s-23-problems": {
+    "title": "Hilbert's 23 problems",
+    "attributed_to": [
+      "hilbert"
+    ]
+  },
+  "hilbert-spaces": {
+    "title": "Hilbert spaces",
+    "attributed_to": [
+      "hilbert"
+    ]
+  },
+  "formal-axiomatic-systems": {
+    "title": "Formal axiomatic systems",
+    "attributed_to": [
+      "hilbert"
+    ]
+  },
+  "hilbert-s-programme": {
+    "title": "Hilbert's programme",
+    "attributed_to": [
+      "hilbert"
+    ]
+  },
+  "invariant-theory": {
+    "title": "Invariant theory",
+    "attributed_to": [
+      "hilbert"
+    ]
+  },
+  "foundations-of-geometry": {
+    "title": "Foundations of geometry",
+    "attributed_to": [
+      "hilbert"
+    ]
+  },
+  "axiomatic-foundations-of-probability": {
+    "title": "Axiomatic foundations of probability",
+    "attributed_to": [
+      "kolmogorov"
+    ]
+  },
+  "kolmogorov-complexity-algorithmic-information-theory": {
+    "title": "Kolmogorov complexity (algorithmic information theory)",
+    "attributed_to": [
+      "kolmogorov"
+    ]
+  },
+  "turbulence-theory-kolmogorov-scaling": {
+    "title": "Turbulence theory (Kolmogorov scaling)",
+    "attributed_to": [
+      "kolmogorov"
+    ]
+  },
+  "ergodic-theory": {
+    "title": "Ergodic theory",
+    "attributed_to": [
+      "kolmogorov"
+    ]
+  },
+  "contributions-to-topology-and-analysis": {
+    "title": "Contributions to topology and analysis",
+    "attributed_to": [
+      "kolmogorov"
+    ]
+  },
+  "lagrangian-mechanics": {
+    "title": "Lagrangian mechanics",
+    "attributed_to": [
+      "lagrange"
+    ]
+  },
+  "lagrange-multipliers": {
+    "title": "Lagrange multipliers",
+    "attributed_to": [
+      "lagrange"
+    ]
+  },
+  "lagrange-interpolation": {
+    "title": "Lagrange interpolation",
+    "attributed_to": [
+      "lagrange"
+    ]
+  },
+  "group-theory-foundations": {
+    "title": "group theory foundations",
+    "attributed_to": [
+      "lagrange"
+    ]
+  },
+  "laplace-transform": {
+    "title": "Laplace transform",
+    "attributed_to": [
+      "laplace"
+    ]
+  },
+  "laplace-equation": {
+    "title": "Laplace equation",
+    "attributed_to": [
+      "laplace"
+    ]
+  },
+  "celestial-mechanics": {
+    "title": "Celestial mechanics",
+    "attributed_to": [
+      "laplace"
+    ]
+  },
+  "bayesian-probability-independent-derivation": {
+    "title": "Bayesian probability (independent derivation)",
+    "attributed_to": [
+      "laplace"
+    ]
+  },
+  "calculus-dy-dx-notation-symbol": {
+    "title": "Calculus (dy/dx notation, ∫ symbol)",
+    "attributed_to": [
+      "leibniz"
+    ]
+  },
+  "binary-arithmetic": {
+    "title": "Binary arithmetic",
+    "attributed_to": [
+      "leibniz"
+    ]
+  },
+  "formal-logic": {
+    "title": "Formal logic",
+    "attributed_to": [
+      "leibniz"
+    ]
+  },
+  "philosophical-monadology": {
+    "title": "Philosophical monadology",
+    "attributed_to": [
+      "leibniz"
+    ]
+  },
+  "calculus-fluxions": {
+    "title": "Calculus (fluxions)",
+    "attributed_to": [
+      "newton"
+    ]
+  },
+  "laws-of-motion-and-gravitation": {
+    "title": "Laws of motion and gravitation",
+    "attributed_to": [
+      "newton"
+    ]
+  },
+  "optics": {
+    "title": "Optics",
+    "attributed_to": [
+      "newton"
+    ]
+  },
+  "binomial-theorem": {
+    "title": "Binomial theorem",
+    "attributed_to": [
+      "newton"
+    ]
+  },
+  "noether-s-theorem-symmetry-and-conservation-laws-in-physics": {
+    "title": "Noether's theorem (symmetry and conservation laws in physics)",
+    "attributed_to": [
+      "noether"
+    ]
+  },
+  "modern-abstract-algebra-rings-ideals-modules": {
+    "title": "Modern abstract algebra (rings, ideals, modules)",
+    "attributed_to": [
+      "noether"
+    ]
+  },
+  "noetherian-rings": {
+    "title": "Noetherian rings",
+    "attributed_to": [
+      "noether"
+    ]
+  },
+  "contributions-to-algebraic-topology": {
+    "title": "Contributions to algebraic topology",
+    "attributed_to": [
+      "noether"
+    ]
+  },
+  "pascal-s-triangle": {
+    "title": "Pascal's triangle",
+    "attributed_to": [
+      "pascal"
+    ]
+  },
+  "pascal-s-theorem-on-hexagons-in-conics": {
+    "title": "Pascal's theorem on hexagons in conics",
+    "attributed_to": [
+      "pascal"
+    ]
+  },
+  "probability-theory-foundations": {
+    "title": "probability theory foundations",
+    "attributed_to": [
+      "pascal"
+    ]
+  },
+  "mechanical-calculator": {
+    "title": "mechanical calculator",
+    "attributed_to": [
+      "pascal"
+    ]
+  },
+  "topology-algebraic-topology-foundations": {
+    "title": "Topology (algebraic topology foundations)",
+    "attributed_to": [
+      "poincare"
+    ]
+  },
+  "poincare-conjecture": {
+    "title": "Poincaré conjecture",
+    "attributed_to": [
+      "poincare"
+    ]
+  },
+  "chaos-theory-three-body-problem": {
+    "title": "Chaos theory (three-body problem)",
+    "attributed_to": [
+      "poincare"
+    ]
+  },
+  "automorphic-functions": {
+    "title": "Automorphic functions",
+    "attributed_to": [
+      "poincare"
+    ]
+  },
+  "philosophy-of-mathematics-conventionalism": {
+    "title": "Philosophy of mathematics (conventionalism)",
+    "attributed_to": [
+      "poincare"
+    ]
+  },
+  "pythagoras-theorem": {
+    "title": "Pythagoras' theorem",
+    "attributed_to": [
+      "pythagoras"
+    ]
+  },
+  "discovery-of-irrational-numbers": {
+    "title": "discovery of irrational numbers",
+    "attributed_to": [
+      "pythagoras"
+    ]
+  },
+  "musical-ratios-and-the-harmonic-series": {
+    "title": "musical ratios and the harmonic series",
+    "attributed_to": [
+      "pythagoras"
+    ]
+  },
+  "ramanujan-s-notebooks-thousands-of-identities-and-formulae": {
+    "title": "Ramanujan's notebooks (thousands of identities and formulae)",
+    "attributed_to": [
+      "ramanujan"
+    ]
+  },
+  "partitions-and-the-hardyramanujan-formula": {
+    "title": "Partitions and the Hardy–Ramanujan formula",
+    "attributed_to": [
+      "ramanujan"
+    ]
+  },
+  "ramanujan-s-tau-function-and-modular-forms": {
+    "title": "Ramanujan's tau function and modular forms",
+    "attributed_to": [
+      "ramanujan"
+    ]
+  },
+  "highly-composite-numbers": {
+    "title": "Highly composite numbers",
+    "attributed_to": [
+      "ramanujan"
+    ]
+  },
+  "mock-theta-functions": {
+    "title": "Mock theta functions",
+    "attributed_to": [
+      "ramanujan"
+    ]
+  },
+  "riemann-integral": {
+    "title": "Riemann integral",
+    "attributed_to": [
+      "riemann"
+    ]
+  },
+  "riemannian-geometry": {
+    "title": "Riemannian geometry",
+    "attributed_to": [
+      "riemann"
+    ]
+  },
+  "riemann-hypothesis": {
+    "title": "Riemann hypothesis",
+    "attributed_to": [
+      "riemann"
+    ]
+  },
+  "riemann-surfaces": {
+    "title": "Riemann surfaces",
+    "attributed_to": [
+      "riemann"
+    ]
+  },
+  "riemann-zeta-function": {
+    "title": "Riemann zeta function",
+    "attributed_to": [
+      "riemann"
+    ]
+  },
+  "turing-machines-theory-of-computation": {
+    "title": "Turing machines (theory of computation)",
+    "attributed_to": [
+      "turing"
+    ]
+  },
+  "halting-problem-undecidability": {
+    "title": "Halting problem (undecidability)",
+    "attributed_to": [
+      "turing"
+    ]
+  },
+  "breaking-enigma-at-bletchley-park": {
+    "title": "Breaking Enigma at Bletchley Park",
+    "attributed_to": [
+      "turing"
+    ]
+  },
+  "turing-test-artificial-intelligence": {
+    "title": "Turing test (artificial intelligence)",
+    "attributed_to": [
+      "turing"
+    ]
+  },
+  "morphogenesis-mathematical-biology": {
+    "title": "Morphogenesis (mathematical biology)",
+    "attributed_to": [
+      "turing"
+    ]
+  },
+  "rigorous-analysis": {
+    "title": "Rigorous ε–δ analysis",
+    "attributed_to": [
+      "weierstrass"
+    ]
+  },
+  "weierstrass-function-continuous-everywhere-differentiable-nowhere": {
+    "title": "Weierstrass function (continuous everywhere, differentiable nowhere)",
+    "attributed_to": [
+      "weierstrass"
+    ]
+  },
+  "weierstrass-approximation-theorem": {
+    "title": "Weierstrass approximation theorem",
+    "attributed_to": [
+      "weierstrass"
+    ]
+  },
+  "uniform-convergence": {
+    "title": "Uniform convergence",
+    "attributed_to": [
+      "weierstrass"
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+---
+title: method of exhaustion
+section: Theorems
+section_slug: 93-theorems
+slug: method-of-exhaustion
+attributed_to: [archimedes]
+era: 02-classical-greece
+appears_in: []
+related_theorems: [area-of-parabolic-segment-first-convergent-infinite-series, euclid-s-elements, intermediate-value-theorem-first-rigorous-proof]
+applications: []
+tags: [geometry, limits, integration, Archimedes]
+year_introduced: c. 370 BCE (Eudoxus); developed by Archimedes c. 250 BCE
+summary: The Greek method of computing areas and volumes by approximating them with simple shapes, increasing in number until the error is 'exhausted' — the ancient precursor of integration.
+---
+
+
+
+## What it says
+
+To find the area enclosed by a curve, inscribe a polygon of $n$ sides, compute its area $A_n$, and show that as $n$ increases the gap between $A_n$ and the true area $A$ can be made as small as desired. The proof structure is by double contradiction: assume $A > A_n + \varepsilon$; derive a contradiction; assume $A < A_n - \varepsilon$; derive another contradiction. Therefore $A = $ limit of $A_n$.
+
+This is not a limit in the modern sense (limits had not been invented), but it achieves the same conclusion by a purely logical route.
+
+## History
+
+Eudoxus of Cnidus (c. 370 BCE) developed the method; [Euclid](/mathematicians/euclid) used it in the *Elements*; but [Archimedes](/mathematicians/archimedes) deployed it with greatest virtuosity — using it to compute the area of parabolic segments, the volume of spheres, and the surface area of cones and cylinders. His *Method* (rediscovered in 1906 on a palimpsest) shows he first found his results by a heuristic "mechanical" method, then proved them rigorously by exhaustion.
+
+## Why it matters
+
+The method of exhaustion is the conceptual forerunner of the Riemann integral. Both approximate a smooth region by simple shapes and take a limit. The key insight — that you can bound an unknown area from above and below, and squeeze the bounds together — is the same insight that underlies all of integration theory. Archimedes was, in this sense, two thousand years ahead of his time.
+
+## Real-world applications
+
+Numerical integration methods (Simpson's rule, Gaussian quadrature) are modern implementations of the same basic idea: approximate a region by simpler pieces.
+
+## Where you'll meet it
+
+The method of exhaustion is introduced in the [Classical Greece era](/history/02-classical-greece) and motivates the formal definition of the [Riemann integral](/theorems/riemann-integral) in Year 2 analysis.

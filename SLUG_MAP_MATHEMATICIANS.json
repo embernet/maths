@@ -1,0 +1,229 @@
+{
+  "abel": [
+    "proof-that-the-general-quintic-has-no-radical-solution",
+    "elliptic-integrals-and-elliptic-functions",
+    "abel-s-theorem",
+    "abelian-groups-posthumous-attribution"
+  ],
+  "al-khwarizmi": [
+    "named-algebra-al-jabr",
+    "algorithm-name-derives-from-his",
+    "introduction-of-hindu-arabic-numerals-to-islamic-scholarship"
+  ],
+  "archimedes": [
+    "area-of-parabolic-segment-first-convergent-infinite-series",
+    "approximation-of",
+    "principle-of-levers-and-buoyancy",
+    "method-of-exhaustion"
+  ],
+  "banach": [
+    "banach-spaces",
+    "banachtarski-paradox",
+    "hahnbanach-theorem",
+    "banach-fixed-point-theorem",
+    "founding-functional-analysis"
+  ],
+  "bayes": [
+    "bayes-theorem",
+    "foundational-paper-on-inverse-probability"
+  ],
+  "bernoulli-family": [
+    "bernoulli-numbers-jacob",
+    "brachistochrone-and-early-calculus-johann",
+    "bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel",
+    "calculus-of-variations-jacob-and-johann"
+  ],
+  "bolzano": [
+    "bolzanoweierstrass-theorem",
+    "intermediate-value-theorem-first-rigorous-proof",
+    "early-work-on-infinite-sets",
+    "rigorous-analysis-before-cauchy"
+  ],
+  "cantor": [
+    "set-theory",
+    "transfinite-numbers",
+    "cantor-s-diagonal-argument",
+    "cardinality-of-infinite-sets",
+    "cantor-set"
+  ],
+  "cardano": [
+    "published-cubic-and-quartic-formulas",
+    "first-systematic-use-of-complex-numbers"
+  ],
+  "cauchy": [
+    "rigorous-foundations-of-calculus-definitions",
+    "cauchy-sequences",
+    "complex-analysis-and-cauchy-s-theorem",
+    "cauchyschwarz-inequality",
+    "group-theory-permutation-groups"
+  ],
+  "dedekind": [
+    "dedekind-cuts-rigorous-construction-of-real-numbers",
+    "dedekind-domains-algebraic-number-theory",
+    "ideals-in-ring-theory",
+    "contributions-to-set-theory-and-foundations"
+  ],
+  "descartes": [
+    "cartesian-coordinates",
+    "analytic-geometry",
+    "connection-of-algebra-to-geometry"
+  ],
+  "erdos": [
+    "prolific-collaborator-509-direct-collaborators",
+    "erdos-number",
+    "probabilistic-method-in-combinatorics",
+    "ramsey-theory",
+    "graph-theory-and-number-theory"
+  ],
+  "euclid": [
+    "euclid-s-elements",
+    "euclidean-geometry",
+    "euclid-s-algorithm",
+    "proof-by-contradiction"
+  ],
+  "euler": [
+    "euler-s-formula-e-i-cos-i-sin",
+    "graph-theory-konigsberg-bridges",
+    "notation-e-i-f-x-popularised",
+    "most-prolific-mathematician-in-history"
+  ],
+  "fermat": [
+    "fermat-s-last-theorem",
+    "fermat-s-little-theorem",
+    "analytic-geometry",
+    "proto-calculus"
+  ],
+  "fibonacci": [
+    "introduced-hindu-arabic-numerals-to-europe-via-liber-abaci",
+    "fibonacci-sequence"
+  ],
+  "fisher": [
+    "maximum-likelihood-estimation",
+    "analysis-of-variance-anova",
+    "experimental-design-randomisation-blocking-factorial-design",
+    "the-fisher-information-matrix",
+    "population-genetics-modern-synthesis"
+  ],
+  "fourier": [
+    "fourier-series",
+    "fourier-transform",
+    "heat-equation"
+  ],
+  "galois": [
+    "galois-theory",
+    "galois-groups",
+    "characterisation-of-solvable-polynomials",
+    "normal-subgroups"
+  ],
+  "gauss": [
+    "gaussian-distribution-normal-distribution",
+    "modular-arithmetic-and-number-theory",
+    "non-euclidean-geometry-unpublished",
+    "gauss-s-law-electrostatics",
+    "method-of-least-squares"
+  ],
+  "godel": [
+    "incompleteness-theorems-1931",
+    "completeness-theorem-for-first-order-logic",
+    "consistency-of-the-continuum-hypothesis-with-zfc",
+    "contributions-to-modal-logic-and-ontology"
+  ],
+  "hardy": [
+    "hardyramanujan-collaboration",
+    "hardyweinberg-equilibrium-genetics",
+    "hardy-spaces-complex-analysis",
+    "analytic-number-theory",
+    "a-mathematician-s-apology"
+  ],
+  "hilbert": [
+    "hilbert-s-23-problems",
+    "hilbert-spaces",
+    "formal-axiomatic-systems",
+    "hilbert-s-programme",
+    "invariant-theory",
+    "foundations-of-geometry"
+  ],
+  "kolmogorov": [
+    "axiomatic-foundations-of-probability",
+    "kolmogorov-complexity-algorithmic-information-theory",
+    "turbulence-theory-kolmogorov-scaling",
+    "ergodic-theory",
+    "contributions-to-topology-and-analysis"
+  ],
+  "lagrange": [
+    "lagrangian-mechanics",
+    "lagrange-multipliers",
+    "lagrange-interpolation",
+    "group-theory-foundations"
+  ],
+  "laplace": [
+    "laplace-transform",
+    "laplace-equation",
+    "celestial-mechanics",
+    "bayesian-probability-independent-derivation"
+  ],
+  "leibniz": [
+    "calculus-dy-dx-notation-symbol",
+    "binary-arithmetic",
+    "formal-logic",
+    "philosophical-monadology"
+  ],
+  "newton": [
+    "calculus-fluxions",
+    "laws-of-motion-and-gravitation",
+    "optics",
+    "binomial-theorem"
+  ],
+  "noether": [
+    "noether-s-theorem-symmetry-and-conservation-laws-in-physics",
+    "modern-abstract-algebra-rings-ideals-modules",
+    "noetherian-rings",
+    "contributions-to-algebraic-topology"
+  ],
+  "pascal": [
+    "pascal-s-triangle",
+    "pascal-s-theorem-on-hexagons-in-conics",
+    "probability-theory-foundations",
+    "mechanical-calculator"
+  ],
+  "poincare": [
+    "topology-algebraic-topology-foundations",
+    "poincare-conjecture",
+    "chaos-theory-three-body-problem",
+    "automorphic-functions",
+    "philosophy-of-mathematics-conventionalism"
+  ],
+  "pythagoras": [
+    "pythagoras-theorem",
+    "discovery-of-irrational-numbers",
+    "musical-ratios-and-the-harmonic-series"
+  ],
+  "ramanujan": [
+    "ramanujan-s-notebooks-thousands-of-identities-and-formulae",
+    "partitions-and-the-hardyramanujan-formula",
+    "ramanujan-s-tau-function-and-modular-forms",
+    "highly-composite-numbers",
+    "mock-theta-functions"
+  ],
+  "riemann": [
+    "riemann-integral",
+    "riemannian-geometry",
+    "riemann-hypothesis",
+    "riemann-surfaces",
+    "riemann-zeta-function"
+  ],
+  "turing": [
+    "turing-machines-theory-of-computation",
+    "halting-problem-undecidability",
+    "breaking-enigma-at-bletchley-park",
+    "turing-test-artificial-intelligence",
+    "morphogenesis-mathematical-biology"
+  ],
+  "weierstrass": [
+    "rigorous-analysis",
+    "weierstrass-function-continuous-everywhere-differentiable-nowhere",
+    "bolzanoweierstrass-theorem",
+    "weierstrass-approximation-theorem",
+    "uniform-convergence"
+  ]
+}

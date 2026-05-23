@@ -1,0 +1,46 @@
+---
+title: Turing machines (theory of computation)
+section: Theorems
+section_slug: 93-theorems
+slug: turing-machines-theory-of-computation
+attributed_to: [turing]
+era: 08-foundations-and-the-twentieth-century-crisis
+appears_in: []
+related_theorems: [halting-problem-undecidability, incompleteness-theorems-1931, hilbert-s-programme, formal-axiomatic-systems]
+applications: [machine-learning-deep-neural-networks, rsa-public-key-cryptography]
+tags: [computation, logic, Turing, complexity-theory]
+year_introduced: '1936'
+summary: An abstract model of computation — a machine reading and writing symbols on an infinite tape — that defines what it means for a problem to be computable.
+---
+
+
+
+## What it says
+
+A **Turing machine** consists of:
+- An infinite tape divided into cells, each containing a symbol from a finite alphabet
+- A read/write head positioned over one cell
+- A finite set of **states** $Q$, including a start state and halting states
+- A **transition function** $\delta: Q \times \Gamma \to Q \times \Gamma \times \{L, R\}$ specifying, given the current state and symbol under the head, the new state, symbol to write, and direction to move
+
+The machine halts when it reaches a halting state. A function $f: \mathbb{N} \to \mathbb{N}$ is **computable** if some Turing machine computes it.
+
+The **Church–Turing thesis** (not a theorem, but a hypothesis) asserts that the class of functions computable by Turing machines coincides with every other reasonable model of computation — lambda calculus, recursive functions, modern computers.
+
+A **universal Turing machine** can simulate any other Turing machine given its description as input — the first theoretical model of a programmable computer.
+
+## History
+
+[Turing](/mathematicians/turing) published "On Computable Numbers, with an Application to the Entscheidungsproblem" in 1936, aged 23, while a graduate student at Cambridge. The paper simultaneously solved Hilbert's decision problem (negatively: no algorithm decides all mathematical questions) and established the theory of computation. Alonzo Church independently reached the same conclusion using lambda calculus the same year. Turing's formulation proved more influential because its mechanical character made the argument intuitive.
+
+## Why it matters
+
+Turing machines define the boundary of what is computationally possible — they separate decidable problems from undecidable ones. The theory of computational complexity (P vs NP and related questions) is built on Turing machines with resource bounds. Every computer ever built is, in principle, a physical realisation of a Turing machine.
+
+## Real-world applications
+
+The theory of computation underlies [cryptography](/applications/cryptography-and-rsa) (complexity assumptions distinguish tractable from intractable problems) and the foundations of [artificial intelligence](/applications/artificial-intelligence-and-machine-learning) (computability theory defines the limits of what machine reasoning can achieve).
+
+## Where you'll meet it
+
+Turing machines appear in Year 4 mathematical logic and theoretical computer science, alongside [Gödel's incompleteness theorems](/theorems/incompleteness-theorems-1931). See the [Foundations and Twentieth-Century Crisis era](/history/08-foundations-and-the-twentieth-century-crisis).

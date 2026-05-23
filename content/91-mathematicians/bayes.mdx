@@ -1,0 +1,30 @@
+---
+title: Thomas Bayes
+section: Mathematician Profiles
+section_slug: 91-mathematicians
+slug: bayes
+born: c.1701
+died: '1761-04-07'
+origin: London, England
+worked_in: ['Tunbridge Wells, England']
+known_for: [bayes-theorem, foundational-paper-on-inverse-probability]
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+tags: [probability, statistics, history]
+hook: He published almost nothing in his lifetime. His one mathematical paper, on the problem of inferring a probability from observations, was submitted to the Royal Society by a friend after Bayes's death and was not read for many years. The theorem named for him is now the foundation of a school of statistical inference that has transformed science, medicine, and machine learning.
+---
+
+
+
+Bayes was a Nonconformist minister in Tunbridge Wells who published almost nothing during his lifetime. His single significant mathematical work, "An Essay towards solving a Problem in the Doctrine of Chances," was found among his papers and communicated to the Royal Society by his friend Richard Price in 1763, two years after Bayes's death.
+
+The essay addresses the **inverse probability problem**: if you observe $k$ successes in $n$ trials of a Bernoulli process, what can you infer about the probability $p$ of success? Bayes's approach was to assign a prior distribution to $p$ (uniform over $[0,1]$, reflecting initial ignorance) and update it in light of the observed data. The result is a posterior distribution describing what the data tells you about $p$.
+
+The theorem that bears his name — **Bayes' theorem** — is a statement about conditional probabilities:
+
+$$P(A \mid B) = \frac{P(B \mid A) \cdot P(A)}{P(B)}$$
+
+It says that the probability of $A$ given $B$ equals the probability of $B$ given $A$, multiplied by the prior probability of $A$, divided by the marginal probability of $B$. This is a theorem of probability that no one disputes; what is controversial is the Bayesian *programme* — the use of probability to represent degrees of belief, and Bayes' theorem to update beliefs in light of evidence.
+
+[Laplace](/mathematicians/laplace) independently developed essentially the same framework, and arguably did more to promote it. Bayes' name nonetheless attached to the central theorem, the prior-to-posterior updating procedure, and the broader school of statistical thought.
+
+**Bayesian inference** is now one of the two dominant paradigms in statistics (alongside frequentism). It underlies spam filters, medical diagnostic algorithms, and Bayesian neural networks in machine learning. The question "how should you update your beliefs when you see evidence?" — which Bayes was perhaps the first to address with mathematical precision — is one of the most pervasive in quantitative science.

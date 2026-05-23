@@ -1,0 +1,41 @@
+---
+title: Experimental design (randomisation, blocking, factorial design)
+section: Theorems
+section_slug: 93-theorems
+slug: experimental-design-randomisation-blocking-factorial-design
+attributed_to: [fisher]
+era: 09-modern-mathematics
+appears_in: [02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [analysis-of-variance-anova, maximum-likelihood-estimation, axiomatic-foundations-of-probability]
+applications: [clinical-trials-design, population-dynamics-ecology, census-and-survey-statistics]
+tags: [statistics, experimental-design, Fisher, randomisation]
+year_introduced: 1925–1935
+summary: Fisher's principles for designing experiments to maximise information while controlling for confounding — randomisation, blocking, and factorial structure.
+---
+
+
+## What it says
+
+Fisher identified three principles for valid experimental design:
+
+1. **Randomisation:** Allocate treatments randomly to experimental units. This controls for unknown confounding variables by distributing them evenly across groups (on average). It is also the basis for the probability calculations in ANOVA — without randomisation, the $F$-test has no valid interpretation.
+
+2. **Blocking:** Group experimental units into homogeneous blocks before randomising treatments within blocks. This removes known sources of variation (e.g., soil type in agricultural trials) from the error term, increasing statistical power.
+
+3. **Factorial design:** Test multiple factors simultaneously, not one at a time. A $2^k$ factorial design with $k$ binary factors requires $2^k$ runs but allows estimation of all main effects and all interaction effects. Testing factors one at a time is inefficient and misses interactions.
+
+## History
+
+[Fisher](/mathematicians/fisher) developed these principles at Rothamsted Experimental Station (1919–1933) while analysing decades of crop yield data. *The Design of Experiments* (1935) remains one of the most influential statistics textbooks ever written.
+
+## Why it matters
+
+Fisher's experimental design principles transformed scientific methodology. Randomised controlled trials — the gold standard for medical evidence — are a direct application. The principle that confounding must be controlled by randomisation, not assumed away, is now foundational across all experimental sciences.
+
+## Real-world applications
+
+[Clinical trials](/applications/clinical-trials-design) use randomisation, blocking (stratification), and factorial designs throughout. [Ecological field experiments](/applications/population-dynamics-ecology) use blocking for spatial variation.
+
+## Where you'll meet it
+
+Experimental design is taught in Year 2 statistics and in applied courses. See the [Modern Mathematics era](/history/09-modern-mathematics).

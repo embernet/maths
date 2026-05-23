@@ -1,0 +1,40 @@
+---
+title: PageRank and the Algebra of the Web
+section: Real-world applications
+section_slug: 94-applications
+slug: pagerank-google
+domains: [computer-science, data-science, engineering]
+uses_theorems: [graph-theory-konigsberg-bridges, axiomatic-foundations-of-probability]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/06-programming-and-discrete-mathematics, 03-specialisation-year-three/07-stochastic-processes]
+related_applications: [recommender-systems, machine-learning-deep-neural-networks, cellular-network-design]
+tags: [graph-theory, eigenvalues, Markov-chains, applied]
+real_world_examples: [Google Search ranking, Academic citation analysis, Social network influence scoring, Recommendation systems]
+summary: The importance of a webpage is the dominant eigenvector of the web's link matrix — a billion-dimensional eigenvalue problem solved by Markov chain theory.
+---
+
+
+## The application
+
+When Google returns search results, the ranking is determined partly by PageRank — an algorithm that assigns each webpage an "importance" score based on how many important pages link to it. The mathematical insight is that importance is self-referential: a page is important if important pages link to it, which is precisely the definition of the dominant eigenvector of the link matrix. Running the internet on this idea required connecting eigenvalue theory, graph theory, and the theory of Markov chains.
+
+## The maths behind it
+
+Model the web as a **directed graph**: nodes are pages, an edge from $i$ to $j$ exists if page $i$ has a link to page $j$. Define the **transition matrix** $P$ where $P_{ij} = 1/(\text{out-degree of } i)$ if there is a link $i \to j$, and $0$ otherwise. A random web-surfer following links at random defines a **Markov chain** with transition matrix $P$.
+
+The **stationary distribution** $\pi$ of this chain satisfies $\pi P = \pi$ (row vector form) — or equivalently, $\pi$ is a **left eigenvector** of $P$ with eigenvalue $1$. For an irreducible aperiodic chain, the Perron-Frobenius theorem guarantees a unique such vector with non-negative entries summing to 1. The components of $\pi$ are the PageRank scores.
+
+In practice, the web graph has "dangling nodes" (pages with no outlinks) and disconnected components, which violate irreducibility. The fix is the **damping factor** $d$: with probability $d \approx 0.85$ the surfer follows a link; with probability $1-d$ they jump to a uniformly random page. The modified matrix $\tilde{P} = d P + (1-d) \mathbf{1}\mathbf{v}^T$ (where $\mathbf{v}$ is a personalisation vector) is irreducible by construction, and its stationary distribution is the PageRank vector.
+
+**Computing PageRank** at web scale ($\sim 10^{10}$ pages) uses the **power iteration method**: start from any distribution $\pi^{(0)}$, repeatedly compute $\pi^{(k+1)} = \pi^{(k)} \tilde{P}$. Convergence is guaranteed and typically fast when $d < 1$ bounds the second eigenvalue away from 1.
+
+## A concrete example
+
+Google's original 1998 paper by Page and Brin computed PageRank on a crawl of roughly 25 million web pages. Today the index contains hundreds of billions of pages; PageRank and its successors are computed on distributed clusters, with the sparse matrix-vector multiply at the core of each power iteration taking minutes to hours. The same algorithm — eigenvector centrality on a graph — measures academic influence (citation PageRank), identifies key proteins in biological networks, and ranks players in chess tournaments.
+
+## History of the application
+
+The mathematical idea — ranking nodes by an eigenvector of the adjacency matrix — was known in sociology (Katz centrality, 1953) and operations research long before the internet. Sergey Brin and Larry Page's contribution was recognising that the hyperlink graph of the web provided the data, and that the eigenvector interpretation made the ranking both meaningful and computable. They filed the PageRank patent in 1998 and founded Google the same year.
+
+## Links
+
+Graph theory — directed graphs, adjacency matrices, the Königsberg problem — is introduced in [Programming, Graphs, and Discrete Mathematics](/02-core-year-two/06-programming-and-discrete-mathematics). The Markov chain theory, stationary distributions, and convergence are covered in [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). Eigenvalues and eigenvectors are the central topic of [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra).

@@ -1,0 +1,40 @@
+---
+title: Protein Folding and AlphaFold
+section: Real-world applications
+section_slug: 94-applications
+slug: protein-folding-alphafold
+domains: [biology, chemistry, computer-science]
+uses_theorems: [cauchyschwarz-inequality, gaussian-distribution-normal-distribution, method-of-least-squares]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 03-specialisation-year-three/05-numerical-analysis, 04-advanced-topics-year-four/03-advanced-pdes]
+related_applications: [machine-learning-deep-neural-networks, robotics-and-control, population-dynamics-ecology]
+tags: [biology, optimisation, deep-learning, geometry, applied]
+real_world_examples: [Drug target identification, Vaccine design, Enzyme engineering, Fundamental biology research]
+summary: AlphaFold's prediction of protein structure from amino-acid sequence solved a fifty-year grand challenge using deep learning over geometric and combinatorial spaces.
+---
+
+
+## The application
+
+Every living cell relies on proteins — molecules that fold from a one-dimensional chain of amino acids into precise three-dimensional shapes that determine their function. Predicting the shape from the sequence (the **protein folding problem**) had been an open challenge since the 1970s. DeepMind's AlphaFold2 (2020) solved it at near-experimental accuracy, revolutionising drug discovery and structural biology. The mathematics involves optimisation in vast configuration spaces, geometric deep learning, and attention mechanisms built on linear algebra.
+
+## The maths behind it
+
+The **configuration space** of a protein with $n$ residues is enormous: each of the roughly $n-1$ backbone dihedral angles $(\phi_i, \psi_i)$ can take values in $[0, 2\pi)$, giving a configuration manifold of dimension $\sim 2n$. For a 300-residue protein this is a $600$-dimensional torus. The physical energy landscape on this manifold has exponentially many local minima.
+
+Traditional physics-based approaches — sampling this space by molecular dynamics or Monte Carlo — cannot explore it thoroughly for large proteins. AlphaFold2's approach is different: it learns a **scoring function** from the Protein Data Bank (roughly 200,000 experimentally determined structures), using a transformer neural network with **equivariant geometry**.
+
+The attention mechanism computes pairwise relationships between all residue pairs simultaneously: $\text{Attention}(Q, K, V) = \text{softmax}(QK^T / \sqrt{d}) V$. This is an $n \times n$ matrix of inner products — the **Cauchy–Schwarz inequality** bounds the attention scores and is implicit in the scaling by $\sqrt{d}$.
+
+**Equivariance** means the network's output respects rotations and translations of the input structure: if you rotate the protein coordinates, the predicted structure rotates accordingly. This is a statement about the representation theory of the rotation group $\text{SO}(3)$ — related to the group theory in [Abstract Algebra](/02-core-year-two/01-abstract-algebra).
+
+## A concrete example
+
+AlphaFold2 predicted structures for virtually all ~200 million proteins in the UniProt database, releasing them publicly in 2022. Researchers have already used these predictions to identify novel drug targets for diseases including malaria, tuberculosis, and neglected tropical diseases where experimental structure determination is too slow or expensive. The time to predict a single protein structure dropped from years (experimental crystallography) to seconds (AlphaFold2 inference).
+
+## History of the application
+
+The CASP (Critical Assessment of protein Structure Prediction) competition, running since 1994, tracked incremental progress toward solving the folding problem. For 25 years, the best methods achieved median accuracy of 40–50% (GDT_TS score). AlphaFold1 in 2018 reached ~58%; AlphaFold2 in 2020 reached ~92%, matching experimental accuracy. The co-inventors received the 2024 Nobel Prize in Chemistry.
+
+## Links
+
+The deep learning architecture is related to [Machine Learning: Deep Neural Networks](/applications/machine-learning-deep-neural-networks). The geometric and group-theoretic aspects connect to [Abstract Algebra](/02-core-year-two/01-abstract-algebra) and [Topology](/03-specialisation-year-three/04-topology). Optimisation methods are in [Numerical Analysis](/03-specialisation-year-three/05-numerical-analysis).

@@ -1,0 +1,32 @@
+        ---
+        title: Binet's formula
+        section: Theorems
+        section_slug: 93-theorems
+        slug: binets-formula
+        attributed_to: [fibonacci]
+        era: 04-renaissance-and-symbolic-algebra
+        appears_in: [02-core-year-two/06-programming-and-discrete-mathematics]
+        related_theorems: [fibonacci-sequence, eigenvalues]
+        applications: [recommender-systems, computer-graphics-3d]
+        tags: [number-sequences, recurrence-relations]
+        year_introduced: "1843"
+        summary: A closed form for the $n$th Fibonacci number using the golden ratio.
+        ---
+
+        $$
+F_n = \frac{\varphi^n - \psi^n}{\sqrt{5}}, \qquad \varphi = \frac{1+\sqrt{5}}{2}, \quad \psi = \frac{1-\sqrt{5}}{2}.
+$$
+
+The Fibonacci sequence — $1, 1, 2, 3, 5, 8, 13, \dots$ — has an explicit non-recursive formula.
+
+## History
+
+Jacques Binet published it in 1843, but Abraham de Moivre had derived an equivalent expression in 1718 and Euler later. The formula is the eigenvalue decomposition of the linear recurrence $F_{n+1} = F_n + F_{n-1}$.
+
+## Why it matters
+
+It is the prototype example of using linear algebra to solve a recurrence. The characteristic polynomial $x^2 = x + 1$ has roots $\varphi$ and $\psi$, and the general solution is a linear combination of $\varphi^n$ and $\psi^n$. This is exactly how spectral methods solve linear ODEs and difference equations.
+
+## Where you'll meet it
+
+In any second-year discrete-mathematics course as the worked example.

@@ -1,0 +1,39 @@
+---
+title: Galois groups
+section: Theorems
+section_slug: 93-theorems
+slug: galois-groups
+attributed_to: [galois]
+era: 07-the-structural-turn
+appears_in: [03-specialisation-year-three/01-galois-theory]
+related_theorems: [galois-theory, characterisation-of-solvable-polynomials, normal-subgroups, group-theory-permutation-groups]
+applications: [error-correcting-codes, quantum-computing-algorithms]
+tags: [algebra, Galois-theory, groups, field-theory]
+year_introduced: 1830–1832
+summary: The Galois group of a polynomial — the group of field automorphisms permuting its roots — which determines whether the polynomial is solvable by radicals.
+---
+
+
+## What it says
+
+Given a polynomial $f(x) \in \mathbb{Q}[x]$ with roots $\alpha_1, \ldots, \alpha_n$ in $\mathbb{C}$, the **splitting field** $K = \mathbb{Q}(\alpha_1, \ldots, \alpha_n)$ is the smallest field containing all roots. The **Galois group** $\text{Gal}(K/\mathbb{Q})$ consists of all field automorphisms $\sigma: K \to K$ that fix $\mathbb{Q}$ pointwise.
+
+These automorphisms permute the roots among themselves, so $\text{Gal}(K/\mathbb{Q})$ is a subgroup of the symmetric group $S_n$.
+
+The **Fundamental Theorem of Galois Theory:** There is a bijective correspondence between subgroups of $\text{Gal}(K/\mathbb{Q})$ and intermediate fields $\mathbb{Q} \subseteq F \subseteq K$, reversing inclusion. Normal subgroups correspond to Galois (normal) extensions.
+
+## History
+
+[Galois](/mathematicians/galois) developed the theory in 1830–32. The Galois group precisely encodes the symmetries of the roots — the obstruction to writing them by radicals is captured entirely in the group's structure.
+
+## Why it matters
+
+The Galois correspondence is a deep duality between algebra (groups) and algebra (fields). It is the prototype for the correspondences in modern algebraic geometry (the étale fundamental group), number theory (absolute Galois groups and the Langlands programme), and topology (fundamental groups and covering spaces).
+
+## Real-world applications
+
+Galois fields $\mathbb{F}_{p^n}$ — which arise from this theory — are the algebraic substrate of [error-correcting codes](/applications/error-correcting-codes) and [quantum computing algorithms](/applications/quantum-computing-algorithms).
+
+## Where you'll meet it
+
+Galois groups are the central object of Year 3 Galois theory. See [Galois theory](/theorems/galois-theory) and the [Structural Turn era](/history/07-the-structural-turn).

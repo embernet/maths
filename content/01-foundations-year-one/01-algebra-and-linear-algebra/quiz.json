@@ -1,0 +1,56 @@
+{
+  "topic_slug": "01-algebra-and-linear-algebra",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Which of the following correctly defines an injective function $f : A \\to B$?",
+      "options": [
+        {"id": "a", "text": "Every element of $B$ is the image of some element of $A$.", "correct": false, "explanation": "That is the definition of surjectivity (onto), not injectivity."},
+        {"id": "b", "text": "$f(a_1) = f(a_2)$ implies $a_1 = a_2$ for all $a_1, a_2 \\in A$.", "correct": true, "explanation": "Correct: distinct inputs must give distinct outputs. Equivalently, $a_1 \\ne a_2$ implies $f(a_1) \\ne f(a_2)$."},
+        {"id": "c", "text": "There exists an element of $B$ with exactly one preimage in $A$.", "correct": false, "explanation": "One pair of distinct inputs with distinct outputs does not make the whole function injective; the condition must hold for all pairs."},
+        {"id": "d", "text": "$f$ has an inverse function.", "correct": false, "explanation": "An inverse exists if and only if $f$ is bijective — both injective and surjective. Injectivity alone is not sufficient."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The characteristic polynomial of the matrix $A = \\begin{pmatrix}3 & 1\\\\0 & 2\\end{pmatrix}$ is:",
+      "options": [
+        {"id": "a", "text": "$\\lambda^2 - 5\\lambda + 6$", "correct": true, "explanation": "$\\det(A - \\lambda I) = (3-\\lambda)(2-\\lambda) - 0 = \\lambda^2 - 5\\lambda + 6$. The eigenvalues are $\\lambda = 2$ and $\\lambda = 3$."},
+        {"id": "b", "text": "$\\lambda^2 + 5\\lambda + 6$", "correct": false, "explanation": "The signs are wrong. Expanding $\\det(A-\\lambda I)$ gives a negative coefficient for $\\lambda$."},
+        {"id": "c", "text": "$\\lambda^2 - 5\\lambda - 6$", "correct": false, "explanation": "The constant term should be $+6 = 3 \\times 2 = \\det(A)$, not $-6$."},
+        {"id": "d", "text": "$\\lambda^2 - 6$", "correct": false, "explanation": "The trace of $A$ is $3 + 2 = 5$, so the coefficient of $\\lambda$ is $-5$, not $0$."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "A linear map $T : \\mathbb{R}^5 \\to \\mathbb{R}^3$ has kernel of dimension 3. What is the dimension of its image?",
+      "options": [
+        {"id": "a", "text": "2", "correct": true, "explanation": "By the rank-nullity theorem, $\\dim(\\ker T) + \\dim(\\text{im}\\, T) = \\dim(\\mathbb{R}^5) = 5$. So $\\dim(\\text{im}\\, T) = 5 - 3 = 2$."},
+        {"id": "b", "text": "3", "correct": false, "explanation": "The kernel has dimension 3, not the image. By rank-nullity, $3 + \\dim(\\text{im}) = 5$."},
+        {"id": "c", "text": "5", "correct": false, "explanation": "The image lives in $\\mathbb{R}^3$ and cannot have dimension greater than 3, let alone 5."},
+        {"id": "d", "text": "8", "correct": false, "explanation": "Adding rather than subtracting gives 8, which exceeds the dimension of the codomain $\\mathbb{R}^3$ — impossible."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "What does Euler's formula $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$ give when $\\theta = \\pi$?",
+      "options": [
+        {"id": "a", "text": "$e^{i\\pi} = -1$, so $e^{i\\pi} + 1 = 0$.", "correct": true, "explanation": "Since $\\cos\\pi = -1$ and $\\sin\\pi = 0$, we get $e^{i\\pi} = -1$. Rearranging gives the famous identity $e^{i\\pi} + 1 = 0$."},
+        {"id": "b", "text": "$e^{i\\pi} = 1$.", "correct": false, "explanation": "That would follow if $\\cos\\pi = 1$, but $\\cos\\pi = -1$."},
+        {"id": "c", "text": "$e^{i\\pi} = i$.", "correct": false, "explanation": "$i$ would require $\\cos\\pi = 0$ and $\\sin\\pi = 1$; neither is true."},
+        {"id": "d", "text": "$e^{i\\pi} = 0$.", "correct": false, "explanation": "The exponential function $e^z$ is never zero for any complex $z$."}
+      ]
+    },
+    {
+      "id": "q5",
+      "stem": "Which statement correctly describes $\\gcd(a,b)$ as computed by the Euclidean algorithm?",
+      "options": [
+        {"id": "a", "text": "It is the largest integer that divides both $a$ and $b$.", "correct": true, "explanation": "Correct. The Euclidean algorithm computes this efficiently in $O(\\log(\\min(a,b)))$ steps, making it practical even for very large integers."},
+        {"id": "b", "text": "It is the smallest positive integer expressible as $ax + by$ for integers $x, y$.", "correct": false, "explanation": "This is actually also true — it is another characterisation of the gcd — but it is not the definition from the Euclidean algorithm. The definition as 'largest common divisor' is more standard."},
+        {"id": "c", "text": "It is always equal to $1$.", "correct": false, "explanation": "Only when $a$ and $b$ are coprime. For example, $\\gcd(4,6) = 2$."},
+        {"id": "d", "text": "It equals $ab / \\text{lcm}(a,b)$ and is found by prime factorisation.", "correct": false, "explanation": "While $\\gcd(a,b) \\cdot \\text{lcm}(a,b) = ab$ is true, the Euclidean algorithm finds the gcd without prime factorisation — which is why it is much faster for large numbers."}
+      ]
+    }
+  ]
+}

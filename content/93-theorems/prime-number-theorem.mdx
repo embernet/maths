@@ -1,0 +1,39 @@
+---
+title: The Prime Number Theorem
+section: Theorems
+section_slug: 93-theorems
+slug: prime-number-theorem
+attributed_to: [gauss, riemann]
+era: 06-the-rigour-revolution
+appears_in: [03-specialisation-year-three/01-galois-theory, 04-advanced-topics-year-four/02-analytic-number-theory]
+related_theorems: [riemann-hypothesis, riemann-zeta-function, fundamental-theorem-of-algebra]
+applications: [rsa-public-key-cryptography, cryptocurrency-blockchain]
+tags: [number-theory, analysis, primes]
+year_introduced: 1896 (proved by Hadamard and de la Vallée Poussin; conjectured by Gauss as a schoolboy)
+summary: The number of primes below $N$ grows like $N / \ln N$ — the rough density of the primes is governed by a logarithm.
+---
+
+
+Primes look chaotic up close. Zoom out, and a pattern appears. Write $\pi(N)$ for the number of primes less than or equal to $N$. The **prime number theorem** says:
+
+$$
+\pi(N) \sim \frac{N}{\ln N} \qquad \text{as } N \to \infty.
+$$
+
+The squiggle $\sim$ means the ratio tends to 1: as $N$ grows, $\pi(N)$ and $N/\ln N$ become arbitrarily close in relative terms. Primes thin out, but they do so smoothly — about one in every $\ln N$ numbers near $N$ is prime.
+
+## History
+
+A fifteen-year-old [Carl Friedrich Gauss](/mathematicians/gauss) tabulated primes for fun and noticed, around 1792, that they appeared to thin out logarithmically. He never published the conjecture but recorded it in his notebooks. Adrien-Marie Legendre stated something very close to it independently in 1797. The hard work — actually proving it — took another century. [Bernhard Riemann](/mathematicians/riemann)'s extraordinary 1859 paper transformed the question into one about a complex-analytic object, the zeta function, and revealed that the precise distribution of primes is governed by the locations of the [zeros of $\zeta(s)$](/theorems/riemann-zeta-function). In 1896, Jacques Hadamard and Charles-Jean de la Vallée Poussin closed the loop, independently proving the theorem using complex analysis. An "elementary" proof — one avoiding complex analysis — eluded mathematicians until Atle Selberg and Paul Erdős found one in 1948 (a collaboration that ended in a famous feud over credit).
+
+## Why it matters
+
+The PNT is the great success of analytic number theory. It connects two worlds — the discrete primes and the continuous logarithm — and shows that even the most stubborn-looking integer sequences have analytic shape. Sharper estimates of the error term $\pi(N) - N/\ln N$ remain an active area: the [Riemann hypothesis](/theorems/riemann-hypothesis), still unproven, would give the sharpest possible bound.
+
+## Real-world applications
+
+Modern cryptography depends on the fact that primes are dense enough to find, but factoring is hard. The PNT tells you roughly how many random tries it takes to find a prime of any given size — directly informing key generation in [RSA and TLS](/applications/rsa-public-key-cryptography) and the elliptic-curve schemes underpinning [cryptocurrency](/applications/cryptocurrency-blockchain).
+
+## Where you'll meet it
+
+A first encounter in third-year analytic number theory; a deeper one in fourth-year [analytic number theory courses](/04-advanced-topics-year-four/02-analytic-number-theory); a complete proof in graduate complex analysis.

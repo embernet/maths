@@ -1,0 +1,76 @@
+---
+title: Programming, Graphs, and Discrete Mathematics
+section: 'Core Mathematics: Year Two'
+section_slug: 02-core-year-two
+year: 2
+order: 6
+tags: [discrete-mathematics, graph-theory, combinatorics, algorithms, numerical-methods, Python, computational]
+prerequisites:
+- 01-algebra-and-linear-algebra
+related:
+- 05-numerical-analysis
+mathematicians: [euler, erdos]
+reading_time_min: 10
+summary: 'Discrete mathematics studies structures that are countable rather than continuous: graphs, trees, and combinatorial objects. Combined with computational methods, it underpins modern algorithms and data science.'
+theorems: [graph-theory-konigsberg-bridges, graph-theory-and-number-theory, probabilistic-method-in-combinatorics, ramsey-theory, fibonacci-sequence, erdos-number]
+applications: [pagerank-google, cellular-network-design, error-correcting-codes, data-compression]
+---
+
+
+Not all mathematics is about smooth curves and continuous functions. Much of the mathematics that drives the modern world — routing algorithms, network analysis, cryptography, error-correcting codes, scheduling — lives in the discrete realm: finite sets, combinatorial structures, and graph-theoretic objects. Year Two discrete mathematics introduces this world and connects it to the computational tools that make large-scale discrete problems tractable.
+
+## Graph theory
+
+A **graph** $G = (V, E)$ consists of a set of **vertices** $V$ and a set of **edges** $E \subseteq V \times V$. Graphs model anything with pairwise relationships: road networks, social connections, the World Wide Web, molecular structures, dependency graphs in software.
+
+**Degree** of a vertex $v$: the number of edges incident to $v$. The **handshaking lemma**: $\sum_{v \in V} \deg(v) = 2|E|$ (each edge contributes 2 to the total degree count). Immediate corollary: the number of odd-degree vertices is always even.
+
+[Euler's](/mathematicians/euler) famous analysis of the Königsberg bridge problem (1736) founded graph theory. Seven bridges connect four landmasses; can you cross each bridge exactly once and return to your starting point? Euler's answer: no, because the four landmasses have odd degree. An **Eulerian circuit** exists if and only if the graph is connected and every vertex has even degree.
+
+**Hamiltonian paths** — visiting every vertex exactly once — are completely different: there is no known polynomial-time algorithm to determine whether a Hamiltonian path exists (this is an NP-complete problem). The contrast between the easy Euler problem and the hard Hamilton problem is one of the first hints of computational complexity theory.
+
+**Trees** are connected acyclic graphs. Any tree on $n$ vertices has exactly $n-1$ edges. Trees are the "skeleton" of graphs: a **spanning tree** of a connected graph is a tree using all vertices.
+
+**Planar graphs** can be drawn in the plane without edge crossings. Euler's formula for planar graphs: $V - E + F = 2$ (where $F$ counts faces, including the outer face). This is a beautiful early example of a topological invariant.
+
+## Graph colouring and chromatic polynomials
+
+Assign colours to vertices so that adjacent vertices have different colours: this is **graph colouring**. The minimum number of colours needed is the **chromatic number** $\chi(G)$.
+
+The **four-colour theorem** (proved by computer in 1976, simplified but still needing a computer in the 1990s): any planar graph can be 4-coloured. Proved by Appel and Haken, it was the first major theorem proved by exhaustive computer case-checking — and controversial for exactly that reason.
+
+The **chromatic polynomial** $P(G, k)$ counts the number of proper $k$-colourings of $G$. It is indeed a polynomial in $k$ (hence the name), and its roots give structural information about the graph.
+
+## Generating functions and combinatorics
+
+A **generating function** encodes a sequence $(a_n)$ as the formal power series $\sum_{n=0}^\infty a_n x^n$. They transform combinatorial recurrences into algebraic equations.
+
+**Example**: the Fibonacci sequence $F_0 = 0, F_1 = 1, F_{n+2} = F_{n+1} + F_n$. Its generating function $F(x) = \sum F_n x^n$ satisfies $F(x) = x + xF(x) + x^2 F(x)$, giving $F(x) = x/(1-x-x^2)$. Partial fractions then give the explicit formula (Binet's formula):
+
+$$F_n = \frac{1}{\sqrt{5}}\left[\left(\frac{1+\sqrt{5}}{2}\right)^n - \left(\frac{1-\sqrt{5}}{2}\right)^n\right].$$
+
+The golden ratio $\phi = (1+\sqrt{5})/2$ emerges from a purely combinatorial recurrence.
+
+## Computational mathematics: Python as a mathematical instrument
+
+A degree in mathematics now inevitably involves computation. Python has become the standard tool, primarily through the scientific ecosystem: NumPy (array computation), SciPy (scientific algorithms), Matplotlib (plotting), and Jupyter notebooks.
+
+Key skills developed in the computational strand:
+
+**Floating-point arithmetic**: computers represent real numbers with finite precision. Rounding errors accumulate; some algorithms are stable (errors stay small) and others unstable (errors grow catastrophically). The condition number $\kappa(A)$ of a matrix measures how sensitive the solution of $Ax = b$ is to perturbations in $b$.
+
+**Root finding**: Newton's method $x_{n+1} = x_n - f(x_n)/f'(x_n)$ converges quadratically (the number of correct decimal places doubles each step) near a simple root. Bisection converges linearly but always converges.
+
+**Numerical integration**: the trapezoid rule $\int_a^b f\, dx \approx h\sum f(x_i)$ has error $O(h^2)$; Simpson's rule is $O(h^4)$. Gaussian quadrature achieves exact integration of polynomials up to degree $2n-1$ with $n$ function evaluations.
+
+**ODE solvers**: Euler's method $y_{n+1} = y_n + hf(t_n, y_n)$ is simple but only first-order accurate. Runge-Kutta methods (particularly RK4) achieve fourth-order accuracy. Stiff ODEs (with very different timescales) require implicit methods.
+
+## Real-world applications
+
+Where this turns up in the world: [PageRank](/applications/pagerank-google) — the algorithm that originally ranked Google search results — is an eigenvector of the web's directed graph, discovered via the power iteration you learn about here. [Cellular network design](/applications/cellular-network-design) uses graph colouring to assign radio frequencies without interference: adjacent cells must receive different colours. [Error-correcting codes](/applications/error-correcting-codes) in QR codes and CDs rely on the algebraic structure of finite fields, whose combinatorial properties are developed in discrete mathematics. [Data compression](/applications/data-compression) uses Huffman coding, a greedy tree algorithm that achieves the information-theoretic minimum given by Shannon's entropy.
+
+## The connection between discrete and continuous
+
+[Paul Erdős](/mathematicians/erdos), perhaps the most prolific mathematician of the twentieth century, worked almost entirely in discrete mathematics — graph theory, combinatorics, number theory — producing over 1,500 papers and establishing the concept of the Erdős number as a playful measure of mathematical collaboration distance. His work demonstrated that discrete mathematics is as deep and rich as the continuous analysis that traditionally dominated pure mathematics.
+
+The boundaries between discrete and continuous are more porous than they first appear. Generating functions use analysis to count combinatorial objects. Spectral graph theory uses eigenvalues to understand graph structure. Fourier analysis on finite groups is the foundation of the Fast Fourier Transform. These connections are a recurring theme in Year Three and beyond.

@@ -1,0 +1,44 @@
+---
+title: Lagrange multipliers
+section: Theorems
+section_slug: 93-theorems
+slug: lagrange-multipliers
+attributed_to: [lagrange]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [lagrangian-mechanics, calculus-of-variations-jacob-and-johann, method-of-least-squares]
+applications: [machine-learning-deep-neural-networks, option-pricing-finance, robotics-and-control, climate-modelling]
+tags: [optimisation, calculus, Lagrange, constrained-optimisation]
+year_introduced: '1788'
+summary: To find the extremum of f(x) subject to g(x) = 0, add λg(x) to f(x) and find the unconstrained extremum — a method that transforms constrained problems into unconstrained ones.
+---
+
+
+
+## What it says
+
+To minimise $f(x_1, \ldots, x_n)$ subject to $g(x_1, \ldots, x_n) = 0$, form the **Lagrangian** $\mathcal{L} = f + \lambda g$ and solve:
+
+$$\nabla f = -\lambda \nabla g, \quad g(x) = 0$$
+
+The parameter $\lambda$ (the Lagrange multiplier) has an important interpretation: it is the rate at which the optimal value of $f$ changes as the constraint is relaxed.
+
+With multiple constraints $g_1 = 0, \ldots, g_k = 0$: add one multiplier per constraint, $\mathcal{L} = f + \sum_i \lambda_i g_i$.
+
+The method extends to inequality constraints $g(x) \leq 0$ via the Karush–Kuhn–Tucker (KKT) conditions.
+
+## History
+
+[Lagrange](/mathematicians/lagrange) introduced multipliers in *Mécanique analytique* (1788) in the context of constrained mechanical equilibrium. The general method for continuous optimisation was appreciated only gradually. The KKT conditions (1951) and duality theory extended it to the modern framework of mathematical programming.
+
+## Why it matters
+
+Lagrange multipliers are the workhorse of constrained optimisation. Every constrained optimisation problem in economics, engineering, or physics is either solved directly by Lagrange multipliers or reduced to a form where Lagrange methods apply. Support vector machines — a major class of machine learning models — are solved using the Lagrange dual problem.
+
+## Real-world applications
+
+[Machine learning](/applications/machine-learning-deep-neural-networks) SVMs use Lagrangian duality. [Option pricing](/applications/option-pricing-finance) uses constrained optimisation. [Robotics](/applications/robotics-and-control) motion planning solves constrained trajectory optimisation. [Climate modelling](/applications/climate-modelling) data assimilation is a constrained least-squares problem.
+
+## Where you'll meet it
+
+Lagrange multipliers appear in Year 1 calculus and Year 2 optimisation. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

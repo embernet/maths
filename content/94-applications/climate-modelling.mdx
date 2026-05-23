@@ -1,0 +1,42 @@
+---
+title: Climate Modelling
+section: Real-world applications
+section_slug: 94-applications
+slug: climate-modelling
+domains: [environmental-science, physics, engineering]
+uses_theorems: [heat-equation, turbulence-theory-kolmogorov-scaling, fourier-series]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 04-advanced-topics-year-four/04-mathematical-physics-and-fluids, 04-advanced-topics-year-four/03-advanced-pdes]
+related_applications: [weather-forecasting, airfoil-and-aerodynamics, seismic-imaging-oil-exploration]
+tags: [climate, PDEs, numerical-methods, applied]
+real_world_examples: [IPCC climate projections, Net-zero pathway modelling, Ocean circulation models, Ice-sheet dynamics]
+summary: Global climate models are enormous systems of discretised partial differential equations — the same equations you solve in your first year at a scale demanding millions of processor cores.
+---
+
+
+## The application
+
+A global climate model (GCM) simulates the behaviour of the atmosphere, ocean, land surface, and ice sheets over decades or centuries. The policy questions it answers — how much will temperatures rise under different emissions scenarios? which regions face the greatest flood risk? — carry civilisational weight. The mathematics is partial differential equations applied at planetary scale.
+
+## The maths behind it
+
+The fluid dynamics of the atmosphere and ocean is governed by the **Navier-Stokes equations** (see [Mathematical Physics and Fluid Dynamics](/04-advanced-topics-year-four/04-mathematical-physics-and-fluids)):
+
+$$\rho\!\left(\frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \mathbf{f}.$$
+
+Coupled with the **heat equation** for temperature, the continuity equation for mass conservation, and equations of state for density, the full system has no closed-form solution. It must be **discretised**: the globe is divided into a grid of cells (typically 50–100 km horizontally, with 50–100 vertical layers), and the PDEs are replaced by finite-difference or finite-element approximations at each grid point.
+
+**Fourier analysis** enters through spectral methods: some models represent horizontal fields as truncated series of spherical harmonics rather than grid values, converting the PDE into a system of coupled ODEs for spectral coefficients. The Fast Fourier Transform makes this computationally feasible.
+
+Turbulence at scales below the grid resolution (clouds, ocean eddies) cannot be directly simulated — it is handled via **parameterisation**: empirical relationships derived from Kolmogorov's turbulence theory and observations, expressing sub-grid effects in terms of resolved-scale quantities.
+
+## A concrete example
+
+The UK Met Office Unified Model runs on a grid of roughly 10 million cells with 70 vertical levels. A century-long climate simulation requires $10^{21}$ floating-point operations. Running on the Met Office supercomputer (peak performance ~$10^{16}$ operations per second), this takes weeks. The CMIP6 ensemble — dozens of models worldwide — constitutes hundreds of petabytes of data, analysed using the same statistical methods taught in Year Two probability.
+
+## History of the application
+
+Lewis Fry Richardson attempted the first numerical weather forecast by hand in 1922, filling a book with arithmetic. He estimated that 64,000 people working in parallel could compute a day's forecast in real time. The first computer-based forecast was run in 1950 by John von Neumann's group on ENIAC. Climate modelling at the multi-decade scale became possible in the 1970s and has grown in scope and resolution ever since.
+
+## Links
+
+The PDEs at the core of climate models are introduced in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes) and extended in [Advanced PDEs](/04-advanced-topics-year-four/03-advanced-pdes). Fluid dynamics is the subject of [Mathematical Physics and Fluid Dynamics](/04-advanced-topics-year-four/04-mathematical-physics-and-fluids). For shorter-timescale prediction see the related application [Weather Forecasting](/applications/weather-forecasting).

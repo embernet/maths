@@ -1,0 +1,37 @@
+---
+title: Galois theory
+section: Theorems
+section_slug: 93-theorems
+slug: galois-theory
+attributed_to: [galois]
+era: 07-the-structural-turn
+appears_in: [03-specialisation-year-three/01-galois-theory, 02-core-year-two/01-abstract-algebra]
+related_theorems: [galois-groups, characterisation-of-solvable-polynomials, group-theory-permutation-groups, proof-that-the-general-quintic-has-no-radical-solution, normal-subgroups]
+applications: [rsa-public-key-cryptography, error-correcting-codes, quantum-computing-algorithms]
+tags: [algebra, groups, field-theory, polynomials]
+year_introduced: 1830–1832 (published posthumously 1846)
+summary: A theory that translates questions about the roots of polynomial equations into questions about groups of symmetries — answering which polynomials are solvable by radicals.
+---
+
+
+## What it says
+
+Galois theory associates to any polynomial equation a **Galois group** — a group that captures the symmetries of the equation's roots (how they can be permuted while preserving algebraic relations among them). The polynomial is *solvable by radicals* (meaning its roots can be expressed using $+, -, \times, \div$, and $n$th roots) if and only if its Galois group is *solvable* in the group-theoretic sense.
+
+For polynomials of degree $\leq 4$, the Galois groups are always solvable — consistent with the existence of the quadratic, cubic, and quartic formulas. For degree 5 and above, there exist polynomials (such as $x^5 - x - 1$) whose Galois group is the symmetric group $S_5$, which is not solvable, confirming [Abel's result](/theorems/proof-that-the-general-quintic-has-no-radical-solution) that no general quintic formula exists.
+
+## History
+
+Évariste [Galois](/mathematicians/galois) developed the theory between 1830 and 1832. He wrote a summary letter revising his existing manuscript the night before a duel in which he died at age 20; the letter was not a first draft but a revision of known work, providing notes on which results were novel. [Abel](/mathematicians/abel) had published the impossibility of a quintic formula several years earlier (1826); Galois's contribution was the complete theory explaining *which* equations are solvable and *why*. His manuscripts were published only in 1846, fourteen years after his death.
+
+## Why it matters
+
+Galois theory is one of the great conceptual revolutions in mathematics. The question "can this equation be solved by radicals?" looks like it is about polynomials, but Galois showed it is really about groups — about symmetry. This translation of algebraic problems into group-theoretic ones is the prototype for the structural approach that now dominates algebra and much of modern mathematics. Galois groups also appear in algebraic number theory, algebraic geometry, and the Langlands programme.
+
+## Real-world applications
+
+Galois fields (finite fields) — the direct offspring of Galois theory applied to finite settings — underpin [error-correcting codes](/applications/error-correcting-codes), [RSA cryptography](/applications/rsa-public-key-cryptography), and [quantum computing algorithms](/applications/quantum-computing-algorithms).
+
+## Where you'll meet it
+
+Galois theory is typically a Year 3 option, building on the Year 2 abstract algebra course. See the [Structural Turn era](/history/07-the-structural-turn) for how it reshaped algebra.

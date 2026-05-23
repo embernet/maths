@@ -1,0 +1,4471 @@
+[
+  {
+    "title": "Welcome to the Undergraduate Mathematics Companion",
+    "section": "Welcome",
+    "slug": "welcome",
+    "kind": "page",
+    "summary": "A guided map of what you will meet in a UK mathematics degree — written for any student arriving with strong A-Level maths.",
+    "tags": [],
+    "mathematicians": [],
+    "url": "/"
+  },
+  {
+    "title": "Algebra and Linear Algebra",
+    "section": "Foundations: Year One",
+    "slug": "algebra-and-linear-algebra",
+    "kind": "topic",
+    "summary": "Sets, functions, and modular arithmetic establish the language of mathematics. Matrices, vector spaces, and eigenvalues give you one of the most powerful tools in the subject.",
+    "tags": [
+      "algebra",
+      "linear-algebra",
+      "sets",
+      "functions",
+      "matrices",
+      "eigenvalues",
+      "vectors",
+      "proof",
+      "foundations"
+    ],
+    "mathematicians": [
+      "euclid",
+      "gauss",
+      "euler",
+      "dedekind"
+    ],
+    "url": "/01-foundations-year-one/01-algebra-and-linear-algebra"
+  },
+  {
+    "title": "Real Analysis: Sequences, Limits, and the ε–δ Language",
+    "section": "Foundations: Year One",
+    "slug": "real-analysis-foundations",
+    "kind": "topic",
+    "summary": "What does it really mean for a sequence to converge? Real analysis gives calculus its foundations — replacing intuitive notions of 'approaches' and 'tends to' with precise logical definitions.",
+    "tags": [
+      "analysis",
+      "sequences",
+      "limits",
+      "epsilon-delta",
+      "convergence",
+      "continuity",
+      "foundations"
+    ],
+    "mathematicians": [
+      "cauchy",
+      "bolzano",
+      "weierstrass",
+      "archimedes"
+    ],
+    "url": "/01-foundations-year-one/02-real-analysis-foundations"
+  },
+  {
+    "title": "Calculus and Methods: Multivariable, Vector, and Differential Equations",
+    "section": "Foundations: Year One",
+    "slug": "calculus-and-methods",
+    "kind": "topic",
+    "summary": "Calculus extends from one variable to many: partial derivatives, double integrals, and vector fields. Differential equations model the physical world, and the three great integral theorems connect geometry to analysis.",
+    "tags": [
+      "calculus",
+      "multivariable",
+      "vector-calculus",
+      "ODEs",
+      "partial-derivatives",
+      "integration",
+      "Stokes",
+      "divergence"
+    ],
+    "mathematicians": [
+      "newton",
+      "leibniz",
+      "gauss",
+      "fourier",
+      "laplace"
+    ],
+    "url": "/01-foundations-year-one/03-calculus-and-methods"
+  },
+  {
+    "title": "Probability and Statistics",
+    "section": "Foundations: Year One",
+    "slug": "probability-and-statistics",
+    "kind": "topic",
+    "summary": "Probability is the mathematics of uncertainty. Year One builds the rigorous framework: probability spaces, random variables, standard distributions, and the foundations of statistical inference.",
+    "tags": [
+      "probability",
+      "statistics",
+      "distributions",
+      "combinatorics",
+      "Bayes",
+      "inference",
+      "foundations"
+    ],
+    "mathematicians": [
+      "bayes",
+      "laplace",
+      "fisher",
+      "kolmogorov"
+    ],
+    "url": "/01-foundations-year-one/04-probability-and-statistics"
+  },
+  {
+    "title": "Abstract Algebra: Groups, Rings, and Fields",
+    "section": "Core Mathematics: Year Two",
+    "slug": "abstract-algebra",
+    "kind": "topic",
+    "summary": "Groups capture symmetry in its purest form; rings and fields generalise the arithmetic of numbers to abstract structures. Year Two abstract algebra is where mathematics starts to feel genuinely new.",
+    "tags": [
+      "algebra",
+      "groups",
+      "rings",
+      "fields",
+      "Lagrange",
+      "isomorphism",
+      "Galois",
+      "symmetry",
+      "abstract-algebra"
+    ],
+    "mathematicians": [
+      "galois",
+      "noether",
+      "lagrange",
+      "abel"
+    ],
+    "url": "/02-core-year-two/01-abstract-algebra"
+  },
+  {
+    "title": "Real Analysis II: Metric Spaces, Uniform Convergence, and Integration",
+    "section": "Core Mathematics: Year Two",
+    "slug": "real-analysis-2",
+    "kind": "topic",
+    "summary": "Metric spaces generalise the real line to any space with a notion of distance. Uniform convergence is the right notion of convergence for functions. Riemann integration is made precise.",
+    "tags": [
+      "analysis",
+      "metric-spaces",
+      "uniform-convergence",
+      "Riemann-integration",
+      "completeness",
+      "compactness",
+      "topology"
+    ],
+    "mathematicians": [
+      "cauchy",
+      "weierstrass",
+      "bolzano",
+      "riemann"
+    ],
+    "url": "/02-core-year-two/02-real-analysis-2"
+  },
+  {
+    "title": "Complex Analysis: Analytic Functions and Cauchy''s Theorem",
+    "section": "Core Mathematics: Year Two",
+    "slug": "complex-analysis",
+    "kind": "topic",
+    "summary": "Complex analysis studies functions of a complex variable. The requirement of differentiability in the complex sense is so strong that it forces functions to be infinitely differentiable and equal to their Taylor series — a rigidity with spectacular consequences.",
+    "tags": [
+      "complex-analysis",
+      "Cauchy",
+      "analytic-functions",
+      "contour-integration",
+      "residues",
+      "Laurent-series"
+    ],
+    "mathematicians": [
+      "cauchy",
+      "riemann",
+      "weierstrass",
+      "euler"
+    ],
+    "url": "/02-core-year-two/03-complex-analysis"
+  },
+  {
+    "title": "Vector Calculus and Partial Differential Equations",
+    "section": "Core Mathematics: Year Two",
+    "slug": "vector-calculus-and-pdes",
+    "kind": "topic",
+    "summary": "Partial differential equations describe heat, waves, and gravity. Fourier's method of separating variables — and expressing solutions as sums of sinusoidal components — is the central technique.",
+    "tags": [
+      "vector-calculus",
+      "PDEs",
+      "Fourier-series",
+      "heat-equation",
+      "wave-equation",
+      "Laplace",
+      "separation-of-variables"
+    ],
+    "mathematicians": [
+      "fourier",
+      "laplace",
+      "gauss"
+    ],
+    "url": "/02-core-year-two/04-vector-calculus-and-pdes"
+  },
+  {
+    "title": "Probability and Statistical Inference",
+    "section": "Core Mathematics: Year Two",
+    "slug": "probability-and-statistical-inference",
+    "kind": "topic",
+    "summary": "Year Two probability deepens the Year One foundations: rigorous estimation theory, the Cramér-Rao bound, the Neyman-Pearson framework, and the beginnings of measure-theoretic probability.",
+    "tags": [
+      "probability",
+      "statistics",
+      "inference",
+      "likelihood",
+      "CLT",
+      "hypothesis-testing",
+      "estimation"
+    ],
+    "mathematicians": [
+      "fisher",
+      "kolmogorov",
+      "bayes",
+      "laplace"
+    ],
+    "url": "/02-core-year-two/05-probability-and-statistical-inference"
+  },
+  {
+    "title": "Programming, Graphs, and Discrete Mathematics",
+    "section": "Core Mathematics: Year Two",
+    "slug": "programming-and-discrete-mathematics",
+    "kind": "topic",
+    "summary": "Discrete mathematics studies structures that are countable rather than continuous: graphs, trees, and combinatorial objects. Combined with computational methods, it underpins modern algorithms and data science.",
+    "tags": [
+      "discrete-mathematics",
+      "graph-theory",
+      "combinatorics",
+      "algorithms",
+      "numerical-methods",
+      "Python",
+      "computational"
+    ],
+    "mathematicians": [
+      "euler",
+      "erdos"
+    ],
+    "url": "/02-core-year-two/06-programming-and-discrete-mathematics"
+  },
+  {
+    "title": "Galois Theory",
+    "section": "Specialisation: Year Three",
+    "slug": "galois-theory",
+    "kind": "topic",
+    "summary": "Galois theory answers the question that plagued mathematicians for centuries: which polynomial equations can be solved by radicals? The answer involves a profound correspondence between field extensions and group theory.",
+    "tags": [
+      "algebra",
+      "Galois-theory",
+      "field-extensions",
+      "group-theory",
+      "solvability",
+      "polynomials"
+    ],
+    "mathematicians": [
+      "galois",
+      "abel",
+      "noether",
+      "lagrange"
+    ],
+    "url": "/03-specialisation-year-three/01-galois-theory"
+  },
+  {
+    "title": "Functional Analysis: Banach and Hilbert Spaces",
+    "section": "Specialisation: Year Three",
+    "slug": "functional-analysis",
+    "kind": "topic",
+    "summary": "Functional analysis extends linear algebra to infinite dimensions. The spaces of functions that arise in analysis, PDEs, and quantum mechanics have algebraic and geometric structure that makes them tractable.",
+    "tags": [
+      "functional-analysis",
+      "Banach-spaces",
+      "Hilbert-spaces",
+      "operators",
+      "norms",
+      "completeness",
+      "quantum-mechanics"
+    ],
+    "mathematicians": [
+      "banach",
+      "hilbert",
+      "cauchy"
+    ],
+    "url": "/03-specialisation-year-three/02-functional-analysis"
+  },
+  {
+    "title": "Measure Theory and Lebesgue Integration",
+    "section": "Specialisation: Year Three",
+    "slug": "measure-and-lebesgue-integration",
+    "kind": "topic",
+    "summary": "Lebesgue integration replaces the Riemann approach with a more powerful theory that handles limits far more gracefully. It is the foundation of modern probability and functional analysis.",
+    "tags": [
+      "measure-theory",
+      "Lebesgue-integration",
+      "sigma-algebras",
+      "convergence-theorems",
+      "probability-foundations"
+    ],
+    "mathematicians": [
+      "cantor",
+      "kolmogorov",
+      "riemann"
+    ],
+    "url": "/03-specialisation-year-three/03-measure-and-lebesgue-integration"
+  },
+  {
+    "title": "Topology",
+    "section": "Specialisation: Year Three",
+    "slug": "topology",
+    "kind": "topic",
+    "summary": "Topology studies properties preserved under continuous deformation — stretching and bending, but not tearing or gluing. It provides the most abstract framework for notions like continuity, convergence, and compactness.",
+    "tags": [
+      "topology",
+      "open-sets",
+      "compactness",
+      "connectedness",
+      "homeomorphism",
+      "Tychonoff",
+      "Hausdorff"
+    ],
+    "mathematicians": [
+      "poincare",
+      "cantor"
+    ],
+    "url": "/03-specialisation-year-three/04-topology"
+  },
+  {
+    "title": "Numerical Analysis",
+    "section": "Specialisation: Year Three",
+    "slug": "numerical-analysis",
+    "kind": "topic",
+    "summary": "Numerical analysis is the mathematics of computation: how to solve problems that have no closed-form answer, and how to bound the errors that arise from discretisation and finite-precision arithmetic.",
+    "tags": [
+      "numerical-analysis",
+      "algorithms",
+      "floating-point",
+      "eigenvalues",
+      "SVD",
+      "iterative-methods",
+      "error-analysis"
+    ],
+    "mathematicians": [
+      "gauss",
+      "newton",
+      "lagrange",
+      "euler"
+    ],
+    "url": "/03-specialisation-year-three/05-numerical-analysis"
+  },
+  {
+    "title": "Mathematical Biology",
+    "section": "Specialisation: Year Three",
+    "slug": "mathematical-biology",
+    "kind": "topic",
+    "summary": "ODEs and PDEs applied to biology: population dynamics, predator-prey models, epidemic spread, and Turing''s reaction-diffusion mechanism for pattern formation on animal coats.",
+    "tags": [
+      "mathematical-biology",
+      "ODEs",
+      "population-dynamics",
+      "epidemiology",
+      "reaction-diffusion",
+      "pattern-formation",
+      "Turing"
+    ],
+    "mathematicians": [
+      "turing"
+    ],
+    "url": "/03-specialisation-year-three/06-mathematical-biology"
+  },
+  {
+    "title": "Stochastic Processes and Martingales",
+    "section": "Specialisation: Year Three",
+    "slug": "stochastic-processes",
+    "kind": "topic",
+    "summary": "Stochastic processes model systems that evolve randomly over time. Markov chains, continuous-time processes, and martingales are the tools; financial derivatives pricing is one of the most striking applications.",
+    "tags": [
+      "probability",
+      "Markov-chains",
+      "martingales",
+      "stochastic-processes",
+      "Brownian-motion",
+      "financial-mathematics"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/03-specialisation-year-three/07-stochastic-processes"
+  },
+  {
+    "title": "Advanced Differential Equations: Green''s Functions and Calculus of Variations",
+    "section": "Specialisation: Year Three",
+    "slug": "differential-equations-advanced",
+    "kind": "topic",
+    "summary": "Advanced ODE and PDE theory: rigorous existence and uniqueness for ODEs via contraction mapping, Green''s functions as integral representations of PDE solutions, and the calculus of variations.",
+    "tags": [
+      "PDEs",
+      "Greens-functions",
+      "calculus-of-variations",
+      "Euler-Lagrange",
+      "harmonic-functions",
+      "Sturm-Liouville"
+    ],
+    "mathematicians": [
+      "euler",
+      "lagrange",
+      "fourier"
+    ],
+    "url": "/03-specialisation-year-three/08-differential-equations-advanced"
+  },
+  {
+    "title": "Algebraic Geometry",
+    "section": "Advanced Topics: Year Four",
+    "slug": "algebraic-geometry",
+    "kind": "topic",
+    "summary": "Algebraic geometry studies geometric objects defined by polynomial equations. In its modern form — Grothendieck's theory of schemes — it unifies algebra, geometry, and number theory.",
+    "tags": [
+      "algebraic-geometry",
+      "varieties",
+      "sheaves",
+      "schemes",
+      "Riemann-surfaces",
+      "commutative-algebra"
+    ],
+    "mathematicians": [
+      "riemann",
+      "noether",
+      "galois",
+      "descartes"
+    ],
+    "url": "/04-advanced-topics-year-four/01-algebraic-geometry"
+  },
+  {
+    "title": "Analytic Number Theory",
+    "section": "Advanced Topics: Year Four",
+    "slug": "analytic-number-theory",
+    "kind": "topic",
+    "summary": "Analytic number theory uses the tools of complex analysis to study the distribution of prime numbers. The Riemann hypothesis — the most famous unsolved problem in mathematics — sits at its heart.",
+    "tags": [
+      "number-theory",
+      "Riemann-hypothesis",
+      "zeta-function",
+      "prime-numbers",
+      "Dirichlet",
+      "L-functions"
+    ],
+    "mathematicians": [
+      "riemann",
+      "gauss",
+      "fermat",
+      "euler",
+      "hardy"
+    ],
+    "url": "/04-advanced-topics-year-four/02-analytic-number-theory"
+  },
+  {
+    "title": "Advanced PDEs: Sobolev Spaces and Weak Solutions",
+    "section": "Advanced Topics: Year Four",
+    "slug": "advanced-pdes",
+    "kind": "topic",
+    "summary": "The modern rigorous theory of PDEs uses Sobolev spaces and weak formulations. Existence and uniqueness become theorems in functional analysis; regularity theory asks how smooth solutions really are.",
+    "tags": [
+      "PDEs",
+      "Sobolev-spaces",
+      "weak-solutions",
+      "elliptic-equations",
+      "regularity",
+      "functional-analysis"
+    ],
+    "mathematicians": [
+      "hilbert",
+      "cauchy",
+      "fourier"
+    ],
+    "url": "/04-advanced-topics-year-four/03-advanced-pdes"
+  },
+  {
+    "title": "Mathematical Physics and Fluid Dynamics",
+    "section": "Advanced Topics: Year Four",
+    "slug": "mathematical-physics-and-fluids",
+    "kind": "topic",
+    "summary": "The mathematics of moving fluids: Euler and Navier-Stokes equations, vorticity, potential flow, and the deep mysteries of turbulence. One of the Clay Millennium Problems is about the Navier-Stokes equations.",
+    "tags": [
+      "fluid-dynamics",
+      "Euler-equations",
+      "Navier-Stokes",
+      "vorticity",
+      "turbulence",
+      "mathematical-physics"
+    ],
+    "mathematicians": [
+      "euler",
+      "newton",
+      "bernoulli-family",
+      "laplace"
+    ],
+    "url": "/04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+  },
+  {
+    "title": "Era 1 — Ancient Origins",
+    "section": "A Brief History of Mathematics",
+    "slug": "ancient-origins",
+    "kind": "era",
+    "summary": "From clay tablets to Euclid''s Elements: how mathematics moved from practical calculation to the idea of proof, and why that transition changed everything.",
+    "tags": [],
+    "mathematicians": [
+      "pythagoras",
+      "euclid",
+      "archimedes"
+    ],
+    "url": "/90-history/01-ancient-origins"
+  },
+  {
+    "title": "Era 2 — Classical Greece and the Axiomatic Method",
+    "section": "A Brief History of Mathematics",
+    "slug": "classical-greece",
+    "kind": "era",
+    "summary": "The Greeks invented the idea of mathematical proof and built it into a complete deductive system. Euclid's Elements is the template for mathematical rigour still used today.",
+    "tags": [],
+    "mathematicians": [
+      "pythagoras",
+      "euclid",
+      "archimedes"
+    ],
+    "url": "/90-history/02-classical-greece"
+  },
+  {
+    "title": "Era 3 — The Islamic Golden Age and the Medieval Synthesis",
+    "section": "A Brief History of Mathematics",
+    "slug": "islamic-golden-age",
+    "kind": "era",
+    "summary": "The Islamic Golden Age preserved and extended Greek mathematics and transmitted the Indo-Arabic numeral system to Europe. Al-Khwarizmi's algebra gave a discipline its name and its method.",
+    "tags": [],
+    "mathematicians": [
+      "al-khwarizmi",
+      "fibonacci"
+    ],
+    "url": "/90-history/03-islamic-golden-age"
+  },
+  {
+    "title": "Era 4 — Renaissance and Symbolic Algebra",
+    "section": "A Brief History of Mathematics",
+    "slug": "renaissance-and-symbolic-algebra",
+    "kind": "era",
+    "summary": "Italian algebraists solved cubic and quartic equations — and in doing so, were forced to confront complex numbers. Descartes and Fermat invented coordinate geometry, fusing algebra and geometry for the first time.",
+    "tags": [],
+    "mathematicians": [
+      "cardano",
+      "fibonacci",
+      "descartes",
+      "fermat"
+    ],
+    "url": "/90-history/04-renaissance-and-symbolic-algebra"
+  },
+  {
+    "title": "Era 5 — The Calculus Revolution",
+    "section": "A Brief History of Mathematics",
+    "slug": "the-calculus-revolution",
+    "kind": "era",
+    "summary": "Newton and Leibniz independently invented calculus; Euler extended it in every direction imaginable. The priority dispute between Newton and Leibniz poisoned British mathematics for a century.",
+    "tags": [],
+    "mathematicians": [
+      "newton",
+      "leibniz",
+      "euler"
+    ],
+    "url": "/90-history/05-the-calculus-revolution"
+  },
+  {
+    "title": "Era 6 — The Rigour Revolution",
+    "section": "A Brief History of Mathematics",
+    "slug": "the-rigour-revolution",
+    "kind": "era",
+    "summary": "After two centuries of brilliant but informal calculus, nineteenth-century mathematicians put analysis on rigorous logical foundations — and discovered that infinity comes in different sizes.",
+    "tags": [],
+    "mathematicians": [
+      "cauchy",
+      "bolzano",
+      "weierstrass",
+      "dedekind",
+      "cantor",
+      "riemann"
+    ],
+    "url": "/90-history/06-the-rigour-revolution"
+  },
+  {
+    "title": "Era 7 — The Structural Turn",
+    "section": "A Brief History of Mathematics",
+    "slug": "the-structural-turn",
+    "kind": "era",
+    "summary": "From Galois's group theory to Noether's abstract algebra, the nineteenth and early twentieth centuries saw mathematics discover that structure — not specific objects — is what matters.",
+    "tags": [],
+    "mathematicians": [
+      "galois",
+      "abel",
+      "noether",
+      "lagrange"
+    ],
+    "url": "/90-history/07-the-structural-turn"
+  },
+  {
+    "title": "Era 8 — Foundations and the Twentieth-Century Crisis",
+    "section": "A Brief History of Mathematics",
+    "slug": "foundations-and-the-twentieth-century-crisis",
+    "kind": "era",
+    "summary": "As mathematics became more rigorous, it confronted questions about its own foundations. Cantor's paradise of infinities, Russell's paradox, Hilbert's programme, and Gödel's shattering proof define the most dramatic episode in the history of mathematical foundations.",
+    "tags": [],
+    "mathematicians": [
+      "cantor",
+      "hilbert",
+      "godel",
+      "turing"
+    ],
+    "url": "/90-history/08-foundations-and-the-twentieth-century-crisis"
+  },
+  {
+    "title": "Era 9 — Modern Mathematics",
+    "section": "A Brief History of Mathematics",
+    "slug": "modern-mathematics",
+    "kind": "era",
+    "summary": "Twentieth-century mathematics expanded in all directions: functional analysis, probability theory, dynamical systems, computational mathematics, and the grand unifying visions of the Langlands programme.",
+    "tags": [],
+    "mathematicians": [
+      "kolmogorov",
+      "fisher",
+      "ramanujan",
+      "banach",
+      "turing"
+    ],
+    "url": "/90-history/09-modern-mathematics"
+  },
+  {
+    "title": "Niels Henrik Abel",
+    "section": "Mathematicians",
+    "slug": "abel",
+    "kind": "mathematician",
+    "summary": "He died of tuberculosis at 26, having solved a problem that had occupied mathematicians for 250 years and laid the foundations for elliptic function theory. He lived in poverty throughout his mathematical career. The paper he submitted to the Paris Academy was mislaid by Cauchy; it was found after his death.",
+    "tags": [
+      "algebra",
+      "group-theory",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/abel"
+  },
+  {
+    "title": "Al-Khwarizmi",
+    "section": "Mathematicians",
+    "slug": "al-khwarizmi",
+    "kind": "mathematician",
+    "summary": "Both the word 'algebra' and the word 'algorithm' derive from his work. One word from his book title (al-jabr), one from the Latin transliteration of his name (Algoritmi). Few mathematicians have gifted two words to everyday language.",
+    "tags": [
+      "algebra",
+      "history",
+      "foundations"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/al-khwarizmi"
+  },
+  {
+    "title": "Archimedes",
+    "section": "Mathematicians",
+    "slug": "archimedes",
+    "kind": "mathematician",
+    "summary": "Allegedly ran naked through Syracuse shouting ''Eureka!'' on discovering the principle of buoyancy. Was killed by a Roman soldier during the siege of Syracuse while drawing geometry in the sand, having reportedly told the soldier: ''Do not disturb my circles.''",
+    "tags": [
+      "history",
+      "integration",
+      "foundations"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/archimedes"
+  },
+  {
+    "title": "Stefan Banach",
+    "section": "Mathematicians",
+    "slug": "banach",
+    "kind": "mathematician",
+    "summary": "He created functional analysis — the study of infinite-dimensional vector spaces — largely in the cafés of interwar Lwów, where the city's mathematical community gathered to collaborate. The Scottish Café, where the mathematicians worked from 1935 onwards, kept a book of open problems between visits — the 'Scottish Book.' He died in 1945 from lung cancer, a consequence of having been used as a lice-feeder in a Nazi typhus research programme.",
+    "tags": [
+      "functional-analysis",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/banach"
+  },
+  {
+    "title": "Thomas Bayes",
+    "section": "Mathematicians",
+    "slug": "bayes",
+    "kind": "mathematician",
+    "summary": "He published almost nothing in his lifetime. His one mathematical paper, on the problem of inferring a probability from observations, was submitted to the Royal Society by a friend after Bayes's death and was not read for many years. The theorem named for him is now the foundation of a school of statistical inference that has transformed science, medicine, and machine learning.",
+    "tags": [
+      "probability",
+      "statistics",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/bayes"
+  },
+  {
+    "title": "The Bernoulli Family",
+    "section": "Mathematicians",
+    "slug": "bernoulli-family",
+    "kind": "mathematician",
+    "summary": "The most remarkable mathematical family in history, spanning three generations. Daniel's father Johann tried to steal credit for Daniel's work, and had Daniel expelled from the family home after they both competed for the same prize — and Johann lost.",
+    "tags": [
+      "calculus",
+      "fluids",
+      "history",
+      "probability"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/bernoulli-family"
+  },
+  {
+    "title": "Bernard Bolzano",
+    "section": "Mathematicians",
+    "slug": "bolzano",
+    "kind": "mathematician",
+    "summary": "He proved the intermediate value theorem rigorously before Cauchy published his foundational work, wrote a philosophical treatise on infinite sets decades before Cantor, and spent the last years of his life under house arrest by the Austrian authorities for his political views. Almost none of his mathematical work was known to his contemporaries.",
+    "tags": [
+      "analysis",
+      "foundations",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/bolzano"
+  },
+  {
+    "title": "Georg Cantor",
+    "section": "Mathematicians",
+    "slug": "cantor",
+    "kind": "mathematician",
+    "summary": "He showed that some infinities are larger than others — that the real numbers are strictly more numerous than the natural numbers — and was attacked for it by [Kronecker](/mathematicians/kronecker), who called him a corrupter of youth. He suffered repeated breakdowns and died in a sanatorium. The mathematics he created is now the foundation of all of modern mathematics.",
+    "tags": [
+      "set-theory",
+      "foundations",
+      "infinity",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/cantor"
+  },
+  {
+    "title": "Gerolamo Cardano",
+    "section": "Mathematicians",
+    "slug": "cardano",
+    "kind": "mathematician",
+    "summary": "Called complex numbers 'as subtle as they are useless.' Those 'useless' imaginary numbers now underlie quantum mechanics, signal processing, and electrical engineering. Also a physician, astrologer, and inveterate gambler who wrote the first book on probability.",
+    "tags": [
+      "algebra",
+      "history",
+      "complex-numbers"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/cardano"
+  },
+  {
+    "title": "Augustin-Louis Cauchy",
+    "section": "Mathematicians",
+    "slug": "cauchy",
+    "kind": "mathematician",
+    "summary": "He published 789 papers — more than any mathematician except Euler — and reportedly annoyed the Paris Academy so badly with his output that they had to impose a page limit on submissions. He also managed to alienate virtually every mathematician he dealt with through a combination of devout Catholic proselytising, political unreliability, and sheer obliviousness.",
+    "tags": [
+      "analysis",
+      "complex-analysis",
+      "foundations",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/cauchy"
+  },
+  {
+    "title": "Richard Dedekind",
+    "section": "Mathematicians",
+    "slug": "dedekind",
+    "kind": "mathematician",
+    "summary": "He invented the notion of an ideal — a technical algebraic object that he named after the 'ideal numbers' of Kummer — and used it to save unique factorisation in algebraic number theory. He was the last student of Gauss, and one of the most careful mathematical thinkers of the nineteenth century.",
+    "tags": [
+      "analysis",
+      "algebra",
+      "foundations",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/dedekind"
+  },
+  {
+    "title": "René Descartes",
+    "section": "Mathematicians",
+    "slug": "descartes",
+    "kind": "mathematician",
+    "summary": "Had a lifelong habit of lying in bed until noon, attributing his mathematical productivity to the protected thinking time. According to one version of the story, he conceived coordinate geometry while lying in bed watching a fly on the ceiling.",
+    "tags": [
+      "geometry",
+      "algebra",
+      "history",
+      "coordinates"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/descartes"
+  },
+  {
+    "title": "Paul Erdős",
+    "section": "Mathematicians",
+    "slug": "erdos",
+    "kind": "mathematician",
+    "summary": "He had no home, no bank account, and no permanent address. He carried a half-empty suitcase and appeared on mathematicians' doorsteps saying 'my brain is open.' He co-authored papers with 509 people, giving rise to the Erdős number — the mathematical equivalent of six degrees of separation. He worked to the day he died, proving theorems at 83.",
+    "tags": [
+      "combinatorics",
+      "number-theory",
+      "graph-theory",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/erdos"
+  },
+  {
+    "title": "Euclid",
+    "section": "Mathematicians",
+    "slug": "euclid",
+    "kind": "mathematician",
+    "summary": "When Ptolemy I asked if there was a shorter route to geometry than the Elements, Euclid reportedly replied: ''There is no royal road to geometry.'' Almost nothing else is known about him personally.",
+    "tags": [
+      "foundations",
+      "proof",
+      "number-theory",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/euclid"
+  },
+  {
+    "title": "Leonhard Euler",
+    "section": "Mathematicians",
+    "slug": "euler",
+    "kind": "mathematician",
+    "summary": "Produced half his total mathematical output after going completely blind at age 59. Continued by dictating and doing mental calculations. Died of a stroke in 1783 — reportedly in the middle of calculating the orbit of Uranus.",
+    "tags": [
+      "foundations",
+      "complex-numbers",
+      "graph-theory",
+      "calculus",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/euler"
+  },
+  {
+    "title": "Pierre de Fermat",
+    "section": "Mathematicians",
+    "slug": "fermat",
+    "kind": "mathematician",
+    "summary": "A lawyer by profession and amateur mathematician by avocation. Wrote his Last Theorem in the margin of a book: ''I have discovered a truly marvellous proof, which this margin is too narrow to contain.'' The proof was not found for 358 years.",
+    "tags": [
+      "number-theory",
+      "history",
+      "algebra"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/fermat"
+  },
+  {
+    "title": "Fibonacci (Leonardo of Pisa)",
+    "section": "Mathematicians",
+    "slug": "fibonacci",
+    "kind": "mathematician",
+    "summary": "Grew up in North Africa, where his father was a customs officer, and was educated in the Arabic mathematical tradition. His 1202 Liber Abaci changed how Europe counted. The Fibonacci sequence appears as a rabbit-breeding puzzle.",
+    "tags": [
+      "history",
+      "combinatorics",
+      "number-theory"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/fibonacci"
+  },
+  {
+    "title": "Ronald A. Fisher",
+    "section": "Mathematicians",
+    "slug": "fisher",
+    "kind": "mathematician",
+    "summary": "He is arguably the most influential statistician who ever lived, and also the most controversial — his contributions to scientific methodology are foundational, and his views on eugenics were deeply harmful. The p-value, ANOVA, maximum likelihood, experimental design: all are largely his creation.",
+    "tags": [
+      "statistics",
+      "probability",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/fisher"
+  },
+  {
+    "title": "Jean-Baptiste Joseph Fourier",
+    "section": "Mathematicians",
+    "slug": "fourier",
+    "kind": "mathematician",
+    "summary": "Orphaned at nine; nearly guillotined during the Terror; governed Egypt under Napoleon; was rejected by Lagrange and Laplace when he first presented his Fourier series. Every mobile phone DSP chip runs on his mathematics.",
+    "tags": [
+      "analysis",
+      "PDEs",
+      "history",
+      "heat-equation"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/fourier"
+  },
+  {
+    "title": "Évariste Galois",
+    "section": "Mathematicians",
+    "slug": "galois",
+    "kind": "mathematician",
+    "summary": "He developed the framework now called Galois theory between the ages of 18 and 20, while in prison. He was killed in a duel at 20. The night before, he wrote a summary letter to a friend revising and annotating work he had developed over the preceding years — not, as legend sometimes has it, inventing the theory from scratch in those final hours.",
+    "tags": [
+      "algebra",
+      "group-theory",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/galois"
+  },
+  {
+    "title": "Carl Friedrich Gauss",
+    "section": "Mathematicians",
+    "slug": "gauss",
+    "kind": "mathematician",
+    "summary": "At age 17, he proved a result — the constructibility of the regular 17-gon — that had eluded mathematicians since the Greeks. He kept a mathematical diary from 1796 to 1814 recording results he never published; several of his unpublished entries, when eventually decoded, showed he had discovered what others later claimed as their own theorems.",
+    "tags": [
+      "number-theory",
+      "statistics",
+      "geometry",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/gauss"
+  },
+  {
+    "title": "Kurt Gödel",
+    "section": "Mathematicians",
+    "slug": "godel",
+    "kind": "mathematician",
+    "summary": "At 25, he published a pair of theorems that ended [Hilbert](/mathematicians/hilbert)'s programme and permanently changed mathematics. Any formal system powerful enough to describe arithmetic either contains unprovable truths, or is inconsistent. You cannot have both completeness and consistency. Mathematics will always contain things that are true but unprovable within any fixed set of rules.",
+    "tags": [
+      "foundations",
+      "logic",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/godel"
+  },
+  {
+    "title": "G. H. Hardy",
+    "section": "Mathematicians",
+    "slug": "hardy",
+    "kind": "mathematician",
+    "summary": "He believed that the best mathematics was the most useless — the further from practical application, the purer. One of his most famous contributions turned out to be in population genetics. His collaboration with Ramanujan, whom he called 'the only romantic incident of my life,' produced some of the deepest results in twentieth-century number theory.",
+    "tags": [
+      "analysis",
+      "number-theory",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/hardy"
+  },
+  {
+    "title": "David Hilbert",
+    "section": "Mathematicians",
+    "slug": "hilbert",
+    "kind": "mathematician",
+    "summary": "At the 1900 Paris International Congress of Mathematicians, he presented 23 problems for the new century. Eight of them are still unsolved. His programme to formalise all of mathematics was destroyed by Gödel's incompleteness theorems in 1931 — a result Hilbert reportedly never fully accepted.",
+    "tags": [
+      "foundations",
+      "functional-analysis",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/hilbert"
+  },
+  {
+    "title": "Andrey Kolmogorov",
+    "section": "Mathematicians",
+    "slug": "kolmogorov",
+    "kind": "mathematician",
+    "summary": "He put probability on a rigorous mathematical footing in 1933 — before him, probability was an intuitive subject with no agreed axioms; after him, it was measure theory. He also founded algorithmic information theory, made fundamental contributions to turbulence, and towards the end of his life taught primary school mathematics to gifted children in rural Russia.",
+    "tags": [
+      "probability",
+      "stochastic-processes",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/kolmogorov"
+  },
+  {
+    "title": "Joseph-Louis Lagrange",
+    "section": "Mathematicians",
+    "slug": "lagrange",
+    "kind": "mathematician",
+    "summary": "Napoleon called him 'the lofty pyramid of the mathematical sciences.' Lagrange said that had he known what mathematics would demand of his health, he would have chosen to be a poet.",
+    "tags": [
+      "mechanics",
+      "algebra",
+      "calculus",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/lagrange"
+  },
+  {
+    "title": "Pierre-Simon Laplace",
+    "section": "Mathematicians",
+    "slug": "laplace",
+    "kind": "mathematician",
+    "summary": "When Napoleon asked why his celestial mechanics book contained no mention of God, Laplace replied: ''Sire, I had no need of that hypothesis.'' Independently derived Bayes'' theorem.",
+    "tags": [
+      "PDEs",
+      "probability",
+      "celestial-mechanics",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/laplace"
+  },
+  {
+    "title": "Gottfried Wilhelm Leibniz",
+    "section": "Mathematicians",
+    "slug": "leibniz",
+    "kind": "mathematician",
+    "summary": "Invented calculus independently of Newton, with vastly superior notation that still dominates today. The bitter priority dispute with Newton, orchestrated partly by the Royal Society, left him isolated at his death — his funeral reportedly attended by only his secretary.",
+    "tags": [
+      "calculus",
+      "history",
+      "notation",
+      "logic"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/leibniz"
+  },
+  {
+    "title": "Isaac Newton",
+    "section": "Mathematicians",
+    "slug": "newton",
+    "kind": "mathematician",
+    "summary": "Invented calculus in 1665–66 while Cambridge was closed due to the plague. Later served as Master of the Royal Mint and personally prosecuted counterfeiters, bringing some to the gallows.",
+    "tags": [
+      "calculus",
+      "history",
+      "physics",
+      "foundations"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/newton"
+  },
+  {
+    "title": "Emmy Noether",
+    "section": "Mathematicians",
+    "slug": "noether",
+    "kind": "mathematician",
+    "summary": "Einstein called her 'the most significant creative mathematical genius thus far produced.' She was denied a university position for years because she was a woman, initially lectured under Hilbert's name, and was dismissed when the Nazis came to power. She then moved to America and continued working until she died unexpectedly two years later.",
+    "tags": [
+      "algebra",
+      "physics",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/noether"
+  },
+  {
+    "title": "Blaise Pascal",
+    "section": "Mathematicians",
+    "slug": "pascal",
+    "kind": "mathematician",
+    "summary": "Built a mechanical calculator at age 18 to help his father's tax work. Converted to Jansenist Christianity after a dramatic carriage accident and largely abandoned mathematics. His theological writings (the Pensées) are among the masterpieces of French prose.",
+    "tags": [
+      "probability",
+      "combinatorics",
+      "geometry",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/pascal"
+  },
+  {
+    "title": "Henri Poincaré",
+    "section": "Mathematicians",
+    "slug": "poincare",
+    "kind": "mathematician",
+    "summary": "He discovered chaos — that deterministic systems can be unpredictably sensitive to initial conditions — while trying to win a prize for proving the solar system was stable. He submitted a flawed paper, won the prize, then found the error himself before publication. The correction cost more than the prize money.",
+    "tags": [
+      "topology",
+      "dynamical-systems",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/poincare"
+  },
+  {
+    "title": "Pythagoras",
+    "section": "Mathematicians",
+    "slug": "pythagoras",
+    "kind": "mathematician",
+    "summary": "Led a mathematical cult that believed everything could be expressed as ratios of integers. A member of the school proved that √2 cannot be so expressed — according to legend, he was drowned for revealing this.",
+    "tags": [
+      "foundations",
+      "irrational-numbers",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/pythagoras"
+  },
+  {
+    "title": "Srinivasa Ramanujan",
+    "section": "Mathematicians",
+    "slug": "ramanujan",
+    "kind": "mathematician",
+    "summary": "He had essentially no formal mathematical training beyond a single undergraduate textbook. He filled notebooks with thousands of results, mostly without proofs. When Hardy received his letter in 1913, he initially dismissed it — then read more carefully. 'They must be true,' he later wrote, 'because if they were not true, no one would have had the imagination to invent them.",
+    "tags": [
+      "number-theory",
+      "analysis",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/ramanujan"
+  },
+  {
+    "title": "Bernhard Riemann",
+    "section": "Mathematicians",
+    "slug": "riemann",
+    "kind": "mathematician",
+    "summary": "His 1854 lecture on the foundations of geometry, delivered to qualify for a lectureship at Göttingen, introduced the geometric framework that Einstein would use sixty years later for general relativity. Riemann died of tuberculosis at 39. In his short career he left perhaps more unsolved problems in his wake than any other mathematician — most famously the Riemann hypothesis, still open after 165 years.",
+    "tags": [
+      "analysis",
+      "geometry",
+      "number-theory",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/riemann"
+  },
+  {
+    "title": "Alan Turing",
+    "section": "Mathematicians",
+    "slug": "turing",
+    "kind": "mathematician",
+    "summary": "He proved the halting problem is undecidable — that there is no general algorithm to determine whether a programme will halt — in the same paper in which he invented the concept of a computer. He was prosecuted for homosexuality in 1952 and subjected to chemical castration. He died in 1954, aged 41, from cyanide poisoning; an inquest recorded suicide.",
+    "tags": [
+      "computation",
+      "logic",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/turing"
+  },
+  {
+    "title": "Karl Weierstrass",
+    "section": "Mathematicians",
+    "slug": "weierstrass",
+    "kind": "mathematician",
+    "summary": "He spent his twenties as a schoolteacher, doing mathematics alone and unpublished. He submitted a paper on Abelian integrals to a journal in 1854, aged 38, and it caused a sensation — the Berlin academy awarded him an honorary doctorate on the spot and offered him a professorship. He then dismantled virtually everything in calculus and rebuilt it from scratch.",
+    "tags": [
+      "analysis",
+      "foundations",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/mathematicians/weierstrass"
+  },
+  {
+    "title": "Resources and Further Reading",
+    "section": "Resources",
+    "slug": "resources",
+    "kind": "page",
+    "summary": "",
+    "tags": [],
+    "mathematicians": [],
+    "url": "/resources"
+  },
+  {
+    "title": "A Mathematician's Apology",
+    "section": "Theorems",
+    "slug": "a-mathematician-s-apology",
+    "kind": "theorem",
+    "summary": "Hardy's essay on the nature and aesthetics of mathematics — one of the most widely read philosophical defences of pure mathematics.",
+    "tags": [
+      "history",
+      "philosophy",
+      "Hardy",
+      "culture"
+    ],
+    "mathematicians": [
+      "hardy"
+    ],
+    "url": "/theorems/a-mathematician-s-apology"
+  },
+  {
+    "title": "Abel's theorem",
+    "section": "Theorems",
+    "slug": "abel-s-theorem",
+    "kind": "theorem",
+    "summary": "If a power series converges at the endpoint of its interval of convergence, the sum is the limit of the function from inside — a theorem about continuity at the boundary of convergence.",
+    "tags": [
+      "analysis",
+      "power-series",
+      "complex-analysis",
+      "Abel"
+    ],
+    "mathematicians": [
+      "abel"
+    ],
+    "url": "/theorems/abel-s-theorem"
+  },
+  {
+    "title": "Abelian groups (posthumous attribution)",
+    "section": "Theorems",
+    "slug": "abelian-groups-posthumous-attribution",
+    "kind": "theorem",
+    "summary": "A group in which the operation commutes — ab = ba for all elements — named in Abel's honour for his work on commutative structures in polynomial theory.",
+    "tags": [
+      "algebra",
+      "groups",
+      "commutativity",
+      "abstract-algebra"
+    ],
+    "mathematicians": [
+      "abel"
+    ],
+    "url": "/theorems/abelian-groups-posthumous-attribution"
+  },
+  {
+    "title": "Algorithm (name derives from his)",
+    "section": "Theorems",
+    "slug": "algorithm-name-derives-from-his",
+    "kind": "theorem",
+    "summary": "The word 'algorithm' derives from the Latinised name of al-Khwarizmi, whose systematic arithmetic procedures established the idea of a step-by-step computational method.",
+    "tags": [
+      "history",
+      "computation",
+      "algorithms",
+      "al-Khwarizmi"
+    ],
+    "mathematicians": [
+      "al-khwarizmi"
+    ],
+    "url": "/theorems/algorithm-name-derives-from-his"
+  },
+  {
+    "title": "Analysis of variance (ANOVA)",
+    "section": "Theorems",
+    "slug": "analysis-of-variance-anova",
+    "kind": "theorem",
+    "summary": "A statistical method to test whether the means of several groups differ by partitioning total variability into between-group and within-group components.",
+    "tags": [
+      "statistics",
+      "ANOVA",
+      "Fisher",
+      "hypothesis-testing"
+    ],
+    "mathematicians": [
+      "fisher"
+    ],
+    "url": "/theorems/analysis-of-variance-anova"
+  },
+  {
+    "title": "analytic geometry",
+    "section": "Theorems",
+    "slug": "analytic-geometry",
+    "kind": "theorem",
+    "summary": "The unification of geometry and algebra through coordinates — allowing geometric problems to be solved algebraically and algebraic equations to be visualised as curves.",
+    "tags": [
+      "geometry",
+      "algebra",
+      "coordinates",
+      "Descartes",
+      "Fermat"
+    ],
+    "mathematicians": [
+      "descartes",
+      "fermat"
+    ],
+    "url": "/theorems/analytic-geometry"
+  },
+  {
+    "title": "Analytic number theory",
+    "section": "Theorems",
+    "slug": "analytic-number-theory",
+    "kind": "theorem",
+    "summary": "The branch of number theory that uses methods from complex analysis to study the distribution of primes and the properties of number-theoretic functions.",
+    "tags": [
+      "number-theory",
+      "complex-analysis",
+      "Hardy",
+      "primes"
+    ],
+    "mathematicians": [
+      "hardy"
+    ],
+    "url": "/theorems/analytic-number-theory"
+  },
+  {
+    "title": "approximation of π",
+    "section": "Theorems",
+    "slug": "approximation-of",
+    "kind": "theorem",
+    "summary": "Archimedes proved that π lies between 223/71 and 22/7 by bounding a circle between inscribed and circumscribed 96-gons — the first rigorous numerical bound on π.",
+    "tags": [
+      "geometry",
+      "pi",
+      "Archimedes",
+      "approximation"
+    ],
+    "mathematicians": [
+      "archimedes"
+    ],
+    "url": "/theorems/approximation-of"
+  },
+  {
+    "title": "Area of parabolic segment (first convergent infinite series)",
+    "section": "Theorems",
+    "slug": "area-of-parabolic-segment-first-convergent-infinite-series",
+    "kind": "theorem",
+    "summary": "Archimedes computed the area of a parabolic segment by summing an infinite geometric series — the first known example of a convergent infinite series used to compute a finite area.",
+    "tags": [
+      "geometry",
+      "series",
+      "limits",
+      "Archimedes"
+    ],
+    "mathematicians": [
+      "archimedes"
+    ],
+    "url": "/theorems/area-of-parabolic-segment-first-convergent-infinite-series"
+  },
+  {
+    "title": "Automorphic functions",
+    "section": "Theorems",
+    "slug": "automorphic-functions",
+    "kind": "theorem",
+    "summary": "Functions invariant under the action of a discrete group of Möbius transformations — Poincaré's generalisation of doubly periodic functions to hyperbolic geometry.",
+    "tags": [
+      "complex-analysis",
+      "automorphic-forms",
+      "Poincaré",
+      "number-theory"
+    ],
+    "mathematicians": [
+      "poincare"
+    ],
+    "url": "/theorems/automorphic-functions"
+  },
+  {
+    "title": "Axiomatic foundations of probability",
+    "section": "Theorems",
+    "slug": "axiomatic-foundations-of-probability",
+    "kind": "theorem",
+    "summary": "Probability is a measure satisfying three axioms — Kolmogorov's 1933 framework that placed probability theory on rigorous mathematical foundations.",
+    "tags": [
+      "probability",
+      "measure-theory",
+      "foundations",
+      "Kolmogorov"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/theorems/axiomatic-foundations-of-probability"
+  },
+  {
+    "title": "Banach fixed-point theorem",
+    "section": "Theorems",
+    "slug": "banach-fixed-point-theorem",
+    "kind": "theorem",
+    "summary": "A contraction mapping on a complete metric space has exactly one fixed point, found by iterated application of the map — the theorem that justifies iterative algorithms.",
+    "tags": [
+      "functional-analysis",
+      "fixed-points",
+      "contraction",
+      "iteration"
+    ],
+    "mathematicians": [
+      "banach"
+    ],
+    "url": "/theorems/banach-fixed-point-theorem"
+  },
+  {
+    "title": "Banach spaces",
+    "section": "Theorems",
+    "slug": "banach-spaces",
+    "kind": "theorem",
+    "summary": "A complete normed vector space — the natural setting for infinite-dimensional analysis, where Cauchy sequences always converge.",
+    "tags": [
+      "functional-analysis",
+      "normed-spaces",
+      "completeness",
+      "Banach"
+    ],
+    "mathematicians": [
+      "banach"
+    ],
+    "url": "/theorems/banach-spaces"
+  },
+  {
+    "title": "Banach–Tarski paradox",
+    "section": "Theorems",
+    "slug": "banachtarski-paradox",
+    "kind": "theorem",
+    "summary": "A solid ball in 3D space can be decomposed into finitely many pieces and reassembled into two balls of the same size as the original — using only rigid motions.",
+    "tags": [
+      "set-theory",
+      "measure-theory",
+      "paradox",
+      "Banach"
+    ],
+    "mathematicians": [
+      "banach"
+    ],
+    "url": "/theorems/banachtarski-paradox"
+  },
+  {
+    "title": "Bayes' theorem",
+    "section": "Theorems",
+    "slug": "bayes-theorem",
+    "kind": "theorem",
+    "summary": "How to update a probability when new evidence arrives — the engine behind modern statistical inference.",
+    "tags": [
+      "probability",
+      "inference",
+      "Bayesian",
+      "statistics"
+    ],
+    "mathematicians": [
+      "bayes"
+    ],
+    "url": "/theorems/bayes-theorem"
+  },
+  {
+    "title": "Bayesian probability (independent derivation)",
+    "section": "Theorems",
+    "slug": "bayesian-probability-independent-derivation",
+    "kind": "theorem",
+    "summary": "Laplace's independent derivation of Bayesian probability and the principle of inverse probability — more systematic and more widely applied than Bayes's original essay.",
+    "tags": [
+      "probability",
+      "Bayesian",
+      "Laplace",
+      "statistics"
+    ],
+    "mathematicians": [
+      "laplace"
+    ],
+    "url": "/theorems/bayesian-probability-independent-derivation"
+  },
+  {
+    "title": "Bernoulli numbers (Jacob)",
+    "section": "Theorems",
+    "slug": "bernoulli-numbers-jacob",
+    "kind": "theorem",
+    "summary": "A sequence of rational numbers appearing in the Taylor series of trigonometric functions, the Euler–Maclaurin formula, and the values of the Riemann zeta function at even positive integers.",
+    "tags": [
+      "number-theory",
+      "series",
+      "Bernoulli",
+      "special-numbers"
+    ],
+    "mathematicians": [
+      "bernoulli-family"
+    ],
+    "url": "/theorems/bernoulli-numbers-jacob"
+  },
+  {
+    "title": "Bernoulli's equation for fluid flow and kinetic theory (Daniel)",
+    "section": "Theorems",
+    "slug": "bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel",
+    "kind": "theorem",
+    "summary": "For an incompressible, inviscid fluid in steady flow, pressure plus kinetic energy per unit volume plus gravitational potential energy per unit volume is constant along a streamline.",
+    "tags": [
+      "fluid-mechanics",
+      "physics",
+      "Bernoulli",
+      "aerodynamics"
+    ],
+    "mathematicians": [
+      "bernoulli-family"
+    ],
+    "url": "/theorems/bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel"
+  },
+  {
+    "title": "Binary arithmetic",
+    "section": "Theorems",
+    "slug": "binary-arithmetic",
+    "kind": "theorem",
+    "summary": "Leibniz's development of the binary number system — representing all integers using only 0 and 1 — the basis of all digital computing.",
+    "tags": [
+      "number-theory",
+      "binary",
+      "computation",
+      "Leibniz"
+    ],
+    "mathematicians": [
+      "leibniz"
+    ],
+    "url": "/theorems/binary-arithmetic"
+  },
+  {
+    "title": "Binomial theorem",
+    "section": "Theorems",
+    "slug": "binomial-theorem",
+    "kind": "theorem",
+    "summary": "The expansion of (x + y)^n — and Newton's generalisation to non-integer and negative powers — giving infinite series for functions like √(1+x) and 1/(1-x).",
+    "tags": [
+      "algebra",
+      "combinatorics",
+      "Newton",
+      "polynomials"
+    ],
+    "mathematicians": [
+      "newton"
+    ],
+    "url": "/theorems/binomial-theorem"
+  },
+  {
+    "title": "Bolzano–Weierstrass theorem",
+    "section": "Theorems",
+    "slug": "bolzanoweierstrass-theorem",
+    "kind": "theorem",
+    "summary": "Every bounded sequence of real numbers has a convergent subsequence — the key lemma for compactness in real analysis.",
+    "tags": [
+      "real-analysis",
+      "sequences",
+      "compactness",
+      "convergence"
+    ],
+    "mathematicians": [
+      "bolzano",
+      "weierstrass"
+    ],
+    "url": "/theorems/bolzanoweierstrass-theorem"
+  },
+  {
+    "title": "Brachistochrone and early calculus (Johann)",
+    "section": "Theorems",
+    "slug": "brachistochrone-and-early-calculus-johann",
+    "kind": "theorem",
+    "summary": "The brachistochrone problem — find the curve of fastest descent under gravity — was solved by Johann Bernoulli in 1696 and gave birth to the calculus of variations.",
+    "tags": [
+      "calculus-of-variations",
+      "mechanics",
+      "Bernoulli",
+      "brachistochrone"
+    ],
+    "mathematicians": [
+      "bernoulli-family"
+    ],
+    "url": "/theorems/brachistochrone-and-early-calculus-johann"
+  },
+  {
+    "title": "Breaking Enigma at Bletchley Park",
+    "section": "Theorems",
+    "slug": "breaking-enigma-at-bletchley-park",
+    "kind": "theorem",
+    "summary": "Turing's design of the Bombe electromechanical machine and his codebreaking mathematics that broke the German Enigma cipher — directly influencing the outcome of the Second World War.",
+    "tags": [
+      "cryptography",
+      "computation",
+      "Turing",
+      "history"
+    ],
+    "mathematicians": [
+      "turing"
+    ],
+    "url": "/theorems/breaking-enigma-at-bletchley-park"
+  },
+  {
+    "title": "Calculus (dy/dx notation, ∫ symbol)",
+    "section": "Theorems",
+    "slug": "calculus-dy-dx-notation-symbol",
+    "kind": "theorem",
+    "summary": "Leibniz's formulation of calculus, including the dy/dx and ∫ notation that every mathematician and scientist uses today.",
+    "tags": [
+      "calculus",
+      "notation",
+      "differentiation",
+      "integration",
+      "Leibniz"
+    ],
+    "mathematicians": [
+      "leibniz"
+    ],
+    "url": "/theorems/calculus-dy-dx-notation-symbol"
+  },
+  {
+    "title": "Calculus (fluxions)",
+    "section": "Theorems",
+    "slug": "calculus-fluxions",
+    "kind": "theorem",
+    "summary": "Newton's formulation of calculus using 'fluxions' — rates of change of flowing quantities — developed in the mid-1660s and used to derive his laws of motion.",
+    "tags": [
+      "calculus",
+      "differentiation",
+      "Newton",
+      "foundations"
+    ],
+    "mathematicians": [
+      "newton"
+    ],
+    "url": "/theorems/calculus-fluxions"
+  },
+  {
+    "title": "Calculus of variations (Jacob and Johann)",
+    "section": "Theorems",
+    "slug": "calculus-of-variations-jacob-and-johann",
+    "kind": "theorem",
+    "summary": "The branch of mathematics that finds the function minimising (or maximising) a given integral — the mathematical framework for Lagrangian mechanics, optimal control, and geometric variational problems.",
+    "tags": [
+      "calculus-of-variations",
+      "optimisation",
+      "Bernoulli",
+      "functionals"
+    ],
+    "mathematicians": [
+      "bernoulli-family"
+    ],
+    "url": "/theorems/calculus-of-variations-jacob-and-johann"
+  },
+  {
+    "title": "Cantor's diagonal argument",
+    "section": "Theorems",
+    "slug": "cantor-s-diagonal-argument",
+    "kind": "theorem",
+    "summary": "A proof by construction that the real numbers are uncountably infinite — more numerous than the natural numbers — using a diagonal method that became a template for mathematical logic.",
+    "tags": [
+      "set-theory",
+      "infinity",
+      "logic",
+      "cardinality"
+    ],
+    "mathematicians": [
+      "cantor"
+    ],
+    "url": "/theorems/cantor-s-diagonal-argument"
+  },
+  {
+    "title": "Cantor set",
+    "section": "Theorems",
+    "slug": "cantor-set",
+    "kind": "theorem",
+    "summary": "A subset of [0,1] with measure zero but uncountably many points, constructed by repeatedly removing middle thirds — the first and most famous fractal.",
+    "tags": [
+      "set-theory",
+      "fractals",
+      "topology",
+      "measure-theory"
+    ],
+    "mathematicians": [
+      "cantor"
+    ],
+    "url": "/theorems/cantor-set"
+  },
+  {
+    "title": "Cardinality of infinite sets",
+    "section": "Theorems",
+    "slug": "cardinality-of-infinite-sets",
+    "kind": "theorem",
+    "summary": "Two sets have the same cardinality if there is a bijection between them — a precise way to compare the sizes of infinite sets, showing that infinity comes in different sizes.",
+    "tags": [
+      "set-theory",
+      "infinity",
+      "cardinality",
+      "foundations"
+    ],
+    "mathematicians": [
+      "cantor"
+    ],
+    "url": "/theorems/cardinality-of-infinite-sets"
+  },
+  {
+    "title": "Cartesian coordinates",
+    "section": "Theorems",
+    "slug": "cartesian-coordinates",
+    "kind": "theorem",
+    "summary": "The coordinate system that identifies points in the plane with pairs of numbers, unifying geometry and algebra into a single framework.",
+    "tags": [
+      "geometry",
+      "algebra",
+      "coordinates",
+      "Descartes"
+    ],
+    "mathematicians": [
+      "descartes"
+    ],
+    "url": "/theorems/cartesian-coordinates"
+  },
+  {
+    "title": "Cauchy sequences",
+    "section": "Theorems",
+    "slug": "cauchy-sequences",
+    "kind": "theorem",
+    "summary": "A sequence where terms become arbitrarily close to each other — a way to characterise convergence without needing to name the limit in advance.",
+    "tags": [
+      "real-analysis",
+      "sequences",
+      "completeness",
+      "convergence"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/cauchy-sequences"
+  },
+  {
+    "title": "Complex analysis and Cauchy's theorem",
+    "section": "Theorems",
+    "slug": "cauchys-integral-theorem",
+    "kind": "theorem",
+    "summary": "If a function is holomorphic (complex differentiable) inside a closed contour, the integral around that contour is zero — a statement with extraordinarily powerful consequences.",
+    "tags": [
+      "complex-analysis",
+      "integration",
+      "holomorphic",
+      "Cauchy"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/cauchys-integral-theorem"
+  },
+  {
+    "title": "Cauchy–Schwarz inequality",
+    "section": "Theorems",
+    "slug": "cauchyschwarz-inequality",
+    "kind": "theorem",
+    "summary": "The absolute value of an inner product never exceeds the product of the norms — the most-used inequality in all of mathematics.",
+    "tags": [
+      "linear-algebra",
+      "inner-products",
+      "inequalities",
+      "analysis"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/cauchyschwarz-inequality"
+  },
+  {
+    "title": "Celestial mechanics",
+    "section": "Theorems",
+    "slug": "celestial-mechanics",
+    "kind": "theorem",
+    "summary": "Laplace's five-volume Mécanique céleste — the systematic application of analysis and differential equations to planetary motion, tides, and the stability of the solar system.",
+    "tags": [
+      "mechanics",
+      "astronomy",
+      "Laplace",
+      "differential-equations"
+    ],
+    "mathematicians": [
+      "laplace"
+    ],
+    "url": "/theorems/celestial-mechanics"
+  },
+  {
+    "title": "Central limit theorem",
+    "section": "Theorems",
+    "slug": "central-limit-theorem",
+    "kind": "theorem",
+    "summary": "The sum of many independent random variables, suitably normalised, converges in distribution to a Gaussian — the theorem that explains why the normal distribution is everywhere.",
+    "tags": [
+      "probability",
+      "statistics",
+      "normal-distribution",
+      "limit-theorems"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/central-limit-theorem"
+  },
+  {
+    "title": "Chaos theory (three-body problem)",
+    "section": "Theorems",
+    "slug": "chaos-theory-three-body-problem",
+    "kind": "theorem",
+    "summary": "Poincaré's discovery that the three-body problem is generally unsolvable and that small changes in initial conditions can lead to wildly different outcomes — the founding insight of chaos theory.",
+    "tags": [
+      "dynamical-systems",
+      "chaos",
+      "Poincaré",
+      "three-body"
+    ],
+    "mathematicians": [
+      "poincare"
+    ],
+    "url": "/theorems/chaos-theory-three-body-problem"
+  },
+  {
+    "title": "Characterisation of solvable polynomials",
+    "section": "Theorems",
+    "slug": "characterisation-of-solvable-polynomials",
+    "kind": "theorem",
+    "summary": "A polynomial equation is solvable by radicals if and only if its Galois group is a solvable group — the central theorem of Galois theory.",
+    "tags": [
+      "algebra",
+      "Galois-theory",
+      "solvability",
+      "groups"
+    ],
+    "mathematicians": [
+      "galois"
+    ],
+    "url": "/theorems/characterisation-of-solvable-polynomials"
+  },
+  {
+    "title": "Completeness theorem for first-order logic",
+    "section": "Theorems",
+    "slug": "completeness-theorem-for-first-order-logic",
+    "kind": "theorem",
+    "summary": "Every logically valid statement in first-order predicate logic has a formal proof — Gödel's doctoral thesis, proved at age 22.",
+    "tags": [
+      "logic",
+      "completeness",
+      "Gödel",
+      "model-theory"
+    ],
+    "mathematicians": [
+      "godel"
+    ],
+    "url": "/theorems/completeness-theorem-for-first-order-logic"
+  },
+  {
+    "title": "Complex analysis and Cauchy's theorem",
+    "section": "Theorems",
+    "slug": "complex-analysis-and-cauchy-s-theorem",
+    "kind": "theorem",
+    "summary": "Cauchy's systematic development of complex function theory — the theory of holomorphic functions and their extraordinary properties.",
+    "tags": [
+      "complex-analysis",
+      "holomorphic",
+      "Cauchy",
+      "integration"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/complex-analysis-and-cauchy-s-theorem"
+  },
+  {
+    "title": "connection of algebra to geometry",
+    "section": "Theorems",
+    "slug": "connection-of-algebra-to-geometry",
+    "kind": "theorem",
+    "summary": "Descartes's insight that algebraic equations and geometric curves are two sides of the same mathematical coin — a unification that transformed both subjects.",
+    "tags": [
+      "algebra",
+      "geometry",
+      "Descartes",
+      "unification"
+    ],
+    "mathematicians": [
+      "descartes"
+    ],
+    "url": "/theorems/connection-of-algebra-to-geometry"
+  },
+  {
+    "title": "Consistency of the continuum hypothesis with ZFC",
+    "section": "Theorems",
+    "slug": "consistency-of-the-continuum-hypothesis-with-zfc",
+    "kind": "theorem",
+    "summary": "Gödel proved that the continuum hypothesis cannot be disproved from the ZFC axioms — half of the independence result showing CH is undecidable from standard axioms.",
+    "tags": [
+      "set-theory",
+      "logic",
+      "independence",
+      "Gödel"
+    ],
+    "mathematicians": [
+      "godel"
+    ],
+    "url": "/theorems/consistency-of-the-continuum-hypothesis-with-zfc"
+  },
+  {
+    "title": "Contributions to algebraic topology",
+    "section": "Theorems",
+    "slug": "contributions-to-algebraic-topology",
+    "kind": "theorem",
+    "summary": "Noether's insight that homology groups (not just Betti numbers) are the right algebraic invariants for topology — a conceptual shift that defined modern algebraic topology.",
+    "tags": [
+      "algebraic-topology",
+      "homology",
+      "Noether",
+      "abstract-algebra"
+    ],
+    "mathematicians": [
+      "noether"
+    ],
+    "url": "/theorems/contributions-to-algebraic-topology"
+  },
+  {
+    "title": "Contributions to modal logic and ontology",
+    "section": "Theorems",
+    "slug": "contributions-to-modal-logic-and-ontology",
+    "kind": "theorem",
+    "summary": "Gödel's formal development of modal logic and his ontological argument — applying formal logical methods to philosophical questions.",
+    "tags": [
+      "logic",
+      "modal-logic",
+      "philosophy",
+      "Gödel"
+    ],
+    "mathematicians": [
+      "godel"
+    ],
+    "url": "/theorems/contributions-to-modal-logic-and-ontology"
+  },
+  {
+    "title": "Contributions to set theory and foundations",
+    "section": "Theorems",
+    "slug": "contributions-to-set-theory-and-foundations",
+    "kind": "theorem",
+    "summary": "Dedekind's foundational work — including Dedekind cuts, the definition of infinite sets, and the characterisation of the natural numbers — which helped lay rigorous foundations for mathematics.",
+    "tags": [
+      "foundations",
+      "set-theory",
+      "real-numbers",
+      "Dedekind"
+    ],
+    "mathematicians": [
+      "dedekind"
+    ],
+    "url": "/theorems/contributions-to-set-theory-and-foundations"
+  },
+  {
+    "title": "Contributions to topology and analysis",
+    "section": "Theorems",
+    "slug": "contributions-to-topology-and-analysis",
+    "kind": "theorem",
+    "summary": "Kolmogorov's foundational contributions to topology, functional analysis, and approximation theory — including the Kolmogorov superposition theorem.",
+    "tags": [
+      "topology",
+      "analysis",
+      "Kolmogorov",
+      "functional-analysis"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/theorems/contributions-to-topology-and-analysis"
+  },
+  {
+    "title": "Dedekind cuts (rigorous construction of real numbers)",
+    "section": "Theorems",
+    "slug": "dedekind-cuts-rigorous-construction-of-real-numbers",
+    "kind": "theorem",
+    "summary": "The real numbers can be rigorously defined from the rationals by 'cuts' — partitions of ℚ into two sets — giving the reals their completeness property.",
+    "tags": [
+      "real-analysis",
+      "foundations",
+      "real-numbers",
+      "completeness"
+    ],
+    "mathematicians": [
+      "dedekind"
+    ],
+    "url": "/theorems/dedekind-cuts-rigorous-construction-of-real-numbers"
+  },
+  {
+    "title": "Dedekind domains (algebraic number theory)",
+    "section": "Theorems",
+    "slug": "dedekind-domains-algebraic-number-theory",
+    "kind": "theorem",
+    "summary": "Dedekind's theory of ideals in rings of algebraic integers — restoring unique factorisation in number fields where ordinary integers fail to factor uniquely.",
+    "tags": [
+      "algebraic-number-theory",
+      "rings",
+      "ideals",
+      "Dedekind"
+    ],
+    "mathematicians": [
+      "dedekind"
+    ],
+    "url": "/theorems/dedekind-domains-algebraic-number-theory"
+  },
+  {
+    "title": "Dirichlet convergence theorem",
+    "section": "Theorems",
+    "slug": "dirichlet-convergence-theorem",
+    "kind": "theorem",
+    "summary": "When does a Fourier series actually equal the function it represents? Dirichlet gave the first rigorous answer.",
+    "tags": [
+      "analysis",
+      "Fourier-series",
+      "convergence"
+    ],
+    "mathematicians": [],
+    "url": "/theorems/dirichlet-convergence-theorem"
+  },
+  {
+    "title": "discovery of irrational numbers",
+    "section": "Theorems",
+    "slug": "discovery-of-irrational-numbers",
+    "kind": "theorem",
+    "summary": "The discovery that √2 cannot be expressed as a ratio of integers — shattering the Pythagorean belief that all quantities are rational.",
+    "tags": [
+      "number-theory",
+      "irrational-numbers",
+      "Pythagoras",
+      "foundations"
+    ],
+    "mathematicians": [
+      "pythagoras"
+    ],
+    "url": "/theorems/discovery-of-irrational-numbers"
+  },
+  {
+    "title": "Early work on infinite sets",
+    "section": "Theorems",
+    "slug": "early-work-on-infinite-sets",
+    "kind": "theorem",
+    "summary": "Bolzano's posthumous Paradoxes of the Infinite — the first systematic treatment of infinite sets, anticipating Cantor's theory by twenty years.",
+    "tags": [
+      "set-theory",
+      "infinity",
+      "foundations",
+      "Bolzano"
+    ],
+    "mathematicians": [
+      "bolzano"
+    ],
+    "url": "/theorems/early-work-on-infinite-sets"
+  },
+  {
+    "title": "Elliptic integrals and elliptic functions",
+    "section": "Theorems",
+    "slug": "elliptic-integrals-and-elliptic-functions",
+    "kind": "theorem",
+    "summary": "Integrals of the form ∫R(x,√P(x))dx where P is a cubic or quartic — and their inverses, the doubly periodic elliptic functions — with profound consequences in number theory and geometry.",
+    "tags": [
+      "complex-analysis",
+      "elliptic-curves",
+      "algebraic-geometry",
+      "Abel"
+    ],
+    "mathematicians": [
+      "abel"
+    ],
+    "url": "/theorems/elliptic-integrals-and-elliptic-functions"
+  },
+  {
+    "title": "Erdős number",
+    "section": "Theorems",
+    "slug": "erdos-number",
+    "kind": "theorem",
+    "summary": "The collaborative distance from Paul Erdős in the graph of mathematical co-authorship — a measure of the small-world structure of mathematics.",
+    "tags": [
+      "graph-theory",
+      "collaboration",
+      "network",
+      "Erdős"
+    ],
+    "mathematicians": [
+      "erdos"
+    ],
+    "url": "/theorems/erdos-number"
+  },
+  {
+    "title": "Ergodic theory",
+    "section": "Theorems",
+    "slug": "ergodic-theory",
+    "kind": "theorem",
+    "summary": "The study of the long-run average behaviour of dynamical systems — when time averages equal space averages, and the connection to statistical mechanics.",
+    "tags": [
+      "dynamical-systems",
+      "probability",
+      "ergodic",
+      "Kolmogorov"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/theorems/ergodic-theory"
+  },
+  {
+    "title": "Euclid's algorithm",
+    "section": "Theorems",
+    "slug": "euclid-s-algorithm",
+    "kind": "theorem",
+    "summary": "A simple repeated-division procedure that finds the greatest common divisor of two integers — and underlies much of modern cryptography.",
+    "tags": [
+      "number-theory",
+      "algorithm",
+      "gcd",
+      "cryptography"
+    ],
+    "mathematicians": [
+      "euclid"
+    ],
+    "url": "/theorems/euclid-s-algorithm"
+  },
+  {
+    "title": "Euclid's Elements",
+    "section": "Theorems",
+    "slug": "euclid-s-elements",
+    "kind": "theorem",
+    "summary": "Thirteen books that organised all of Greek mathematics into a single deductive system from five axioms — the template for mathematical proof that endures to this day.",
+    "tags": [
+      "geometry",
+      "axioms",
+      "proof",
+      "foundations",
+      "number-theory"
+    ],
+    "mathematicians": [
+      "euclid"
+    ],
+    "url": "/theorems/euclid-s-elements"
+  },
+  {
+    "title": "Euclidean geometry",
+    "section": "Theorems",
+    "slug": "euclidean-geometry",
+    "kind": "theorem",
+    "summary": "The geometry of flat space built from Euclid's five postulates — the framework for measuring distances, angles, and areas that held unchallenged for two thousand years.",
+    "tags": [
+      "geometry",
+      "axioms",
+      "space",
+      "distance",
+      "angles"
+    ],
+    "mathematicians": [
+      "euclid"
+    ],
+    "url": "/theorems/euclidean-geometry"
+  },
+  {
+    "title": "Euler's formula (e^iθ = cos θ + i sin θ)",
+    "section": "Theorems",
+    "slug": "euler-s-formula-e-i-cos-i-sin",
+    "kind": "theorem",
+    "summary": "The formula e^{iθ} = cos θ + i sin θ unifies exponential and trigonometric functions and is the single most useful identity in mathematics.",
+    "tags": [
+      "complex-analysis",
+      "exponentials",
+      "trigonometry",
+      "Euler"
+    ],
+    "mathematicians": [
+      "euler"
+    ],
+    "url": "/theorems/euler-s-formula-e-i-cos-i-sin"
+  },
+  {
+    "title": "Euler's Totient Function",
+    "section": "Theorems",
+    "slug": "euler-s-totient-function",
+    "kind": "theorem",
+    "summary": "How many numbers up to $n$ are coprime to $n$ — and why this innocent count became the engine of modern cryptography.",
+    "tags": [
+      "number-theory",
+      "modular-arithmetic",
+      "primes"
+    ],
+    "mathematicians": [
+      "euler"
+    ],
+    "url": "/theorems/euler-s-totient-function"
+  },
+  {
+    "title": "Experimental design (randomisation, blocking, factorial design)",
+    "section": "Theorems",
+    "slug": "experimental-design-randomisation-blocking-factorial-design",
+    "kind": "theorem",
+    "summary": "Fisher's principles for designing experiments to maximise information while controlling for confounding — randomisation, blocking, and factorial structure.",
+    "tags": [
+      "statistics",
+      "experimental-design",
+      "Fisher",
+      "randomisation"
+    ],
+    "mathematicians": [
+      "fisher"
+    ],
+    "url": "/theorems/experimental-design-randomisation-blocking-factorial-design"
+  },
+  {
+    "title": "Fermat's Last Theorem",
+    "section": "Theorems",
+    "slug": "fermat-s-last-theorem",
+    "kind": "theorem",
+    "summary": "There are no positive integers x, y, z satisfying x^n + y^n = z^n for any integer n > 2 — a conjecture that took 358 years to prove.",
+    "tags": [
+      "number-theory",
+      "Fermat",
+      "elliptic-curves",
+      "Galois-theory"
+    ],
+    "mathematicians": [
+      "fermat"
+    ],
+    "url": "/theorems/fermat-s-last-theorem"
+  },
+  {
+    "title": "Fermat's little theorem",
+    "section": "Theorems",
+    "slug": "fermat-s-little-theorem",
+    "kind": "theorem",
+    "summary": "For any prime p and integer a not divisible by p, a raised to the power p−1 is congruent to 1 mod p — the foundation of most public-key cryptography.",
+    "tags": [
+      "number-theory",
+      "modular-arithmetic",
+      "primes",
+      "cryptography"
+    ],
+    "mathematicians": [
+      "fermat"
+    ],
+    "url": "/theorems/fermat-s-little-theorem"
+  },
+  {
+    "title": "Fibonacci sequence",
+    "section": "Theorems",
+    "slug": "fibonacci-sequence",
+    "kind": "theorem",
+    "summary": "The sequence 1, 1, 2, 3, 5, 8, 13, … where each term is the sum of the two preceding — arising from a rabbit breeding problem and appearing throughout mathematics and nature.",
+    "tags": [
+      "sequences",
+      "recurrence",
+      "Fibonacci",
+      "number-theory"
+    ],
+    "mathematicians": [
+      "fibonacci"
+    ],
+    "url": "/theorems/fibonacci-sequence"
+  },
+  {
+    "title": "First systematic use of complex numbers",
+    "section": "Theorems",
+    "slug": "first-systematic-use-of-complex-numbers",
+    "kind": "theorem",
+    "summary": "Cardano's Ars Magna introduced square roots of negative numbers as a necessary computational device — the first systematic encounter with complex numbers.",
+    "tags": [
+      "complex-numbers",
+      "algebra",
+      "history",
+      "foundations"
+    ],
+    "mathematicians": [
+      "cardano"
+    ],
+    "url": "/theorems/first-systematic-use-of-complex-numbers"
+  },
+  {
+    "title": "Formal axiomatic systems",
+    "section": "Theorems",
+    "slug": "formal-axiomatic-systems",
+    "kind": "theorem",
+    "summary": "A mathematical theory specified by a formal language, a set of axioms, and rules of inference — Hilbert's vision of mathematics as a game with symbols, fully specifiable and ideally complete.",
+    "tags": [
+      "logic",
+      "foundations",
+      "Hilbert",
+      "axioms"
+    ],
+    "mathematicians": [
+      "hilbert"
+    ],
+    "url": "/theorems/formal-axiomatic-systems"
+  },
+  {
+    "title": "Formal logic",
+    "section": "Theorems",
+    "slug": "formal-logic",
+    "kind": "theorem",
+    "summary": "Leibniz's vision of a calculus ratiocinator — a formal symbolic calculus for reasoning — anticipating Boolean algebra and mathematical logic by 150 years.",
+    "tags": [
+      "logic",
+      "foundations",
+      "Leibniz",
+      "history"
+    ],
+    "mathematicians": [
+      "leibniz"
+    ],
+    "url": "/theorems/formal-logic"
+  },
+  {
+    "title": "Foundational paper on inverse probability",
+    "section": "Theorems",
+    "slug": "foundational-paper-on-inverse-probability",
+    "kind": "theorem",
+    "summary": "Bayes' Essay towards solving a problem in the doctrine of chances — the paper that introduced the concept of reasoning backwards from evidence to causes.",
+    "tags": [
+      "probability",
+      "Bayesian",
+      "inverse-probability",
+      "statistics"
+    ],
+    "mathematicians": [
+      "bayes"
+    ],
+    "url": "/theorems/foundational-paper-on-inverse-probability"
+  },
+  {
+    "title": "Foundations of geometry",
+    "section": "Theorems",
+    "slug": "foundations-of-geometry",
+    "kind": "theorem",
+    "summary": "Hilbert's rigorous axiomatisation of Euclidean geometry — filling the logical gaps in Euclid's Elements with a complete, consistent, and independent set of axioms.",
+    "tags": [
+      "geometry",
+      "axioms",
+      "foundations",
+      "Hilbert"
+    ],
+    "mathematicians": [
+      "hilbert"
+    ],
+    "url": "/theorems/foundations-of-geometry"
+  },
+  {
+    "title": "Founding functional analysis",
+    "section": "Theorems",
+    "slug": "founding-functional-analysis",
+    "kind": "theorem",
+    "summary": "Stefan Banach's systematic development of infinite-dimensional analysis — the theory of normed spaces, bounded linear operators, and their properties.",
+    "tags": [
+      "functional-analysis",
+      "Banach",
+      "history",
+      "infinite-dimensional"
+    ],
+    "mathematicians": [
+      "banach"
+    ],
+    "url": "/theorems/founding-functional-analysis"
+  },
+  {
+    "title": "Fourier series",
+    "section": "Theorems",
+    "slug": "fourier-series",
+    "kind": "theorem",
+    "summary": "Any periodic function can be written as a sum of sines and cosines — and the coefficients carry complete information about the function's frequency content.",
+    "tags": [
+      "analysis",
+      "periodic-functions",
+      "harmonics",
+      "Fourier"
+    ],
+    "mathematicians": [
+      "fourier"
+    ],
+    "url": "/theorems/fourier-series"
+  },
+  {
+    "title": "Fourier transform",
+    "section": "Theorems",
+    "slug": "fourier-transform",
+    "kind": "theorem",
+    "summary": "The Fourier transform decomposes a function of time (or space) into its component frequencies — the most important transformation in applied mathematics.",
+    "tags": [
+      "analysis",
+      "frequency",
+      "transforms",
+      "harmonic-analysis"
+    ],
+    "mathematicians": [
+      "fourier"
+    ],
+    "url": "/theorems/fourier-transform"
+  },
+  {
+    "title": "Fundamental theorem of algebra",
+    "section": "Theorems",
+    "slug": "fundamental-theorem-of-algebra",
+    "kind": "theorem",
+    "summary": "Every non-constant polynomial with complex coefficients has at least one complex root — so it factors completely over the complex numbers.",
+    "tags": [
+      "algebra",
+      "complex-numbers",
+      "polynomials",
+      "existence"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/fundamental-theorem-of-algebra"
+  },
+  {
+    "title": "The Fundamental Theorem of Calculus",
+    "section": "Theorems",
+    "slug": "fundamental-theorem-of-calculus",
+    "kind": "theorem",
+    "summary": "Differentiation and integration are inverses — the surprise insight that turned calculus from a bag of tricks into a unified theory.",
+    "tags": [
+      "calculus",
+      "analysis",
+      "foundations"
+    ],
+    "mathematicians": [
+      "newton",
+      "leibniz",
+      "bernoulli-family"
+    ],
+    "url": "/theorems/fundamental-theorem-of-calculus"
+  },
+  {
+    "title": "Galois groups",
+    "section": "Theorems",
+    "slug": "galois-groups",
+    "kind": "theorem",
+    "summary": "The Galois group of a polynomial — the group of field automorphisms permuting its roots — which determines whether the polynomial is solvable by radicals.",
+    "tags": [
+      "algebra",
+      "Galois-theory",
+      "groups",
+      "field-theory"
+    ],
+    "mathematicians": [
+      "galois"
+    ],
+    "url": "/theorems/galois-groups"
+  },
+  {
+    "title": "Galois theory",
+    "section": "Theorems",
+    "slug": "galois-theory",
+    "kind": "theorem",
+    "summary": "A theory that translates questions about the roots of polynomial equations into questions about groups of symmetries — answering which polynomials are solvable by radicals.",
+    "tags": [
+      "algebra",
+      "groups",
+      "field-theory",
+      "polynomials"
+    ],
+    "mathematicians": [
+      "galois"
+    ],
+    "url": "/theorems/galois-theory"
+  },
+  {
+    "title": "Gauss's law (electrostatics)",
+    "section": "Theorems",
+    "slug": "gauss-s-law-electrostatics",
+    "kind": "theorem",
+    "summary": "The total electric flux through a closed surface equals the enclosed charge divided by ε₀ — one of Maxwell's four equations governing electromagnetism.",
+    "tags": [
+      "physics",
+      "electrostatics",
+      "Gauss",
+      "vector-calculus"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/gauss-s-law-electrostatics"
+  },
+  {
+    "title": "Gaussian distribution (normal distribution)",
+    "section": "Theorems",
+    "slug": "gaussian-distribution-normal-distribution",
+    "kind": "theorem",
+    "summary": "The bell-shaped distribution that arises whenever many small independent random effects add together — the most important probability distribution in mathematics.",
+    "tags": [
+      "probability",
+      "statistics",
+      "normal-distribution",
+      "Gauss"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/gaussian-distribution-normal-distribution"
+  },
+  {
+    "title": "Graph theory and number theory",
+    "section": "Theorems",
+    "slug": "graph-theory-and-number-theory",
+    "kind": "theorem",
+    "summary": "Erdős's foundational contributions to graph theory and number theory — including extremal graph theory, the Erdős–Ko–Rado theorem, and work on prime gaps.",
+    "tags": [
+      "graph-theory",
+      "number-theory",
+      "combinatorics",
+      "Erdős"
+    ],
+    "mathematicians": [
+      "erdos"
+    ],
+    "url": "/theorems/graph-theory-and-number-theory"
+  },
+  {
+    "title": "Graph theory (Königsberg bridges)",
+    "section": "Theorems",
+    "slug": "graph-theory-konigsberg-bridges",
+    "kind": "theorem",
+    "summary": "Euler's solution to the Königsberg bridge problem — can you cross all seven bridges once — founded graph theory and identified the concept of an Eulerian path.",
+    "tags": [
+      "graph-theory",
+      "Euler",
+      "combinatorics",
+      "topology"
+    ],
+    "mathematicians": [
+      "euler"
+    ],
+    "url": "/theorems/graph-theory-konigsberg-bridges"
+  },
+  {
+    "title": "group theory foundations",
+    "section": "Theorems",
+    "slug": "group-theory-foundations",
+    "kind": "theorem",
+    "summary": "Lagrange's theorem — the order of a subgroup divides the order of the group — the first result in abstract group theory, proved forty years before groups were formally defined.",
+    "tags": [
+      "algebra",
+      "groups",
+      "Lagrange",
+      "history"
+    ],
+    "mathematicians": [
+      "lagrange"
+    ],
+    "url": "/theorems/group-theory-foundations"
+  },
+  {
+    "title": "Group theory (permutation groups)",
+    "section": "Theorems",
+    "slug": "group-theory-permutation-groups",
+    "kind": "theorem",
+    "summary": "The theory of permutation groups — the study of symmetries through the algebra of bijections on a set — the cornerstone of modern abstract algebra.",
+    "tags": [
+      "algebra",
+      "groups",
+      "symmetry",
+      "permutations"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/group-theory-permutation-groups"
+  },
+  {
+    "title": "Hahn–Banach theorem",
+    "section": "Theorems",
+    "slug": "hahn-banach-theorem",
+    "kind": "theorem",
+    "summary": "A bounded linear functional on a subspace of a normed space can be extended to the whole space without increasing its norm — the fundamental extension theorem of functional analysis.",
+    "tags": [
+      "functional-analysis",
+      "linear-spaces",
+      "duality",
+      "extension"
+    ],
+    "mathematicians": [
+      "banach"
+    ],
+    "url": "/theorems/hahn-banach-theorem"
+  },
+  {
+    "title": "Hahn–Banach theorem",
+    "section": "Theorems",
+    "slug": "hahnbanach-theorem",
+    "kind": "theorem",
+    "summary": "A linear functional defined on a subspace of a normed vector space can always be extended to the whole space without increasing its norm — a cornerstone of functional analysis.",
+    "tags": [
+      "functional-analysis",
+      "linear-algebra",
+      "Banach",
+      "extension-theorems"
+    ],
+    "mathematicians": [
+      "banach"
+    ],
+    "url": "/theorems/hahnbanach-theorem"
+  },
+  {
+    "title": "Halting problem (undecidability)",
+    "section": "Theorems",
+    "slug": "halting-problem-undecidability",
+    "kind": "theorem",
+    "summary": "There is no general algorithm that can determine, for an arbitrary program and input, whether the program will halt or run forever.",
+    "tags": [
+      "computation",
+      "undecidability",
+      "Turing",
+      "logic"
+    ],
+    "mathematicians": [
+      "turing"
+    ],
+    "url": "/theorems/halting-problem-undecidability"
+  },
+  {
+    "title": "Hardy spaces (complex analysis)",
+    "section": "Theorems",
+    "slug": "hardy-spaces-complex-analysis",
+    "kind": "theorem",
+    "summary": "Function spaces on the disc or upper half-plane whose boundary values have integrable powers — the bridge between complex analysis and Fourier analysis on the circle.",
+    "tags": [
+      "complex-analysis",
+      "functional-analysis",
+      "Hardy-spaces",
+      "Fourier"
+    ],
+    "mathematicians": [
+      "hardy"
+    ],
+    "url": "/theorems/hardy-spaces-complex-analysis"
+  },
+  {
+    "title": "Hardy–Ramanujan collaboration",
+    "section": "Theorems",
+    "slug": "hardyramanujan-collaboration",
+    "kind": "theorem",
+    "summary": "The mathematical collaboration between G.H. Hardy and Srinivasa Ramanujan — one of the most remarkable partnerships in mathematical history.",
+    "tags": [
+      "number-theory",
+      "history",
+      "Hardy",
+      "Ramanujan",
+      "collaboration"
+    ],
+    "mathematicians": [
+      "hardy"
+    ],
+    "url": "/theorems/hardyramanujan-collaboration"
+  },
+  {
+    "title": "Hardy–Weinberg equilibrium (genetics)",
+    "section": "Theorems",
+    "slug": "hardyweinberg-equilibrium-genetics",
+    "kind": "theorem",
+    "summary": "Allele frequencies in a large, randomly mating population remain constant from generation to generation in the absence of selection, mutation, and migration.",
+    "tags": [
+      "genetics",
+      "population-biology",
+      "Hardy",
+      "probability"
+    ],
+    "mathematicians": [
+      "hardy"
+    ],
+    "url": "/theorems/hardyweinberg-equilibrium-genetics"
+  },
+  {
+    "title": "Heat equation",
+    "section": "Theorems",
+    "slug": "heat-equation",
+    "kind": "theorem",
+    "summary": "The partial differential equation governing the diffusion of heat — and the equation whose study led Fourier to develop his series decomposition.",
+    "tags": [
+      "PDEs",
+      "heat",
+      "diffusion",
+      "Fourier"
+    ],
+    "mathematicians": [
+      "fourier"
+    ],
+    "url": "/theorems/heat-equation"
+  },
+  {
+    "title": "Highly composite numbers",
+    "section": "Theorems",
+    "slug": "highly-composite-numbers",
+    "kind": "theorem",
+    "summary": "A positive integer is highly composite if it has more divisors than any smaller positive integer — Ramanujan's systematic study of maximally divisible numbers.",
+    "tags": [
+      "number-theory",
+      "divisors",
+      "Ramanujan",
+      "combinatorics"
+    ],
+    "mathematicians": [
+      "ramanujan"
+    ],
+    "url": "/theorems/highly-composite-numbers"
+  },
+  {
+    "title": "Hilbert's 23 problems",
+    "section": "Theorems",
+    "slug": "hilbert-s-23-problems",
+    "kind": "theorem",
+    "summary": "The 23 unsolved problems Hilbert presented at the 1900 International Congress of Mathematicians — a research programme that shaped twentieth-century mathematics.",
+    "tags": [
+      "history",
+      "Hilbert",
+      "problems",
+      "foundations"
+    ],
+    "mathematicians": [
+      "hilbert"
+    ],
+    "url": "/theorems/hilbert-s-23-problems"
+  },
+  {
+    "title": "Hilbert's programme",
+    "section": "Theorems",
+    "slug": "hilbert-s-programme",
+    "kind": "theorem",
+    "summary": "Hilbert's ambition to formalise all of mathematics into a finite, complete, consistent axiomatic system — terminated by Gödel's incompleteness theorems.",
+    "tags": [
+      "foundations",
+      "logic",
+      "Hilbert",
+      "formalism"
+    ],
+    "mathematicians": [
+      "hilbert"
+    ],
+    "url": "/theorems/hilbert-s-programme"
+  },
+  {
+    "title": "Hilbert spaces",
+    "section": "Theorems",
+    "slug": "hilbert-spaces",
+    "kind": "theorem",
+    "summary": "A complete inner-product space — the infinite-dimensional analogue of Euclidean space, and the natural setting for quantum mechanics and Fourier analysis.",
+    "tags": [
+      "functional-analysis",
+      "inner-products",
+      "Hilbert",
+      "quantum-mechanics"
+    ],
+    "mathematicians": [
+      "hilbert"
+    ],
+    "url": "/theorems/hilbert-spaces"
+  },
+  {
+    "title": "Ideals in ring theory",
+    "section": "Theorems",
+    "slug": "ideals-in-ring-theory",
+    "kind": "theorem",
+    "summary": "An ideal in a ring is a subset closed under addition and under multiplication by any ring element — a generalisation of multiples that enables quotient rings and unique factorisation.",
+    "tags": [
+      "algebra",
+      "rings",
+      "ideals",
+      "abstract-algebra"
+    ],
+    "mathematicians": [
+      "dedekind"
+    ],
+    "url": "/theorems/ideals-in-ring-theory"
+  },
+  {
+    "title": "Incompleteness theorems (1931)",
+    "section": "Theorems",
+    "slug": "incompleteness-theorems-1931",
+    "kind": "theorem",
+    "summary": "In any consistent formal system strong enough to express basic arithmetic, there are true statements that cannot be proved within the system — and the system cannot prove its own consistency.",
+    "tags": [
+      "logic",
+      "foundations",
+      "undecidability",
+      "Gödel"
+    ],
+    "mathematicians": [
+      "godel"
+    ],
+    "url": "/theorems/incompleteness-theorems-1931"
+  },
+  {
+    "title": "Intermediate value theorem (first rigorous proof)",
+    "section": "Theorems",
+    "slug": "intermediate-value-theorem-first-rigorous-proof",
+    "kind": "theorem",
+    "summary": "A continuous function that takes two values must take every value in between — the theorem that makes continuous change meaningful.",
+    "tags": [
+      "real-analysis",
+      "continuity",
+      "existence",
+      "topology"
+    ],
+    "mathematicians": [
+      "bolzano"
+    ],
+    "url": "/theorems/intermediate-value-theorem-first-rigorous-proof"
+  },
+  {
+    "title": "Introduced Hindu-Arabic numerals to Europe via Liber Abaci",
+    "section": "Theorems",
+    "slug": "introduced-hindu-arabic-numerals-to-europe-via-liber-abaci",
+    "kind": "theorem",
+    "summary": "Fibonacci's Liber Abaci introduced the Hindu-Arabic positional numeral system to Europe, demonstrating its practical advantages over Roman numerals for commercial calculation.",
+    "tags": [
+      "history",
+      "numerals",
+      "arithmetic",
+      "Fibonacci"
+    ],
+    "mathematicians": [
+      "fibonacci"
+    ],
+    "url": "/theorems/introduced-hindu-arabic-numerals-to-europe-via-liber-abaci"
+  },
+  {
+    "title": "Introduction of Hindu-Arabic numerals to Islamic scholarship",
+    "section": "Theorems",
+    "slug": "introduction-of-hindu-arabic-numerals-to-islamic-scholarship",
+    "kind": "theorem",
+    "summary": "Al-Khwarizmi's arithmetic treatise transmitted the Hindu positional decimal system — including zero — to the Islamic world and thence to Europe.",
+    "tags": [
+      "history",
+      "numerals",
+      "arithmetic",
+      "foundations"
+    ],
+    "mathematicians": [
+      "al-khwarizmi"
+    ],
+    "url": "/theorems/introduction-of-hindu-arabic-numerals-to-islamic-scholarship"
+  },
+  {
+    "title": "Invariant theory",
+    "section": "Theorems",
+    "slug": "invariant-theory",
+    "kind": "theorem",
+    "summary": "The study of properties of algebraic objects that remain unchanged under group actions — Hilbert's basis theorem resolved the central problem of classical invariant theory.",
+    "tags": [
+      "algebra",
+      "invariants",
+      "Hilbert",
+      "representation-theory"
+    ],
+    "mathematicians": [
+      "hilbert"
+    ],
+    "url": "/theorems/invariant-theory"
+  },
+  {
+    "title": "Kolmogorov complexity (algorithmic information theory)",
+    "section": "Theorems",
+    "slug": "kolmogorov-complexity-algorithmic-information-theory",
+    "kind": "theorem",
+    "summary": "The complexity of a string is the length of the shortest computer program that produces it — a measure of information content independent of probability distributions.",
+    "tags": [
+      "information-theory",
+      "complexity",
+      "Kolmogorov",
+      "algorithms"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/theorems/kolmogorov-complexity-algorithmic-information-theory"
+  },
+  {
+    "title": "Lagrange interpolation",
+    "section": "Theorems",
+    "slug": "lagrange-interpolation",
+    "kind": "theorem",
+    "summary": "The unique polynomial of degree ≤ n passing through n+1 given data points — and a formula to compute it.",
+    "tags": [
+      "numerical-methods",
+      "interpolation",
+      "polynomials",
+      "Lagrange"
+    ],
+    "mathematicians": [
+      "lagrange"
+    ],
+    "url": "/theorems/lagrange-interpolation"
+  },
+  {
+    "title": "Lagrange multipliers",
+    "section": "Theorems",
+    "slug": "lagrange-multipliers",
+    "kind": "theorem",
+    "summary": "To find the extremum of f(x) subject to g(x) = 0, add λg(x) to f(x) and find the unconstrained extremum — a method that transforms constrained problems into unconstrained ones.",
+    "tags": [
+      "optimisation",
+      "calculus",
+      "Lagrange",
+      "constrained-optimisation"
+    ],
+    "mathematicians": [
+      "lagrange"
+    ],
+    "url": "/theorems/lagrange-multipliers"
+  },
+  {
+    "title": "Lagrangian mechanics",
+    "section": "Theorems",
+    "slug": "lagrangian-mechanics",
+    "kind": "theorem",
+    "summary": "A reformulation of classical mechanics using the principle of stationary action — replacing Newton's force-based approach with a single scalar function, the Lagrangian.",
+    "tags": [
+      "mechanics",
+      "physics",
+      "Lagrange",
+      "variational-methods"
+    ],
+    "mathematicians": [
+      "lagrange"
+    ],
+    "url": "/theorems/lagrangian-mechanics"
+  },
+  {
+    "title": "Laplace equation",
+    "section": "Theorems",
+    "slug": "laplace-equation",
+    "kind": "theorem",
+    "summary": "The equation ∇²u = 0 governing gravitational and electrostatic potentials, steady heat distribution, and incompressible fluid flow — the simplest elliptic PDE.",
+    "tags": [
+      "PDEs",
+      "harmonic-functions",
+      "Laplace",
+      "potential-theory"
+    ],
+    "mathematicians": [
+      "laplace"
+    ],
+    "url": "/theorems/laplace-equation"
+  },
+  {
+    "title": "Laplace transform",
+    "section": "Theorems",
+    "slug": "laplace-transform",
+    "kind": "theorem",
+    "summary": "An integral transform that converts differentiation into multiplication by s, making linear ODEs with constant coefficients algebraic equations.",
+    "tags": [
+      "analysis",
+      "differential-equations",
+      "Laplace",
+      "transforms"
+    ],
+    "mathematicians": [
+      "laplace"
+    ],
+    "url": "/theorems/laplace-transform"
+  },
+  {
+    "title": "The Law of Cosines",
+    "section": "Theorems",
+    "slug": "law-of-cosines",
+    "kind": "theorem",
+    "summary": "Pythagoras's theorem generalised to any triangle — relate the three sides via the cosine of the enclosed angle.",
+    "tags": [
+      "geometry",
+      "trigonometry",
+      "foundations"
+    ],
+    "mathematicians": [
+      "euclid",
+      "pythagoras"
+    ],
+    "url": "/theorems/law-of-cosines"
+  },
+  {
+    "title": "Law of large numbers",
+    "section": "Theorems",
+    "slug": "law-of-large-numbers",
+    "kind": "theorem",
+    "summary": "As the number of independent trials grows, the sample mean converges to the true mean — the theorem that gives probability its empirical meaning.",
+    "tags": [
+      "probability",
+      "statistics",
+      "convergence",
+      "foundations"
+    ],
+    "mathematicians": [
+      "bernoulli-family"
+    ],
+    "url": "/theorems/law-of-large-numbers"
+  },
+  {
+    "title": "Laws of motion and gravitation",
+    "section": "Theorems",
+    "slug": "laws-of-motion-and-gravitation",
+    "kind": "theorem",
+    "summary": "Newton's three laws of motion and the inverse-square law of gravitation — the equations that governed physics for two centuries and still govern everyday engineering.",
+    "tags": [
+      "mechanics",
+      "physics",
+      "Newton",
+      "gravity"
+    ],
+    "mathematicians": [
+      "newton"
+    ],
+    "url": "/theorems/laws-of-motion-and-gravitation"
+  },
+  {
+    "title": "Maximum likelihood estimation",
+    "section": "Theorems",
+    "slug": "maximum-likelihood-estimation",
+    "kind": "theorem",
+    "summary": "Choose the parameter value that makes the observed data most probable — Fisher's principle for statistical estimation that underpins most of modern statistics and machine learning.",
+    "tags": [
+      "statistics",
+      "estimation",
+      "Fisher",
+      "inference"
+    ],
+    "mathematicians": [
+      "fisher"
+    ],
+    "url": "/theorems/maximum-likelihood-estimation"
+  },
+  {
+    "title": "Mean value theorem",
+    "section": "Theorems",
+    "slug": "mean-value-theorem",
+    "kind": "theorem",
+    "summary": "For a differentiable function on an interval, there is at least one point where the instantaneous rate of change equals the average rate over the whole interval.",
+    "tags": [
+      "calculus",
+      "analysis",
+      "derivatives",
+      "real-analysis"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/mean-value-theorem"
+  },
+  {
+    "title": "mechanical calculator",
+    "section": "Theorems",
+    "slug": "mechanical-calculator",
+    "kind": "theorem",
+    "summary": "Pascal's Pascaline — the first commercially available mechanical calculator, performing addition and subtraction by carry-propagating gear mechanisms.",
+    "tags": [
+      "computation",
+      "history",
+      "Pascal",
+      "calculator"
+    ],
+    "mathematicians": [
+      "pascal"
+    ],
+    "url": "/theorems/mechanical-calculator"
+  },
+  {
+    "title": "method of exhaustion",
+    "section": "Theorems",
+    "slug": "method-of-exhaustion",
+    "kind": "theorem",
+    "summary": "The Greek method of computing areas and volumes by approximating them with simple shapes, increasing in number until the error is 'exhausted' — the ancient precursor of integration.",
+    "tags": [
+      "geometry",
+      "limits",
+      "integration",
+      "Archimedes"
+    ],
+    "mathematicians": [
+      "archimedes"
+    ],
+    "url": "/theorems/method-of-exhaustion"
+  },
+  {
+    "title": "Method of least squares",
+    "section": "Theorems",
+    "slug": "method-of-least-squares",
+    "kind": "theorem",
+    "summary": "Fit a model to data by minimising the sum of squared residuals — Gauss's method for combining observations that is now the foundation of linear regression.",
+    "tags": [
+      "statistics",
+      "optimisation",
+      "Gauss",
+      "linear-regression"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/method-of-least-squares"
+  },
+  {
+    "title": "Mock theta functions",
+    "section": "Theorems",
+    "slug": "mock-theta-functions",
+    "kind": "theorem",
+    "summary": "Ramanujan's deathbed discovery — 17 mysterious q-series that nearly, but not quite, behave like modular forms, finally explained 85 years later via the theory of harmonic Maass forms.",
+    "tags": [
+      "number-theory",
+      "modular-forms",
+      "Ramanujan",
+      "q-series"
+    ],
+    "mathematicians": [
+      "ramanujan"
+    ],
+    "url": "/theorems/mock-theta-functions"
+  },
+  {
+    "title": "Modern abstract algebra (rings, ideals, modules)",
+    "section": "Theorems",
+    "slug": "modern-abstract-algebra-rings-ideals-modules",
+    "kind": "theorem",
+    "summary": "Noether's 1921 paper establishing the theory of rings, ideals, and modules as a unified abstract framework — the foundation of modern algebra.",
+    "tags": [
+      "algebra",
+      "rings",
+      "modules",
+      "abstract-algebra",
+      "Noether"
+    ],
+    "mathematicians": [
+      "noether"
+    ],
+    "url": "/theorems/modern-abstract-algebra-rings-ideals-modules"
+  },
+  {
+    "title": "Modular arithmetic and number theory",
+    "section": "Theorems",
+    "slug": "modular-arithmetic-and-number-theory",
+    "kind": "theorem",
+    "summary": "Arithmetic modulo n — working with remainders — formalised by Gauss in Disquisitiones Arithmeticae and now the foundation of all of public-key cryptography.",
+    "tags": [
+      "number-theory",
+      "modular-arithmetic",
+      "Gauss",
+      "congruences"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/modular-arithmetic-and-number-theory"
+  },
+  {
+    "title": "Morphogenesis (mathematical biology)",
+    "section": "Theorems",
+    "slug": "morphogenesis-mathematical-biology",
+    "kind": "theorem",
+    "summary": "Turing's reaction–diffusion model explaining how uniform biological tissue spontaneously breaks symmetry to produce spatial patterns — stripes, spots, and spirals — through coupled chemical diffusion.",
+    "tags": [
+      "mathematical-biology",
+      "differential-equations",
+      "Turing",
+      "pattern-formation"
+    ],
+    "mathematicians": [
+      "turing"
+    ],
+    "url": "/theorems/morphogenesis-mathematical-biology"
+  },
+  {
+    "title": "Most prolific mathematician in history",
+    "section": "Theorems",
+    "slug": "most-prolific-mathematician-in-history",
+    "kind": "theorem",
+    "summary": "Euler produced over 850 publications — approximately one third of all mathematics published in the eighteenth century — across analysis, number theory, algebra, geometry, mechanics, and music theory.",
+    "tags": [
+      "history",
+      "Euler",
+      "productivity",
+      "mathematics"
+    ],
+    "mathematicians": [
+      "euler"
+    ],
+    "url": "/theorems/most-prolific-mathematician-in-history"
+  },
+  {
+    "title": "musical ratios and the harmonic series",
+    "section": "Theorems",
+    "slug": "musical-ratios-and-the-harmonic-series",
+    "kind": "theorem",
+    "summary": "Pythagoras's discovery that musical consonances correspond to simple integer ratios — the basis of Western music theory and a precursor to Fourier analysis.",
+    "tags": [
+      "music",
+      "ratios",
+      "Pythagoras",
+      "harmonics"
+    ],
+    "mathematicians": [
+      "pythagoras"
+    ],
+    "url": "/theorems/musical-ratios-and-the-harmonic-series"
+  },
+  {
+    "title": "Named algebra (al-jabr)",
+    "section": "Theorems",
+    "slug": "named-algebra-al-jabr",
+    "kind": "theorem",
+    "summary": "The word 'algebra' derives from al-jabr, a term in al-Khwarizmi's 820 CE treatise on solving linear and quadratic equations systematically.",
+    "tags": [
+      "algebra",
+      "history",
+      "al-Khwarizmi",
+      "foundations"
+    ],
+    "mathematicians": [
+      "al-khwarizmi"
+    ],
+    "url": "/theorems/named-algebra-al-jabr"
+  },
+  {
+    "title": "Noether's theorem (symmetry and conservation laws in physics)",
+    "section": "Theorems",
+    "slug": "noether-s-theorem-symmetry-and-conservation-laws-in-physics",
+    "kind": "theorem",
+    "summary": "Every differentiable symmetry of the action of a physical system corresponds to a conserved quantity — the most beautiful theorem in physics.",
+    "tags": [
+      "physics",
+      "symmetry",
+      "conservation-laws",
+      "Noether"
+    ],
+    "mathematicians": [
+      "noether"
+    ],
+    "url": "/theorems/noether-s-theorem-symmetry-and-conservation-laws-in-physics"
+  },
+  {
+    "title": "Noetherian rings",
+    "section": "Theorems",
+    "slug": "noetherian-rings",
+    "kind": "theorem",
+    "summary": "A ring in which every ascending chain of ideals stabilises — a finiteness condition that ensures algebraic geometry behaves well and that the Hilbert basis theorem holds.",
+    "tags": [
+      "algebra",
+      "rings",
+      "Noetherian",
+      "commutative-algebra"
+    ],
+    "mathematicians": [
+      "noether"
+    ],
+    "url": "/theorems/noetherian-rings"
+  },
+  {
+    "title": "Non-Euclidean geometry (unpublished)",
+    "section": "Theorems",
+    "slug": "non-euclidean-geometry-unpublished",
+    "kind": "theorem",
+    "summary": "Gauss privately discovered hyperbolic geometry — a consistent geometry where the parallel postulate fails — but never published it, fearing the 'clamour of the Boeotians'.",
+    "tags": [
+      "geometry",
+      "non-Euclidean",
+      "Gauss",
+      "history"
+    ],
+    "mathematicians": [
+      "gauss"
+    ],
+    "url": "/theorems/non-euclidean-geometry-unpublished"
+  },
+  {
+    "title": "Normal subgroups",
+    "section": "Theorems",
+    "slug": "normal-subgroups",
+    "kind": "theorem",
+    "summary": "A subgroup closed under conjugation — the condition that allows you to form a quotient group, and a key concept Galois introduced to characterise solvable extensions.",
+    "tags": [
+      "algebra",
+      "groups",
+      "normal-subgroups",
+      "quotient-groups"
+    ],
+    "mathematicians": [
+      "galois"
+    ],
+    "url": "/theorems/normal-subgroups"
+  },
+  {
+    "title": "Notation: e, i, f(x), Σ (popularised π)",
+    "section": "Theorems",
+    "slug": "notation-e-i-f-x-popularised",
+    "kind": "theorem",
+    "summary": "Euler standardised the notation e, i, f(x), and Σ, and popularised the use of π — notational choices so successful they have never been superseded.",
+    "tags": [
+      "notation",
+      "history",
+      "Euler",
+      "mathematics"
+    ],
+    "mathematicians": [
+      "euler"
+    ],
+    "url": "/theorems/notation-e-i-f-x-popularised"
+  },
+  {
+    "title": "Optics",
+    "section": "Theorems",
+    "slug": "optics",
+    "kind": "theorem",
+    "summary": "Newton's systematic study of light — demonstrating that white light is a mixture of all colours and developing the corpuscular theory of light.",
+    "tags": [
+      "physics",
+      "optics",
+      "Newton",
+      "light"
+    ],
+    "mathematicians": [
+      "newton"
+    ],
+    "url": "/theorems/optics"
+  },
+  {
+    "title": "Partitions and the Hardy–Ramanujan formula",
+    "section": "Theorems",
+    "slug": "partitions-and-the-hardyramanujan-formula",
+    "kind": "theorem",
+    "summary": "The number of ways to write n as an ordered sum of positive integers grows roughly as e^{π√(2n/3)} / (4n√3) — derived by Hardy and Ramanujan using the circle method.",
+    "tags": [
+      "number-theory",
+      "partitions",
+      "Ramanujan",
+      "Hardy",
+      "combinatorics"
+    ],
+    "mathematicians": [
+      "ramanujan"
+    ],
+    "url": "/theorems/partitions-and-the-hardyramanujan-formula"
+  },
+  {
+    "title": "Pascal's theorem on hexagons in conics",
+    "section": "Theorems",
+    "slug": "pascal-s-theorem-on-hexagons-in-conics",
+    "kind": "theorem",
+    "summary": "If a hexagon is inscribed in a conic, the three pairs of opposite sides meet at three collinear points — a projective geometry theorem of surprising generality.",
+    "tags": [
+      "projective-geometry",
+      "conics",
+      "Pascal",
+      "geometry"
+    ],
+    "mathematicians": [
+      "pascal"
+    ],
+    "url": "/theorems/pascal-s-theorem-on-hexagons-in-conics"
+  },
+  {
+    "title": "Pascal's triangle",
+    "section": "Theorems",
+    "slug": "pascal-s-triangle",
+    "kind": "theorem",
+    "summary": "The triangular array of binomial coefficients — where each number is the sum of the two above it — encoding the combinatorial structure of (x+y)^n.",
+    "tags": [
+      "combinatorics",
+      "Pascal",
+      "binomial-coefficients",
+      "arithmetic"
+    ],
+    "mathematicians": [
+      "pascal"
+    ],
+    "url": "/theorems/pascal-s-triangle"
+  },
+  {
+    "title": "Philosophical monadology",
+    "section": "Theorems",
+    "slug": "philosophical-monadology",
+    "kind": "theorem",
+    "summary": "Leibniz's metaphysical system of monads — immaterial, self-contained units of experience whose pre-established harmony accounts for the apparent interaction of mind and world.",
+    "tags": [
+      "philosophy",
+      "Leibniz",
+      "metaphysics",
+      "history"
+    ],
+    "mathematicians": [
+      "leibniz"
+    ],
+    "url": "/theorems/philosophical-monadology"
+  },
+  {
+    "title": "Philosophy of mathematics (conventionalism)",
+    "section": "Theorems",
+    "slug": "philosophy-of-mathematics-conventionalism",
+    "kind": "theorem",
+    "summary": "Poincaré's view that mathematical and scientific principles are conventions, chosen for convenience, not discovered truths — developed in La Science et l'Hypothèse.",
+    "tags": [
+      "philosophy",
+      "Poincaré",
+      "geometry",
+      "conventionalism"
+    ],
+    "mathematicians": [
+      "poincare"
+    ],
+    "url": "/theorems/philosophy-of-mathematics-conventionalism"
+  },
+  {
+    "title": "Poincaré conjecture",
+    "section": "Theorems",
+    "slug": "poincare-conjecture",
+    "kind": "theorem",
+    "summary": "Every simply connected closed 3-manifold is homeomorphic to the 3-sphere — Poincaré's conjecture from 1904, proved by Perelman in 2003.",
+    "tags": [
+      "topology",
+      "manifolds",
+      "Poincaré",
+      "solved-problem"
+    ],
+    "mathematicians": [
+      "poincare"
+    ],
+    "url": "/theorems/poincare-conjecture"
+  },
+  {
+    "title": "Population genetics (modern synthesis)",
+    "section": "Theorems",
+    "slug": "population-genetics-modern-synthesis",
+    "kind": "theorem",
+    "summary": "Fisher's mathematical theory reconciling Mendelian genetics with Darwinian evolution — the modern synthesis showing continuous traits arise from many discrete genetic loci.",
+    "tags": [
+      "genetics",
+      "population-biology",
+      "Fisher",
+      "evolution"
+    ],
+    "mathematicians": [
+      "fisher"
+    ],
+    "url": "/theorems/population-genetics-modern-synthesis"
+  },
+  {
+    "title": "The Prime Number Theorem",
+    "section": "Theorems",
+    "slug": "prime-number-theorem",
+    "kind": "theorem",
+    "summary": "The number of primes below $N$ grows like $N / \\ln N$ — the rough density of the primes is governed by a logarithm.",
+    "tags": [
+      "number-theory",
+      "analysis",
+      "primes"
+    ],
+    "mathematicians": [
+      "gauss",
+      "riemann"
+    ],
+    "url": "/theorems/prime-number-theorem"
+  },
+  {
+    "title": "principle of levers and buoyancy",
+    "section": "Theorems",
+    "slug": "principle-of-levers-and-buoyancy",
+    "kind": "theorem",
+    "summary": "Equal weights at equal distances balance — and a body immersed in fluid is buoyed up by a force equal to the weight of fluid displaced.",
+    "tags": [
+      "mechanics",
+      "physics",
+      "Archimedes",
+      "statics"
+    ],
+    "mathematicians": [
+      "archimedes"
+    ],
+    "url": "/theorems/principle-of-levers-and-buoyancy"
+  },
+  {
+    "title": "Probabilistic method in combinatorics",
+    "section": "Theorems",
+    "slug": "probabilistic-method-in-combinatorics",
+    "kind": "theorem",
+    "summary": "A method for proving the existence of combinatorial objects by showing they occur with positive probability in a random construction — without explicitly constructing them.",
+    "tags": [
+      "combinatorics",
+      "probability",
+      "Erdős",
+      "existence-proof"
+    ],
+    "mathematicians": [
+      "erdos"
+    ],
+    "url": "/theorems/probabilistic-method-in-combinatorics"
+  },
+  {
+    "title": "probability theory foundations",
+    "section": "Theorems",
+    "slug": "probability-theory-foundations",
+    "kind": "theorem",
+    "summary": "The famous correspondence between Pascal and Fermat solving the problem of points — the founding moment of mathematical probability theory.",
+    "tags": [
+      "probability",
+      "history",
+      "Pascal",
+      "combinatorics"
+    ],
+    "mathematicians": [
+      "pascal"
+    ],
+    "url": "/theorems/probability-theory-foundations"
+  },
+  {
+    "title": "Prolific collaborator (509 direct collaborators)",
+    "section": "Theorems",
+    "slug": "prolific-collaborator-509-direct-collaborators",
+    "kind": "theorem",
+    "summary": "Paul Erdős had 509 direct collaborators and published over 1,500 papers — the most prolific mathematician of the twentieth century and the inspiration for the Erdős number network.",
+    "tags": [
+      "combinatorics",
+      "history",
+      "collaboration",
+      "Erdős"
+    ],
+    "mathematicians": [
+      "erdos"
+    ],
+    "url": "/theorems/prolific-collaborator-509-direct-collaborators"
+  },
+  {
+    "title": "proof by contradiction",
+    "section": "Theorems",
+    "slug": "proof-by-contradiction",
+    "kind": "theorem",
+    "summary": "To prove a statement P, assume ¬P and derive a contradiction — one of the most powerful proof techniques in mathematics.",
+    "tags": [
+      "logic",
+      "proof",
+      "contradiction",
+      "foundations"
+    ],
+    "mathematicians": [
+      "euclid"
+    ],
+    "url": "/theorems/proof-by-contradiction"
+  },
+  {
+    "title": "Proof that the general quintic has no radical solution",
+    "section": "Theorems",
+    "slug": "proof-that-the-general-quintic-has-no-radical-solution",
+    "kind": "theorem",
+    "summary": "No general formula using radicals can solve the degree-5 polynomial equation — Abel's proof that Ruffini had suspected but never rigorously established.",
+    "tags": [
+      "algebra",
+      "polynomials",
+      "Abel",
+      "unsolvability"
+    ],
+    "mathematicians": [
+      "abel"
+    ],
+    "url": "/theorems/proof-that-the-general-quintic-has-no-radical-solution"
+  },
+  {
+    "title": "proto-calculus",
+    "section": "Theorems",
+    "slug": "proto-calculus",
+    "kind": "theorem",
+    "summary": "Fermat's method of adequality — a technique for finding maxima, minima, and tangent lines that anticipated the derivative, developed before Newton and Leibniz.",
+    "tags": [
+      "calculus",
+      "history",
+      "Fermat",
+      "derivatives"
+    ],
+    "mathematicians": [
+      "fermat"
+    ],
+    "url": "/theorems/proto-calculus"
+  },
+  {
+    "title": "Published cubic and quartic formulas",
+    "section": "Theorems",
+    "slug": "published-cubic-and-quartic-formulas",
+    "kind": "theorem",
+    "summary": "Cardano's Ars Magna published the first general algebraic formulas for solving cubic and quartic equations — a watershed in Renaissance mathematics.",
+    "tags": [
+      "algebra",
+      "polynomials",
+      "formulas",
+      "Renaissance"
+    ],
+    "mathematicians": [
+      "cardano"
+    ],
+    "url": "/theorems/published-cubic-and-quartic-formulas"
+  },
+  {
+    "title": "Pythagoras' theorem",
+    "section": "Theorems",
+    "slug": "pythagoras-theorem",
+    "kind": "theorem",
+    "summary": "In a right-angled triangle, the square on the hypotenuse equals the sum of the squares on the other two sides.",
+    "tags": [
+      "geometry",
+      "trigonometry",
+      "distance",
+      "foundations"
+    ],
+    "mathematicians": [
+      "pythagoras"
+    ],
+    "url": "/theorems/pythagoras-theorem"
+  },
+  {
+    "title": "Ramanujan's notebooks (thousands of identities and formulae)",
+    "section": "Theorems",
+    "slug": "ramanujan-s-notebooks-thousands-of-identities-and-formulae",
+    "kind": "theorem",
+    "summary": "Ramanujan's four notebooks — thousands of formulas and identities in number theory, analysis, and combinatorics, many years ahead of their time and still not fully proved.",
+    "tags": [
+      "number-theory",
+      "Ramanujan",
+      "identities",
+      "history"
+    ],
+    "mathematicians": [
+      "ramanujan"
+    ],
+    "url": "/theorems/ramanujan-s-notebooks-thousands-of-identities-and-formulae"
+  },
+  {
+    "title": "Ramanujan's tau function and modular forms",
+    "section": "Theorems",
+    "slug": "ramanujan-s-tau-function-and-modular-forms",
+    "kind": "theorem",
+    "summary": "Ramanujan's delta function and its coefficients τ(n) — a modular form of weight 12 whose properties Ramanujan conjectured and which took 60 years to prove.",
+    "tags": [
+      "number-theory",
+      "modular-forms",
+      "Ramanujan",
+      "tau-function"
+    ],
+    "mathematicians": [
+      "ramanujan"
+    ],
+    "url": "/theorems/ramanujan-s-tau-function-and-modular-forms"
+  },
+  {
+    "title": "Ramsey theory",
+    "section": "Theorems",
+    "slug": "ramsey-theory",
+    "kind": "theorem",
+    "summary": "Complete disorder is impossible: any large enough structure must contain a highly ordered substructure. Ramsey theory quantifies exactly how large is ''large enough''.",
+    "tags": [
+      "combinatorics",
+      "graph-theory",
+      "Ramsey",
+      "extremal"
+    ],
+    "mathematicians": [
+      "erdos"
+    ],
+    "url": "/theorems/ramsey-theory"
+  },
+  {
+    "title": "Riemann hypothesis",
+    "section": "Theorems",
+    "slug": "riemann-hypothesis",
+    "kind": "theorem",
+    "summary": "All non-trivial zeros of the Riemann zeta function have real part 1/2 — the most famous unsolved problem in mathematics, with deep consequences for the distribution of prime numbers.",
+    "tags": [
+      "number-theory",
+      "complex-analysis",
+      "primes",
+      "unsolved"
+    ],
+    "mathematicians": [
+      "riemann"
+    ],
+    "url": "/theorems/riemann-hypothesis"
+  },
+  {
+    "title": "Riemann integral",
+    "section": "Theorems",
+    "slug": "riemann-integral",
+    "kind": "theorem",
+    "summary": "The first rigorous definition of the integral — the area under a curve defined as the limit of sums of rectangular slices — giving analysis its formal foundation.",
+    "tags": [
+      "analysis",
+      "integration",
+      "Riemann",
+      "calculus"
+    ],
+    "mathematicians": [
+      "riemann"
+    ],
+    "url": "/theorems/riemann-integral"
+  },
+  {
+    "title": "Riemann surfaces",
+    "section": "Theorems",
+    "slug": "riemann-surfaces",
+    "kind": "theorem",
+    "summary": "One-dimensional complex manifolds — surfaces on which multi-valued complex functions become single-valued, unifying complex analysis and topology.",
+    "tags": [
+      "complex-analysis",
+      "topology",
+      "Riemann",
+      "algebraic-geometry"
+    ],
+    "mathematicians": [
+      "riemann"
+    ],
+    "url": "/theorems/riemann-surfaces"
+  },
+  {
+    "title": "Riemann zeta function",
+    "section": "Theorems",
+    "slug": "riemann-zeta-function",
+    "kind": "theorem",
+    "summary": "A complex function that encodes the distribution of prime numbers — and whose zeros determine how irregular that distribution can be.",
+    "tags": [
+      "number-theory",
+      "complex-analysis",
+      "primes",
+      "zeta"
+    ],
+    "mathematicians": [
+      "riemann"
+    ],
+    "url": "/theorems/riemann-zeta-function"
+  },
+  {
+    "title": "Riemannian geometry",
+    "section": "Theorems",
+    "slug": "riemannian-geometry",
+    "kind": "theorem",
+    "summary": "The study of curved spaces equipped with a metric — Riemann's 1854 lecture generalised Euclidean geometry to arbitrary dimensions, providing the mathematical language for Einstein's general relativity.",
+    "tags": [
+      "geometry",
+      "differential-geometry",
+      "Riemann",
+      "general-relativity"
+    ],
+    "mathematicians": [
+      "riemann"
+    ],
+    "url": "/theorems/riemannian-geometry"
+  },
+  {
+    "title": "Rigorous analysis before Cauchy",
+    "section": "Theorems",
+    "slug": "rigorous-analysis-before-cauchy",
+    "kind": "theorem",
+    "summary": "Bolzano's 1817 paper — the first rigorous treatment of limits and continuity in analysis, predating Cauchy's Cours d'analyse by four years.",
+    "tags": [
+      "analysis",
+      "history",
+      "foundations",
+      "Bolzano"
+    ],
+    "mathematicians": [
+      "bolzano"
+    ],
+    "url": "/theorems/rigorous-analysis-before-cauchy"
+  },
+  {
+    "title": "Rigorous ε–δ analysis",
+    "section": "Theorems",
+    "slug": "rigorous-analysis",
+    "kind": "theorem",
+    "summary": "Weierstrass's completion of the rigorous foundations of real analysis — precise definitions of limit, continuity, and convergence that eliminated all appeals to geometric intuition.",
+    "tags": [
+      "analysis",
+      "epsilon-delta",
+      "Weierstrass",
+      "rigour"
+    ],
+    "mathematicians": [
+      "weierstrass"
+    ],
+    "url": "/theorems/rigorous-analysis"
+  },
+  {
+    "title": "Rigorous foundations of calculus (ε–δ definitions)",
+    "section": "Theorems",
+    "slug": "rigorous-foundations-of-calculus-definitions",
+    "kind": "theorem",
+    "summary": "The ε–δ definition of limits and continuity that replaced informal infinitesimals with precise logical statements — the language of all modern analysis.",
+    "tags": [
+      "analysis",
+      "epsilon-delta",
+      "limits",
+      "continuity",
+      "foundations"
+    ],
+    "mathematicians": [
+      "cauchy"
+    ],
+    "url": "/theorems/rigorous-foundations-of-calculus-definitions"
+  },
+  {
+    "title": "Set theory",
+    "section": "Theorems",
+    "slug": "set-theory",
+    "kind": "theorem",
+    "summary": "Cantor's theory of sets — the study of collections of objects — which became the universal language of mathematics and revealed an infinite hierarchy of infinities.",
+    "tags": [
+      "set-theory",
+      "foundations",
+      "logic",
+      "Cantor"
+    ],
+    "mathematicians": [
+      "cantor"
+    ],
+    "url": "/theorems/set-theory"
+  },
+  {
+    "title": "The Fisher information matrix",
+    "section": "Theorems",
+    "slug": "the-fisher-information-matrix",
+    "kind": "theorem",
+    "summary": "A matrix measuring the amount of information an observable random variable carries about an unknown parameter — and bounding the variance of any unbiased estimator.",
+    "tags": [
+      "statistics",
+      "Fisher-information",
+      "estimation",
+      "Cramér-Rao"
+    ],
+    "mathematicians": [
+      "fisher"
+    ],
+    "url": "/theorems/the-fisher-information-matrix"
+  },
+  {
+    "title": "Topology (algebraic topology foundations)",
+    "section": "Theorems",
+    "slug": "topology-algebraic-topology-foundations",
+    "kind": "theorem",
+    "summary": "Poincaré's development of algebraic topology — using groups (fundamental groups, homology groups) to classify topological spaces up to continuous deformation.",
+    "tags": [
+      "topology",
+      "algebraic-topology",
+      "Poincaré",
+      "homotopy"
+    ],
+    "mathematicians": [
+      "poincare"
+    ],
+    "url": "/theorems/topology-algebraic-topology-foundations"
+  },
+  {
+    "title": "Transfinite numbers",
+    "section": "Theorems",
+    "slug": "transfinite-numbers",
+    "kind": "theorem",
+    "summary": "Cardinal and ordinal numbers extended beyond the finite — Cantor's systematic theory of different sizes and orders of infinity.",
+    "tags": [
+      "set-theory",
+      "infinity",
+      "ordinals",
+      "cardinals",
+      "Cantor"
+    ],
+    "mathematicians": [
+      "cantor"
+    ],
+    "url": "/theorems/transfinite-numbers"
+  },
+  {
+    "title": "Turbulence theory (Kolmogorov scaling)",
+    "section": "Theorems",
+    "slug": "turbulence-theory-kolmogorov-scaling",
+    "kind": "theorem",
+    "summary": "Kolmogorov's 1941 theory of turbulence — that in the inertial subrange, energy dissipates through eddies at a universal rate following a -5/3 power law.",
+    "tags": [
+      "fluid-dynamics",
+      "turbulence",
+      "Kolmogorov",
+      "scaling"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/theorems/turbulence-theory-kolmogorov-scaling"
+  },
+  {
+    "title": "Turing machines (theory of computation)",
+    "section": "Theorems",
+    "slug": "turing-machines-theory-of-computation",
+    "kind": "theorem",
+    "summary": "An abstract model of computation — a machine reading and writing symbols on an infinite tape — that defines what it means for a problem to be computable.",
+    "tags": [
+      "computation",
+      "logic",
+      "Turing",
+      "complexity-theory"
+    ],
+    "mathematicians": [
+      "turing"
+    ],
+    "url": "/theorems/turing-machines-theory-of-computation"
+  },
+  {
+    "title": "Turing test (artificial intelligence)",
+    "section": "Theorems",
+    "slug": "turing-test-artificial-intelligence",
+    "kind": "theorem",
+    "summary": "Turing's operational criterion for machine intelligence — if a human interrogator cannot reliably distinguish a machine from a human in conversation, the machine may be considered to think.",
+    "tags": [
+      "computation",
+      "artificial-intelligence",
+      "Turing",
+      "philosophy"
+    ],
+    "mathematicians": [
+      "turing"
+    ],
+    "url": "/theorems/turing-test-artificial-intelligence"
+  },
+  {
+    "title": "Uniform convergence",
+    "section": "Theorems",
+    "slug": "uniform-convergence",
+    "kind": "theorem",
+    "summary": "Uniform convergence — the condition under which a sequence of functions has a limit that preserves continuity, integration, and differentiation — distinguishing it from the weaker pointwise convergence.",
+    "tags": [
+      "analysis",
+      "convergence",
+      "Weierstrass",
+      "series"
+    ],
+    "mathematicians": [
+      "weierstrass"
+    ],
+    "url": "/theorems/uniform-convergence"
+  },
+  {
+    "title": "Weierstrass approximation theorem",
+    "section": "Theorems",
+    "slug": "weierstrass-approximation-theorem",
+    "kind": "theorem",
+    "summary": "Every continuous function on a closed interval can be uniformly approximated by polynomials — the foundation of polynomial approximation theory.",
+    "tags": [
+      "analysis",
+      "approximation",
+      "Weierstrass",
+      "polynomials"
+    ],
+    "mathematicians": [
+      "weierstrass"
+    ],
+    "url": "/theorems/weierstrass-approximation-theorem"
+  },
+  {
+    "title": "Weierstrass function (continuous everywhere, differentiable nowhere)",
+    "section": "Theorems",
+    "slug": "weierstrass-function-continuous-everywhere-differentiable-nowhere",
+    "kind": "theorem",
+    "summary": "A function that is continuous at every point on the real line but differentiable at no point — Weierstrass's pathological counterexample that demolished the assumption that continuous functions must have derivatives.",
+    "tags": [
+      "analysis",
+      "counterexample",
+      "Weierstrass",
+      "continuity",
+      "differentiability"
+    ],
+    "mathematicians": [
+      "weierstrass"
+    ],
+    "url": "/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere"
+  },
+  {
+    "title": "Actuarial Science: Insurance and Pensions",
+    "section": "Real-world applications",
+    "slug": "actuarial-science",
+    "kind": "application",
+    "summary": "The price of an annuity and the solvency of a pension fund both rest on probability theory, life tables, and the mathematics of discounting future cash flows.",
+    "tags": [
+      "actuarial",
+      "probability",
+      "finance",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/actuarial-science"
+  },
+  {
+    "title": "Airfoil Design and Aerodynamics",
+    "section": "Real-world applications",
+    "slug": "airfoil-and-aerodynamics",
+    "kind": "application",
+    "summary": "The shape of an aircraft wing was originally designed using conformal mappings from complex analysis — turning the flow around a cylinder into the flow around an airfoil.",
+    "tags": [
+      "aerodynamics",
+      "complex-analysis",
+      "PDEs",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/airfoil-and-aerodynamics"
+  },
+  {
+    "title": "Bridge and Structural Engineering",
+    "section": "Real-world applications",
+    "slug": "bridge-and-structural-engineering",
+    "kind": "application",
+    "summary": "The resonant frequency of a bridge or skyscraper is an eigenvalue problem — the Tacoma Narrows collapse happened because wind drove the bridge at one of its natural frequencies.",
+    "tags": [
+      "engineering",
+      "eigenvalues",
+      "PDEs",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/bridge-and-structural-engineering"
+  },
+  {
+    "title": "Cellular Network Design",
+    "section": "Real-world applications",
+    "slug": "cellular-network-design",
+    "kind": "application",
+    "summary": "Assigning radio frequencies to mobile phone masts without interference is a graph-colouring problem; dividing the country into service areas is a Voronoi diagram.",
+    "tags": [
+      "graph-theory",
+      "geometry",
+      "telecommunications",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/cellular-network-design"
+  },
+  {
+    "title": "Census and Survey Statistics",
+    "section": "Real-world applications",
+    "slug": "census-and-survey-statistics",
+    "kind": "application",
+    "summary": "Estimating the unemployment rate for 67 million people from a sample of 50,000 households requires sampling theory, regression estimation, and careful handling of complex survey design.",
+    "tags": [
+      "statistics",
+      "sampling",
+      "inference",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/census-and-survey-statistics"
+  },
+  {
+    "title": "Climate Modelling",
+    "section": "Real-world applications",
+    "slug": "climate-modelling",
+    "kind": "application",
+    "summary": "Global climate models are enormous systems of discretised partial differential equations — the same equations you solve in your first year at a scale demanding millions of processor cores.",
+    "tags": [
+      "climate",
+      "PDEs",
+      "numerical-methods",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/climate-modelling"
+  },
+  {
+    "title": "Clinical Trials Design",
+    "section": "Real-world applications",
+    "slug": "clinical-trials-design",
+    "kind": "application",
+    "summary": "Whether a new drug works is a statistical question — answered by randomised controlled trials designed according to hypothesis testing, power calculations, and the principles Ronald Fisher established in the 1920s.",
+    "tags": [
+      "statistics",
+      "medicine",
+      "hypothesis-testing",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/clinical-trials-design"
+  },
+  {
+    "title": "Computer Graphics and 3D Rendering",
+    "section": "Real-world applications",
+    "slug": "computer-graphics-3d",
+    "kind": "application",
+    "summary": "Every photorealistic film frame and video game scene is a composition of matrix transformations, quaternion rotations, and differential geometry — your linear algebra course rendered on screen.",
+    "tags": [
+      "graphics",
+      "linear-algebra",
+      "geometry",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/computer-graphics-3d"
+  },
+  {
+    "title": "Cryptocurrency and Blockchain",
+    "section": "Real-world applications",
+    "slug": "cryptocurrency-blockchain",
+    "kind": "application",
+    "summary": "Bitcoin's security rests on the discrete logarithm problem for elliptic curves over finite fields — algebraic geometry at the heart of a global financial network.",
+    "tags": [
+      "cryptography",
+      "probability",
+      "elliptic-curves",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/cryptocurrency-blockchain"
+  },
+  {
+    "title": "Cybersecurity: Anomaly Detection",
+    "section": "Real-world applications",
+    "slug": "cybersecurity-anomaly-detection",
+    "kind": "application",
+    "summary": "Detecting a hacker in a network or fraud in a transaction stream is a hypothesis test: does this pattern of behaviour look like it came from the normal distribution, or from something else?",
+    "tags": [
+      "security",
+      "statistics",
+      "hypothesis-testing",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/cybersecurity-anomaly-detection"
+  },
+  {
+    "title": "Data Compression",
+    "section": "Real-world applications",
+    "slug": "data-compression",
+    "kind": "application",
+    "summary": "Claude Shannon proved there is a fundamental limit to how much any data can be compressed — and Huffman coding achieves that limit using probability theory.",
+    "tags": [
+      "information-theory",
+      "entropy",
+      "algorithms",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/data-compression"
+  },
+  {
+    "title": "Digital Signatures",
+    "section": "Real-world applications",
+    "slug": "digital-signatures",
+    "kind": "application",
+    "summary": "A digital signature proves that a document was signed by a specific party, using the same number theory as RSA but in a different direction.",
+    "tags": [
+      "cryptography",
+      "security",
+      "number-theory",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/digital-signatures"
+  },
+  {
+    "title": "Epidemiological Modelling",
+    "section": "Real-world applications",
+    "slug": "epidemiological-modelling",
+    "kind": "application",
+    "summary": "The SIR model — three coupled ordinary differential equations — captures the essential dynamics of epidemic spread and the mathematics of herd immunity.",
+    "tags": [
+      "epidemiology",
+      "ODEs",
+      "public-health",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/epidemiological-modelling"
+  },
+  {
+    "title": "Error-Correcting Codes",
+    "section": "Real-world applications",
+    "slug": "error-correcting-codes",
+    "kind": "application",
+    "summary": "QR codes survive coffee stains and scratches because the algebra of finite fields guarantees that errors can be detected and corrected.",
+    "tags": [
+      "coding-theory",
+      "algebra",
+      "finite-fields",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/error-correcting-codes"
+  },
+  {
+    "title": "Gambling, Game Theory, and Strategic Decision-Making",
+    "section": "Real-world applications",
+    "slug": "gambling-and-game-theory",
+    "kind": "application",
+    "summary": "Expected value and Nash equilibrium are the two ideas that govern rational decision-making under uncertainty — from casino games to nuclear deterrence.",
+    "tags": [
+      "probability",
+      "game-theory",
+      "decision-making",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/gambling-and-game-theory"
+  },
+  {
+    "title": "GPS Positioning",
+    "section": "Real-world applications",
+    "slug": "gps-positioning",
+    "kind": "application",
+    "summary": "Finding your position to within a few metres requires solving an over-determined linear system and correcting for the curvature of spacetime.",
+    "tags": [
+      "navigation",
+      "linear-algebra",
+      "relativity",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/gps-positioning"
+  },
+  {
+    "title": "Gravitational Wave Detection",
+    "section": "Real-world applications",
+    "slug": "gravitational-wave-detection",
+    "kind": "application",
+    "summary": "Detecting the ripple in spacetime from two black holes merging a billion light-years away requires matching a microsecond-long signal against thousands of templates using the Fourier transform — the most sensitive measurement in the history of science.",
+    "tags": [
+      "physics",
+      "signal-processing",
+      "general-relativity",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/gravitational-wave-detection"
+  },
+  {
+    "title": "Machine Learning: Bayesian Inference",
+    "section": "Real-world applications",
+    "slug": "machine-learning-bayesian-inference",
+    "kind": "application",
+    "summary": "Bayesian inference gives machine learning models not just a prediction but a calibrated uncertainty — the engine is Bayes' theorem applied at scale.",
+    "tags": [
+      "machine-learning",
+      "probability",
+      "Bayes",
+      "inference",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/machine-learning-bayesian-inference"
+  },
+  {
+    "title": "Machine Learning: Deep Neural Networks",
+    "section": "Real-world applications",
+    "slug": "machine-learning-deep-neural-networks",
+    "kind": "application",
+    "summary": "A deep neural network is a composition of linear maps and nonlinear activations, trained by gradient descent — Year One linear algebra and calculus at enormous scale.",
+    "tags": [
+      "machine-learning",
+      "linear-algebra",
+      "optimisation",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/machine-learning-deep-neural-networks"
+  },
+  {
+    "title": "Medical Diagnosis and Screening",
+    "section": "Real-world applications",
+    "slug": "medical-diagnosis-screening",
+    "kind": "application",
+    "summary": "A positive test result does not mean you have the disease — Bayes' theorem explains the famous false-positive paradox that puzzles doctors and patients alike.",
+    "tags": [
+      "Bayes",
+      "probability",
+      "medicine",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/medical-diagnosis-screening"
+  },
+  {
+    "title": "Medical Imaging: MRI and CT Scanning",
+    "section": "Real-world applications",
+    "slug": "medical-imaging-mri-ct",
+    "kind": "application",
+    "summary": "Turning millions of measurements into a picture of the inside of a human body is a triumph of harmonic analysis and inverse problem theory.",
+    "tags": [
+      "imaging",
+      "Fourier",
+      "inverse-problems",
+      "medicine",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/medical-imaging-mri-ct"
+  },
+  {
+    "title": "Option Pricing and Financial Mathematics",
+    "section": "Real-world applications",
+    "slug": "option-pricing-finance",
+    "kind": "application",
+    "summary": "The Black–Scholes equation for pricing financial options is the heat equation in disguise — one of the deepest connections between physics and finance.",
+    "tags": [
+      "finance",
+      "PDEs",
+      "stochastic-calculus",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/option-pricing-finance"
+  },
+  {
+    "title": "PageRank and the Algebra of the Web",
+    "section": "Real-world applications",
+    "slug": "pagerank-google",
+    "kind": "application",
+    "summary": "The importance of a webpage is the dominant eigenvector of the web's link matrix — a billion-dimensional eigenvalue problem solved by Markov chain theory.",
+    "tags": [
+      "graph-theory",
+      "eigenvalues",
+      "Markov-chains",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/pagerank-google"
+  },
+  {
+    "title": "Population Dynamics and Ecology",
+    "section": "Real-world applications",
+    "slug": "population-dynamics-ecology",
+    "kind": "application",
+    "summary": "The oscillation of hare and lynx populations across the Canadian boreal, the collapse of cod stocks, and the extinction cascades triggered by keystone species are all predicted by the differential equations of mathematical ecology.",
+    "tags": [
+      "ecology",
+      "ODEs",
+      "chaos",
+      "bifurcation",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/population-dynamics-ecology"
+  },
+  {
+    "title": "Protein Folding and AlphaFold",
+    "section": "Real-world applications",
+    "slug": "protein-folding-alphafold",
+    "kind": "application",
+    "summary": "AlphaFold's prediction of protein structure from amino-acid sequence solved a fifty-year grand challenge using deep learning over geometric and combinatorial spaces.",
+    "tags": [
+      "biology",
+      "optimisation",
+      "deep-learning",
+      "geometry",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/protein-folding-alphafold"
+  },
+  {
+    "title": "Quantum Computing Algorithms",
+    "section": "Real-world applications",
+    "slug": "quantum-computing-algorithms",
+    "kind": "application",
+    "summary": "Shor's algorithm breaks RSA by computing a hidden period in a group using the quantum Fourier transform — the deepest known application of group theory to computing.",
+    "tags": [
+      "quantum-computing",
+      "Fourier",
+      "group-theory",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/quantum-computing-algorithms"
+  },
+  {
+    "title": "Radar and Sonar",
+    "section": "Real-world applications",
+    "slug": "radar-and-sonar",
+    "kind": "application",
+    "summary": "Radar and sonar detect objects by sending out pulses and listening for echoes — the mathematics of Fourier analysis and matched filtering extracts weak signals from noise.",
+    "tags": [
+      "signal-processing",
+      "Fourier",
+      "detection",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/radar-and-sonar"
+  },
+  {
+    "title": "Recommender Systems",
+    "section": "Real-world applications",
+    "slug": "recommender-systems",
+    "kind": "application",
+    "summary": "The Netflix recommendations that keep you watching and the Spotify playlist that seems to read your mind both rest on factorising a huge sparse matrix — a problem solved by alternating least squares.",
+    "tags": [
+      "machine-learning",
+      "linear-algebra",
+      "optimisation",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/recommender-systems"
+  },
+  {
+    "title": "Robotics and Control Theory",
+    "section": "Real-world applications",
+    "slug": "robotics-and-control",
+    "kind": "application",
+    "summary": "Keeping a robot arm on target or a drone in the air is a continuous optimisation problem solved by control theory — Lyapunov stability, PID controllers, and the Kalman filter.",
+    "tags": [
+      "control",
+      "ODEs",
+      "optimisation",
+      "Kalman-filtering",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/robotics-and-control"
+  },
+  {
+    "title": "RSA and Public-Key Cryptography",
+    "section": "Real-world applications",
+    "slug": "rsa-public-key-cryptography",
+    "kind": "application",
+    "summary": "Every secure website on the internet relies on a piece of seventeenth-century number theory.",
+    "tags": [
+      "cryptography",
+      "security",
+      "number-theory",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/rsa-public-key-cryptography"
+  },
+  {
+    "title": "Seismic Imaging and Oil Exploration",
+    "section": "Real-world applications",
+    "slug": "seismic-imaging-oil-exploration",
+    "kind": "application",
+    "summary": "Sending sound waves into the earth and listening to the echoes is an inverse problem — recovering a picture of the subsurface from measurements at the surface using wave equations and Fourier methods.",
+    "tags": [
+      "inverse-problems",
+      "PDEs",
+      "wave-equations",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/seismic-imaging-oil-exploration"
+  },
+  {
+    "title": "Signal Processing: JPEG and MP3",
+    "section": "Real-world applications",
+    "slug": "signal-processing-jpeg-mp3",
+    "kind": "application",
+    "summary": "JPEG images and MP3 audio files exist because human perception is insensitive to most Fourier coefficients — discarding them gives compression with no perceptible loss.",
+    "tags": [
+      "signal-processing",
+      "Fourier",
+      "wavelets",
+      "compression",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/signal-processing-jpeg-mp3"
+  },
+  {
+    "title": "Spam Filtering",
+    "section": "Real-world applications",
+    "slug": "spam-filtering",
+    "kind": "application",
+    "summary": "The filter that keeps your inbox clean uses Bayes'' theorem: given that this email contains the word ''Viagra'', how likely is it to be spam?",
+    "tags": [
+      "Bayes",
+      "classification",
+      "probability",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/spam-filtering"
+  },
+  {
+    "title": "Traffic Flow Modelling",
+    "section": "Real-world applications",
+    "slug": "traffic-flow-modelling",
+    "kind": "application",
+    "summary": "Traffic jams can appear from nowhere on a clear motorway — the mathematics of shock waves explains why, and the same equations that govern gas dynamics govern the formation of queues.",
+    "tags": [
+      "traffic",
+      "PDEs",
+      "shock-waves",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/traffic-flow-modelling"
+  },
+  {
+    "title": "Weather Forecasting",
+    "section": "Real-world applications",
+    "slug": "weather-forecasting",
+    "kind": "application",
+    "summary": "A five-day weather forecast requires solving the Navier–Stokes equations on a global grid, and acknowledging through ensemble methods that deterministic prediction becomes impossible at about ten days.",
+    "tags": [
+      "meteorology",
+      "PDEs",
+      "chaos-theory",
+      "applied"
+    ],
+    "mathematicians": [],
+    "url": "/applications/weather-forecasting"
+  }
+]

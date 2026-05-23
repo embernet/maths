@@ -1,0 +1,425 @@
+---
+/**
+ * LeftSidebar.astro
+ * Desktop-only left navigation sidebar (≥1024px).
+ * Renders full site hierarchy with collapsible sections.
+ * Uses is:inline vanilla JS to avoid Vite null-byte issues.
+ */
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url?.pathname ?? '/' } = Astro.props;
+
+// --- Build hierarchy from content/ ---
+const contentDir = join(process.cwd(), 'content');
+const siteConfigPath = join(contentDir, '_site.json');
+let siteConfig: { navigation_order?: string[] } = {};
+if (existsSync(siteConfigPath)) {
+  try { siteConfig = JSON.parse(readFileSync(siteConfigPath, 'utf8')); } catch { /* ignore */ }
+}
+
+const navOrder: string[] = siteConfig.navigation_order ?? [];
+
+interface TopicLink { label: string; href: string; slug: string; }
+interface SidebarSection {
+  sectionSlug: string;
+  label: string;
+  href: string;
+  children: TopicLink[];
+  countBadge?: number;
+  isSpecial?: boolean; // Theorems, Applications, Mathematicians — link to index, no inline children
+}
+
+function readSectionTitle(sectionSlug: string): string {
+  const secPath = join(contentDir, sectionSlug, '_section.json');
+  if (existsSync(secPath)) {
+    try {
+      const s = JSON.parse(readFileSync(secPath, 'utf8'));
+      if (s.title) return s.title;
+    } catch { /* ignore */ }
+  }
+  return sectionSlug.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function readTopicTitle(mdxPath: string, folderSlug: string): string {
+  if (!existsSync(mdxPath)) return folderSlug.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  let text = '';
+  try { text = readFileSync(mdxPath, 'utf8'); } catch { return folderSlug; }
+  if (!text.startsWith('---')) return folderSlug;
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return folderSlug;
+  const yaml = text.slice(3, end);
+  const m = yaml.match(/^title\s*:\s*["']?(.+?)["']?\s*$/m);
+  return m ? m[1].replace(/^["']|["']$/g, '') : folderSlug.replace(/^\d+-/, '').replace(/-/g, ' ');
+}
+
+// Count theorems from slug map + MDX files
+let theoremCount = 0;
+const theoremDir = join(contentDir, '93-theorems');
+const slugMapPath = join(theoremDir, '_slug-map.json');
+if (existsSync(slugMapPath)) {
+  try { theoremCount = Object.keys(JSON.parse(readFileSync(slugMapPath, 'utf8'))).length; } catch { /* ignore */ }
+}
+if (theoremCount === 0 && existsSync(theoremDir)) {
+  theoremCount = readdirSync(theoremDir).filter(f => f.endsWith('.mdx') && f !== 'index.mdx').length;
+}
+
+// Count applications
+let appCount = 0;
+const appDir = join(contentDir, '94-applications');
+if (existsSync(appDir)) {
+  appCount = readdirSync(appDir).filter(f => f.endsWith('.mdx') && f !== 'index.mdx').length;
+}
+
+// Count mathematicians
+let mathCount = 0;
+const mathDir = join(contentDir, '91-mathematicians');
+if (existsSync(mathDir)) {
+  mathCount = readdirSync(mathDir).filter(f => f.endsWith('.mdx') && f !== 'index.mdx').length;
+}
+
+const sections: SidebarSection[] = [];
+
+for (const slug of navOrder) {
+  const label = readSectionTitle(slug);
+
+  if (slug === '00-welcome') {
+    sections.push({ sectionSlug: slug, label: 'Welcome', href: '/', children: [] });
+    continue;
+  }
+
+  if (slug === '91-mathematicians') {
+    sections.push({
+      sectionSlug: slug,
+      label: 'Mathematicians',
+      href: '/mathematicians',
+      children: [],
+      countBadge: mathCount,
+      isSpecial: true,
+    });
+    continue;
+  }
+
+  if (slug === '92-resources') {
+    sections.push({ sectionSlug: slug, label: 'Resources', href: '/resources', children: [] });
+    continue;
+  }
+
+  if (slug === '93-theorems') {
+    sections.push({
+      sectionSlug: slug,
+      label: 'Theorems',
+      href: '/theorems',
+      children: [],
+      countBadge: theoremCount,
+      isSpecial: true,
+    });
+    continue;
+  }
+
+  if (slug === '94-applications') {
+    sections.push({
+      sectionSlug: slug,
+      label: 'Real-world applications',
+      href: '/applications',
+      children: [],
+      countBadge: appCount || undefined,
+      isSpecial: true,
+    });
+    continue;
+  }
+
+  if (slug === '95-definitions') {
+    let defCount = 0;
+    try {
+      const dir = join(contentDir, '95-definitions');
+      if (existsSync(dir)) {
+        defCount = readdirSync(dir).filter(f => f.endsWith('.mdx') && !f.startsWith('_')).length;
+      }
+    } catch { /* ignore */ }
+    sections.push({
+      sectionSlug: slug,
+      label: 'Definitions',
+      href: '/definitions',
+      children: [],
+      countBadge: defCount || undefined,
+      isSpecial: true,
+    });
+    continue;
+  }
+
+  if (slug === '98-about') {
+    sections.push({ sectionSlug: slug, label: 'About', href: '/about', children: [] });
+    continue;
+  }
+
+  // Year sections and history — build children
+  const sectionPath = join(contentDir, slug);
+  const children: TopicLink[] = [];
+
+  if (existsSync(sectionPath)) {
+    let topics: string[] = [];
+    try { topics = readdirSync(sectionPath).sort(); } catch { /* ignore */ }
+    for (const sub of topics) {
+      if (sub.startsWith('_')) continue;
+      const subPath = join(sectionPath, sub);
+      try {
+        if (!statSync(subPath).isDirectory()) continue;
+      } catch { continue; }
+      const mdxPath = join(subPath, 'index.mdx');
+      const childLabel = readTopicTitle(mdxPath, sub);
+      const childHref = slug === '90-history' ? `/90-history/${sub}` : `/${slug}/${sub}`;
+      children.push({ label: childLabel, href: childHref, slug: sub });
+    }
+  }
+
+  // Special href for history
+  const href = slug === '90-history' ? `/90-history` : `/${slug}`;
+  sections.push({ sectionSlug: slug, label, href, children });
+}
+
+// Determine which section is active (current)
+function isCurrentSection(sec: SidebarSection): boolean {
+  if (sec.href === '/' && currentPath === '/') return true;
+  if (sec.href !== '/' && currentPath.startsWith(sec.href)) return true;
+  // Year sections: match /{sectionSlug}/
+  if (currentPath.startsWith(`/${sec.sectionSlug}`)) return true;
+  return false;
+}
+
+function isCurrentChild(href: string): boolean {
+  return currentPath === href || currentPath.startsWith(href + '/');
+}
+---
+
+<aside class="left-sidebar no-print" aria-label="Site navigation">
+  <nav>
+    {sections.map((sec, idx) => {
+      const active = isCurrentSection(sec);
+      const hasChildren = sec.children.length > 0;
+      const sectionId = `sidebar-sec-${idx}`;
+      return (
+        <div class={`sidebar-section${active ? ' is-active' : ''}`} data-active={active ? 'true' : 'false'}>
+          {hasChildren ? (
+            <button
+              class="sec-header sec-toggle"
+              aria-expanded={active ? 'true' : 'false'}
+              aria-controls={sectionId}
+              data-section-id={sectionId}
+            >
+              <span class="sec-label">
+                <a href={sec.href} class="sec-link" tabindex="-1">{sec.label}</a>
+              </span>
+              {sec.countBadge !== undefined && (
+                <span class="count-badge">{sec.countBadge}</span>
+              )}
+              <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          ) : (
+            <div class="sec-header sec-plain">
+              <a href={sec.href} class={`sec-link${active ? ' active' : ''}`} aria-current={active ? 'page' : undefined}>
+                {sec.label}
+              </a>
+              {sec.countBadge !== undefined && (
+                <span class="count-badge">{sec.countBadge}</span>
+              )}
+            </div>
+          )}
+
+          {hasChildren && (
+            <ul
+              id={sectionId}
+              class="sec-children"
+              role="list"
+              hidden={!active}
+            >
+              {sec.children.map((child) => {
+                const childActive = isCurrentChild(child.href);
+                return (
+                  <li>
+                    <a
+                      href={child.href}
+                      class={`child-link${childActive ? ' active' : ''}`}
+                      aria-current={childActive ? 'page' : undefined}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      );
+    })}
+  </nav>
+</aside>
+
+<script is:inline>
+(function() {
+  var sidebar = document.querySelector('.left-sidebar');
+  if (!sidebar) return;
+
+  sidebar.querySelectorAll('.sec-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      // Allow click on the sec-link <a> inside to navigate
+      if (e.target && e.target.tagName === 'A') return;
+      e.preventDefault();
+
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      var sectionId = btn.getAttribute('data-section-id');
+      var panel = sectionId ? document.getElementById(sectionId) : null;
+
+      if (expanded) {
+        btn.setAttribute('aria-expanded', 'false');
+        if (panel) panel.hidden = true;
+      } else {
+        btn.setAttribute('aria-expanded', 'true');
+        if (panel) panel.hidden = false;
+      }
+    });
+  });
+})();
+</script>
+
+<style>
+  .left-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: calc(var(--header-h) + 1rem);
+    height: calc(100vh - var(--header-h) - 2rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+    padding: 1rem 0;
+    border-right: 1px solid var(--color-border);
+    background: var(--color-bg);
+    /* Hidden on mobile by default; parent layout controls display */
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .left-sidebar { display: block; }
+  }
+
+  /* Scrollbar styling (webkit) */
+  .left-sidebar::-webkit-scrollbar { width: 4px; }
+  .left-sidebar::-webkit-scrollbar-track { background: transparent; }
+  .left-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+
+  .sidebar-section {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .sec-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 1rem;
+    gap: 0.4rem;
+  }
+
+  .sec-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-serif);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: background 0.12s;
+  }
+  .sec-toggle:hover { background: var(--color-surface); }
+
+  .is-active > .sec-toggle {
+    color: var(--color-accent);
+  }
+
+  .sec-plain { }
+
+  .sec-label {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sec-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+    flex: 1 1 0;
+  }
+  .sec-link:hover { color: var(--color-accent); }
+  .sec-link.active, .is-active .sec-link { color: var(--color-accent); }
+
+  /* sec-plain inherits from sec-header layout */
+  .sec-plain .sec-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .count-badge {
+    flex-shrink: 0;
+    display: inline-block;
+    min-width: 1.4rem;
+    padding: 0.05rem 0.35rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    font-size: 0.7rem;
+    text-align: center;
+    color: var(--color-muted);
+    line-height: 1.4;
+  }
+
+  .chevron {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--color-muted);
+    transition: transform 0.2s;
+  }
+  .sec-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .sec-children {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0.4rem 0;
+  }
+
+  .child-link {
+    display: block;
+    padding: 0.3rem 0.75rem 0.3rem 1.75rem;
+    font-size: 0.78rem;
+    color: var(--color-text);
+    text-decoration: none;
+    line-height: 1.4;
+    border-radius: 0;
+    transition: background 0.1s, color 0.1s;
+  }
+  .child-link:hover {
+    background: var(--color-surface);
+    color: var(--color-primary);
+  }
+  .child-link.active {
+    color: var(--color-accent);
+    font-weight: 600;
+    background: var(--color-surface);
+    border-left: 2px solid var(--color-accent);
+    padding-left: calc(1.75rem - 2px);
+  }
+</style>

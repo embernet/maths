@@ -1,0 +1,40 @@
+---
+title: Digital Signatures
+section: Real-world applications
+section_slug: 94-applications
+slug: digital-signatures
+domains: [computer-science, security, law]
+uses_theorems: [fermat-s-little-theorem, modular-arithmetic-and-number-theory, euclid-s-algorithm]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/01-abstract-algebra]
+related_applications: [rsa-public-key-cryptography, cryptocurrency-blockchain, error-correcting-codes]
+tags: [cryptography, security, number-theory, applied]
+real_world_examples: [Software code signing, Email authentication (DKIM), Legal electronic signatures (eIDAS), SSL/TLS certificate chains]
+summary: A digital signature proves that a document was signed by a specific party, using the same number theory as RSA but in a different direction.
+---
+
+
+## The application
+
+When a software update arrives on your computer, your operating system verifies a digital signature before installing it — confirming that the package genuinely came from the publisher and was not tampered with in transit. Digital signatures are used to authenticate software, emails, legal contracts, and financial transactions. The mathematics is public-key cryptography combined with cryptographic hash functions.
+
+## The maths behind it
+
+A digital signature scheme has three algorithms: **KeyGen** (produce a public-private key pair), **Sign** (use the private key to sign a message), and **Verify** (use the public key to check a signature). Security requires that it be computationally infeasible to forge a valid signature without the private key.
+
+**RSA signatures**: to sign message $m$, compute the hash $h = H(m)$ (where $H$ is a cryptographic hash function such as SHA-256) and compute $\sigma = h^d \bmod n$ using the private exponent $d$. To verify, check that $\sigma^e \equiv H(m) \pmod{n}$ using the public exponent $e$. The correctness follows from the same Euler's theorem argument as RSA encryption.
+
+**Elliptic Curve Digital Signature Algorithm (ECDSA)**, used in Bitcoin, TLS 1.3, and most modern systems, replaces RSA's multiplicative group modulo $n$ with the group of points on an elliptic curve over a finite field. An elliptic curve over $\mathbb{F}_p$ is the set $\{(x,y) \in \mathbb{F}_p^2 : y^2 = x^3 + ax + b\} \cup \{\mathcal{O}\}$ with a group law defined by the chord-and-tangent construction. The discrete logarithm problem on such curves is believed harder than integer factorisation, allowing much smaller key sizes (256-bit ECDSA provides roughly the same security as 3072-bit RSA).
+
+The group theory of elliptic curves over finite fields — structure theorems, Hasse's bound on the group order — comes from algebraic geometry, sitting at the intersection of abstract algebra and [Algebraic Geometry](/04-advanced-topics-year-four/01-algebraic-geometry).
+
+## A concrete example
+
+The certificate chain securing `https://google.com` involves three digital signatures: Google's leaf certificate is signed by an intermediate CA, which is signed by a root CA trusted by your browser. Each signature is ECDSA over NIST P-256 (a specific elliptic curve). Your browser verifies all three signatures in a few milliseconds before allowing the connection. Roughly 95% of web traffic is now TLS-encrypted, all anchored to this chain of elliptic-curve signatures.
+
+## History of the application
+
+Whitfield Diffie and Martin Hellman proposed the concept of digital signatures in their 1976 paper introducing public-key cryptography. RSA signatures followed in 1977. ECDSA was standardised in 1999. The elliptic curve foundation traces back to number-theoretic work by Weierstrass, and the connection to cryptography was proposed independently by Neal Koblitz and Victor Miller in 1985.
+
+## Links
+
+The modular arithmetic and number theory is introduced in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra). The group and ring theory is in [Abstract Algebra](/02-core-year-two/01-abstract-algebra). Elliptic curves appear in [Algebraic Geometry](/04-advanced-topics-year-four/01-algebraic-geometry). See also [RSA and Public-Key Cryptography](/applications/rsa-public-key-cryptography) and [Cryptocurrency and Blockchain](/applications/cryptocurrency-blockchain).

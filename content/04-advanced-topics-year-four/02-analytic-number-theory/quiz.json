@@ -1,0 +1,36 @@
+{
+  "topic_slug": "02-analytic-number-theory",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The Riemann hypothesis states that all non-trivial zeros of $\\zeta(s)$ have real part equal to:",
+      "options": [
+        {"id": "a", "text": "$\\frac{1}{2}$.", "correct": true, "explanation": "All non-trivial zeros are conjectured to lie on the critical line $\\text{Re}(s) = 1/2$. This is unproved; over $10^{13}$ zeros have been verified numerically to lie there."},
+        {"id": "b", "text": "$1$.", "correct": false, "explanation": "$\\zeta(s)$ has a simple pole at $s=1$ and no zeros near $\\text{Re}(s) = 1$. The prime number theorem uses the zero-free region near this line."},
+        {"id": "c", "text": "$0$.", "correct": false, "explanation": "$\\text{Re}(s) = 0$ is on the boundary of the critical strip but not the conjectured location of zeros."},
+        {"id": "d", "text": "An even negative integer.", "correct": false, "explanation": "The trivial zeros are at $s = -2, -4, -6, \\ldots$ (even negative integers). The Riemann hypothesis concerns the non-trivial zeros, which lie in the critical strip $0 < \\text{Re}(s) < 1$."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The prime number theorem asserts that $\\pi(x)$, the number of primes up to $x$, satisfies:",
+      "options": [
+        {"id": "a", "text": "$\\pi(x) \\sim x / \\log x$ as $x \\to \\infty$.", "correct": true, "explanation": "Proved by Hadamard and de la Vallée Poussin in 1896 using the properties of the Riemann zeta function. The logarithmic integral $\\text{Li}(x)$ is a better approximation."},
+        {"id": "b", "text": "$\\pi(x) \\sim \\sqrt{x}$.", "correct": false, "explanation": "The prime counting function grows much faster than $\\sqrt{x}$. For $x = 10^6$, $\\pi(x) = 78498$ while $\\sqrt{10^6} = 1000$."},
+        {"id": "c", "text": "$\\pi(x) \\sim x$.", "correct": false, "explanation": "If $\\pi(x) \\sim x$, essentially every integer would be prime. The actual density of primes near $x$ is approximately $1/\\log x$."},
+        {"id": "d", "text": "$\\pi(x) \\sim x / \\log^2 x$.", "correct": false, "explanation": "Off by one factor of $\\log x$. The correct asymptotic is $x / \\log x$."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Euler's product formula $\\zeta(s) = \\prod_p (1-p^{-s})^{-1}$ is equivalent to:",
+      "options": [
+        {"id": "a", "text": "The fundamental theorem of arithmetic: every integer has a unique prime factorisation.", "correct": true, "explanation": "Expanding the Euler product and collecting terms gives $\\sum n^{-s}$ precisely because each $n$ appears exactly once, from its unique factorisation into primes. The product formula IS the analytic form of unique factorisation."},
+        {"id": "b", "text": "The prime number theorem.", "correct": false, "explanation": "The Euler product is a formal identity; proving the PNT requires deep analysis of zeros of $\\zeta(s)$, far beyond the product formula alone."},
+        {"id": "c", "text": "The Riemann hypothesis.", "correct": false, "explanation": "The Euler product is a proved identity. The Riemann hypothesis is an unproved conjecture about zeros of $\\zeta$."},
+        {"id": "d", "text": "Dirichlet's theorem on primes in arithmetic progressions.", "correct": false, "explanation": "Dirichlet's theorem requires L-functions (generalisations of $\\zeta$). The Euler product alone does not give Dirichlet's theorem."}
+      ]
+    }
+  ]
+}

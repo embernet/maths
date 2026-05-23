@@ -1,0 +1,43 @@
+---
+title: Complex analysis and Cauchy's theorem
+section: Theorems
+section_slug: 93-theorems
+slug: cauchys-integral-theorem
+attributed_to: [cauchy]
+era: 06-the-rigour-revolution
+appears_in: [02-core-year-two/03-complex-analysis]
+related_theorems: [cauchy-sequences, euler-s-formula-e-i-cos-i-sin, riemann-zeta-function, fourier-transform]
+applications: [signal-processing-jpeg-mp3, option-pricing-finance, quantum-computing-algorithms]
+tags: [complex-analysis, integration, holomorphic, Cauchy]
+year_introduced: '1825'
+summary: If a function is holomorphic (complex differentiable) inside a closed contour, the integral around that contour is zero — a statement with extraordinarily powerful consequences.
+---
+
+
+## What it says
+
+Let $f$ be holomorphic (complex differentiable) on and inside a simple closed contour $C$ in the complex plane. Then:
+
+$$\oint_C f(z)\,dz = 0$$
+
+From this seemingly simple statement follow the Cauchy integral formula, the residue theorem, and the principle that a holomorphic function's values everywhere inside a region are completely determined by its values on the boundary. The residue theorem extends the result to functions with isolated singularities:
+
+$$\oint_C f(z)\,dz = 2\pi i \sum_k \operatorname{Res}(f, z_k)$$
+
+where the sum is over singularities $z_k$ inside $C$.
+
+## History
+
+[Cauchy](/mathematicians/cauchy) presented the theorem in 1825 after years of work developing rigorous complex analysis. It was a radical departure from earlier practice, where complex integrals were computed by analogy with real ones without understanding what "holomorphic" really meant. Cauchy's insistence on precise definitions and careful proofs set the standard for the rigour revolution that followed throughout the nineteenth century.
+
+## Why it matters
+
+Complex analysis is arguably the most elegant branch of mathematics. Real analysis deals with functions that can behave wildly — continuous but nowhere differentiable, integrable but not nice. Complex differentiability, by contrast, is so strong a condition that it forces infinite differentiability, power series expansions, and the astounding result that global behaviour is determined by boundary data. The residue theorem turns many real integrals that seem intractable into simple residue calculations.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) uses contour integration to evaluate the inverse Laplace and Z-transforms that describe filter behaviour. [Option pricing](/applications/option-pricing-finance) uses complex analysis to invert characteristic functions. [Quantum computing](/applications/quantum-computing-algorithms) relies on unitary operators whose spectral theory is rooted in complex analysis.
+
+## Where you'll meet it
+
+Cauchy's theorem is the core of the [Year 2 complex analysis course](/history/06-the-rigour-revolution). The residue theorem and its applications dominate the second half of that course. The machinery resurfaces in Year 3 analytic number theory, where it is used to study the [Riemann zeta function](/theorems/riemann-zeta-function).

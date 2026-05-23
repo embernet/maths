@@ -1,0 +1,48 @@
+---
+title: Population Dynamics and Ecology
+section: Real-world applications
+section_slug: 94-applications
+slug: population-dynamics-ecology
+domains: [biology, environmental-science, mathematics]
+uses_theorems: [chaos-theory-three-body-problem]
+uses_topics: [01-foundations-year-one/03-calculus-and-methods, 03-specialisation-year-three/06-mathematical-biology, 03-specialisation-year-three/07-stochastic-processes]
+related_applications: [epidemiological-modelling, climate-modelling, weather-forecasting]
+tags: [ecology, ODEs, chaos, bifurcation, applied]
+real_world_examples: [Fisheries management and sustainable quotas, Predator reintroduction planning (wolves in Yellowstone), Invasive species control, Conservation biology]
+summary: The oscillation of hare and lynx populations across the Canadian boreal, the collapse of cod stocks, and the extinction cascades triggered by keystone species are all predicted by the differential equations of mathematical ecology.
+---
+
+
+## The application
+
+Whether a fish stock can survive a given harvest rate, whether reintroducing wolves will destabilise or stabilise a deer population, whether an invasive species will drive an endemic one to extinction — these are questions of conservation biology that mathematical ecology addresses with differential equations, stability analysis, and bifurcation theory. The same equations that describe predator-prey cycles are used to design fisheries management policies and extinction risk assessments.
+
+## The maths behind it
+
+The **Lotka-Volterra equations** model a two-species predator-prey system:
+
+$$\dot{x} = \alpha x - \beta xy, \qquad \dot{y} = \delta xy - \gamma y,$$
+
+where $x$ is prey density, $y$ predator density, $\alpha$ the prey growth rate, $\beta$ the predation rate coefficient, $\delta$ the predator growth efficiency, and $\gamma$ the predator death rate.
+
+The equilibria are $(0,0)$ (extinction) and $(x^*, y^*) = (\gamma/\delta, \, \alpha/\beta)$. Linearisation at the non-trivial equilibrium gives purely imaginary eigenvalues $\pm i\sqrt{\alpha\gamma}$, indicating a **centre**: solutions orbit the equilibrium in closed curves in phase space. The conserved quantity $H = \delta x - \gamma \ln x + \beta y - \alpha \ln y$ is constant along trajectories.
+
+**Logistic competition** between two species $x, y$ both competing for the same resource:
+
+$$\dot{x} = r_1 x\left(1 - \frac{x + \alpha_{12} y}{K_1}\right), \qquad \dot{y} = r_2 y\left(1 - \frac{y + \alpha_{21} x}{K_2}\right),$$
+
+exhibits the **competitive exclusion principle**: under generic conditions, one species drives the other to extinction. Coexistence is possible only under specific parameter relationships.
+
+**Bifurcations and chaos**: adding even one more species, or replacing the Lotka-Volterra functional response with a saturating Holling Type III response, can make the system exhibit **limit cycles** and eventually **chaos** — the three-species Lotka-Volterra system is one of the simplest systems to exhibit chaotic dynamics, connecting to [Poincaré's](/mathematicians/poincare) work on the three-body problem.
+
+## A concrete example
+
+The Atlantic cod collapse (1992) is one of the most dramatic ecological disasters in modern fisheries history. Canadian cod stocks, harvested at rates that simple logistic models predicted were sustainable, collapsed to roughly 1% of historical levels in less than two decades. The failure partly reflected ignoring spatial structure and demographic variation (age-structured models predict different maximum sustainable yields than the simple logistic equation). Modern fisheries management uses age-structured population models calibrated to survey data, with maximum sustainable yield computed from the model's equilibrium properties.
+
+## History of the application
+
+Alfred Lotka (an American chemist) and Vito Volterra (an Italian mathematician) independently published the predator-prey equations in 1925 and 1926. Volterra was motivated by his son-in-law's observation that predatory fish increased as a proportion of the catch during World War I (when fishing was reduced). The mathematical analysis of ecological stability and bifurcations was developed by Robert May in a series of influential papers in the 1970s, including his discovery that even simple one-dimensional population models (the logistic map) exhibit period-doubling cascades to chaos.
+
+## Links
+
+The ODEs governing population dynamics are introduced in [Calculus and Methods](/01-foundations-year-one/03-calculus-and-methods) and the biological applications are in [Mathematical Biology](/03-specialisation-year-three/06-mathematical-biology). Stochastic extensions for small populations are in [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). See also the related application [Epidemiological Modelling](/applications/epidemiological-modelling).

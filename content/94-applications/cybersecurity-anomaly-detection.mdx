@@ -1,0 +1,44 @@
+---
+title: 'Cybersecurity: Anomaly Detection'
+section: Real-world applications
+section_slug: 94-applications
+slug: cybersecurity-anomaly-detection
+domains: [computer-science, security, statistics]
+uses_theorems: [gaussian-distribution-normal-distribution, maximum-likelihood-estimation, bayes-theorem]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_applications: [spam-filtering, machine-learning-bayesian-inference, rsa-public-key-cryptography]
+tags: [security, statistics, hypothesis-testing, applied]
+real_world_examples: [Intrusion detection systems, Fraud detection in banking, Malware behaviour analysis, Network traffic monitoring]
+summary: 'Detecting a hacker in a network or fraud in a transaction stream is a hypothesis test: does this pattern of behaviour look like it came from the normal distribution, or from something else?'
+---
+
+
+## The application
+
+Every large organisation runs **anomaly detection** systems on its network traffic and user activity: flagging behaviour that deviates significantly from established baselines. The same problem arises in banking (detecting fraudulent transactions), cloud infrastructure (detecting compromised accounts), and industrial control systems (detecting sensor anomalies). The mathematics is statistical hypothesis testing applied continuously to streaming data.
+
+## The maths behind it
+
+**Statistical baselines**: model normal behaviour by fitting a probability distribution to historical data. For numerical features (login frequency, bytes transferred, API call rates), a Gaussian model $X \sim N(\mu, \sigma^2)$ is common; $\mu$ and $\sigma^2$ are estimated from normal observations by maximum likelihood. For count data, a Poisson or negative-binomial model is typical.
+
+**Anomaly scores**: a new observation $x$ is scored by its **negative log-likelihood** (or equivalently, its **Mahalanobis distance** from the fitted distribution). For a Gaussian baseline with mean $\mu$ and covariance $\Sigma$ (for multivariate features),
+
+$$d^2(\mathbf{x}) = (\mathbf{x} - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x} - \boldsymbol{\mu}).$$
+
+Under the null hypothesis of normality, $d^2$ follows a $\chi^2_p$ distribution (where $p$ is the number of features). An alert is triggered when $d^2$ exceeds the $\chi^2_p$ critical value at a chosen significance level $\alpha$ — this is the classical hypothesis-testing framework of [Fisher](/mathematicians/fisher) and Neyman-Pearson applied to a stream.
+
+**Sequential testing** handles the streaming nature: a **CUSUM** (cumulative sum) chart monitors the cumulative log-likelihood ratio and raises an alarm when the cumulative sum exceeds a threshold. CUSUM controls the average run length (ARL) — the expected number of observations before a false alarm — at a desired level while minimising the delay to detection when an anomaly occurs.
+
+**Bayesian anomaly detection** models both the normal and anomalous classes explicitly: $p(\text{anomaly} \mid \mathbf{x}) \propto p(\mathbf{x} \mid \text{anomaly})\, p(\text{anomaly})$. The prior $p(\text{anomaly})$ is typically very small (rare events), giving the famous false-positive problem: even a very accurate classifier has low precision when positives are rare. This is exactly the screening paradox of [Medical Diagnosis and Screening](/applications/medical-diagnosis-screening).
+
+## A concrete example
+
+A large bank processes millions of transactions per day. A typical anomaly detection system maintains a per-user model of spending patterns (merchant categories, amounts, geographies, times of day). A transaction scoring system evaluates each transaction in under 10 milliseconds against the user's model; scores above a threshold trigger a step-up authentication challenge or a temporary hold. The system is calibrated to accept around 0.1% false positive rate (to avoid blocking legitimate customers) while achieving high recall on actual fraud.
+
+## History of the application
+
+The statistical foundations — control charts, CUSUM — were developed by Walter Shewhart (1920s) and E. S. Page (1954) for industrial quality control. Their application to network security began in the 1990s with the growth of the internet. Modern anomaly detection combines classical statistical tests with machine learning models, but the fundamental hypothesis-testing framework remains unchanged.
+
+## Links
+
+Statistical distributions and hypothesis testing are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). The Neyman-Pearson framework and estimation theory are in [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). See also [Spam Filtering](/applications/spam-filtering) and [Medical Diagnosis and Screening](/applications/medical-diagnosis-screening) for related false-positive problems.

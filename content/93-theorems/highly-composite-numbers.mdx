@@ -1,0 +1,40 @@
+---
+title: Highly composite numbers
+section: Theorems
+section_slug: 93-theorems
+slug: highly-composite-numbers
+attributed_to: [ramanujan]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [partitions-and-the-hardyramanujan-formula, ramanujan-s-notebooks-thousands-of-identities-and-formulae]
+applications: [signal-processing-jpeg-mp3, data-compression]
+tags: [number-theory, divisors, Ramanujan, combinatorics]
+year_introduced: '1915'
+summary: A positive integer is highly composite if it has more divisors than any smaller positive integer — Ramanujan's systematic study of maximally divisible numbers.
+---
+
+
+
+## What it says
+
+A **highly composite number** (HCN) is a positive integer $n$ such that $d(n) > d(k)$ for all positive integers $k < n$, where $d(n)$ is the number of divisors.
+
+The first few: 1, 2, 4, 6, 12, 24, 36, 48, 60, 120, 180, 240, 360, 720, 840, 1260, 1680, 2520, 5040, …
+
+[Ramanujan](/mathematicians/ramanujan) proved that highly composite numbers have a specific form: $2^{a_1} 3^{a_2} 5^{a_3} \cdots p_k^{a_k}$ where $a_1 \geq a_2 \geq \cdots \geq a_k \geq 1$ (a product of consecutive primes with non-increasing exponents). He also introduced **superior highly composite numbers** (a stronger variant) and related them to the Riemann hypothesis.
+
+## History
+
+Ramanujan submitted his paper to the London Mathematical Society in 1915. The published version was shortened to save space during WWI; the full version was published only in 1997.
+
+## Why it matters
+
+Highly composite numbers are maximally divisible — they have the most factors of any number their size. This makes them useful in contexts where you want maximum flexibility in dividing quantities: 12 hours (12 = HCN with 6 divisors), 60 minutes (60 = HCN), 360 degrees. Ramanujan's analysis of their structure connects to deep results about the distribution of primes.
+
+## Real-world applications
+
+FFT algorithms perform best when the input size is a highly composite number — [signal processing](/applications/signal-processing-jpeg-mp3) and [data compression](/applications/data-compression) exploit this.
+
+## Where you'll meet it
+
+Highly composite numbers appear in Year 3 number theory. See the [Modern Mathematics era](/history/09-modern-mathematics).

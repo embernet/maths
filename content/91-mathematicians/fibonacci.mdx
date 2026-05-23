@@ -1,0 +1,26 @@
+---
+title: Fibonacci (Leonardo of Pisa)
+section: Mathematician Profiles
+section_slug: 91-mathematicians
+slug: fibonacci
+born: c.1170 CE
+died: c.1250 CE
+origin: Pisa, Italy
+worked_in: [North Africa, 'Pisa, Italy']
+known_for: [introduced-hindu-arabic-numerals-to-europe-via-liber-abaci, fibonacci-sequence]
+appears_in: [02-core-year-two/06-programming-and-discrete-mathematics]
+tags: [history, combinatorics, number-theory]
+hook: Grew up in North Africa, where his father was a customs officer, and was educated in the Arabic mathematical tradition. His 1202 Liber Abaci changed how Europe counted. The Fibonacci sequence appears as a rabbit-breeding puzzle.
+---
+
+
+
+Leonardo of Pisa, nicknamed Fibonacci (possibly from *filius Bonacci*, "son of Bonaccio"), spent his childhood in Bugia (now Béjaïa, Algeria) and other North African ports, receiving a superb education in the Arabic mathematical tradition — including the Hindu-Arabic numeral system that Europe had not yet adopted.
+
+His 1202 *Liber Abaci* ("Book of Calculation") was a comprehensive manual of commercial arithmetic using the Hindu-Arabic digits 0–9 and decimal place value. He explained why this system was vastly superior to the Roman numerals that European merchants were still using: calculation with it is dramatically more efficient. The book was intended for merchants, notaries, and anyone who needed to calculate. It succeeded: over the following century, the Hindu-Arabic system spread through European commercial centres.
+
+The Fibonacci sequence appears in the *Liber Abaci* as a recreational puzzle: how many pairs of rabbits will there be after twelve months, if each pair produces a new pair every month starting from the second month? The answer follows the recurrence $F_{n+2} = F_{n+1} + F_n$, giving $1, 1, 2, 3, 5, 8, 13, 21, 34, \ldots$
+
+The generating function of the Fibonacci sequence satisfies $F(x) = x / (1 - x - x^2)$, and partial fractions give the explicit formula (Binet's formula): $F_n = (\phi^n - \hat{\phi}^n)/\sqrt{5}$ where $\phi = (1+\sqrt{5})/2$ is the golden ratio. The golden ratio thus emerges from a purely combinatorial recurrence — a beautiful and somewhat mysterious connection.
+
+You will meet Fibonacci numbers in combinatorics, computational mathematics, and wherever recursive structures appear in algorithms.

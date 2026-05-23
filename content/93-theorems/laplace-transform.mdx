@@ -1,0 +1,42 @@
+---
+title: Laplace transform
+section: Theorems
+section_slug: 93-theorems
+slug: laplace-transform
+attributed_to: [laplace]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [fourier-transform, laplace-equation, calculus-dy-dx-notation-symbol, heat-equation]
+applications: [signal-processing-jpeg-mp3, robotics-and-control, climate-modelling]
+tags: [analysis, differential-equations, Laplace, transforms]
+year_introduced: '1782'
+summary: An integral transform that converts differentiation into multiplication by s, making linear ODEs with constant coefficients algebraic equations.
+---
+
+
+
+## What it says
+
+For a function $f(t)$ defined for $t \geq 0$, the **Laplace transform** is:
+
+$$\mathcal{L}\{f\}(s) = F(s) = \int_0^\infty f(t)\, e^{-st}\, dt$$
+
+Key property: $\mathcal{L}\{f'\}(s) = sF(s) - f(0)$. Differentiation becomes multiplication by $s$.
+
+This converts a linear ODE with constant coefficients $ay'' + by' + cy = g(t)$ into an algebraic equation in $F(s)$. Solve for $F(s)$, then invert using tables or the Bromwich integral $f(t) = \frac{1}{2\pi i}\int_{\sigma - i\infty}^{\sigma + i\infty} F(s) e^{st}\, ds$.
+
+## History
+
+[Laplace](/mathematicians/laplace) used operator methods for differential equations in *Mécanique céleste* (1799). The transform bears his name though earlier precursors exist. Oliver Heaviside popularised operational calculus — essentially the Laplace transform, without the rigorous inversion theory — in the 1890s for electrical circuit analysis.
+
+## Why it matters
+
+The Laplace transform is the workhorse of linear systems analysis and control theory. It converts differential equations into algebraic equations, making it much easier to analyse the steady-state and transient behaviour of linear systems. The transfer function $F(s)$ encodes everything about a linear time-invariant system's response.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) and [robotics control](/applications/robotics-and-control) design is done in the Laplace ($s$) domain. [Climate modelling](/applications/climate-modelling) uses Laplace methods for linearised stability analysis.
+
+## Where you'll meet it
+
+The Laplace transform is introduced in Year 2 differential equations. See the [Calculus Revolution era](/history/05-the-calculus-revolution) and [Fourier transform](/theorems/fourier-transform) for the closely related frequency-domain tool.

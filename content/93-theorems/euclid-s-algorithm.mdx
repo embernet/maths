@@ -1,0 +1,42 @@
+---
+title: Euclid's algorithm
+section: Theorems
+section_slug: 93-theorems
+slug: euclid-s-algorithm
+attributed_to: [euclid]
+era: 02-classical-greece
+appears_in: [02-core-year-two/01-abstract-algebra]
+related_theorems: [euclid-s-elements, fermat-s-little-theorem, modular-arithmetic-and-number-theory]
+applications: [rsa-public-key-cryptography, error-correcting-codes, digital-signatures]
+tags: [number-theory, algorithm, gcd, cryptography]
+year_introduced: c. 300 BCE
+summary: A simple repeated-division procedure that finds the greatest common divisor of two integers — and underlies much of modern cryptography.
+---
+
+
+
+## What it says
+
+To find $\gcd(a, b)$ with $a \geq b > 0$, repeatedly replace $(a, b)$ with $(b, a \bmod b)$ until the remainder is zero. The last non-zero remainder is the GCD.
+
+$$\gcd(a, b) = \gcd(b,\, a \bmod b)$$
+
+For example: $\gcd(252, 105)$. Divide: $252 = 2 \times 105 + 42$. Then $\gcd(105, 42)$: $105 = 2 \times 42 + 21$. Then $\gcd(42, 21)$: $42 = 2 \times 21 + 0$. Answer: $\gcd = 21$.
+
+The algorithm terminates because the remainders strictly decrease; it is correct because dividing out common factors at each step preserves divisibility.
+
+## History
+
+[Euclid](/mathematicians/euclid) presented the algorithm in the *Elements* (Books VII and X, c. 300 BCE), though it may be older. It is widely considered the first non-trivial algorithm in recorded history. The name "algorithm" itself derives (much later, via Arabic scholarship) from [al-Khwarizmi](/mathematicians/al-khwarizmi), but the concept Euclid described is the direct ancestor of every systematic computational procedure.
+
+## Why it matters
+
+The algorithm is fast — the number of steps is proportional to the number of digits of the smaller input, not its magnitude. This efficiency made it practically invaluable long before computers existed. In modern number theory it is the gateway to Bézout's identity ($\gcd(a,b) = ma + nb$ for integers $m, n$), which in turn underpins the construction of modular inverses — the arithmetical heart of public-key cryptography.
+
+## Real-world applications
+
+Every time you visit a secure website, [RSA public-key cryptography](/applications/rsa-public-key-cryptography) is running under the hood, and computing modular inverses via the extended Euclidean algorithm is a key step. The same mechanism appears in [digital signatures](/applications/digital-signatures) and [error-correcting codes](/applications/error-correcting-codes).
+
+## Where you'll meet it
+
+Euclid's algorithm appears in the first weeks of any number theory course — see the [algebra and number theory](/theorems/modular-arithmetic-and-number-theory) topic pages. It resurfaces in [abstract algebra](/theorems/dedekind-domains-algebraic-number-theory) when you study PIDs, and in computational contexts throughout [algorithms and cryptography](/theorems/fermats-little-theorem).

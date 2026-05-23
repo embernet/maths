@@ -1,0 +1,42 @@
+---
+title: Gravitational Wave Detection
+section: Real-world applications
+section_slug: 94-applications
+slug: gravitational-wave-detection
+domains: [physics, engineering, mathematics]
+uses_theorems: [fourier-transform, gaussian-distribution-normal-distribution, riemannian-geometry]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/05-numerical-analysis, 04-advanced-topics-year-four/04-mathematical-physics-and-fluids]
+related_applications: [radar-and-sonar, medical-imaging-mri-ct, climate-modelling]
+tags: [physics, signal-processing, general-relativity, applied]
+real_world_examples: [LIGO detection of binary black hole mergers, Virgo and KAGRA gravitational wave observatories, Multi-messenger astronomy, Tests of general relativity]
+summary: Detecting the ripple in spacetime from two black holes merging a billion light-years away requires matching a microsecond-long signal against thousands of templates using the Fourier transform — the most sensitive measurement in the history of science.
+---
+
+
+## The application
+
+On 14 September 2015, LIGO detected a gravitational wave signal from two black holes merging 1.3 billion light-years away. The signal lasted 0.2 seconds and displaced LIGO's 4-km mirrors by $10^{-18}$ metres — one-thousandth the diameter of a proton. Extracting this signal from noise that is a billion times larger required **matched filtering** against a bank of thousands of theoretical waveform templates. The 2017 Nobel Prize in Physics recognised the detection; the mathematics that made it possible is Fourier analysis, statistical signal processing, and numerical relativity.
+
+## The maths behind it
+
+The key technique is **matched filtering**. A gravitational wave signal $h(t)$ buried in detector noise $n(t)$ is detected by computing the inner product of the data $d(t) = h(t) + n(t)$ with each template $\hat{h}(t)$:
+
+$$\rho = 4\, \text{Re} \int_0^\infty \frac{\tilde{d}(f) \tilde{h}^*(f)}{S_n(f)}\, df,$$
+
+where $\tilde{d}(f)$ and $\tilde{h}(f)$ are Fourier transforms, and $S_n(f)$ is the **noise power spectral density** (estimated from data). Dividing by $S_n(f)$ is **whitening** — down-weighting frequency bands where the detector is noisier. The quantity $\rho$ (the signal-to-noise ratio) follows a non-central chi-squared distribution when a signal is present; a threshold of $\rho \geq 8$ is standard.
+
+**Template banks**: the signal from two merging black holes depends on their masses and spins. A bank of roughly $250{,}000$ templates covers the astrophysically interesting mass-spin parameter space. Each template is computed from numerical or analytical solutions to Einstein's equations. The total matched filtering computation scans all templates against all time offsets in seconds using FFT-based convolution.
+
+**Parameter estimation**: after detection, Bayesian inference using Markov chain Monte Carlo determines the posterior distribution over all parameters (masses, spins, sky location, distance). The likelihood is again evaluated using the matched filter inner product — stochastic calculus and probability theory applied at the frontier of observational physics.
+
+## A concrete example
+
+The first detected signal, GW150914, had a matched filter SNR of $\rho \approx 24$ (extremely significant). The inferred source was a binary black hole system at redshift $z \approx 0.09$ (~400 Mpc) with component masses of approximately 36 and 29 solar masses, producing a final black hole of approximately 62 solar masses — with roughly 3 solar masses ($\sim 5 \times 10^{47}$ joules) radiated as gravitational waves in 0.2 seconds.
+
+## History of the application
+
+Einstein predicted gravitational waves in 1916 as a consequence of general relativity but doubted they could ever be detected. Joseph Weber built the first detectors in the 1960s (bar detectors) with insufficient sensitivity. Rainer Weiss conceived the interferometric approach in 1972; Kip Thorne developed the theoretical template bank framework. The 40-year construction and commissioning of LIGO (laser interferometer gravitational-wave observatory) represents one of the longest-sustained engineering efforts in science.
+
+## Links
+
+The Fourier transform and signal-processing mathematics are in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). The statistical detection framework connects to [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). Riemannian geometry — the mathematical language of general relativity — is in the context of [Riemannian Geometry](/theorems/riemannian-geometry) and Year Four topics. See also the related application [Radar and Sonar](/applications/radar-and-sonar).

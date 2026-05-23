@@ -1,0 +1,39 @@
+---
+title: group theory foundations
+section: Theorems
+section_slug: 93-theorems
+slug: group-theory-foundations
+attributed_to: [lagrange]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/01-abstract-algebra]
+related_theorems: [group-theory-permutation-groups, galois-theory, fermat-s-little-theorem, lagrangian-mechanics]
+applications: [rsa-public-key-cryptography, error-correcting-codes]
+tags: [algebra, groups, Lagrange, history]
+year_introduced: '1770'
+summary: Lagrange's theorem — the order of a subgroup divides the order of the group — the first result in abstract group theory, proved forty years before groups were formally defined.
+---
+
+
+## What it says
+
+**Lagrange's theorem:** If $H$ is a subgroup of a finite group $G$, then $|H|$ divides $|G|$.
+
+Proof: the cosets $gH$ partition $G$ into equal-sized pieces, each of size $|H|$. The number of pieces is $[G:H] = |G|/|H|$, which must be an integer.
+
+Consequence: the order of any element $g \in G$ divides $|G|$ (since $\langle g \rangle$ is a subgroup of order equal to the element's order). This immediately implies Fermat's little theorem: $a^{p-1} \equiv 1 \pmod{p}$ for prime $p$ and $\gcd(a, p) = 1$, since $(\mathbb{Z}/p\mathbb{Z})^*$ has order $p-1$.
+
+## History
+
+[Lagrange](/mathematicians/lagrange) proved a precursor of this theorem in 1770 while studying permutation groups and the roots of polynomials. He noticed that the number of values a function of $n$ variables takes under permutations of the variables always divides $n!$. This was the seed of group theory, sixty years before Cauchy and Galois formalised the group concept.
+
+## Why it matters
+
+Lagrange's theorem is the first structural result in group theory. It immediately gives non-trivial information: groups of prime order $p$ have no subgroups other than $\{e\}$ and $G$ itself, so they are cyclic. The theorem is used in every group theory proof that involves "counting."
+
+## Real-world applications
+
+Lagrange's theorem underlies the correctness of [RSA cryptography](/applications/rsa-public-key-cryptography) (via the group structure of $(\mathbb{Z}/n\mathbb{Z})^*$) and [error-correcting codes](/applications/error-correcting-codes).
+
+## Where you'll meet it
+
+Lagrange's theorem is one of the first theorems in Year 2 abstract algebra. See the [Calculus Revolution era](/history/05-the-calculus-revolution) for historical context.

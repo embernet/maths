@@ -1,0 +1,40 @@
+---
+title: Cellular Network Design
+section: Real-world applications
+section_slug: 94-applications
+slug: cellular-network-design
+domains: [engineering, telecommunications, computer-science]
+uses_theorems: [graph-theory-konigsberg-bridges, fourier-transform]
+uses_topics: [02-core-year-two/06-programming-and-discrete-mathematics, 01-foundations-year-one/04-probability-and-statistics]
+related_applications: [error-correcting-codes, signal-processing-jpeg-mp3, pagerank-google]
+tags: [graph-theory, geometry, telecommunications, applied]
+real_world_examples: [4G and 5G mobile networks, Wi-Fi channel planning, Satellite constellation coverage, Emergency service radio networks]
+summary: Assigning radio frequencies to mobile phone masts without interference is a graph-colouring problem; dividing the country into service areas is a Voronoi diagram.
+---
+
+
+## The application
+
+When you make a mobile phone call, your signal is handled by a network of base stations whose coverage areas tile the landscape with minimal overlap and whose radio frequencies are assigned so that adjacent cells never interfere. Two distinct pieces of mathematics govern this design: **graph colouring** (how to assign frequencies) and **Voronoi diagrams** (how to divide the plane into service areas).
+
+## The maths behind it
+
+**Frequency reuse via graph colouring**: model the network as a graph where each cell is a vertex and an edge joins two cells if they are close enough to interfere (typically within a few cells' distance). Assigning frequencies so that no two adjacent cells share the same one is a proper **graph colouring** of this interference graph. The minimum number of frequencies needed is the **chromatic number** $\chi(G)$.
+
+For a hexagonal grid (the idealised cell layout), adjacent cells number six and the chromatic number is three (if one-tier interference only) or seven (if two-tier). In practice, the graph is irregular and NP-hard to colour optimally; network planners use greedy heuristics and simulated annealing. The mathematical framework — graph colouring, chromatic numbers, the four-colour theorem — is developed in [Programming, Graphs, and Discrete Mathematics](/02-core-year-two/06-programming-and-discrete-mathematics).
+
+**Voronoi diagrams**: given a set of base station locations $\{p_1, \ldots, p_n\}$, the **Voronoi cell** of $p_i$ is the set of points in the plane closer to $p_i$ than to any other base station. These cells tile the plane exactly and define natural service areas. Voronoi diagrams arise from the geometry of nearest-neighbour assignment and are dual to the **Delaunay triangulation** — a triangulation that maximises the minimum angle of any triangle, favoured by finite element mesh generators.
+
+**5G network planning** uses additional mathematical tools: **stochastic geometry** models the random placement of base stations as a Poisson point process, allowing probabilistic coverage calculations via tools from measure theory; **OFDM** (Orthogonal Frequency-Division Multiplexing) uses the discrete Fourier transform to split a wideband channel into orthogonal sub-carriers, combining signal-processing mathematics with the engineering of multi-path fading.
+
+## A concrete example
+
+A typical UK 4G network has roughly 60,000 base stations. Planning the frequency and power assignment for each, subject to interference constraints, is a large combinatorial optimisation problem solved by specialised network planning software. The Voronoi approach allows coverage gaps and overlaps to be quantified analytically before deployment.
+
+## History of the application
+
+The cellular concept — small hexagonal cells with frequency reuse across non-adjacent cells — was invented at Bell Labs in 1947 by Douglas Ring and W. Rae Young and first deployed commercially in Japan in 1979. The explicit connection to graph colouring was recognised early and remains the standard framework for frequency planning.
+
+## Links
+
+Graph colouring and the chromatic number are in [Programming, Graphs, and Discrete Mathematics](/02-core-year-two/06-programming-and-discrete-mathematics). Signal processing using Fourier methods is covered in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). The probabilistic aspects of coverage modelling connect to [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics).

@@ -1,0 +1,36 @@
+{
+  "topic_slug": "02-functional-analysis",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "A Banach space is a normed vector space that is:",
+      "options": [
+        {"id": "a", "text": "Complete: every Cauchy sequence converges.", "correct": true, "explanation": "A Banach space is a complete normed vector space. Completeness is what distinguishes Banach spaces from general normed spaces and makes fixed-point theorems work."},
+        {"id": "b", "text": "Finite-dimensional.", "correct": false, "explanation": "$\\mathbb{R}^n$ is a Banach space but functional analysis is primarily about infinite-dimensional Banach spaces like $C([a,b])$ and $L^p$ spaces."},
+        {"id": "c", "text": "Equipped with an inner product.", "correct": false, "explanation": "Inner products give Hilbert spaces, which are special cases of Banach spaces. Not every Banach space has an inner product structure."},
+        {"id": "d", "text": "Compact in the weak topology.", "correct": false, "explanation": "Compact spaces have special properties not shared by all Banach spaces. The unit ball of an infinite-dimensional Banach space is never compact."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Parseval's theorem in a Hilbert space with orthonormal basis $\\{e_n\\}$ states:",
+      "options": [
+        {"id": "a", "text": "$\\|f\\|^2 = \\sum_n |\\langle f, e_n \\rangle|^2$.", "correct": true, "explanation": "Parseval's theorem generalises the Pythagorean theorem to infinite dimensions. In Fourier terms: the total energy equals the sum of squared Fourier coefficients."},
+        {"id": "b", "text": "$\\|f\\| = \\sum_n \\langle f, e_n \\rangle$.", "correct": false, "explanation": "Missing squares and absolute values. Parseval's theorem involves squared norms and squared absolute values of coefficients."},
+        {"id": "c", "text": "$f = \\sum_n \\langle f, e_n\\rangle$.", "correct": false, "explanation": "The reconstruction formula is $f = \\sum_n \\langle f, e_n\\rangle e_n$ — the $e_n$ factor is missing here."},
+        {"id": "d", "text": "$\\langle f, g \\rangle = \\|f\\|\\|g\\|$.", "correct": false, "explanation": "That would require $f$ and $g$ to be parallel (scalar multiples of each other). The Cauchy-Schwarz inequality says $|\\langle f,g\\rangle| \\le \\|f\\|\\|g\\|$ with equality iff parallel."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The Banach contraction mapping theorem requires the map $T: X \\to X$ to satisfy:",
+      "options": [
+        {"id": "a", "text": "$\\|Tx - Ty\\| \\le k\\|x-y\\|$ for some fixed $k < 1$ and all $x, y$.", "correct": true, "explanation": "The contraction condition with $k < 1$ ensures successive iterates converge geometrically fast to the unique fixed point."},
+        {"id": "b", "text": "$T$ is linear.", "correct": false, "explanation": "The theorem applies to any contraction on a complete metric space, linear or not. The Picard iteration for ODEs uses a non-linear contraction."},
+        {"id": "c", "text": "$T$ is surjective.", "correct": false, "explanation": "Surjectivity is not required. The theorem only guarantees existence of a fixed point, not that $T$ maps onto all of $X$."},
+        {"id": "d", "text": "$X$ is finite-dimensional.", "correct": false, "explanation": "The theorem holds in any complete metric space, including infinite-dimensional Banach spaces. The infinite-dimensional case is where it is most useful."}
+      ]
+    }
+  ]
+}

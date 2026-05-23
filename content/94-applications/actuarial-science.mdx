@@ -1,0 +1,46 @@
+---
+title: 'Actuarial Science: Insurance and Pensions'
+section: Real-world applications
+section_slug: 94-applications
+slug: actuarial-science
+domains: [finance, statistics, economics]
+uses_theorems: [gaussian-distribution-normal-distribution, axiomatic-foundations-of-probability, maximum-likelihood-estimation]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference, 03-specialisation-year-three/07-stochastic-processes]
+related_applications: [option-pricing-finance, clinical-trials-design, census-and-survey-statistics]
+tags: [actuarial, probability, finance, applied]
+real_world_examples: [Life insurance pricing, Defined-benefit pension liability valuation, Car insurance premium calculation, Solvency II regulatory capital]
+summary: The price of an annuity and the solvency of a pension fund both rest on probability theory, life tables, and the mathematics of discounting future cash flows.
+---
+
+
+## The application
+
+An actuary prices a life insurance policy by computing the expected present value of future claims. A pension fund trustee needs to know whether the fund holds enough assets to pay all promised benefits. Both calculations involve probability distributions over human lifetimes, interest rate models, and the mathematics of discounting uncertain future cash flows. Actuarial science is applied probability and statistics in one of its most consequential settings.
+
+## The maths behind it
+
+**Life tables** capture the probability $q_x$ that a person aged $x$ dies before age $x+1$. From the survival probability $p_x = 1 - q_x$, the probability of surviving from age $x$ to age $x+n$ is:
+
+$${}_{n}p_x = \prod_{k=0}^{n-1} p_{x+k}.$$
+
+The **expected present value** (EPV) of a whole-life annuity paying £1 per year to a life currently aged $x$ is:
+
+$$\ddot{a}_x = \sum_{k=0}^{\infty} {}_{k}p_x \cdot v^k,$$
+
+where $v = 1/(1+i)$ is the discount factor at interest rate $i$. This is a weighted sum of survival probabilities — a Stieltjes integral in continuous time.
+
+The EPV of a whole-life insurance paying £1 on death is $A_x = 1 - d\, \ddot{a}_x$ (where $d = i/(1+i)$), following from the fundamental actuarial identity. These formulas translate a probability distribution over lifetimes into a price.
+
+**Mortality modelling**: modern actuarial practice fits parametric models to observed mortality data. The **Lee-Carter model** decomposes log-mortality $\ln \mu_{x,t} = \alpha_x + \beta_x \kappa_t + \varepsilon_{x,t}$ where $\kappa_t$ is a mortality index whose future values follow an ARIMA time-series model. This is essentially principal component analysis on a mortality matrix, combined with time-series forecasting — all within the framework of [maximum likelihood estimation](/02-core-year-two/05-probability-and-statistical-inference).
+
+## A concrete example
+
+The UK's 2022 actuarial valuation of the National Health Service Pension Scheme estimated liabilities of £1.4 trillion — the present value of pensions promised to NHS employees, discounted at a prescribed rate. A one-percentage-point change in the discount rate changes the liability by roughly £150 billion. This is the mathematics of discounted cash flows applied at national scale.
+
+## History of the application
+
+The first life table was constructed by John Graunt in 1662 from London's Bills of Mortality. Edmund Halley (of comet fame) produced the first actuarially useful life table in 1693 and derived the first EPV formula for an annuity. The modern era of stochastic mortality modelling began with the Lee-Carter paper in 1992, which transformed actuarial practice from deterministic projections to probabilistic scenario analysis.
+
+## Links
+
+Probability theory and distributions are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). Estimation and statistical inference are in [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). The interest rate modelling aspects connect to [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). See also [Option Pricing](/applications/option-pricing-finance) for the related continuous-time finance mathematics.

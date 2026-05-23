@@ -1,0 +1,40 @@
+---
+title: Fundamental theorem of algebra
+section: Theorems
+section_slug: 93-theorems
+slug: fundamental-theorem-of-algebra
+attributed_to: [gauss]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/03-complex-analysis]
+related_theorems: [cauchys-integral-theorem, galois-theory, euler-s-formula-e-i-cos-i-sin, first-systematic-use-of-complex-numbers]
+applications: [signal-processing-jpeg-mp3, option-pricing-finance]
+tags: [algebra, complex-numbers, polynomials, existence]
+year_introduced: 1799 (Gauss's first proof)
+summary: Every non-constant polynomial with complex coefficients has at least one complex root — so it factors completely over the complex numbers.
+---
+
+
+
+## What it says
+
+Every polynomial $p(z) = a_n z^n + a_{n-1} z^{n-1} + \cdots + a_0$ of degree $n \geq 1$ with coefficients in $\mathbb{C}$ has exactly $n$ roots in $\mathbb{C}$ (counted with multiplicity).
+
+Equivalently: $\mathbb{C}$ is algebraically closed. You cannot escape $\mathbb{C}$ by taking roots of polynomials.
+
+A degree-$n$ polynomial factors completely as $a_n(z - z_1)(z - z_2) \cdots (z - z_n)$ over $\mathbb{C}$.
+
+## History
+
+The theorem was widely believed before it was proved. [Gauss](/mathematicians/gauss) gave the first rigorous proof in his 1799 doctoral dissertation, later improving it. His proof is essentially topological: he showed that the image of a large circle under a polynomial wraps around the origin, and used the intermediate value theorem to conclude a root must exist inside. Argand, Laplace, and d'Alembert had earlier incomplete attempts. The modern proof using [Cauchy's theorem](/theorems/cauchys-integral-theorem) — if $p(z)$ had no root, $1/p(z)$ would be entire, and a contour integral argument gives a contradiction — is slick and elegant.
+
+## Why it matters
+
+The Fundamental Theorem of Algebra is why complex numbers are "complete" in a sense the reals are not. Over $\mathbb{R}$, the polynomial $x^2 + 1$ has no roots. Over $\mathbb{C}$, every polynomial has as many roots as its degree. This completeness is what makes complex analysis so powerful — there are no missing roots to worry about, and partial fraction decompositions always work. It also explains why [Cardano's](/mathematicians/cardano) formula for the cubic must sometimes pass through complex numbers even when all three roots are real (the *casus irreducibilis*).
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) works with rational transfer functions, factored over $\mathbb{C}$ into poles and zeros — the FTA guarantees this factorisation is always possible. [Option pricing](/applications/option-pricing-finance) involves characteristic functions that are polynomials in the complex plane.
+
+## Where you'll meet it
+
+The fundamental theorem of algebra appears in Year 1 and is proved rigorously in Year 2 complex analysis. See the [Calculus Revolution era](/history/05-the-calculus-revolution) for the historical context of Gauss's work.

@@ -1,0 +1,42 @@
+---
+title: Lagrangian mechanics
+section: Theorems
+section_slug: 93-theorems
+slug: lagrangian-mechanics
+attributed_to: [lagrange]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [calculus-of-variations-jacob-and-johann, noether-s-theorem-symmetry-and-conservation-laws-in-physics, lagrange-multipliers, laws-of-motion-and-gravitation]
+applications: [robotics-and-control, gravitational-wave-detection, climate-modelling]
+tags: [mechanics, physics, Lagrange, variational-methods]
+year_introduced: '1788'
+summary: A reformulation of classical mechanics using the principle of stationary action — replacing Newton's force-based approach with a single scalar function, the Lagrangian.
+---
+
+
+
+## What it says
+
+For a mechanical system with generalised coordinates $q_1, \ldots, q_n$, define the **Lagrangian** $L = T - V$ (kinetic minus potential energy). The equations of motion follow from the principle of stationary action:
+
+$$\frac{d}{dt}\frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial q_i} = 0 \quad (i = 1, \ldots, n)$$
+
+These are the **Euler–Lagrange equations** applied to mechanics. They are equivalent to Newton's laws but often far simpler to apply: you do not need to compute forces — only energies.
+
+The approach generalises to field theories: replace $q_i(t)$ by fields $\phi(x, t)$ and sum over spatial positions. All of fundamental physics — electromagnetism, quantum field theory, general relativity — is expressed in Lagrangian form.
+
+## History
+
+[Lagrange](/mathematicians/lagrange) published *Mécanique analytique* in 1788. He was proud that the book contained no diagrams — it was purely algebraic, a complete reduction of mechanics to analysis. This algebraic programme (making physics calculable) is one of the great intellectual achievements of the eighteenth century.
+
+## Why it matters
+
+The Lagrangian formulation reveals conservation laws more clearly than Newton's approach (see [Noether's theorem](/theorems/noether-s-theorem-symmetry-and-conservation-laws-in-physics)), handles constrained motion naturally, and generalises seamlessly to quantum mechanics (Feynman's path integral is the quantum version of the principle of stationary action).
+
+## Real-world applications
+
+[Robotics and control](/applications/robotics-and-control) systems are modelled and controlled using Lagrangian dynamics. [Gravitational-wave detection](/applications/gravitational-wave-detection) template waveforms come from Lagrangian general relativity. [Climate modelling](/applications/climate-modelling) fluid dynamics uses Lagrangian descriptions.
+
+## Where you'll meet it
+
+Lagrangian mechanics appears in Year 2 differential equations and Year 3 variational methods. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

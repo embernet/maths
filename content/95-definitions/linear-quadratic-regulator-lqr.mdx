@@ -1,0 +1,18 @@
+---
+title: 'Linear quadratic regulator (LQR)'
+section: Definitions
+section_slug: 95-definitions
+slug: linear-quadratic-regulator-lqr
+tags: [applied]
+first_seen_in: '94-applications/robotics-and-control.mdx'
+mentioned_in: ['94-applications/robotics-and-control']
+summary: 'Quick definition of Linear quadratic regulator (LQR) from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Linear quadratic regulator (LQR)**: for a linear system, the optimal control law that minimises $\int_0^\infty (\mathbf{x}^T Q \mathbf{x} + \mathbf{u}^T R \mathbf{u})\, dt$ is the state-feedback law $\mathbf{u} = -K\mathbf{x}$, where $K = R^{-1}B^T P$ and $P$ solves the **algebraic Riccati equation** — a nonlinear matrix equation solvable by numerical methods.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

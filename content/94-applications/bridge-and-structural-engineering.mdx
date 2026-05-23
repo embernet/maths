@@ -1,0 +1,44 @@
+---
+title: Bridge and Structural Engineering
+section: Real-world applications
+section_slug: 94-applications
+slug: bridge-and-structural-engineering
+domains: [engineering, physics, mathematics]
+uses_theorems: [method-of-least-squares, fourier-series]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 01-foundations-year-one/03-calculus-and-methods, 04-advanced-topics-year-four/03-advanced-pdes]
+related_applications: [airfoil-and-aerodynamics, traffic-flow-modelling, climate-modelling]
+tags: [engineering, eigenvalues, PDEs, applied]
+real_world_examples: [Suspension bridge design, Skyscraper structural analysis, Earthquake-resistant buildings, Wind-induced vibration of towers]
+summary: The resonant frequency of a bridge or skyscraper is an eigenvalue problem — the Tacoma Narrows collapse happened because wind drove the bridge at one of its natural frequencies.
+---
+
+
+## The application
+
+When the Tacoma Narrows suspension bridge collapsed in 1940, only four months after opening, it was because wind-induced oscillation reached a resonant frequency of the structure — a phenomenon called **aeroelastic flutter**. Every civil engineering structure has natural frequencies at which it will vibrate if disturbed; design requires ensuring those frequencies avoid driving forces (wind, traffic, earthquakes). The mathematics is eigenvalue theory applied to continuous structures modelled by PDEs.
+
+## The maths behind it
+
+**Static analysis** of a structure reduces to solving $K\mathbf{u} = \mathbf{f}$, where $K$ is the **stiffness matrix** (assembled from element stiffness matrices in the finite element method), $\mathbf{u}$ the vector of nodal displacements, and $\mathbf{f}$ the applied forces. This is a large linear system whose solution gives the deformation of the structure under load.
+
+**Dynamic analysis** adds inertia: the equation of motion is $M\ddot{\mathbf{u}} + C\dot{\mathbf{u}} + K\mathbf{u} = \mathbf{f}(t)$, where $M$ is the mass matrix and $C$ the damping matrix. The natural frequencies are the **eigenvalues** of the generalised problem:
+
+$$K\boldsymbol{\phi} = \omega^2 M \boldsymbol{\phi},$$
+
+and $\boldsymbol{\phi}$ are the corresponding **mode shapes** (eigenvectors). The Tacoma Narrows collapse involved the fundamental torsional mode at roughly 0.2 Hz — matched by vortex shedding from the wind.
+
+**Fourier analysis** of the applied loads (wind spectra, earthquake spectra) determines which frequencies carry the most energy. Safe design ensures that natural frequencies are not coincident with the dominant frequencies of the load — or that damping is sufficient to limit resonant amplification.
+
+For continuous structures (beams, plates), the eigenvalue problem becomes the **Sturm-Liouville problem** for the beam equation: $EI\, u'''' = \omega^2 \rho A\, u$, with boundary conditions depending on the support type. The natural frequencies of a uniform cantilever beam are proportional to $(1.875)^2, (4.694)^2, (7.855)^2, \ldots$ — the squares of the roots of $\cosh(kL)\cos(kL) + 1 = 0$, a transcendental equation.
+
+## A concrete example
+
+The Millennium Bridge in London, opened in June 2000, had to be closed after two days because pedestrian footfall excited the lateral (swaying) natural mode at 1 Hz — coinciding with normal walking pace. Engineers retrofitted 37 fluid-viscous dampers (increasing damping) and 52 tuned mass dampers (shifting natural frequencies away from the excitation frequency), reopening the bridge in 2002. The cost of the retrofit was £5 million; the mathematical analysis of the problem drew directly on structural eigenvalue theory and Fourier spectral analysis of crowd dynamics.
+
+## History of the application
+
+The eigenvalue approach to structural dynamics was developed by Rayleigh in *The Theory of Sound* (1877), using variational methods to estimate natural frequencies. The finite element method, allowing computation on complex three-dimensional geometries, was developed in the 1950s–60s and is now universal in structural engineering. Modern seismic design codes are explicitly probabilistic, requiring structures to resist earthquakes with specified return periods.
+
+## Links
+
+Eigenvalues and eigenvectors are in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra). The PDE formulation of beam and plate vibration connects to [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes) and [Advanced PDEs](/04-advanced-topics-year-four/03-advanced-pdes). Fourier series for analysing periodic loads are in the PDE module. The calculus of variations (Rayleigh's method) is in [Advanced Differential Equations](/03-specialisation-year-three/08-differential-equations-advanced).

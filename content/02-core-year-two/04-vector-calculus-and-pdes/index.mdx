@@ -1,0 +1,91 @@
+---
+title: Vector Calculus and Partial Differential Equations
+section: 'Core Mathematics: Year Two'
+section_slug: 02-core-year-two
+year: 2
+order: 4
+tags: [vector-calculus, PDEs, Fourier-series, heat-equation, wave-equation, Laplace, separation-of-variables]
+prerequisites:
+- 03-calculus-and-methods
+related:
+- 08-differential-equations-advanced
+- 03-advanced-pdes
+- 04-mathematical-physics-and-fluids
+mathematicians: [fourier, laplace, gauss]
+reading_time_min: 11
+summary: Partial differential equations describe heat, waves, and gravity. Fourier's method of separating variables — and expressing solutions as sums of sinusoidal components — is the central technique.
+theorems: [fourier-series, fourier-transform, heat-equation, laplace-equation, laplace-transform, gauss-s-law-electrostatics]
+applications: [signal-processing-jpeg-mp3, medical-imaging-mri-ct, climate-modelling, weather-forecasting, option-pricing-finance]
+---
+
+
+
+Where ordinary differential equations describe how a quantity evolves in time, **partial differential equations** (PDEs) describe how quantities vary across both space and time simultaneously. The temperature inside a metal rod, the displacement of a vibrating string, the gravitational potential outside a planet — all are modelled by PDEs.
+
+## The three canonical PDEs
+
+Three second-order linear PDEs appear in almost every application of mathematical physics, and understanding them is the core objective of Year Two methods:
+
+**Heat equation** (parabolic):
+$$\frac{\partial u}{\partial t} = k\, \nabla^2 u.$$
+Describes the diffusion of heat (or any diffusing quantity). The solution smooths out irregularities over time.
+
+**Wave equation** (hyperbolic):
+$$\frac{\partial^2 u}{\partial t^2} = c^2\, \nabla^2 u.$$
+Describes the propagation of waves: sound, vibrations, electromagnetic waves in free space.
+
+**Laplace equation** (elliptic):
+$$\nabla^2 u = 0.$$
+Describes steady-state distributions: gravitational potential, electrostatic potential, steady-state temperature. Solutions are **harmonic functions**.
+
+The classification — parabolic, hyperbolic, elliptic — determines the mathematical character of the PDE: how many boundary conditions are needed, how far information propagates, and what methods apply.
+
+## Fourier series
+
+[Fourier's](/mathematicians/fourier) great insight (1807, initially rejected by Lagrange and Laplace as the claim seemed too strong) was that any "reasonable" function on an interval $[-L, L]$ can be written as a sum of sines and cosines:
+
+$$f(x) = \frac{a_0}{2} + \sum_{n=1}^\infty \left(a_n \cos\frac{n\pi x}{L} + b_n \sin\frac{n\pi x}{L}\right),$$
+
+where the **Fourier coefficients** are:
+
+$$a_n = \frac{1}{L} \int_{-L}^L f(x)\cos\frac{n\pi x}{L}\, dx, \qquad b_n = \frac{1}{L} \int_{-L}^L f(x)\sin\frac{n\pi x}{L}\, dx.$$
+
+The coefficients are computed by **orthogonality**: $\int_{-L}^L \cos(m\pi x/L)\cos(n\pi x/L)\, dx = 0$ if $m \ne n$. The sinusoidal functions form an orthogonal basis for a space of functions.
+
+The **Dirichlet convergence theorem** says the Fourier series converges to $f(x)$ at every point where $f$ is continuous and satisfies a mild regularity condition. At a jump discontinuity, it converges to the average of the left and right limits.
+
+## Separation of variables
+
+The standard method for solving linear PDEs: assume the solution factors as a product of functions of individual variables, substitute into the PDE, and separate the equation into ODEs for each variable.
+
+**Example**: heat equation on a rod of length $L$ with homogeneous boundary conditions $u(0,t) = u(L,t) = 0$. Try $u(x,t) = X(x)T(t)$:
+
+$$\frac{T'}{kT} = \frac{X''}{X} = -\lambda \quad \text{(constant, since LHS depends only on $t$, RHS only on $x$)}.$$
+
+The $x$-equation $X'' + \lambda X = 0$ with $X(0) = X(L) = 0$ has solutions $X_n(x) = \sin(n\pi x / L)$ for $\lambda_n = (n\pi/L)^2$, $n = 1, 2, \ldots$. The $t$-equation gives $T_n(t) = e^{-k\lambda_n t}$. By superposition (linearity!):
+
+$$u(x,t) = \sum_{n=1}^\infty b_n \sin\frac{n\pi x}{L}\, e^{-k(n\pi/L)^2 t}.$$
+
+The coefficients $b_n$ are the Fourier sine coefficients of the initial temperature distribution $u(x, 0)$.
+
+## d'Alembert's solution for the wave equation
+
+The 1D wave equation $u_{tt} = c^2 u_{xx}$ has a beautiful explicit solution, found by d'Alembert in 1747:
+
+$$u(x,t) = \frac{1}{2}\left[f(x+ct) + f(x-ct)\right] + \frac{1}{2c}\int_{x-ct}^{x+ct} g(s)\, ds,$$
+
+where $f$ is the initial displacement $u(x,0)$ and $g$ is the initial velocity $u_t(x,0)$. This is a superposition of two waves travelling in opposite directions at speed $c$.
+
+## Laplace's equation and harmonic functions
+
+Solutions to $\nabla^2 u = 0$ (harmonic functions) satisfy the **mean value property**: the value of $u$ at any point equals the average of $u$ over any sphere (or circle) centred at that point. This implies the **maximum principle**: a harmonic function on a bounded domain cannot have an interior maximum or minimum — these must occur on the boundary.
+
+The maximum principle is one of the most powerful tools in PDE theory. It immediately gives uniqueness for the Dirichlet problem (find $u$ harmonic in $D$ with prescribed boundary values): if two solutions agree on $\partial D$, their difference is harmonic and zero on $\partial D$, so by the maximum principle it is zero everywhere.
+
+## Real-world applications
+
+Where this turns up in the world: [JPEG images and MP3 audio](/applications/signal-processing-jpeg-mp3) compress data by discarding Fourier coefficients the human eye and ear cannot detect — the Fourier series from this course is the entire mathematical basis. [MRI and CT scanning](/applications/medical-imaging-mri-ct) reconstruct images from measurements in Fourier space, inverting the transform you learn here. [Climate models](/applications/climate-modelling) discretise the same heat and wave equations on planetary grids; [option pricing](/applications/option-pricing-finance) reveals the Black–Scholes equation to be the heat equation in disguise.
+
+## Why Fourier's idea was revolutionary
+
+Fourier series were controversial precisely because they worked for functions nobody had expected to be "decomposable" — discontinuous step functions, sawtooth waves. The question of exactly which functions have convergent Fourier series drove the development of analysis throughout the nineteenth century and directly led to Cantor's set theory and eventually to Lebesgue's measure theory. The idea that a function is determined by its "frequency components" is now foundational not just in mathematics but in engineering (signal processing), physics (quantum mechanics uses Fourier analysis constantly), and data science (the Fast Fourier Transform algorithm, from Cooley and Tukey's 1965 paper, is one of the most used algorithms in the world).

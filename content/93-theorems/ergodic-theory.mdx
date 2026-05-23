@@ -1,0 +1,42 @@
+---
+title: Ergodic theory
+section: Theorems
+section_slug: 93-theorems
+slug: ergodic-theory
+attributed_to: [kolmogorov]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [axiomatic-foundations-of-probability, law-of-large-numbers, turbulence-theory-kolmogorov-scaling]
+applications: [weather-forecasting, climate-modelling, actuarial-science]
+tags: [dynamical-systems, probability, ergodic, Kolmogorov]
+year_introduced: 1930s (foundational period); Kolmogorov 1950s–60s
+summary: The study of the long-run average behaviour of dynamical systems — when time averages equal space averages, and the connection to statistical mechanics.
+---
+
+
+
+## What it says
+
+A measure-preserving dynamical system $(X, \mathcal{F}, \mu, T)$ is **ergodic** if every $T$-invariant set has measure 0 or 1.
+
+**Birkhoff's ergodic theorem:** For an ergodic system and any integrable function $f$:
+
+$$\lim_{n\to\infty} \frac{1}{n} \sum_{k=0}^{n-1} f(T^k x) = \int_X f\, d\mu \quad \text{for almost every } x$$
+
+Time averages equal space averages. This justifies the statistical mechanical assumption: a gas molecule eventually visits all accessible states, so time-averaging gives the same result as averaging over all molecules.
+
+## History
+
+The ergodic hypothesis in physics was formulated by Boltzmann in the 1870s. Birkhoff and von Neumann proved ergodic theorems in 1931. [Kolmogorov](/mathematicians/kolmogorov) made major contributions to ergodic theory in the 1950s–60s, including the Kolmogorov–Arnold–Moser (KAM) theorem about quasi-periodic orbits in nearly-integrable Hamiltonian systems.
+
+## Why it matters
+
+Ergodic theory explains when statistical mechanics is valid: when time averages equal ensemble averages. It also describes when chaotic systems can be modelled probabilistically. The KAM theorem is central to understanding the stability of the solar system.
+
+## Real-world applications
+
+[Weather forecasting](/applications/weather-forecasting) and [climate modelling](/applications/climate-modelling) use ergodic arguments to justify long-run statistics. [Actuarial science](/applications/actuarial-science) assumes ergodic behaviour in many risk models.
+
+## Where you'll meet it
+
+Ergodic theory appears in Year 4 dynamical systems and probability. See the [Modern Mathematics era](/history/09-modern-mathematics).

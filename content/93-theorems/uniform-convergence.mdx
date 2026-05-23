@@ -1,0 +1,45 @@
+---
+title: Uniform convergence
+section: Theorems
+section_slug: 93-theorems
+slug: uniform-convergence
+attributed_to: [weierstrass]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [rigorous-analysis, weierstrass-function-continuous-everywhere-differentiable-nowhere, weierstrass-approximation-theorem, cauchy-sequences, fourier-series, riemann-integral]
+applications: []
+tags: [analysis, convergence, Weierstrass, series]
+year_introduced: '1841'
+summary: Uniform convergence — the condition under which a sequence of functions has a limit that preserves continuity, integration, and differentiation — distinguishing it from the weaker pointwise convergence.
+---
+
+
+
+## What it says
+
+A sequence of functions $f_n: [a,b] \to \mathbb{R}$ **converges pointwise** to $f$ if for each fixed $x$, $f_n(x) \to f(x)$. The $N$ that makes $|f_n(x) - f(x)| < \varepsilon$ may depend on both $\varepsilon$ and $x$.
+
+The sequence **converges uniformly** to $f$ if for every $\varepsilon > 0$ there exists $N$ (depending only on $\varepsilon$, not on $x$) such that $n > N$ implies $|f_n(x) - f(x)| < \varepsilon$ for all $x \in [a,b]$.
+
+Key theorems:
+- **Continuity preserved:** The uniform limit of continuous functions is continuous. (Pointwise limit need not be.)
+- **Integration:** $\int_a^b f_n \to \int_a^b f$ under uniform convergence.
+- **Differentiation:** If $f_n \to f$ pointwise and $f_n' \to g$ uniformly, then $f$ is differentiable and $f' = g$.
+
+Without uniform convergence these fail: Fourier's original treatment of the heat equation (1807) involved interchanging limits and integrals in ways that are only justified by uniform convergence, and early analysts did not always check the condition.
+
+## History
+
+The distinction between pointwise and uniform convergence was first made precise by [Weierstrass](/mathematicians/weierstrass) in unpublished lectures around 1841, though he published it later. Abel (1826) had noticed anomalies in the convergence of Fourier series; Seidel (1847) identified the issue as the non-uniformity of convergence near points of discontinuity. Weierstrass's systematic treatment, and his [nowhere-differentiable function](/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere) as a demonstration of what can go wrong, made the concept indispensable.
+
+## Why it matters
+
+Uniform convergence is the correct condition for swapping limits with integrals and derivatives — operations performed constantly in analysis. Without it, arguments that "look right" can fail. It is one of the core concepts in real analysis, alongside Cauchy sequences and $\varepsilon$–$\delta$ limits, that every undergraduate analyst must internalise.
+
+## Real-world applications
+
+Uniform convergence underpins the validity of truncating infinite series in numerical computation: it guarantees that the partial sum approximates the limit uniformly, giving computable error bounds.
+
+## Where you'll meet it
+
+Uniform convergence is Year 2 core analysis, closely tied to the [Weierstrass approximation theorem](/theorems/weierstrass-approximation-theorem) and [Fourier series](/theorems/fourier-series). See the [Rigour Revolution era](/history/06-the-rigour-revolution).

@@ -1,0 +1,39 @@
+---
+title: The Law of Cosines
+section: Theorems
+section_slug: 93-theorems
+slug: law-of-cosines
+attributed_to: [euclid, pythagoras]
+era: 02-classical-greece
+appears_in: [01-foundations-year-one/01-algebra-and-linear-algebra]
+related_theorems: [pythagoras-theorem, euclidean-geometry]
+applications: [gps-positioning, computer-graphics-3d, radar-and-sonar]
+tags: [geometry, trigonometry, foundations]
+year_introduced: Implicit in Euclid's *Elements* (Book II, c. 300 BCE); modern form 16th century
+summary: Pythagoras's theorem generalised to any triangle — relate the three sides via the cosine of the enclosed angle.
+---
+
+
+In any triangle with sides $a$, $b$, $c$ and the angle $\gamma$ opposite side $c$:
+
+$$
+c^2 = a^2 + b^2 - 2ab\cos\gamma.
+$$
+
+When $\gamma = 90°$, $\cos\gamma = 0$ and you recover Pythagoras. When $\gamma$ is acute, $c^2$ is *less* than $a^2 + b^2$; when obtuse, $c^2$ is *more*. The cosine term is the correction.
+
+## History
+
+Propositions 12 and 13 of Book II of Euclid's *Elements* give a geometric formulation of this result — phrased as the difference of squares of certain rectangles, with no trigonometry. The trigonometric form had to wait for the development of the sine and cosine functions, which the Islamic mathematicians (Abu al-Wafa, al-Battani) brought to maturity in the tenth century. The modern algebraic statement is sometimes attributed to François Viète (1593).
+
+## Why it matters
+
+The law of cosines is the workhorse of triangulation. Knowing any two sides and the angle between them tells you the third. Knowing all three sides tells you every angle. This is enough to recover an entire triangle — and, by triangulation, an entire surveyed landscape.
+
+## Real-world applications
+
+[GPS positioning](/applications/gps-positioning) and [radar](/applications/radar-and-sonar) reduce to triangulation problems where the law of cosines (and its generalisations to higher dimensions) is doing the geometry. [3-D computer graphics](/applications/computer-graphics-3d) uses dot-product identities that are essentially the law of cosines in disguise — the cosine of the angle between two vectors equals the dot product divided by the product of magnitudes.
+
+## Where you'll meet it
+
+In any first-year linear algebra course, as the geometric interpretation of the dot product.

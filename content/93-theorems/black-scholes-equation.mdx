@@ -1,0 +1,38 @@
+        ---
+        title: The Black-Scholes equation
+        section: Theorems
+        section_slug: 93-theorems
+        slug: black-scholes-equation
+        attributed_to: []
+        era: 09-modern-mathematics
+        appears_in: [04-advanced-topics-year-four/03-advanced-pdes]
+        related_theorems: [heat-equation, axiomatic-foundations-of-probability]
+        applications: [option-pricing-finance, actuarial-science]
+        tags: [finance, PDE, stochastic]
+        year_introduced: "1973"
+        summary: The partial differential equation that prices financial options — the heat equation in disguise.
+        ---
+
+        The value $V(S, t)$ of a European option on an asset $S$ with volatility $\sigma$ and risk-free rate $r$ satisfies
+
+$$
+\frac{\partial V}{\partial t} + \tfrac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + r S \frac{\partial V}{\partial S} - rV = 0.
+$$
+
+A change of variables turns it into the heat equation, with the option's payoff as initial data.
+
+## History
+
+Fischer Black and Myron Scholes derived the equation in 1973; Robert Merton extended their framework the same year. Scholes and Merton shared the 1997 Nobel Prize in Economics (Black had died in 1995). The model triggered the explosion of derivatives trading in the 1980s and 90s.
+
+## Why it matters
+
+It established that prices of derivative contracts could be computed from the diffusion of their underlying, using no information about expected returns. The result was as conceptually clean as it was economically transformative — and its assumption of constant volatility was as wrong as it was useful.
+
+## Real-world applications
+
+Every options-trading desk and every [actuarial valuation](/applications/actuarial-science) of insurance liabilities uses Black-Scholes or one of its descendants.
+
+## Where you'll meet it
+
+In any final-year mathematical-finance option.

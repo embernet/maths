@@ -1,0 +1,42 @@
+---
+title: Laplace equation
+section: Theorems
+section_slug: 93-theorems
+slug: laplace-equation
+attributed_to: [laplace]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [gauss-s-law-electrostatics, heat-equation, fourier-series, laplace-transform]
+applications: [seismic-imaging-oil-exploration, bridge-and-structural-engineering, climate-modelling]
+tags: [PDEs, harmonic-functions, Laplace, potential-theory]
+year_introduced: '1782'
+summary: The equation ∇²u = 0 governing gravitational and electrostatic potentials, steady heat distribution, and incompressible fluid flow — the simplest elliptic PDE.
+---
+
+
+
+## What it says
+
+The **Laplace equation** is:
+
+$$\nabla^2 u = \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} = 0$$
+
+Solutions are **harmonic functions**. They satisfy the mean value property: the value at any point equals the average over any sphere centred there. Harmonic functions are infinitely differentiable and cannot have interior maxima or minima (maximum principle) — the extrema occur on the boundary.
+
+The **Poisson equation** $\nabla^2 u = f$ has a source term $f$ and generalises to include non-zero charge/mass density.
+
+## History
+
+[Laplace](/mathematicians/laplace) derived the equation in the 1780s while studying gravitational potentials. It is also a consequence of [Gauss's law](/theorems/gauss-s-law-electrostatics) in regions with no charge. The equation appears in potential theory, complex analysis (harmonic = real part of holomorphic), and conformal mapping.
+
+## Why it matters
+
+Laplace's equation is the paradigm for elliptic PDEs. Unlike the heat equation (parabolic) or wave equation (hyperbolic), its solutions are determined entirely by boundary data — no initial conditions needed. This makes it the correct model for equilibrium states: steady-state temperature, electrostatic potential, and the velocity potential of irrotational flow.
+
+## Real-world applications
+
+[Seismic imaging](/applications/seismic-imaging-oil-exploration) uses potential theory (Laplace-type equations) for subsurface reconstruction. [Structural engineering](/applications/bridge-and-structural-engineering) uses the Airy stress function (satisfying the biharmonic equation $\nabla^4 u = 0$). [Climate modelling](/applications/climate-modelling) uses the Laplace equation for geopotential height.
+
+## Where you'll meet it
+
+Laplace's equation is a Year 2 differential equations topic and Year 4 PDE theory. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

@@ -1,0 +1,46 @@
+---
+title: Spam Filtering
+section: Real-world applications
+section_slug: 94-applications
+slug: spam-filtering
+domains: [computer-science, statistics, engineering]
+uses_theorems: [bayes-theorem, maximum-likelihood-estimation]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_applications: [machine-learning-bayesian-inference, cybersecurity-anomaly-detection, medical-diagnosis-screening]
+tags: [Bayes, classification, probability, applied]
+real_world_examples: [Gmail spam detection, Outlook junk mail filter, Enterprise email security gateways, SMS spam detection]
+summary: 'The filter that keeps your inbox clean uses Bayes'' theorem: given that this email contains the word ''Viagra'', how likely is it to be spam?'
+---
+
+
+## The application
+
+Approximately 45% of global email traffic is spam — 162 billion messages per day. Every email service runs a spam classifier to keep most of it out of your inbox. The simplest and most instructive implementation is **naïve Bayes classification**: a direct application of Bayes' theorem that works surprisingly well despite its simplifying assumption.
+
+## The maths behind it
+
+**Naïve Bayes classifier**: let $C = 1$ (spam) or $C = 0$ (ham) and let $\mathbf{w} = (w_1, w_2, \ldots, w_d)$ be the word features present in an email (a binary vector: $w_i = 1$ if word $i$ appears). Bayes' theorem gives:
+
+$$P(C = 1 \mid \mathbf{w}) = \frac{P(\mathbf{w} \mid C = 1)\, P(C = 1)}{P(\mathbf{w})}.$$
+
+The "naïve" assumption is that word occurrences are **conditionally independent** given the class: $P(\mathbf{w} \mid C) = \prod_i P(w_i \mid C)$. Then:
+
+$$P(C = 1 \mid \mathbf{w}) \propto P(C = 1) \prod_{i : w_i = 1} P(w_i = 1 \mid C = 1) \prod_{i : w_i = 0} P(w_i = 0 \mid C = 1).$$
+
+The parameters $P(w_i = 1 \mid C)$ are estimated from a labelled training set by **maximum likelihood** (simply the fraction of class-$C$ emails containing word $i$, with Laplace smoothing to avoid zero probabilities for unseen words).
+
+In log-space this becomes a **linear classifier**: $\log P(C=1 \mid \mathbf{w}) - \log P(C=0 \mid \mathbf{w}) = \log \frac{P(C=1)}{P(C=0)} + \sum_i w_i \log \frac{P(w_i=1 \mid C=1)}{P(w_i=1 \mid C=0)}$. Each word $i$ contributes a **weight** (its log-likelihood ratio) to the total score; words strongly associated with spam get large positive weights.
+
+**Logistic regression** relaxes the independence assumption by directly modelling $P(C = 1 \mid \mathbf{x}) = \sigma(\boldsymbol{\theta}^T \mathbf{x})$ (where $\sigma$ is the sigmoid function) and estimating $\boldsymbol{\theta}$ by maximum likelihood. Modern spam filters use much richer features and neural network classifiers, but naïve Bayes remains competitive and interpretable.
+
+## A concrete example
+
+A naïve Bayes spam filter trained on the SpamAssassin public corpus achieves roughly 97% accuracy. Gmail's spam detection (using deep learning) achieves over 99.9% precision (few false positives) with high recall — filtering billions of spam messages per day with an imperceptibly small false positive rate for legitimate mail.
+
+## History of the application
+
+Spam became a serious problem with the rise of commercial internet in the mid-1990s. Paul Graham's 2002 essay "A Plan for Spam" popularised the naïve Bayes approach and triggered a wave of adoption. It remains one of the best-known real-world demonstrations that a simple probability model can outperform elaborate heuristic rule systems.
+
+## Links
+
+Bayes' theorem and conditional probability are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). Maximum likelihood estimation is in [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). For deeper Bayesian models see [Machine Learning: Bayesian Inference](/applications/machine-learning-bayesian-inference). The false-positive problem in low-prevalence settings is explored in [Medical Diagnosis and Screening](/applications/medical-diagnosis-screening).

@@ -1,0 +1,71 @@
+---
+title: Numerical Analysis
+section: 'Specialisation: Year Three'
+section_slug: 03-specialisation-year-three
+year: 3
+order: 5
+tags: [numerical-analysis, algorithms, floating-point, eigenvalues, SVD, iterative-methods, error-analysis]
+prerequisites:
+- 01-algebra-and-linear-algebra
+related:
+- 06-programming-and-discrete-mathematics
+- 04-mathematical-physics-and-fluids
+mathematicians: [gauss, newton, lagrange, euler]
+reading_time_min: 8
+summary: 'Numerical analysis is the mathematics of computation: how to solve problems that have no closed-form answer, and how to bound the errors that arise from discretisation and finite-precision arithmetic.'
+theorems: [method-of-least-squares, lagrange-interpolation, gaussian-distribution-normal-distribution]
+applications: [climate-modelling, gps-positioning, robotics-and-control, bridge-and-structural-engineering]
+---
+
+
+Every practical application of mathematics eventually requires a number. When a closed-form answer exists, you compute it symbolically. When it does not — and for most real problems, it does not — you need numerical methods: algorithms that produce approximate answers with quantifiable error bounds.
+
+Numerical analysis is not simply "computing things"; it is a mathematical discipline that studies the existence, accuracy, and efficiency of algorithms, and the theoretical guarantees that underpin them.
+
+## Floating-point arithmetic and condition numbers
+
+Computers represent real numbers in **floating-point** format: a number is stored as $\pm m \times 2^e$ where $m$ (the mantissa) has a fixed number of bits. This introduces unavoidable **rounding errors** at every arithmetic operation.
+
+The **condition number** $\kappa(A)$ of a matrix measures the sensitivity of the linear system $Ax = b$ to perturbations in $b$:
+
+$$\frac{\|\delta x\|}{\|x\|} \le \kappa(A) \frac{\|\delta b\|}{\|b\|}.$$
+
+If $\kappa(A) \approx 10^k$, you lose roughly $k$ significant figures in the solution. An ill-conditioned matrix ($\kappa \gg 1$) makes the linear system numerically unreliable regardless of the algorithm used.
+
+## Eigenvalue algorithms: the QR algorithm
+
+Computing eigenvalues of large matrices is the central problem of numerical linear algebra. The naive approach (solve the characteristic polynomial) is numerically disastrous: the roots of a polynomial are extremely sensitive to coefficient perturbations.
+
+The **QR algorithm** iterates: write $A = Q_k R_k$ (QR factorisation), then set $A_{k+1} = R_k Q_k$. This sequence converges (under mild conditions) to an upper triangular matrix (Schur form) whose diagonal entries are the eigenvalues. The QR algorithm is the workhorse of numerical eigenvalue computation and underlies MATLAB's `eig` function and most scientific computing eigensolvers.
+
+The **SVD (Singular Value Decomposition)**: every $m \times n$ matrix $A$ can be written as $A = U\Sigma V^T$ where $U, V$ are orthogonal and $\Sigma$ is diagonal with non-negative entries (singular values). SVD is used for low-rank approximation (recommender systems, image compression, PCA in statistics), and is numerically the most stable decomposition for ill-conditioned problems.
+
+## Krylov subspace methods
+
+For very large, sparse matrices (millions of rows), storing a full dense matrix is impractical. **Krylov subspace methods** exploit sparsity by working with the sequence of vectors $\{b, Ab, A^2b, \ldots, A^{k-1}b\}$ (the Krylov subspace) rather than the full matrix.
+
+The **conjugate gradient method** solves $Ax = b$ for symmetric positive definite $A$ by minimising the $A$-norm of the error over the Krylov subspace. It requires only matrix-vector products (not factorisation) and converges in at most $n$ steps (exactly) or much faster in practice when eigenvalues are clustered.
+
+**Preconditioning**: choosing a preconditioner $P \approx A$ and solving $P^{-1}Ax = P^{-1}b$ instead, improving the condition number and thus the convergence rate.
+
+## Numerical integration and ODE solvers
+
+**Gaussian quadrature** uses $n$ carefully chosen quadrature points to integrate polynomials of degree up to $2n - 1$ exactly. The points and weights are determined by orthogonality conditions, giving much higher accuracy than evenly-spaced rules for smooth functions.
+
+**Runge-Kutta methods** for ODEs: the classic RK4 method computes four intermediate slopes and combines them with weights, achieving fourth-order accuracy ($O(h^4)$ local error) with only four function evaluations per step.
+
+**Stiff ODEs** — those with solutions on widely separated timescales — cause explicit methods to require impractically small step sizes. **Implicit methods** (where the next step is defined by an implicit equation involving $f(t_{n+1}, y_{n+1})$) are stable for large step sizes but require solving a nonlinear system at each step.
+
+## Numerical PDEs: finite element methods
+
+Solving PDEs on complex domains requires discretisation. The **finite element method** (FEM) is the standard approach for elliptic PDEs: approximate the solution as a piecewise polynomial on a mesh, and solve for the coefficients by requiring the **weak form** of the PDE to hold:
+
+$$a(u_h, v_h) = \ell(v_h) \quad \forall v_h \in V_h,$$
+
+where $a(\cdot, \cdot)$ is a bilinear form derived from the PDE and $V_h$ is the finite-dimensional trial space. The Lax-Milgram theorem guarantees a unique solution. FEM is used in structural engineering, aerodynamics, and medical imaging.
+
+## Real-world applications
+
+Where this turns up in the world: [Climate modelling](/applications/climate-modelling) runs the global climate on supercomputers by discretising the atmosphere and ocean onto a grid and advancing the state forward in time using exactly the ODE and PDE solvers developed in this course — the accuracy of the forecast depends directly on the order and stability of the numerical scheme. [GPS positioning](/applications/gps-positioning) solves an overdetermined linear system (more satellite range measurements than unknowns) using the least-squares methods and condition-number analysis taught here; errors from floating-point and geometry combine multiplicatively, and understanding both is essential. [Bridge and structural engineering](/applications/bridge-and-structural-engineering) computes stress distributions across irregular geometries using finite element analysis, where every simulation is a large sparse linear system solved by the iterative Krylov methods at the heart of this course.
+
+The field combines the deepest ideas in approximation theory, linear algebra, and analysis — and every scientific simulation you have ever seen on a screen was produced by software built on these foundations.

@@ -1,0 +1,171 @@
+---
+/**
+ * /definitions/[slug] — individual definition page.
+ * Generates one route per .mdx file in content/95-definitions/.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const defsDir = join(process.cwd(), 'content/95-definitions');
+
+export async function getStaticPaths() {
+  const dir = join(process.cwd(), 'content/95-definitions');
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => extname(f) === '.mdx' && !f.startsWith('_'))
+    .map((f) => ({ params: { slug: basename(f, '.mdx') } }));
+}
+
+function parseFrontmatter(fp: string): Record<string, unknown> {
+  let text = '';
+  try { text = readFileSync(fp, 'utf8'); } catch { return {}; }
+  if (!text.startsWith('---')) return {};
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+const { slug } = Astro.params;
+const filePath = join(defsDir, `${slug}.mdx`);
+const fm = existsSync(filePath) ? parseFrontmatter(filePath) : {};
+
+const title = (fm.title as string) ?? slug!.replace(/-/g, ' ');
+const summary = fm.summary as string | undefined;
+const tags = (fm.tags as string[]) ?? [];
+const mentionedIn = (fm.mentioned_in as string[]) ?? [];
+const firstSeenIn = fm.first_seen_in as string | undefined;
+
+// Glob import for MDX content
+const defPages = await import.meta.glob('/content/95-definitions/*.mdx');
+const matchKey = `/content/95-definitions/${slug}.mdx`;
+let Content: unknown = null;
+if (defPages[matchKey]) {
+  const mod = await defPages[matchKey]() as { default: unknown };
+  Content = mod.default;
+}
+
+function pageUrl(p: string): string {
+  // p is like "01-foundations-year-one/01-algebra-and-linear-algebra/index"
+  // or "91-mathematicians/cauchy" etc.
+  const trimmed = p.replace(/\/index$/, '');
+  // Mathematicians → /mathematicians/{slug}; same for theorems / applications / definitions
+  if (trimmed.startsWith('91-mathematicians/')) return '/' + trimmed.replace('91-mathematicians/', 'mathematicians/');
+  if (trimmed.startsWith('93-theorems/')) return '/' + trimmed.replace('93-theorems/', 'theorems/');
+  if (trimmed.startsWith('94-applications/')) return '/' + trimmed.replace('94-applications/', 'applications/');
+  if (trimmed.startsWith('95-definitions/')) return '/' + trimmed.replace('95-definitions/', 'definitions/');
+  if (trimmed.startsWith('00-welcome')) return '/';
+  return '/' + trimmed;
+}
+
+function pageDisplayName(p: string): string {
+  const segs = p.replace(/\/index$/, '').split('/');
+  const last = segs[segs.length - 1] ?? p;
+  return last.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+---
+
+<BaseLayout title={title} description={summary ?? `Definition of ${title}`}>
+  <div class="prose-content definition-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <a href="/95-definitions">Definitions</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <header class="definition-header">
+      <h1>{title}</h1>
+      <div class="definition-meta">
+        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+      </div>
+    </header>
+
+    {summary && <p class="definition-summary-callout">{summary}</p>}
+
+    {Content ? (
+      <div class="definition-body">
+        <Content />
+      </div>
+    ) : (
+      <div class="stub-notice">
+        <p>A definition is being prepared for this term.</p>
+      </div>
+    )}
+
+    {mentionedIn.length > 0 && (
+      <div class="definition-backlinks">
+        <section class="backlinks-section" aria-label="Where this term appears">
+          <h2>Where this term appears</h2>
+          <ul class="backlink-list">
+            {mentionedIn.map((p) => (
+              <li><a href={pageUrl(p)} class="backlink-item">{pageDisplayName(p)}</a></li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .definition-page { padding: 1.5rem 1rem 4rem; }
+  .breadcrumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 1.25rem; }
+  .breadcrumb a { color: var(--color-primary); }
+  .definition-header { margin-bottom: 1rem; }
+  .definition-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+  .definition-summary-callout {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    padding: 0.75rem 1.1rem;
+    border-radius: 0 0.4rem 0.4rem 0;
+    font-style: italic;
+    margin: 1rem 0 1.5rem;
+    max-width: 72ch;
+  }
+  .definition-body { margin-top: 1rem; }
+  .stub-notice {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    padding: 1rem 1.25rem;
+    color: var(--color-muted);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+  .definition-backlinks {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .backlinks-section h2 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.6rem;
+  }
+  .backlink-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.3rem 1.5rem;
+  }
+  .backlink-item { color: var(--color-primary); text-decoration: none; font-size: 0.9rem; display: block; padding: 0.15rem 0; }
+  .backlink-item:hover { color: var(--color-accent); text-decoration: underline; }
+</style>

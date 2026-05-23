@@ -1,0 +1,68 @@
+---
+title: 'Advanced PDEs: Sobolev Spaces and Weak Solutions'
+section: 'Advanced Topics: Year Four'
+section_slug: 04-advanced-topics-year-four
+year: 4
+order: 3
+tags: [PDEs, Sobolev-spaces, weak-solutions, elliptic-equations, regularity, functional-analysis]
+prerequisites:
+- 03-measure-and-lebesgue-integration
+- 02-functional-analysis
+- 08-differential-equations-advanced
+related:
+- 04-mathematical-physics-and-fluids
+mathematicians: [hilbert, cauchy, fourier]
+reading_time_min: 7
+summary: The modern rigorous theory of PDEs uses Sobolev spaces and weak formulations. Existence and uniqueness become theorems in functional analysis; regularity theory asks how smooth solutions really are.
+theorems: [heat-equation, laplace-equation, banach-fixed-point-theorem, hilbert-spaces]
+applications: [climate-modelling, seismic-imaging-oil-exploration, bridge-and-structural-engineering]
+---
+
+
+*Note: Year Four content at this level is indicative. Students on a four-year integrated master's programme should consult their department's current catalogue for the definitive unit list and syllabi.*
+
+Classical PDE theory requires that solutions are differentiable — you can only insert a function into $-\Delta u = f$ if $u$ has second derivatives in the classical sense. But many natural problems have data (boundary conditions, forcing terms) that are not smooth, and insisting on classical solutions excludes important physical situations.
+
+The modern resolution is to expand the class of "solutions" to include **weak solutions** — functions that satisfy the PDE in an integral (distributional) sense. This requires the theory of **Sobolev spaces** and functional analytic tools.
+
+## Weak derivatives and Sobolev spaces
+
+A function $u \in L^2(\Omega)$ has a **weak partial derivative** $\partial u / \partial x_i$ if there exists $v \in L^2(\Omega)$ such that for all smooth test functions $\phi$ with compact support:
+
+$$\int_\Omega u\, \frac{\partial \phi}{\partial x_i}\, dx = -\int_\Omega v\, \phi\, dx.$$
+
+This is the integration-by-parts formula turned into a definition: $v$ behaves as a derivative of $u$ "in the sense of distributions."
+
+The **Sobolev space** $H^k(\Omega) = W^{k,2}(\Omega)$ consists of functions in $L^2(\Omega)$ whose weak derivatives up to order $k$ are also in $L^2(\Omega)$, with inner product:
+
+$$\langle u, v \rangle_{H^k} = \sum_{|\alpha| \le k} \int_\Omega D^\alpha u\, D^\alpha v\, dx.$$
+
+These are Hilbert spaces. The space $H^1_0(\Omega)$ (functions in $H^1$ that vanish on $\partial \Omega$) is the natural space for solutions of elliptic PDEs with homogeneous Dirichlet conditions.
+
+## Weak formulations and the Lax-Milgram theorem
+
+Consider the elliptic PDE $-\Delta u = f$ on $\Omega$ with $u = 0$ on $\partial\Omega$. Multiply by a test function $v \in H^1_0(\Omega)$ and integrate:
+
+$$\int_\Omega \nabla u \cdot \nabla v\, dx = \int_\Omega fv\, dx.$$
+
+This is the **weak formulation**: find $u \in H^1_0(\Omega)$ such that $a(u,v) = F(v)$ for all $v \in H^1_0(\Omega)$, where $a(u,v) = \int \nabla u \cdot \nabla v\, dx$ and $F(v) = \int fv\, dx$.
+
+The **Lax-Milgram theorem**: if $a(\cdot,\cdot)$ is a bounded, coercive bilinear form on a Hilbert space $H$, and $F$ is a bounded linear functional, then there exists a unique $u \in H$ with $a(u,v) = F(v)$ for all $v$.
+
+Coercivity for the Laplacian follows from **Poincaré's inequality**: $\|u\|_{L^2}^2 \le C\|\nabla u\|_{L^2}^2$ for $u \in H^1_0(\Omega)$. This bounds the full $H^1$ norm by the gradient alone.
+
+## Elliptic regularity
+
+A weak solution is merely in $H^1_0$. Is it actually smooth? **Elliptic regularity theory** answers: if $f \in H^k(\Omega)$ and $\partial\Omega$ is sufficiently smooth, then $u \in H^{k+2}(\Omega)$. The solution is "two derivatives more regular than the data" — a hallmark of elliptic PDEs.
+
+In the limit: if $f$ is smooth ($f \in C^\infty$), then $u \in C^\infty(\Omega)$ (interior regularity). This is a striking result: a function defined merely as a minimiser of an integral functional is automatically infinitely differentiable.
+
+## Real-world applications
+
+Where this turns up in the world: [Climate modelling](/applications/climate-modelling) uses finite element and finite volume discretisations of atmospheric PDEs whose mathematical foundations are precisely the weak formulations and Lax-Milgram theory in this course; without the elliptic regularity results, there would be no rigorous justification that the discretised model is solving the right equation. [Seismic imaging for oil and gas exploration](/applications/seismic-imaging-oil-exploration) inverts acoustic wave equations (a hyperbolic PDE) to reconstruct subsurface structure from surface measurements — an inverse problem whose well-posedness rests on the PDE theory here. [Bridge and structural engineering](/applications/bridge-and-structural-engineering) simulates stress and deformation using finite element analysis; the Céa's lemma error bound you prove in this course is what justifies trusting those simulations when lives depend on them.
+
+## Connection to finite element methods
+
+The weak formulation is also the starting point for numerical computation. Restrict to a finite-dimensional subspace $V_h \subset H^1_0$ (piecewise polynomial functions on a mesh) and solve $a(u_h, v_h) = F(v_h)$ for all $v_h \in V_h$. This is the **Galerkin approximation**, the mathematical core of the finite element method.
+
+**Céa's lemma** gives the best possible error bound: $\|u - u_h\|_{H^1} \le C \inf_{v_h \in V_h} \|u - v_h\|_{H^1}$. The FEM solution is quasi-optimal: up to the constant $C$, it is as good as the best approximation from $V_h$. Mesh refinement and higher-order elements improve the approximation, with convergence rates controlled by Sobolev embedding theorems.

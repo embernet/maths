@@ -1,0 +1,42 @@
+---
+title: Kolmogorov complexity (algorithmic information theory)
+section: Theorems
+section_slug: 93-theorems
+slug: kolmogorov-complexity-algorithmic-information-theory
+attributed_to: [kolmogorov]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [axiomatic-foundations-of-probability, turing-machines-theory-of-computation, halting-problem-undecidability]
+applications: [data-compression, machine-learning-deep-neural-networks]
+tags: [information-theory, complexity, Kolmogorov, algorithms]
+year_introduced: '1963'
+summary: The complexity of a string is the length of the shortest computer program that produces it — a measure of information content independent of probability distributions.
+---
+
+
+
+## What it says
+
+The **Kolmogorov complexity** $K(x)$ of a string $x$ (relative to a fixed universal Turing machine) is the length of the shortest program that outputs $x$ and halts.
+
+Key properties:
+- $K(x) \leq |x| + c$ (you can always describe $x$ by copying it, up to a constant)
+- Most strings of length $n$ have $K(x) \approx n$ (they are incompressible — no short description exists)
+- $K$ is not computable (computing it would solve the halting problem)
+- **Coding theorem:** $K(x) \approx -\log_2 P_{\text{opt}}(x)$ where $P_{\text{opt}}$ is the optimal compressor
+
+## History
+
+[Kolmogorov](/mathematicians/kolmogorov) introduced the concept in 1963; Ray Solomonoff and Gregory Chaitin independently developed related ideas. Chaitin's $\Omega$ (the halting probability) is a specific incompressible number that encodes many arithmetic truths.
+
+## Why it matters
+
+Kolmogorov complexity gives a definition of randomness that does not require a probability distribution: a string is random if it has no short description. This connects information theory, computability, and probability in a deep way. It also gives insight into [data compression](/applications/data-compression) — you cannot compress below $K(x)$ — and provides theoretical grounding for Occam's razor (prefer simpler models).
+
+## Real-world applications
+
+[Data compression](/applications/data-compression) algorithms approach the Kolmogorov complexity limit. [Machine learning](/applications/machine-learning-deep-neural-networks) generalisation bounds can be phrased in terms of description length.
+
+## Where you'll meet it
+
+Kolmogorov complexity appears in Year 4 logic and information theory. See the [Modern Mathematics era](/history/09-modern-mathematics).

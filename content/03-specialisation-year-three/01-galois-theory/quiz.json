@@ -1,0 +1,36 @@
+{
+  "topic_slug": "01-galois-theory",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The fundamental theorem of Galois theory establishes a correspondence between:",
+      "options": [
+        {"id": "a", "text": "Intermediate fields of $K/F$ and subgroups of $\\text{Gal}(K/F)$.", "correct": true, "explanation": "The correspondence reverses inclusion: larger intermediate fields correspond to smaller subgroups, and vice versa. Normal subfields correspond to normal subgroups."},
+        {"id": "b", "text": "Intermediate fields and subfields of $F$.", "correct": false, "explanation": "The correspondence is between intermediate fields of $K/F$ and subgroups of the Galois group, not subfields of $F$."},
+        {"id": "c", "text": "Elements of $K$ and elements of $\\text{Gal}(K/F)$.", "correct": false, "explanation": "The theorem is about subfields and subgroups, not individual elements."},
+        {"id": "d", "text": "Irreducible polynomials over $F$ and conjugacy classes of $\\text{Gal}(K/F)$.", "correct": false, "explanation": "Conjugacy classes of the Galois group do correspond to conjugate roots, but the fundamental theorem is the subfield-subgroup correspondence."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The general quintic equation has no solution by radicals. The group-theoretic reason is that:",
+      "options": [
+        {"id": "a", "text": "The symmetric group $S_5$ is not solvable — its alternating subgroup $A_5$ is simple and non-abelian.", "correct": true, "explanation": "$A_5$ is the smallest non-abelian simple group. Since $A_5$ has no proper non-trivial normal subgroups, $S_5$ cannot have a composition series with abelian factors, so $S_5$ is not solvable."},
+        {"id": "b", "text": "Five is not a prime number.", "correct": false, "explanation": "Five is prime. Primeness of the degree is not the relevant criterion."},
+        {"id": "c", "text": "Degree-5 polynomials always have irrational coefficients.", "correct": false, "explanation": "The result concerns polynomials with rational (or general field) coefficients. The coefficients can be anything."},
+        {"id": "d", "text": "Abel proved it using analysis rather than algebra.", "correct": false, "explanation": "Abel's proof was algebraic. Galois's proof used group theory, which Abel did not have."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The degree $[\\mathbb{Q}(\\sqrt{2}, \\sqrt{3}) : \\mathbb{Q}]$ is:",
+      "options": [
+        {"id": "a", "text": "4.", "correct": true, "explanation": "$[\\mathbb{Q}(\\sqrt{2}):\\mathbb{Q}]=2$ and $[\\mathbb{Q}(\\sqrt{2},\\sqrt{3}):\\mathbb{Q}(\\sqrt{2})]=2$ (since $\\sqrt{3} \\notin \\mathbb{Q}(\\sqrt{2})$). By the tower law, total degree is $2 \\times 2 = 4$. A basis is $\\{1, \\sqrt{2}, \\sqrt{3}, \\sqrt{6}\\}$."},
+        {"id": "b", "text": "2.", "correct": false, "explanation": "This would be the degree of $\\mathbb{Q}(\\sqrt{2})/\\mathbb{Q}$ alone. Adding a second independent irrationality doubles the degree again."},
+        {"id": "c", "text": "6.", "correct": false, "explanation": "No: the degree is 4, not 6. The extension has basis $\\{1, \\sqrt{2}, \\sqrt{3}, \\sqrt{6}\\}$ of size 4."},
+        {"id": "d", "text": "3.", "correct": false, "explanation": "Degrees of field extensions are always powers of the degree of the minimal polynomial, which here gives $2 \\times 2 = 4$."}
+      ]
+    }
+  ]
+}

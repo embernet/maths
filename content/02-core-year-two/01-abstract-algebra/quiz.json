@@ -1,0 +1,46 @@
+{
+  "topic_slug": "01-abstract-algebra",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "If $|G| = 15$, which of the following is a possible order for a subgroup of $G$?",
+      "options": [
+        {"id": "a", "text": "5", "correct": true, "explanation": "By Lagrange's theorem, the order of any subgroup must divide $|G| = 15$. The divisors of 15 are 1, 3, 5, and 15 — so 5 is a valid subgroup order."},
+        {"id": "b", "text": "4", "correct": false, "explanation": "4 does not divide 15, so by Lagrange's theorem no subgroup of order 4 can exist in a group of order 15."},
+        {"id": "c", "text": "6", "correct": false, "explanation": "6 does not divide 15. Lagrange's theorem rules this out."},
+        {"id": "d", "text": "7", "correct": false, "explanation": "7 does not divide 15. The possible subgroup orders are exactly the divisors of 15: 1, 3, 5, 15."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The First Isomorphism Theorem for groups states that, for a homomorphism $\\phi: G \\to H$:",
+      "options": [
+        {"id": "a", "text": "$G / \\ker\\phi \\cong \\text{im}\\,\\phi$.", "correct": true, "explanation": "The quotient of G by the kernel is isomorphic to the image. This is the fundamental structure theorem for homomorphisms, attributed to Noether in its abstract form."},
+        {"id": "b", "text": "$G \\cong H$.", "correct": false, "explanation": "This would require $\\phi$ to be an isomorphism (bijective homomorphism). In general $\\phi$ need not be bijective."},
+        {"id": "c", "text": "$\\ker\\phi \\cong \\text{im}\\,\\phi$.", "correct": false, "explanation": "The kernel and image need not be isomorphic. The theorem relates the quotient $G/\\ker\\phi$ to $\\text{im}\\,\\phi$."},
+        {"id": "d", "text": "$|G| = |\\ker\\phi| + |\\text{im}\\,\\phi|$.", "correct": false, "explanation": "The correct multiplicative relation is $|G| = |\\ker\\phi| \\cdot |\\text{im}\\,\\phi|$ (from Lagrange: $|G/\\ker\\phi| = |\\text{im}\\,\\phi|$ and $|G| = |\\ker\\phi| \\cdot [G:\\ker\\phi]$). Addition is wrong."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Which of the following is NOT a group under the stated operation?",
+      "options": [
+        {"id": "a", "text": "The positive rationals $\\mathbb{Q}^+$ under multiplication.", "correct": false, "explanation": "This IS a group: closed (product of positive rationals is positive rational), associative, identity 1, and every $p/q$ has inverse $q/p \\in \\mathbb{Q}^+$."},
+        {"id": "b", "text": "The natural numbers $\\mathbb{N} = \\{0, 1, 2, \\ldots\\}$ under addition.", "correct": true, "explanation": "This is NOT a group. The element 1 has no additive inverse in $\\mathbb{N}$: there is no natural number $n$ with $1 + n = 0$ (if 0 is excluded, no identity either). Inverses fail."},
+        {"id": "c", "text": "The integers $\\mathbb{Z}$ under addition.", "correct": false, "explanation": "This IS a group: closed, associative, identity 0, and every integer $n$ has inverse $-n \\in \\mathbb{Z}$."},
+        {"id": "d", "text": "The symmetric group $S_3$ of permutations of $\\{1,2,3\\}$ under composition.", "correct": false, "explanation": "This IS a group — the definition of a symmetric group. $|S_3| = 6$."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "Cayley's theorem says every group $G$ embeds into:",
+      "options": [
+        {"id": "a", "text": "The symmetric group $S_{|G|}$.", "correct": true, "explanation": "Every group $G$ is isomorphic to a subgroup of the group of all permutations of $G$ itself (acting by left multiplication). This embeds $G$ into $S_{|G|}$."},
+        {"id": "b", "text": "The general linear group $GL_n(\\mathbb{R})$ for some $n$.", "correct": false, "explanation": "That is a representation theorem for finite groups over a field — true but a stronger result than Cayley's. Cayley's theorem uses permutations, not matrices."},
+        {"id": "c", "text": "An abelian group.", "correct": false, "explanation": "Not in general. $S_3$ is non-abelian, and Cayley embeds it in $S_6$ (also non-abelian). Cayley's theorem does not produce an abelian overgroup."},
+        {"id": "d", "text": "The additive group $\\mathbb{Z}$.", "correct": false, "explanation": "Infinite cyclic groups embed in $\\mathbb{Z}$, but finite groups do not (except the trivial group), since $\\mathbb{Z}$ has only two elements of finite order: 0 and... none, since $\\mathbb{Z}$ is torsion-free."}
+      ]
+    }
+  ]
+}

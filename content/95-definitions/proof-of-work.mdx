@@ -1,0 +1,18 @@
+---
+title: 'Proof of work'
+section: Definitions
+section_slug: 95-definitions
+slug: proof-of-work
+tags: [applied]
+first_seen_in: '94-applications/cryptocurrency-blockchain.mdx'
+mentioned_in: ['94-applications/cryptocurrency-blockchain']
+summary: 'Quick definition of Proof of work from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Proof of work**: to add a block, a miner must find a nonce $x$ such that $\text{SHA256}(\text{SHA256}(\text{header} \| x)) < T$ (a target $T$). Since SHA-256 outputs are uniformly distributed (modelled as a random oracle), each trial succeeds with probability $T / 2^{256}$. Finding a valid nonce is a Bernoulli trial with success probability $p \approx T/2^{256}$; the number of trials needed is geometrically distributed with mean $1/p$. The network adjusts $T$ every 2016 blocks to target a 10-minute average block time.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

@@ -1,0 +1,32 @@
+---
+title: Dirichlet convergence theorem
+section: Theorems
+section_slug: 93-theorems
+slug: dirichlet-convergence-theorem
+attributed_to: []
+era: 06-the-rigour-revolution
+appears_in: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/04-topology]
+related_theorems: [fourier-series, fourier-transform]
+applications: [signal-processing-jpeg-mp3, medical-imaging-mri-ct]
+tags: [analysis, Fourier-series, convergence]
+year_introduced: "1829"
+summary: When does a Fourier series actually equal the function it represents? Dirichlet gave the first rigorous answer.
+---
+
+If $f$ is a periodic function with finitely many discontinuities and finitely many extrema on any period (the **Dirichlet conditions**), then its Fourier series converges to $f(x)$ at every point where $f$ is continuous, and to the average $\tfrac12(f(x^-) + f(x^+))$ at any jump discontinuity.
+
+## History
+
+Fourier's bold claim — that every reasonable function admits a trigonometric expansion — was scandalous in 1807 because Fourier offered no proof of convergence. [Lagrange](/mathematicians/lagrange) was unimpressed; [Cauchy](/mathematicians/cauchy) tried but stumbled. The first rigorous convergence theorem was Peter Gustav Lejeune Dirichlet's, published in 1829. He identified precisely which functions are well-behaved enough to have a convergent Fourier series, settling a question that had vexed analysis for two decades.
+
+## Why it matters
+
+Dirichlet's proof introduced techniques — partial sums, kernels, careful estimation — that became the workhorses of Fourier analysis for the next century. It was also the first place in which a mathematician proved, rather than asserted, that a series of functions converged to a stated limit, which set the standard of rigour for the rigour revolution.
+
+## Real-world applications
+
+Every digital signal compression scheme — [JPEG, MP3 and friends](/applications/signal-processing-jpeg-mp3) — uses truncated Fourier-style expansions. Knowing when convergence is guaranteed (and where it fails — overshoot at jump discontinuities is called the **Gibbs phenomenon**) is essential for understanding the artefacts you see at sharp edges in compressed images.
+
+## Where you'll meet it
+
+A first encounter in second-year Fourier-series courses; a deeper treatment in third-year harmonic analysis.

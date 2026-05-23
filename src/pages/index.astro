@@ -1,0 +1,176 @@
+---
+/**
+ * index.astro — Welcome page.
+ * Reads content/00-welcome/index.mdx (if present) via dynamic import.
+ * Falls back to a placeholder when Silas hasn't written it yet.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+const welcomePath = join(process.cwd(), 'content/00-welcome/index.mdx');
+const hasWelcome = existsSync(welcomePath);
+
+// Load section overview data for the grid
+const contentDir = join(process.cwd(), 'content');
+
+interface SectionCard {
+  slug: string;
+  title: string;
+  blurb: string;
+  topicCount: number;
+  href: string;
+}
+
+const yearSections = ['01-foundations-year-one', '02-core-year-two', '03-specialisation-year-three', '04-advanced-topics-year-four'];
+const cards: SectionCard[] = [];
+
+for (const slug of yearSections) {
+  const jsonPath = join(contentDir, slug, '_section.json');
+  if (!existsSync(jsonPath)) continue;
+  try {
+    const sec = JSON.parse(readFileSync(jsonPath, 'utf8'));
+    // Count topic subdirectories
+    const { readdirSync, statSync } = await import('node:fs');
+    const sectionDir = join(contentDir, slug);
+    let topicCount = 0;
+    try {
+      topicCount = readdirSync(sectionDir).filter((f) =>
+        statSync(join(sectionDir, f)).isDirectory()
+      ).length;
+    } catch { /* ignore */ }
+    cards.push({
+      slug,
+      title: sec.title ?? slug,
+      blurb: sec.blurb ?? '',
+      topicCount,
+      href: `/${slug}`,
+    });
+  } catch { /* ignore */ }
+}
+---
+
+<BaseLayout title="The Undergraduate Mathematics Companion">
+  <div class="welcome-page">
+    {hasWelcome ? (
+      <!-- When Silas has written the welcome MDX we render it via the section below -->
+      <div class="welcome-prose prose-content">
+        <h1>The Undergraduate Mathematics Companion</h1>
+        <p class="tagline">A friendly map of the curriculum a maths undergraduate meets in their first four years.</p>
+        <!-- MDX content rendered separately via the mdx route below -->
+      </div>
+    ) : (
+      <div class="welcome-prose prose-content">
+        <h1>The Undergraduate Mathematics Companion</h1>
+        <p class="tagline">A friendly map of the curriculum a maths undergraduate meets in their first four years.</p>
+        <p>
+          Use the navigation above to explore topics by year, browse
+          the <a href="/mathematicians">mathematicians</a> who built the subject,
+          or search for any topic using the search box in the header.
+        </p>
+      </div>
+    )}
+
+    {cards.length > 0 && (
+      <section class="section-grid-wrapper prose-content" aria-label="Curriculum sections">
+        <h2 class="section-grid-heading">Browse by year</h2>
+        <div class="section-grid">
+          {cards.map((card) => (
+            <a href={card.href} class="section-card">
+              <span class="card-title">{card.title}</span>
+              {card.topicCount > 0 && (
+                <span class="card-count">{card.topicCount} topic{card.topicCount !== 1 ? 's' : ''}</span>
+              )}
+              {card.blurb && <p class="card-blurb">{card.blurb}</p>}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="welcome-links prose-content">
+      <a href="/mathematicians" class="pill-link">Browse mathematicians →</a>
+      <a href="/resources" class="pill-link">External resources →</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .welcome-page { padding: 2rem 0 4rem; }
+
+  .tagline {
+    font-size: 1.15rem;
+    color: var(--color-muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-grid-wrapper { margin-top: 2.5rem; }
+
+  .section-grid-heading {
+    font-size: 1.15rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .section-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 600px) {
+    .section-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .section-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.6rem;
+    padding: 1.1rem 1.3rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .section-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 10px rgba(26,58,82,0.1);
+  }
+
+  .card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+  .card-count {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+  }
+  .card-blurb {
+    font-size: 0.88rem;
+    color: #444;
+    margin: 0.25rem 0 0;
+    line-height: 1.5;
+  }
+
+  .welcome-links {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .pill-link {
+    display: inline-block;
+    padding: 0.45rem 1rem;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.15s;
+  }
+  .pill-link:hover { background: var(--color-accent); color: #fff; }
+</style>

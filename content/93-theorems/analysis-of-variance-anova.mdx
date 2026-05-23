@@ -1,0 +1,42 @@
+---
+title: Analysis of variance (ANOVA)
+section: Theorems
+section_slug: 93-theorems
+slug: analysis-of-variance-anova
+attributed_to: [fisher]
+era: 09-modern-mathematics
+appears_in: [02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [maximum-likelihood-estimation, experimental-design-randomisation-blocking-factorial-design, the-fisher-information-matrix, gaussian-distribution-normal-distribution]
+applications: [clinical-trials-design, census-and-survey-statistics, population-dynamics-ecology]
+tags: [statistics, ANOVA, Fisher, hypothesis-testing]
+year_introduced: 1921–1925
+summary: A statistical method to test whether the means of several groups differ by partitioning total variability into between-group and within-group components.
+---
+
+
+## What it says
+
+ANOVA tests the null hypothesis that all group means are equal by comparing the **between-group variance** (how much group means differ) to the **within-group variance** (how much observations vary within each group).
+
+The **$F$-statistic** is:
+$$F = \frac{\text{Mean square between groups}}{\text{Mean square within groups}}$$
+
+Under the null hypothesis (and Gaussian assumptions), $F$ follows an $F$-distribution. Large $F$ suggests the group means differ. The $F$-test is a generalisation of the two-sample $t$-test to multiple groups.
+
+The key identity (for one-way ANOVA): $\text{SS}_{\text{total}} = \text{SS}_{\text{between}} + \text{SS}_{\text{within}}$, where SS denotes sum of squares.
+
+## History
+
+[Fisher](/mathematicians/fisher) developed ANOVA while working at Rothamsted Experimental Station in the 1920s, analysing agricultural field trial data. He needed to separate the effects of different fertiliser treatments from soil variation and seasonal fluctuation. *Statistical Methods for Research Workers* (1925) and *The Design of Experiments* (1935) codified these methods. They have been standard in experimental science ever since.
+
+## Why it matters
+
+ANOVA is the workhorse for analysing designed experiments with multiple treatment groups. It is the correct analysis for factorial designs (multiple factors each at multiple levels) and underlies regression models, mixed-effects models, and the general linear model. The idea of partitioning variance — understanding where the variability in your data comes from — is one of the deepest organising principles in statistics.
+
+## Real-world applications
+
+[Clinical trials](/applications/clinical-trials-design) use ANOVA to compare multiple treatment arms. [Survey and census statistics](/applications/census-and-survey-statistics) use ANOVA frameworks for demographic comparisons. [Ecology](/applications/population-dynamics-ecology) uses ANOVA to assess treatment effects in field experiments.
+
+## Where you'll meet it
+
+ANOVA is introduced in Year 2 statistical inference and used in all applied statistics courses. See the [Modern Mathematics era](/history/09-modern-mathematics).

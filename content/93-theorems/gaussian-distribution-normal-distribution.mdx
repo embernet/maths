@@ -1,0 +1,39 @@
+---
+title: Gaussian distribution (normal distribution)
+section: Theorems
+section_slug: 93-theorems
+slug: gaussian-distribution-normal-distribution
+attributed_to: [gauss]
+era: 05-the-calculus-revolution
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [central-limit-theorem, method-of-least-squares, bayes-theorem, axiomatic-foundations-of-probability]
+applications: [medical-diagnosis-screening, option-pricing-finance, machine-learning-deep-neural-networks, clinical-trials-design, census-and-survey-statistics]
+tags: [probability, statistics, normal-distribution, Gauss]
+year_introduced: '1809'
+summary: The bell-shaped distribution that arises whenever many small independent random effects add together — the most important probability distribution in mathematics.
+---
+
+
+## What it says
+
+The Gaussian (normal) distribution with mean $\mu$ and standard deviation $\sigma$ has probability density:
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}}\, e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+
+About 68% of values fall within one standard deviation of the mean, 95% within two, and 99.7% within three. The distribution is symmetric about $\mu$ and uniquely characterised by just two parameters: location and spread.
+
+## History
+
+The distribution appears in work by Abraham de Moivre (1733) as an approximation to the binomial, but [Gauss](/mathematicians/gauss) gave it its modern form in *Theoria Motus* (1809) while deriving the method of least squares for fitting orbits of celestial bodies. He showed that if measurement errors are Gaussian, the maximum likelihood estimator of the true position is the mean of the observations. Laplace independently derived related results; the [Central Limit Theorem](/theorems/central-limit-theorem) later explained *why* the Gaussian is so ubiquitous.
+
+## Why it matters
+
+The Gaussian is the fixed point of averaging: sum many independent random variables (from almost any distribution), and the result, suitably normalised, converges to a Gaussian. This is the Central Limit Theorem, and it means that Gaussian statistics apply to virtually every aggregate measurement — from polling to particle physics. The Gaussian is also the maximum-entropy distribution for a given mean and variance, making it the "least informative" distribution consistent with those constraints.
+
+## Real-world applications
+
+[Medical screening](/applications/medical-diagnosis-screening) uses Gaussian models for test-result distributions to set cut-off thresholds. [Option pricing](/applications/option-pricing-finance) (Black–Scholes) models log-returns as Gaussian. [Machine learning](/applications/machine-learning-deep-neural-networks) uses Gaussian noise models throughout, from linear regression to variational autoencoders. [Clinical trials](/applications/clinical-trials-design) and [survey statistics](/applications/census-and-survey-statistics) are built on Gaussian assumptions.
+
+## Where you'll meet it
+
+The Gaussian distribution appears in Year 1 probability and is central to Year 2 statistical inference. Its derivation as the limit of sums of random variables connects to the [Central Limit Theorem](/theorems/central-limit-theorem) and the [Calculus Revolution era](/history/05-the-calculus-revolution).

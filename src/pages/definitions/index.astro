@@ -1,0 +1,101 @@
+---
+/**
+ * /definitions — alphabetical index of every term that has a definition page.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const dir = join(process.cwd(), 'content/95-definitions');
+
+function parseTitle(fp: string): string {
+  try {
+    const text = readFileSync(fp, 'utf8');
+    const m = text.match(/^---\n[\s\S]*?title:\s*"?([^"\n]+)"?/m);
+    return m ? m[1].trim() : '';
+  } catch { return ''; }
+}
+
+const items: { slug: string; title: string }[] = [];
+if (existsSync(dir)) {
+  for (const f of readdirSync(dir)) {
+    if (extname(f) !== '.mdx' || f.startsWith('_')) continue;
+    const slug = basename(f, '.mdx');
+    const title = parseTitle(join(dir, f)) || slug.replace(/-/g, ' ');
+    items.push({ slug, title });
+  }
+}
+items.sort((a, b) => a.title.localeCompare(b.title, 'en-GB', { sensitivity: 'base' }));
+
+// Group by first letter
+const groups: Record<string, typeof items> = {};
+for (const it of items) {
+  const c = it.title[0].toUpperCase();
+  const key = /[A-Z]/.test(c) ? c : '#';
+  (groups[key] = groups[key] ?? []).push(it);
+}
+const letters = Object.keys(groups).sort();
+---
+
+<BaseLayout title="Definitions" description="Every bold key term across the guide has a one-glance definition here.">
+  <div class="prose-content definitions-index">
+    <header>
+      <h1>Definitions</h1>
+      <p class="lede">Every bold key term across the guide has a definition page here. Click any bold concept anywhere on the site to jump straight to it.</p>
+    </header>
+
+    <nav class="alpha-nav" aria-label="Jump to letter">
+      {letters.map((l) => <a href={`#letter-${l}`}>{l}</a>)}
+    </nav>
+
+    {letters.map((l) => (
+      <section class="letter-group" id={`letter-${l}`}>
+        <h2>{l}</h2>
+        <ul class="def-list">
+          {groups[l].map((it) => (
+            <li><a href={`/definitions/${it.slug}`}>{it.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .definitions-index { padding: 1.5rem 1rem 4rem; }
+  .lede { color: var(--color-muted); max-width: 64ch; }
+  .alpha-nav {
+    display: flex; flex-wrap: wrap; gap: 0.3rem 0.5rem;
+    margin: 1rem 0 2rem;
+    padding: 0.6rem; background: var(--color-surface); border-radius: 0.4rem;
+    position: sticky; top: var(--header-h); z-index: 5;
+  }
+  .alpha-nav a {
+    padding: 0.15rem 0.5rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0.25rem;
+  }
+  .alpha-nav a:hover { background: var(--color-accent); color: #fff; }
+  .letter-group { margin-bottom: 2rem; }
+  .letter-group h2 {
+    font-size: 1.4rem;
+    color: var(--color-accent);
+    margin: 0 0 0.6rem;
+  }
+  .def-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.2rem 1rem;
+  }
+  .def-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 0.2rem 0;
+    display: block;
+  }
+  .def-list a:hover { color: var(--color-accent); text-decoration: underline; }
+</style>

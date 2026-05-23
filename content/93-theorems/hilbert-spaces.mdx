@@ -1,0 +1,42 @@
+---
+title: Hilbert spaces
+section: Theorems
+section_slug: 93-theorems
+slug: hilbert-spaces
+attributed_to: [hilbert]
+era: 08-foundations-and-the-twentieth-century-crisis
+appears_in: []
+related_theorems: [banach-spaces, hahn-banach-theorem, cauchyschwarz-inequality, fourier-series, axiomatic-foundations-of-probability]
+applications: [quantum-computing-algorithms, machine-learning-deep-neural-networks, signal-processing-jpeg-mp3, medical-imaging-mri-ct]
+tags: [functional-analysis, inner-products, Hilbert, quantum-mechanics]
+year_introduced: 1900s (Hilbert); formalised 1920s–30s
+summary: A complete inner-product space — the infinite-dimensional analogue of Euclidean space, and the natural setting for quantum mechanics and Fourier analysis.
+---
+
+
+
+## What it says
+
+A **Hilbert space** $H$ is a vector space equipped with an inner product $\langle \cdot, \cdot \rangle$ that is complete under the induced norm $\|v\| = \sqrt{\langle v, v \rangle}$.
+
+Key properties:
+- **Orthogonality:** vectors $u, v$ are orthogonal if $\langle u, v \rangle = 0$
+- **Orthonormal bases:** every separable Hilbert space has a countable orthonormal basis $\{e_n\}$; any vector $v = \sum_n \langle v, e_n \rangle e_n$
+- **Projection theorem:** for any closed subspace $V \subseteq H$ and any $v \in H$, there is a unique best approximation of $v$ from $V$
+- **Riesz representation theorem:** every bounded linear functional on $H$ is of the form $\phi(v) = \langle v, w \rangle$ for some $w \in H$
+
+## History
+
+[Hilbert](/mathematicians/hilbert) studied integral equations at the turn of the twentieth century, working with spaces of functions. The abstract concept was formalised by von Neumann in the late 1920s, partly motivated by the need for a rigorous mathematical framework for quantum mechanics.
+
+## Why it matters
+
+Quantum mechanics lives in Hilbert spaces: physical states are unit vectors, observables are self-adjoint operators, and measurement corresponds to projection. $L^2(\mathbb{R})$ — square-integrable functions — is the canonical Hilbert space for quantum wavefunctions. In mathematics, Hilbert spaces are the "nice" infinite-dimensional spaces: all separable Hilbert spaces are isomorphic, a simplicity that makes them tractable.
+
+## Real-world applications
+
+[Quantum computing](/applications/quantum-computing-algorithms) operates in Hilbert spaces by definition. [Machine learning kernel methods](/applications/machine-learning-deep-neural-networks) use reproducing kernel Hilbert spaces. [Signal processing](/applications/signal-processing-jpeg-mp3) uses $L^2$ Hilbert spaces throughout. [MRI reconstruction](/applications/medical-imaging-mri-ct) is a problem in Hilbert space.
+
+## Where you'll meet it
+
+Hilbert spaces are introduced in Year 3 functional analysis. See the [Foundations and Twentieth-Century Crisis era](/history/08-foundations-and-the-twentieth-century-crisis).

@@ -1,0 +1,377 @@
+---
+/**
+ * /mathematicians/[slug] — individual mathematician page.
+ * Generates one route per .mdx file in content/91-mathematicians/.
+ * v1.1: known_for slugs → theorem links; "Where their work appears" from backlinks.json
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+export async function getStaticPaths() {
+  const mathDir = join(process.cwd(), 'content/91-mathematicians');
+  const paths = [];
+
+  if (!existsSync(mathDir)) return [];
+
+  for (const file of readdirSync(mathDir)) {
+    if (extname(file) !== '.mdx') continue;
+    const slug = basename(file, '.mdx');
+    if (slug === 'index') continue;
+    paths.push({ params: { slug } });
+  }
+  return paths;
+}
+
+const { slug } = Astro.params;
+const mathDir = join(process.cwd(), 'content/91-mathematicians');
+const theoremDir = join(process.cwd(), 'content/93-theorems');
+const filePath = join(mathDir, `${slug}.mdx`);
+
+// Parse frontmatter
+function parseFrontmatter(fp: string): Record<string, unknown> {
+  let text = '';
+  try { text = readFileSync(fp, 'utf8'); } catch { return {}; }
+  if (!text.startsWith('---')) return {};
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+// Load theorem slug map for title lookup
+const slugMapPath = join(process.cwd(), 'content/93-theorems/_slug-map.json');
+let slugMap: Record<string, { title: string; attributed_to?: string[] }> = {};
+if (existsSync(slugMapPath)) {
+  try { slugMap = JSON.parse(readFileSync(slugMapPath, 'utf8')); } catch { /* ignore */ }
+}
+
+function getTheoremTitle(theoremSlug: string): string {
+  // Prefer MDX frontmatter if file exists
+  const mdxPath = join(theoremDir, `${theoremSlug}.mdx`);
+  if (existsSync(mdxPath)) {
+    const fm = parseFrontmatter(mdxPath);
+    if (fm.title) return fm.title as string;
+  }
+  // Fall back to slug map
+  if (slugMap[theoremSlug]?.title) return slugMap[theoremSlug].title;
+  // Final fallback: prettify slug
+  return theoremSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+// Load backlinks.json for "Where their work appears"
+const backlinksPath = join(process.cwd(), 'public/api/backlinks.json');
+let backlinks: Record<string, {
+  attributed_to?: string[];
+  appears_in_topics?: string[];
+  appears_in_eras?: string[];
+  used_in_applications?: string[];
+}> = {};
+if (existsSync(backlinksPath)) {
+  try { backlinks = JSON.parse(readFileSync(backlinksPath, 'utf8')); } catch { /* ignore */ }
+}
+
+// Collect all topics and eras this mathematician's theorems appear in
+const appearsInTopics = new Set<string>();
+const appearsInEras = new Set<string>();
+const usedInApplications = new Set<string>();
+
+// Look through all backlink entries where this mathematician is attributed
+for (const [, entry] of Object.entries(backlinks)) {
+  if (entry.attributed_to && entry.attributed_to.includes(slug!)) {
+    for (const t of entry.appears_in_topics ?? []) appearsInTopics.add(t);
+    for (const e of entry.appears_in_eras ?? []) appearsInEras.add(e);
+    for (const a of entry.used_in_applications ?? []) usedInApplications.add(a);
+  }
+}
+
+const fm = parseFrontmatter(filePath);
+const title = (fm.title as string) ?? slug;
+const hook = fm.hook as string | undefined;
+const born = fm.born as string | undefined;
+const died = fm.died as string | undefined;
+const origin = fm.origin as string | undefined;
+const workedIn = (fm.worked_in as string[]) ?? [];
+const knownFor = (fm.known_for as string[]) ?? [];
+const appearsIn = (fm.appears_in as string[]) ?? [];
+const tags = (fm.tags as string[]) ?? [];
+
+// Determine if known_for entries are slugs (v1.1) or free text (v1).
+// Slugs will typically be in the slug map or match slug pattern.
+function isSlug(s: string): boolean {
+  return /^[a-z0-9][a-z0-9-]*$/.test(s);
+}
+
+// Render MDX body via glob import
+const mathPages = await import.meta.glob('/content/91-mathematicians/*.mdx');
+const matchKey = `/content/91-mathematicians/${slug}.mdx`;
+let Content: unknown = null;
+if (mathPages[matchKey]) {
+  const mod = await mathPages[matchKey]() as { default: unknown };
+  Content = mod.default;
+}
+
+function topicDisplayName(topicPath: string): string {
+  const parts = topicPath.split('/');
+  const topic = parts[parts.length - 1] ?? topicPath;
+  return topic.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function topicUrl(topicPath: string): string {
+  const parts = topicPath.split('/');
+  if (parts.length === 2) return `/${parts[0]}/${parts[1]}`;
+  return `/${topicPath}`;
+}
+
+const eraLabels: Record<string, string> = {
+  '01-ancient-origins': 'Ancient Origins',
+  '02-classical-greece': 'Classical Greece',
+  '03-islamic-golden-age': 'Islamic Golden Age',
+  '04-renaissance-and-symbolic-algebra': 'Renaissance & Symbolic Algebra',
+  '05-the-calculus-revolution': 'The Calculus Revolution',
+  '06-the-rigour-revolution': 'The Rigour Revolution',
+  '07-the-structural-turn': 'The Structural Turn',
+  '08-foundations-and-the-twentieth-century-crisis': 'Foundations & the Twentieth-Century Crisis',
+  '09-modern-mathematics': 'Modern Mathematics',
+};
+
+const appearsInTopicsArray = Array.from(appearsInTopics);
+const appearsInErasArray = Array.from(appearsInEras);
+const usedInApplicationsArray = Array.from(usedInApplications);
+const hasWorkAppears = appearsInTopicsArray.length > 0 || appearsInErasArray.length > 0 || usedInApplicationsArray.length > 0;
+---
+
+<BaseLayout title={title} description={hook ?? `Biographical page for ${title}`}>
+  <div class="prose-content mathematician-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/mathematicians">Mathematicians</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <header class="math-page-header">
+      <h1>{title}</h1>
+      <div class="math-meta">
+        {born && died && (
+          <span class="math-dates">{born.slice(0,4)}–{died.slice(0,4)}</span>
+        )}
+        {origin && <span class="math-origin">{origin}</span>}
+        {workedIn.length > 0 && (
+          <span class="math-worked-in">Worked in: {workedIn.join(', ')}</span>
+        )}
+      </div>
+    </header>
+
+    {hook && <p class="math-hook-callout">{hook}</p>}
+
+    {knownFor.length > 0 && (
+      <section class="math-known-for" aria-label="Known for">
+        <h2>Known for</h2>
+        <ul>
+          {knownFor.map((item) => (
+            <li>
+              {isSlug(item) ? (
+                <a href={`/theorems/${item}`}>{getTheoremTitle(item)}</a>
+              ) : (
+                item
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {Content ? (
+      <div class="math-body">
+        <Content />
+      </div>
+    ) : (
+      <p class="empty-note">Full biographical content is being prepared.</p>
+    )}
+
+    {appearsIn.length > 0 && (
+      <section class="math-appears-in" aria-label="Appears in topics">
+        <h2>Appears in</h2>
+        <ul class="appears-list">
+          {appearsIn.map((topicSlug) => (
+            <li>
+              <a href={`#`} class="topic-ref">
+                {topicSlug.replace(/-/g, ' ')}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {hasWorkAppears && (
+      <section class="math-work-appears" aria-label="Where their work appears">
+        <h2>Where their work appears</h2>
+        <div class="work-appears-grid">
+          {appearsInTopicsArray.length > 0 && (
+            <div>
+              <h3>Topics</h3>
+              <ul class="appears-list">
+                {appearsInTopicsArray.map((topicPath) => (
+                  <li>
+                    <a href={topicUrl(topicPath)} class="topic-ref">
+                      {topicDisplayName(topicPath)}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {appearsInErasArray.length > 0 && (
+            <div>
+              <h3>Historical eras</h3>
+              <ul class="appears-list">
+                {appearsInErasArray.map((eraSlug) => (
+                  <li>
+                    <a href={`/90-history/${eraSlug}`} class="topic-ref">
+                      {eraLabels[eraSlug] ?? eraSlug.replace(/-/g, ' ')}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {usedInApplicationsArray.length > 0 && (
+            <div>
+              <h3>Real-world applications</h3>
+              <ul class="appears-list">
+                {usedInApplicationsArray.map((appSlug) => (
+                  <li>
+                    <a href={`/applications/${appSlug}`} class="topic-ref">
+                      {appSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {tags.length > 0 && (
+      <div class="math-tags" aria-label="Tags">
+        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .mathematician-page { padding: 1.5rem 1rem 4rem; }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .math-page-header { margin-bottom: 1rem; }
+
+  .math-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin-top: 0.4rem;
+  }
+
+  .math-hook-callout {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    padding: 0.75rem 1.1rem;
+    border-radius: 0 0.4rem 0.4rem 0;
+    font-style: italic;
+    color: #3a3a3a;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .math-known-for ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .math-known-for li { margin-bottom: 0.3rem; }
+  .math-known-for a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .math-known-for a:hover { color: var(--color-accent); }
+
+  .math-body { margin-top: 1.5rem; }
+
+  .math-appears-in { margin-top: 2rem; }
+
+  .math-work-appears {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .math-work-appears h3 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.5rem;
+  }
+
+  .work-appears-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem 2rem;
+    margin-top: 0.75rem;
+  }
+
+  .appears-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .topic-ref {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
+    font-size: 0.88rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+  .topic-ref:hover { background: var(--color-surface); }
+
+  .math-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 2rem;
+  }
+
+  .empty-note {
+    color: var(--color-muted);
+    font-style: italic;
+  }
+</style>

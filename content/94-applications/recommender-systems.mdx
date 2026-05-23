@@ -1,0 +1,44 @@
+---
+title: Recommender Systems
+section: Real-world applications
+section_slug: 94-applications
+slug: recommender-systems
+domains: [computer-science, data-science, engineering]
+uses_theorems: [method-of-least-squares, cauchyschwarz-inequality]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 03-specialisation-year-three/05-numerical-analysis]
+related_applications: [machine-learning-deep-neural-networks, pagerank-google, data-compression]
+tags: [machine-learning, linear-algebra, optimisation, applied]
+real_world_examples: [Netflix film recommendations, Spotify Discover Weekly, Amazon 'customers also bought', YouTube next-video suggestions]
+summary: The Netflix recommendations that keep you watching and the Spotify playlist that seems to read your mind both rest on factorising a huge sparse matrix — a problem solved by alternating least squares.
+---
+
+
+## The application
+
+A recommendation system takes a partially observed matrix of user-item interactions (ratings, plays, purchases) and predicts the missing entries — what would user $i$ rate item $j$ if they encountered it? The dominant mathematical approach is **matrix factorisation**, which decomposes the interaction matrix into a product of low-rank matrices representing latent user preferences and item properties. The factorisation is found by solving a least-squares optimisation problem.
+
+## The maths behind it
+
+Let $R$ be an $m \times n$ matrix where $R_{ij}$ is user $i$'s rating of item $j$ (missing if user $i$ has not rated item $j$). The **low-rank factorisation** model approximates $R \approx UV^T$, where $U$ is $m \times k$ (a matrix of $k$-dimensional user latent vectors) and $V$ is $n \times k$ (item latent vectors). The rank $k$ (typically 10–200) is far smaller than $m$ or $n$.
+
+The parameters are found by minimising the **regularised reconstruction error** over observed entries:
+
+$$\min_{U, V} \sum_{(i,j) \in \Omega} (R_{ij} - \mathbf{u}_i \cdot \mathbf{v}_j)^2 + \lambda(\|\mathbf{u}_i\|^2 + \|\mathbf{v}_j\|^2),$$
+
+where $\Omega$ is the set of observed entries and $\lambda$ is a regularisation parameter. This is a **non-convex least-squares problem** (non-convex because the product $\mathbf{u}_i \cdot \mathbf{v}_j$ is bilinear).
+
+**Alternating least squares (ALS)** solves it by alternating: fix $V$ and solve for each $\mathbf{u}_i$ (a standard ridge regression problem), then fix $U$ and solve for each $\mathbf{v}_j$. Each sub-problem is a linear least-squares problem solvable in closed form: $\mathbf{u}_i = (V_\Omega^T V_\Omega + \lambda I)^{-1} V_\Omega^T \mathbf{r}_i$, where $V_\Omega$ contains the item vectors for items rated by user $i$ and $\mathbf{r}_i$ the corresponding ratings. The **Cauchy–Schwarz inequality** bounds the inner products $\mathbf{u}_i \cdot \mathbf{v}_j$ and guarantees that predictions are bounded when $U, V$ are bounded.
+
+**Stochastic gradient descent** is an alternative: update each parameter in the direction of the gradient of a single observed rating's error, which is computationally cheaper per step but slower to converge.
+
+## A concrete example
+
+Netflix's Cinematch system was the subject of the Netflix Prize (2006–2009): a $1 million prize for any team improving prediction accuracy by 10% over their baseline. The winning solution (BellKor's Pragmatic Chaos) used an ensemble of over 100 models, with matrix factorisation as the core component. The prize was credited with advancing the field substantially. Spotify's Discover Weekly (launched 2015) reached 1 billion streams in its first year, using a similar approach with audio features supplementing interaction data.
+
+## History of the application
+
+Collaborative filtering (recommending based on similar users) was first proposed at Xerox PARC in 1992. Matrix factorisation as a dominant approach emerged from the Netflix Prize research. The SVD connection was noticed early: if all ratings were observed, the optimal rank-$k$ approximation is the truncated SVD of $R$. With missing data, ALS and SGD replace the exact SVD.
+
+## Links
+
+Linear algebra and the SVD are in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra). Least-squares optimisation and regularisation connect to [Numerical Analysis](/03-specialisation-year-three/05-numerical-analysis). The machine learning context is in [Machine Learning: Deep Neural Networks](/applications/machine-learning-deep-neural-networks).

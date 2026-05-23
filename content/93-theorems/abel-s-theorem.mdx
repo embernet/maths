@@ -1,0 +1,42 @@
+---
+title: Abel's theorem
+section: Theorems
+section_slug: 93-theorems
+slug: abel-s-theorem
+attributed_to: [abel]
+era: 06-the-rigour-revolution
+appears_in: [02-core-year-two/03-complex-analysis]
+related_theorems: [proof-that-the-general-quintic-has-no-radical-solution, elliptic-integrals-and-elliptic-functions, abelian-groups-posthumous-attribution, galois-theory]
+applications: []
+tags: [analysis, power-series, complex-analysis, Abel]
+year_introduced: '1826'
+summary: If a power series converges at the endpoint of its interval of convergence, the sum is the limit of the function from inside — a theorem about continuity at the boundary of convergence.
+---
+
+
+
+## What it says
+
+**Abel's theorem on power series:** If $\sum_{n=0}^\infty a_n$ converges to $S$, then:
+
+$$\lim_{x \to 1^-} \sum_{n=0}^\infty a_n x^n = S$$
+
+More generally, if $\sum a_n r^n$ converges at $x = r$ (the endpoint of the radius of convergence), then the power series $f(x) = \sum a_n x^n$ has a limit equal to the series sum as $x \to r$ from inside the radius.
+
+This fills in a gap in the theory of power series: convergence of a series and convergence of a function are not the same thing, and Abel's theorem clarifies the relationship at the boundary.
+
+## History
+
+[Abel](/mathematicians/abel) published this theorem in 1826 in *Crelle's Journal* as part of his campaign to put analysis on rigorous foundations. He was dismayed by Cauchy's 1821 "theorem" that the sum of a convergent series of continuous functions is continuous — Abel found counterexamples and showed the correct statement required uniform convergence (though he did not use that term). Abel died in 1829 at age 26; [Galois](/mathematicians/galois) died three years later at 20. Both left mathematics transformed.
+
+## Why it matters
+
+Abel's theorem is a prototype for results about interchange of limits — can you swap a limit and a sum? Usually not without care. The theorem establishes conditions under which the interchange is valid at the boundary, and the idea generalises to Abel summation, a technique for assigning sums to divergent series in a controlled way. Abel summation appears in analytic number theory and the study of the [Riemann zeta function](/theorems/riemann-zeta-function).
+
+## Real-world applications
+
+Abel summation methods are used in analytic number theory and in the study of series arising in [signal processing](/applications/signal-processing-jpeg-mp3), though the direct applications of this specific theorem are more mathematical than engineering.
+
+## Where you'll meet it
+
+Abel's theorem appears in Year 2 complex analysis and Year 3 analysis, alongside a careful treatment of uniform convergence. The historical context is in the [Rigour Revolution era](/history/06-the-rigour-revolution).

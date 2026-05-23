@@ -1,0 +1,40 @@
+---
+title: Gambling, Game Theory, and Strategic Decision-Making
+section: Real-world applications
+section_slug: 94-applications
+slug: gambling-and-game-theory
+domains: [economics, mathematics, social-science]
+uses_theorems: [axiomatic-foundations-of-probability, bayes-theorem, probability-theory-foundations]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference, 03-specialisation-year-three/07-stochastic-processes]
+related_applications: [actuarial-science, machine-learning-bayesian-inference, option-pricing-finance]
+tags: [probability, game-theory, decision-making, applied]
+real_world_examples: [Poker tournament strategy, Algorithmic sports betting, Nash equilibria in auctions, Central bank interest rate decisions, Evolutionary game theory in biology]
+summary: Expected value and Nash equilibrium are the two ideas that govern rational decision-making under uncertainty — from casino games to nuclear deterrence.
+---
+
+
+## The application
+
+Game theory and probability theory together constitute the mathematical foundation of rational decision-making in any situation involving uncertainty or strategic interaction. Casinos design games so the house has a positive expected value; card counters try to achieve the same. Firms bid in auctions using Nash equilibria. Evolutionary biologists model animal behaviour as mixed strategies. The mathematics runs from elementary probability to stochastic processes, and its applications span economics, biology, political science, and computer science.
+
+## The maths behind it
+
+**Expected value**: for a random payoff $X$ with distribution $p$, the expected value $E[X] = \sum_x x\, p(X = x)$. A **fair game** has $E[X] = 0$; a game with $E[X] > 0$ favours the player. Roulette with 37 numbers and a single-zero house slot has $E[\text{payout on a single number}] = 36 \times (1/37) - 1 \times (36/37) = -1/37 \approx -2.7\%$: the house keeps 2.7 pence of every pound wagered on average.
+
+**The gambler's ruin**: a player starting with $k$ units, playing against a house with $(N - k)$ units, making fair bets, has probability $k/N$ of winning all $N$ units before going broke. For an unfair game, the probability of ruin approaches 1 exponentially fast as $k/N \to 0$ — a result proved using difference equations for the probability generating function, a technique related to the generating functions in [discrete mathematics](/02-core-year-two/06-programming-and-discrete-mathematics).
+
+**Nash equilibrium**: in a game where each player chooses a strategy to maximise their payoff given the others' strategies, a **Nash equilibrium** is a strategy profile where no player can improve by unilaterally deviating. In the game rock-paper-scissors, the unique Nash equilibrium is the mixed strategy: play each option with probability 1/3. Nash proved existence of mixed-strategy equilibria for finite games in 1950 (Nobel 1994) using the Brouwer fixed-point theorem — a topological result.
+
+**Kelly criterion**: given a positive-expected-value bet with win probability $p$ and odds $b:1$, the fraction $f^* = (bp - (1-p))/b$ of bankroll to wager maximises the long-run growth rate of wealth. This is the logarithmic utility result of information theory applied to gambling, and it underlies professional sports betting and quantitative hedge fund position sizing.
+
+## A concrete example
+
+The efficient market hypothesis holds that financial markets behave like fair games — price changes are unpredictable. Market microstructure theory studies the Nash equilibria between market-makers and informed traders. High-frequency trading strategies seek situations where the fair-game assumption breaks down — exploiting fleeting mispricings detectable with sub-millisecond timestamped data.
+
+## History of the application
+
+Pascal and Fermat developed probability theory in 1654 specifically to analyse gambling problems. Blaise [Pascal](/mathematicians/pascal) corresponded with Fermat about the problem of points (how to divide stakes if a game is interrupted) and derived the first probability calculations. Von Neumann and Morgenstern formalised game theory in 1944; Nash's equilibrium concept followed in 1950.
+
+## Links
+
+Probability axioms, expectation, and distributions are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). The optional stopping theorem and martingale theory (which formalises "fair games") are in [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). Nash's fixed-point argument connects to [Topology](/03-specialisation-year-three/04-topology).

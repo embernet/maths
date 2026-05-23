@@ -1,0 +1,61 @@
+---
+title: Algebraic Geometry
+section: 'Advanced Topics: Year Four'
+section_slug: 04-advanced-topics-year-four
+year: 4
+order: 1
+tags: [algebraic-geometry, varieties, sheaves, schemes, Riemann-surfaces, commutative-algebra]
+prerequisites:
+- 01-galois-theory
+- 03-complex-analysis
+related:
+- 02-analytic-number-theory
+mathematicians: [riemann, noether, galois, descartes]
+reading_time_min: 8
+summary: Algebraic geometry studies geometric objects defined by polynomial equations. In its modern form — Grothendieck's theory of schemes — it unifies algebra, geometry, and number theory.
+theorems: [riemann-surfaces, riemannian-geometry, galois-theory, dedekind-domains-algebraic-number-theory]
+applications: [cryptocurrency-blockchain, digital-signatures]
+---
+
+
+*Note: Year Four content at this level is indicative. Students on a four-year integrated master's programme should consult their department's current catalogue for the definitive unit list and syllabi. Units vary by institution and year.*
+
+Algebraic geometry asks: what is the geometry of the solutions to polynomial equations? The circle $x^2 + y^2 = 1$ and the ellipse are curves in the plane. The torus is a surface. These are examples of **algebraic varieties** — sets of solutions to systems of polynomial equations.
+
+The subject has a long history (it begins with Descartes' coordinate geometry) but took its modern form only in the twentieth century, with the foundational work of Serre, Grothendieck, and others who rebuilt the entire subject on the language of commutative algebra and sheaf theory.
+
+## Affine and projective varieties
+
+An **affine variety** over a field $k$ is the set of common zeros of a collection of polynomials $f_1, \ldots, f_r \in k[x_1, \ldots, x_n]$:
+
+$$V(f_1, \ldots, f_r) = \{(a_1, \ldots, a_n) \in k^n : f_i(a_1, \ldots, a_n) = 0\ \forall i\}.$$
+
+The **ideal** $I(V)$ of a variety $V$ is the set of all polynomials vanishing on $V$. The **coordinate ring** $k[V] = k[x_1, \ldots, x_n]/I(V)$ encodes the algebraic structure of $V$.
+
+**Hilbert's Nullstellensatz** (the "zero-locus theorem") is the fundamental bridge between algebra and geometry: over an algebraically closed field $k$, there is a one-to-one correspondence between radical ideals in $k[x_1, \ldots, x_n]$ and algebraic varieties in $k^n$.
+
+**Projective varieties** avoid the special treatment of points "at infinity" by working in **projective space** $\mathbb{P}^n_k$: the set of lines through the origin in $k^{n+1}$, with points represented by homogeneous coordinates $[x_0 : x_1 : \cdots : x_n]$. In projective space, parallel lines meet. The projective closure of an affine variety includes the "boundary behaviour at infinity."
+
+## Curves and the Riemann-Roch theorem
+
+An algebraic curve (one-dimensional variety) over $\mathbb{C}$ is, as a topological space, a compact Riemann surface — a torus with $g$ handles for some **genus** $g \ge 0$. A sphere is $g=0$; a torus is $g=1$; a pretzel shape is $g=2$.
+
+The **Riemann-Roch theorem** relates the algebra of functions on a curve to its topology:
+
+$$\ell(D) - \ell(K - D) = \deg(D) + 1 - g,$$
+
+where $D$ is a **divisor** (formal sum of points), $\ell(D)$ counts linearly independent meromorphic functions with poles bounded by $D$, and $K$ is the canonical divisor. This theorem — proved by [Riemann](/mathematicians/riemann) and completed by Roch — is the central result in the theory of algebraic curves.
+
+Applications: the Riemann-Roch theorem shows that every smooth projective curve of genus 0 is isomorphic to $\mathbb{P}^1$ (the Riemann sphere); every curve of genus 1 is a torus (an **elliptic curve**), and elliptic curves over $\mathbb{Q}$ are the objects in Wiles's proof of Fermat's Last Theorem.
+
+## Real-world applications
+
+Where this turns up in the world: [Elliptic-curve cryptography](/applications/cryptocurrency-blockchain) — the mathematics behind Bitcoin, Ethereum, and TLS connections — relies entirely on the arithmetic of elliptic curves over finite fields, which are algebraic curves of genus 1 in the sense of the Riemann-Roch theorem. [Digital signatures](/applications/digital-signatures) in modern cryptographic standards (ECDSA, EdDSA) use the group law on elliptic curves, whose structure is classified precisely by the algebraic geometry in this course. The Wiles proof of Fermat's Last Theorem — one of the most celebrated results of the twentieth century — is stated and proved in the language of schemes, the framework you encounter here.
+
+## Schemes and modern algebraic geometry
+
+Grothendieck's **scheme theory** (1960s) vastly generalised the notion of variety. A scheme is a locally ringed space: locally it looks like the spectrum of a commutative ring $\text{Spec}(R)$ (the set of prime ideals of $R$, equipped with a natural topology and sheaf of rings). This allows algebraic geometry to work over any ring — including $\mathbb{Z}$, which gives a bridge to number theory.
+
+The major consequence: problems in number theory can be reinterpreted as problems about schemes over $\mathbb{Z}$, and geometric intuition can be used to prove arithmetic results. This is the language in which Deligne proved the Weil conjectures (1974), and Wiles proved Fermat's Last Theorem (1995).
+
+Algebraic geometry at this level requires substantial algebraic background (commutative algebra, homological algebra) and represents one of the most technically demanding — and most powerful — areas of pure mathematics.

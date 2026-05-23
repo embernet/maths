@@ -1,0 +1,46 @@
+{
+  "topic_slug": "03-calculus-and-methods",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "For $f(x,y) = x^2 y + \\sin(xy)$, what is $\\frac{\\partial f}{\\partial y}$?",
+      "options": [
+        {"id": "a", "text": "$x^2 + x\\cos(xy)$", "correct": true, "explanation": "Differentiating with respect to y, treating x as constant: $\\frac{\\partial}{{\\partial y}}(x^2 y) = x^2$ and $\\frac{\\partial}{{\\partial y}}(\\sin(xy)) = x\\cos(xy)$ by the chain rule."},
+        {"id": "b", "text": "$2xy + y\\cos(xy)$", "correct": false, "explanation": "This is $\\partial f / \\partial x$, not $\\partial f / \\partial y$. When differentiating with respect to y, treat x as a constant."},
+        {"id": "c", "text": "$x^2 + \\cos(xy)$", "correct": false, "explanation": "The chain rule has been misapplied to $\\sin(xy)$. The derivative of $\\sin(xy)$ with respect to y is $x\\cos(xy)$, not $\\cos(xy)$."},
+        {"id": "d", "text": "$2x + x\\cos(xy)$", "correct": false, "explanation": "$\\frac{\\partial}{{\\partial y}}(x^2 y) = x^2$ (treating $x^2$ as a constant coefficient of $y$), not $2x$."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Stokes' theorem relates:",
+      "options": [
+        {"id": "a", "text": "The line integral of $\\mathbf{F}$ around a closed curve $C$ to the surface integral of $\\nabla \\times \\mathbf{F}$ over a surface bounded by $C$.", "correct": true, "explanation": "Correct: $\\oint_C \\mathbf{F}\\cdot d\\mathbf{r} = \\iint_S (\\nabla\\times\\mathbf{F})\\cdot d\\mathbf{S}$. The curl measures rotation; Stokes connects local rotation to global circulation around the boundary."},
+        {"id": "b", "text": "The volume integral of $\\nabla \\cdot \\mathbf{F}$ over $V$ to the surface integral of $\\mathbf{F}$ over $\\partial V$.", "correct": false, "explanation": "That is the Divergence Theorem (also called Gauss's theorem): $\\iiint_V \\nabla\\cdot\\mathbf{F}\\, dV = \\oiint_{\\partial V} \\mathbf{F}\\cdot d\\mathbf{S}$."},
+        {"id": "c", "text": "A double integral over a region $D$ in the plane to a line integral around its boundary.", "correct": false, "explanation": "That is Green's theorem, the two-dimensional special case of Stokes' theorem."},
+        {"id": "d", "text": "The gradient of a scalar field to its level curves.", "correct": false, "explanation": "The relationship between gradients and level curves is a geometric fact about derivatives, not what Stokes' theorem says."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The general solution of $y'' - 5y' + 6y = 0$ is:",
+      "options": [
+        {"id": "a", "text": "$y = Ae^{2t} + Be^{3t}$", "correct": true, "explanation": "The characteristic equation $\\lambda^2 - 5\\lambda + 6 = (\\lambda-2)(\\lambda-3) = 0$ has roots $\\lambda = 2, 3$. The general solution is $Ae^{2t} + Be^{3t}$."},
+        {"id": "b", "text": "$y = Ae^{-2t} + Be^{-3t}$", "correct": false, "explanation": "Negative exponents would come from characteristic roots $-2$ and $-3$. Check the signs: $(-2) + (-3) = -5 \\ne -5$... wait, that's actually correct in the sum but wrong in the product: $(-2)(-3) = 6$. Re-check: characteristic equation is $\\lambda^2 - 5\\lambda + 6$, roots sum to $+5$ and product is $+6$, so roots are $+2$ and $+3$, not $-2, -3$."},
+        {"id": "c", "text": "$y = (At + B)e^{5t/2}$", "correct": false, "explanation": "This form (repeated root) arises when the characteristic equation has a repeated root. Here the roots are distinct: 2 and 3."},
+        {"id": "d", "text": "$y = e^{5t/2}(A\\cos t + B\\sin t)$", "correct": false, "explanation": "Complex conjugate roots produce this form. But the discriminant of $\\lambda^2 - 5\\lambda + 6$ is $25 - 24 = 1 > 0$, so the roots are real."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "A vector field $\\mathbf{F}$ is conservative on a simply connected domain if and only if:",
+      "options": [
+        {"id": "a", "text": "$\\nabla \\times \\mathbf{F} = \\mathbf{0}$ everywhere on the domain.", "correct": true, "explanation": "Zero curl implies the existence of a scalar potential $\\phi$ with $\\mathbf{F} = \\nabla\\phi$ on simply connected domains. Line integrals then depend only on endpoints, not the path taken."},
+        {"id": "b", "text": "$\\nabla \\cdot \\mathbf{F} = 0$ everywhere on the domain.", "correct": false, "explanation": "Zero divergence means $\\mathbf{F}$ is solenoidal (incompressible), not conservative. A solenoidal field has a vector potential $\\mathbf{A}$ with $\\mathbf{F} = \\nabla \\times \\mathbf{A}$."},
+        {"id": "c", "text": "The surface integral of $\\mathbf{F}$ over any closed surface is zero.", "correct": false, "explanation": "By the Divergence Theorem, this is equivalent to zero divergence — which characterises solenoidal fields, not conservative ones."},
+        {"id": "d", "text": "$|\\mathbf{F}|$ is constant along every streamline.", "correct": false, "explanation": "This describes an unrelated geometric property of the field and has no direct connection to whether it is conservative."}
+      ]
+    }
+  ]
+}

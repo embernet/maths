@@ -1,0 +1,45 @@
+---
+/**
+ * /resources — external resources page.
+ * Renders content/92-resources/index.mdx when present.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+const hasContent = existsSync(join(process.cwd(), 'content/92-resources/index.mdx'));
+
+const ResourcesContent = hasContent
+  ? (await import.meta.glob('/content/92-resources/index.mdx', { eager: true }) as Record<string, { default: unknown }>)['/content/92-resources/index.mdx']?.default
+  : null;
+---
+
+<BaseLayout title="Resources" description="Curated external resources for undergraduate mathematics.">
+  <div class="prose-content resources-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">Resources</span>
+    </nav>
+
+    <h1>Resources</h1>
+
+    {ResourcesContent ? (
+      <div class="resources-body">
+        <ResourcesContent />
+      </div>
+    ) : (
+      <p class="empty-note">
+        A curated list of textbooks, lecture notes, and online resources is being compiled.
+        Check back soon.
+      </p>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .resources-page { padding: 1.5rem 1rem 4rem; }
+  .breadcrumb { font-size: 0.85rem; color: var(--color-muted); margin-bottom: 1.25rem; }
+  .breadcrumb a { color: var(--color-primary); }
+  .empty-note { color: var(--color-muted); font-style: italic; }
+</style>

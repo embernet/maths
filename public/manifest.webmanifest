@@ -1,0 +1,30 @@
+{
+  "name": "The Undergraduate Mathematics Companion",
+  "short_name": "Maths Companion",
+  "description": "A friendly map of the undergraduate mathematics curriculum.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1a3a52",
+  "background_color": "#faf9f7",
+  "lang": "en-GB",
+  "icons": [
+    {
+      "src": "/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-256.svg",
+      "sizes": "256x256",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "_note": "Replace SVG icons with PNG equivalents for maximum compatibility. See README for instructions."
+}

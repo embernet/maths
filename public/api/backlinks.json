@@ -1,0 +1,2656 @@
+{
+  "euclid-s-algorithm": {
+    "attributed_to": [
+      "euclid"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes",
+      "digital-signatures"
+    ]
+  },
+  "euclid-s-elements": {
+    "attributed_to": [
+      "euclid"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "bridge-and-structural-engineering",
+      "computer-graphics-3d"
+    ]
+  },
+  "euclidean-geometry": {
+    "attributed_to": [
+      "euclid"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "bridge-and-structural-engineering",
+      "computer-graphics-3d",
+      "gps-positioning",
+      "robotics-and-control"
+    ]
+  },
+  "fermat-s-little-theorem": {
+    "attributed_to": [
+      "fermat"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "digital-signatures",
+      "error-correcting-codes",
+      "cryptocurrency-blockchain"
+    ]
+  },
+  "modular-arithmetic-and-number-theory": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes",
+      "digital-signatures",
+      "cryptocurrency-blockchain",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "method-of-least-squares": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "03-specialisation-year-three/05-numerical-analysis",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "climate-modelling",
+      "census-and-survey-statistics",
+      "machine-learning-deep-neural-networks",
+      "bridge-and-structural-engineering",
+      "protein-folding-alphafold",
+      "recommender-systems"
+    ]
+  },
+  "cartesian-coordinates": {
+    "attributed_to": [
+      "descartes"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d",
+      "gps-positioning",
+      "robotics-and-control"
+    ]
+  },
+  "analytic-geometry": {
+    "attributed_to": [
+      "descartes",
+      "fermat"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d",
+      "gps-positioning",
+      "robotics-and-control"
+    ]
+  },
+  "pythagoras-theorem": {
+    "attributed_to": [
+      "pythagoras"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "computer-graphics-3d",
+      "bridge-and-structural-engineering",
+      "robotics-and-control"
+    ]
+  },
+  "rsa-public-key-cryptography": {
+    "uses_theorems": [
+      "fermat-s-little-theorem",
+      "modular-arithmetic-and-number-theory",
+      "euclid-s-algorithm"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra"
+    ]
+  },
+  "pagerank-google": {
+    "uses_theorems": [
+      "graph-theory-konigsberg-bridges",
+      "axiomatic-foundations-of-probability"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/06-programming-and-discrete-mathematics",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ]
+  },
+  "gps-positioning": {
+    "uses_theorems": [
+      "method-of-least-squares",
+      "gaussian-distribution-normal-distribution"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "01-foundations-year-one/03-calculus-and-methods",
+      "03-specialisation-year-three/05-numerical-analysis"
+    ]
+  },
+  "machine-learning-deep-neural-networks": {
+    "uses_theorems": [
+      "method-of-least-squares",
+      "gaussian-distribution-normal-distribution",
+      "cauchyschwarz-inequality"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "01-foundations-year-one/03-calculus-and-methods",
+      "03-specialisation-year-three/05-numerical-analysis"
+    ]
+  },
+  "cauchy-sequences": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations",
+      "02-core-year-two/02-real-analysis-2",
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "climate-modelling"
+    ]
+  },
+  "bolzanoweierstrass-theorem": {
+    "attributed_to": [
+      "bolzano",
+      "weierstrass"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations",
+      "02-core-year-two/02-real-analysis-2",
+      "03-specialisation-year-three/04-topology"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "intermediate-value-theorem-first-rigorous-proof": {
+    "attributed_to": [
+      "bolzano"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "weather-forecasting"
+    ]
+  },
+  "rigorous-foundations-of-calculus-definitions": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "rigorous-analysis": {
+    "attributed_to": [
+      "weierstrass"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "weierstrass-approximation-theorem": {
+    "attributed_to": [
+      "weierstrass"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations",
+      "02-core-year-two/02-real-analysis-2"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "computer-graphics-3d",
+      "computer-graphics-and-visualisation"
+    ]
+  },
+  "uniform-convergence": {
+    "attributed_to": [
+      "weierstrass"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations",
+      "02-core-year-two/02-real-analysis-2"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "riemann-integral": {
+    "attributed_to": [
+      "riemann"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/02-real-analysis-foundations",
+      "02-core-year-two/02-real-analysis-2",
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "robotics-and-control": {
+    "uses_theorems": [
+      "lagrangian-mechanics",
+      "laplace-transform",
+      "fourier-transform"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "03-specialisation-year-three/08-differential-equations-advanced",
+      "01-foundations-year-one/04-probability-and-statistics"
+    ]
+  },
+  "heat-equation": {
+    "attributed_to": [
+      "fourier"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "weather-forecasting",
+      "medical-imaging-mri-ct",
+      "option-pricing-finance",
+      "traffic-flow-modelling"
+    ]
+  },
+  "laplace-equation": {
+    "attributed_to": [
+      "laplace"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "04-advanced-topics-year-four/03-advanced-pdes",
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "seismic-imaging-oil-exploration",
+      "bridge-and-structural-engineering",
+      "climate-modelling",
+      "airfoil-and-aerodynamics"
+    ]
+  },
+  "calculus-fluxions": {
+    "attributed_to": [
+      "newton"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "weather-forecasting",
+      "gravitational-wave-detection"
+    ]
+  },
+  "calculus-dy-dx-notation-symbol": {
+    "attributed_to": [
+      "leibniz"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "option-pricing-finance",
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "laws-of-motion-and-gravitation": {
+    "attributed_to": [
+      "newton"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection",
+      "robotics-and-control",
+      "weather-forecasting"
+    ]
+  },
+  "proto-calculus": {
+    "attributed_to": [
+      "fermat"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "option-pricing-finance"
+    ]
+  },
+  "bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel": {
+    "attributed_to": [
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "airfoil-and-aerodynamics",
+      "bridge-and-structural-engineering",
+      "weather-forecasting"
+    ]
+  },
+  "climate-modelling": {
+    "uses_theorems": [
+      "heat-equation",
+      "turbulence-theory-kolmogorov-scaling",
+      "fourier-series"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ]
+  },
+  "epidemiological-modelling": {
+    "uses_theorems": [
+      "axiomatic-foundations-of-probability",
+      "gaussian-distribution-normal-distribution"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "03-specialisation-year-three/06-mathematical-biology",
+      "01-foundations-year-one/04-probability-and-statistics"
+    ]
+  },
+  "option-pricing-finance": {
+    "uses_theorems": [
+      "heat-equation",
+      "fourier-transform",
+      "axiomatic-foundations-of-probability"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/07-stochastic-processes",
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+    ]
+  },
+  "bayes-theorem": {
+    "attributed_to": [
+      "bayes"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "medical-diagnosis-screening",
+      "spam-filtering",
+      "machine-learning-bayesian-inference",
+      "epidemiological-modelling",
+      "clinical-trials-design",
+      "cybersecurity-anomaly-detection",
+      "gambling-and-game-theory"
+    ]
+  },
+  "axiomatic-foundations-of-probability": {
+    "attributed_to": [
+      "kolmogorov"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference",
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "actuarial-science",
+      "epidemiological-modelling",
+      "option-pricing-finance",
+      "machine-learning-bayesian-inference",
+      "cryptocurrency-blockchain",
+      "data-compression",
+      "gambling-and-game-theory",
+      "medical-diagnosis-screening",
+      "pagerank-google"
+    ]
+  },
+  "gaussian-distribution-normal-distribution": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "03-specialisation-year-three/05-numerical-analysis",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "medical-diagnosis-screening",
+      "option-pricing-finance",
+      "machine-learning-deep-neural-networks",
+      "clinical-trials-design",
+      "census-and-survey-statistics",
+      "actuarial-science",
+      "cybersecurity-anomaly-detection",
+      "epidemiological-modelling",
+      "gps-positioning",
+      "gravitational-wave-detection",
+      "machine-learning-bayesian-inference",
+      "protein-folding-alphafold",
+      "radar-and-sonar",
+      "weather-forecasting"
+    ]
+  },
+  "maximum-likelihood-estimation": {
+    "attributed_to": [
+      "fisher"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "clinical-trials-design",
+      "machine-learning-deep-neural-networks",
+      "medical-diagnosis-screening",
+      "census-and-survey-statistics",
+      "actuarial-science",
+      "cybersecurity-anomaly-detection",
+      "machine-learning-bayesian-inference",
+      "spam-filtering"
+    ]
+  },
+  "foundational-paper-on-inverse-probability": {
+    "attributed_to": [
+      "bayes"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "medical-diagnosis-screening",
+      "spam-filtering",
+      "machine-learning-bayesian-inference"
+    ]
+  },
+  "bayesian-probability-independent-derivation": {
+    "attributed_to": [
+      "laplace"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "medical-diagnosis-screening",
+      "machine-learning-bayesian-inference",
+      "epidemiological-modelling"
+    ]
+  },
+  "probability-theory-foundations": {
+    "attributed_to": [
+      "pascal"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "gambling-and-game-theory",
+      "actuarial-science",
+      "epidemiological-modelling"
+    ]
+  },
+  "medical-diagnosis-screening": {
+    "uses_theorems": [
+      "bayes-theorem",
+      "axiomatic-foundations-of-probability"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ]
+  },
+  "spam-filtering": {
+    "uses_theorems": [
+      "bayes-theorem",
+      "maximum-likelihood-estimation"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ]
+  },
+  "clinical-trials-design": {
+    "uses_theorems": [
+      "gaussian-distribution-normal-distribution",
+      "maximum-likelihood-estimation",
+      "experimental-design-randomisation-blocking-factorial-design",
+      "analysis-of-variance-anova"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ]
+  },
+  "galois-theory": {
+    "attributed_to": [
+      "galois"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory",
+      "04-advanced-topics-year-four/01-algebraic-geometry"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "galois-groups": {
+    "attributed_to": [
+      "galois"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "normal-subgroups": {
+    "attributed_to": [
+      "galois"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "group-theory-permutation-groups": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes",
+      "quantum-computing-algorithms",
+      "rsa-public-key-cryptography",
+      "computer-graphics-3d"
+    ]
+  },
+  "noether-s-theorem-symmetry-and-conservation-laws-in-physics": {
+    "attributed_to": [
+      "noether"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "gravitational-wave-detection",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "modern-abstract-algebra-rings-ideals-modules": {
+    "attributed_to": [
+      "noether"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes",
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "ideals-in-ring-theory": {
+    "attributed_to": [
+      "dedekind"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes"
+    ]
+  },
+  "abelian-groups-posthumous-attribution": {
+    "attributed_to": [
+      "abel"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "lagrangian-mechanics": {
+    "attributed_to": [
+      "lagrange"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/08-differential-equations-advanced"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "robotics-and-control",
+      "gravitational-wave-detection",
+      "climate-modelling"
+    ]
+  },
+  "proof-that-the-general-quintic-has-no-radical-solution": {
+    "attributed_to": [
+      "abel"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes"
+    ]
+  },
+  "error-correcting-codes": {
+    "uses_theorems": [
+      "galois-theory",
+      "galois-groups",
+      "modular-arithmetic-and-number-theory"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory"
+    ]
+  },
+  "quantum-computing-algorithms": {
+    "uses_theorems": [
+      "fourier-transform",
+      "galois-theory",
+      "group-theory-permutation-groups",
+      "modular-arithmetic-and-number-theory"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra",
+      "03-specialisation-year-three/01-galois-theory",
+      "03-specialisation-year-three/02-functional-analysis"
+    ]
+  },
+  "banach-fixed-point-theorem": {
+    "attributed_to": [
+      "banach"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/02-real-analysis-2",
+      "03-specialisation-year-three/02-functional-analysis",
+      "03-specialisation-year-three/08-differential-equations-advanced",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "climate-modelling",
+      "robotics-and-control",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "weierstrass-function-continuous-everywhere-differentiable-nowhere": {
+    "attributed_to": [
+      "weierstrass"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/02-real-analysis-2"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "option-pricing-finance",
+      "mathematical-finance-and-stochastic-calculus"
+    ]
+  },
+  "complex-analysis-and-cauchy-s-theorem": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance",
+      "airfoil-and-aerodynamics"
+    ]
+  },
+  "euler-s-formula-e-i-cos-i-sin": {
+    "attributed_to": [
+      "euler"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "radar-and-sonar",
+      "quantum-computing-algorithms",
+      "computer-graphics-3d"
+    ]
+  },
+  "riemann-surfaces": {
+    "attributed_to": [
+      "riemann"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis",
+      "04-advanced-topics-year-four/01-algebraic-geometry"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "theoretical-physics-and-mathematics"
+    ]
+  },
+  "riemann-zeta-function": {
+    "attributed_to": [
+      "riemann"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis",
+      "04-advanced-topics-year-four/02-analytic-number-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "riemann-hypothesis": {
+    "attributed_to": [
+      "riemann"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis",
+      "04-advanced-topics-year-four/02-analytic-number-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "cybersecurity-anomaly-detection"
+    ]
+  },
+  "airfoil-and-aerodynamics": {
+    "uses_theorems": [
+      "complex-analysis-and-cauchy-s-theorem",
+      "laplace-equation",
+      "bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel"
+    ],
+    "uses_topics": [
+      "02-core-year-two/03-complex-analysis",
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ]
+  },
+  "fourier-series": {
+    "attributed_to": [
+      "fourier"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "radar-and-sonar",
+      "medical-imaging-mri-ct",
+      "seismic-imaging-oil-exploration",
+      "bridge-and-structural-engineering",
+      "climate-modelling",
+      "weather-forecasting"
+    ]
+  },
+  "fourier-transform": {
+    "attributed_to": [
+      "fourier"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "medical-imaging-mri-ct",
+      "radar-and-sonar",
+      "gravitational-wave-detection",
+      "data-compression",
+      "cellular-network-design",
+      "option-pricing-finance",
+      "quantum-computing-algorithms",
+      "robotics-and-control",
+      "seismic-imaging-oil-exploration"
+    ]
+  },
+  "laplace-transform": {
+    "attributed_to": [
+      "laplace"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "robotics-and-control",
+      "climate-modelling"
+    ]
+  },
+  "gauss-s-law-electrostatics": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "medical-imaging-mri-ct",
+      "radar-and-sonar",
+      "seismic-imaging-oil-exploration"
+    ]
+  },
+  "signal-processing-jpeg-mp3": {
+    "uses_theorems": [
+      "fourier-series",
+      "fourier-transform",
+      "hilbert-spaces"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/02-functional-analysis"
+    ]
+  },
+  "medical-imaging-mri-ct": {
+    "uses_theorems": [
+      "fourier-transform",
+      "fourier-series",
+      "heat-equation"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/02-functional-analysis",
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+    ]
+  },
+  "the-fisher-information-matrix": {
+    "attributed_to": [
+      "fisher"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "clinical-trials-design",
+      "machine-learning-deep-neural-networks",
+      "medical-imaging-mri-ct"
+    ]
+  },
+  "analysis-of-variance-anova": {
+    "attributed_to": [
+      "fisher"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "clinical-trials-design",
+      "census-and-survey-statistics",
+      "population-dynamics-ecology"
+    ]
+  },
+  "experimental-design-randomisation-blocking-factorial-design": {
+    "attributed_to": [
+      "fisher"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "clinical-trials-design",
+      "population-dynamics-ecology",
+      "census-and-survey-statistics"
+    ]
+  },
+  "census-and-survey-statistics": {
+    "uses_theorems": [
+      "gaussian-distribution-normal-distribution",
+      "maximum-likelihood-estimation",
+      "analysis-of-variance-anova",
+      "experimental-design-randomisation-blocking-factorial-design"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ]
+  },
+  "cybersecurity-anomaly-detection": {
+    "uses_theorems": [
+      "gaussian-distribution-normal-distribution",
+      "maximum-likelihood-estimation",
+      "bayes-theorem"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ]
+  },
+  "graph-theory-konigsberg-bridges": {
+    "attributed_to": [
+      "euler"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "pagerank-google",
+      "cellular-network-design",
+      "robotics-and-control"
+    ]
+  },
+  "graph-theory-and-number-theory": {
+    "attributed_to": [
+      "erdos"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "pagerank-google",
+      "error-correcting-codes",
+      "recommender-systems"
+    ]
+  },
+  "probabilistic-method-in-combinatorics": {
+    "attributed_to": [
+      "erdos"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes",
+      "cybersecurity-anomaly-detection"
+    ]
+  },
+  "ramsey-theory": {
+    "attributed_to": [
+      "erdos"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "cybersecurity-anomaly-detection"
+    ]
+  },
+  "fibonacci-sequence": {
+    "attributed_to": [
+      "fibonacci"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "population-dynamics-ecology",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "erdos-number": {
+    "attributed_to": [
+      "erdos"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "pagerank-google",
+      "recommender-systems"
+    ]
+  },
+  "cellular-network-design": {
+    "uses_theorems": [
+      "graph-theory-konigsberg-bridges",
+      "fourier-transform"
+    ],
+    "uses_topics": [
+      "02-core-year-two/06-programming-and-discrete-mathematics",
+      "01-foundations-year-one/04-probability-and-statistics"
+    ]
+  },
+  "data-compression": {
+    "uses_theorems": [
+      "axiomatic-foundations-of-probability",
+      "kolmogorov-complexity-algorithmic-information-theory"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/06-programming-and-discrete-mathematics"
+    ]
+  },
+  "characterisation-of-solvable-polynomials": {
+    "attributed_to": [
+      "galois"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes"
+    ]
+  },
+  "abel-s-theorem": {
+    "attributed_to": [
+      "abel"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/01-galois-theory",
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "dedekind-domains-algebraic-number-theory": {
+    "attributed_to": [
+      "dedekind"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/01-galois-theory",
+      "04-advanced-topics-year-four/01-algebraic-geometry"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes"
+    ]
+  },
+  "cryptocurrency-blockchain": {
+    "uses_theorems": [
+      "fermat-s-little-theorem",
+      "modular-arithmetic-and-number-theory",
+      "axiomatic-foundations-of-probability"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra",
+      "04-advanced-topics-year-four/01-algebraic-geometry"
+    ]
+  },
+  "banach-spaces": {
+    "attributed_to": [
+      "banach"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/02-functional-analysis"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
+  "hahnbanach-theorem": {
+    "attributed_to": [
+      "banach"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/02-functional-analysis"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ]
+  },
+  "hilbert-spaces": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/02-functional-analysis",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms",
+      "machine-learning-deep-neural-networks",
+      "signal-processing-jpeg-mp3",
+      "medical-imaging-mri-ct"
+    ]
+  },
+  "cauchyschwarz-inequality": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/02-functional-analysis"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "signal-processing-jpeg-mp3",
+      "quantum-computing-algorithms",
+      "protein-folding-alphafold",
+      "recommender-systems"
+    ]
+  },
+  "founding-functional-analysis": {
+    "attributed_to": [
+      "banach"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/02-functional-analysis"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
+  "ergodic-theory": {
+    "attributed_to": [
+      "kolmogorov"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "climate-modelling",
+      "actuarial-science"
+    ]
+  },
+  "early-work-on-infinite-sets": {
+    "attributed_to": [
+      "bolzano"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "set-theory": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "machine-learning-bayesian-inference": {
+    "uses_theorems": [
+      "bayes-theorem",
+      "axiomatic-foundations-of-probability",
+      "maximum-likelihood-estimation",
+      "gaussian-distribution-normal-distribution"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference",
+      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+    ]
+  },
+  "actuarial-science": {
+    "uses_theorems": [
+      "gaussian-distribution-normal-distribution",
+      "axiomatic-foundations-of-probability",
+      "maximum-likelihood-estimation"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ]
+  },
+  "topology-algebraic-topology-foundations": {
+    "attributed_to": [
+      "poincare"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/04-topology"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "data-compression",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "poincare-conjecture": {
+    "attributed_to": [
+      "poincare"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/04-topology"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ]
+  },
+  "contributions-to-topology-and-analysis": {
+    "attributed_to": [
+      "kolmogorov"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/04-topology"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "computer-graphics-3d": {
+    "uses_theorems": [
+      "euler-s-formula-e-i-cos-i-sin",
+      "riemannian-geometry"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "01-foundations-year-one/03-calculus-and-methods",
+      "03-specialisation-year-three/04-topology"
+    ]
+  },
+  "protein-folding-alphafold": {
+    "uses_theorems": [
+      "cauchyschwarz-inequality",
+      "gaussian-distribution-normal-distribution",
+      "method-of-least-squares"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "03-specialisation-year-three/05-numerical-analysis",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ]
+  },
+  "lagrange-interpolation": {
+    "attributed_to": [
+      "lagrange"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/05-numerical-analysis"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "climate-modelling",
+      "machine-learning-deep-neural-networks",
+      "gps-positioning"
+    ]
+  },
+  "bridge-and-structural-engineering": {
+    "uses_theorems": [
+      "method-of-least-squares",
+      "fourier-series"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "01-foundations-year-one/03-calculus-and-methods",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ]
+  },
+  "morphogenesis-mathematical-biology": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/06-mathematical-biology"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "epidemiological-modelling",
+      "mathematical-biology-epidemiology"
+    ]
+  },
+  "chaos-theory-three-body-problem": {
+    "attributed_to": [
+      "poincare"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/06-mathematical-biology"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "climate-modelling",
+      "population-dynamics-ecology"
+    ]
+  },
+  "population-dynamics-ecology": {
+    "uses_theorems": [
+      "chaos-theory-three-body-problem"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "03-specialisation-year-three/06-mathematical-biology",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ]
+  },
+  "kolmogorov-complexity-algorithmic-information-theory": {
+    "attributed_to": [
+      "kolmogorov"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/07-stochastic-processes"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "data-compression",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "calculus-of-variations-jacob-and-johann": {
+    "attributed_to": [
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/08-differential-equations-advanced"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "robotics-and-control",
+      "airfoil-and-aerodynamics",
+      "climate-modelling"
+    ]
+  },
+  "riemannian-geometry": {
+    "attributed_to": [
+      "riemann"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics-year-four/01-algebraic-geometry"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gps-and-satellite-navigation",
+      "computer-graphics-3d",
+      "gravitational-wave-detection"
+    ]
+  },
+  "digital-signatures": {
+    "uses_theorems": [
+      "fermat-s-little-theorem",
+      "modular-arithmetic-and-number-theory",
+      "euclid-s-algorithm"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "02-core-year-two/01-abstract-algebra"
+    ]
+  },
+  "fermat-s-last-theorem": {
+    "attributed_to": [
+      "fermat"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics-year-four/02-analytic-number-theory",
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "digital-signatures"
+    ]
+  },
+  "analytic-number-theory": {
+    "attributed_to": [
+      "hardy"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics-year-four/02-analytic-number-theory"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "seismic-imaging-oil-exploration": {
+    "uses_theorems": [
+      "fourier-transform",
+      "fourier-series"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/08-differential-equations-advanced",
+      "04-advanced-topics-year-four/03-advanced-pdes"
+    ]
+  },
+  "turbulence-theory-kolmogorov-scaling": {
+    "attributed_to": [
+      "kolmogorov"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "weather-forecasting",
+      "climate-modelling",
+      "airfoil-and-aerodynamics"
+    ]
+  },
+  "weather-forecasting": {
+    "uses_theorems": [
+      "heat-equation",
+      "turbulence-theory-kolmogorov-scaling",
+      "fourier-series",
+      "gaussian-distribution-normal-distribution"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ]
+  },
+  "a-mathematician-s-apology": {
+    "attributed_to": [
+      "hardy"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ]
+  },
+  "algorithm-name-derives-from-his": {
+    "attributed_to": [
+      "al-khwarizmi"
+    ],
+    "appears_in_eras": [
+      "03-islamic-golden-age"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "pagerank-google",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "turing-machines-theory-of-computation": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "rsa-public-key-cryptography",
+      "cryptography-and-rsa",
+      "artificial-intelligence-and-machine-learning"
+    ]
+  },
+  "approximation-of": {
+    "attributed_to": [
+      "archimedes"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection"
+    ]
+  },
+  "area-of-parabolic-segment-first-convergent-infinite-series": {
+    "attributed_to": [
+      "archimedes"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ]
+  },
+  "automorphic-functions": {
+    "attributed_to": [
+      "poincare"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "law-of-large-numbers": {
+    "attributed_to": [
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "actuarial-science",
+      "gambling-and-game-theory",
+      "census-and-survey-statistics",
+      "epidemiological-modelling"
+    ]
+  },
+  "banachtarski-paradox": {
+    "attributed_to": [
+      "banach"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ]
+  },
+  "bernoulli-numbers-jacob": {
+    "attributed_to": [
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "binary-arithmetic": {
+    "attributed_to": [
+      "leibniz"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms",
+      "error-correcting-codes",
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "binomial-theorem": {
+    "attributed_to": [
+      "newton"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "option-pricing-finance",
+      "machine-learning-bayesian-inference",
+      "error-correcting-codes"
+    ]
+  },
+  "pascal-s-triangle": {
+    "attributed_to": [
+      "pascal"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "option-pricing-finance"
+    ]
+  },
+  "brachistochrone-and-early-calculus-johann": {
+    "attributed_to": [
+      "bernoulli-family"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "robotics-and-control",
+      "airfoil-and-aerodynamics"
+    ]
+  },
+  "breaking-enigma-at-bletchley-park": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "cryptography-and-rsa"
+    ]
+  },
+  "fundamental-theorem-of-calculus-newton": {},
+  "cantor-s-diagonal-argument": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "cantor-set": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "cardinality-of-infinite-sets": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "cauchys-integral-theorem": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "celestial-mechanics": {
+    "attributed_to": [
+      "laplace"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection",
+      "weather-forecasting"
+    ]
+  },
+  "central-limit-theorem": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "census-and-survey-statistics",
+      "clinical-trials-design",
+      "epidemiological-modelling",
+      "option-pricing-finance",
+      "actuarial-science"
+    ]
+  },
+  "completeness-theorem-for-first-order-logic": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "incompleteness-theorems-1931": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "connection-of-algebra-to-geometry": {
+    "attributed_to": [
+      "descartes"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d"
+    ]
+  },
+  "consistency-of-the-continuum-hypothesis-with-zfc": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "hilbert-s-23-problems": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "contributions-to-algebraic-topology": {
+    "attributed_to": [
+      "noether"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "data-compression",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "contributions-to-modal-logic-and-ontology": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "contributions-to-set-theory-and-foundations": {
+    "attributed_to": [
+      "dedekind"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "dedekind-cuts-rigorous-construction-of-real-numbers": {
+    "attributed_to": [
+      "dedekind"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "dirichlet-convergence-theorem": {
+    "appears_in_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/04-topology"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "medical-imaging-mri-ct"
+    ]
+  },
+  "discovery-of-irrational-numbers": {
+    "attributed_to": [
+      "pythagoras"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ]
+  },
+  "elliptic-integrals-and-elliptic-functions": {
+    "attributed_to": [
+      "abel"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection"
+    ]
+  },
+  "fermats-little-theorem": {},
+  "proof-by-contradiction": {
+    "attributed_to": [
+      "euclid"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ]
+  },
+  "euler-s-totient-function": {
+    "attributed_to": [
+      "euler"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra",
+      "04-advanced-topics-year-four/02-analytic-number-theory"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "digital-signatures",
+      "cryptocurrency-blockchain"
+    ]
+  },
+  "eulers-totient-function": {},
+  "first-systematic-use-of-complex-numbers": {
+    "attributed_to": [
+      "cardano"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "quantum-computing-algorithms"
+    ]
+  },
+  "fundamental-theorem-of-algebra": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/03-complex-analysis"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
+  "formal-axiomatic-systems": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "formal-logic": {
+    "attributed_to": [
+      "leibniz"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "foundations-of-geometry": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d",
+      "bridge-and-structural-engineering"
+    ]
+  },
+  "fundamental-theorem-of-calculus": {
+    "attributed_to": [
+      "newton",
+      "leibniz",
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "02-core-year-two/02-real-analysis-2"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
+  "group-theory-foundations": {
+    "attributed_to": [
+      "lagrange"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes"
+    ]
+  },
+  "hahn-banach-theorem": {
+    "attributed_to": [
+      "banach"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "option-pricing-finance",
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "halting-problem-undecidability": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "hardy-spaces-complex-analysis": {
+    "attributed_to": [
+      "hardy"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
+  "hardyramanujan-collaboration": {
+    "attributed_to": [
+      "hardy"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "hardyweinberg-equilibrium-genetics": {
+    "attributed_to": [
+      "hardy"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "epidemiological-modelling",
+      "population-dynamics-ecology"
+    ]
+  },
+  "highly-composite-numbers": {
+    "attributed_to": [
+      "ramanujan"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3",
+      "data-compression"
+    ]
+  },
+  "hilbert-s-programme": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "introduced-hindu-arabic-numerals-to-europe-via-liber-abaci": {
+    "attributed_to": [
+      "fibonacci"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ]
+  },
+  "introduction-of-hindu-arabic-numerals-to-islamic-scholarship": {
+    "attributed_to": [
+      "al-khwarizmi"
+    ],
+    "appears_in_eras": [
+      "03-islamic-golden-age"
+    ]
+  },
+  "invariant-theory": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d"
+    ]
+  },
+  "lagrange-multipliers": {
+    "attributed_to": [
+      "lagrange"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "option-pricing-finance",
+      "robotics-and-control",
+      "climate-modelling"
+    ]
+  },
+  "law-of-cosines": {
+    "attributed_to": [
+      "euclid",
+      "pythagoras"
+    ],
+    "appears_in_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "computer-graphics-3d",
+      "radar-and-sonar"
+    ]
+  },
+  "mean-value-theorem": {
+    "attributed_to": [
+      "cauchy"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "weather-forecasting"
+    ]
+  },
+  "mechanical-calculator": {
+    "attributed_to": [
+      "pascal"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ]
+  },
+  "method-of-exhaustion": {
+    "attributed_to": [
+      "archimedes"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ]
+  },
+  "mock-theta-functions": {
+    "attributed_to": [
+      "ramanujan"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ]
+  },
+  "most-prolific-mathematician-in-history": {
+    "attributed_to": [
+      "euler"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "musical-ratios-and-the-harmonic-series": {
+    "attributed_to": [
+      "pythagoras"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "named-algebra-al-jabr": {
+    "attributed_to": [
+      "al-khwarizmi"
+    ],
+    "appears_in_eras": [
+      "03-islamic-golden-age"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "noetherian-rings": {
+    "attributed_to": [
+      "noether"
+    ],
+    "appears_in_topics": [
+      "02-core-year-two/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes"
+    ]
+  },
+  "non-euclidean-geometry-unpublished": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection"
+    ]
+  },
+  "notation-e-i-f-x-popularised": {
+    "attributed_to": [
+      "euler"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "optics": {
+    "attributed_to": [
+      "newton"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "medical-imaging-mri-ct",
+      "radar-and-sonar"
+    ]
+  },
+  "partitions-and-the-hardyramanujan-formula": {
+    "attributed_to": [
+      "ramanujan"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "pascal-s-theorem-on-hexagons-in-conics": {
+    "attributed_to": [
+      "pascal"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d"
+    ]
+  },
+  "philosophical-monadology": {
+    "attributed_to": [
+      "leibniz"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "philosophy-of-mathematics-conventionalism": {
+    "attributed_to": [
+      "poincare"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ]
+  },
+  "population-genetics-modern-synthesis": {
+    "attributed_to": [
+      "fisher"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "population-dynamics-ecology",
+      "epidemiological-modelling"
+    ]
+  },
+  "prime-number-theorem": {
+    "attributed_to": [
+      "gauss",
+      "riemann"
+    ],
+    "appears_in_topics": [
+      "03-specialisation-year-three/01-galois-theory",
+      "04-advanced-topics-year-four/02-analytic-number-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "cryptocurrency-blockchain"
+    ]
+  },
+  "principle-of-levers-and-buoyancy": {
+    "attributed_to": [
+      "archimedes"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "bridge-and-structural-engineering",
+      "airfoil-and-aerodynamics"
+    ]
+  },
+  "prolific-collaborator-509-direct-collaborators": {
+    "attributed_to": [
+      "erdos"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "pagerank-google",
+      "recommender-systems",
+      "cybersecurity-anomaly-detection"
+    ]
+  },
+  "published-cubic-and-quartic-formulas": {
+    "attributed_to": [
+      "cardano"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ]
+  },
+  "ramanujan-s-notebooks-thousands-of-identities-and-formulae": {
+    "attributed_to": [
+      "ramanujan"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ]
+  },
+  "ramanujan-s-tau-function-and-modular-forms": {
+    "attributed_to": [
+      "ramanujan"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "rigorous-analysis-before-cauchy": {
+    "attributed_to": [
+      "bolzano"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "transfinite-numbers": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "turing-test-artificial-intelligence": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "artificial-intelligence-and-machine-learning"
+    ]
+  },
+  "gambling-and-game-theory": {
+    "uses_theorems": [
+      "axiomatic-foundations-of-probability",
+      "bayes-theorem",
+      "probability-theory-foundations"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/04-probability-and-statistics",
+      "02-core-year-two/05-probability-and-statistical-inference",
+      "03-specialisation-year-three/07-stochastic-processes"
+    ]
+  },
+  "gravitational-wave-detection": {
+    "uses_theorems": [
+      "fourier-transform",
+      "gaussian-distribution-normal-distribution",
+      "riemannian-geometry"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/05-numerical-analysis",
+      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+    ]
+  },
+  "radar-and-sonar": {
+    "uses_theorems": [
+      "fourier-transform",
+      "fourier-series",
+      "gaussian-distribution-normal-distribution"
+    ],
+    "uses_topics": [
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/05-numerical-analysis"
+    ]
+  },
+  "recommender-systems": {
+    "uses_theorems": [
+      "method-of-least-squares",
+      "cauchyschwarz-inequality"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/01-algebra-and-linear-algebra",
+      "03-specialisation-year-three/05-numerical-analysis"
+    ]
+  },
+  "traffic-flow-modelling": {
+    "uses_theorems": [
+      "heat-equation"
+    ],
+    "uses_topics": [
+      "01-foundations-year-one/03-calculus-and-methods",
+      "02-core-year-two/04-vector-calculus-and-pdes",
+      "03-specialisation-year-three/08-differential-equations-advanced"
+    ]
+  }
+}

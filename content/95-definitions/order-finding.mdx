@@ -1,0 +1,18 @@
+---
+title: 'order-finding'
+section: Definitions
+section_slug: 95-definitions
+slug: order-finding
+tags: [applied]
+first_seen_in: '94-applications/quantum-computing-algorithms.mdx'
+mentioned_in: ['94-applications/quantum-computing-algorithms']
+summary: 'Quick definition of order-finding from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Shor's algorithm** reduces integer factorisation to **order-finding**: given $a$ and $n$, find the smallest positive integer $r$ such that $a^r \equiv 1 \pmod{n}$ (the multiplicative order of $a$ mod $n$). If $r$ is even and $a^{r/2} \not\equiv -1 \pmod{n}$, then $\gcd(a^{r/2} \pm 1, n)$ gives a non-trivial factor of $n$ with high probability. This is the classical reduction, requiring only Fermat's little theorem and basic modular arithmetic.
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

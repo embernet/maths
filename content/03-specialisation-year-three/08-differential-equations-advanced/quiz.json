@@ -1,0 +1,36 @@
+{
+  "topic_slug": "08-differential-equations-advanced",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The Green's function $G(x, \\xi)$ for a linear ODE $Ly = f$ is defined as the solution of:",
+      "options": [
+        {"id": "a", "text": "$LG(\\cdot, \\xi) = \\delta(\\cdot - \\xi)$, where $\\delta$ is the Dirac delta.", "correct": true, "explanation": "The Green's function is the response to a unit impulse. Once found, the solution for any forcing $f$ is given by convolution: $y(x) = \\int G(x,\\xi) f(\\xi)\\,d\\xi$."},
+        {"id": "b", "text": "$LG = 0$ with $G(a) = G(b) = 1$.", "correct": false, "explanation": "This would be the homogeneous equation with non-zero boundary conditions — not the definition of the Green's function."},
+        {"id": "c", "text": "$G(x,\\xi) = G(\\xi, x)$ for all $x, \\xi$.", "correct": false, "explanation": "Symmetry $G(x,\\xi) = G(\\xi,x)$ is a property of Green's functions for self-adjoint operators, not their definition."},
+        {"id": "d", "text": "$LG = f$ with $G(a) = G(b) = 0$.", "correct": false, "explanation": "This would define the original solution $y$, not the Green's function. The Green's function has delta-function forcing."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The Euler-Lagrange equation for the functional $J[y] = \\int_a^b F(x, y, y')\\, dx$ is:",
+      "options": [
+        {"id": "a", "text": "$\\frac{\\partial F}{\\partial y} - \\frac{d}{dx}\\frac{\\partial F}{\\partial y'} = 0$.", "correct": true, "explanation": "This is the Euler-Lagrange equation — the necessary condition for $y$ to be a critical point of $J$. Derived by setting the first variation $\\delta J = 0$."},
+        {"id": "b", "text": "$\\frac{\\partial F}{\\partial y'} = 0$.", "correct": false, "explanation": "This would say $F$ doesn't depend on $y'$ — not the correct Euler-Lagrange equation."},
+        {"id": "c", "text": "$\\frac{\\partial^2 F}{\\partial y^2} > 0$.", "correct": false, "explanation": "This is a sufficient condition for $F$ to be convex in $y$ — related to second-order conditions for a minimum but not the Euler-Lagrange equation."},
+        {"id": "d", "text": "$F(x, y, y') = \\text{const}$.", "correct": false, "explanation": "The Beltrami identity (a first integral when $F$ doesn't depend on $x$ explicitly) takes this form, but it is a consequence of Euler-Lagrange, not the equation itself."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Gronwall's lemma is used in ODE theory primarily to:",
+      "options": [
+        {"id": "a", "text": "Prove that solutions depend continuously on initial conditions.", "correct": true, "explanation": "Gronwall's inequality bounds the difference between two solutions in terms of the difference of initial conditions. It is the main tool for proving continuous dependence."},
+        {"id": "b", "text": "Construct explicit solutions in closed form.", "correct": false, "explanation": "Gronwall gives bounds on solutions, not explicit formulas. Picard iteration constructs solutions; Gronwall bounds the errors."},
+        {"id": "c", "text": "Prove that all ODEs have global solutions.", "correct": false, "explanation": "Not true in general: $y' = y^2$ blows up in finite time from any non-zero initial condition. Gronwall provides local bounds under Lipschitz conditions."},
+        {"id": "d", "text": "Show the Picard iterates converge uniformly.", "correct": false, "explanation": "Uniform convergence of Picard iterates follows from the contraction mapping argument (Banach fixed-point theorem), not Gronwall's lemma directly."}
+      ]
+    }
+  ]
+}

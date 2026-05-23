@@ -1,0 +1,48 @@
+---
+title: Clinical Trials Design
+section: Real-world applications
+section_slug: 94-applications
+slug: clinical-trials-design
+domains: [medicine, statistics, public-health]
+uses_theorems: [gaussian-distribution-normal-distribution, maximum-likelihood-estimation, experimental-design-randomisation-blocking-factorial-design, analysis-of-variance-anova]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_applications: [epidemiological-modelling, medical-diagnosis-screening, census-and-survey-statistics]
+tags: [statistics, medicine, hypothesis-testing, applied]
+real_world_examples: [COVID-19 vaccine trials, Cancer drug approvals, NICE health technology assessments, Blood pressure treatment guidelines]
+summary: Whether a new drug works is a statistical question — answered by randomised controlled trials designed according to hypothesis testing, power calculations, and the principles Ronald Fisher established in the 1920s.
+---
+
+
+## The application
+
+Before a new drug reaches patients, it must pass through clinical trials demonstrating safety and efficacy. The mathematical framework that governs trial design — how many participants are needed, how to randomise, what statistical tests to apply, and how to interpret the results — was developed by [Ronald Fisher](/mathematicians/fisher) in the 1920s and remains the gold standard of evidence-based medicine. Every drug currently on the market was approved via this statistical framework.
+
+## The maths behind it
+
+A **randomised controlled trial** (RCT) randomly assigns participants to a treatment group or a control (placebo) group. The outcome of interest is measured for each participant, and the question is whether the difference in outcomes between groups is large enough to be unlikely under the null hypothesis of no treatment effect.
+
+The **null hypothesis** $H_0$ is that the true treatment effect $\delta = \mu_T - \mu_C = 0$. A t-test statistic:
+
+$$T = \frac{\bar{X}_T - \bar{X}_C}{\hat{\sigma}\sqrt{1/n_T + 1/n_C}}$$
+
+follows approximately a standard normal under $H_0$ when sample sizes are large. The trial **rejects $H_0$** at significance level $\alpha$ (typically 5%) if $|T| > z_{\alpha/2}$.
+
+**Statistical power** $1 - \beta$ is the probability of rejecting $H_0$ when the true effect size is $\delta$. A power calculation determines the required sample size $n$:
+
+$$n \approx \frac{(z_{\alpha/2} + z_\beta)^2 \sigma^2}{\delta^2}.$$
+
+For $\alpha = 0.05$ (two-sided) and power $1 - \beta = 0.80$, $z_{\alpha/2} = 1.96$ and $z_\beta = 0.84$, giving $n \approx 8\sigma^2/\delta^2$ per group.
+
+**Adaptive trials** modify allocation ratios or stop early based on interim analyses, using sequential testing procedures (group sequential methods) that control the overall Type I error rate despite multiple looks at the data.
+
+## A concrete example
+
+The Oxford-AstraZeneca COVID-19 vaccine trial enrolled 11,636 participants. The power calculation assumed a vaccine efficacy of around 60% (relative risk reduction), a one-sided significance level of 2.5%, and 90% power. The trial observed efficacy of 70.4%, with a 95% confidence interval of 54.8–80.6%. The statistical analysis used a Cox proportional hazards model, a more sophisticated variant of the two-sample comparison above.
+
+## History of the application
+
+[Fisher](/mathematicians/fisher) published *Statistical Methods for Research Workers* (1925) and *The Design of Experiments* (1935), laying out randomisation, blocking, factorial designs, and the analysis of variance. The first modern RCT — of streptomycin for tuberculosis, run by Austin Bradford Hill in 1948 — used Fisher's framework. Bradford Hill also established the Bradford Hill criteria for causality and pioneered the evidence linking smoking to lung cancer.
+
+## Links
+
+Probability distributions and hypothesis testing are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). Estimation theory, the Neyman-Pearson framework, and likelihood methods are in [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). See also [Medical Diagnosis and Screening](/applications/medical-diagnosis-screening) and [Census and Survey Statistics](/applications/census-and-survey-statistics).

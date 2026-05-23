@@ -1,0 +1,48 @@
+---
+title: Mean value theorem
+section: Theorems
+section_slug: 93-theorems
+slug: mean-value-theorem
+attributed_to: [cauchy]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [intermediate-value-theorem-first-rigorous-proof, bolzanoweierstrass-theorem, rigorous-foundations-of-calculus-definitions]
+applications: [climate-modelling, weather-forecasting]
+tags: [calculus, analysis, derivatives, real-analysis]
+year_introduced: 1823 (rigorous form, Cauchy)
+summary: For a differentiable function on an interval, there is at least one point where the instantaneous rate of change equals the average rate over the whole interval.
+---
+
+
+
+## What it says
+
+If $f$ is continuous on $[a, b]$ and differentiable on $(a, b)$, then there exists $c \in (a, b)$ such that:
+
+$$f'(c) = \frac{f(b) - f(a)}{b - a}$$
+
+In plain language: the slope of the tangent at $c$ equals the slope of the chord from $a$ to $b$. Geometrically, somewhere on the curve the tangent is parallel to the secant joining the endpoints.
+
+The special case $f(a) = f(b)$ is **Rolle's theorem**: if a differentiable function returns to its starting value, it must have zero derivative somewhere in between.
+
+## History
+
+Lagrange stated a version of the theorem in 1797, but [Cauchy](/mathematicians/cauchy) gave the first rigorous proof in his 1823 *Résumé des leçons*. He needed it to prove that functions with identically zero derivative are constant — without the MVT, you cannot make that step, and calculus rests on a gap. Bolzano had earlier proved the Intermediate Value Theorem, and both results are part of the same programme of filling in the logical foundations of analysis.
+
+## Why it matters
+
+The MVT is perhaps the most-used tool in theoretical calculus. Almost every proof that requires "going from a local condition (derivative) to a global conclusion (function values)" passes through the MVT. It implies:
+- A function with positive derivative on an interval is increasing.
+- If two functions have the same derivative, they differ by a constant.
+- Taylor's theorem (in one of its forms).
+- Error bounds for numerical differentiation.
+
+These are not curiosities — they are the scaffolding that holds rigorous analysis together.
+
+## Real-world applications
+
+Numerical solvers for differential equations use the MVT to establish error bounds. [Weather forecasting](/applications/weather-forecasting) and [climate modelling](/applications/climate-modelling) rely on such solvers at every timestep.
+
+## Where you'll meet it
+
+The MVT is introduced in Year 1 analysis and is a prerequisite for almost everything in Year 2 real analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution) for the broader context of nineteenth-century analysis.

@@ -1,0 +1,43 @@
+---
+title: Law of large numbers
+section: Theorems
+section_slug: 93-theorems
+slug: law-of-large-numbers
+attributed_to: [bernoulli-family]
+era: 05-the-calculus-revolution
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [central-limit-theorem, axiomatic-foundations-of-probability, gaussian-distribution-normal-distribution]
+applications: [actuarial-science, gambling-and-game-theory, census-and-survey-statistics, epidemiological-modelling]
+tags: [probability, statistics, convergence, foundations]
+year_introduced: 1713 (Bernoulli, weak form)
+summary: As the number of independent trials grows, the sample mean converges to the true mean — the theorem that gives probability its empirical meaning.
+---
+
+
+## What it says
+
+**Weak law (Bernoulli):** For i.i.d. random variables with mean $\mu$ and finite variance, the sample mean $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$ converges *in probability* to $\mu$:
+
+$$P\!\left(|\bar{X}_n - \mu| > \varepsilon\right) \to 0 \quad \text{as } n \to \infty, \text{ for any } \varepsilon > 0$$
+
+**Strong law (Kolmogorov):** The sample mean converges *almost surely* to $\mu$:
+
+$$P\!\left(\lim_{n\to\infty} \bar{X}_n = \mu\right) = 1$$
+
+The distinction matters: the weak law says the probability of being far off goes to zero; the strong law says you are almost certain to converge, trajectory by trajectory.
+
+## History
+
+Jacob [Bernoulli](/mathematicians/bernoulli-family) proved the weak law for the binomial distribution in *Ars Conjectandi* (published posthumously 1713) and called it his "golden theorem." He needed it to justify using observed frequencies as estimates of probability. The strong law waited until [Kolmogorov](/mathematicians/kolmogorov)'s rigorous foundations of probability (1933), which gave the tools to make "almost surely" precise.
+
+## Why it matters
+
+The law of large numbers is what makes probability a science rather than a philosophical game. Without it, there would be no connection between the abstract definition of probability and observed frequencies. The LLN justifies: taking averages of measurements to reduce noise, using sample statistics to estimate population parameters, and the entire enterprise of statistical inference. The Central Limit Theorem tells you *how fast* the convergence happens and what the fluctuations look like.
+
+## Real-world applications
+
+[Actuarial science](/applications/actuarial-science) relies on the LLN to predict aggregate claims from individual risk distributions. [Gambling](/applications/gambling-and-game-theory) — the house edge exists only in the long run because of the LLN. [Survey sampling](/applications/census-and-survey-statistics) and [epidemiology](/applications/epidemiological-modelling) estimate population means from samples.
+
+## Where you'll meet it
+
+The LLN appears in Year 1 probability and is revisited in Year 2 with a rigorous proof using [Kolmogorov's axiomatic foundations](/theorems/axiomatic-foundations-of-probability). See the [Calculus Revolution era](/history/05-the-calculus-revolution) for the historical context.

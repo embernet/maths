@@ -1,0 +1,46 @@
+---
+title: Weierstrass function (continuous everywhere, differentiable nowhere)
+section: Theorems
+section_slug: 93-theorems
+slug: weierstrass-function-continuous-everywhere-differentiable-nowhere
+attributed_to: [weierstrass]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [rigorous-analysis, uniform-convergence, weierstrass-approximation-theorem, bolzanoweierstrass-theorem]
+applications: [option-pricing-finance]
+tags: [analysis, counterexample, Weierstrass, continuity, differentiability]
+year_introduced: '1872'
+summary: A function that is continuous at every point on the real line but differentiable at no point — Weierstrass's pathological counterexample that demolished the assumption that continuous functions must have derivatives.
+---
+
+
+
+## What it says
+
+The **Weierstrass function** is defined by
+
+$$W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)$$
+
+where $0 < a < 1$, $b$ is a positive odd integer, and $ab > 1 + \frac{3\pi}{2}$.
+
+**Theorem (Weierstrass, 1872):** $W$ is continuous everywhere but differentiable nowhere.
+
+*Continuity* follows because the series converges uniformly (the terms are bounded by $a^n$ and $\sum a^n < \infty$), and uniform limits of continuous functions are continuous.
+
+*Nowhere differentiability* is the surprise: the increasingly rapid oscillations from the high-frequency terms $\cos(b^n \pi x)$ destroy any derivative at every point, however small the scale.
+
+## History
+
+[Weierstrass](/mathematicians/weierstrass) presented this function to the Berlin Academy on 18 July 1872. The mathematical community was shocked. The prevailing belief — held by Cauchy, Ampère, and others — was that a continuous function must be differentiable "except perhaps at isolated points." Weierstrass's example showed this was false in the most extreme possible way. Charles Hermite wrote to Stieltjes that the function was a "lamentable plague." Riemann had earlier asserted (without proof) that $\sum n^{-2}\sin(n^2 x)$ is an example; Hardy proved this in 1916.
+
+## Why it matters
+
+The Weierstrass function is the canonical counterexample in real analysis. It demonstrates that intuition built from smooth, "nice" functions does not extend to all continuous functions. It motivated the rigorous development of [uniform convergence](/theorems/uniform-convergence) — the series defining $W$ converges uniformly but pointwise convergence alone is insufficient to preserve differentiability. The function also foreshadowed fractal geometry: the graph of $W$ has Hausdorff dimension strictly greater than 1.
+
+## Real-world applications
+
+Brownian motion — the mathematical model of random particle motion — is (almost surely) continuous everywhere and differentiable nowhere. This is the basis of [mathematical finance and stochastic calculus](/applications/mathematical-finance-and-stochastic-calculus), where asset prices are modelled by Brownian paths.
+
+## Where you'll meet it
+
+The Weierstrass function appears in Year 2 real analysis as the defining counterexample for continuity without differentiability. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

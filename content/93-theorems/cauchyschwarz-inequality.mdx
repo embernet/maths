@@ -1,0 +1,44 @@
+---
+title: Cauchy–Schwarz inequality
+section: Theorems
+section_slug: 93-theorems
+slug: cauchyschwarz-inequality
+attributed_to: [cauchy]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [hahn-banach-theorem, hilbert-spaces, fourier-series]
+applications: [machine-learning-deep-neural-networks, signal-processing-jpeg-mp3, quantum-computing-algorithms]
+tags: [linear-algebra, inner-products, inequalities, analysis]
+year_introduced: 1821 (Cauchy); extended by Schwarz 1885
+summary: The absolute value of an inner product never exceeds the product of the norms — the most-used inequality in all of mathematics.
+---
+
+
+
+## What it says
+
+For vectors $\mathbf{u}$ and $\mathbf{v}$ in an inner-product space:
+
+$$|\langle \mathbf{u}, \mathbf{v} \rangle| \leq \|\mathbf{u}\|\, \|\mathbf{v}\|$$
+
+with equality if and only if $\mathbf{u}$ and $\mathbf{v}$ are parallel (one is a scalar multiple of the other).
+
+In $\mathbb{R}^n$ with the dot product this says $|\mathbf{u} \cdot \mathbf{v}| \leq |\mathbf{u}||\mathbf{v}|$, which you can interpret geometrically: $|\cos\theta| \leq 1$. For integrals (the Schwarz version):
+
+$$\left(\int_a^b f(x)g(x)\,dx\right)^2 \leq \int_a^b f(x)^2\,dx \cdot \int_a^b g(x)^2\,dx$$
+
+## History
+
+[Cauchy](/mathematicians/cauchy) proved the finite sum version in 1821. Viktor Bunyakovsky extended it to integrals in 1859, and Hermann Amandus Schwarz gave the general inner-product version in 1885. The inequality carries different names in different countries; in the UK "Cauchy–Schwarz" is standard.
+
+## Why it matters
+
+This is the bit that catches students out: the Cauchy–Schwarz inequality turns up in virtually every area of mathematics. It proves the triangle inequality for inner-product norms. It underlies the definition of angles in abstract vector spaces. It is the key step in proving that correlation coefficients lie between $-1$ and $1$. In quantum mechanics it implies the Heisenberg uncertainty principle. In Fourier analysis it bounds how well a signal and a filter can simultaneously be localised.
+
+## Real-world applications
+
+[Machine learning](/applications/machine-learning-deep-neural-networks) uses cosine similarity (essentially normalised inner products) for document and embedding comparison — the Cauchy–Schwarz inequality guarantees that similarity scores are bounded. [Signal processing](/applications/signal-processing-jpeg-mp3) uses it in matched filter derivations. [Quantum computing](/applications/quantum-computing-algorithms) uses it in the analysis of quantum states and measurement bounds.
+
+## Where you'll meet it
+
+Cauchy–Schwarz appears in Year 1 linear algebra, Year 2 real analysis, and returns in Year 3 functional analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution) for the historical development of rigorous inequalities.

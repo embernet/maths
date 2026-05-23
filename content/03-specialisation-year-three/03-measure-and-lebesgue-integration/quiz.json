@@ -1,0 +1,36 @@
+{
+  "topic_slug": "03-measure-and-lebesgue-integration",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The Dominated Convergence Theorem allows you to conclude $\\lim_{n\\to\\infty}\\int f_n = \\int f$ provided:",
+      "options": [
+        {"id": "a", "text": "$f_n \\to f$ pointwise and $|f_n| \\le g$ for some integrable $g$.", "correct": true, "explanation": "The dominating function $g$ controls the size of all $f_n$. This is the standard DCT hypothesis. No further uniformity conditions are needed."},
+        {"id": "b", "text": "$f_n \\to f$ uniformly.", "correct": false, "explanation": "Uniform convergence is sufficient but not necessary. The DCT is more general — it allows pointwise convergence provided the domination condition holds."},
+        {"id": "c", "text": "The $f_n$ are all continuous.", "correct": false, "explanation": "Continuity is not required by the DCT. The theorem applies to any measurable functions satisfying the domination condition."},
+        {"id": "d", "text": "The integral $\\int f_n$ is finite for all $n$.", "correct": false, "explanation": "Finiteness of individual integrals is a consequence of the domination condition (since $|f_n| \\le g$ and $g$ is integrable), not an additional hypothesis."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The Lebesgue measure of the set of rational numbers $\\mathbb{Q} \\subset \\mathbb{R}$ is:",
+      "options": [
+        {"id": "a", "text": "0.", "correct": true, "explanation": "$\\mathbb{Q}$ is countable: $\\mathbb{Q} = \\{q_1, q_2, \\ldots\\}$. Each singleton $\\{q_n\\}$ has measure zero. Countable additivity gives $\\lambda(\\mathbb{Q}) = \\sum \\lambda(\\{q_n\\}) = 0$."},
+        {"id": "b", "text": "1.", "correct": false, "explanation": "Rationals are countable and dense but measure zero. Measure is not the same as density."},
+        {"id": "c", "text": "$\\infty$.", "correct": false, "explanation": "The rationals are unbounded, but each point has zero measure. Measure zero times infinity is still zero here (countable additivity applies)."},
+        {"id": "d", "text": "Undefined — rationals are not Lebesgue measurable.", "correct": false, "explanation": "The rationals are a countable set and therefore Borel measurable. All Borel sets are Lebesgue measurable."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Fubini's theorem guarantees that for an integrable function $f(x,y)$:",
+      "options": [
+        {"id": "a", "text": "The iterated integrals $\\int\\int f\\, dx\\, dy$ and $\\int\\int f\\, dy\\, dx$ are equal.", "correct": true, "explanation": "Fubini's theorem allows free interchange of the order of integration, provided $f$ is integrable (or non-negative, for the Tonelli version)."},
+        {"id": "b", "text": "The double integral equals zero.", "correct": false, "explanation": "The integral of a positive function is positive. Fubini says nothing about the value, only about the order of integration."},
+        {"id": "c", "text": "$f$ must be continuous for the iterated integrals to make sense.", "correct": false, "explanation": "Fubini's theorem applies to measurable (Lebesgue-integrable) functions, which need not be continuous."},
+        {"id": "d", "text": "The partial integrals $\\int f(x,y)\\, dx$ are continuous in $y$.", "correct": false, "explanation": "Measurable but possibly discontinuous functions may have partial integrals that are merely measurable, not continuous."}
+      ]
+    }
+  ]
+}

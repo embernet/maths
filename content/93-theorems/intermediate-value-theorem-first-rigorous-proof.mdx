@@ -1,0 +1,42 @@
+---
+title: Intermediate value theorem (first rigorous proof)
+section: Theorems
+section_slug: 93-theorems
+slug: intermediate-value-theorem-first-rigorous-proof
+attributed_to: [bolzano]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [bolzanoweierstrass-theorem, mean-value-theorem, dedekind-cuts-rigorous-construction-of-real-numbers]
+applications: [weather-forecasting]
+tags: [real-analysis, continuity, existence, topology]
+year_introduced: '1817'
+summary: A continuous function that takes two values must take every value in between — the theorem that makes continuous change meaningful.
+---
+
+
+
+## What it says
+
+If $f$ is continuous on $[a, b]$ and $f(a) < 0 < f(b)$ (or vice versa), then there exists $c \in (a, b)$ with $f(c) = 0$.
+
+More generally: if $f$ is continuous on $[a, b]$ and $k$ is any value between $f(a)$ and $f(b)$, then $f$ takes the value $k$ somewhere on $(a, b)$.
+
+In plain language: you cannot get from one height to another without passing through every height in between, provided you travel continuously. This seems obvious — but proving it requires understanding what "continuous" and "real number" actually mean.
+
+## History
+
+[Bolzano](/mathematicians/bolzano) gave the first rigorous proof in his 1817 paper *Rein analytischer Beweis* ("Pure analytical proof"). He was dismayed that the theorem — which his contemporaries considered self-evident — had no proper proof, and that proofs of the Fundamental Theorem of Algebra relied on geometric intuition rather than analysis. His paper was a direct challenge to that sloppiness. Cauchy gave a cleaner proof in 1821, and it is often attributed to him, but Bolzano's 1817 paper was first.
+
+## Why it matters
+
+The IVT is one of the deepest properties of the real number line. It fails for the rationals: $f(x) = x^2 - 2$ is continuous on $[1, 2]$ with $f(1) < 0 < f(2)$, but the zero at $\sqrt{2}$ is not in $\mathbb{Q}$. So the IVT is, in a sense, what distinguishes $\mathbb{R}$ from $\mathbb{Q}$: the reals are complete, meaning there are no "gaps" for the function to jump over.
+
+The IVT is also the simplest existence theorem in analysis — it tells you a root exists without constructing it. Bisection search then finds it numerically.
+
+## Real-world applications
+
+Bisection root-finding, which relies on the IVT, underpins many numerical solvers. [Weather forecasting](/applications/weather-forecasting) models use iterative root-finding to solve implicit equations at each grid cell and time step.
+
+## Where you'll meet it
+
+The IVT appears in Year 1 calculus courses and is revisited carefully in Year 2 real analysis, where its proof reveals what completeness of $\mathbb{R}$ really means. See also [Dedekind cuts](/theorems/dedekind-cuts-rigorous-construction-of-real-numbers) for the construction that makes the proof work.

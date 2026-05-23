@@ -1,0 +1,32 @@
+---
+title: Karl Weierstrass
+section: Mathematician Profiles
+section_slug: 91-mathematicians
+slug: weierstrass
+born: '1815-10-31'
+died: '1897-02-19'
+origin: Ostenfelde, Kingdom of Prussia (now Germany)
+worked_in: ['Berlin, Germany']
+known_for: [rigorous-analysis, weierstrass-function-continuous-everywhere-differentiable-nowhere, bolzanoweierstrass-theorem, weierstrass-approximation-theorem, uniform-convergence]
+appears_in: [01-foundations-year-one/02-real-analysis-foundations, 02-core-year-two/02-real-analysis-2]
+tags: [analysis, foundations, history]
+hook: He spent his twenties as a schoolteacher, doing mathematics alone and unpublished. He submitted a paper on Abelian integrals to a journal in 1854, aged 38, and it caused a sensation — the Berlin academy awarded him an honorary doctorate on the spot and offered him a professorship. He then dismantled virtually everything in calculus and rebuilt it from scratch.
+---
+
+
+
+Weierstrass is the architect of modern analysis. Where [Cauchy](/mathematicians/cauchy) had made a first pass at rigour, Weierstrass completed the project, tracking down and eliminating every remaining intuitive assumption in the calculus.
+
+His most notorious result was the construction, in 1872, of a function that is **continuous everywhere but differentiable nowhere** — what is now called the Weierstrass function:
+
+$$f(x) = \sum_{n=0}^\infty a^n \cos(b^n \pi x)$$
+
+where $0 < a < 1$, $b$ is a positive odd integer, and $ab > 1 + \frac{3\pi}{2}$. This was profoundly disturbing to mathematicians who had assumed that a continuous function must be differentiable "almost everywhere," or that the graph of a continuous function must be a curve you could draw without lifting your pen. Weierstrass's construction showed this was false: continuity and differentiability are genuinely independent properties.
+
+The **Bolzano–Weierstrass theorem** — every bounded sequence has a convergent subsequence — appears in this form due to Weierstrass. [Bolzano](/mathematicians/bolzano) had proved related results earlier, but Weierstrass gave the theorem the form and generality in which it is now taught.
+
+The **Weierstrass approximation theorem** states that every continuous function on a closed bounded interval $[a, b]$ can be uniformly approximated by polynomials: for any $\varepsilon > 0$, there exists a polynomial $p$ such that $|f(x) - p(x)| < \varepsilon$ for all $x \in [a, b]$. This is the theoretical foundation for numerical approximation.
+
+His treatment of **uniform convergence** — distinguishing it carefully from pointwise convergence — resolved the confusion that had caused errors in earlier work on term-by-term differentiation and integration of series. A sequence of functions $f_n$ converges uniformly to $f$ if the rate of convergence is the same at every point; this is stronger than pointwise convergence and is what is needed to justify swapping limits and integrals.
+
+Weierstrass ran a famous seminar in Berlin that shaped German mathematics for a generation, training [Cantor](/mathematicians/cantor), Schwarz, and many others.

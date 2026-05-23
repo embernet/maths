@@ -1,0 +1,51 @@
+---
+title: Medical Diagnosis and Screening
+section: Real-world applications
+section_slug: 94-applications
+slug: medical-diagnosis-screening
+domains: [medicine, statistics, public-health]
+uses_theorems: [bayes-theorem, axiomatic-foundations-of-probability]
+uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_applications: [spam-filtering, clinical-trials-design, cybersecurity-anomaly-detection]
+tags: [Bayes, probability, medicine, applied]
+real_world_examples: [COVID-19 lateral flow tests, Breast cancer mammography screening, HIV screening programmes, PSA testing for prostate cancer]
+summary: A positive test result does not mean you have the disease — Bayes' theorem explains the famous false-positive paradox that puzzles doctors and patients alike.
+---
+
+
+## The application
+
+A screening test for a rare disease with 99% accuracy sounds impressive. Yet if the disease affects 1 in 1,000 people and you test a random person who tests positive, the probability that they actually have the disease is only about 9%. This counter-intuitive result — the **false-positive paradox** — follows directly from Bayes' theorem and has significant consequences for medical policy on mass screening programmes.
+
+## The maths behind it
+
+Define:
+- **Sensitivity** (true positive rate): $P(\text{test+} \mid \text{disease+})$
+- **Specificity** (true negative rate): $P(\text{test-} \mid \text{disease-}) = 1 - P(\text{test+} \mid \text{disease-})$
+- **Prevalence**: $P(\text{disease+})$
+
+Bayes' theorem gives the **positive predictive value** (PPV) — the probability of disease given a positive test:
+
+$$\text{PPV} = P(\text{disease+} \mid \text{test+}) = \frac{\text{sensitivity} \times \text{prevalence}}{\text{sensitivity} \times \text{prevalence} + (1 - \text{specificity}) \times (1 - \text{prevalence})}.$$
+
+For a disease with prevalence 0.001 (1 in 1,000) and a test with sensitivity = specificity = 0.99:
+
+$$\text{PPV} = \frac{0.99 \times 0.001}{0.99 \times 0.001 + 0.01 \times 0.999} = \frac{0.00099}{0.00099 + 0.00999} \approx 0.090.$$
+
+Only 9% of positive results are true positives — even with a 99% accurate test. The denominator is dominated by the false positives on the vast majority of disease-free individuals.
+
+**Natural frequencies** make this more intuitive: in 100,000 tested individuals, 100 have the disease and 99 test positive; 99,900 do not have the disease and 999 of these test positive. Of the $99 + 999 = 1098$ total positives, only 99 are genuine — about 9%.
+
+This analysis underpins NHS policy decisions on which screening programmes to fund: a screening programme for a rare condition must achieve very high specificity to have an acceptable PPV, or must be restricted to higher-prevalence subpopulations (e.g., targeted screening by age or risk factors).
+
+## A concrete example
+
+During the COVID-19 pandemic, lateral flow test (LFT) sensitivity was approximately 60–80% for symptomatic individuals and lower for asymptomatic cases; specificity was approximately 99.7%. At a community prevalence of 1% (roughly the UK average during a major wave), the PPV of a positive LFT was around 70–85% — reasonably reassuring. At lower prevalences (0.1%), it dropped to about 30%, meaning most positive tests in low-incidence settings were false positives, complicating the interpretation of mass testing programmes.
+
+## History of the application
+
+Bayes' theorem in the medical context was popularised by David Eddy in the 1980s, who documented that physicians systematically overestimated the diagnostic value of tests. Studies showed that most doctors, when given the sensitivity, specificity, and prevalence, could not compute the PPV correctly without formal probability training. The result has been used to argue both for and against various cancer screening programmes (mammography, PSA testing) where the false-positive rate has significant human cost.
+
+## Links
+
+Bayes' theorem and conditional probability are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). The classification theory and likelihood ratios connect to [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). See also [Spam Filtering](/applications/spam-filtering) for the identical mathematical problem in a different domain, and [Clinical Trials Design](/applications/clinical-trials-design) for the statistical framework for testing interventions.

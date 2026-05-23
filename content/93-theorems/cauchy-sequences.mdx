@@ -1,0 +1,42 @@
+---
+title: Cauchy sequences
+section: Theorems
+section_slug: 93-theorems
+slug: cauchy-sequences
+attributed_to: [cauchy]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [bolzanoweierstrass-theorem, dedekind-cuts-rigorous-construction-of-real-numbers, rigorous-foundations-of-calculus-definitions, banach-fixed-point-theorem]
+applications: [weather-forecasting, climate-modelling]
+tags: [real-analysis, sequences, completeness, convergence]
+year_introduced: '1821'
+summary: A sequence where terms become arbitrarily close to each other — a way to characterise convergence without needing to name the limit in advance.
+---
+
+
+
+## What it says
+
+A sequence $(a_n)$ is a **Cauchy sequence** if for every $\varepsilon > 0$ there exists $N$ such that for all $m, n > N$:
+
+$$|a_m - a_n| < \varepsilon$$
+
+The key point: you never mention the limit. You only require that terms cluster together. In the real numbers (and any complete metric space), every Cauchy sequence converges — this is the defining property of completeness.
+
+The contrapositive is equally useful: if a sequence is not Cauchy, it cannot converge, regardless of how you extend the space.
+
+## History
+
+[Cauchy](/mathematicians/cauchy) introduced this characterisation of convergence in *Cours d'analyse* (1821) as part of his project to put calculus on rigorous foundations. Before Cauchy, convergence was intuitive — a sequence "tends to a limit" if it seems to approach something. Cauchy made it precise. The deeper question — why do Cauchy sequences in $\mathbb{R}$ converge? — was answered only when [Dedekind](/mathematicians/dedekind) and [Cantor](/mathematicians/cantor) constructed the reals rigorously from the rationals in the 1870s.
+
+## Why it matters
+
+Cauchy sequences are the bridge between algebra and analysis. They let you construct $\mathbb{R}$ from $\mathbb{Q}$ by "completing" — adding in all the missing limits. The same construction works for any metric space: complete it by adjoining the limits of all Cauchy sequences. Banach spaces (complete normed vector spaces) are defined this way. This is not just abstract machinery; numerical methods for differential equations produce Cauchy sequences and rely on completeness to guarantee convergence to a solution.
+
+## Real-world applications
+
+Iterative numerical solvers used in [weather forecasting](/applications/weather-forecasting) and [climate modelling](/applications/climate-modelling) converge because the underlying update procedures produce Cauchy sequences in appropriate function spaces.
+
+## Where you'll meet it
+
+Cauchy sequences appear in Year 1 analysis and form part of the backbone of Year 2 real analysis — see the [Rigour Revolution era](/history/06-the-rigour-revolution). They return in Year 3 functional analysis via [Banach spaces](/theorems/banach-spaces) and the [Banach fixed-point theorem](/theorems/banach-fixed-point-theorem).

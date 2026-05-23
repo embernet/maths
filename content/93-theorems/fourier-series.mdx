@@ -1,0 +1,45 @@
+---
+title: Fourier series
+section: Theorems
+section_slug: 93-theorems
+slug: fourier-series
+attributed_to: [fourier]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [fourier-transform, euler-s-formula-e-i-cos-i-sin, heat-equation, cauchyschwarz-inequality]
+applications: [signal-processing-jpeg-mp3, radar-and-sonar, medical-imaging-mri-ct, seismic-imaging-oil-exploration]
+tags: [analysis, periodic-functions, harmonics, Fourier]
+year_introduced: 1807 (presented); 1822 (published)
+summary: Any periodic function can be written as a sum of sines and cosines — and the coefficients carry complete information about the function's frequency content.
+---
+
+
+
+## What it says
+
+For a $2\pi$-periodic function $f$, the **Fourier series** is:
+
+$$f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} \left(a_n \cos(nx) + b_n \sin(nx)\right)$$
+
+where the coefficients are:
+$$a_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx)\,dx, \quad b_n = \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx)\,dx$$
+
+Using complex exponentials (via Euler's formula): $f(x) = \sum_{n=-\infty}^{\infty} c_n e^{inx}$ with $c_n = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)e^{-inx}\,dx$.
+
+The coefficients $c_n$ are the **Fourier coefficients** — they measure how much of each frequency $n$ is present in $f$.
+
+## History
+
+[Fourier](/mathematicians/fourier) presented this decomposition to the Paris Academy in 1807 and published it fully in *Théorie analytique de la chaleur* (1822). His claim that *any* function could be so represented was controversial — Cauchy and Lagrange doubted it. The question of when and in what sense the series converges took a century to resolve properly, driving the development of [Riemann integration](/theorems/riemann-integral), Lebesgue integration, and the theory of distributions.
+
+## Why it matters
+
+Fourier series reveal the frequency structure of periodic phenomena. A sound wave, a seismic signal, a power grid oscillation — decompose it into Fourier components, and you see which frequencies dominate. This is the start of spectral analysis. The discovery that arbitrary functions can be built from pure oscillations is one of the deepest insights in mathematics, with applications ranging from music to quantum mechanics.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) (JPEG, MP3, audio synthesis) is built on Fourier decompositions. [Medical imaging](/applications/medical-imaging-mri-ct) — MRI reconstruction — uses Fourier analysis directly. [Radar and sonar](/applications/radar-and-sonar) analyse return signals by frequency. [Seismic imaging](/applications/seismic-imaging-oil-exploration) decomposes ground vibrations into frequency components.
+
+## Where you'll meet it
+
+Fourier series appear in Year 2 differential equations and dominate the Year 3 harmonic analysis course. See the [Calculus Revolution era](/history/05-the-calculus-revolution) and the [Fourier transform](/theorems/fourier-transform) for the non-periodic generalisation.

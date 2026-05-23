@@ -1,0 +1,42 @@
+---
+title: Riemann zeta function
+section: Theorems
+section_slug: 93-theorems
+slug: riemann-zeta-function
+attributed_to: [riemann]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [riemann-hypothesis, cauchys-integral-theorem, analytic-number-theory, euler-s-formula-e-i-cos-i-sin]
+applications: [rsa-public-key-cryptography]
+tags: [number-theory, complex-analysis, primes, zeta]
+year_introduced: '1859'
+summary: A complex function that encodes the distribution of prime numbers — and whose zeros determine how irregular that distribution can be.
+---
+
+
+
+## What it says
+
+For $\text{Re}(s) > 1$, the Riemann zeta function is defined by:
+
+$$\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s} = \prod_{p \text{ prime}} \frac{1}{1 - p^{-s}}$$
+
+The second expression is the **Euler product**, which encodes the unique factorisation of integers into primes. Euler knew this product for real $s > 1$; [Riemann](/mathematicians/riemann) extended $\zeta$ to all of $\mathbb{C}$ (except $s = 1$) by analytic continuation. The function satisfies a functional equation relating $\zeta(s)$ and $\zeta(1-s)$.
+
+Special values: $\zeta(2) = \pi^2/6$ (Euler's solution to the Basel problem), $\zeta(4) = \pi^4/90$, and so on for even positive integers. The values at odd positive integers (like $\zeta(3)$, Apéry's constant) are much more mysterious.
+
+## History
+
+Euler computed $\zeta(2) = \pi^2/6$ in 1735, solving the Basel problem that had stumped mathematicians for decades, and discovered the product formula. Riemann's 1859 paper introduced the analytic continuation and the [Riemann hypothesis](/theorems/riemann-hypothesis), transforming the function from a number-theoretic curiosity into the central object of analytic number theory.
+
+## Why it matters
+
+The zeros of $\zeta(s)$ control the distribution of prime numbers through the explicit formula for the prime counting function $\pi(x)$. More broadly, $\zeta(s)$ is the prototype for a whole family of *$L$-functions*, each encoding number-theoretic data in its zeros and special values. The Langlands programme — one of the grandest unifying frameworks in modern mathematics — predicts deep relationships between these $L$-functions.
+
+## Real-world applications
+
+Prime number distribution underlies the difficulty of factoring used in [RSA cryptography](/applications/rsa-public-key-cryptography). Understanding where primes are — which the zeta function encodes — is therefore of indirect but real cryptographic relevance.
+
+## Where you'll meet it
+
+The zeta function is introduced in Year 3 number theory and explored in depth in Year 4 analytic number theory. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

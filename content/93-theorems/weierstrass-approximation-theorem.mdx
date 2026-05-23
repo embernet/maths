@@ -1,0 +1,44 @@
+---
+title: Weierstrass approximation theorem
+section: Theorems
+section_slug: 93-theorems
+slug: weierstrass-approximation-theorem
+attributed_to: [weierstrass]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [rigorous-analysis, uniform-convergence, fourier-series, lagrange-interpolation]
+applications: [signal-processing-jpeg-mp3, computer-graphics-3d]
+tags: [analysis, approximation, Weierstrass, polynomials]
+year_introduced: '1885'
+summary: Every continuous function on a closed interval can be uniformly approximated by polynomials — the foundation of polynomial approximation theory.
+---
+
+
+
+## What it says
+
+**Weierstrass approximation theorem (1885):** Let $f: [a,b] \to \mathbb{R}$ be continuous. For every $\varepsilon > 0$, there exists a polynomial $p$ such that
+
+$$|f(x) - p(x)| < \varepsilon \quad \text{for all } x \in [a,b].$$
+
+That is, polynomials are **dense** in $C([a,b])$ with the uniform (sup-norm) topology.
+
+The Stone–Weierstrass theorem (Marshall Stone, 1937) is the far-reaching generalisation: on a compact Hausdorff space $X$, any subalgebra of $C(X)$ that separates points and contains a constant is dense in $C(X)$. This unifies the Weierstrass theorem, Fourier series approximation, and many other approximation results.
+
+The classic constructive proof uses **Bernstein polynomials**: $B_n(f)(x) = \sum_{k=0}^n f(k/n)\binom{n}{k}x^k(1-x)^{n-k}$, which converge uniformly to $f$ on $[0,1]$.
+
+## History
+
+[Weierstrass](/mathematicians/weierstrass) proved this result in 1885, in the same decade as his work on nowhere-differentiable functions. The result was surprising: polynomials are rigid algebraic objects, yet they can approximate any continuous function to any desired precision. Bernstein's constructive proof (1912) connected the result to probability theory via the law of large numbers.
+
+## Why it matters
+
+The Weierstrass approximation theorem guarantees that complicated functions can always be replaced by polynomials for practical purposes. It is the theoretical basis for polynomial interpolation, spline approximation, and numerical quadrature. The Stone–Weierstrass generalisation is one of the most widely applied theorems in functional analysis.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) uses polynomial and trigonometric approximation constantly — any band-limited signal can be reconstructed from finitely many terms. [Computer graphics](/applications/computer-graphics-and-visualisation) uses Bézier curves and splines, which are piecewise polynomial approximations to arbitrary shapes.
+
+## Where you'll meet it
+
+The Weierstrass approximation theorem appears in Year 2 real analysis and Year 3 functional analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

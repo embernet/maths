@@ -1,0 +1,252 @@
+---
+/**
+ * /applications/ — index of all real-world application pages.
+ * Alphabetical within each domain group.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const appDir = join(process.cwd(), 'content/94-applications');
+
+interface AppEntry {
+  slug: string;
+  title: string;
+  summary?: string;
+  domains?: string[];
+  uses_theorems?: string[];
+  href: string;
+  sortKey: string;
+}
+
+function parseFrontmatter(filePath: string): Record<string, unknown> | null {
+  let text: string;
+  try { text = readFileSync(filePath, 'utf8'); } catch { return null; }
+  if (!text.startsWith('---')) return null;
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return null;
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+const entries: AppEntry[] = [];
+
+if (existsSync(appDir)) {
+  for (const file of readdirSync(appDir)) {
+    if (extname(file) !== '.mdx') continue;
+    const slug = basename(file, '.mdx');
+    if (slug === 'index') continue;
+
+    const fm = parseFrontmatter(join(appDir, file));
+    if (!fm) continue;
+
+    entries.push({
+      slug,
+      title: (fm.title as string) ?? slug.replace(/-/g, ' '),
+      summary: fm.summary as string | undefined,
+      domains: (fm.domains as string[]) ?? [],
+      uses_theorems: (fm.uses_theorems as string[]) ?? [],
+      href: `/applications/${slug}`,
+      sortKey: ((fm.title as string) ?? slug).replace(/^(The |A |An )/i, ''),
+    });
+  }
+}
+
+entries.sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+
+// Group by primary domain (first in list), with ungrouped fallback
+const domainLabels: Record<string, string> = {
+  'computer-science': 'Computer Science',
+  'security': 'Security & Cryptography',
+  'finance': 'Finance & Economics',
+  'physics': 'Physics & Engineering',
+  'biology': 'Biology & Medicine',
+  'statistics': 'Statistics & Data Science',
+  'engineering': 'Engineering',
+  'communication': 'Communication',
+  'transport': 'Transport & Navigation',
+};
+
+const byDomain: Record<string, AppEntry[]> = { '__other__': [] };
+for (const e of entries) {
+  const domain = e.domains?.[0];
+  if (domain) {
+    if (!byDomain[domain]) byDomain[domain] = [];
+    byDomain[domain].push(e);
+  } else {
+    byDomain['__other__'].push(e);
+  }
+}
+
+const domainOrder = Object.keys(byDomain).filter(d => d !== '__other__').sort();
+if (byDomain['__other__']?.length > 0) domainOrder.push('__other__');
+
+const totalCount = entries.length;
+---
+
+<BaseLayout title="Real-world Applications" description="How undergraduate mathematics turns up in the world — from cryptography to climate models.">
+  <div class="prose-content applications-index">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">Real-world applications</span>
+    </nav>
+
+    <h1>Real-world Applications</h1>
+    <p class="index-intro">
+      {totalCount > 0
+        ? `${totalCount} applications showing how undergraduate mathematics works in the world. Each page links back to the theorems and topics it draws on.`
+        : 'Application pages are being prepared. Each will show how undergraduate mathematics works in the world, linking back to the theorems and topics it draws on.'
+      }
+    </p>
+
+    {totalCount === 0 ? (
+      <div class="coming-soon">
+        <p>
+          Applications pages are coming soon. In the meantime, theorem pages already link to applications
+          — visit any <a href="/theorems">theorem page</a> to see where its ideas are put to work.
+        </p>
+        <h2>Examples of applications being written</h2>
+        <ul class="preview-list">
+          <li>RSA and public-key cryptography</li>
+          <li>GPS positioning and satellite navigation</li>
+          <li>Medical diagnosis and screening (Bayesian inference)</li>
+          <li>Climate modelling and numerical PDEs</li>
+          <li>PageRank and network analysis</li>
+          <li>Black–Scholes and financial derivatives</li>
+          <li>JPEG compression and the Fourier transform</li>
+          <li>Machine learning — neural networks</li>
+        </ul>
+      </div>
+    ) : (
+      domainOrder.filter(d => byDomain[d]?.length > 0).map((domain) => (
+        <section class="domain-group" aria-label={`Domain: ${domainLabels[domain] ?? domain}`}>
+          <h2 class="domain-heading">
+            {domain === '__other__' ? 'Other applications' : (domainLabels[domain] ?? domain.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))}
+          </h2>
+          <ul class="app-list">
+            {byDomain[domain].map((a) => (
+              <li class="app-entry">
+                <div class="app-main">
+                  <a href={a.href} class="app-title">{a.title}</a>
+                  {a.domains && a.domains.length > 1 && (
+                    <span class="domain-chips" aria-label="Domains">
+                      {a.domains.slice(1).map((d) => (
+                        <span class="domain-chip">{d.replace(/-/g, ' ')}</span>
+                      ))}
+                    </span>
+                  )}
+                </div>
+                {a.summary && <p class="app-summary">{a.summary}</p>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .applications-index { padding: 1.5rem 1rem 4rem; }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .index-intro {
+    color: var(--color-muted);
+    font-style: italic;
+    margin-bottom: 2rem;
+    max-width: 70ch;
+  }
+
+  .coming-soon {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    max-width: 65ch;
+  }
+  .coming-soon p { color: var(--color-text); }
+
+  .preview-list {
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .domain-group { margin-top: 2.5rem; }
+
+  .domain-heading {
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+  }
+
+  .app-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .app-main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.6rem;
+  }
+
+  .app-title {
+    font-weight: 500;
+    font-size: 0.97rem;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .app-title:hover { color: var(--color-accent); text-decoration: underline; }
+
+  .domain-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .domain-chip {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.73rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    color: var(--color-muted);
+    text-transform: capitalize;
+  }
+
+  .app-summary {
+    font-size: 0.86rem;
+    color: var(--color-muted);
+    margin: 0.2rem 0 0;
+    max-width: 70ch;
+    line-height: 1.5;
+    font-style: italic;
+  }
+</style>

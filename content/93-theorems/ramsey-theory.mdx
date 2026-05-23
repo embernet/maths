@@ -1,0 +1,40 @@
+---
+title: Ramsey theory
+section: Theorems
+section_slug: 93-theorems
+slug: ramsey-theory
+attributed_to: [erdos]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [probabilistic-method-in-combinatorics, graph-theory-and-number-theory, erdos-number]
+applications: [cybersecurity-anomaly-detection]
+tags: [combinatorics, graph-theory, Ramsey, extremal]
+year_introduced: 1930 (Ramsey's theorem); developed by Erdős from 1947
+summary: 'Complete disorder is impossible: any large enough structure must contain a highly ordered substructure. Ramsey theory quantifies exactly how large is ''large enough''.'
+---
+
+
+
+## What it says
+
+**Ramsey's theorem (1930):** For any integers $r, s \geq 1$, there exists a smallest integer $R(r, s)$ such that any two-colouring of the edges of the complete graph $K_n$ with $n \geq R(r,s)$ contains either a red clique of size $r$ or a blue clique of size $s$.
+
+The simplest non-trivial case: $R(3, 3) = 6$. Among any six people, either three mutually know each other or three are all strangers.
+
+Known values: $R(3,3) = 6$, $R(3,4) = 9$, $R(3,5) = 14$, $R(4,4) = 18$. Even $R(5,5)$ is unknown; Erdős is reported to have said that if aliens threatened to destroy Earth unless humans computed $R(5,5)$, the right response would be to devote all available computers to the problem, but if they demanded $R(6,6)$ the right response would be to attack.
+
+## History
+
+Frank Ramsey proved the theorem in 1930. [Erdős](/mathematicians/erdos) and Szekeres independently reproved it in 1935 and Erdős then drove the field forward, using the [probabilistic method](/theorems/probabilistic-method-in-combinatorics) to show that $R(k,k) \geq 2^{k/2}$ — that Ramsey numbers grow exponentially.
+
+## Why it matters
+
+Ramsey theory says that any sufficiently large structure must contain a specified pattern. This "order out of chaos" principle pervades combinatorics, number theory (van der Waerden's theorem, Hales–Jewett theorem), and theoretical computer science. Computing Ramsey numbers is famously hard; most remain unknown.
+
+## Real-world applications
+
+Pattern-recognition in networks — [cybersecurity anomaly detection](/applications/cybersecurity-anomaly-detection) — uses Ramsey-type reasoning about the inevitability of certain structures in large graphs.
+
+## Where you'll meet it
+
+Ramsey theory is a Year 3 combinatorics topic. See the [Modern Mathematics era](/history/09-modern-mathematics).

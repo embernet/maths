@@ -1,0 +1,36 @@
+{
+  "topic_slug": "04-topology",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "A function $f: X \\to Y$ between topological spaces is continuous if and only if:",
+      "options": [
+        {"id": "a", "text": "The preimage of every open set in $Y$ is open in $X$.", "correct": true, "explanation": "This is the topological definition of continuity. It generalises the metric-space definition without requiring any notion of distance."},
+        {"id": "b", "text": "The image of every open set in $X$ is open in $Y$.", "correct": false, "explanation": "That is the definition of an open map, not a continuous map. Continuous maps need not be open."},
+        {"id": "c", "text": "$f$ is differentiable at every point of $X$.", "correct": false, "explanation": "Differentiability is a stronger condition requiring a metric and more structure. Topological continuity makes no reference to derivatives."},
+        {"id": "d", "text": "The preimage of every closed set in $Y$ is closed in $X$.", "correct": false, "explanation": "Actually this IS equivalent to continuity (since closed sets are complements of open sets, and preimages commute with complements). But the standard stated definition uses open sets."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Tychonoff's theorem states that:",
+      "options": [
+        {"id": "a", "text": "An arbitrary product of compact topological spaces is compact.", "correct": true, "explanation": "Even an uncountable product of compact spaces (e.g., $[0,1]^{[0,1]}$) is compact. The proof for infinite products uses the Axiom of Choice."},
+        {"id": "b", "text": "A finite product of compact spaces is compact.", "correct": false, "explanation": "True but weaker. The remarkable content of Tychonoff's theorem is that it holds for arbitrary (including infinite) products."},
+        {"id": "c", "text": "A compact Hausdorff space is metrizable.", "correct": false, "explanation": "That is Urysohn's metrization theorem, a different result. Tychonoff's theorem is about products."},
+        {"id": "d", "text": "Every closed subset of a compact space is compact.", "correct": false, "explanation": "Also true, but a different result. Tychonoff's theorem is specifically about products."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The fundamental group $\\pi_1(S^1)$ of the circle $S^1$ is isomorphic to:",
+      "options": [
+        {"id": "a", "text": "$\\mathbb{Z}$.", "correct": true, "explanation": "A loop on the circle is characterised by its winding number: how many times it wraps around. The winding number is an integer, and concatenation of loops adds winding numbers. So $\\pi_1(S^1) \\cong \\mathbb{Z}$."},
+        {"id": "b", "text": "$\\{0\\}$ (trivial group).", "correct": false, "explanation": "The trivial fundamental group would mean every loop can be contracted to a point. On the circle, a loop wrapping around once cannot be contracted."},
+        {"id": "c", "text": "$\\mathbb{Z}/2\\mathbb{Z}$.", "correct": false, "explanation": "$\\mathbb{Z}/2\\mathbb{Z}$ is the fundamental group of the projective plane $\\mathbb{RP}^2$, not the circle."},
+        {"id": "d", "text": "$\\mathbb{R}$.", "correct": false, "explanation": "The fundamental group of $S^1$ is the additive group of integers $\\mathbb{Z}$ (discrete winding numbers), not the reals."}
+      ]
+    }
+  ]
+}

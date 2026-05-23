@@ -1,0 +1,46 @@
+---
+title: Euler's formula (e^iθ = cos θ + i sin θ)
+section: Theorems
+section_slug: 93-theorems
+slug: euler-s-formula-e-i-cos-i-sin
+attributed_to: [euler]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/03-complex-analysis]
+related_theorems: [fourier-series, fourier-transform, cauchys-integral-theorem, notation-e-i-f-x-popularised]
+applications: [signal-processing-jpeg-mp3, radar-and-sonar, quantum-computing-algorithms]
+tags: [complex-analysis, exponentials, trigonometry, Euler]
+year_introduced: '1748'
+summary: The formula e^{iθ} = cos θ + i sin θ unifies exponential and trigonometric functions and is the single most useful identity in mathematics.
+---
+
+
+
+## What it says
+
+$$e^{i\theta} = \cos\theta + i\sin\theta$$
+
+For any real angle $\theta$, raising Euler's number $e$ to the imaginary power $i\theta$ lands on the unit circle in the complex plane at angle $\theta$. Multiplication by $e^{i\theta}$ is rotation by $\theta$.
+
+The special case $\theta = \pi$ gives Euler's identity:
+
+$$e^{i\pi} + 1 = 0$$
+
+Often called the most beautiful equation in mathematics for uniting the five most important constants: $e$, $i$, $\pi$, $1$, $0$.
+
+The formula follows from the power series for $e^x$, $\cos x$, and $\sin x$ — substitute $x = i\theta$ into the series for $e^x$, collect real and imaginary parts, and the other two series appear exactly.
+
+## History
+
+[Euler](/mathematicians/euler) stated the formula in its modern form in *Introductio in analysin infinitorum* (1748), though Roger Cotes had an implicit version earlier. Euler's genius was to see it not as an isolated curiosity but as the natural bridge between real exponentials and circular functions. Note that Euler popularised the notation $e$ and $i$, and standardised $\pi$ — he did not invent π itself.
+
+## Why it matters
+
+Euler's formula turns every periodic function into a superposition of complex exponentials, making it the conceptual foundation of the Fourier transform. Trigonometric identities that are painful to prove geometrically become trivial algebra: $e^{i(\alpha+\beta)} = e^{i\alpha} e^{i\beta}$ immediately gives the angle-addition formulas. Complex exponentials also make differential equations much easier: $e^{st}$ (with $s = \sigma + i\omega$ complex) is the eigenfunction of every linear time-invariant system.
+
+## Real-world applications
+
+[Signal processing](/applications/signal-processing-jpeg-mp3) — JPEG compression, MP3 encoding, audio synthesis — all compute Fourier transforms that are essentially repeated applications of Euler's formula. [Radar and sonar](/applications/radar-and-sonar) analyse signals as complex exponentials. [Quantum computing](/applications/quantum-computing-algorithms) represents quantum gates as unitary matrices, whose entries involve $e^{i\theta}$ throughout.
+
+## Where you'll meet it
+
+Euler's formula is introduced in complex numbers (Year 1) and becomes a working tool in [complex analysis](/theorems/cauchys-integral-theorem) (Year 2). You will use it constantly in [Fourier analysis](/theorems/fourier-transform) and any course involving oscillations or waves.

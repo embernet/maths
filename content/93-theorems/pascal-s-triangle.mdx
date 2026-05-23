@@ -1,0 +1,50 @@
+---
+title: Pascal's triangle
+section: Theorems
+section_slug: 93-theorems
+slug: pascal-s-triangle
+attributed_to: [pascal]
+era: 04-renaissance-and-symbolic-algebra
+appears_in: []
+related_theorems: [binomial-theorem, probability-theory-foundations, fibonacci-sequence]
+applications: [option-pricing-finance]
+tags: [combinatorics, Pascal, binomial-coefficients, arithmetic]
+year_introduced: '1653'
+summary: The triangular array of binomial coefficients — where each number is the sum of the two above it — encoding the combinatorial structure of (x+y)^n.
+---
+
+
+
+## What it says
+
+Pascal's triangle is the array:
+```
+       1
+      1 1
+     1 2 1
+    1 3 3 1
+   1 4 6 4 1
+```
+The $k$th entry in row $n$ (with $n, k$ starting from 0) is $\binom{n}{k}$.
+
+**Key properties:**
+- Each entry is the sum of the two entries above: $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$ (Pascal's identity)
+- Row $n$ sums to $2^n$
+- Diagonal sums give Fibonacci numbers
+- The entries are exactly the binomial coefficients in $(x+y)^n$
+
+## History
+
+[Pascal](/mathematicians/pascal) systematised the triangle in *Traité du triangle arithmétique* (1654), though the triangle was known centuries earlier: in China (Yang Hui, 11th century), India (Halayudha, 10th century), and Persia (al-Karaji, 11th century). Pascal's contribution was to derive its properties systematically and to apply it to probability (see [probability theory foundations](/theorems/probability-theory-foundations)).
+
+## Why it matters
+
+Pascal's triangle is one of the most fertile structures in elementary mathematics. It contains the binomial coefficients, Fibonacci numbers, the powers of 2, the triangular numbers, and much more. The binomial coefficients it encodes appear in probability, combinatorics, and algebra throughout.
+
+## Real-world applications
+
+The binomial tree model in [option pricing](/applications/option-pricing-finance) is built directly on Pascal's triangle.
+
+## Where you'll meet it
+
+Pascal's triangle is introduced in Year 1 algebra and combinatorics. See the [Renaissance and Symbolic Algebra era](/history/04-renaissance-and-symbolic-algebra).

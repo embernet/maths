@@ -1,0 +1,152 @@
+---
+/**
+ * TopicLayout.astro
+ * Renders a topic page: prose content + sidebar (desktop) + quiz island.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Quiz from '../components/Quiz.astro';
+import { readFileSync, existsSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    section?: string;
+    section_slug?: string;
+    year?: number;
+    tags?: string[];
+    prerequisites?: string[];
+    related?: string[];
+    mathematicians?: string[];
+    reading_time_min?: number;
+    summary?: string;
+  };
+  /** Absolute path to the MDX file being rendered (passed by Astro content machinery) */
+  file?: string;
+}
+
+const { frontmatter, file } = Astro.props;
+
+// Attempt to load a colocated quiz.json
+let quizData: unknown = null;
+if (file) {
+  const quizPath = join(dirname(file), 'quiz.json');
+  if (existsSync(quizPath)) {
+    try {
+      quizData = JSON.parse(readFileSync(quizPath, 'utf8'));
+    } catch {
+      // Malformed quiz.json — skip silently.
+    }
+  }
+}
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.summary}>
+  <div class="topic-page-wrapper">
+    <!-- Main prose content -->
+    <article class="prose-content topic-article" aria-label={frontmatter.title}>
+      <header class="topic-header">
+        {frontmatter.section && (
+          <span class="section-badge">{frontmatter.section}</span>
+        )}
+        <h1>{frontmatter.title}</h1>
+        <div class="topic-meta">
+          {frontmatter.reading_time_min && (
+            <span class="reading-chip">⏱ {frontmatter.reading_time_min} min read</span>
+          )}
+          {frontmatter.tags && frontmatter.tags.length > 0 && (
+            <div class="tag-list" aria-label="Tags">
+              {frontmatter.tags.map((tag) => (
+                <span class="tag-pill">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+        {frontmatter.prerequisites && frontmatter.prerequisites.length > 0 && (
+          <p class="prereq-note">
+            <strong>Prerequisites:</strong>{' '}
+            {frontmatter.prerequisites.map((slug, i) => (
+              <>
+                <a href={`/${frontmatter.section_slug}/${slug}`}>{slug}</a>
+                {i < (frontmatter.prerequisites?.length ?? 0) - 1 ? ', ' : ''}
+              </>
+            ))}
+          </p>
+        )}
+      </header>
+
+      <slot />
+
+      {quizData && (
+        <section class="quiz-island no-print" aria-label="Check your understanding">
+          <Quiz quizData={quizData} />
+        </section>
+      )}
+    </article>
+
+    <!-- Sidebar: related topics + linked mathematicians (in-content on mobile, fixed on desktop) -->
+    <Sidebar
+      related={frontmatter.related}
+      mathematicians={frontmatter.mathematicians}
+      sectionSlug={frontmatter.section_slug}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .topic-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .topic-page-wrapper {
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 0 2rem;
+    }
+    .topic-article {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+
+  .topic-header { margin-bottom: 1.5rem; }
+
+  .topic-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .prereq-note {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  .quiz-island {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+</style>

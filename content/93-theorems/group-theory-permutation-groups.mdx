@@ -1,0 +1,43 @@
+---
+title: Group theory (permutation groups)
+section: Theorems
+section_slug: 93-theorems
+slug: group-theory-permutation-groups
+attributed_to: [cauchy]
+era: 07-the-structural-turn
+appears_in: [02-core-year-two/01-abstract-algebra, 03-specialisation-year-three/01-galois-theory]
+related_theorems: [galois-theory, galois-groups, normal-subgroups, group-theory-foundations, fermat-s-little-theorem]
+applications: [error-correcting-codes, quantum-computing-algorithms, rsa-public-key-cryptography, computer-graphics-3d]
+tags: [algebra, groups, symmetry, permutations]
+year_introduced: 1815 (Cauchy); developed through 1830s–1840s
+summary: The theory of permutation groups — the study of symmetries through the algebra of bijections on a set — the cornerstone of modern abstract algebra.
+---
+
+
+## What it says
+
+A **group** is a set $G$ with a binary operation $\cdot$ satisfying:
+1. **Closure:** $a \cdot b \in G$ for all $a, b \in G$
+2. **Associativity:** $(a \cdot b) \cdot c = a \cdot (b \cdot c)$
+3. **Identity:** there exists $e \in G$ with $e \cdot a = a \cdot e = a$
+4. **Inverses:** for each $a \in G$ there exists $a^{-1}$ with $a \cdot a^{-1} = e$
+
+A **permutation group** is a group whose elements are bijections $\sigma: X \to X$ on some set $X$, with composition as the operation. Cayley's theorem states that every abstract group is isomorphic to a permutation group — so permutation groups are the universal model.
+
+The key structural results: Lagrange's theorem (the order of a subgroup divides the order of the group), Cauchy's theorem (if prime $p$ divides $|G|$, there is an element of order $p$), and the Sylow theorems.
+
+## History
+
+[Cauchy](/mathematicians/cauchy) developed the theory of permutation groups systematically from 1815, building on earlier work by [Lagrange](/mathematicians/lagrange) on polynomial roots. [Galois](/mathematicians/galois) then used this machinery to settle the solvability of polynomial equations. The abstract definition of a group was formalised by Cayley in 1854. Group theory subsequently became the language of symmetry across mathematics and physics.
+
+## Why it matters
+
+Groups capture the essence of symmetry. The same abstract algebra describes the symmetries of crystals, the conserved quantities in physics (via Noether's theorem), the structure of chemical molecules, the coding theory that protects data transmissions, and the quantum mechanical spin states of particles. Learning group theory means learning a language that translates seamlessly between these domains.
+
+## Real-world applications
+
+[Error-correcting codes](/applications/error-correcting-codes) use the structure of groups and fields. [Quantum computing](/applications/quantum-computing-algorithms) represents quantum gates as unitary groups. [3D graphics](/applications/computer-graphics-3d) uses rotation groups (Lie groups) for transformations.
+
+## Where you'll meet it
+
+Group theory is introduced in Year 2 abstract algebra and deepens in Year 3 Galois theory and representation theory. See the [Structural Turn era](/history/07-the-structural-turn).

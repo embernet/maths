@@ -1,0 +1,89 @@
+---
+/**
+ * BaseLayout.astro
+ * Wraps every page: sticky header, KaTeX CSS, print sheet, footer.
+ * At ≥1024px: left sidebar + main content.
+ * At ≥1280px: left sidebar + main content + right sidebar (if present).
+ */
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeftSidebar from '../components/LeftSidebar.astro';
+import 'katex/dist/katex.min.css';
+import '../styles/global.css';
+import '../styles/print.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Extra <head> content (e.g. canonical, og:image) */
+  headSlot?: string;
+}
+
+const { title, description = 'The Undergraduate Mathematics Companion — a friendly map of the undergraduate mathematics curriculum.' } = Astro.props;
+const siteTitle = 'The Undergraduate Mathematics Companion';
+const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{fullTitle}</title>
+
+    <!-- PWA manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1a3a52" />
+
+    <!-- Icons (SVG placeholders — replace with PNG for broadest device support) -->
+    <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+
+    <!-- Print stylesheet is injected by global.css @media print block -->
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <Header />
+    <div class="page-body">
+      <LeftSidebar currentPath={Astro.url.pathname} />
+      <main id="main-content" class="main-content">
+        <slot />
+      </main>
+    </div>
+    <Footer />
+
+    <!-- Service worker registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {
+            // SW registration failed — silently degrade.
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  /* Page body: sidebar + main layout */
+  .page-body {
+    display: flex;
+    min-height: calc(100vh - var(--header-h));
+    padding-top: var(--header-h);
+    align-items: flex-start;
+  }
+
+  .main-content {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  /* Override global body > main padding-top since .page-body handles it */
+  body > .page-body > main {
+    padding-top: 0;
+  }
+</style>

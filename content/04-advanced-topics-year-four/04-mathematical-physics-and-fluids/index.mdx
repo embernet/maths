@@ -1,0 +1,67 @@
+---
+title: Mathematical Physics and Fluid Dynamics
+section: 'Advanced Topics: Year Four'
+section_slug: 04-advanced-topics-year-four
+year: 4
+order: 4
+tags: [fluid-dynamics, Euler-equations, Navier-Stokes, vorticity, turbulence, mathematical-physics]
+prerequisites:
+- 03-calculus-and-methods
+- 08-differential-equations-advanced
+related:
+- 03-advanced-pdes
+mathematicians: [euler, newton, bernoulli-family, laplace]
+reading_time_min: 7
+summary: 'The mathematics of moving fluids: Euler and Navier-Stokes equations, vorticity, potential flow, and the deep mysteries of turbulence. One of the Clay Millennium Problems is about the Navier-Stokes equations.'
+theorems: [turbulence-theory-kolmogorov-scaling, bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel, laplace-equation]
+applications: [weather-forecasting, airfoil-and-aerodynamics, climate-modelling]
+---
+
+
+
+*Note: Year Four content at this level is indicative. Students on a four-year integrated master's programme should consult their department's current catalogue for the definitive unit list and syllabi.*
+
+Fluid dynamics is one of the most mathematically rich areas of applied mathematics. It is also one of the most physically important — weather forecasting, aircraft design, cardiovascular modelling, and climate simulation all reduce to solving versions of the same equations. And one of those equations — the Navier-Stokes equation — has resisted rigorous mathematical analysis for over 150 years.
+
+## The Navier-Stokes equations
+
+For a viscous incompressible fluid with velocity field $\mathbf{u}(\mathbf{x}, t)$ and pressure $p(\mathbf{x}, t)$:
+
+$$\rho\left(\frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla)\mathbf{u}\right) = -\nabla p + \mu \nabla^2 \mathbf{u} + \mathbf{f},$$
+$$\nabla \cdot \mathbf{u} = 0 \quad \text{(incompressibility)}.$$
+
+The first equation is Newton's second law for a fluid element: the left side is mass times acceleration (convective term $(\mathbf{u} \cdot \nabla)\mathbf{u}$ included); the right side is pressure gradient, viscosity, and body forces. The $\mu\nabla^2\mathbf{u}$ term describes viscous (friction) forces; setting $\mu = 0$ gives the **Euler equations** for inviscid flow.
+
+The Clay Millennium Problem: do smooth (infinitely differentiable) solutions to the 3D Navier-Stokes equations, starting from smooth initial data, exist for all time? Or can singularities develop? No one knows. A proof or disproof carries a $1,000,000 prize.
+
+## Inviscid flow and potential theory
+
+For irrotational flow ($\nabla \times \mathbf{u} = 0$), the velocity is the gradient of a **velocity potential** $\phi$: $\mathbf{u} = \nabla\phi$. Combined with incompressibility, $\phi$ satisfies Laplace's equation $\nabla^2\phi = 0$.
+
+This connects fluid dynamics to complex analysis (in 2D): the **complex potential** $w(z) = \phi + i\psi$ (where $\psi$ is the stream function) is analytic, and conformal mappings transform complicated geometries into simple ones where the flow is known.
+
+**Bernoulli's equation** (for steady inviscid incompressible flow along a streamline):
+$$\frac{1}{2}\rho|\mathbf{u}|^2 + p + \rho gz = \text{const.}$$
+Speed and pressure trade off: faster flow has lower pressure. This is why aircraft wings generate lift.
+
+**Kelvin's circulation theorem**: in inviscid flow, the circulation $\Gamma = \oint_C \mathbf{u} \cdot d\mathbf{r}$ around any closed material curve is conserved. Vorticity is frozen into the fluid; it neither appears nor disappears (without viscosity).
+
+## Vorticity and turbulence
+
+**Vorticity** $\omega = \nabla \times \mathbf{u}$ measures local rotation. The **vorticity equation** (from taking the curl of the Euler equations):
+
+$$\frac{D\omega}{Dt} = (\omega \cdot \nabla)\mathbf{u} \quad \text{(in 3D)}.$$
+
+The term $(\omega \cdot \nabla)\mathbf{u}$ is the **vortex stretching** term: as vortex tubes are stretched (by being caught in a strain field), their vorticity intensifies. In 2D this term vanishes; in 3D it is the source of the turbulence cascade.
+
+**Turbulence** remains one of the great unsolved problems of classical physics. Kolmogorov's 1941 theory ($K41$) predicts the **energy spectrum** $E(k) \sim k^{-5/3}$ in the inertial range of turbulence (where energy cascades from large scales to small without dissipation). This is confirmed experimentally but derived from dimensional analysis and scaling arguments rather than from the Navier-Stokes equations directly.
+
+## Real-world applications
+
+Where this turns up in the world: [Weather forecasting](/applications/weather-forecasting) runs the full Navier-Stokes and thermodynamic equations on a discretised atmosphere — the stability analysis and condition-number theory from this course determine which numerical schemes remain reliable over multi-day forecasts. [Airfoil and aerodynamics design](/applications/airfoil-and-aerodynamics) exploits the potential-flow theory in this course directly: conformal mapping transforms the flow around a wing into a mathematically tractable problem, and Bernoulli's equation gives the lift formula that every aeronautical engineer uses. [Climate modelling](/applications/climate-modelling) couples ocean and atmosphere through the same Navier-Stokes framework, with turbulence parametrisations informed by Kolmogorov's $k^{-5/3}$ scaling law that you derive here.
+
+## Dimensionless numbers and scaling
+
+The **Reynolds number** $Re = \rho UL/\mu$ (ratio of inertial to viscous forces) governs the character of flow: $Re \ll 1$ gives Stokes flow (viscosity dominates, no turbulence); $Re \gg 1$ gives inertia-dominated turbulent flow. Blood in capillaries has $Re \approx 0.001$; flow over an aircraft wing has $Re \approx 10^7$.
+
+Dimensional analysis — the **Buckingham Pi theorem** — is one of the most useful tools in applied mathematics. It says: if a physical relationship involves $n$ variables with $k$ independent dimensions, it can be expressed as a relationship between $n - k$ dimensionless groups. This reduces the parameter space and often reveals the essential physics without solving any equations.

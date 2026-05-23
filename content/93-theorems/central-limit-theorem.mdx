@@ -1,0 +1,41 @@
+---
+title: Central limit theorem
+section: Theorems
+section_slug: 93-theorems
+slug: central-limit-theorem
+attributed_to: [gauss]
+era: 06-the-rigour-revolution
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [gaussian-distribution-normal-distribution, law-of-large-numbers, axiomatic-foundations-of-probability, fourier-transform]
+applications: [census-and-survey-statistics, clinical-trials-design, epidemiological-modelling, option-pricing-finance, actuarial-science]
+tags: [probability, statistics, normal-distribution, limit-theorems]
+year_introduced: c. 1733–1901 (various contributors)
+summary: The sum of many independent random variables, suitably normalised, converges in distribution to a Gaussian — the theorem that explains why the normal distribution is everywhere.
+---
+
+
+## What it says
+
+Let $X_1, X_2, \ldots, X_n$ be independent identically distributed random variables with mean $\mu$ and variance $\sigma^2 < \infty$. Define the sample mean $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$. Then:
+
+$$\sqrt{n}\,\frac{\bar{X}_n - \mu}{\sigma} \xrightarrow{d} \mathcal{N}(0, 1) \quad \text{as } n \to \infty$$
+
+The distribution of the standardised sample mean converges to the standard normal, regardless of the shape of the original distribution. You do not need the $X_i$ to be Gaussian — any distribution with finite variance will do.
+
+## History
+
+Abraham de Moivre proved a special case for coin flips in 1733. Laplace extended it and began to understand its generality. The fully rigorous modern version was proved by Lyapunov (1901) and Lindeberg (1922) — [Gauss](/mathematicians/gauss)'s name is attached through his fundamental role in establishing the normal distribution and least-squares theory that the CLT justifies.
+
+## Why it matters
+
+The CLT is the reason Gaussian statistics work in so many settings. Whenever you measure something that is itself the result of many small additive contributions — noise in a measurement, the height of a population, the return on a diversified portfolio — the CLT says the distribution will be approximately Gaussian. This justifies the ubiquity of $z$-tests, $t$-tests, confidence intervals, and almost everything in classical frequentist statistics.
+
+The proof, in its clean form using [Fourier transforms](/theorems/fourier-transform) of characteristic functions, is a beautiful application of analysis to probability.
+
+## Real-world applications
+
+[Survey statistics](/applications/census-and-survey-statistics) and [clinical trials](/applications/clinical-trials-design) rely on CLT-derived standard errors. [Actuarial science](/applications/actuarial-science) uses it to model aggregate risk. [Option pricing](/applications/option-pricing-finance) assumes log-normal returns, justified partly by CLT-type arguments. [Epidemiological modelling](/applications/epidemiological-modelling) uses Gaussian approximations for large populations.
+
+## Where you'll meet it
+
+The CLT is the centrepiece of Year 1 probability and Year 2 statistical inference. Its proof via characteristic functions appears in a Year 2 probability theory course and ties into the [Fourier transform](/theorems/fourier-transform).

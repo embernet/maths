@@ -1,0 +1,906 @@
+---
+/**
+ * Header.astro
+ * Sticky top header: logo + always-visible hamburger + search input.
+ * Hamburger opens a full-overlay modal nav on every viewport.
+ * On <768px the search input becomes a magnifier icon that opens a search drawer.
+ */
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+// Load site config
+const siteConfigPath = join(process.cwd(), 'content/_site.json');
+let siteConfig = { title: 'The Undergraduate Mathematics Companion', navigation_order: [] as string[] };
+if (existsSync(siteConfigPath)) {
+  try { siteConfig = JSON.parse(readFileSync(siteConfigPath, 'utf8')); } catch { /* use default */ }
+}
+
+// Build nav items from navigation_order + colocated _section.json files
+interface NavItem { slug: string; label: string; href: string; children: { label: string; href: string; slug: string; }[]; }
+const navItems: NavItem[] = [];
+
+const contentDir = join(process.cwd(), 'content');
+import { readdirSync, statSync } from 'node:fs';
+
+for (const slug of siteConfig.navigation_order ?? []) {
+  let label = slug.replace(/^\d+-/, '').replace(/-/g, ' ');
+  label = label.charAt(0).toUpperCase() + label.slice(1);
+
+  let href = '/';
+  if (slug === '00-welcome') {
+    href = '/';
+  } else if (slug === '91-mathematicians') {
+    href = '/mathematicians';
+  } else if (slug === '92-resources') {
+    href = '/resources';
+  } else if (slug === '93-theorems') {
+    href = '/theorems';
+  } else if (slug === '94-applications') {
+    href = '/applications';
+  } else if (slug === '95-definitions') {
+    href = '/definitions';
+  } else if (slug === '98-about') {
+    href = '/about';
+  } else {
+    href = `/${slug}`;
+  }
+
+  // Try to read a prettier title from _section.json
+  const sectionJsonPath = join(contentDir, slug, '_section.json');
+  if (existsSync(sectionJsonPath)) {
+    try {
+      const sec = JSON.parse(readFileSync(sectionJsonPath, 'utf8'));
+      if (sec.title) label = sec.title;
+    } catch { /* keep derived label */ }
+  }
+
+  // Build first-level children for year sections and history
+  const children: { label: string; href: string; slug: string; }[] = [];
+  const sectionPath = join(contentDir, slug);
+  if (
+    existsSync(sectionPath) &&
+    slug !== '00-welcome' && slug !== '91-mathematicians' &&
+    slug !== '92-resources' && slug !== '93-theorems' && slug !== '94-applications' &&
+    slug !== '95-definitions' && slug !== '98-about'
+  ) {
+    try {
+      const subs = readdirSync(sectionPath).sort();
+      for (const sub of subs) {
+        if (sub.startsWith('_')) continue;
+        const subPath = join(sectionPath, sub);
+        try { if (!statSync(subPath).isDirectory()) continue; } catch { continue; }
+        const mdxPath = join(subPath, 'index.mdx');
+        let childLabel = sub.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        if (existsSync(mdxPath)) {
+          try {
+            const txt = readFileSync(mdxPath, 'utf8');
+            const m = txt.match(/^title\s*:\s*["']?(.+?)["']?\s*$/m);
+            if (m) childLabel = m[1].replace(/^["']|["']$/g, '');
+          } catch { /* keep derived */ }
+        }
+        const childHref = slug === '90-history' ? `/90-history/${sub}` : `/${slug}/${sub}`;
+        children.push({ label: childLabel, href: childHref, slug: sub });
+      }
+    } catch { /* ignore */ }
+  }
+
+  navItems.push({ slug, label, href, children });
+}
+
+// Short labels for the compact desktop chip nav
+const shortLabels: Record<string, string> = {
+  '00-welcome': 'Welcome',
+  '01-foundations-year-one': 'Year 1',
+  '02-core-year-two': 'Year 2',
+  '03-specialisation-year-three': 'Year 3',
+  '04-advanced-topics-year-four': 'Year 4',
+  '90-history': 'History',
+  '91-mathematicians': 'Mathematicians',
+  '92-resources': 'Resources',
+  '93-theorems': 'Theorems',
+  '94-applications': 'Applications',
+  '95-definitions': 'Definitions',
+  '98-about': 'About',
+};
+---
+
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <!-- Hamburger button — always visible on all viewports -->
+    <button
+      class="hamburger-btn no-print"
+      id="hamburger-btn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="overlay-nav"
+      aria-haspopup="dialog"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Logo / site title -->
+    <a href="/" class="site-logo" aria-label="Home — The Undergraduate Mathematics Companion">
+      <span class="logo-symbol" aria-hidden="true">∑</span>
+      <span class="logo-text">Maths Companion</span>
+    </a>
+
+    <!-- Desktop chip nav (slim row; supplementary to hamburger overlay) -->
+    <nav class="desktop-nav no-print" aria-label="Section navigation">
+      <ul role="list">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} data-slug={item.slug}>
+              {shortLabels[item.slug] ?? item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Search — desktop: text input; mobile: magnifier icon toggle -->
+    <div class="search-wrapper no-print">
+      <button class="search-icon-btn" id="search-icon-btn" aria-label="Open search" aria-expanded="false" aria-controls="header-search-wrapper">
+        <!-- Magnifier SVG -->
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+          <line x1="12.7" y1="12.7" x2="17" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <div id="header-search-wrapper" class="search-input-wrapper">
+        <label for="header-search" class="sr-only">Search topics</label>
+        <input
+          type="search"
+          id="header-search"
+          placeholder="Search…"
+          autocomplete="off"
+          aria-label="Search topics"
+          aria-autocomplete="list"
+          aria-controls="search-dropdown"
+          aria-expanded="false"
+        />
+      </div>
+      <div id="search-dropdown" class="search-dropdown" role="listbox" aria-label="Search results" hidden></div>
+    </div>
+  </div>
+</header>
+
+<!-- Full-site overlay nav (all viewports) -->
+<div
+  id="overlay-nav"
+  class="overlay-nav no-print"
+  role="dialog"
+  aria-label="Site navigation"
+  aria-modal="true"
+  hidden
+>
+  <div class="overlay-backdrop" id="overlay-backdrop"></div>
+  <nav class="overlay-panel" aria-label="Full site navigation">
+    <div class="overlay-header">
+      <span class="overlay-title">Navigation</span>
+      <button class="overlay-close" id="overlay-close" aria-label="Close navigation menu">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          <line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <ul class="overlay-list" role="list">
+      {navItems.map((item, idx) => {
+        const hasChildren = item.children.length > 0;
+        const childId = `overlay-children-${idx}`;
+        return (
+          <li class="overlay-item">
+            {hasChildren ? (
+              <>
+                <div class="overlay-row">
+                  <a href={item.href} class="overlay-link">{item.label}</a>
+                  <button
+                    class="overlay-expand-btn"
+                    aria-expanded="false"
+                    aria-controls={childId}
+                    aria-label={`Expand ${item.label} sections`}
+                  >
+                    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                      <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+                <ul id={childId} class="overlay-children" hidden role="list">
+                  {item.children.map(child => (
+                    <li>
+                      <a href={child.href} class="overlay-child-link">{child.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <div class="overlay-row">
+                <a href={item.href} class="overlay-link">{item.label}</a>
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+</div>
+
+<!-- Search drawer (mobile) -->
+<div id="search-drawer" class="search-drawer no-print" hidden>
+  <div class="search-drawer-inner">
+    <label for="search-drawer-input" class="sr-only">Search topics</label>
+    <input
+      type="search"
+      id="search-drawer-input"
+      placeholder="Search topics…"
+      autocomplete="off"
+      aria-label="Search topics"
+      aria-autocomplete="list"
+      aria-controls="search-drawer-dropdown"
+      aria-expanded="false"
+    />
+    <button class="drawer-close" id="search-drawer-close" aria-label="Close search">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <line x1="2" y1="2" x2="14" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div id="search-drawer-dropdown" class="search-dropdown search-drawer-dropdown" role="listbox" aria-label="Search results" hidden></div>
+  </div>
+</div>
+
+<!-- Search + hamburger logic (is:inline to avoid Vite null-byte issue) -->
+<script is:inline>
+(function() {
+
+  // ---- Hamburger overlay ----
+  var hamburgerBtn = document.getElementById('hamburger-btn');
+  var overlayNav = document.getElementById('overlay-nav');
+  var overlayClose = document.getElementById('overlay-close');
+  var overlayBackdrop = document.getElementById('overlay-backdrop');
+  var lastFocused = null;
+
+  function getAllFocusable(root) {
+    return Array.from(root.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    ));
+  }
+
+  function openOverlay() {
+    if (!overlayNav || !hamburgerBtn) return;
+    lastFocused = document.activeElement;
+    overlayNav.hidden = false;
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    hamburgerBtn.setAttribute('aria-label', 'Close navigation menu');
+    // Transform to X
+    hamburgerBtn.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    // Focus first focusable element in panel
+    var focusable = getAllFocusable(overlayNav);
+    if (focusable.length) focusable[0].focus();
+  }
+
+  function closeOverlay() {
+    if (!overlayNav || !hamburgerBtn) return;
+    overlayNav.hidden = true;
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
+    hamburgerBtn.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+    lastFocused = null;
+  }
+
+  if (hamburgerBtn) hamburgerBtn.addEventListener('click', function() {
+    overlayNav && overlayNav.hidden ? openOverlay() : closeOverlay();
+  });
+
+  if (overlayClose) overlayClose.addEventListener('click', closeOverlay);
+  if (overlayBackdrop) overlayBackdrop.addEventListener('click', closeOverlay);
+
+  // Esc to close
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (overlayNav && !overlayNav.hidden) closeOverlay();
+      if (searchDrawer && !searchDrawer.hidden) closeSearchDrawer();
+    }
+  });
+
+  // Focus trap in overlay
+  if (overlayNav) {
+    overlayNav.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab') return;
+      var focusable = getAllFocusable(overlayNav);
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
+  // Overlay expand/collapse for child sections
+  if (overlayNav) {
+    overlayNav.querySelectorAll('.overlay-expand-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        var targetId = btn.getAttribute('aria-controls');
+        var panel = targetId ? document.getElementById(targetId) : null;
+        btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        btn.classList.toggle('is-expanded', !expanded);
+        if (panel) panel.hidden = expanded;
+      });
+    });
+  }
+
+  // Close overlay when a link is clicked
+  if (overlayNav) {
+    overlayNav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeOverlay);
+    });
+  }
+
+  // ---- Search (desktop) ----
+  var fuse = null;
+  var indexLoaded = false;
+
+  var desktopInput = document.getElementById('header-search');
+  var desktopDropdown = document.getElementById('search-dropdown');
+
+  async function loadIndex(callback) {
+    if (indexLoaded) { if (callback) callback(); return; }
+    indexLoaded = true;
+    try {
+      var fuseModule = await import('/node_modules/fuse.js/dist/fuse.mjs').catch(function() { return null; });
+      if (!fuseModule) {
+        // fallback: dynamic import from CDN or bundled
+        fuseModule = await import('fuse.js').catch(function() { return null; });
+      }
+      var res = await fetch('/api/index.json');
+      var data = await res.json();
+      var FuseClass = fuseModule ? (fuseModule.default || fuseModule) : null;
+      if (FuseClass) {
+        fuse = new FuseClass(data, {
+          keys: ['title', 'summary', 'tags', 'mathematicians'],
+          threshold: 0.35,
+          includeScore: true,
+          minMatchCharLength: 2,
+        });
+      }
+    } catch(err) {
+      // Search unavailable — fail silently.
+    }
+    if (callback) callback();
+  }
+
+  function renderResults(results, dropdownEl) {
+    dropdownEl.innerHTML = '';
+    if (!results.length) {
+      dropdownEl.innerHTML = '<p class="search-empty">No results found.</p>';
+      dropdownEl.hidden = false;
+      return;
+    }
+    var ul = document.createElement('ul');
+    ul.setAttribute('role', 'listbox');
+    results.slice(0, 8).forEach(function(r) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      var kind = r.item.kind ? ' (' + r.item.kind + ')' : '';
+      li.innerHTML = '<a href="' + r.item.url + '">' +
+        '<span class="result-title">' + r.item.title + kind + '</span>' +
+        '<span class="result-section">' + r.item.section + '</span>' +
+        '</a>';
+      ul.appendChild(li);
+    });
+    dropdownEl.appendChild(ul);
+    dropdownEl.hidden = false;
+  }
+
+  function performSearch(q, dropdownEl) {
+    if (!fuse || q.length < 2) { dropdownEl.hidden = true; return; }
+    renderResults(fuse.search(q), dropdownEl);
+  }
+
+  if (desktopInput && desktopDropdown) {
+    desktopInput.addEventListener('focus', function() { loadIndex(); });
+    desktopInput.addEventListener('input', function() {
+      var q = desktopInput.value.trim();
+      if (!fuse || q.length < 2) {
+        desktopDropdown.hidden = true;
+        desktopInput.setAttribute('aria-expanded', 'false');
+        return;
+      }
+      renderResults(fuse.search(q), desktopDropdown);
+      desktopInput.setAttribute('aria-expanded', 'true');
+    });
+    document.addEventListener('click', function(e) {
+      if (!desktopInput.contains(e.target) && !desktopDropdown.contains(e.target)) {
+        desktopDropdown.hidden = true;
+        desktopInput.setAttribute('aria-expanded', 'false');
+      }
+    });
+    desktopInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        desktopDropdown.hidden = true;
+        desktopInput.setAttribute('aria-expanded', 'false');
+        desktopInput.blur();
+      }
+    });
+  }
+
+  // ---- Search icon (mobile) → search drawer ----
+  var searchIconBtn = document.getElementById('search-icon-btn');
+  var searchDrawer = document.getElementById('search-drawer');
+  var searchDrawerClose = document.getElementById('search-drawer-close');
+  var searchDrawerInput = document.getElementById('search-drawer-input');
+  var searchDrawerDropdown = document.getElementById('search-drawer-dropdown');
+
+  function openSearchDrawer() {
+    if (!searchDrawer) return;
+    searchDrawer.hidden = false;
+    if (searchIconBtn) searchIconBtn.setAttribute('aria-expanded', 'true');
+    if (searchDrawerInput) { searchDrawerInput.focus(); loadIndex(); }
+  }
+
+  function closeSearchDrawer() {
+    if (!searchDrawer) return;
+    searchDrawer.hidden = true;
+    if (searchIconBtn) { searchIconBtn.setAttribute('aria-expanded', 'false'); searchIconBtn.focus(); }
+    if (searchDrawerDropdown) searchDrawerDropdown.hidden = true;
+  }
+
+  if (searchIconBtn) searchIconBtn.addEventListener('click', openSearchDrawer);
+  if (searchDrawerClose) searchDrawerClose.addEventListener('click', closeSearchDrawer);
+
+  if (searchDrawerInput && searchDrawerDropdown) {
+    searchDrawerInput.addEventListener('input', function() {
+      var q = searchDrawerInput.value.trim();
+      performSearch(q, searchDrawerDropdown);
+    });
+  }
+
+  // ---- Mark active nav item ----
+  var currentPath = window.location.pathname.replace(/\/$/, '') || '/';
+  document.querySelectorAll('.desktop-nav a, .overlay-link').forEach(function(a) {
+    var href = (a.getAttribute('href') || '').replace(/\/$/, '') || '/';
+    if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
+      a.setAttribute('aria-current', 'page');
+      a.classList.add('active');
+    }
+  });
+
+})();
+</script>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--color-primary);
+    color: #fff;
+    height: var(--header-h);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Hamburger — always visible */
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.3rem;
+    transition: background 0.15s;
+    flex-shrink: 0;
+    order: 0;
+  }
+  .hamburger-btn:hover { background: rgba(255,255,255,0.15); }
+  .hamburger-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .hamburger-btn.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger-btn.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger-btn.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Logo */
+  .site-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: #fff;
+    flex-shrink: 0;
+    order: 1;
+  }
+  .logo-symbol {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+  }
+  .logo-text {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  @media (max-width: 480px) {
+    .logo-text { display: none; }
+  }
+
+  /* Desktop nav (slim chips, hidden on mobile) */
+  .desktop-nav {
+    display: none;
+    flex: 1 1 0;
+    overflow: hidden;
+    order: 2;
+  }
+  @media (min-width: 900px) {
+    .desktop-nav { display: block; }
+  }
+  .desktop-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.1rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .desktop-nav ul::-webkit-scrollbar { display: none; }
+  .desktop-nav a {
+    display: block;
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.35rem;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+  .desktop-nav a:hover,
+  .desktop-nav a.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+  .desktop-nav a[aria-current="page"],
+  .desktop-nav a.active {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  /* Search wrapper */
+  .search-wrapper {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    order: 3;
+    margin-left: auto;
+  }
+
+  /* Magnifier icon button (visible on mobile) */
+  .search-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .search-icon-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .search-icon-btn svg { width: 20px; height: 20px; }
+  @media (min-width: 768px) {
+    .search-icon-btn { display: none; }
+  }
+
+  /* Desktop search input (hidden on mobile) */
+  .search-input-wrapper { display: none; }
+  @media (min-width: 768px) {
+    .search-input-wrapper { display: block; }
+  }
+
+  #header-search {
+    font-family: var(--font-serif);
+    font-size: 0.88rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 1rem;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    outline: none;
+    width: 8rem;
+    transition: width 0.2s, background 0.2s;
+  }
+  #header-search::placeholder { color: rgba(255,255,255,0.55); }
+  #header-search:focus {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.6);
+    width: 14rem;
+  }
+
+  /* Search dropdown */
+  .search-dropdown {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    width: 22rem;
+    max-width: 90vw;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+    overflow: hidden;
+    z-index: 200;
+    color: var(--color-text);
+  }
+  .search-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.3rem 0;
+  }
+  .search-dropdown li a {
+    display: flex;
+    flex-direction: column;
+    padding: 0.55rem 1rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: background 0.1s;
+  }
+  .search-dropdown li a:hover { background: var(--color-surface); }
+  .result-title {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+  .result-section {
+    font-size: 0.76rem;
+    color: var(--color-muted);
+  }
+  .search-empty {
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  /* ---- Overlay nav ---- */
+  .overlay-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+  }
+
+  .overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+  }
+
+  .overlay-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(340px, 88vw);
+    background: var(--color-primary);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+  }
+
+  .overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: var(--header-h);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+
+  .overlay-title {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .overlay-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .overlay-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+  .overlay-close svg { width: 18px; height: 18px; }
+
+  .overlay-list {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0 2rem;
+    flex: 1 1 0;
+  }
+
+  .overlay-item {}
+
+  .overlay-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .overlay-link {
+    flex: 1 1 0;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+    font-size: 0.98rem;
+    transition: background 0.12s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .overlay-link:hover,
+  .overlay-link.active { background: rgba(255,255,255,0.1); color: #fff; }
+  .overlay-link[aria-current="page"] { color: var(--color-accent); font-weight: 600; }
+
+  .overlay-expand-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.6);
+    padding: 0.5rem 0.75rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.12s, color 0.12s;
+  }
+  .overlay-expand-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .overlay-expand-btn svg { width: 18px; height: 18px; transition: transform 0.2s; }
+  .overlay-expand-btn.is-expanded svg { transform: rotate(180deg); }
+
+  .overlay-children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(0,0,0,0.15);
+  }
+  .overlay-child-link {
+    display: block;
+    padding: 0.6rem 1.25rem 0.6rem 2.25rem;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: background 0.1s, color 0.1s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .overlay-child-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+  /* ---- Search drawer (mobile) ---- */
+  .search-drawer {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    z-index: 150;
+    background: var(--color-primary);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  @media (min-width: 768px) {
+    .search-drawer { display: none; }
+  }
+
+  .search-drawer-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    position: relative;
+  }
+
+  .search-drawer-inner input {
+    flex: 1 1 0;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    outline: none;
+  }
+  .search-drawer-inner input::placeholder { color: rgba(255,255,255,0.55); }
+  .search-drawer-inner input:focus { background: rgba(255,255,255,0.22); }
+
+  .drawer-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+  .drawer-close:hover { background: rgba(255,255,255,0.15); }
+  .drawer-close svg { width: 16px; height: 16px; }
+
+  .search-drawer-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 1rem;
+    width: auto;
+  }
+
+  /* Screen-reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

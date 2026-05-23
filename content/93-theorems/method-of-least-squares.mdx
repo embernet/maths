@@ -1,0 +1,46 @@
+---
+title: Method of least squares
+section: Theorems
+section_slug: 93-theorems
+slug: method-of-least-squares
+attributed_to: [gauss]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [gaussian-distribution-normal-distribution, maximum-likelihood-estimation, the-fisher-information-matrix]
+applications: [gps-positioning, climate-modelling, census-and-survey-statistics, machine-learning-deep-neural-networks]
+tags: [statistics, optimisation, Gauss, linear-regression]
+year_introduced: 1801 (used); 1809 (published)
+summary: Fit a model to data by minimising the sum of squared residuals — Gauss's method for combining observations that is now the foundation of linear regression.
+---
+
+
+
+## What it says
+
+Given observations $y_1, \ldots, y_n$ and model predictions $\hat{y}_i(\theta)$ depending on parameters $\theta$, the **least squares** estimate minimises:
+
+$$\sum_{i=1}^n (y_i - \hat{y}_i(\theta))^2$$
+
+For the linear model $\mathbf{y} = X\boldsymbol{\beta} + \boldsymbol{\varepsilon}$, the least squares solution is:
+
+$$\hat{\boldsymbol{\beta}} = (X^\top X)^{-1} X^\top \mathbf{y}$$
+
+**Gauss–Markov theorem:** Under the assumptions of zero-mean errors with equal variance, the least squares estimator is the Best Linear Unbiased Estimator (BLUE) — minimum variance among all linear unbiased estimators.
+
+If errors are Gaussian, least squares is equivalent to [maximum likelihood estimation](/theorems/maximum-likelihood-estimation).
+
+## History
+
+[Gauss](/mathematicians/gauss) used the method in 1801 to predict the return of the asteroid Ceres from only 40 days of observations, to the astonishment of astronomers. He published the method in *Theoria Motus* (1809). Legendre published the method independently in 1805 and claimed priority; the dispute was unpleasant. The probabilistic justification — that least squares is optimal when errors are Gaussian — is Gauss's contribution.
+
+## Why it matters
+
+Least squares is the oldest and most widely used fitting method in science. Every linear regression, every fit of a curve to data, every calibration of a measurement instrument uses least squares or a direct extension. Understanding why it works — the Gauss–Markov theorem and the connection to MLE — is essential for any quantitative scientist.
+
+## Real-world applications
+
+[GPS positioning](/applications/gps-positioning) uses weighted least squares to solve the overdetermined position system. [Climate modelling](/applications/climate-modelling) fits model parameters to observations by least squares. [Machine learning](/applications/machine-learning-deep-neural-networks) linear regression is OLS. [Survey statistics](/applications/census-and-survey-statistics) uses least squares throughout.
+
+## Where you'll meet it
+
+The method of least squares appears in Year 2 linear algebra and statistical inference. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

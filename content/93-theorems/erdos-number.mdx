@@ -1,0 +1,41 @@
+---
+title: Erdős number
+section: Theorems
+section_slug: 93-theorems
+slug: erdos-number
+attributed_to: [erdos]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [prolific-collaborator-509-direct-collaborators, graph-theory-and-number-theory, graph-theory-konigsberg-bridges]
+applications: [pagerank-google, recommender-systems]
+tags: [graph-theory, collaboration, network, Erdős]
+year_introduced: coined c. 1969
+summary: The collaborative distance from Paul Erdős in the graph of mathematical co-authorship — a measure of the small-world structure of mathematics.
+---
+
+
+## What it says
+
+The **Erdős number** of a mathematician is defined recursively:
+- Erdős himself has Erdős number 0
+- Anyone who has co-authored a paper directly with Erdős has number 1
+- Anyone who has co-authored with a number-1 mathematician (but not with Erdős directly) has number 2
+- And so on
+
+This is exactly the **graph distance** from Erdős in the co-authorship graph. The Erdős number is an instance of the "six degrees of separation" phenomenon: the mathematical collaboration network is a small-world graph in which most vertices are within a small number of hops from each other.
+
+## History
+
+The Erdős number was coined informally in the mathematical community, often attributed to Casper Goffman (1969). It became widely tracked after [Erdős](/mathematicians/erdos)'s death in 1996. The American Mathematical Society maintains an online database. Einstein, Erdős, and Turing all have finite Bacon numbers (collaborative distance in film) — an example of the small-world property.
+
+## Why it matters
+
+The Erdős number is a playful but genuinely instructive example of graph theory and network science in action. It demonstrates: the small-world phenomenon (most pairs of vertices are nearby), the power of hubs (high-degree nodes like Erdős reduce average distances dramatically), and the utility of graph-theoretic thinking for social networks. [PageRank](/applications/pagerank-google) and [recommender systems](/applications/recommender-systems) are more sophisticated versions of the same graph-distance reasoning.
+
+## Real-world applications
+
+The ideas in graph distance underpin [PageRank](/applications/pagerank-google) and [recommender system](/applications/recommender-systems) algorithms.
+
+## Where you'll meet it
+
+Graph distance and small-world networks appear in Year 3 combinatorics and algorithms. See the [Modern Mathematics era](/history/09-modern-mathematics).

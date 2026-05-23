@@ -1,0 +1,42 @@
+---
+title: Traffic Flow Modelling
+section: Real-world applications
+section_slug: 94-applications
+slug: traffic-flow-modelling
+domains: [engineering, urban-planning, mathematics]
+uses_theorems: [heat-equation]
+uses_topics: [01-foundations-year-one/03-calculus-and-methods, 02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/08-differential-equations-advanced]
+related_applications: [epidemiological-modelling, population-dynamics-ecology, cellular-network-design]
+tags: [traffic, PDEs, shock-waves, applied]
+real_world_examples: [Motorway variable speed limits, Traffic signal coordination, Urban congestion charging design, Autonomous vehicle routing]
+summary: Traffic jams can appear from nowhere on a clear motorway — the mathematics of shock waves explains why, and the same equations that govern gas dynamics govern the formation of queues.
+---
+
+
+## The application
+
+Phantom traffic jams — jams that form on open roads with no accident or obstruction — are one of the more counterintuitive phenomena of everyday life. They arise because traffic flow, like compressible gas dynamics, supports **shock waves**: discontinuities in density that propagate backward through a flow even when vehicles move forward. The mathematics that explains this is the theory of hyperbolic conservation laws, developed in the same framework as fluid dynamics.
+
+## The maths behind it
+
+The simplest traffic model is the **Lighthill–Whitham–Richards (LWR) model** (1955), a first-order PDE for traffic density $\rho(x,t)$ (vehicles per kilometre):
+
+$$\frac{\partial \rho}{\partial t} + \frac{\partial}{\partial x}[\rho\, v(\rho)] = 0,$$
+
+where $v(\rho)$ is the average speed as a function of density (decreasing: at higher density, drivers go slower). The flux $q = \rho v(\rho)$ is the flow rate (vehicles per hour). This is a **conservation law** — the total number of vehicles is conserved — and has the form of the inviscid Burgers equation from fluid dynamics.
+
+**Shock waves**: when the characteristics of this PDE (curves along which information propagates) converge, the density becomes multi-valued and a discontinuity (shock) forms. This is the traffic jam: a boundary between free flow (low density, high speed) moving forward, and congested flow (high density, low speed) moving backward. The shock speed is given by the **Rankine-Hugoniot condition**: $c_{\text{shock}} = [q]_{\text{jump}} / [\rho]_{\text{jump}}$ — the ratio of jumps in flux and density. For typical traffic conditions, this speed is negative (the jam propagates backward even as vehicles pass through it).
+
+**Cellular automata models** provide a discrete alternative: each cell is either empty or occupied by a vehicle, and vehicles advance according to simple local rules. The Nagel-Schreckenberg model (1992) exhibits spontaneous jam formation from microscopic rules, confirming that phantom jams are intrinsic to the system rather than an artefact of continuum approximation.
+
+## A concrete example
+
+The UK's MIDAS (Motorway Incident Detection and Automatic Signalling) system uses real-time traffic counts from loop detectors to implement variable speed limits — reducing speed upstream of developing congestion to smooth density gradients and prevent shocks from forming. The mathematical justification is precisely the LWR model: suppressing the conditions under which characteristics converge prevents shock formation.
+
+## History of the application
+
+The LWR model was published independently by Lighthill and Whitham (1955) and Richards (1956), drawing explicitly on the analogy with compressible gas dynamics. The connection to shock waves was recognised immediately. Nagel and Schreckenberg introduced the cellular automaton approach in 1992; today traffic modelling spans scales from individual vehicle dynamics (microsimulation) to national network assignment (macroscopic flow models).
+
+## Links
+
+The PDE framework is introduced in [Calculus and Methods](/01-foundations-year-one/03-calculus-and-methods) and developed in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). Shock wave theory and hyperbolic conservation laws are in [Advanced Differential Equations](/03-specialisation-year-three/08-differential-equations-advanced). The fluid dynamics analogy is in [Mathematical Physics and Fluid Dynamics](/04-advanced-topics-year-four/04-mathematical-physics-and-fluids).

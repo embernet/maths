@@ -1,0 +1,18 @@
+---
+title: 'filtered back-projection'
+section: Definitions
+section_slug: 95-definitions
+slug: filtered-back-projection
+tags: [applied]
+first_seen_in: '94-applications/medical-imaging-mri-ct.mdx'
+mentioned_in: ['94-applications/medical-imaging-mri-ct']
+summary: 'Quick definition of filtered back-projection from its appearance in the curriculum.'
+---
+
+## Definition
+
+**CT scanning** uses X-rays fired through the body at hundreds of angles. The detector measures line integrals of tissue density along each ray: $Rf(\theta, s) = \int_{L(\theta,s)} f(x,y)\, dl$, where $f(x,y)$ is the unknown density function and $L(\theta,s)$ is the line at angle $\theta$ and signed distance $s$ from the origin. This is the **Radon transform**, introduced by Johann Radon in 1917. Reconstructing $f$ from its Radon transform is an inverse problem, solved in practice by **filtered back-projection**: apply the inverse Fourier transform to the projections, filter with a ramp filter in frequency space, then back-project (smear each filtered projection back across the image).
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

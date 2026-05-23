@@ -1,0 +1,100 @@
+---
+title: 'Calculus and Methods: Multivariable, Vector, and Differential Equations'
+section: 'Foundations: Year One'
+section_slug: 01-foundations-year-one
+year: 1
+order: 3
+tags: [calculus, multivariable, vector-calculus, ODEs, partial-derivatives, integration, Stokes, divergence]
+prerequisites:
+- 02-real-analysis-foundations
+related:
+- 04-vector-calculus-and-pdes
+- 08-differential-equations-advanced
+mathematicians: [newton, leibniz, gauss, fourier, laplace]
+reading_time_min: 14
+summary: 'Calculus extends from one variable to many: partial derivatives, double integrals, and vector fields. Differential equations model the physical world, and the three great integral theorems connect geometry to analysis.'
+theorems: [heat-equation, laplace-equation, calculus-fluxions, calculus-dy-dx-notation-symbol, laws-of-motion-and-gravitation, proto-calculus, bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel]
+applications: [climate-modelling, epidemiological-modelling, population-dynamics-ecology, option-pricing-finance]
+---
+
+
+
+Single-variable calculus — differentiation and integration along a line — is the version you know from A-level. The calculus you meet in the first year of a degree moves in three directions: into more variables (multivariable calculus), into vector fields (vector calculus), and into differential equations (ODEs and their systems). These are not three separate subjects; they are the same calculus generalised, and the connections between them are the most important part.
+
+## Partial derivatives and the chain rule
+
+A function $f(x, y)$ takes two variables as input. Its **partial derivative** with respect to $x$,
+
+$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h},$$
+
+measures how $f$ changes when $x$ varies and $y$ is held fixed. This is the most important idea in multivariable calculus, and it is not much harder than the single-variable case.
+
+The **chain rule** for partial derivatives handles compositions: if $z = f(x(t), y(t))$, then
+
+$$\frac{dz}{dt} = \frac{\partial f}{\partial x}\frac{dx}{dt} + \frac{\partial f}{\partial y}\frac{dy}{dt}.$$
+
+The general chain rule for arbitrary compositions is expressed using the **Jacobian matrix** — the matrix of all partial derivatives — and matrix multiplication.
+
+The second-order partial derivatives $\partial^2 f / \partial x^2$, $\partial^2 f / \partial x \partial y$, and $\partial^2 f / \partial y^2$ describe curvature. When $\partial^2 f / \partial x \partial y = \partial^2 f / \partial y \partial x$ (which happens whenever the mixed partials are continuous — Schwarz's theorem), the order of differentiation does not matter.
+
+## Multiple integrals
+
+Double integrals $\iint_D f(x,y)\, dA$ extend the single integral to regions in the plane. You evaluate them by iterated integration — integrate over $y$ first with $x$ fixed, then integrate the result over $x$. The **Jacobian** appears when you change variables:
+
+$$\iint_D f(x,y)\, dx\, dy = \iint_{D'} f(r\cos\theta, r\sin\theta)\cdot r\, dr\, d\theta$$
+
+in polar coordinates, where the factor $r$ is $|\partial(x,y)/\partial(r,\theta)|$, the absolute value of the Jacobian determinant. Triple integrals and spherical/cylindrical coordinates follow the same pattern.
+
+## Ordinary differential equations
+
+An **ordinary differential equation** (ODE) is an equation relating a function $y(t)$ and its derivatives. They appear everywhere: Newton's second law $F = ma$ is an ODE; Kirchhoff's laws in circuit theory produce ODEs; compartment models in pharmacology and epidemiology are systems of ODEs.
+
+**First-order linear ODEs** have the form $y' + p(t)y = q(t)$. The **integrating factor** method multiplies both sides by $\mu(t) = e^{\int p(t)\, dt}$, turning the left side into $(μy)'$ and allowing direct integration.
+
+**Second-order linear ODEs** with constant coefficients, $ay'' + by' + cy = g(t)$, are solved in two steps: find the general solution of the homogeneous equation $ay'' + by' + cy = 0$ (using the characteristic equation $a\lambda^2 + b\lambda + c = 0$), then add a particular integral matching the forcing term $g(t)$. This is the mathematics of oscillators: springs, pendulums, electrical circuits.
+
+## The geometry of curves and surfaces: gradient, divergence, curl
+
+Vector calculus attaches a calculus to vector fields — functions $\mathbf{F}(x,y,z)$ that assign a vector to every point in space. The three fundamental operations are:
+
+$$\nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right) \quad \text{(gradient — points uphill)}$$
+
+$$\nabla \cdot \mathbf{F} = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z} \quad \text{(divergence — measures outward flow)}$$
+
+$$\nabla \times \mathbf{F} = \left(\frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z},\ \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x},\ \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right) \quad \text{(curl — measures rotation)}$$
+
+A field with zero curl everywhere is **conservative** — it is the gradient of some scalar potential $\phi$, and line integrals $\int_C \mathbf{F} \cdot d\mathbf{r}$ are path-independent, depending only on endpoints. This is the vector-calculus analogue of the Fundamental Theorem of Calculus.
+
+## The three great integral theorems
+
+Three theorems unify all of vector calculus. Each says the same thing in different geometry: *an integral over a region equals an integral over its boundary*.
+
+**Green's Theorem** (2D): For a region $D$ in the plane with boundary $\partial D$,
+
+$$\oint_{\partial D} (P\, dx + Q\, dy) = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) dA.$$
+
+**Stokes' Theorem** (surface-to-curve): For a surface $S$ with boundary curve $\partial S$,
+
+$$\oint_{\partial S} \mathbf{F} \cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}.$$
+
+The theorem is named after [George Gabriel Stokes](/mathematicians/stokes), who set it as an examination question in 1854. It had been communicated to Stokes in a letter from William Thomson (Lord Kelvin) in 1850 — a reminder that the person whose name is attached to a result is not always the person who discovered it.
+
+**Divergence Theorem** (volume-to-surface): For a region $V$ with boundary surface $\partial V$,
+
+$$\iiint_V \nabla \cdot \mathbf{F}\, dV = \oiint_{\partial V} \mathbf{F} \cdot d\mathbf{S}.$$
+
+These three theorems, in more abstract form, are all special cases of a single result in differential geometry: Stokes' theorem on manifolds. You will appreciate this unity when you meet differential forms in more advanced courses.
+
+## A note on notation: Newton versus Leibniz
+
+You will encounter both Newton's notation ($\dot{y}$ for $dy/dt$) and [Leibniz's](/mathematicians/leibniz) notation ($dy/dx$, $\int f(x)\, dx$). Leibniz's notation dominates modern mathematics because it is vastly more convenient for multivariable and higher-dimensional calculus: the chain rule $\frac{dz}{dt} = \frac{\partial z}{\partial x}\frac{dx}{dt} + \frac{\partial z}{\partial y}\frac{dy}{dt}$ is almost self-evident in Leibniz notation and would be a notational nightmare in Newton's. This is not a mathematical difference — it is a choice of language. Use Leibniz notation for everything multivariable.
+
+## Real-world applications
+
+Where this turns up in the world: [Climate modelling](/applications/climate-modelling) discretises the partial differential equations from this course onto grids of millions of cells — every weather forecast and IPCC projection runs on the vector calculus you learn here. [Epidemiological models](/applications/epidemiological-modelling) write the SIR epidemic equations as the ODEs introduced in this module; the SIR model's threshold theorem (which determines herd immunity) is solved by the techniques taught here. [Option pricing in finance](/applications/option-pricing-finance) turns the Black–Scholes equation — a PDE — into the heat equation via a change of variables; the heat equation itself is the subject of this module.
+
+## Where this leads
+
+The calculus of Year One connects to much of the rest of the degree. Vector calculus is the language of fluid dynamics, electromagnetism, and classical mechanics. Differential equations underlie everything from population modelling to financial mathematics to quantum mechanics. In Year Two, you will revisit the integral theorems with greater rigour and see how they extend to PDEs. In Year Three, these tools become the foundation of fluid dynamics, control theory, and the calculus of variations.
+
+The deeper message of calculus — that global behaviour (integrals over regions) is determined by local behaviour (derivatives at boundaries) — turns out to be one of the deepest patterns in all of mathematics.

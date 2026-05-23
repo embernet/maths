@@ -1,0 +1,36 @@
+{
+  "topic_slug": "01-algebraic-geometry",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "An affine variety $V \\subset k^n$ is defined as:",
+      "options": [
+        {"id": "a", "text": "The common zero set of a collection of polynomials in $k[x_1, \\ldots, x_n]$.", "correct": true, "explanation": "An affine variety is $V(f_1,\\ldots,f_r) = \\{a \\in k^n : f_i(a) = 0\\ \\forall i\\}$. Hilbert's Nullstellensatz gives the dictionary between varieties and radical ideals."},
+        {"id": "b", "text": "A smooth manifold embedded in $\\mathbb{R}^n$.", "correct": false, "explanation": "Smooth manifolds are objects of differential geometry. Algebraic varieties are defined by polynomial equations and may have singular points where the manifold structure breaks down."},
+        {"id": "c", "text": "The image of a polynomial map from $k$ to $k^n$.", "correct": false, "explanation": "Images of polynomial maps (rational curves) are a special type of variety but not the definition of varieties in general."},
+        {"id": "d", "text": "A subset of $k^n$ closed in the Euclidean topology.", "correct": false, "explanation": "In the Zariski topology, closed sets are algebraic varieties. But in the Euclidean topology, many more sets are closed. Algebraic geometry uses the Zariski topology."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The genus $g$ of a smooth projective complex algebraic curve corresponds topologically to:",
+      "options": [
+        {"id": "a", "text": "The number of handles on the corresponding Riemann surface.", "correct": true, "explanation": "A smooth projective curve over $\\mathbb{C}$ is a compact Riemann surface of genus $g$: a sphere with $g$ handles attached. $g=0$: sphere; $g=1$: torus (elliptic curve); $g \\ge 2$: higher genus surface."},
+        {"id": "b", "text": "The degree of the defining polynomial.", "correct": false, "explanation": "Degree and genus are related (for a smooth plane curve of degree $d$, genus $= (d-1)(d-2)/2$) but they are different quantities."},
+        {"id": "c", "text": "The dimension of the curve as a real manifold.", "correct": false, "explanation": "All algebraic curves have real dimension 2 (as complex dimension 1 manifolds). Genus is not the real dimension."},
+        {"id": "d", "text": "The number of irreducible components.", "correct": false, "explanation": "Irreducible components is a separate concept. A smooth irreducible curve has genus $g$ for any $g \\ge 0$."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Hilbert's Nullstellensatz, over an algebraically closed field, gives a correspondence between:",
+      "options": [
+        {"id": "a", "text": "Radical ideals in $k[x_1,\\ldots,x_n]$ and algebraic varieties in $k^n$.", "correct": true, "explanation": "The Nullstellensatz (zero locus theorem) is the fundamental bridge of algebraic geometry. Radical ideals correspond bijectively to varieties; prime ideals correspond to irreducible varieties."},
+        {"id": "b", "text": "Maximal ideals and points of $k^n$.", "correct": false, "explanation": "True but weaker: maximal ideals of $k[x_1,\\ldots,x_n]$ over an algebraically closed field correspond to points. The full Nullstellensatz covers all radical ideals and varieties."},
+        {"id": "c", "text": "Prime ideals and smooth varieties.", "correct": false, "explanation": "Prime ideals correspond to irreducible varieties, not smooth ones. Irreducibility and smoothness are different properties."},
+        {"id": "d", "text": "Polynomial ideals and complex manifolds.", "correct": false, "explanation": "Algebraic varieties need not be manifolds (they can have singular points). The correspondence is between ideals and varieties (not necessarily smooth)."}
+      ]
+    }
+  ]
+}

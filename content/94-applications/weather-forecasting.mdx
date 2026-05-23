@@ -1,0 +1,40 @@
+---
+title: Weather Forecasting
+section: Real-world applications
+section_slug: 94-applications
+slug: weather-forecasting
+domains: [environmental-science, physics, engineering]
+uses_theorems: [heat-equation, turbulence-theory-kolmogorov-scaling, fourier-series, gaussian-distribution-normal-distribution]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 04-advanced-topics-year-four/04-mathematical-physics-and-fluids, 03-specialisation-year-three/07-stochastic-processes]
+related_applications: [climate-modelling, airfoil-and-aerodynamics, epidemiological-modelling]
+tags: [meteorology, PDEs, chaos-theory, applied]
+real_world_examples: [Daily weather apps, Aviation weather services, Flood and storm warnings, Agricultural planning]
+summary: A five-day weather forecast requires solving the Navier–Stokes equations on a global grid, and acknowledging through ensemble methods that deterministic prediction becomes impossible at about ten days.
+---
+
+
+## The application
+
+Modern weather forecasting is accurate to roughly five days for most large-scale weather events and improving annually. It is one of the most computationally intensive scientific endeavours in routine operation: the European Centre for Medium-Range Weather Forecasts (ECMWF) runs a global model twice daily on a supercomputer that ranks among the world's most powerful. The mathematics spans fluid dynamics, PDEs, probability, and the theory of chaos.
+
+## The maths behind it
+
+The governing equations are the **primitive equations** — a simplified form of the Navier-Stokes equations appropriate for large-scale atmospheric dynamics, combined with the thermodynamic energy equation, the continuity equation, and the ideal gas law. These are coupled, nonlinear PDEs in four dimensions (three spatial plus time).
+
+The model atmosphere is discretised on a global grid (ECMWF currently uses a grid of roughly 9 km horizontal resolution with 137 vertical levels) and stepped forward in time using a semi-implicit semi-Lagrangian scheme that avoids the numerical instability of explicit methods for fast gravity waves.
+
+**Data assimilation** combines the model forecast with millions of observations (from weather stations, radiosondes, satellites, aircraft, and ocean buoys) to produce the best estimate of the current atmospheric state. Mathematically this is a constrained least-squares problem (4D-Var assimilation), minimising the weighted sum of forecast error and observation departure over a time window.
+
+**Chaos and ensemble forecasting**: the atmosphere is a chaotic dynamical system. [Poincaré](/mathematicians/poincare) identified sensitivity to initial conditions in the three-body problem; for the atmosphere, Edward Lorenz quantified it in 1963. Small errors in the initial state grow exponentially, making deterministic forecasts unreliable beyond roughly ten days. The operational response is **ensemble forecasting**: run fifty slightly perturbed versions of the model, and treat the spread of forecasts as a probabilistic distribution of outcomes.
+
+## A concrete example
+
+A 48-hour forecast from ECMWF has roughly the same skill today as a 24-hour forecast had in the 1980s — a doubling of forecast horizon every decade. The ensemble system generates 51 forecasts (one control plus 50 perturbed members) at slightly lower resolution, allowing meteorologists to issue probabilistic warnings: "70% chance of gale-force winds over the English Channel on Thursday."
+
+## History of the application
+
+Lewis Fry Richardson published *Weather Prediction by Numerical Process* in 1922, outlining the mathematical framework for numerical forecasting and estimating the human labour required. The first electronic numerical forecast was run in 1950 by Charney, Fjörtoft, and von Neumann on ENIAC, demonstrating the approach was computationally feasible. ECMWF was founded in 1975 and has been the world leader in forecast quality ever since.
+
+## Links
+
+The fluid dynamics underlying atmospheric models is covered in [Mathematical Physics and Fluid Dynamics](/04-advanced-topics-year-four/04-mathematical-physics-and-fluids). PDE methods are in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). The chaos and probabilistic forecast aspects connect to [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). For longer timescales see [Climate Modelling](/applications/climate-modelling).

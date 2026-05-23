@@ -1,0 +1,36 @@
+{
+  "topic_slug": "03-advanced-pdes",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "A weak solution of $-\\Delta u = f$ on $\\Omega$ with $u=0$ on $\\partial\\Omega$ is a function $u \\in H^1_0(\\Omega)$ satisfying:",
+      "options": [
+        {"id": "a", "text": "$\\int_\\Omega \\nabla u \\cdot \\nabla v\\, dx = \\int_\\Omega fv\\, dx$ for all $v \\in H^1_0(\\Omega)$.", "correct": true, "explanation": "This is the weak formulation, derived by multiplying the PDE by a test function and integrating by parts. The boundary term vanishes because $v=0$ on $\\partial\\Omega$."},
+        {"id": "b", "text": "$-\\Delta u(x) = f(x)$ for all $x \\in \\Omega$.", "correct": false, "explanation": "That is the classical (pointwise) formulation, which requires $u$ to have classical second derivatives. The weak formulation is more general."},
+        {"id": "c", "text": "$u$ minimises $\\int_\\Omega |\\nabla u|^2\\, dx$ over all functions.", "correct": false, "explanation": "Minimising $\\int |\\nabla u|^2$ with no constraint gives $u = 0$. With the constraint $u = $ prescribed boundary data or a right-hand side, you get the Dirichlet principle. The weak formulation is the Euler-Lagrange condition of the variational problem with right-hand side."},
+        {"id": "d", "text": "$u$ is continuous and satisfies the PDE except at finitely many points.", "correct": false, "explanation": "Weak solutions are $L^2$ functions; they need not be continuous. The weak formulation defines solutions entirely through the integral identity."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The Lax-Milgram theorem guarantees a unique weak solution provided the bilinear form $a(\\cdot,\\cdot)$ is:",
+      "options": [
+        {"id": "a", "text": "Bounded and coercive (elliptic).", "correct": true, "explanation": "Bounded means $|a(u,v)| \\le M\\|u\\|\\|v\\|$; coercive means $a(u,u) \\ge \\alpha\\|u\\|^2$ for some $\\alpha > 0$. Both are needed for Lax-Milgram."},
+        {"id": "b", "text": "Symmetric and positive definite.", "correct": false, "explanation": "Symmetry is not required by Lax-Milgram (unlike the Riesz representation theorem). Coercivity replaces the positive-definiteness requirement."},
+        {"id": "c", "text": "Continuous as a function of $x$.", "correct": false, "explanation": "Lax-Milgram applies to abstract Hilbert spaces. Continuity as a function of $x$ is not the relevant condition."},
+        {"id": "d", "text": "Invertible as a matrix.", "correct": false, "explanation": "Lax-Milgram is an infinite-dimensional theorem. There is no matrix, and invertibility is what Lax-Milgram proves, not assumes."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Elliptic regularity says: if $-\\Delta u = f$ weakly and $f \\in H^k(\\Omega)$, then:",
+      "options": [
+        {"id": "a", "text": "$u \\in H^{k+2}(\\Omega)$ — the solution is two derivatives more regular than the data.", "correct": true, "explanation": "Elliptic equations 'gain' two derivatives. This is a hallmark of elliptic (as opposed to hyperbolic) PDEs. If $f \\in C^\\infty$, repeated application gives $u \\in C^\\infty$ by Sobolev embedding."},
+        {"id": "b", "text": "$u$ has the same regularity as $f$.", "correct": false, "explanation": "Elliptic equations improve regularity. Hyperbolic equations (wave equation) tend to preserve regularity without improving it."},
+        {"id": "c", "text": "$u \\in H^{k-2}(\\Omega)$ — differentiation loses regularity.", "correct": false, "explanation": "Differentiation loses regularity, but solving an elliptic equation gains it. The operator $-\\Delta$ has a bounded inverse (in appropriate spaces) that maps $H^k$ to $H^{k+2}$."},
+        {"id": "d", "text": "$u$ is smooth if and only if $f$ is analytic.", "correct": false, "explanation": "If $f \\in C^\\infty$, then $u \\in C^\\infty$ by elliptic regularity. Analyticity is a stronger condition and is not required."}
+      ]
+    }
+  ]
+}

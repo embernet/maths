@@ -1,0 +1,46 @@
+---
+title: Binomial theorem
+section: Theorems
+section_slug: 93-theorems
+slug: binomial-theorem
+attributed_to: [newton]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [pascal-s-triangle, fundamental-theorem-of-algebra, calculus-fluxions]
+applications: [option-pricing-finance, machine-learning-bayesian-inference, error-correcting-codes]
+tags: [algebra, combinatorics, Newton, polynomials]
+year_introduced: 1665 (Newton's generalisation)
+summary: The expansion of (x + y)^n — and Newton's generalisation to non-integer and negative powers — giving infinite series for functions like √(1+x) and 1/(1-x).
+---
+
+
+
+## What it says
+
+**Binomial theorem** (integer $n \geq 0$):
+
+$$(x + y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k$$
+
+where $\binom{n}{k} = \frac{n!}{k!(n-k)!}$ is the binomial coefficient.
+
+**Newton's generalisation** (arbitrary real or complex $\alpha$):
+
+$$(1 + x)^\alpha = \sum_{k=0}^\infty \binom{\alpha}{k} x^k = 1 + \alpha x + \frac{\alpha(\alpha-1)}{2!}x^2 + \cdots$$
+
+where $\binom{\alpha}{k} = \frac{\alpha(\alpha-1)\cdots(\alpha-k+1)}{k!}$. This converges for $|x| < 1$.
+
+## History
+
+The binomial theorem for integer powers appears in early algebra texts and can be extracted from [Pascal's triangle](/theorems/pascal-s-triangle). [Newton](/mathematicians/newton) discovered the generalisation to fractional and negative powers around 1665, using it to derive series expansions for $\sqrt{1+x}$, $(1+x)^{-1}$, and more — unlocking a practical method for computation that he used throughout his calculus work.
+
+## Why it matters
+
+Newton's generalised binomial theorem gave the first systematic method for expanding non-polynomial functions as infinite power series. It is a special case of the Taylor series and provided the computational backbone of early calculus. The combinatorial binomial coefficients also appear in probability theory (the binomial distribution), Pascal's triangle, and combinatorics throughout.
+
+## Real-world applications
+
+[Option pricing](/applications/option-pricing-finance) uses the binomial tree model, built on binomial coefficients. [Bayesian machine learning](/applications/machine-learning-bayesian-inference) uses the binomial distribution. [Error-correcting codes](/applications/error-correcting-codes) use binomial coefficient counting.
+
+## Where you'll meet it
+
+The binomial theorem is introduced in Year 1 algebra. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

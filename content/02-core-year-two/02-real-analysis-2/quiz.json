@@ -1,0 +1,46 @@
+{
+  "topic_slug": "02-real-analysis-2",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Which of the following is a metric on $\\mathbb{R}^2$?",
+      "options": [
+        {"id": "a", "text": "$d(x,y) = \\max(|x_1 - y_1|, |x_2 - y_2|)$ (the $\\ell^\\infty$ or Chebyshev metric).", "correct": true, "explanation": "This satisfies all three metric axioms. The triangle inequality holds because $\\max(|x_i - z_i|) \\le \\max(|x_i - y_i|) + \\max(|y_i - z_i|)$."},
+        {"id": "b", "text": "$d(x,y) = (x_1 - y_1)^2 + (x_2 - y_2)^2$.", "correct": false, "explanation": "This is the square of the Euclidean distance. It fails the triangle inequality: take $x=(0,0)$, $y=(1,0)$, $z=(2,0)$. Then $d(x,z)=4$, $d(x,y)+d(y,z)=1+1=2 < 4$."},
+        {"id": "c", "text": "$d(x,y) = |x_1 - y_1| - |x_2 - y_2|$.", "correct": false, "explanation": "This is not always non-negative: take $x=(0,0)$, $y=(1,2)$. Then $d(x,y) = 1 - 2 = -1 < 0$. Metrics must be non-negative."},
+        {"id": "d", "text": "$d(x,y) = \\sqrt{|x_1 - y_1|} + \\sqrt{|x_2 - y_2|}$... but only on $\\{(x,y): x_1 \\ne y_1\\}$.", "correct": false, "explanation": "A metric must be defined on all pairs of points in the space, including $x = y$, where any metric must give 0."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The sequence of functions $f_n(x) = x^n$ on $[0, 1]$ converges pointwise to $f(x) = 0$ for $x \\in [0,1)$ and $f(1) = 1$. Is this convergence uniform?",
+      "options": [
+        {"id": "a", "text": "No — the limit function is not continuous, so the convergence cannot be uniform.", "correct": true, "explanation": "Uniform convergence preserves continuity. Since each $f_n$ is continuous but the limit $f$ is discontinuous at $x=1$, the convergence cannot be uniform on $[0,1]$."},
+        {"id": "b", "text": "Yes — for any $\\varepsilon > 0$, we can find $N$ such that $|x^n - f(x)| < \\varepsilon$ for all $n > N$ and all $x$.", "correct": false, "explanation": "We cannot: for any fixed $n$, $x^n$ is close to 1 for $x$ near 1. For $\\varepsilon = 1/2$: no single $N$ works, because $x^n \\to 1$ as $x \\to 1^-$ for fixed $n$."},
+        {"id": "c", "text": "Yes, but only on $[0, \\frac{1}{2}]$.", "correct": false, "explanation": "The convergence IS uniform on $[0, r]$ for any fixed $r < 1$, but the question asks about $[0,1]$."},
+        {"id": "d", "text": "The question is ill-posed because the limit is not a function.", "correct": false, "explanation": "The limit is a well-defined function on $[0,1]$: $f(x) = 0$ for $x < 1$ and $f(1) = 1$. It is just not continuous."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The Heine-Borel theorem (in $\\mathbb{R}^n$) states that a set is compact if and only if it is:",
+      "options": [
+        {"id": "a", "text": "Closed and bounded.", "correct": true, "explanation": "In $\\mathbb{R}^n$, compactness is equivalent to being closed (contains all its limit points) and bounded (fits inside some ball). This fails in infinite-dimensional spaces."},
+        {"id": "b", "text": "Open and bounded.", "correct": false, "explanation": "Open sets are not compact in general: the open interval $(0,1)$ is bounded but not compact (the cover $(1/n, 1)$ has no finite subcover)."},
+        {"id": "c", "text": "Connected and bounded.", "correct": false, "explanation": "Connected and bounded does not imply compactness: $(0,1)$ is connected and bounded but not compact."},
+        {"id": "d", "text": "Complete and totally bounded.", "correct": false, "explanation": "This is the characterisation of compactness in general metric spaces, but Heine-Borel specifically refers to the simpler characterisation in $\\mathbb{R}^n$."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "A bounded function $f: [a,b] \\to \\mathbb{R}$ is Riemann integrable if and only if:",
+      "options": [
+        {"id": "a", "text": "The infimum of upper sums equals the supremum of lower sums over all partitions.", "correct": true, "explanation": "This is Riemann's criterion. The common value, when it exists, is the integral. Equivalently: for every $\\varepsilon > 0$ there exists a partition $P$ with $U(f,P) - L(f,P) < \\varepsilon$."},
+        {"id": "b", "text": "$f$ is continuous on $[a,b]$.", "correct": false, "explanation": "Continuity is sufficient but not necessary. Monotone functions and functions with finitely many discontinuities are also Riemann integrable."},
+        {"id": "c", "text": "$f$ has a primitive (antiderivative) on $[a,b]$.", "correct": false, "explanation": "Having an antiderivative is not equivalent to Riemann integrability. A function can have an antiderivative but fail to be Riemann integrable (though Lebesgue integrability is then guaranteed)."},
+        {"id": "d", "text": "$f$ is bounded and has at most countably many discontinuities.", "correct": false, "explanation": "This is a sufficient condition (Lebesgue's criterion for Riemann integrability: $f$ is integrable iff its set of discontinuities has measure zero) but is a stronger statement than the definition."}
+      ]
+    }
+  ]
+}

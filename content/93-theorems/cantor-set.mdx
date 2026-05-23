@@ -1,0 +1,45 @@
+---
+title: Cantor set
+section: Theorems
+section_slug: 93-theorems
+slug: cantor-set
+attributed_to: [cantor]
+era: 08-foundations-and-the-twentieth-century-crisis
+appears_in: []
+related_theorems: [cardinality-of-infinite-sets, set-theory, bolzanoweierstrass-theorem]
+applications: [signal-processing-jpeg-mp3]
+tags: [set-theory, fractals, topology, measure-theory]
+year_introduced: '1883'
+summary: A subset of [0,1] with measure zero but uncountably many points, constructed by repeatedly removing middle thirds — the first and most famous fractal.
+---
+
+
+
+## What it says
+
+The Cantor set $C$ is constructed from $[0, 1]$ by:
+1. Remove the open middle third: $(\frac{1}{3}, \frac{2}{3})$
+2. Remove the middle thirds of the two remaining intervals: $(\frac{1}{9}, \frac{2}{9})$ and $(\frac{7}{9}, \frac{8}{9})$
+3. Repeat indefinitely.
+
+The Cantor set is what remains. Its properties are striking:
+- **Measure zero**: the total length removed is $\frac{1}{3} + \frac{2}{9} + \frac{4}{27} + \cdots = 1$, so $C$ has Lebesgue measure 0
+- **Uncountable**: $C$ has the same cardinality as $[0,1]$ (via ternary expansions)
+- **Perfect**: every point is a limit of other points in $C$; no isolated points
+- **Nowhere dense**: $C$ contains no open interval
+
+## History
+
+[Cantor](/mathematicians/cantor) described the set in 1883 as an example of a perfect nowhere-dense set. It was not originally conceived as a fractal — that perspective came later, especially after Benoit Mandelbrot popularised fractal geometry in the 1970s. The Cantor set appears naturally in the theory of dynamical systems and as the limit set of iterated function systems.
+
+## Why it matters
+
+The Cantor set is a counterexample zoo: it shows that "measure zero" and "uncountable" are independent properties; that a set can be dense-in-itself without containing any open interval; and that the intuitive picture of the real line can break down in subtle ways. It is the prototype for fractal sets and for the strange attractors of chaotic dynamical systems.
+
+## Real-world applications
+
+Fractal geometry, to which the Cantor set is foundational, has applications in [signal processing](/applications/signal-processing-jpeg-mp3) (fractal compression) and antenna design.
+
+## Where you'll meet it
+
+The Cantor set appears in Year 2 real analysis and Year 4 set theory. See the [Foundations and Twentieth-Century Crisis era](/history/08-foundations-and-the-twentieth-century-crisis).

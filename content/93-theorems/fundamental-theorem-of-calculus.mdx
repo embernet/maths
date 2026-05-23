@@ -1,0 +1,49 @@
+---
+title: The Fundamental Theorem of Calculus
+section: Theorems
+section_slug: 93-theorems
+slug: fundamental-theorem-of-calculus
+attributed_to: [newton, leibniz, bernoulli-family]
+era: 05-the-calculus-revolution
+appears_in: [01-foundations-year-one/03-calculus-and-methods, 02-core-year-two/02-real-analysis-2]
+related_theorems: [calculus-fluxions, calculus-dy-dx-notation-symbol, mean-value-theorem, riemann-integral]
+applications: [climate-modelling, signal-processing-jpeg-mp3, option-pricing-finance]
+tags: [calculus, analysis, foundations]
+year_introduced: Late 17th century; rigorous form by Cauchy and Riemann in the 19th century
+summary: Differentiation and integration are inverses — the surprise insight that turned calculus from a bag of tricks into a unified theory.
+---
+
+
+There are two halves, and once you see them together you understand why calculus is a single subject rather than two.
+
+**The first fundamental theorem.** If $f$ is continuous on $[a,b]$, then the area function
+
+$$
+F(x) = \int_a^x f(t)\,dt
+$$
+
+is differentiable, and $F'(x) = f(x)$.
+
+**The second fundamental theorem.** If $F$ is any antiderivative of $f$ on $[a,b]$ (any function with $F' = f$), then
+
+$$
+\int_a^b f(x)\,dx = F(b) - F(a).
+$$
+
+Together they say: differentiation undoes integration, and integration undoes differentiation. The two operations — slope of a curve, area under a curve — are opposite sides of the same coin.
+
+## History
+
+Glimpses of the theorem appear in seventeenth-century work by Isaac Barrow (Newton's teacher) and James Gregory, but the unified statement and its power were the great achievement of [Isaac Newton](/mathematicians/newton) and [Gottfried Leibniz](/mathematicians/leibniz) in the 1660s–1680s — discovered independently and in different notations. The bitter priority dispute that followed split European mathematics for a century. The rigorous proof, with continuous functions and a precise notion of integral, came much later — Augustin-Louis Cauchy gave the modern argument in 1823, and Bernhard Riemann's definition of the integral (1854) made the whole theorem fully precise.
+
+## Why it matters
+
+The FTC turns area calculation — historically a brutally hard problem requiring inscribed polygons and limit arguments — into a routine of antidifferentiation. It lets you exchange a hard integral for a search for an antiderivative, which is often easy. It underlies every change-of-variable, every integration by parts, and every numerical scheme that breaks an integral into local slopes.
+
+## Real-world applications
+
+Every domain that adds up a continuous quantity uses the FTC implicitly. [Climate models](/applications/climate-modelling) integrate fluxes over time and space; the [discrete cosine transform](/applications/signal-processing-jpeg-mp3) inside JPEG and MP3 is integration's continuous cousin made discrete; [Black–Scholes option pricing](/applications/option-pricing-finance) hinges on an integral representation of expected payoff.
+
+## Where you'll meet it
+
+It is the climax of your first calculus course and the foundation of your second-year analysis course, where Riemann's rigorous proof is at last available to you.

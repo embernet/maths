@@ -1,0 +1,46 @@
+---
+title: Cantor's diagonal argument
+section: Theorems
+section_slug: 93-theorems
+slug: cantor-s-diagonal-argument
+attributed_to: [cantor]
+era: 08-foundations-and-the-twentieth-century-crisis
+appears_in: []
+related_theorems: [cardinality-of-infinite-sets, set-theory, transfinite-numbers, incompleteness-theorems-1931, halting-problem-undecidability]
+applications: [quantum-computing-algorithms]
+tags: [set-theory, infinity, logic, cardinality]
+year_introduced: '1891'
+summary: A proof by construction that the real numbers are uncountably infinite — more numerous than the natural numbers — using a diagonal method that became a template for mathematical logic.
+---
+
+
+
+## What it says
+
+Suppose you could list all real numbers between 0 and 1 as an infinite sequence $r_1, r_2, r_3, \ldots$. Write each in decimal:
+
+$$r_1 = 0.d_{11}d_{12}d_{13}\ldots$$
+$$r_2 = 0.d_{21}d_{22}d_{23}\ldots$$
+$$r_3 = 0.d_{31}d_{32}d_{33}\ldots$$
+
+Now construct a number $d = 0.d_1 d_2 d_3 \ldots$ by choosing each digit $d_n$ to differ from $d_{nn}$ (the diagonal digit of $r_n$). Then $d$ differs from every $r_n$ in the list — in the $n$th decimal place. So $d$ is a real number not in the list. Contradiction: no such list can be complete.
+
+Therefore $\mathbb{R}$ is **uncountable**: no bijection from $\mathbb{N}$ to $\mathbb{R}$ exists.
+
+## History
+
+[Cantor](/mathematicians/cantor) published the diagonal argument in 1891, though he had proved the uncountability of $\mathbb{R}$ by a different method in 1874. The diagonal version is cleaner, more general, and has proved extraordinarily reusable: [Gödel](/mathematicians/godel) used a similar self-referential construction in his incompleteness theorems, and [Turing](/mathematicians/turing) used it to prove the undecidability of the halting problem.
+
+## Why it matters
+
+The diagonal argument is one of the great proof techniques in mathematics. It shows that infinity comes in different sizes — a shocking idea in 1891 — and establishes that there are strictly more real numbers than integers, even though both sets are infinite. This opened the entire theory of cardinality and transfinite numbers.
+
+The reusability of the diagonal method makes it a template: whenever you need to show that a proposed enumeration must miss something, look for a diagonal construction.
+
+## Real-world applications
+
+The undecidability results that the diagonal argument spawned — via Gödel and Turing — set fundamental limits on what any computer can compute. [Quantum computing](/applications/quantum-computing-algorithms) must work within these limits.
+
+## Where you'll meet it
+
+Cantor's diagonal argument appears in Year 1 logic and proof, and is revisited in Year 4 set theory. See the [Foundations and Twentieth-Century Crisis era](/history/08-foundations-and-the-twentieth-century-crisis).

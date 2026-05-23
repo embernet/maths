@@ -1,0 +1,42 @@
+---
+title: Radar and Sonar
+section: Real-world applications
+section_slug: 94-applications
+slug: radar-and-sonar
+domains: [engineering, physics, defence]
+uses_theorems: [fourier-transform, fourier-series, gaussian-distribution-normal-distribution]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/05-numerical-analysis]
+related_applications: [gravitational-wave-detection, signal-processing-jpeg-mp3, medical-imaging-mri-ct]
+tags: [signal-processing, Fourier, detection, applied]
+real_world_examples: [Air traffic control radar, Weather radar, Submarine sonar, Speed cameras, Ground-penetrating radar]
+summary: Radar and sonar detect objects by sending out pulses and listening for echoes — the mathematics of Fourier analysis and matched filtering extracts weak signals from noise.
+---
+
+
+## The application
+
+Radar (Radio Detection And Ranging) and sonar (Sound Navigation And Ranging) both work by transmitting a wave and detecting its reflection from a target. The time delay gives range; the Doppler shift gives velocity. Extracting these quantities from noisy measured signals is a signal-processing problem whose solution uses the Fourier transform, matched filtering, and statistical hypothesis testing.
+
+## The maths behind it
+
+A transmitted pulse $s(t)$ reflects from a target at range $R$ with radial velocity $v$ and returns as $r(t) \propto s(t - 2R/c)\, e^{j2\pi f_d t}$, where $c$ is the wave speed and $f_d = 2v f_0 / c$ is the **Doppler frequency shift**. The received signal also contains thermal noise $n(t)$, modelled as a zero-mean Gaussian random process.
+
+**Matched filtering**: to detect a known signal $s(t)$ in additive Gaussian noise, the **matched filter** maximises the signal-to-noise ratio. Its impulse response is $h(t) = s^*(T - t)$ (the time-reversed complex conjugate of the signal), and the filter output is the cross-correlation of the received signal with $s$:
+
+$$y(t) = \int r(\tau)\, s^*(t - \tau + T)\, d\tau.$$
+
+In the frequency domain this is multiplication: $Y(f) = R(f) \cdot S^*(f) \cdot e^{j2\pi fT}$, where the product is computed via the **fast Fourier transform**. The matched filter output peaks at the correct delay when the signal is present, and the peak value is compared to a threshold to decide detection.
+
+**Doppler processing**: in pulsed radar, the received pulses from a target have a phase that advances by $e^{j2\pi f_d T_r}$ pulse-to-pulse (where $T_r$ is the pulse repetition interval). Taking the DFT across a coherent dwell of $N$ pulses concentrates the target energy at frequency bin $k \approx N f_d T_r$, allowing simultaneous estimation of range and velocity — the **range-Doppler map**.
+
+## A concrete example
+
+A modern air traffic control radar (such as the Raytheon ASR-11) transmits pulses at around 1 GHz, rotating its antenna to scan the full airspace every 4–5 seconds. The digital signal processor performs matched filtering on thousands of range bins simultaneously, using FFT-based processing at hundreds of millions of complex operations per second, to track hundreds of aircraft simultaneously.
+
+## History of the application
+
+Radar was developed independently in Britain, Germany, the United States, and France in the 1930s, with Britain's Chain Home system first deployed operationally in 1937. The mathematical framework — matched filtering, optimal detection — was formalised by Van Vleck and Middleton in the 1940s and by Woodward (1953) who introduced the ambiguity function. Sonar has an earlier history: Paul Langevin used ultrasound to detect submarines in World War I (1917).
+
+## Links
+
+The Fourier transform and frequency-domain methods are developed in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). Statistical detection theory connects to [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). The numerical signal-processing methods are in [Numerical Analysis](/03-specialisation-year-three/05-numerical-analysis). See the related application [Gravitational Wave Detection](/applications/gravitational-wave-detection) for matched filtering at its most extreme.

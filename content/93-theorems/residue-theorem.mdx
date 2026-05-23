@@ -1,0 +1,38 @@
+        ---
+        title: The residue theorem
+        section: Theorems
+        section_slug: 93-theorems
+        slug: residue-theorem
+        attributed_to: [cauchy]
+        era: 06-the-rigour-revolution
+        appears_in: [02-core-year-two/03-complex-analysis, 03-specialisation-year-three/03-measure-and-lebesgue-integration]
+        related_theorems: [cauchys-integral-theorem, complex-analysis-and-cauchy-s-theorem, fourier-transform]
+        applications: [signal-processing-jpeg-mp3, medical-imaging-mri-ct, gravitational-wave-detection]
+        tags: [complex-analysis, contour-integration]
+        year_introduced: "1825"
+        summary: Compute real integrals you cannot otherwise touch by closing a contour in the complex plane and counting residues.
+        ---
+
+        For a meromorphic function $f$ with finitely many poles inside a closed positively-oriented contour $\gamma$:
+
+$$
+\oint_\gamma f(z)\,dz = 2\pi i \sum_k \operatorname{Res}(f, z_k),
+$$
+
+where the residue $\operatorname{Res}(f, z_k)$ is the $-1$ coefficient of the Laurent expansion of $f$ at $z_k$.
+
+## History
+
+[Cauchy](/mathematicians/cauchy) developed the calculus of residues in the 1820s as he was building the rigorous theory of complex integration. The residue theorem packaged everything: Cauchy's integral theorem, Cauchy's integral formula, and the techniques for computing improper real integrals.
+
+## Why it matters
+
+It transforms hard real integrals into algebraic computations of residues. Definite integrals like $\int_{-\infty}^\infty \frac{1}{1+x^4}\, dx$ that resist all elementary techniques fall in seconds. It is also the engine inside the inverse Laplace and Fourier transforms.
+
+## Real-world applications
+
+Inverse transforms in [signal processing](/applications/signal-processing-jpeg-mp3) and the recovery of images from MRI data both reduce to residue calculations.
+
+## Where you'll meet it
+
+A central topic of the second-year complex-analysis course.

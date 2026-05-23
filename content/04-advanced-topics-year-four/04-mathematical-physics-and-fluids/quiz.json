@@ -1,0 +1,36 @@
+{
+  "topic_slug": "04-mathematical-physics-and-fluids",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The incompressibility condition for a fluid is expressed as:",
+      "options": [
+        {"id": "a", "text": "$\\nabla \\cdot \\mathbf{u} = 0$.", "correct": true, "explanation": "Zero divergence of the velocity field means fluid is neither created nor destroyed at any point — an incompressible fluid conserves volume."},
+        {"id": "b", "text": "$\\nabla \\times \\mathbf{u} = 0$.", "correct": false, "explanation": "Zero curl means irrotational flow (no local rotation). This is a different condition, satisfied by potential flows."},
+        {"id": "c", "text": "$\\rho = \\text{const}$.", "correct": false, "explanation": "Constant density implies incompressibility, but they are not the same. For an incompressible fluid, $D\\rho/Dt = 0$; this together with mass conservation gives $\\nabla\\cdot\\mathbf{u}=0$."},
+        {"id": "d", "text": "$\\frac{\\partial p}{\\partial t} = 0$.", "correct": false, "explanation": "Steady pressure is not incompressibility. Incompressibility is a kinematic condition on the velocity field."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "Bernoulli's equation $\\frac{1}{2}\\rho|\\mathbf{u}|^2 + p = \\text{const}$ along a streamline implies:",
+      "options": [
+        {"id": "a", "text": "Where fluid flows faster, pressure is lower.", "correct": true, "explanation": "This is the physical content: kinetic energy and pressure energy trade off along streamlines. It explains the Venturi effect, aircraft wing lift (faster flow over the upper surface gives lower pressure), and many other phenomena."},
+        {"id": "b", "text": "Where fluid flows faster, pressure is higher.", "correct": false, "explanation": "The opposite: Bernoulli says higher speed → lower pressure. Confusion about this sign is a very common error."},
+        {"id": "c", "text": "The total mechanical energy of the fluid increases downstream.", "correct": false, "explanation": "Bernoulli says the sum $\\frac{1}{2}\\rho u^2 + p$ is constant (for steady inviscid flow) — conserved, not increasing."},
+        {"id": "d", "text": "Fluid pressure is zero in a vacuum.", "correct": false, "explanation": "Bernoulli's equation relates changes in pressure to changes in speed; it makes no statement about absolute pressure values."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The Reynolds number $Re = \\rho UL/\\mu$ governs fluid flow because:",
+      "options": [
+        {"id": "a", "text": "It measures the ratio of inertial forces to viscous forces; large $Re$ indicates turbulent flow.", "correct": true, "explanation": "$Re$ compares convective acceleration ($\\rho U^2/L$) to viscous stress ($\\mu U/L^2$). Turbulence occurs when inertia overwhelms viscosity. The transition from laminar to turbulent flow typically occurs around $Re \\approx 2000$-$4000$ for pipe flow."},
+        {"id": "b", "text": "It determines the speed of sound in the fluid.", "correct": false, "explanation": "That is the Mach number $M = U/c_s$ (ratio of flow speed to sound speed). The Mach number governs compressibility effects; the Reynolds number governs viscosity effects."},
+        {"id": "c", "text": "It measures the pressure difference across the flow.", "correct": false, "explanation": "Pressure differences are governed by Bernoulli and the geometry of the flow, not directly by the Reynolds number."},
+        {"id": "d", "text": "It is always less than 1 in physical flows.", "correct": false, "explanation": "Reynolds numbers in engineering flows range from less than 0.001 (blood in capillaries) to $10^8$ or more (large ships). Most interesting flows have $Re \\gg 1$."}
+      ]
+    }
+  ]
+}

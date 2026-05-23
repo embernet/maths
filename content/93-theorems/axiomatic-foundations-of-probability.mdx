@@ -1,0 +1,45 @@
+---
+title: Axiomatic foundations of probability
+section: Theorems
+section_slug: 93-theorems
+slug: axiomatic-foundations-of-probability
+attributed_to: [kolmogorov]
+era: 09-modern-mathematics
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [bayes-theorem, central-limit-theorem, law-of-large-numbers, ergodic-theory]
+applications: [actuarial-science, epidemiological-modelling, option-pricing-finance, machine-learning-bayesian-inference]
+tags: [probability, measure-theory, foundations, Kolmogorov]
+year_introduced: '1933'
+summary: Probability is a measure satisfying three axioms — Kolmogorov's 1933 framework that placed probability theory on rigorous mathematical foundations.
+---
+
+
+## What it says
+
+A **probability space** consists of:
+- A sample space $\Omega$ (the set of all possible outcomes)
+- A $\sigma$-algebra $\mathcal{F}$ of events (subsets of $\Omega$ closed under complement and countable union)
+- A probability measure $P: \mathcal{F} \to [0,1]$
+
+satisfying the **Kolmogorov axioms**:
+1. $P(A) \geq 0$ for all $A \in \mathcal{F}$
+2. $P(\Omega) = 1$
+3. For disjoint events $A_1, A_2, \ldots$: $P\!\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty P(A_i)$
+
+From these three axioms, all of probability theory — conditional probability, independence, expectations, distributions, limit theorems — is derived.
+
+## History
+
+[Kolmogorov](/mathematicians/kolmogorov) published *Grundbegriffe der Wahrscheinlichkeitsrechnung* in 1933, at age 30. Before this, probability was a collection of useful techniques without a rigorous foundation — different mathematicians used different definitions and the subject was not clearly a branch of mathematics. Kolmogorov grounded it in measure theory (which Lebesgue had developed for integration), giving probability a clean axiomatic base. The [strong law of large numbers](/theorems/law-of-large-numbers) and the central limit theorem were immediately expressible and provable with full rigour.
+
+## Why it matters
+
+Kolmogorov's axioms are the reason you can prove things *about* probability rather than merely compute with it. Measure-theoretic probability handles continuous distributions, infinite sequences of events, and limit theorems in a unified framework. It is the prerequisite for stochastic processes, Brownian motion, and the mathematical theory of finance — all of which require careful handling of uncountably many events.
+
+## Real-world applications
+
+[Actuarial science](/applications/actuarial-science), [option pricing](/applications/option-pricing-finance), [epidemiological models](/applications/epidemiological-modelling), and [Bayesian machine learning](/applications/machine-learning-bayesian-inference) all rest on Kolmogorov's framework.
+
+## Where you'll meet it
+
+The Kolmogorov axioms appear in Year 1 probability and are treated rigorously using measure theory in Year 2 or 3. See the [Modern Mathematics era](/history/09-modern-mathematics).

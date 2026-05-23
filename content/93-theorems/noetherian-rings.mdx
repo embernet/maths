@@ -1,0 +1,44 @@
+---
+title: Noetherian rings
+section: Theorems
+section_slug: 93-theorems
+slug: noetherian-rings
+attributed_to: [noether]
+era: 07-the-structural-turn
+appears_in: [02-core-year-two/01-abstract-algebra]
+related_theorems: [modern-abstract-algebra-rings-ideals-modules, ideals-in-ring-theory, invariant-theory, dedekind-domains-algebraic-number-theory]
+applications: [error-correcting-codes]
+tags: [algebra, rings, Noetherian, commutative-algebra]
+year_introduced: '1921'
+summary: A ring in which every ascending chain of ideals stabilises — a finiteness condition that ensures algebraic geometry behaves well and that the Hilbert basis theorem holds.
+---
+
+
+
+## What it says
+
+A ring $R$ is **Noetherian** if it satisfies the **ascending chain condition (ACC) on ideals**: every chain $I_1 \subseteq I_2 \subseteq I_3 \subseteq \cdots$ of ideals eventually stabilises ($I_n = I_{n+1} = \cdots$ for some $n$).
+
+Equivalent conditions:
+- Every ideal is finitely generated
+- Every non-empty family of ideals has a maximal element (Zorn's lemma)
+
+Examples: $\mathbb{Z}$, every field, polynomial rings $k[x_1, \ldots, x_n]$ over a field (Hilbert basis theorem), rings of algebraic integers (Dedekind domains are Noetherian).
+
+**Hilbert basis theorem:** If $R$ is Noetherian, so is $R[x]$.
+
+## History
+
+[Noether](/mathematicians/noether) introduced and studied Noetherian rings in her 1921 paper, naming them after properties she had identified. The term "Noetherian" was coined posthumously to honour her. [Hilbert](/mathematicians/hilbert)'s basis theorem (1888) — that polynomial rings over fields are Noetherian — was one of the key precursors.
+
+## Why it matters
+
+The Noetherian condition is a finiteness condition that makes algebra tractable. In algebraic geometry, algebraic varieties over fields have coordinate rings that are Noetherian; this ensures every variety has finitely many irreducible components, algebraic maps have finite fibres, and algorithms for computing with varieties terminate. Without Noetherianness, many standard results fail.
+
+## Real-world applications
+
+Algebraic geometry over finite fields (used in [error-correcting codes](/applications/error-correcting-codes)) requires Noetherian rings.
+
+## Where you'll meet it
+
+Noetherian rings appear in Year 2 abstract algebra and Year 4 algebraic geometry. See the [Structural Turn era](/history/07-the-structural-turn).

@@ -1,0 +1,44 @@
+---
+title: Epidemiological Modelling
+section: Real-world applications
+section_slug: 94-applications
+slug: epidemiological-modelling
+domains: [public-health, biology, mathematics]
+uses_theorems: [axiomatic-foundations-of-probability, gaussian-distribution-normal-distribution]
+uses_topics: [01-foundations-year-one/03-calculus-and-methods, 03-specialisation-year-three/06-mathematical-biology, 01-foundations-year-one/04-probability-and-statistics]
+related_applications: [population-dynamics-ecology, clinical-trials-design, weather-forecasting]
+tags: [epidemiology, ODEs, public-health, applied]
+real_world_examples: [COVID-19 pandemic modelling, Flu vaccine strain selection, Ebola outbreak containment, Childhood vaccination schedules]
+summary: The SIR model — three coupled ordinary differential equations — captures the essential dynamics of epidemic spread and the mathematics of herd immunity.
+---
+
+
+## The application
+
+During the COVID-19 pandemic, the concept of $R_0$ (the basic reproductive number) became part of everyday language. Whether an epidemic grows or subsides, what fraction of a population needs to be vaccinated to prevent spread, and when interventions should be relaxed — all of these questions are answered by the mathematical theory of epidemic models. The simplest such model, the SIR model, is three coupled ordinary differential equations whose analysis is Year Three mathematical biology.
+
+## The maths behind it
+
+The **SIR model** partitions a population $N$ into **Susceptible** ($S$), **Infected** ($I$), and **Recovered/Removed** ($R$) compartments, with dynamics:
+
+$$\dot{S} = -\beta SI/N, \qquad \dot{I} = \beta SI/N - \gamma I, \qquad \dot{R} = \gamma I.$$
+
+The parameter $\beta$ is the transmission rate and $\gamma$ the recovery rate. The **basic reproductive number** is $R_0 = \beta/\gamma$: the average number of secondary infections caused by one infectious individual in a fully susceptible population.
+
+The epidemic threshold: $\dot{I} > 0$ (epidemic grows) if and only if $S(t) > N/R_0$. Once $S$ falls below this threshold, the epidemic declines. The **herd immunity threshold** is the proportion $1 - 1/R_0$ that must be immune (via vaccination or prior infection) to reduce the effective $R$ below 1.
+
+The **final size equation** gives the total fraction $z$ ultimately infected as the solution of $1 - z = e^{-R_0 z}$ — an implicit transcendental equation whose analysis reveals that even a severe epidemic ($R_0 = 4$) does not infect everyone (about 98% in this case, but typically far less).
+
+**Stochastic extensions** model small populations (relevant at the onset or near extinction), using branching processes and continuous-time Markov chains. **Network models** replace the mean-field assumption (homogeneous mixing) with explicit contact graphs, coupling the epidemic dynamics with the graph-colouring and spectral theory of [discrete mathematics](/02-core-year-two/06-programming-and-discrete-mathematics).
+
+## A concrete example
+
+During the COVID-19 pandemic, the SIR model and its SEIR extension (adding an **Exposed** compartment for the incubation period) were used by virtually every national health authority to project hospital admissions. More sophisticated compartmental models — age-structured, with explicit vaccination rollout schedules — guided decisions about school closures, vaccine prioritisation, and booster campaigns. The UK's SPI-M committee published weekly ensemble projections using multiple model types.
+
+## History of the application
+
+The mathematical theory of epidemic dynamics was pioneered by William Ogilvy Kermack and A. G. McKendrick in a landmark 1927 paper that introduced the SIR equations and derived the threshold theorem. Ronald Ross had earlier modelled malaria transmission using ODEs (1911, Nobel 1902). The modern computational era — with individual-based models, network simulations, and Bayesian inference for $R_t$ estimation — was triggered by the 2001 UK foot-and-mouth epidemic and reached maturity with COVID-19.
+
+## Links
+
+The ODE theory for the SIR model is developed in [Calculus and Methods](/01-foundations-year-one/03-calculus-and-methods) and the biological application in [Mathematical Biology](/03-specialisation-year-three/06-mathematical-biology). The stochastic aspects connect to [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics) and [Stochastic Processes](/03-specialisation-year-three/07-stochastic-processes). See also [Population Dynamics and Ecology](/applications/population-dynamics-ecology) and [Clinical Trials Design](/applications/clinical-trials-design).

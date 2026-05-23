@@ -1,0 +1,327 @@
+---
+/**
+ * /theorems/[slug] — individual theorem page.
+ * Generates one route per .mdx file in content/93-theorems/ plus stubs from _slug-map.json.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const theoremDir = join(process.cwd(), 'content/93-theorems');
+const slugMapPath = join(process.cwd(), 'content/93-theorems/_slug-map.json');
+
+let slugMap: Record<string, { title: string; attributed_to?: string[] }> = {};
+if (existsSync(slugMapPath)) {
+  try { slugMap = JSON.parse(readFileSync(slugMapPath, 'utf8')); } catch { /* ignore */ }
+}
+
+export async function getStaticPaths() {
+  const tDir = join(process.cwd(), 'content/93-theorems');
+  const smPath = join(process.cwd(), 'content/93-theorems/_slug-map.json');
+  const slugs = new Set<string>();
+
+  if (existsSync(tDir)) {
+    for (const file of readdirSync(tDir)) {
+      if (extname(file) !== '.mdx') continue;
+      const s = basename(file, '.mdx');
+      if (s !== 'index') slugs.add(s);
+    }
+  }
+
+  // Also include slug-map entries (stubs)
+  if (existsSync(smPath)) {
+    try {
+      const map = JSON.parse(readFileSync(smPath, 'utf8'));
+      for (const s of Object.keys(map)) slugs.add(s);
+    } catch { /* ignore */ }
+  }
+
+  return Array.from(slugs).map(slug => ({ params: { slug } }));
+}
+
+function parseFrontmatter(fp: string): Record<string, unknown> {
+  let text = '';
+  try { text = readFileSync(fp, 'utf8'); } catch { return {}; }
+  if (!text.startsWith('---')) return {};
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+// Helper: get title for a theorem slug from MDX or slug-map
+function getTheoremTitle(slug: string): string {
+  const mdxPath = join(theoremDir, `${slug}.mdx`);
+  if (existsSync(mdxPath)) {
+    const fm = parseFrontmatter(mdxPath);
+    if (fm.title) return fm.title as string;
+  }
+  return slugMap[slug]?.title ?? slug.replace(/-/g, ' ');
+}
+
+// Helper: get mathematician display name
+function mathName(slug: string): string {
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+const { slug } = Astro.params;
+const filePath = join(theoremDir, `${slug}.mdx`);
+const hasMDX = existsSync(filePath);
+
+const fm = hasMDX ? parseFrontmatter(filePath) : {};
+const mapEntry = slugMap[slug!] ?? null;
+
+const title = (fm.title as string) ?? mapEntry?.title ?? slug!.replace(/-/g, ' ');
+const summary = fm.summary as string | undefined;
+const yearIntroduced = fm.year_introduced as string | undefined;
+const era = fm.era as string | undefined;
+const attributedTo = (fm.attributed_to as string[]) ?? mapEntry?.attributed_to ?? [];
+const appearsIn = (fm.appears_in as string[]) ?? [];
+const relatedTheorems = (fm.related_theorems as string[]) ?? [];
+const applications = (fm.applications as string[]) ?? [];
+const tags = (fm.tags as string[]) ?? [];
+
+// Era labels
+const eraLabels: Record<string, string> = {
+  '01-ancient-origins': 'Ancient Origins',
+  '02-classical-greece': 'Classical Greece',
+  '03-islamic-golden-age': 'Islamic Golden Age',
+  '04-renaissance-and-symbolic-algebra': 'Renaissance & Symbolic Algebra',
+  '05-the-calculus-revolution': 'The Calculus Revolution',
+  '06-the-rigour-revolution': 'The Rigour Revolution',
+  '07-the-structural-turn': 'The Structural Turn',
+  '08-foundations-and-the-twentieth-century-crisis': 'Foundations & the Twentieth-Century Crisis',
+  '09-modern-mathematics': 'Modern Mathematics',
+};
+
+// Glob import for MDX content
+const theoremPages = await import.meta.glob('/content/93-theorems/*.mdx');
+const matchKey = `/content/93-theorems/${slug}.mdx`;
+let Content: unknown = null;
+if (theoremPages[matchKey]) {
+  const mod = await theoremPages[matchKey]() as { default: unknown };
+  Content = mod.default;
+}
+
+// Parse topic path e.g. "01-foundations-year-one/04-probability-and-statistics"
+function topicDisplayName(topicPath: string): string {
+  const parts = topicPath.split('/');
+  const topic = parts[parts.length - 1] ?? topicPath;
+  return topic.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function topicUrl(topicPath: string): string {
+  const parts = topicPath.split('/');
+  if (parts.length === 2) return `/${parts[0]}/${parts[1]}`;
+  return `/${topicPath}`;
+}
+---
+
+<BaseLayout title={title} description={summary ?? `Theorem page for ${title}`}>
+  <div class="prose-content theorem-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <a href="/theorems">Theorems</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <header class="theorem-header">
+      <h1>{title}</h1>
+      <div class="theorem-meta">
+        {yearIntroduced && (
+          <span class="meta-chip year-chip">{yearIntroduced}</span>
+        )}
+        {era && eraLabels[era] && (
+          <a href={`/90-history/${era}`} class="meta-chip era-chip">{eraLabels[era]}</a>
+        )}
+        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+      </div>
+    </header>
+
+    {summary && <p class="theorem-summary-callout">{summary}</p>}
+
+    {Content ? (
+      <div class="theorem-body">
+        <Content />
+      </div>
+    ) : (
+      <div class="stub-notice">
+        <p>A full page for this result is being prepared. The information below is drawn from the theorem index.</p>
+      </div>
+    )}
+
+    <div class="theorem-backlinks">
+      {attributedTo.length > 0 && (
+        <section class="backlinks-section" aria-label="Attributed to">
+          <h2>Attributed to</h2>
+          <ul class="backlink-list">
+            {attributedTo.map((mathSlug) => (
+              <li>
+                <a href={`/mathematicians/${mathSlug}`} class="backlink-item">
+                  {mathName(mathSlug)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {appearsIn.length > 0 && (
+        <section class="backlinks-section" aria-label="Where it appears">
+          <h2>Where it appears</h2>
+          <ul class="backlink-list">
+            {appearsIn.map((topicPath) => (
+              <li>
+                <a href={topicUrl(topicPath)} class="backlink-item">
+                  {topicDisplayName(topicPath)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {applications.length > 0 && (
+        <section class="backlinks-section" aria-label="Real-world applications">
+          <h2>Real-world applications</h2>
+          <ul class="backlink-list">
+            {applications.map((appSlug) => (
+              <li>
+                <a href={`/applications/${appSlug}`} class="backlink-item">
+                  {appSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {relatedTheorems.length > 0 && (
+        <section class="backlinks-section" aria-label="Related theorems">
+          <h2>Related theorems</h2>
+          <ul class="backlink-list">
+            {relatedTheorems.map((tSlug) => (
+              <li>
+                <a href={`/theorems/${tSlug}`} class="backlink-item">
+                  {getTheoremTitle(tSlug)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .theorem-page { padding: 1.5rem 1rem 4rem; }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .theorem-header { margin-bottom: 1rem; }
+
+  .theorem-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .meta-chip {
+    display: inline-block;
+    padding: 0.15rem 0.65rem;
+    border-radius: 1rem;
+    font-size: 0.78rem;
+    font-style: normal;
+  }
+  .year-chip {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+  }
+  .era-chip {
+    background: var(--color-primary);
+    color: #fff;
+    text-decoration: none;
+  }
+  .era-chip:hover { background: var(--color-accent); }
+
+  .theorem-summary-callout {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    padding: 0.75rem 1.1rem;
+    border-radius: 0 0.4rem 0.4rem 0;
+    font-style: italic;
+    color: #3a3a3a;
+    margin: 1rem 0 1.5rem;
+    max-width: 72ch;
+  }
+
+  .theorem-body { margin-top: 1rem; }
+
+  .stub-notice {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    padding: 1rem 1.25rem;
+    color: var(--color-muted);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+
+  .theorem-backlinks {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem 2rem;
+  }
+
+  .backlinks-section h2 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.6rem;
+  }
+
+  .backlink-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .backlink-item {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.15rem 0;
+  }
+  .backlink-item:hover { color: var(--color-accent); text-decoration: underline; }
+</style>

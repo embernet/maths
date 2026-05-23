@@ -1,0 +1,18 @@
+---
+title: 'Bayesian anomaly detection'
+section: Definitions
+section_slug: 95-definitions
+slug: bayesian-anomaly-detection
+tags: [applied]
+first_seen_in: '94-applications/cybersecurity-anomaly-detection.mdx'
+mentioned_in: ['94-applications/cybersecurity-anomaly-detection']
+summary: 'Quick definition of Bayesian anomaly detection from its appearance in the curriculum.'
+---
+
+## Definition
+
+**Bayesian anomaly detection** models both the normal and anomalous classes explicitly: $p(\text{anomaly} \mid \mathbf{x}) \propto p(\mathbf{x} \mid \text{anomaly})\, p(\text{anomaly})$. The prior $p(\text{anomaly})$ is typically very small (rare events), giving the famous false-positive problem: even a very accurate classifier has low precision when positives are rare. This is exactly the screening paradox of [Medical Diagnosis and Screening](/applications/medical-diagnosis-screening).
+
+## Where this appears
+
+This term turns up across the curriculum — see the cross-references panel.

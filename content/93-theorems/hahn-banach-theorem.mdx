@@ -1,0 +1,40 @@
+---
+title: Hahn–Banach theorem
+section: Theorems
+section_slug: 93-theorems
+slug: hahn-banach-theorem
+attributed_to: [banach]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [banach-spaces, banach-fixed-point-theorem, hilbert-spaces, cauchyschwarz-inequality]
+applications: [machine-learning-deep-neural-networks, option-pricing-finance, signal-processing-jpeg-mp3]
+tags: [functional-analysis, linear-spaces, duality, extension]
+year_introduced: 1927 (Hahn); 1929 (Banach)
+summary: A bounded linear functional on a subspace of a normed space can be extended to the whole space without increasing its norm — the fundamental extension theorem of functional analysis.
+---
+
+
+
+## What it says
+
+Let $X$ be a normed vector space, $Y \subseteq X$ a subspace, and $f: Y \to \mathbb{R}$ a bounded linear functional with $|f(y)| \leq M \|y\|$. Then there exists a bounded linear functional $F: X \to \mathbb{R}$ such that $F|_Y = f$ and $\|F\| = \|f\|$.
+
+In other words: you can always extend a continuous linear functional from a subspace to the whole space, preserving its norm.
+
+**Consequences:** Every normed space has enough bounded linear functionals to separate points. The dual space $X^*$ is non-trivial. You can find linear functionals that "support" convex sets — the basis of convex optimisation duality.
+
+## History
+
+Hans Hahn proved the theorem for $\ell^\infty$ in 1927; [Banach](/mathematicians/banach) gave the general version in 1929. The theorem requires the axiom of choice (or Zorn's lemma) in full generality — it is not constructive. Banach developed functional analysis systematically in Lwów from the mid-1920s onwards, with his mathematical circle famously working in the Scottish Café from 1935, recording problems in the *Scottish Book*.
+
+## Why it matters
+
+The Hahn–Banach theorem is one of the three pillars of functional analysis (alongside the open mapping theorem and the uniform boundedness principle). It guarantees the existence of dual objects — bounded linear functionals — that are essential for duality arguments in optimisation, control theory, and partial differential equations. Without it, you cannot even prove that continuous linear functionals on infinite-dimensional spaces exist in abundance.
+
+## Real-world applications
+
+[Machine learning](/applications/machine-learning-deep-neural-networks) and [signal processing](/applications/signal-processing-jpeg-mp3) optimisation problems use duality results that trace back to Hahn–Banach. [Option pricing](/applications/option-pricing-finance) risk-neutral measure existence is a consequence of Hahn–Banach-style separation theorems.
+
+## Where you'll meet it
+
+The Hahn–Banach theorem is a Year 3 or Year 4 functional analysis result. See the [Modern Mathematics era](/history/09-modern-mathematics).

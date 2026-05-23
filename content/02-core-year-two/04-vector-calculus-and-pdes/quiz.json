@@ -1,0 +1,36 @@
+{
+  "topic_slug": "04-vector-calculus-and-pdes",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The heat equation $u_t = ku_{xx}$ with initial data $u(x,0) = f(x)$ and boundary conditions $u(0,t) = u(L,t) = 0$ is solved by separation of variables. The spatial eigenfunctions are:",
+      "options": [
+        {"id": "a", "text": "$X_n(x) = \\sin(n\\pi x / L)$, for $n = 1, 2, 3, \\ldots$", "correct": true, "explanation": "The boundary conditions $X(0)=X(L)=0$ and the eigenvalue equation $X'' + \\lambda X = 0$ give $\\lambda_n = (n\\pi/L)^2$ and $X_n = \\sin(n\\pi x/L)$."},
+        {"id": "b", "text": "$X_n(x) = \\cos(n\\pi x / L)$, for $n = 0, 1, 2, \\ldots$", "correct": false, "explanation": "Cosine solutions $\\cos(n\\pi x/L)$ satisfy the Neumann boundary conditions $X'(0) = X'(L) = 0$, not the Dirichlet conditions $X(0) = X(L) = 0$."},
+        {"id": "c", "text": "$X_n(x) = e^{n\\pi x / L}$", "correct": false, "explanation": "Real exponentials do not satisfy $X(0) = X(L) = 0$ (they are non-zero everywhere). Complex exponentials $e^{in\\pi x/L}$ could work with periodic conditions."},
+        {"id": "d", "text": "$X_n(x) = x(L-x)$", "correct": false, "explanation": "This is a single function, not a family. Separation of variables yields an infinite family of eigenfunctions."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The maximum principle for Laplace's equation says that a harmonic function on a bounded domain:",
+      "options": [
+        {"id": "a", "text": "Attains its maximum and minimum values on the boundary, not in the interior.", "correct": true, "explanation": "A non-constant harmonic function has no interior maxima or minima. This gives uniqueness for the Dirichlet problem: two solutions with the same boundary data are equal."},
+        {"id": "b", "text": "Is always equal to zero on the boundary.", "correct": false, "explanation": "Boundary values can be prescribed arbitrarily in the Dirichlet problem. The maximum principle says where the maximum is attained, not what its value is."},
+        {"id": "c", "text": "Has zero gradient at all boundary points.", "correct": false, "explanation": "This would be the Neumann boundary condition, not a consequence of the maximum principle."},
+        {"id": "d", "text": "Satisfies $u_{xx} + u_{yy} > 0$ at interior maxima.", "correct": false, "explanation": "If $u$ is harmonic, $u_{xx} + u_{yy} = 0$ everywhere — there are no interior maxima to speak of."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "The Fourier cosine coefficient $a_n$ in the series $f(x) = \\frac{a_0}{2} + \\sum_{n=1}^\\infty a_n\\cos(n\\pi x / L)$ on $[0,L]$ is:",
+      "options": [
+        {"id": "a", "text": "$a_n = \\frac{2}{L}\\int_0^L f(x)\\cos\\frac{n\\pi x}{L}\\, dx$.", "correct": true, "explanation": "The orthogonality relation $\\int_0^L \\cos(m\\pi x/L)\\cos(n\\pi x/L)\\, dx = 0$ for $m\\ne n$ and $= L/2$ for $m=n>0$ gives this formula."},
+        {"id": "b", "text": "$a_n = \\int_0^L f(x)\\cos\\frac{n\\pi x}{L}\\, dx$.", "correct": false, "explanation": "Missing the normalisation factor $2/L$. Without it, the coefficient does not correctly recover the amplitude of the $n$th cosine component."},
+        {"id": "c", "text": "$a_n = \\frac{1}{L}\\int_0^L f(x)\\sin\\frac{n\\pi x}{L}\\, dx$.", "correct": false, "explanation": "Sine and cosine — swapped. Cosine coefficients use the cosine kernel; this formula computes sine coefficients."},
+        {"id": "d", "text": "$a_n = \\frac{2}{L}\\int_0^L f(x)\\sin\\frac{n\\pi x}{L}\\, dx$.", "correct": false, "explanation": "The normalisation is right but cosine and sine are swapped. This formula gives $b_n$, not $a_n$."}
+      ]
+    }
+  ]
+}

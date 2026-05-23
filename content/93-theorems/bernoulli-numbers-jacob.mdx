@@ -1,0 +1,42 @@
+---
+title: Bernoulli numbers (Jacob)
+section: Theorems
+section_slug: 93-theorems
+slug: bernoulli-numbers-jacob
+attributed_to: [bernoulli-family]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/01-abstract-algebra]
+related_theorems: [riemann-zeta-function, fourier-series, euler-s-formula-e-i-cos-i-sin]
+applications: []
+tags: [number-theory, series, Bernoulli, special-numbers]
+year_introduced: 1713 (posthumous)
+summary: A sequence of rational numbers appearing in the Taylor series of trigonometric functions, the Euler–Maclaurin formula, and the values of the Riemann zeta function at even positive integers.
+---
+
+
+
+## What it says
+
+The Bernoulli numbers $B_n$ are defined by the generating function:
+
+$$\frac{t}{e^t - 1} = \sum_{n=0}^{\infty} B_n \frac{t^n}{n!}$$
+
+The first few values: $B_0 = 1$, $B_1 = -\frac{1}{2}$, $B_2 = \frac{1}{6}$, $B_4 = -\frac{1}{30}$, and all odd $B_n = 0$ for $n > 1$.
+
+Key appearance: the Euler–Maclaurin formula connecting sums and integrals uses Bernoulli numbers as correction terms. Euler's result $\zeta(2n) = \frac{(2\pi)^{2n}|B_{2n}|}{2(2n)!}$ connects them to the [Riemann zeta function](/theorems/riemann-zeta-function).
+
+## History
+
+Jacob [Bernoulli](/mathematicians/bernoulli-family) discovered these numbers while computing sums of powers of integers in *Ars Conjectandi* (1713). Independently, the Japanese mathematician Seki Takakazu found the same sequence around the same time. Ada Lovelace noted in her famous 1843 notes that Babbage's Analytical Engine could compute Bernoulli numbers — one of the first examples of a computer program.
+
+## Why it matters
+
+Bernoulli numbers appear with remarkable regularity across mathematics: in the Taylor expansion of $\tan x$ and $\cot x$, in the Euler–Maclaurin summation formula (essential for numerical analysis), and in algebraic topology (the Atiyah–Singer index theorem involves them). Their appearance in so many different contexts signals deep connections between analysis and number theory.
+
+## Real-world applications
+
+The Euler–Maclaurin formula, which uses Bernoulli numbers, provides error estimates for numerical integration methods used throughout scientific computing.
+
+## Where you'll meet it
+
+Bernoulli numbers appear in Year 3 number theory and analysis. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

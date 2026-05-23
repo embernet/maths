@@ -1,0 +1,46 @@
+{
+  "topic_slug": "02-real-analysis-foundations",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Which of the following is the correct ε–N definition of $a_n \\to L$ as $n \\to \\infty$?",
+      "options": [
+        {"id": "a", "text": "For every $\\varepsilon > 0$ there exists $N \\in \\mathbb{N}$ such that for all $n > N$, $|a_n - L| < \\varepsilon$.", "correct": true, "explanation": "This is the standard definition. Note the quantifier order: ε is chosen first (by the challenger), then N is produced in response, then the condition holds for all subsequent n."},
+        {"id": "b", "text": "There exists $N \\in \\mathbb{N}$ such that for every $\\varepsilon > 0$ and all $n > N$, $|a_n - L| < \\varepsilon$.", "correct": false, "explanation": "Swapping the quantifiers makes this a much stronger and usually false statement: a single N would have to work for all ε simultaneously, including arbitrarily small ones."},
+        {"id": "c", "text": "$|a_n - L| \\to 0$ as $n \\to \\infty$.", "correct": false, "explanation": "This is circular: it defines a limit using another limit. The ε–N definition is what makes 'tends to zero' itself precise."},
+        {"id": "d", "text": "For all $n$, $|a_n - L| < \\varepsilon$.", "correct": false, "explanation": "Missing the quantifier over ε and the N condition entirely — this would require the sequence to be within ε of L from the very start, for all ε."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The Bolzano-Weierstrass theorem states that:",
+      "options": [
+        {"id": "a", "text": "Every bounded sequence in $\\mathbb{R}$ has a convergent subsequence.", "correct": true, "explanation": "Correct. The theorem uses the completeness of ℝ (specifically the supremum axiom). It fails in ℚ, where a bounded sequence of rationals may converge to an irrational."},
+        {"id": "b", "text": "Every Cauchy sequence in $\\mathbb{R}$ converges.", "correct": false, "explanation": "That is the completeness of ℝ (or the Cauchy completeness theorem) — a related but distinct result."},
+        {"id": "c", "text": "Every monotone bounded sequence converges.", "correct": false, "explanation": "That is the Monotone Convergence Theorem, also a consequence of completeness but a different statement."},
+        {"id": "d", "text": "Every continuous function on a closed interval attains its maximum.", "correct": false, "explanation": "That is the Extreme Value Theorem. Bolzano-Weierstrass is used in its proof, but the statements are different."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "Why does the series $\\sum_{n=1}^\\infty \\frac{1}{n}$ (the harmonic series) diverge, despite $\\frac{1}{n} \\to 0$?",
+      "options": [
+        {"id": "a", "text": "The terms $\\frac{1}{n}$ do not decrease fast enough: grouping gives $\\frac{1}{2} + (\\frac{1}{3}+\\frac{1}{4}) + (\\frac{1}{5}+\\cdots+\\frac{1}{8}) + \\cdots$, each group exceeding $\\frac{1}{2}$.", "correct": true, "explanation": "This is Oresme's classic grouping argument (c.1350), rediscovered many times. Each bracketed group is greater than 1/2, so partial sums grow without bound."},
+        {"id": "b", "text": "Because $\\frac{1}{n}$ is not eventually zero.", "correct": false, "explanation": "No convergent series has terms that are eventually zero (unless all terms are zero). The condition $a_n \\to 0$ is necessary but not sufficient for convergence."},
+        {"id": "c", "text": "Because the ratio test gives limit 1, which implies divergence.", "correct": false, "explanation": "When the ratio test gives limit exactly 1, it is inconclusive — it neither confirms convergence nor divergence. The ratio test fails here."},
+        {"id": "d", "text": "Because it is an alternating series.", "correct": false, "explanation": "The harmonic series $\\sum 1/n$ is not alternating — all terms are positive."}
+      ]
+    },
+    {
+      "id": "q4",
+      "stem": "Which property of $\\mathbb{R}$ distinguishes it from $\\mathbb{Q}$ and makes analysis work?",
+      "options": [
+        {"id": "a", "text": "Completeness: every non-empty set of real numbers that is bounded above has a least upper bound.", "correct": true, "explanation": "The supremum axiom (or completeness axiom) is what makes ℝ 'gapless'. It is not a theorem — it is part of the definition of the real numbers, capturing the intuition that ℝ has no 'holes'."},
+        {"id": "b", "text": "Countability: the real numbers are countably infinite.", "correct": false, "explanation": "The real numbers are uncountably infinite — one of Cantor's great discoveries. The rationals are countably infinite."},
+        {"id": "c", "text": "Archimedean property: for any $x \\in \\mathbb{R}$ there exists $n \\in \\mathbb{N}$ with $n > x$.", "correct": false, "explanation": "The Archimedean property holds for ℝ (and for ℚ), but it does not distinguish ℝ from ℚ — both are Archimedean."},
+        {"id": "d", "text": "Density: between any two real numbers there is another real number.", "correct": false, "explanation": "Density holds in ℚ as well — between any two rationals lies another rational. It does not distinguish ℝ from ℚ."}
+      ]
+    }
+  ]
+}

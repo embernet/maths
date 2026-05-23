@@ -1,0 +1,44 @@
+---
+title: RSA and Public-Key Cryptography
+section: Real-world applications
+section_slug: 94-applications
+slug: rsa-public-key-cryptography
+domains: [computer-science, security, finance]
+uses_theorems: [fermat-s-little-theorem, modular-arithmetic-and-number-theory, euclid-s-algorithm]
+uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/01-abstract-algebra]
+related_applications: [digital-signatures, error-correcting-codes, cryptocurrency-blockchain]
+tags: [cryptography, security, number-theory, applied]
+real_world_examples: [HTTPS / TLS on every website, PGP email encryption, SSH remote login, WhatsApp end-to-end encryption (variant)]
+summary: Every secure website on the internet relies on a piece of seventeenth-century number theory.
+---
+
+
+## The application
+
+When you type a password into a website, something remarkable happens in the milliseconds before it reaches the server: your browser and the server perform a key exchange that ensures only the server can read what you sent, even though anyone could intercept the transmission. This is public-key cryptography, and the mathematics behind the most widely deployed version — RSA — is undergraduate number theory.
+
+## The maths behind it
+
+RSA is built on a single hard problem: given a very large integer $n = pq$ (the product of two large primes), it is computationally infeasible to find $p$ and $q$. Factoring a 2048-bit number would take longer than the age of the universe on current hardware. But working with remainders modulo $n$ is fast.
+
+The key theorem is **Fermat's little theorem**: for any integer $a$ not divisible by a prime $p$,
+
+$$a^{p-1} \equiv 1 \pmod{p}.$$
+
+Euler's generalisation extends this to composite moduli: $a^{\phi(n)} \equiv 1 \pmod{n}$ whenever $\gcd(a, n) = 1$, where $\phi(n) = (p-1)(q-1)$ is **Euler's totient function** — the count of integers less than $n$ coprime to it.
+
+RSA key generation: choose primes $p, q$; compute $n = pq$ and $\phi(n) = (p-1)(q-1)$; pick a public exponent $e$ coprime to $\phi(n)$; compute the private exponent $d$ satisfying $ed \equiv 1 \pmod{\phi(n)}$ using the **extended Euclidean algorithm**. Publish $(e, n)$; keep $d$ secret.
+
+Encryption: $c \equiv m^e \pmod{n}$. Decryption: $m \equiv c^d \pmod{n}$. The correctness follows directly from Euler's theorem: $c^d \equiv m^{ed} \equiv m^{1 + k\phi(n)} \equiv m \pmod{n}$.
+
+## A concrete example
+
+A minimal RSA example: take $p = 61$, $q = 53$, so $n = 3233$ and $\phi(n) = 3120$. Choose $e = 17$; the extended Euclidean algorithm gives $d = 2753$. Encrypting the message $m = 65$: $65^{17} \bmod 3233 = 2790$. Decrypting: $2790^{2753} \bmod 3233 = 65$. In practice, $n$ is 2048 bits (617 decimal digits) and the same arithmetic is performed by optimised libraries using fast modular exponentiation.
+
+## History of the application
+
+RSA was published in 1977 by Ron Rivest, Adi Shamir, and Leonard Adleman at MIT (though Clifford Cocks at GCHQ had independently developed an equivalent system in 1973, classified until 1997). The insight — that a mathematical trapdoor function could replace the need for a pre-shared secret — was genuinely revolutionary. The internet as we know it, with HTTPS securing banking, shopping, and communication, would not exist without it.
+
+## Links
+
+The number theory this rests on is introduced in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra), where modular arithmetic and Euclid's algorithm first appear. Abstract Algebra in Year Two ([Abstract Algebra: Groups, Rings, and Fields](/02-core-year-two/01-abstract-algebra)) makes the group-theoretic structure explicit. See also the related application [Digital Signatures](/applications/digital-signatures), which builds on the same foundations.

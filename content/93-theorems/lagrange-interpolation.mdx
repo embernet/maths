@@ -1,0 +1,42 @@
+---
+title: Lagrange interpolation
+section: Theorems
+section_slug: 93-theorems
+slug: lagrange-interpolation
+attributed_to: [lagrange]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [weierstrass-approximation-theorem, fourier-series, method-of-least-squares]
+applications: [weather-forecasting, climate-modelling, machine-learning-deep-neural-networks, gps-positioning]
+tags: [numerical-methods, interpolation, polynomials, Lagrange]
+year_introduced: '1795'
+summary: The unique polynomial of degree ≤ n passing through n+1 given data points — and a formula to compute it.
+---
+
+
+
+## What it says
+
+Given $n+1$ distinct points $(x_0, y_0), \ldots, (x_n, y_n)$, the **Lagrange interpolating polynomial** is:
+
+$$p(x) = \sum_{j=0}^n y_j \prod_{\substack{k=0 \\ k \neq j}}^n \frac{x - x_k}{x_j - x_k}$$
+
+This is the unique polynomial of degree $\leq n$ satisfying $p(x_j) = y_j$ for all $j$. The basis polynomials $\ell_j(x) = \prod_{k \neq j} \frac{x - x_k}{x_j - x_k}$ satisfy $\ell_j(x_k) = \delta_{jk}$ (1 if $j = k$, 0 otherwise).
+
+**Warning:** Runge's phenomenon — interpolating at equally spaced points leads to large oscillations near the endpoints for high-degree polynomials. Chebyshev points eliminate this.
+
+## History
+
+[Lagrange](/mathematicians/lagrange) published the formula in 1795, though Newton and Gregory had earlier related forms. Lagrange's clean formulation became standard.
+
+## Why it matters
+
+Lagrange interpolation is the foundation of numerical analysis: every quadrature rule (numerical integration), every finite element method, and many ODE solvers use polynomial approximation at their core. Understanding interpolation error — how well a polynomial fits the underlying function between data points — is essential for assessing the accuracy of these methods.
+
+## Real-world applications
+
+[Weather forecasting](/applications/weather-forecasting) interpolates meteorological data from discrete observation stations. [GPS](/applications/gps-positioning) receivers interpolate satellite positions from tabulated ephemeris data. [Machine learning](/applications/machine-learning-deep-neural-networks) kernel methods can be viewed as interpolation in feature spaces.
+
+## Where you'll meet it
+
+Lagrange interpolation appears in Year 2 numerical methods. See the [Calculus Revolution era](/history/05-the-calculus-revolution) and [Weierstrass approximation theorem](/theorems/weierstrass-approximation-theorem) for the theoretical context.

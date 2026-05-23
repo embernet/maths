@@ -1,0 +1,67 @@
+/* ============================================================
+   Print stylesheet — strips chrome, keeps topic body clean
+   ============================================================ */
+@media print {
+  /* Hide navigation and interactive elements */
+  header,
+  nav,
+  .site-header,
+  .sidebar,
+  .quiz-island,
+  .search-wrapper,
+  footer,
+  .no-print,
+  .hamburger-btn,
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Remove sticky positioning */
+  body {
+    padding-top: 0 !important;
+  }
+
+  main, article, .prose-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Reasonable font size for print */
+  html { font-size: 12pt; }
+
+  h1 { font-size: 22pt; }
+  h2 { font-size: 17pt; }
+  h3 { font-size: 14pt; }
+
+  /* Avoid widows / orphans */
+  p, h2, h3, h4 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  /* Display full URLs for links */
+  a[href]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  /* KaTeX display blocks — prevent splitting across pages */
+  .katex-display {
+    page-break-inside: avoid;
+  }
+
+  /* Borders and backgrounds on blockquotes */
+  blockquote {
+    border-left: 2pt solid #888;
+    background: none;
+  }
+
+  /* Hide related-topics sidebar (on desktop it is fixed) */
+  .topic-sidebar { display: none !important; }
+}

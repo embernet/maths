@@ -1,0 +1,288 @@
+---
+/**
+ * /applications/[slug] — individual application page.
+ * Generates one route per .mdx file in content/94-applications/.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { join, basename, extname } from 'node:path';
+
+const appDir = join(process.cwd(), 'content/94-applications');
+const theoremDir = join(process.cwd(), 'content/93-theorems');
+const slugMapPath = join(process.cwd(), 'content/93-theorems/_slug-map.json');
+
+let slugMap: Record<string, { title: string }> = {};
+if (existsSync(slugMapPath)) {
+  try { slugMap = JSON.parse(readFileSync(slugMapPath, 'utf8')); } catch { /* ignore */ }
+}
+
+export async function getStaticPaths() {
+  const aDir = join(process.cwd(), 'content/94-applications');
+  if (!existsSync(aDir)) return [];
+  const paths = [];
+  for (const file of readdirSync(aDir)) {
+    if (extname(file) !== '.mdx') continue;
+    const slug = basename(file, '.mdx');
+    if (slug === 'index') continue;
+    paths.push({ params: { slug } });
+  }
+  return paths;
+}
+
+function parseFrontmatter(fp: string): Record<string, unknown> {
+  let text = '';
+  try { text = readFileSync(fp, 'utf8'); } catch { return {}; }
+  if (!text.startsWith('---')) return {};
+  const end = text.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const yaml = text.slice(3, end).trim();
+  const result: Record<string, unknown> = {};
+  for (const line of yaml.split('\n')) {
+    const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
+    if (!m) continue;
+    const [, key, rawVal] = m;
+    const val = rawVal.trim();
+    if (val.startsWith('[')) {
+      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+    } else {
+      result[key] = val.replace(/^["']|["']$/g, '');
+    }
+  }
+  return result;
+}
+
+function getTheoremTitle(slug: string): string {
+  const mdxPath = join(theoremDir, `${slug}.mdx`);
+  if (existsSync(mdxPath)) {
+    const fm = parseFrontmatter(mdxPath);
+    if (fm.title) return fm.title as string;
+  }
+  return slugMap[slug]?.title ?? slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function topicDisplayName(topicPath: string): string {
+  const parts = topicPath.split('/');
+  const topic = parts[parts.length - 1] ?? topicPath;
+  return topic.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function topicUrl(topicPath: string): string {
+  const parts = topicPath.split('/');
+  if (parts.length === 2) return `/${parts[0]}/${parts[1]}`;
+  return `/${topicPath}`;
+}
+
+const { slug } = Astro.params;
+const filePath = join(appDir, `${slug}.mdx`);
+const fm = parseFrontmatter(filePath);
+
+const title = (fm.title as string) ?? slug!.replace(/-/g, ' ');
+const summary = fm.summary as string | undefined;
+const domains = (fm.domains as string[]) ?? [];
+const usesTheorems = (fm.uses_theorems as string[]) ?? [];
+const usesTopics = (fm.uses_topics as string[]) ?? [];
+const relatedApps = (fm.related_applications as string[]) ?? [];
+const tags = (fm.tags as string[]) ?? [];
+const realWorldExamples = (fm.real_world_examples as string[]) ?? [];
+
+// Glob import for MDX content
+const appPages = await import.meta.glob('/content/94-applications/*.mdx');
+const matchKey = `/content/94-applications/${slug}.mdx`;
+let Content: unknown = null;
+if (appPages[matchKey]) {
+  const mod = await appPages[matchKey]() as { default: unknown };
+  Content = mod.default;
+}
+---
+
+<BaseLayout title={title} description={summary ?? `Application page for ${title}`}>
+  <div class="prose-content application-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <a href="/applications">Real-world applications</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{title}</span>
+    </nav>
+
+    <header class="app-header">
+      <h1>{title}</h1>
+      <div class="app-meta">
+        {domains.map((d) => (
+          <span class="domain-badge">{d.replace(/-/g, ' ')}</span>
+        ))}
+        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+      </div>
+    </header>
+
+    {summary && <p class="app-summary-callout">{summary}</p>}
+
+    {realWorldExamples.length > 0 && (
+      <div class="real-examples" aria-label="Real-world examples">
+        <strong>Examples:</strong>
+        <ul>
+          {realWorldExamples.map((ex) => <li>{ex}</li>)}
+        </ul>
+      </div>
+    )}
+
+    {Content ? (
+      <div class="app-body">
+        <Content />
+      </div>
+    ) : (
+      <div class="stub-notice">
+        <p>A full page for this application is being prepared.</p>
+      </div>
+    )}
+
+    <div class="app-backlinks">
+      {usesTheorems.length > 0 && (
+        <section class="backlinks-section" aria-label="Maths behind it">
+          <h2>Maths behind it</h2>
+          <ul class="backlink-list">
+            {usesTheorems.map((tSlug) => (
+              <li>
+                <a href={`/theorems/${tSlug}`} class="backlink-item">
+                  {getTheoremTitle(tSlug)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {usesTopics.length > 0 && (
+        <section class="backlinks-section" aria-label="Topics that build it">
+          <h2>Topics that build it</h2>
+          <ul class="backlink-list">
+            {usesTopics.map((topicPath) => (
+              <li>
+                <a href={topicUrl(topicPath)} class="backlink-item">
+                  {topicDisplayName(topicPath)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {relatedApps.length > 0 && (
+        <section class="backlinks-section" aria-label="Related applications">
+          <h2>Related applications</h2>
+          <ul class="backlink-list">
+            {relatedApps.map((appSlug) => (
+              <li>
+                <a href={`/applications/${appSlug}`} class="backlink-item">
+                  {appSlug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .application-page { padding: 1.5rem 1rem 4rem; }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: 1.25rem;
+  }
+  .breadcrumb a { color: var(--color-primary); }
+
+  .app-header { margin-bottom: 1rem; }
+
+  .app-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .domain-badge {
+    display: inline-block;
+    padding: 0.15rem 0.65rem;
+    border-radius: 1rem;
+    font-size: 0.78rem;
+    background: var(--color-primary);
+    color: #fff;
+    text-transform: capitalize;
+  }
+
+  .app-summary-callout {
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-accent);
+    padding: 0.75rem 1.1rem;
+    border-radius: 0 0.4rem 0.4rem 0;
+    font-style: italic;
+    color: #3a3a3a;
+    margin: 1rem 0 1.5rem;
+    max-width: 72ch;
+  }
+
+  .real-examples {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .real-examples ul {
+    margin: 0.3rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .app-body { margin-top: 1rem; }
+
+  .stub-notice {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    padding: 1rem 1.25rem;
+    color: var(--color-muted);
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+
+  .app-backlinks {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem 2rem;
+  }
+
+  .backlinks-section h2 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.6rem;
+  }
+
+  .backlink-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .backlink-item {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    padding: 0.15rem 0;
+  }
+  .backlink-item:hover { color: var(--color-accent); text-decoration: underline; }
+</style>

@@ -1,0 +1,108 @@
+---
+/**
+ * Sidebar.astro
+ * Shows related topics and linked mathematicians.
+ * On mobile: rendered inline after article content.
+ * On desktop (≥1024px): fixed aside column.
+ */
+interface Props {
+  related?: string[];
+  mathematicians?: string[];
+  sectionSlug?: string;
+}
+
+const { related = [], mathematicians = [], sectionSlug } = Astro.props;
+
+const hasContent = related.length > 0 || mathematicians.length > 0;
+---
+
+{hasContent && (
+  <aside class="topic-sidebar no-print" aria-label="Related pages">
+    {related.length > 0 && (
+      <section class="sidebar-section">
+        <h2 class="sidebar-heading">Related topics</h2>
+        <ul class="sidebar-list">
+          {related.map((slug) => (
+            <li>
+              <a href={sectionSlug ? `/${sectionSlug}/${slug}` : `#`}>
+                {slug.replace(/^\d+-/, '').replace(/-/g, ' ')}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {mathematicians.length > 0 && (
+      <section class="sidebar-section">
+        <h2 class="sidebar-heading">Mathematicians</h2>
+        <ul class="sidebar-list">
+          {mathematicians.map((slug) => (
+            <li>
+              <a href={`/mathematicians/${slug}`}>
+                {slug.charAt(0).toUpperCase() + slug.slice(1)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </aside>
+)}
+
+<style>
+  .topic-sidebar {
+    width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.25rem 1rem;
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 1024px) {
+    .topic-sidebar {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+      width: 220px;
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+  }
+
+  .sidebar-section + .sidebar-section {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .sidebar-heading {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.65rem;
+  }
+
+  .sidebar-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .sidebar-list a {
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+    padding: 0.2rem 0;
+    border-radius: 0.25rem;
+    transition: color 0.12s;
+    /* Capitalise slugs prettily */
+    text-transform: capitalize;
+  }
+  .sidebar-list a:hover { color: var(--color-accent); }
+</style>

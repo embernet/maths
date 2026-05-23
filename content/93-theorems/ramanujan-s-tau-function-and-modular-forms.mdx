@@ -1,0 +1,46 @@
+---
+title: Ramanujan's tau function and modular forms
+section: Theorems
+section_slug: 93-theorems
+slug: ramanujan-s-tau-function-and-modular-forms
+attributed_to: [ramanujan]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [partitions-and-the-hardyramanujan-formula, automorphic-functions, riemann-zeta-function, elliptic-integrals-and-elliptic-functions]
+applications: []
+tags: [number-theory, modular-forms, Ramanujan, tau-function]
+year_introduced: '1916'
+summary: Ramanujan's delta function and its coefficients τ(n) — a modular form of weight 12 whose properties Ramanujan conjectured and which took 60 years to prove.
+---
+
+
+
+## What it says
+
+The **Ramanujan tau function** $\tau(n)$ is defined by the generating function:
+
+$$\Delta(q) = q\prod_{n=1}^\infty(1-q^n)^{24} = \sum_{n=1}^\infty \tau(n) q^n$$
+
+where $q = e^{2\pi i z}$ and $z$ is in the upper half-plane. The function $\Delta(z)$ is a **cusp form of weight 12** for the modular group $\text{SL}_2(\mathbb{Z})$.
+
+**Ramanujan's conjectures (1916):**
+1. $\tau$ is multiplicative: $\tau(mn) = \tau(m)\tau(n)$ for $\gcd(m,n)=1$
+2. For prime $p$: $|\tau(p)| \leq 2p^{11/2}$ (the Ramanujan conjecture)
+
+The first was proved by Mordell (1917). The second — equivalent to the Riemann hypothesis for the Ramanujan zeta function — was proved by Deligne (1974) as a corollary of his proof of the Weil conjectures (a Fields Medal).
+
+## History
+
+[Ramanujan](/mathematicians/ramanujan) found these conjectures by direct computation. The proof required Grothendieck's algebraic geometry and l-adic cohomology — mathematical machinery that did not exist when Ramanujan wrote them.
+
+## Why it matters
+
+Ramanujan's delta function is the prototype for modular forms: automorphic objects that encode deep arithmetic. The connection between modular forms and elliptic curves — the Taniyama–Shimura theorem — is the key to Wiles's proof of Fermat's Last Theorem.
+
+## Real-world applications
+
+No direct applications, but modular forms are central to modern number theory and indirectly affect [RSA-type cryptography](/applications/rsa-public-key-cryptography) through elliptic curve theory.
+
+## Where you'll meet it
+
+Modular forms appear in Year 4 number theory. See the [Modern Mathematics era](/history/09-modern-mathematics).

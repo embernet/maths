@@ -1,0 +1,42 @@
+---
+title: Bolzano–Weierstrass theorem
+section: Theorems
+section_slug: 93-theorems
+slug: bolzanoweierstrass-theorem
+attributed_to: [bolzano, weierstrass]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [cauchy-sequences, intermediate-value-theorem-first-rigorous-proof, dedekind-cuts-rigorous-construction-of-real-numbers, rigorous-analysis]
+applications: [weather-forecasting, machine-learning-deep-neural-networks]
+tags: [real-analysis, sequences, compactness, convergence]
+year_introduced: 1817 (Bolzano); 1860s (Weierstrass)
+summary: Every bounded sequence of real numbers has a convergent subsequence — the key lemma for compactness in real analysis.
+---
+
+
+
+## What it says
+
+If $(a_n)$ is a sequence of real numbers satisfying $|a_n| \leq M$ for all $n$ (bounded), then there exists a subsequence $(a_{n_k})$ that converges to a limit.
+
+Equivalently: a subset of $\mathbb{R}^n$ is compact (sequentially) if and only if it is closed and bounded.
+
+The proof works by successive bisection: divide the bounding interval in half repeatedly, always choosing the half containing infinitely many terms. The nested intervals converge to a point, and the terms selected from each interval form a convergent subsequence.
+
+## History
+
+[Bolzano](/mathematicians/bolzano) stated a version in 1817, though his proof was incomplete and largely unread at the time. [Weierstrass](/mathematicians/weierstrass) gave the result its modern form and proof in the 1860s as part of his thorough reconstruction of real analysis. The theorem bears both names in recognition of this joint history.
+
+## Why it matters
+
+The Bolzano–Weierstrass theorem is the gateway to compactness — one of the most important concepts in analysis and topology. In a compact set, sequences cannot escape; every one has a cluster point. This property underpins the proofs that continuous functions on closed bounded intervals attain their maximum and minimum (the Extreme Value Theorem), that continuous functions on compact sets are uniformly continuous, and that Cauchy sequences converge.
+
+It also marks a shift in mathematical thinking: from "does this sequence converge?" (which requires knowing the limit) to "does some subsequence converge?" (which doesn't). That shift — from existence of limits to compactness arguments — pervades twentieth-century analysis.
+
+## Real-world applications
+
+Existence proofs in numerical analysis and optimisation — confirming that an iterative algorithm has a convergent subsequence — use Bolzano–Weierstrass. [Machine learning](/applications/machine-learning-deep-neural-networks) optimisation theory invokes compactness results to guarantee that gradient descent sequences have cluster points near local minima.
+
+## Where you'll meet it
+
+Bolzano–Weierstrass is a core result in Year 2 real analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution) for the programme of which it was part, and [compactness and topology](/theorems/topology-algebraic-topology-foundations) for where the ideas lead in Year 3.

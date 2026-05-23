@@ -1,0 +1,42 @@
+---
+title: Morphogenesis (mathematical biology)
+section: Theorems
+section_slug: 93-theorems
+slug: morphogenesis-mathematical-biology
+attributed_to: [turing]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [turing-machines-theory-of-computation, heat-equation]
+applications: [epidemiological-modelling]
+tags: [mathematical-biology, differential-equations, Turing, pattern-formation]
+year_introduced: '1952'
+summary: Turing's reaction–diffusion model explaining how uniform biological tissue spontaneously breaks symmetry to produce spatial patterns — stripes, spots, and spirals — through coupled chemical diffusion.
+---
+
+
+
+## What it says
+
+In "The Chemical Basis of Morphogenesis" (1952), [Turing](/mathematicians/turing) modelled two chemical species — an **activator** $u$ and an **inhibitor** $v$ — diffusing and reacting according to
+
+$$\frac{\partial u}{\partial t} = D_u \nabla^2 u + f(u, v), \qquad \frac{\partial v}{\partial t} = D_v \nabla^2 v + g(u, v)$$
+
+where $D_u$ and $D_v$ are diffusion coefficients and $f$, $g$ are nonlinear reaction terms.
+
+The key insight: if the inhibitor diffuses much faster than the activator ($D_v \gg D_u$), a uniform steady state that is stable without diffusion can become **diffusion-driven unstable** — small perturbations grow and settle into spatially periodic patterns. The characteristic wavelength of the resulting pattern is determined by the ratio $D_v/D_u$ and the reaction kinetics. This mechanism is now called a **Turing instability**.
+
+## History
+
+Turing published this paper in 1952, two years before his death. It was his only published work in biology and represented a complete change of direction from computation theory. The paper was initially neglected; experimental evidence for Turing patterns in chemical systems (the Belousov–Zhabotinsky reaction) and later in developmental biology accumulated from the 1970s onward. Direct evidence of Turing patterns in vertebrate development — digit spacing in mice paws — was demonstrated in 2012 by Sheth et al.
+
+## Why it matters
+
+Morphogenesis had been a central mystery of developmental biology: how does a uniform fertilised egg produce an organism with complex, reproducible spatial structure? Turing's mathematical model showed that chemistry and diffusion alone — no external template — are sufficient to break symmetry and generate pattern. The model has since been applied to animal coat markings (cheetah spots, zebra stripes), left–right asymmetry in vertebrate embryos, and phyllotaxis (spiral packing of seeds in sunflowers).
+
+## Real-world applications
+
+[Mathematical biology and epidemiology](/applications/mathematical-biology-epidemiology) uses reaction–diffusion equations extensively in modelling developmental processes, tumour growth, and spread of species in ecosystems.
+
+## Where you'll meet it
+
+Turing patterns appear in applied mathematics and mathematical biology courses, linked to the [heat equation](/theorems/heat-equation) and partial differential equations. See the [Modern Mathematics era](/history/09-modern-mathematics).

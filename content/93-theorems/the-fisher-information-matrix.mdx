@@ -1,0 +1,45 @@
+---
+title: The Fisher information matrix
+section: Theorems
+section_slug: 93-theorems
+slug: the-fisher-information-matrix
+attributed_to: [fisher]
+era: 09-modern-mathematics
+appears_in: [02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [maximum-likelihood-estimation, cauchyschwarz-inequality, gaussian-distribution-normal-distribution]
+applications: [clinical-trials-design, machine-learning-deep-neural-networks, medical-imaging-mri-ct]
+tags: [statistics, Fisher-information, estimation, Cramér-Rao]
+year_introduced: 1922–1925
+summary: A matrix measuring the amount of information an observable random variable carries about an unknown parameter — and bounding the variance of any unbiased estimator.
+---
+
+
+## What it says
+
+For a parametric model $p(x; \theta)$, the **Fisher information** (scalar case) is:
+
+$$\mathcal{I}(\theta) = \mathbb{E}\!\left[\left(\frac{\partial}{\partial\theta} \log p(X;\theta)\right)^2\right]$$
+
+The **Cramér–Rao bound:** For any unbiased estimator $\hat{\theta}$ of $\theta$:
+
+$$\text{Var}(\hat{\theta}) \geq \frac{1}{\mathcal{I}(\theta)}$$
+
+No unbiased estimator can have variance smaller than $1/\mathcal{I}(\theta)$. MLEs achieve this bound asymptotically — they are *asymptotically efficient*.
+
+The Fisher information matrix generalises to vector parameters: $\mathcal{I}(\theta)_{ij} = \mathbb{E}[\frac{\partial \log p}{\partial \theta_i} \frac{\partial \log p}{\partial \theta_j}]$.
+
+## History
+
+[Fisher](/mathematicians/fisher) introduced the concept in his 1922 and 1925 papers on estimation. The Cramér–Rao bound was proved independently by Cramér and Rao in 1945–46. The geometric interpretation of Fisher information as a metric on the space of probability distributions (information geometry) was developed by Rao and later formalised by Amari in the 1980s.
+
+## Why it matters
+
+The Fisher information matrix tells you how much you can learn from data about a parameter. High Fisher information means the data is highly informative; low Fisher information means the parameter is hard to estimate. This has practical consequences for experimental design — you want to design experiments that maximise Fisher information. In machine learning, the natural gradient (using the inverse Fisher information matrix as a preconditioner) is a second-order optimisation method.
+
+## Real-world applications
+
+[Clinical trial design](/applications/clinical-trials-design) optimises experiment designs to maximise Fisher information. [Machine learning](/applications/machine-learning-deep-neural-networks) uses the Fisher matrix for natural gradient descent. [MRI reconstruction](/applications/medical-imaging-mri-ct) uses Fisher information to assess image quality.
+
+## Where you'll meet it
+
+The Fisher information matrix appears in Year 2 statistical inference and Year 3 mathematical statistics. See the [Modern Mathematics era](/history/09-modern-mathematics).

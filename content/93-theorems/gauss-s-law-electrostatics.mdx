@@ -1,0 +1,48 @@
+---
+title: Gauss's law (electrostatics)
+section: Theorems
+section_slug: 93-theorems
+slug: gauss-s-law-electrostatics
+attributed_to: [gauss]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [laplace-equation, method-of-least-squares, fourier-transform]
+applications: [medical-imaging-mri-ct, radar-and-sonar, seismic-imaging-oil-exploration]
+tags: [physics, electrostatics, Gauss, vector-calculus]
+year_introduced: '1835'
+summary: The total electric flux through a closed surface equals the enclosed charge divided by ε₀ — one of Maxwell's four equations governing electromagnetism.
+---
+
+
+
+## What it says
+
+**Gauss's law (integral form):**
+
+$$\oint_S \mathbf{E} \cdot d\mathbf{A} = \frac{Q_{\text{enc}}}{\varepsilon_0}$$
+
+The net electric flux through any closed surface $S$ equals the total enclosed charge $Q_{\text{enc}}$ divided by the permittivity of free space $\varepsilon_0$.
+
+**Differential form** (using the divergence theorem):
+
+$$\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$
+
+where $\rho$ is the charge density. This is one of Maxwell's four equations.
+
+For a point charge $Q$, Gauss's law immediately gives the inverse-square law: $\|\mathbf{E}\| = \frac{Q}{4\pi\varepsilon_0 r^2}$, recovered by taking a spherical surface of radius $r$.
+
+## History
+
+[Gauss](/mathematicians/gauss) stated this law in 1835 (unpublished at the time; published 1867). It was incorporated by Maxwell into his unified theory of electromagnetism in the 1860s. The divergence theorem itself — which connects the integral and differential forms — is also attributed to Gauss (and independently to Green and Ostrogradsky).
+
+## Why it matters
+
+Gauss's law is one of the most powerful tools in electrostatics: for symmetric charge distributions (spherical, cylindrical, planar), it allows the electric field to be computed almost by inspection. The same mathematical structure — a divergence equation — appears in fluid mechanics, gravity, and heat flow.
+
+## Real-world applications
+
+[MRI](/applications/medical-imaging-mri-ct) uses electromagnetic field calculations governed by Gauss's law. [Radar and sonar](/applications/radar-and-sonar) rely on Maxwell's equations, of which Gauss's law is one. [Seismic imaging](/applications/seismic-imaging-oil-exploration) uses analogous divergence equations for acoustic waves.
+
+## Where you'll meet it
+
+Gauss's law appears in Year 2 differential equations in the context of vector calculus and PDEs. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

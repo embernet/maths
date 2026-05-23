@@ -1,0 +1,42 @@
+---
+title: Graph theory (Königsberg bridges)
+section: Theorems
+section_slug: 93-theorems
+slug: graph-theory-konigsberg-bridges
+attributed_to: [euler]
+era: 05-the-calculus-revolution
+appears_in: []
+related_theorems: [euler-s-formula-e-i-cos-i-sin, graph-theory-and-number-theory, topology-algebraic-topology-foundations]
+applications: [pagerank-google, cellular-network-design, robotics-and-control]
+tags: [graph-theory, Euler, combinatorics, topology]
+year_introduced: '1736'
+summary: Euler's solution to the Königsberg bridge problem — can you cross all seven bridges once — founded graph theory and identified the concept of an Eulerian path.
+---
+
+
+
+## What it says
+
+The city of Königsberg had seven bridges connecting four landmasses. The problem: can you walk through the city crossing each bridge exactly once?
+
+[Euler](/mathematicians/euler) abstracted the problem: replace each landmass by a vertex, each bridge by an edge. The question becomes: does the resulting graph have an **Eulerian path** (traversing every edge exactly once)?
+
+**Euler's theorem:** A connected graph has an Eulerian circuit (closed Eulerian path) if and only if every vertex has even degree. It has an Eulerian path (not necessarily closed) if and only if it has exactly zero or two vertices of odd degree.
+
+The Königsberg graph has four vertices of odd degree, so no Eulerian path exists.
+
+## History
+
+Euler solved the problem in a 1736 paper — the first paper in graph theory. He recognised that the geography was irrelevant; only the abstract connectivity mattered. This act of abstraction — replacing a physical problem with a purely relational one — is the founding moment of both graph theory and topology.
+
+## Why it matters
+
+Graph theory is now one of the largest and most applied branches of mathematics. Networks of all kinds — road networks, internet infrastructure, social networks, biological pathways — are graphs. [Euler's formula](/theorems/euler-s-formula-e-i-cos-i-sin) $V - E + F = 2$ for planar graphs is another foundational result from the same tradition.
+
+## Real-world applications
+
+[PageRank](/applications/pagerank-google) operates on directed graphs. [Cellular network design](/applications/cellular-network-design) optimises graph-structured coverage problems. [Robotics](/applications/robotics-and-control) uses graph algorithms for path planning.
+
+## Where you'll meet it
+
+Graph theory is introduced in Year 3 combinatorics and discrete mathematics. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

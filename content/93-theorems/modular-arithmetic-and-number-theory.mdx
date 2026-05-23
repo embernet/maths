@@ -1,0 +1,41 @@
+---
+title: Modular arithmetic and number theory
+section: Theorems
+section_slug: 93-theorems
+slug: modular-arithmetic-and-number-theory
+attributed_to: [gauss]
+era: 05-the-calculus-revolution
+appears_in: [02-core-year-two/01-abstract-algebra]
+related_theorems: [fermat-s-little-theorem, euclid-s-algorithm, galois-theory]
+applications: [rsa-public-key-cryptography, error-correcting-codes, digital-signatures]
+tags: [number-theory, modular-arithmetic, Gauss, congruences]
+year_introduced: '1801'
+summary: Arithmetic modulo n — working with remainders — formalised by Gauss in Disquisitiones Arithmeticae and now the foundation of all of public-key cryptography.
+---
+
+
+
+## What it says
+
+Two integers $a$ and $b$ are **congruent modulo $n$** (written $a \equiv b \pmod{n}$) if $n$ divides $a - b$. Congruence is an equivalence relation, and the equivalence classes form a ring $\mathbb{Z}/n\mathbb{Z}$ under addition and multiplication.
+
+Key results:
+- $\mathbb{Z}/p\mathbb{Z}$ is a field for prime $p$ (every non-zero element has a multiplicative inverse)
+- The Chinese Remainder Theorem: if $\gcd(m, n) = 1$, then $\mathbb{Z}/mn\mathbb{Z} \cong \mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z}$
+- Fermat's little theorem: $a^{p-1} \equiv 1 \pmod{p}$ for prime $p$ and $\gcd(a, p) = 1$
+
+## History
+
+[Gauss](/mathematicians/gauss) systematised modular arithmetic in *Disquisitiones Arithmeticae* (1801), writing it in the congruence notation $a \equiv b \pmod{n}$ that is now standard. The book also contains his proof of the law of quadratic reciprocity (which he called the "golden theorem") and the theory of binary quadratic forms. Gauss was 24 when it was published.
+
+## Why it matters
+
+Modular arithmetic is the language of number theory and modern cryptography. Working modulo a prime makes the integers into a field — a structure where division is possible — and all of linear algebra over $\mathbb{Z}/p\mathbb{Z}$ follows. The difficulty of inverting certain modular operations (computing discrete logarithms, factoring integers) is the security basis of RSA and elliptic curve cryptography.
+
+## Real-world applications
+
+[RSA public-key cryptography](/applications/rsa-public-key-cryptography), [digital signatures](/applications/digital-signatures), and [error-correcting codes](/applications/error-correcting-codes) all operate in modular arithmetic.
+
+## Where you'll meet it
+
+Modular arithmetic is introduced in Year 1 and is a prerequisite for Year 2 abstract algebra and Year 3 cryptography courses. See the [Calculus Revolution era](/history/05-the-calculus-revolution).

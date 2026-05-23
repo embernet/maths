@@ -1,0 +1,42 @@
+---
+title: Incompleteness theorems (1931)
+section: Theorems
+section_slug: 93-theorems
+slug: incompleteness-theorems-1931
+attributed_to: [godel]
+era: 08-foundations-and-the-twentieth-century-crisis
+appears_in: []
+related_theorems: [halting-problem-undecidability, cantor-s-diagonal-argument, formal-axiomatic-systems, hilbert-s-programme, turing-machines-theory-of-computation]
+applications: [quantum-computing-algorithms]
+tags: [logic, foundations, undecidability, Gödel]
+year_introduced: '1931'
+summary: In any consistent formal system strong enough to express basic arithmetic, there are true statements that cannot be proved within the system — and the system cannot prove its own consistency.
+---
+
+
+
+## What it says
+
+**First incompleteness theorem:** Any consistent formal system $F$ that is capable of proving basic arithmetic contains a sentence $G$ that is true (in the standard model) but unprovable in $F$.
+
+**Second incompleteness theorem:** Such a system $F$ cannot prove its own consistency.
+
+[Gödel](/mathematicians/godel) constructed $G$ explicitly — it is (roughly) the sentence "this sentence is not provable in $F$" — encoding the claim in arithmetic via Gödel numbering. If $F$ could prove $G$, it would be inconsistent; if $F$ proves $\neg G$, it has proved a falsehood. So $F$ can do neither, yet $G$ is true.
+
+## History
+
+Kurt Gödel published both theorems in 1931 at age 25. They demolished Hilbert's programme — the ambition to find a complete, consistent axiomatic foundation for all of mathematics. [Hilbert](/mathematicians/hilbert) had launched this programme in 1900 and spent decades developing formal systems he hoped would achieve it. Gödel showed it was impossible in principle, not merely difficult in practice. The shock was enormous; the result was eventually accepted as one of the most important theorems in the history of logic.
+
+## Why it matters
+
+The incompleteness theorems set hard limits on formal proof: there will always be truths that outrun any fixed set of axioms. This does not mean mathematics is broken — it means the formal-axiomatic picture of mathematics is incomplete. The theorems also had a direct influence on the theory of computation: [Turing](/mathematicians/turing)'s undecidability results are closely related and were partly inspired by Gödel's methods.
+
+The second theorem has a philosophical sharpness: you cannot validate your own reasoning system from within that system. This is not a technical footnote; it is a deep fact about self-reference and formal systems.
+
+## Real-world applications
+
+The limits on provability and computability set boundaries for what any [quantum computing](/applications/quantum-computing-algorithms) system or classical algorithm can achieve.
+
+## Where you'll meet it
+
+The incompleteness theorems are discussed in Year 4 mathematical logic. See the [Foundations and Twentieth-Century Crisis era](/history/08-foundations-and-the-twentieth-century-crisis) for the context of Hilbert's programme.

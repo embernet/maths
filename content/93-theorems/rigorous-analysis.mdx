@@ -1,0 +1,45 @@
+---
+title: Rigorous ε–δ analysis
+section: Theorems
+section_slug: 93-theorems
+slug: rigorous-analysis
+attributed_to: [weierstrass]
+era: 06-the-rigour-revolution
+appears_in: []
+related_theorems: [rigorous-foundations-of-calculus-definitions, uniform-convergence, bolzanoweierstrass-theorem, cauchy-sequences, weierstrass-function-continuous-everywhere-differentiable-nowhere, weierstrass-approximation-theorem]
+applications: []
+tags: [analysis, epsilon-delta, Weierstrass, rigour]
+year_introduced: 1860s
+summary: Weierstrass's completion of the rigorous foundations of real analysis — precise definitions of limit, continuity, and convergence that eliminated all appeals to geometric intuition.
+---
+
+
+
+## What it says
+
+[Weierstrass](/mathematicians/weierstrass) gave the definitive formulation of the **$\varepsilon$–$\delta$ definition of limit**: a function $f$ has limit $L$ at $a$ if for every $\varepsilon > 0$ there exists $\delta > 0$ such that $0 < |x - a| < \delta$ implies $|f(x) - L| < \varepsilon$.
+
+From this he built a complete rigorous framework:
+
+- **Continuity**: $f$ is continuous at $a$ if $\lim_{x \to a} f(x) = f(a)$
+- **Uniform continuity**: for every $\varepsilon > 0$, a single $\delta > 0$ works for all $a$ simultaneously
+- **Uniform convergence** of a sequence of functions $f_n \to f$: for every $\varepsilon > 0$ there exists $N$ such that $n > N$ implies $|f_n(x) - f(x)| < \varepsilon$ for all $x$
+- **Completeness of $\mathbb{R}$**: every Cauchy sequence of real numbers converges
+
+He also introduced the construction of the real numbers via power series over rationals, tying the whole framework together without reference to geometric intuition about "infinitely small quantities."
+
+## History
+
+Cauchy had taken a first step towards rigour in his 1821 *Cours d'analyse*, but his treatment still relied on intuitive notions. Weierstrass, from his lectures at Berlin in the 1860s and 1870s — which were distributed in notes and deeply influenced an entire generation of analysts — gave the fully rigorous treatment. He showed that without precision, seemingly obvious results fail: a function can be continuous everywhere yet differentiable nowhere (his [famous example](/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere)). His approach, transmitted through students such as Cantor, Klein, and Schwarz, became the standard treatment.
+
+## Why it matters
+
+Rigorous analysis ended a century of productive but logically unsound work in calculus. It established that intuition must be checked against precise definitions — a principle that now governs all of mathematics. The $\varepsilon$–$\delta$ definition is the first technical hurdle every undergraduate analyst faces, and the ability to read and write $\varepsilon$–$\delta$ proofs is the defining skill of a working analyst.
+
+## Real-world applications
+
+The rigorous framework underpins numerical analysis and error bounds — knowing precisely when approximations are valid and quantifying how close they are.
+
+## Where you'll meet it
+
+Rigorous analysis is Year 1 core analysis. See the [Rigour Revolution era](/history/06-the-rigour-revolution).

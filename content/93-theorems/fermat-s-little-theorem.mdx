@@ -1,0 +1,44 @@
+---
+title: Fermat's little theorem
+section: Theorems
+section_slug: 93-theorems
+slug: fermat-s-little-theorem
+attributed_to: [fermat]
+era: 04-renaissance-and-symbolic-algebra
+appears_in: [02-core-year-two/01-abstract-algebra]
+related_theorems: [modular-arithmetic-and-number-theory, euclid-s-algorithm, group-theory-permutation-groups]
+applications: [rsa-public-key-cryptography, digital-signatures, error-correcting-codes]
+tags: [number-theory, modular-arithmetic, primes, cryptography]
+year_introduced: '1640'
+summary: For any prime p and integer a not divisible by p, a raised to the power p−1 is congruent to 1 mod p — the foundation of most public-key cryptography.
+---
+
+
+
+## What it says
+
+For any prime $p$ and integer $a$ with $\gcd(a, p) = 1$:
+
+$$a^{p-1} \equiv 1 \pmod{p}$$
+
+Equivalently, $a^p \equiv a \pmod{p}$ for all integers $a$.
+
+In plain language: raise any integer not divisible by $p$ to the $(p-1)$th power, and you get a multiple of $p$ plus 1. For example, $2^6 = 64 = 63 + 1 = 9 \times 7 + 1$, and indeed $64 \equiv 1 \pmod 7$.
+
+The modern proof uses group theory: the integers $\{1, 2, \ldots, p-1\}$ form a group under multiplication mod $p$ of order $p-1$, and by Lagrange's theorem every element's order divides $p-1$, so $a^{p-1} = e = 1$ in the group.
+
+## History
+
+[Fermat](/mathematicians/fermat) stated the theorem in a letter to Frénicle de Bessy in 1640 without proof. Euler gave the first published proof in 1736 and generalised it to composite moduli via the Euler totient function (see [Euler's totient function](/theorems/eulers-totient-function)). Leibniz had an unpublished proof around the same time as Fermat, showing that independent discovery was possible.
+
+## Why it matters
+
+Fermat's little theorem is the direct ancestor of the RSA cryptosystem. RSA encryption relies on the fact that computing $a^e \pmod{n}$ is easy, while recovering $a$ from $a^e \pmod{n}$ without knowing the prime factorisation of $n$ is computationally infeasible. The correctness proof for RSA decryption uses Euler's generalisation of Fermat's theorem. Every secure website using RSA certificates owes a debt to a 1640 observation.
+
+## Real-world applications
+
+[RSA public-key cryptography](/applications/rsa-public-key-cryptography) and [digital signatures](/applications/digital-signatures) depend directly on Fermat/Euler. [Error-correcting codes](/applications/error-correcting-codes) over finite fields use the same modular arithmetic.
+
+## Where you'll meet it
+
+Fermat's little theorem appears in Year 1 number theory and is proved rigorously in Year 2 abstract algebra using group theory. See the [Renaissance and Symbolic Algebra era](/history/04-renaissance-and-symbolic-algebra) for historical context.

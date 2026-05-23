@@ -1,0 +1,43 @@
+---
+title: Breaking Enigma at Bletchley Park
+section: Theorems
+section_slug: 93-theorems
+slug: breaking-enigma-at-bletchley-park
+attributed_to: [turing]
+era: 09-modern-mathematics
+appears_in: []
+related_theorems: [turing-machines-theory-of-computation, halting-problem-undecidability]
+applications: [rsa-public-key-cryptography]
+tags: [cryptography, computation, Turing, history]
+year_introduced: 1939–1945
+summary: Turing's design of the Bombe electromechanical machine and his codebreaking mathematics that broke the German Enigma cipher — directly influencing the outcome of the Second World War.
+---
+
+
+## What it says
+
+The German **Enigma machine** used a rotor-based polyalphabetic substitution cipher. The daily settings (rotor order, initial positions, plug-board connections) produced approximately $10^{23}$ possible configurations, making brute-force search impossible.
+
+[Turing](/mathematicians/turing) exploited structural weaknesses in Enigma's operation:
+
+1. **No letter encrypts to itself** (a constraint of the reflector wiring)
+2. **Cribs** — known or guessed plaintext fragments (e.g., standard message openings) — could be tested by seeking self-consistent assignments
+3. The **Bombe**, an electromechanical device Turing designed (building on Polish work by Marian Rejewski), ran through rotor positions testing candidate settings in parallel; a contradiction (a letter encrypting to itself) eliminated a setting
+
+By 1941–42, the Bombe network at Bletchley Park was reading a large fraction of German naval Enigma traffic, allowing convoys to reroute around U-boat patrols.
+
+## History
+
+The Government Code and Cypher School at Bletchley Park recruited Turing in 1939. He worked with Gordon Welchman (who added the diagonal board, multiplying the Bombe's power), Dilly Knox, and others. The work was classified until 1974. Turing also attacked the more complex Lorenz cipher used for high-level German communications, contributing to the design of Colossus — the first programmable electronic computer — built by Tommy Flowers.
+
+## Why it matters
+
+The codebreaking operation at Bletchley Park was one of the most significant intelligence operations in military history. Historians estimate it shortened the war in Europe by two to four years. Turing's contribution demonstrated that abstract mathematical reasoning — the same approach he applied to the Entscheidungsproblem — had direct and decisive practical consequences. The work also laid groundwork for electronic computing.
+
+## Real-world applications
+
+Modern [cryptography](/applications/cryptography-and-rsa) owes a conceptual debt to Turing's codebreaking: the ideas of exploiting cipher structure, using known-plaintext attacks, and automating search remain central to cryptanalysis.
+
+## Where you'll meet it
+
+Enigma and Bletchley Park appear in courses on the history of computing and cryptography. See the [Modern Mathematics era](/history/09-modern-mathematics).

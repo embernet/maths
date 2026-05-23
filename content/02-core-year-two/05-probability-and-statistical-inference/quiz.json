@@ -1,0 +1,36 @@
+{
+  "topic_slug": "05-probability-and-statistical-inference",
+  "title": "Check your understanding",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "The Cramér-Rao lower bound says that for an unbiased estimator $\\hat{\\theta}$ of $\\theta$ based on $n$ i.i.d. observations:",
+      "options": [
+        {"id": "a", "text": "$\\text{Var}(\\hat{\\theta}) \\ge 1/(n\\,I(\\theta))$, where $I(\\theta)$ is the Fisher information of one observation.", "correct": true, "explanation": "The Cramér-Rao bound: no unbiased estimator can have variance smaller than $1/(nI(\\theta))$. An estimator achieving this bound is efficient."},
+        {"id": "b", "text": "$\\text{Var}(\\hat{\\theta}) \\ge n \\cdot I(\\theta)$.", "correct": false, "explanation": "This is the reciprocal of the correct bound. More information (larger $I(\\theta)$) means a smaller achievable variance, not a larger one."},
+        {"id": "c", "text": "$\\text{Var}(\\hat{\\theta}) = 0$.", "correct": false, "explanation": "Zero variance would mean the estimator equals $\\theta$ exactly regardless of the data — impossible when $\\theta$ is unknown."},
+        {"id": "d", "text": "$E[\\hat{\\theta}] \\ge \\theta$.", "correct": false, "explanation": "The Cramér-Rao bound is about variance, not bias. An unbiased estimator has $E[\\hat{\\theta}] = \\theta$ by assumption."}
+      ]
+    },
+    {
+      "id": "q2",
+      "stem": "The Neyman-Pearson lemma says the most powerful test at level $\\alpha$ of $H_0: \\theta = \\theta_0$ vs $H_1: \\theta = \\theta_1$ is based on:",
+      "options": [
+        {"id": "a", "text": "The likelihood ratio $\\Lambda = L(\\theta_1)/L(\\theta_0)$, rejecting $H_0$ when $\\Lambda > c_\\alpha$.", "correct": true, "explanation": "This is the Neyman-Pearson lemma. No other test at the same significance level has higher power. Many standard tests (t-test, z-test) are special cases."},
+        {"id": "b", "text": "The sample mean $\\bar{X}$, rejecting when $\\bar{X}$ is too large.", "correct": false, "explanation": "For testing a Normal mean, this IS the likelihood ratio test — but the Neyman-Pearson lemma covers any simple vs simple hypothesis pair, not just Normal means."},
+        {"id": "c", "text": "Minimising the Type II error probability, ignoring Type I error.", "correct": false, "explanation": "The Neyman-Pearson framework controls Type I error at level $\\alpha$ first, then maximises power (minimises Type II error) subject to that constraint."},
+        {"id": "d", "text": "The maximum likelihood estimator: reject $H_0$ when $\\hat{\\theta}_{MLE}$ is far from $\\theta_0$.", "correct": false, "explanation": "While related, this is not the Neyman-Pearson lemma. The lemma specifies the likelihood ratio test, not a test based on the MLE."}
+      ]
+    },
+    {
+      "id": "q3",
+      "stem": "A Markov chain has transition matrix $P = \\begin{pmatrix} 0.7 & 0.3 \\\\ 0.4 & 0.6 \\end{pmatrix}$. Which vector $\\pi$ is a stationary distribution?",
+      "options": [
+        {"id": "a", "text": "$\\pi = (4/7, 3/7)$.", "correct": true, "explanation": "Check $\\pi P = \\pi$: $(4/7)(0.7) + (3/7)(0.4) = 2.8/7 + 1.2/7 = 4/7$ ✓ and $(4/7)(0.3) + (3/7)(0.6) = 1.2/7 + 1.8/7 = 3/7$ ✓. Also $4/7 + 3/7 = 1$ ✓."},
+        {"id": "b", "text": "$\\pi = (0.7, 0.3)$.", "correct": false, "explanation": "The first row of $P$, not the stationary distribution. Check: $(0.7)(0.7) + (0.3)(0.4) = 0.49 + 0.12 = 0.61 \\ne 0.7$."},
+        {"id": "c", "text": "$\\pi = (0.5, 0.5)$.", "correct": false, "explanation": "Check: $(0.5)(0.7) + (0.5)(0.4) = 0.55 \\ne 0.5$. Equal distribution is only stationary if the chain is doubly stochastic (all column sums = 1), which it is not here."},
+        {"id": "d", "text": "$\\pi = (1, 0)$.", "correct": false, "explanation": "Starting entirely in state 1, after one step you have $(0.7, 0.3) \\ne (1,0)$."}
+      ]
+    }
+  ]
+}

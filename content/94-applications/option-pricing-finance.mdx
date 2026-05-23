@@ -1,0 +1,49 @@
+---
+title: Option Pricing and Financial Mathematics
+section: Real-world applications
+section_slug: 94-applications
+slug: option-pricing-finance
+domains: [finance, economics, physics]
+uses_theorems: [heat-equation, fourier-transform, axiomatic-foundations-of-probability]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/07-stochastic-processes, 03-specialisation-year-three/03-measure-and-lebesgue-integration]
+related_applications: [actuarial-science, machine-learning-bayesian-inference]
+tags: [finance, PDEs, stochastic-calculus, applied]
+real_world_examples: [Stock option contracts on exchanges, Currency hedging by multinational firms, Interest-rate derivatives at central banks, Structured products]
+summary: The Black–Scholes equation for pricing financial options is the heat equation in disguise — one of the deepest connections between physics and finance.
+---
+
+
+
+## The application
+
+A financial option is a contract that gives its holder the right, but not the obligation, to buy or sell an asset at a fixed price on a future date. Pricing such a contract fairly — so neither buyer nor seller has an unfair advantage — requires modelling the random future evolution of the asset price. The mathematics is stochastic calculus, and the pricing equation is a partial differential equation identical in form to the heat equation.
+
+## The maths behind it
+
+The **Black–Scholes model** assumes the asset price $S_t$ follows **geometric Brownian motion**:
+
+$$dS = \mu S\, dt + \sigma S\, dW_t,$$
+
+where $\mu$ is the drift, $\sigma$ the volatility, and $W_t$ a standard Brownian motion (Wiener process). The option value $V(S, t)$ depends on the current price $S$ and time $t$.
+
+Applying **Itô's lemma** to $V(S_t, t)$ and constructing a risk-free portfolio (long the option, short $\partial V / \partial S$ units of the stock) eliminates the random term. Setting the portfolio's return equal to the risk-free rate gives the **Black–Scholes PDE**:
+
+$$\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS\frac{\partial V}{\partial S} - rV = 0.$$
+
+Changing variables $S = e^x$, $\tau = T - t$ transforms this into the **heat equation** $\partial u / \partial \tau = \frac{1}{2}\sigma^2 \partial^2 u / \partial x^2$. The explicit Black–Scholes formula for a European call option with strike $K$ and maturity $T$ is:
+
+$$C = S_0 N(d_1) - K e^{-rT} N(d_2),$$
+
+where $d_1 = [\ln(S_0/K) + (r + \sigma^2/2)T]/(\sigma\sqrt{T})$, $d_2 = d_1 - \sigma\sqrt{T}$, and $N$ is the standard normal CDF.
+
+## A concrete example
+
+The global over-the-counter derivatives market has a notional value exceeding $600 trillion. A European equity option on Apple with strike \$200, maturity six months, current price \$195, volatility 25%, and risk-free rate 5%, is priced by the formula to within cents. Every bank's trading desk runs Black–Scholes and its extensions thousands of times per second.
+
+## History of the application
+
+Fischer Black and Myron Scholes published their pricing formula in 1973; Robert Merton published an extension simultaneously. The Chicago Board Options Exchange opened in the same year, turning options trading into a mainstream market. Scholes and Merton received the 1997 Nobel Prize in Economics (Black had died in 1995). The formula's derivation drew explicitly on [Kolmogorov's](/mathematicians/kolmogorov) theory of diffusion processes and the heat equation of [Fourier](/mathematicians/fourier).
+
+## Links
+
+Stochastic calculus is developed in [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). The PDE side connects to [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes). Measure-theoretic probability, the rigorous foundation of Brownian motion, is in [Measure Theory and Lebesgue Integration](/03-specialisation-year-three/03-measure-and-lebesgue-integration).

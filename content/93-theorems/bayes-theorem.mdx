@@ -1,0 +1,39 @@
+---
+title: Bayes' theorem
+section: Theorems
+section_slug: 93-theorems
+slug: bayes-theorem
+attributed_to: [bayes]
+era: 05-the-calculus-revolution
+appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]
+related_theorems: [axiomatic-foundations-of-probability, gaussian-distribution-normal-distribution, central-limit-theorem, bayesian-probability-independent-derivation]
+applications: [medical-diagnosis-screening, spam-filtering, machine-learning-bayesian-inference, epidemiological-modelling, clinical-trials-design]
+tags: [probability, inference, Bayesian, statistics]
+year_introduced: 1763 (posthumous)
+summary: How to update a probability when new evidence arrives — the engine behind modern statistical inference.
+---
+
+
+## What it says
+
+$$P(H \mid E) = \frac{P(E \mid H)\, P(H)}{P(E)}$$
+
+Given evidence $E$, the probability that hypothesis $H$ is true equals the likelihood of seeing $E$ if $H$ were true, multiplied by the prior probability of $H$, divided by the total probability of seeing $E$.
+
+The three ingredients: **prior** $P(H)$ — what you believed before; **likelihood** $P(E \mid H)$ — how well $H$ explains the evidence; **posterior** $P(H \mid E)$ — what you believe after. Inference is the repeated application of this update as new evidence accumulates.
+
+## History
+
+[Bayes](/mathematicians/bayes) derived the theorem in an essay found in his papers after his death and published by Richard Price in 1763. [Laplace](/mathematicians/laplace) independently discovered and far more extensively developed the same idea around 1774, applying it to problems in celestial mechanics and demographics — so in practice much of what we call Bayesian statistics is due to Laplace. The theorem was relatively neglected through the nineteenth and early twentieth centuries when frequentist statistics dominated; Bayesian inference was rehabilitated in the second half of the twentieth century and now underpins a huge fraction of applied statistics and machine learning.
+
+## Why it matters
+
+Bayes' theorem is the correct framework for updating beliefs under uncertainty. It handles situations where you cannot run controlled experiments — medical diagnosis, historical inference, scientific hypothesis testing — by making the prior explicit and forcing coherence between old beliefs and new data. Once you understand it, you will notice that arguments about evidence (court cases, medical tests, scientific controversies) often go wrong precisely because people reason as if $P(H \mid E) = P(E \mid H)$, which is known as the base rate neglect fallacy.
+
+## Real-world applications
+
+[Medical diagnosis](/applications/medical-diagnosis-screening) — computing the probability a patient has a condition given a positive test — is a direct application of Bayes' theorem; base rates matter enormously. [Spam filtering](/applications/spam-filtering) classifies email using naive Bayes models. [Bayesian machine learning](/applications/machine-learning-bayesian-inference) places priors over model parameters. [Epidemiological models](/applications/epidemiological-modelling) use Bayesian updating to infer outbreak parameters.
+
+## Where you'll meet it
+
+Bayes' theorem appears in Year 1 probability and is the starting point for Year 2 statistical inference. The [Calculus Revolution era](/history/05-the-calculus-revolution) page covers the historical context.

@@ -1,0 +1,38 @@
+---
+title: 'Medical Imaging: MRI and CT Scanning'
+section: Real-world applications
+section_slug: 94-applications
+slug: medical-imaging-mri-ct
+domains: [medicine, physics, engineering]
+uses_theorems: [fourier-transform, fourier-series, heat-equation]
+uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 03-specialisation-year-three/02-functional-analysis, 03-specialisation-year-three/03-measure-and-lebesgue-integration]
+related_applications: [signal-processing-jpeg-mp3, radar-and-sonar, gravitational-wave-detection]
+tags: [imaging, Fourier, inverse-problems, medicine, applied]
+real_world_examples: [MRI brain scans, CT (computed tomography) for cancer detection, PET scanning, Ultrasound imaging]
+summary: Turning millions of measurements into a picture of the inside of a human body is a triumph of harmonic analysis and inverse problem theory.
+---
+
+
+## The application
+
+When a patient lies inside an MRI machine, no incision is made, no radiation is delivered, and yet within minutes a clinician can examine a three-dimensional image of the patient's brain with millimetre resolution. The same ability to reconstruct an interior from exterior measurements underpins CT scanning, PET imaging, and ultrasound. The mathematical ideas that make this possible are the Fourier transform and the Radon transform.
+
+## The maths behind it
+
+**CT scanning** uses X-rays fired through the body at hundreds of angles. The detector measures line integrals of tissue density along each ray: $Rf(\theta, s) = \int_{L(\theta,s)} f(x,y)\, dl$, where $f(x,y)$ is the unknown density function and $L(\theta,s)$ is the line at angle $\theta$ and signed distance $s$ from the origin. This is the **Radon transform**, introduced by Johann Radon in 1917. Reconstructing $f$ from its Radon transform is an inverse problem, solved in practice by **filtered back-projection**: apply the inverse Fourier transform to the projections, filter with a ramp filter in frequency space, then back-project (smear each filtered projection back across the image).
+
+The connection to Fourier analysis is given by the **projection-slice theorem**: the one-dimensional Fourier transform of a parallel projection at angle $\theta$ equals the values of the two-dimensional Fourier transform of $f$ along the corresponding slice through the origin. This means the measurements directly sample the Fourier transform of $f$; reconstruction is therefore a problem of inverting the Fourier transform from a finite, noisy sample.
+
+**MRI** measures the nuclear magnetic resonance of hydrogen protons. The raw measurements from an MRI scanner are samples of the **k-space** of the image — which is precisely the Fourier domain. Image reconstruction is then an inverse Fourier transform, with substantial signal processing to correct for hardware imperfections and motion artefacts.
+
+## A concrete example
+
+A typical brain MRI acquires on the order of $256 \times 256 \times 256$ voxels. The scanner fills k-space by varying magnetic field gradients; each readout sweeps a line through k-space at a different position. After acquiring perhaps 50,000 lines, a three-dimensional fast Fourier transform converts the k-space data to image space in milliseconds on modern hardware. The resulting volumetric image allows radiologists to detect tumours, strokes, and structural abnormalities invisible to X-rays.
+
+## History of the application
+
+Radon's 1917 paper establishing the mathematical framework lay dormant for decades. Allan Cormack independently derived reconstruction formulae in the 1960s; Godfrey Hounsfield built the first clinical CT scanner in 1971. Cormack and Hounsfield shared the 1979 Nobel Prize in Physiology or Medicine — an unusual honour for work that is fundamentally mathematical. MRI, pioneered by Paul Lauterbur and Peter Mansfield (Nobel 2003), followed in the 1970s–80s.
+
+## Links
+
+The Fourier transform is developed in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes) and placed in its functional-analytic setting in [Functional Analysis](/03-specialisation-year-three/02-functional-analysis). Inverse problem theory connects to [Advanced PDEs](/04-advanced-topics-year-four/03-advanced-pdes). Related applications include [Signal Processing: JPEG and MP3](/applications/signal-processing-jpeg-mp3) and [Radar and Sonar](/applications/radar-and-sonar).
