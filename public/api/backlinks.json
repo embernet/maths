@@ -1,28 +1,10 @@
 {
-  "euclid-s-algorithm": {
-    "attributed_to": [
-      "euclid"
-    ],
-    "appears_in_topics": [
-      "01-foundations/01-algebra-and-linear-algebra",
-      "02-core-mathematics/01-abstract-algebra",
-      "97-nature/01-the-golden-ratio",
-      "97-nature/03-phyllotaxis-and-the-golden-angle"
-    ],
-    "appears_in_eras": [
-      "02-classical-greece"
-    ],
-    "used_in_applications": [
-      "rsa-public-key-cryptography",
-      "error-correcting-codes",
-      "digital-signatures"
-    ]
-  },
   "euclid-s-elements": {
     "attributed_to": [
       "euclid"
     ],
     "appears_in_topics": [
+      "01-foundations/00-numbers-sets-and-proof",
       "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
@@ -33,14 +15,114 @@
       "computer-graphics-3d"
     ]
   },
-  "euclidean-geometry": {
+  "cantor-s-diagonal-argument": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_topics": [
+      "01-foundations/00-numbers-sets-and-proof",
+      "03-specialist-areas/12-set-theory",
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "cardinality-of-infinite-sets": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_topics": [
+      "01-foundations/00-numbers-sets-and-proof",
+      "03-specialist-areas/12-set-theory"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "dedekind-cuts-rigorous-construction-of-real-numbers": {
+    "attributed_to": [
+      "dedekind"
+    ],
+    "appears_in_topics": [
+      "01-foundations/00-numbers-sets-and-proof"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "formal-axiomatic-systems": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "01-foundations/00-numbers-sets-and-proof",
+      "03-specialist-areas/11-logic",
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "rsa-public-key-cryptography": {
+    "uses_theorems": [
+      "fermat-s-little-theorem",
+      "modular-arithmetic-and-number-theory",
+      "euclid-s-algorithm"
+    ],
+    "uses_topics": [
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra"
+    ]
+  },
+  "error-correcting-codes": {
+    "uses_theorems": [
+      "galois-theory",
+      "galois-groups",
+      "modular-arithmetic-and-number-theory"
+    ],
+    "uses_topics": [
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
+    ]
+  },
+  "data-compression": {
+    "uses_theorems": [
+      "axiomatic-foundations-of-probability",
+      "kolmogorov-complexity-algorithmic-information-theory"
+    ],
+    "uses_topics": [
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
+    ]
+  },
+  "euclid-s-algorithm": {
     "attributed_to": [
       "euclid"
     ],
     "appears_in_topics": [
       "01-foundations/01-algebra-and-linear-algebra",
-      "97-nature/07-honeycombs-and-the-hexagon-theorem",
-      "97-nature/08-voronoi-tessellations-in-nature"
+      "02-core-mathematics/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "02-classical-greece"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes",
+      "digital-signatures"
+    ]
+  },
+  "euclidean-geometry": {
+    "attributed_to": [
+      "euclid"
+    ],
+    "appears_in_topics": [
+      "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -58,8 +140,7 @@
     ],
     "appears_in_topics": [
       "01-foundations/01-algebra-and-linear-algebra",
-      "02-core-mathematics/01-abstract-algebra",
-      "96-lean4/13-fermat-little"
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -97,6 +178,8 @@
     "appears_in_topics": [
       "01-foundations/01-algebra-and-linear-algebra",
       "03-specialist-areas/05-numerical-analysis",
+      "03-specialist-areas/15-optimisation",
+      "04-advanced-topics/18-mathematics-of-machine-learning",
       "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
@@ -117,8 +200,7 @@
       "descartes"
     ],
     "appears_in_topics": [
-      "01-foundations/01-algebra-and-linear-algebra",
-      "97-nature/04-spirals-from-nautilus-to-galaxies"
+      "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -135,7 +217,8 @@
       "fermat"
     ],
     "appears_in_topics": [
-      "01-foundations/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "03-specialist-areas/17-projective-geometry"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -161,17 +244,6 @@
       "computer-graphics-3d",
       "bridge-and-structural-engineering",
       "robotics-and-control"
-    ]
-  },
-  "rsa-public-key-cryptography": {
-    "uses_theorems": [
-      "fermat-s-little-theorem",
-      "modular-arithmetic-and-number-theory",
-      "euclid-s-algorithm"
-    ],
-    "uses_topics": [
-      "01-foundations/01-algebra-and-linear-algebra",
-      "02-core-mathematics/01-abstract-algebra"
     ]
   },
   "pagerank-google": {
@@ -363,8 +435,7 @@
       "01-foundations/03-calculus-and-methods",
       "02-core-mathematics/04-vector-calculus-and-pdes",
       "04-advanced-topics/03-advanced-pdes",
-      "04-advanced-topics/04-mathematical-physics-and-fluids",
-      "97-nature/11-the-mathematics-of-sand-dunes-and-waves"
+      "04-advanced-topics/04-mathematical-physics-and-fluids"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -498,7 +569,8 @@
     ],
     "appears_in_topics": [
       "01-foundations/04-probability-and-statistics",
-      "02-core-mathematics/05-probability-and-statistical-inference"
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "04-advanced-topics/18-mathematics-of-machine-learning"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -521,7 +593,10 @@
       "01-foundations/04-probability-and-statistics",
       "02-core-mathematics/05-probability-and-statistical-inference",
       "03-specialist-areas/03-measure-and-lebesgue-integration",
-      "03-specialist-areas/07-stochastic-processes"
+      "03-specialist-areas/07-stochastic-processes",
+      "03-specialist-areas/14-information-theory",
+      "04-advanced-topics/13-statistical-mechanics",
+      "04-advanced-topics/16-mathematical-finance"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -545,11 +620,7 @@
     "appears_in_topics": [
       "01-foundations/04-probability-and-statistics",
       "03-specialist-areas/05-numerical-analysis",
-      "02-core-mathematics/05-probability-and-statistical-inference",
-      "97-nature/00-section-opener",
-      "97-nature/05-fractals-and-self-similarity",
-      "97-nature/10-allometric-scaling-and-kleibers-law",
-      "97-nature/12-the-genetic-code-as-mathematics"
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -682,6 +753,7 @@
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
       "03-specialist-areas/01-galois-theory",
+      "03-specialist-areas/10-representation-theory",
       "04-advanced-topics/01-algebraic-geometry"
     ],
     "appears_in_eras": [
@@ -699,7 +771,8 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
-      "03-specialist-areas/01-galois-theory"
+      "03-specialist-areas/01-galois-theory",
+      "03-specialist-areas/10-representation-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -715,7 +788,8 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
-      "03-specialist-areas/01-galois-theory"
+      "03-specialist-areas/01-galois-theory",
+      "03-specialist-areas/10-representation-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -730,6 +804,7 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/10-representation-theory",
       "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
@@ -747,7 +822,10 @@
       "noether"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/10-representation-theory",
+      "04-advanced-topics/06-differential-geometry",
+      "04-advanced-topics/08-lie-groups-and-lie-algebras"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -763,6 +841,8 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
+      "04-advanced-topics/07-algebraic-number-theory",
+      "04-advanced-topics/10-commutative-algebra",
       "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
@@ -778,7 +858,9 @@
       "dedekind"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra",
+      "04-advanced-topics/07-algebraic-number-theory",
+      "04-advanced-topics/10-commutative-algebra"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -793,6 +875,7 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
+      "04-advanced-topics/09-algebraic-curves",
       "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
@@ -810,7 +893,8 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/01-abstract-algebra",
-      "03-specialist-areas/08-differential-equations-advanced"
+      "03-specialist-areas/08-differential-equations-advanced",
+      "03-specialist-areas/15-optimisation"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -834,18 +918,6 @@
     ],
     "used_in_applications": [
       "error-correcting-codes"
-    ]
-  },
-  "error-correcting-codes": {
-    "uses_theorems": [
-      "galois-theory",
-      "galois-groups",
-      "modular-arithmetic-and-number-theory"
-    ],
-    "uses_topics": [
-      "01-foundations/01-algebra-and-linear-algebra",
-      "02-core-mathematics/01-abstract-algebra",
-      "03-specialist-areas/01-galois-theory"
     ]
   },
   "quantum-computing-algorithms": {
@@ -887,8 +959,7 @@
       "weierstrass"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/02-real-analysis-2",
-      "97-nature/05-fractals-and-self-similarity"
+      "02-core-mathematics/02-real-analysis-2"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -936,7 +1007,10 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/03-complex-analysis",
-      "04-advanced-topics/01-algebraic-geometry"
+      "04-advanced-topics/01-algebraic-geometry",
+      "04-advanced-topics/06-differential-geometry",
+      "04-advanced-topics/09-algebraic-curves",
+      "04-advanced-topics/11-riemann-surfaces"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -951,7 +1025,8 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/03-complex-analysis",
-      "04-advanced-topics/02-analytic-number-theory"
+      "04-advanced-topics/02-analytic-number-theory",
+      "04-advanced-topics/11-riemann-surfaces"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -966,7 +1041,8 @@
     ],
     "appears_in_topics": [
       "02-core-mathematics/03-complex-analysis",
-      "04-advanced-topics/02-analytic-number-theory"
+      "04-advanced-topics/02-analytic-number-theory",
+      "04-advanced-topics/11-riemann-surfaces"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -993,9 +1069,7 @@
       "fourier"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/04-vector-calculus-and-pdes",
-      "97-nature/09-turing-patterns-and-animal-coats",
-      "97-nature/11-the-mathematics-of-sand-dunes-and-waves"
+      "02-core-mathematics/04-vector-calculus-and-pdes"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1015,9 +1089,7 @@
       "fourier"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/04-vector-calculus-and-pdes",
-      "97-nature/00-section-opener",
-      "97-nature/11-the-mathematics-of-sand-dunes-and-waves"
+      "02-core-mathematics/04-vector-calculus-and-pdes"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1166,7 +1238,8 @@
       "euler"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "03-specialist-areas/13-combinatorics-and-graph-theory"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1182,7 +1255,8 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "03-specialist-areas/13-combinatorics-and-graph-theory"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1198,7 +1272,8 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "03-specialist-areas/13-combinatorics-and-graph-theory"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1213,7 +1288,8 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "03-specialist-areas/13-combinatorics-and-graph-theory"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1227,11 +1303,7 @@
       "fibonacci"
     ],
     "appears_in_topics": [
-      "02-core-mathematics/06-programming-and-discrete-mathematics",
-      "97-nature/00-section-opener",
-      "97-nature/01-the-golden-ratio",
-      "97-nature/02-fibonacci-numbers-in-nature",
-      "97-nature/03-phyllotaxis-and-the-golden-angle"
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -1266,16 +1338,6 @@
       "01-foundations/04-probability-and-statistics"
     ]
   },
-  "data-compression": {
-    "uses_theorems": [
-      "axiomatic-foundations-of-probability",
-      "kolmogorov-complexity-algorithmic-information-theory"
-    ],
-    "uses_topics": [
-      "01-foundations/04-probability-and-statistics",
-      "02-core-mathematics/06-programming-and-discrete-mathematics"
-    ]
-  },
   "characterisation-of-solvable-polynomials": {
     "attributed_to": [
       "galois"
@@ -1296,6 +1358,8 @@
     ],
     "appears_in_topics": [
       "03-specialist-areas/01-galois-theory",
+      "04-advanced-topics/09-algebraic-curves",
+      "04-advanced-topics/11-riemann-surfaces",
       "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
@@ -1311,7 +1375,9 @@
     ],
     "appears_in_topics": [
       "03-specialist-areas/01-galois-theory",
-      "04-advanced-topics/01-algebraic-geometry"
+      "04-advanced-topics/01-algebraic-geometry",
+      "04-advanced-topics/07-algebraic-number-theory",
+      "04-advanced-topics/10-commutative-algebra"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1418,7 +1484,8 @@
     ],
     "appears_in_topics": [
       "03-specialist-areas/03-measure-and-lebesgue-integration",
-      "03-specialist-areas/07-stochastic-processes"
+      "03-specialist-areas/07-stochastic-processes",
+      "04-advanced-topics/13-statistical-mechanics"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1445,7 +1512,8 @@
       "cantor"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/03-measure-and-lebesgue-integration"
+      "03-specialist-areas/03-measure-and-lebesgue-integration",
+      "03-specialist-areas/12-set-theory"
     ],
     "appears_in_eras": [
       "08-foundations-and-the-twentieth-century-crisis"
@@ -1481,7 +1549,8 @@
       "poincare"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/04-topology"
+      "03-specialist-areas/04-topology",
+      "04-advanced-topics/05-algebraic-topology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1496,7 +1565,9 @@
       "poincare"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/04-topology"
+      "03-specialist-areas/04-topology",
+      "03-specialist-areas/16-dynamical-systems",
+      "04-advanced-topics/05-algebraic-topology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1507,7 +1578,8 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/04-topology"
+      "03-specialist-areas/04-topology",
+      "03-specialist-areas/16-dynamical-systems"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1572,8 +1644,7 @@
       "turing"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/06-mathematical-biology",
-      "97-nature/09-turing-patterns-and-animal-coats"
+      "03-specialist-areas/06-mathematical-biology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1587,7 +1658,8 @@
       "poincare"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/06-mathematical-biology"
+      "03-specialist-areas/06-mathematical-biology",
+      "03-specialist-areas/16-dynamical-systems"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1613,7 +1685,8 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "03-specialist-areas/07-stochastic-processes"
+      "03-specialist-areas/07-stochastic-processes",
+      "03-specialist-areas/14-information-theory"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1639,12 +1712,318 @@
       "climate-modelling"
     ]
   },
+  "euler-lagrange-equation": {
+    "appears_in_topics": [
+      "03-specialist-areas/08-differential-equations-advanced",
+      "03-specialist-areas/15-optimisation"
+    ]
+  },
+  "hamiltons-principle": {
+    "appears_in_topics": [
+      "03-specialist-areas/08-differential-equations-advanced"
+    ]
+  },
+  "group-theory-foundations": {
+    "attributed_to": [
+      "lagrange"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/10-representation-theory",
+      "04-advanced-topics/08-lie-groups-and-lie-algebras",
+      "02-core-mathematics/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography",
+      "error-correcting-codes"
+    ]
+  },
+  "completeness-theorem-for-first-order-logic": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/11-logic"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "incompleteness-theorems-1931": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/11-logic",
+      "04-advanced-topics/05-algebraic-topology",
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "formal-logic": {
+    "attributed_to": [
+      "leibniz"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/11-logic",
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "halting-problem-undecidability": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/11-logic",
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "quantum-computing-algorithms"
+    ]
+  },
+  "hilbert-s-programme": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/11-logic",
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "contributions-to-modal-logic-and-ontology": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/11-logic"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "transfinite-numbers": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/12-set-theory"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "zorns-lemma": {
+    "appears_in_topics": [
+      "03-specialist-areas/12-set-theory"
+    ]
+  },
+  "russells-paradox": {
+    "appears_in_topics": [
+      "03-specialist-areas/12-set-theory"
+    ]
+  },
+  "contributions-to-set-theory-and-foundations": {
+    "attributed_to": [
+      "dedekind"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/12-set-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ]
+  },
+  "cantor-set": {
+    "attributed_to": [
+      "cantor"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/12-set-theory"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "signal-processing-jpeg-mp3"
+    ]
+  },
+  "consistency-of-the-continuum-hypothesis-with-zfc": {
+    "attributed_to": [
+      "godel"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/12-set-theory"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ]
+  },
+  "most-prolific-mathematician-in-history": {
+    "attributed_to": [
+      "euler"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/13-combinatorics-and-graph-theory"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ]
+  },
+  "prolific-collaborator-509-direct-collaborators": {
+    "attributed_to": [
+      "erdos"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/13-combinatorics-and-graph-theory"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "pagerank-google",
+      "recommender-systems",
+      "cybersecurity-anomaly-detection"
+    ]
+  },
+  "lagrange-multipliers": {
+    "attributed_to": [
+      "lagrange"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/15-optimisation"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "option-pricing-finance",
+      "robotics-and-control",
+      "climate-modelling"
+    ]
+  },
+  "traffic-flow-modelling": {
+    "uses_theorems": [
+      "heat-equation"
+    ],
+    "uses_topics": [
+      "01-foundations/03-calculus-and-methods",
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/08-differential-equations-advanced"
+    ]
+  },
+  "automorphic-functions": {
+    "attributed_to": [
+      "poincare"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/16-dynamical-systems"
+    ],
+    "appears_in_eras": [
+      "09-modern-mathematics"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "celestial-mechanics": {
+    "attributed_to": [
+      "laplace"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/16-dynamical-systems"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection",
+      "weather-forecasting"
+    ]
+  },
+  "weather-forecasting": {
+    "uses_theorems": [
+      "heat-equation",
+      "turbulence-theory-kolmogorov-scaling",
+      "fourier-series",
+      "gaussian-distribution-normal-distribution"
+    ],
+    "uses_topics": [
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "04-advanced-topics/04-mathematical-physics-and-fluids",
+      "03-specialist-areas/07-stochastic-processes"
+    ]
+  },
+  "pascal-s-theorem-on-hexagons-in-conics": {
+    "attributed_to": [
+      "pascal"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/17-projective-geometry"
+    ],
+    "appears_in_eras": [
+      "04-renaissance-and-symbolic-algebra"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d"
+    ]
+  },
+  "foundations-of-geometry": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/17-projective-geometry"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d",
+      "bridge-and-structural-engineering"
+    ]
+  },
+  "non-euclidean-geometry-unpublished": {
+    "attributed_to": [
+      "gauss"
+    ],
+    "appears_in_topics": [
+      "03-specialist-areas/17-projective-geometry"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection"
+    ]
+  },
   "riemannian-geometry": {
     "attributed_to": [
       "riemann"
     ],
     "appears_in_topics": [
-      "04-advanced-topics/01-algebraic-geometry"
+      "04-advanced-topics/01-algebraic-geometry",
+      "04-advanced-topics/06-differential-geometry",
+      "04-advanced-topics/08-lie-groups-and-lie-algebras",
+      "04-advanced-topics/14-general-relativity"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1672,6 +2051,8 @@
     ],
     "appears_in_topics": [
       "04-advanced-topics/02-analytic-number-theory",
+      "04-advanced-topics/07-algebraic-number-theory",
+      "04-advanced-topics/09-algebraic-curves",
       "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
@@ -1723,17 +2104,152 @@
       "airfoil-and-aerodynamics"
     ]
   },
-  "weather-forecasting": {
+  "contributions-to-algebraic-topology": {
+    "attributed_to": [
+      "noether"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/05-algebraic-topology",
+      "04-advanced-topics/11-riemann-surfaces"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "data-compression",
+      "machine-learning-deep-neural-networks"
+    ]
+  },
+  "fundamental-theorem-of-calculus": {
+    "attributed_to": [
+      "newton",
+      "leibniz",
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/06-differential-geometry",
+      "01-foundations/03-calculus-and-methods",
+      "02-core-mathematics/02-real-analysis-2"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
+  "gravitational-wave-detection": {
     "uses_theorems": [
-      "heat-equation",
-      "turbulence-theory-kolmogorov-scaling",
-      "fourier-series",
-      "gaussian-distribution-normal-distribution"
+      "fourier-transform",
+      "gaussian-distribution-normal-distribution",
+      "riemannian-geometry"
     ],
     "uses_topics": [
       "02-core-mathematics/04-vector-calculus-and-pdes",
-      "04-advanced-topics/04-mathematical-physics-and-fluids",
-      "03-specialist-areas/07-stochastic-processes"
+      "03-specialist-areas/05-numerical-analysis",
+      "04-advanced-topics/04-mathematical-physics-and-fluids"
+    ]
+  },
+  "hilbert-s-23-problems": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/07-algebraic-number-theory",
+      "04-advanced-topics/10-commutative-algebra"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "invariant-theory": {
+    "attributed_to": [
+      "hilbert"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/08-lie-groups-and-lie-algebras",
+      "04-advanced-topics/10-commutative-algebra",
+      "03-specialist-areas/01-galois-theory"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "computer-graphics-3d"
+    ]
+  },
+  "noetherian-rings": {
+    "attributed_to": [
+      "noether"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/10-commutative-algebra",
+      "02-core-mathematics/01-abstract-algebra"
+    ],
+    "appears_in_eras": [
+      "07-the-structural-turn"
+    ],
+    "used_in_applications": [
+      "error-correcting-codes"
+    ]
+  },
+  "elliptic-integrals-and-elliptic-functions": {
+    "attributed_to": [
+      "abel"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/11-riemann-surfaces"
+    ],
+    "appears_in_eras": [
+      "06-the-rigour-revolution"
+    ],
+    "used_in_applications": [
+      "gps-positioning",
+      "gravitational-wave-detection"
+    ]
+  },
+  "turing-machines-theory-of-computation": {
+    "attributed_to": [
+      "turing"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/12-godels-incompleteness-theorems"
+    ],
+    "appears_in_eras": [
+      "08-foundations-and-the-twentieth-century-crisis"
+    ],
+    "used_in_applications": [
+      "machine-learning-deep-neural-networks",
+      "rsa-public-key-cryptography"
+    ]
+  },
+  "law-of-large-numbers": {
+    "attributed_to": [
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "04-advanced-topics/13-statistical-mechanics",
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "actuarial-science",
+      "gambling-and-game-theory",
+      "census-and-survey-statistics",
+      "epidemiological-modelling"
+    ]
+  },
+  "black-scholes-equation": {
+    "appears_in_topics": [
+      "04-advanced-topics/16-mathematical-finance"
     ]
   },
   "a-mathematician-s-apology": {
@@ -1757,21 +2273,6 @@
       "machine-learning-deep-neural-networks"
     ]
   },
-  "turing-machines-theory-of-computation": {
-    "attributed_to": [
-      "turing"
-    ],
-    "appears_in_topics": [
-      "97-nature/09-turing-patterns-and-animal-coats"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "machine-learning-deep-neural-networks",
-      "rsa-public-key-cryptography"
-    ]
-  },
   "approximation-of": {
     "attributed_to": [
       "archimedes"
@@ -1790,35 +2291,6 @@
     ],
     "appears_in_eras": [
       "02-classical-greece"
-    ]
-  },
-  "automorphic-functions": {
-    "attributed_to": [
-      "poincare"
-    ],
-    "appears_in_eras": [
-      "09-modern-mathematics"
-    ],
-    "used_in_applications": [
-      "rsa-public-key-cryptography"
-    ]
-  },
-  "law-of-large-numbers": {
-    "attributed_to": [
-      "bernoulli-family"
-    ],
-    "appears_in_topics": [
-      "01-foundations/04-probability-and-statistics",
-      "02-core-mathematics/05-probability-and-statistical-inference"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ],
-    "used_in_applications": [
-      "actuarial-science",
-      "gambling-and-game-theory",
-      "census-and-survey-statistics",
-      "epidemiological-modelling"
     ]
   },
   "banachtarski-paradox": {
@@ -1857,9 +2329,6 @@
     "attributed_to": [
       "newton"
     ],
-    "appears_in_topics": [
-      "97-nature/12-the-genetic-code-as-mathematics"
-    ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
     ],
@@ -1867,17 +2336,6 @@
       "option-pricing-finance",
       "machine-learning-bayesian-inference",
       "error-correcting-codes"
-    ]
-  },
-  "pascal-s-triangle": {
-    "attributed_to": [
-      "pascal"
-    ],
-    "appears_in_eras": [
-      "04-renaissance-and-symbolic-algebra"
-    ],
-    "used_in_applications": [
-      "option-pricing-finance"
     ]
   },
   "brachistochrone-and-early-calculus-johann": {
@@ -1903,58 +2361,6 @@
       "rsa-public-key-cryptography"
     ]
   },
-  "fundamental-theorem-of-calculus": {
-    "attributed_to": [
-      "newton",
-      "leibniz",
-      "bernoulli-family"
-    ],
-    "appears_in_topics": [
-      "01-foundations/03-calculus-and-methods",
-      "02-core-mathematics/02-real-analysis-2"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ],
-    "used_in_applications": [
-      "climate-modelling",
-      "signal-processing-jpeg-mp3",
-      "option-pricing-finance"
-    ]
-  },
-  "cantor-s-diagonal-argument": {
-    "attributed_to": [
-      "cantor"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "quantum-computing-algorithms"
-    ]
-  },
-  "cantor-set": {
-    "attributed_to": [
-      "cantor"
-    ],
-    "appears_in_topics": [
-      "97-nature/05-fractals-and-self-similarity"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "signal-processing-jpeg-mp3"
-    ]
-  },
-  "cardinality-of-infinite-sets": {
-    "attributed_to": [
-      "cantor"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
   "cauchys-integral-theorem": {
     "attributed_to": [
       "cauchy"
@@ -1969,19 +2375,6 @@
       "signal-processing-jpeg-mp3",
       "option-pricing-finance",
       "quantum-computing-algorithms"
-    ]
-  },
-  "celestial-mechanics": {
-    "attributed_to": [
-      "laplace"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ],
-    "used_in_applications": [
-      "gps-positioning",
-      "gravitational-wave-detection",
-      "weather-forecasting"
     ]
   },
   "central-limit-theorem": {
@@ -2003,25 +2396,6 @@
       "actuarial-science"
     ]
   },
-  "completeness-theorem-for-first-order-logic": {
-    "attributed_to": [
-      "godel"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
-  "incompleteness-theorems-1931": {
-    "attributed_to": [
-      "godel"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "quantum-computing-algorithms"
-    ]
-  },
   "connection-of-algebra-to-geometry": {
     "attributed_to": [
       "descartes"
@@ -2031,61 +2405,6 @@
     ],
     "used_in_applications": [
       "computer-graphics-3d"
-    ]
-  },
-  "consistency-of-the-continuum-hypothesis-with-zfc": {
-    "attributed_to": [
-      "godel"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
-  "hilbert-s-23-problems": {
-    "attributed_to": [
-      "hilbert"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "rsa-public-key-cryptography"
-    ]
-  },
-  "contributions-to-algebraic-topology": {
-    "attributed_to": [
-      "noether"
-    ],
-    "appears_in_eras": [
-      "07-the-structural-turn"
-    ],
-    "used_in_applications": [
-      "data-compression",
-      "machine-learning-deep-neural-networks"
-    ]
-  },
-  "contributions-to-modal-logic-and-ontology": {
-    "attributed_to": [
-      "godel"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
-  "contributions-to-set-theory-and-foundations": {
-    "attributed_to": [
-      "dedekind"
-    ],
-    "appears_in_eras": [
-      "06-the-rigour-revolution"
-    ]
-  },
-  "dedekind-cuts-rigorous-construction-of-real-numbers": {
-    "attributed_to": [
-      "dedekind"
-    ],
-    "appears_in_eras": [
-      "06-the-rigour-revolution"
     ]
   },
   "dirichlet-convergence-theorem": {
@@ -2104,29 +2423,6 @@
   "discovery-of-irrational-numbers": {
     "attributed_to": [
       "pythagoras"
-    ],
-    "appears_in_topics": [
-      "96-lean4/09-sqrt-two-irrational"
-    ],
-    "appears_in_eras": [
-      "02-classical-greece"
-    ]
-  },
-  "elliptic-integrals-and-elliptic-functions": {
-    "attributed_to": [
-      "abel"
-    ],
-    "appears_in_eras": [
-      "06-the-rigour-revolution"
-    ],
-    "used_in_applications": [
-      "gps-positioning",
-      "gravitational-wave-detection"
-    ]
-  },
-  "proof-by-contradiction": {
-    "attributed_to": [
-      "euclid"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -2179,49 +2475,6 @@
       "option-pricing-finance"
     ]
   },
-  "formal-axiomatic-systems": {
-    "attributed_to": [
-      "hilbert"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
-  "formal-logic": {
-    "attributed_to": [
-      "leibniz"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ]
-  },
-  "foundations-of-geometry": {
-    "attributed_to": [
-      "hilbert"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "computer-graphics-3d",
-      "bridge-and-structural-engineering"
-    ]
-  },
-  "group-theory-foundations": {
-    "attributed_to": [
-      "lagrange"
-    ],
-    "appears_in_topics": [
-      "02-core-mathematics/01-abstract-algebra"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ],
-    "used_in_applications": [
-      "rsa-public-key-cryptography",
-      "error-correcting-codes"
-    ]
-  },
   "hahn-banach-theorem": {
     "attributed_to": [
       "banach"
@@ -2233,17 +2486,6 @@
       "machine-learning-deep-neural-networks",
       "option-pricing-finance",
       "signal-processing-jpeg-mp3"
-    ]
-  },
-  "halting-problem-undecidability": {
-    "attributed_to": [
-      "turing"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ],
-    "used_in_applications": [
-      "quantum-computing-algorithms"
     ]
   },
   "hardy-spaces-complex-analysis": {
@@ -2273,9 +2515,6 @@
     "attributed_to": [
       "hardy"
     ],
-    "appears_in_topics": [
-      "97-nature/12-the-genetic-code-as-mathematics"
-    ],
     "appears_in_eras": [
       "09-modern-mathematics"
     ],
@@ -2296,14 +2535,6 @@
       "data-compression"
     ]
   },
-  "hilbert-s-programme": {
-    "attributed_to": [
-      "hilbert"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
   "introduced-hindu-arabic-numerals-to-europe-via-liber-abaci": {
     "attributed_to": [
       "fibonacci"
@@ -2318,34 +2549,6 @@
     ],
     "appears_in_eras": [
       "03-islamic-golden-age"
-    ]
-  },
-  "invariant-theory": {
-    "attributed_to": [
-      "hilbert"
-    ],
-    "appears_in_topics": [
-      "03-specialist-areas/01-galois-theory"
-    ],
-    "appears_in_eras": [
-      "06-the-rigour-revolution"
-    ],
-    "used_in_applications": [
-      "computer-graphics-3d"
-    ]
-  },
-  "lagrange-multipliers": {
-    "attributed_to": [
-      "lagrange"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ],
-    "used_in_applications": [
-      "machine-learning-deep-neural-networks",
-      "option-pricing-finance",
-      "robotics-and-control",
-      "climate-modelling"
     ]
   },
   "law-of-cosines": {
@@ -2401,14 +2604,6 @@
       "09-modern-mathematics"
     ]
   },
-  "most-prolific-mathematician-in-history": {
-    "attributed_to": [
-      "euler"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ]
-  },
   "musical-ratios-and-the-harmonic-series": {
     "attributed_to": [
       "pythagoras"
@@ -2429,32 +2624,6 @@
     ],
     "used_in_applications": [
       "rsa-public-key-cryptography"
-    ]
-  },
-  "noetherian-rings": {
-    "attributed_to": [
-      "noether"
-    ],
-    "appears_in_topics": [
-      "02-core-mathematics/01-abstract-algebra"
-    ],
-    "appears_in_eras": [
-      "07-the-structural-turn"
-    ],
-    "used_in_applications": [
-      "error-correcting-codes"
-    ]
-  },
-  "non-euclidean-geometry-unpublished": {
-    "attributed_to": [
-      "gauss"
-    ],
-    "appears_in_eras": [
-      "06-the-rigour-revolution"
-    ],
-    "used_in_applications": [
-      "gps-positioning",
-      "gravitational-wave-detection"
     ]
   },
   "notation-e-i-f-x-popularised": {
@@ -2488,7 +2657,7 @@
       "quantum-computing-algorithms"
     ]
   },
-  "pascal-s-theorem-on-hexagons-in-conics": {
+  "pascal-s-triangle": {
     "attributed_to": [
       "pascal"
     ],
@@ -2496,7 +2665,7 @@
       "04-renaissance-and-symbolic-algebra"
     ],
     "used_in_applications": [
-      "computer-graphics-3d"
+      "option-pricing-finance"
     ]
   },
   "philosophical-monadology": {
@@ -2518,9 +2687,6 @@
   "population-genetics-modern-synthesis": {
     "attributed_to": [
       "fisher"
-    ],
-    "appears_in_topics": [
-      "97-nature/12-the-genetic-code-as-mathematics"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -2559,17 +2725,12 @@
       "airfoil-and-aerodynamics"
     ]
   },
-  "prolific-collaborator-509-direct-collaborators": {
+  "proof-by-contradiction": {
     "attributed_to": [
-      "erdos"
+      "euclid"
     ],
     "appears_in_eras": [
-      "09-modern-mathematics"
-    ],
-    "used_in_applications": [
-      "pagerank-google",
-      "recommender-systems",
-      "cybersecurity-anomaly-detection"
+      "02-classical-greece"
     ]
   },
   "published-cubic-and-quartic-formulas": {
@@ -2607,14 +2768,6 @@
       "06-the-rigour-revolution"
     ]
   },
-  "transfinite-numbers": {
-    "attributed_to": [
-      "cantor"
-    ],
-    "appears_in_eras": [
-      "08-foundations-and-the-twentieth-century-crisis"
-    ]
-  },
   "turing-test-artificial-intelligence": {
     "attributed_to": [
       "turing"
@@ -2638,18 +2791,6 @@
       "03-specialist-areas/07-stochastic-processes"
     ]
   },
-  "gravitational-wave-detection": {
-    "uses_theorems": [
-      "fourier-transform",
-      "gaussian-distribution-normal-distribution",
-      "riemannian-geometry"
-    ],
-    "uses_topics": [
-      "02-core-mathematics/04-vector-calculus-and-pdes",
-      "03-specialist-areas/05-numerical-analysis",
-      "04-advanced-topics/04-mathematical-physics-and-fluids"
-    ]
-  },
   "radar-and-sonar": {
     "uses_theorems": [
       "fourier-transform",
@@ -2669,16 +2810,6 @@
     "uses_topics": [
       "01-foundations/01-algebra-and-linear-algebra",
       "03-specialist-areas/05-numerical-analysis"
-    ]
-  },
-  "traffic-flow-modelling": {
-    "uses_theorems": [
-      "heat-equation"
-    ],
-    "uses_topics": [
-      "01-foundations/03-calculus-and-methods",
-      "02-core-mathematics/04-vector-calculus-and-pdes",
-      "03-specialist-areas/08-differential-equations-advanced"
     ]
   }
 }

@@ -10,6 +10,12 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+interface SuggestedPreReading {
+  kind: string;
+  ref: string;
+  why: string;
+}
+
 interface Props {
   frontmatter: {
     title: string;
@@ -22,6 +28,8 @@ interface Props {
     mathematicians?: string[];
     reading_time_min?: number;
     summary?: string;
+    node_type?: string;
+    suggested_pre_reading?: SuggestedPreReading[];
   };
   /** Absolute path to the MDX file being rendered (passed by Astro content machinery) */
   file?: string;
@@ -41,6 +49,41 @@ if (file) {
     }
   }
 }
+
+// Load search index once to resolve pre-reading entry titles
+const indexPath = join(process.cwd(), 'public', 'api', 'index.json');
+let searchIndex: Array<{ url: string; title: string; slug: string }> = [];
+if (existsSync(indexPath)) {
+  try {
+    searchIndex = JSON.parse(readFileSync(indexPath, 'utf8'));
+  } catch {
+    // Index not yet built — fall back to slug-derived labels.
+  }
+}
+
+function resolvePreReadingHref(kind: string, ref: string): string {
+  switch (kind) {
+    case 'topic':        return `/${ref}`;
+    case 'theorem':      return `/theorems/${ref}`;
+    case 'application':  return `/applications/${ref}`;
+    case 'mathematician': return `/mathematicians/${ref}`;
+    case 'history':      return `/90-history/${ref}`;
+    case 'definition':   return `/definitions/${ref}`;
+    case 'nature':       return `/97-nature/${ref}`;
+    default:             return `/${ref}`;
+  }
+}
+
+function resolvePreReadingTitle(kind: string, ref: string): string {
+  const href = resolvePreReadingHref(kind, ref);
+  const entry = searchIndex.find(r => r.url === href);
+  if (entry) return entry.title;
+  // Fall back: humanise the final path segment
+  const last = ref.split('/').pop() ?? ref;
+  return last.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+const preReading = frontmatter.suggested_pre_reading ?? [];
 ---
 
 <BaseLayout title={frontmatter.title} description={frontmatter.summary}>
@@ -76,6 +119,23 @@ if (file) {
           </p>
         )}
       </header>
+
+      {preReading.length > 0 && (
+        <section class="suggested-pre-reading" aria-label="Suggested pre-reading">
+          <h2>Suggested pre-reading</h2>
+          <ul>
+            {preReading.map((entry) => (
+              <li>
+                <a href={resolvePreReadingHref(entry.kind, entry.ref)}>
+                  {resolvePreReadingTitle(entry.kind, entry.ref)}
+                </a>
+                {' '}&mdash;{' '}
+                <em>{entry.why}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <slot />
 
@@ -142,6 +202,54 @@ if (file) {
     border-radius: 0.4rem;
     padding: 0.5rem 0.85rem;
     margin-top: 0.75rem;
+  }
+
+  .suggested-pre-reading {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 0.45rem 0.45rem 0;
+    padding: 0.9rem 1.1rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+
+  .suggested-pre-reading h2 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.6rem;
+  }
+
+  .suggested-pre-reading ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .suggested-pre-reading li {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .suggested-pre-reading a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .suggested-pre-reading a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .suggested-pre-reading em {
+    color: var(--color-muted);
+    font-style: italic;
   }
 
   .quiz-island {

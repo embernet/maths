@@ -9,6 +9,7 @@ import Sidebar from '../../components/Sidebar.astro';
 import Quiz from '../../components/Quiz.astro';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import yaml from 'js-yaml';
 
 export async function getStaticPaths() {
   const contentDir = join(process.cwd(), 'content');
@@ -46,15 +47,20 @@ function parseFrontmatter(fp: string): Record<string, unknown> {
   if (!text.startsWith('---')) return {};
   const end = text.indexOf('\n---', 3);
   if (end === -1) return {};
-  const yaml = text.slice(3, end).trim();
+  const yamlBlock = text.slice(3, end).trim();
+  try {
+    const parsed = yaml.load(yamlBlock);
+    if (parsed && typeof parsed === 'object') return parsed as Record<string, unknown>;
+  } catch { /* fall through to simple parser */ }
+  // Simple fallback
   const result: Record<string, unknown> = {};
-  for (const line of yaml.split('\n')) {
+  for (const line of yamlBlock.split('\n')) {
     const m = line.match(/^([\w_]+)\s*:\s*(.*)/);
     if (!m) continue;
     const [, key, rawVal] = m;
     const val = rawVal.trim();
     if (val.startsWith('[')) {
-      result[key] = val.slice(1,-1).split(',').map((v)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
+      result[key] = val.slice(1,-1).split(',').map((v: string)=>v.trim().replace(/^["']|["']$/g,'')).filter(Boolean);
     } else {
       result[key] = val.replace(/^["']|["']$/g, '');
     }
@@ -93,6 +99,38 @@ const summary = fm.summary as string | undefined;
 // v1.1 fields
 const theorems = (fm.theorems as string[]) ?? [];
 const applications = (fm.applications as string[]) ?? [];
+
+// v1.2 fields
+interface SuggestedPreReading { kind: string; ref: string; why: string; }
+const suggestedPreReading = (fm.suggested_pre_reading as SuggestedPreReading[]) ?? [];
+
+// Load search index for pre-reading title lookup
+const indexPath = join(process.cwd(), 'public', 'api', 'index.json');
+let searchIndex: Array<{ url: string; title: string }> = [];
+if (existsSync(indexPath)) {
+  try { searchIndex = JSON.parse(readFileSync(indexPath, 'utf8')); } catch { /* ignore */ }
+}
+
+function resolvePreReadingHref(kind: string, ref: string): string {
+  switch (kind) {
+    case 'topic':         return `/${ref}`;
+    case 'theorem':       return `/theorems/${ref}`;
+    case 'application':   return `/applications/${ref}`;
+    case 'mathematician': return `/mathematicians/${ref}`;
+    case 'history':       return `/90-history/${ref}`;
+    case 'definition':    return `/definitions/${ref}`;
+    case 'nature':        return `/97-nature/${ref}`;
+    default:              return `/${ref}`;
+  }
+}
+
+function resolvePreReadingTitle(kind: string, ref: string): string {
+  const href = resolvePreReadingHref(kind, ref);
+  const entry = searchIndex.find(r => r.url === href);
+  if (entry) return entry.title;
+  const last = ref.split('/').pop() ?? ref;
+  return last.replace(/^\d+-/, '').replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+}
 
 // Load colocated quiz.json if present
 const quizPath = join(topicDir, 'quiz.json');
@@ -147,6 +185,23 @@ if (topicPages[matchKey]) {
           </p>
         )}
       </header>
+
+      {suggestedPreReading.length > 0 && (
+        <section class="suggested-pre-reading" aria-label="Suggested pre-reading">
+          <h2>Suggested pre-reading</h2>
+          <ul>
+            {suggestedPreReading.map((entry) => (
+              <li>
+                <a href={resolvePreReadingHref(entry.kind, entry.ref)}>
+                  {resolvePreReadingTitle(entry.kind, entry.ref)}
+                </a>
+                {' '}&mdash;{' '}
+                <em>{entry.why}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {Content ? (
         <div class="topic-body">
@@ -301,4 +356,52 @@ if (topicPages[matchKey]) {
     transition: color 0.12s;
   }
   .sidebar-list a:hover { color: var(--color-accent); }
+
+  .suggested-pre-reading {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 0.45rem 0.45rem 0;
+    padding: 0.9rem 1.1rem;
+    margin: 1.25rem 0 1.75rem;
+  }
+
+  .suggested-pre-reading h2 {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-muted);
+    margin: 0 0 0.6rem;
+  }
+
+  .suggested-pre-reading ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .suggested-pre-reading li {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .suggested-pre-reading a {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .suggested-pre-reading a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .suggested-pre-reading em {
+    color: var(--color-muted);
+    font-style: italic;
+  }
 </style>

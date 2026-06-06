@@ -1,0 +1,616 @@
+---
+/**
+ * /graph — Knowledge Graph view
+ * Cytoscape.js canvas (left ~60%) + side panel (right ~40%)
+ * Data source: /api/graph.json generated at build time by build-index.mjs
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Knowledge Graph" description="Visual map of mathematics — explore topics, theorems, applications, mathematicians, and their connections.">
+  <div class="graph-page" id="graph-page">
+
+    <!-- Search bar (top-left, overlaid on canvas) -->
+    <div class="graph-toolbar">
+      <label for="graph-search" class="sr-only">Filter nodes by name</label>
+      <input
+        type="search"
+        id="graph-search"
+        class="graph-search"
+        placeholder="Filter nodes…"
+        autocomplete="off"
+        aria-label="Filter graph nodes by name"
+      />
+      <span class="graph-node-count" id="graph-node-count" aria-live="polite"></span>
+    </div>
+
+    <!-- Legend (top-right, collapsible) -->
+    <div class="graph-legend" id="graph-legend">
+      <button class="legend-toggle" id="legend-toggle" aria-expanded="true" aria-controls="legend-body">
+        Legend <span class="legend-chevron" aria-hidden="true">▲</span>
+      </button>
+      <div id="legend-body" class="legend-body">
+        <ul id="legend-list" class="legend-list"></ul>
+      </div>
+    </div>
+
+    <!-- Cytoscape canvas -->
+    <div class="graph-canvas-wrapper">
+      <div id="cy" class="cy-canvas" aria-label="Mathematics knowledge graph" role="img"></div>
+      <div class="graph-loading" id="graph-loading" aria-live="polite">Loading graph…</div>
+    </div>
+
+    <!-- Side panel -->
+    <aside class="graph-side-panel" id="graph-side-panel" aria-label="Selected node detail">
+      <div class="side-panel-placeholder" id="side-panel-placeholder">
+        <p>Click a node to read its article.</p>
+      </div>
+      <div class="side-panel-content" id="side-panel-content" hidden></div>
+    </aside>
+
+  </div>
+</BaseLayout>
+
+<!-- Cytoscape + fcose from CDN -->
+<script is:inline src="https://unpkg.com/cytoscape@3/dist/cytoscape.min.js"></script>
+<script is:inline src="https://unpkg.com/cytoscape-fcose@2/dist/cytoscape-fcose.js"></script>
+
+<script is:inline>
+(function () {
+
+  // ── Colour palette (per v1.2 §3) ──────────────────────────────────────────
+  var NODE_COLOURS = {
+    topic:         '#1a3a52',
+    theorem:       '#a77b3f',
+    application:   '#5a7a3f',
+    mathematician: '#6a3a5e',
+    history:       '#a7553f',
+    definition:    '#5a6a7a',
+    nature:        '#3f8a5a',
+  };
+  var DEFAULT_COLOUR = '#888';
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  var cy = null;
+  var graphData = null;
+  var currentFilter = '';
+
+  // ── DOM refs ──────────────────────────────────────────────────────────────
+  var cyEl           = document.getElementById('cy');
+  var loadingEl      = document.getElementById('graph-loading');
+  var sideContent    = document.getElementById('side-panel-content');
+  var sidePlaceholder= document.getElementById('side-panel-placeholder');
+  var searchInput    = document.getElementById('graph-search');
+  var nodeCountEl    = document.getElementById('graph-node-count');
+  var legendList     = document.getElementById('legend-list');
+  var legendToggle   = document.getElementById('legend-toggle');
+  var legendBody     = document.getElementById('legend-body');
+
+  // ── Legend ────────────────────────────────────────────────────────────────
+  function buildLegend(nodes) {
+    var counts = {};
+    for (var i = 0; i < nodes.length; i++) {
+      var t = nodes[i].node_type || 'unknown';
+      counts[t] = (counts[t] || 0) + 1;
+    }
+    legendList.innerHTML = '';
+    Object.keys(NODE_COLOURS).forEach(function (type) {
+      if (!counts[type]) return;
+      var li = document.createElement('li');
+      li.className = 'legend-item';
+      li.innerHTML =
+        '<span class="legend-swatch" style="background:' + NODE_COLOURS[type] + '"></span>' +
+        '<span class="legend-label">' + type.charAt(0).toUpperCase() + type.slice(1) + '</span>' +
+        '<span class="legend-count">' + (counts[type] || 0) + '</span>';
+      legendList.appendChild(li);
+    });
+  }
+
+  legendToggle.addEventListener('click', function () {
+    var expanded = legendToggle.getAttribute('aria-expanded') === 'true';
+    legendToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    legendBody.hidden = expanded;
+    legendToggle.querySelector('.legend-chevron').textContent = expanded ? '▼' : '▲';
+  });
+
+  // ── Cytoscape style factory ───────────────────────────────────────────────
+  function cytoscapeStyle() {
+    return [
+      {
+        selector: 'node',
+        style: {
+          'background-color': function (ele) {
+            return NODE_COLOURS[ele.data('node_type')] || DEFAULT_COLOUR;
+          },
+          'label': 'data(label)',
+          'font-size': 9,
+          'color': '#fff',
+          'text-valign': 'center',
+          'text-halign': 'center',
+          'text-wrap': 'ellipsis',
+          'text-max-width': 60,
+          'width': 22,
+          'height': 22,
+          'border-width': 0,
+          'min-zoomed-font-size': 8,
+        },
+      },
+      {
+        selector: 'node[?forthcoming]',
+        style: {
+          'opacity': 0.35,
+          'border-width': 2,
+          'border-style': 'dashed',
+          'border-color': '#888',
+          'cursor': 'default',
+        },
+      },
+      {
+        selector: 'node:selected',
+        style: {
+          'border-width': 3,
+          'border-color': '#fff',
+          'width': 30,
+          'height': 30,
+        },
+      },
+      {
+        selector: 'node.faded',
+        style: { 'opacity': 0.15 },
+      },
+      {
+        selector: 'edge',
+        style: {
+          'width': 1,
+          'line-color': '#cbd5e0',
+          'opacity': 0.55,
+          'curve-style': 'bezier',
+        },
+      },
+      {
+        selector: 'edge[type="pre-reading"]',
+        style: {
+          'width': 1,
+          'line-color': '#a0aec0',
+          'target-arrow-shape': 'triangle',
+          'target-arrow-color': '#a0aec0',
+          'arrow-scale': 0.7,
+          'opacity': 0.65,
+        },
+      },
+      {
+        selector: 'edge[type="related"]',
+        style: {
+          'width': 2,
+          'line-color': '#90cdf4',
+          'opacity': 0.5,
+        },
+      },
+      {
+        selector: 'edge.faded',
+        style: { 'opacity': 0.06 },
+      },
+    ];
+  }
+
+  // ── Filter / search ───────────────────────────────────────────────────────
+  function applyFilter(q) {
+    currentFilter = q.toLowerCase().trim();
+    if (!cy) return;
+    if (!currentFilter) {
+      cy.nodes().removeClass('faded').style('display', 'element');
+      cy.edges().removeClass('faded').style('display', 'element');
+      updateNodeCount(cy.nodes(':visible').length);
+      return;
+    }
+    cy.nodes().forEach(function (n) {
+      var label = (n.data('label') || '').toLowerCase();
+      var matches = label.includes(currentFilter);
+      n.style('display', matches ? 'element' : 'none');
+    });
+    cy.edges().forEach(function (e) {
+      var srcVisible = e.source().style('display') !== 'none';
+      var tgtVisible = e.target().style('display') !== 'none';
+      e.style('display', srcVisible && tgtVisible ? 'element' : 'none');
+    });
+    updateNodeCount(cy.nodes(':visible').length);
+  }
+
+  function updateNodeCount(n) {
+    nodeCountEl.textContent = n + ' node' + (n !== 1 ? 's' : '');
+  }
+
+  searchInput.addEventListener('input', function () {
+    applyFilter(searchInput.value);
+  });
+
+  // ── Side panel ────────────────────────────────────────────────────────────
+  function showSidePanel(html) {
+    sidePlaceholder.hidden = true;
+    sideContent.hidden = false;
+    sideContent.innerHTML = html;
+  }
+
+  function resetSidePanel() {
+    sideContent.hidden = true;
+    sideContent.innerHTML = '';
+    sidePlaceholder.hidden = false;
+  }
+
+  function loadNodeArticle(url) {
+    showSidePanel('<p class="side-loading">Loading…</p>');
+    fetch(url)
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(html, 'text/html');
+        // Try .topic-article first, then .prose-content, then <article>
+        var article =
+          doc.querySelector('.topic-article') ||
+          doc.querySelector('.prose-content') ||
+          doc.querySelector('article');
+        if (article) {
+          // Make links open in a new tab so they don't navigate away from /graph
+          article.querySelectorAll('a[href]').forEach(function (a) {
+            var href = a.getAttribute('href');
+            if (href && !href.startsWith('#')) {
+              a.setAttribute('target', '_blank');
+              a.setAttribute('rel', 'noopener noreferrer');
+            }
+          });
+          showSidePanel(article.outerHTML);
+        } else {
+          showSidePanel('<p class="side-error">Could not load article content.</p>');
+        }
+      })
+      .catch(function () {
+        showSidePanel('<p class="side-error">Failed to fetch article.</p>');
+      });
+  }
+
+  // ── Build Cytoscape elements from graph.json ───────────────────────────────
+  function buildElements(data) {
+    var elements = [];
+    for (var i = 0; i < data.nodes.length; i++) {
+      var n = data.nodes[i];
+      elements.push({
+        group: 'nodes',
+        data: {
+          id: n.id,
+          label: n.label || n.id,
+          node_type: n.node_type,
+          url: n.url,
+          summary: n.summary || '',
+          forthcoming: n.forthcoming || false,
+        },
+      });
+    }
+    for (var j = 0; j < data.edges.length; j++) {
+      var e = data.edges[j];
+      // Skip edges where either endpoint is missing from nodes
+      elements.push({
+        group: 'edges',
+        data: {
+          id: 'e-' + j,
+          source: e.source,
+          target: e.target,
+          type: e.type,
+        },
+      });
+    }
+    return elements;
+  }
+
+  // ── Main: fetch graph.json and initialise Cytoscape ──────────────────────
+  fetch('/api/graph.json')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      graphData = data;
+      loadingEl.hidden = true;
+      buildLegend(data.nodes);
+
+      if (typeof cytoscape === 'undefined') {
+        loadingEl.textContent = 'Cytoscape library failed to load.';
+        loadingEl.hidden = false;
+        return;
+      }
+
+      // Register fcose if available
+      if (typeof cytoscapeFcose !== 'undefined') {
+        cytoscape.use(cytoscapeFcose);
+      }
+
+      cy = cytoscape({
+        container: cyEl,
+        elements: buildElements(data),
+        style: cytoscapeStyle(),
+        layout: {
+          name: typeof cytoscapeFcose !== 'undefined' ? 'fcose' : 'cose',
+          animate: false,
+          randomize: false,
+          quality: 'proof',
+          nodeRepulsion: 4500,
+          idealEdgeLength: 80,
+          edgeElasticity: 0.45,
+          nestingFactor: 0.1,
+          gravity: 0.25,
+          numIter: 2500,
+          tile: true,
+          tilingPaddingVertical: 10,
+          tilingPaddingHorizontal: 10,
+        },
+        minZoom: 0.1,
+        maxZoom: 8,
+        wheelSensitivity: 0.3,
+      });
+
+      updateNodeCount(cy.nodes().length);
+
+      // ── Node click: select, fit neighbourhood, load article ──────────────
+      cy.on('tap', 'node', function (evt) {
+        var node = evt.target;
+
+        // Forthcoming nodes: no action, just show tooltip
+        if (node.data('forthcoming')) {
+          return;
+        }
+
+        // Highlight 1-hop neighbourhood
+        cy.nodes().removeClass('faded');
+        cy.edges().removeClass('faded');
+        var neighbourhood = node.closedNeighborhood();
+        cy.elements().not(neighbourhood).addClass('faded');
+
+        // Fit the neighbourhood with padding
+        cy.animate({
+          fit: { eles: neighbourhood, padding: 60 },
+          duration: 380,
+          easing: 'ease-in-out-cubic',
+        });
+
+        // Load article in side panel
+        var url = node.data('url');
+        if (url) {
+          loadNodeArticle(url);
+        } else {
+          resetSidePanel();
+        }
+      });
+
+      // Click on background: reset
+      cy.on('tap', function (evt) {
+        if (evt.target === cy) {
+          cy.nodes().removeClass('faded');
+          cy.edges().removeClass('faded');
+          resetSidePanel();
+        }
+      });
+
+      // Tooltip for forthcoming nodes
+      cy.on('mouseover', 'node[?forthcoming]', function (evt) {
+        var node = evt.target;
+        var pos = node.renderedPosition();
+        var tip = document.getElementById('graph-tooltip');
+        if (!tip) {
+          tip = document.createElement('div');
+          tip.id = 'graph-tooltip';
+          tip.className = 'graph-tooltip';
+          document.querySelector('.graph-canvas-wrapper').appendChild(tip);
+        }
+        tip.textContent = 'Forthcoming';
+        tip.style.left = pos.x + 'px';
+        tip.style.top = (pos.y - 30) + 'px';
+        tip.hidden = false;
+      });
+      cy.on('mouseout', 'node', function () {
+        var tip = document.getElementById('graph-tooltip');
+        if (tip) tip.hidden = true;
+      });
+
+      // Re-apply filter after graph loads (in case user typed before load)
+      if (currentFilter) applyFilter(currentFilter);
+    })
+    .catch(function (err) {
+      loadingEl.textContent = 'Failed to load graph data.';
+      loadingEl.hidden = false;
+      console.error('[graph] fetch error:', err);
+    });
+
+})();
+</script>
+
+<style>
+  /* ── Page layout ── */
+  .graph-page {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 40%;
+    grid-template-rows: auto 1fr;
+    height: calc(100vh - var(--header-h));
+    overflow: hidden;
+  }
+
+  /* ── Toolbar (search + count) ── */
+  .graph-toolbar {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255,255,255,0.92);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 10;
+  }
+
+  .graph-search {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    background: #fff;
+    color: var(--color-text);
+    width: 14rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .graph-search:focus { border-color: var(--color-primary); }
+
+  .graph-node-count {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  /* ── Legend ── */
+  .graph-legend {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background: rgba(255,255,255,0.95);
+    border-left: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 10;
+    max-width: 100%;
+  }
+
+  .legend-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-serif);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    padding: 0.45rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .legend-toggle:hover { background: var(--color-surface); }
+  .legend-chevron { font-size: 0.7rem; }
+
+  .legend-body { padding: 0.25rem 0.5rem 0.5rem; }
+
+  .legend-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+  }
+
+  .legend-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-label { flex: 1 1 0; color: var(--color-text); }
+  .legend-count {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Canvas ── */
+  .graph-canvas-wrapper {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    position: relative;
+    overflow: hidden;
+    background: #f8fafc;
+  }
+
+  .cy-canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .graph-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.95rem;
+    color: var(--color-muted);
+    pointer-events: none;
+  }
+
+  /* ── Side panel ── */
+  .graph-side-panel {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    overflow-y: auto;
+    border-left: 1px solid var(--color-border);
+    background: #fff;
+    padding: 1.25rem 1.5rem 2rem;
+  }
+
+  .side-panel-placeholder p {
+    color: var(--color-muted);
+    font-style: italic;
+    font-size: 0.92rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .side-loading,
+  .side-error {
+    color: var(--color-muted);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  /* ── Forthcoming tooltip ── */
+  .graph-tooltip {
+    position: absolute;
+    background: rgba(0,0,0,0.72);
+    color: #fff;
+    font-size: 0.78rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 0.3rem;
+    pointer-events: none;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 20;
+  }
+
+  /* ── Screen-reader only ── */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ── Mobile: stack vertically ── */
+  @media (max-width: 768px) {
+    .graph-page {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto 55vh auto;
+    }
+    .graph-toolbar { grid-column: 1; grid-row: 1; }
+    .graph-legend  { grid-column: 1; grid-row: 2; border-left: none; border-bottom: 1px solid var(--color-border); }
+    .graph-canvas-wrapper { grid-column: 1; grid-row: 3; }
+    .graph-side-panel { grid-column: 1; grid-row: 4; border-left: none; border-top: 1px solid var(--color-border); }
+  }
+</style>

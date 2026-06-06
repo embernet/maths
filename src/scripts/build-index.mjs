@@ -5,6 +5,7 @@
  * and writes:
  *   public/api/index.json    — Fuse.js search index (all pages)
  *   public/api/backlinks.json — cross-link map keyed by canonical slug
+ *   public/api/graph.json    — knowledge graph (nodes + edges) for the /graph view
  *
  * Each search record:
  * { title, section, slug, kind, summary, tags, mathematicians, url }
@@ -15,6 +16,7 @@
 import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import yaml from 'js-yaml';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = join(__dirname, '..', '..');
@@ -22,10 +24,11 @@ const contentDir = join(root, 'content');
 const outputDir = join(root, 'public', 'api');
 const outputFile = join(outputDir, 'index.json');
 const backlinksFile = join(outputDir, 'backlinks.json');
+const graphFile = join(outputDir, 'graph.json');
 
 if (!existsSync(outputDir)) mkdirSync(outputDir, { recursive: true });
 
-/** Extract YAML frontmatter from an MDX/MD file. Returns object or null. */
+/** Extract YAML frontmatter from an MDX/MD file using js-yaml. Returns object or null. */
 function parseFrontmatter(filePath) {
   let text;
   try { text = readFileSync(filePath, 'utf8'); } catch { return null; }
@@ -35,14 +38,20 @@ function parseFrontmatter(filePath) {
   if (end === -1) return null;
 
   const yamlBlock = text.slice(3, end).trim();
-  const result = {};
+  try {
+    const parsed = yaml.load(yamlBlock);
+    if (parsed && typeof parsed === 'object') return parsed;
+  } catch {
+    // Fall back to simple line-by-line parser for resilience
+  }
 
+  // Simple line-by-line fallback (flat key-value only)
+  const result = {};
   for (const line of yamlBlock.split('\n')) {
     const m = line.match(/^(\w[\w_]*)\s*:\s*(.*)/);
     if (!m) continue;
     const [, key, rawVal] = m;
     const val = rawVal.trim();
-
     if (val.startsWith('[')) {
       result[key] = val
         .slice(1, -1)
@@ -94,6 +103,10 @@ const records = [];
 // backlinks: keyed by theorem/application slug
 const backlinks = {};
 
+// Graph data: collected in parallel with the main walk
+// pageData: keyed by node id; stores frontmatter for edge derivation
+const pageData = new Map(); // nodeId -> { fm, url, title, node_type, forthcoming: false }
+
 function ensureBacklink(slug) {
   if (!backlinks[slug]) {
     backlinks[slug] = {
@@ -108,10 +121,29 @@ function ensureBacklink(slug) {
   return backlinks[slug];
 }
 
+// ── Sections excluded from the graph ──────────────────────────────────────────
+const GRAPH_EXCLUDED = new Set([
+  '00-welcome', '92-resources', '98-about', '96-lean4', '97-python', '98-r',
+]);
+
+// Infer node_type from directory prefix when not declared in frontmatter
+function inferNodeType(dirEntry) {
+  if (dirEntry.startsWith('01-') || dirEntry.startsWith('02-') ||
+      dirEntry.startsWith('03-') || dirEntry.startsWith('04-')) return 'topic';
+  if (dirEntry === '91-mathematicians') return 'mathematician';
+  if (dirEntry === '93-theorems')       return 'theorem';
+  if (dirEntry === '94-applications')   return 'application';
+  if (dirEntry === '90-history')        return 'history';
+  if (dirEntry === '97-nature')         return 'nature';
+  if (dirEntry === '95-definitions')    return 'definition';
+  return null;
+}
+
 if (!existsSync(contentDir)) {
   writeFileSync(outputFile, '[]', 'utf8');
   writeFileSync(backlinksFile, '{}', 'utf8');
-  console.log('[build-index] content/ not found — wrote empty index.json and backlinks.json');
+  writeFileSync(graphFile, JSON.stringify({ nodes: [], edges: [] }, null, 2), 'utf8');
+  console.log('[build-index] content/ not found — wrote empty outputs');
   process.exit(0);
 }
 
@@ -130,6 +162,7 @@ for (const entry of topLevelEntries) {
       const fm = parseFrontmatter(join(entryPath, file));
       if (!fm || !fm.title) continue;
 
+      const url = `/mathematicians/${slug}`;
       records.push({
         title: fm.title,
         section: 'Mathematicians',
@@ -138,7 +171,17 @@ for (const entry of topLevelEntries) {
         summary: fm.hook ?? fm.summary ?? '',
         tags: fm.tags ?? [],
         mathematicians: [],
-        url: `/mathematicians/${slug}`,
+        url,
+      });
+
+      const nodeId = `mathematician:${slug}`;
+      pageData.set(nodeId, {
+        fm,
+        url,
+        title: fm.title,
+        node_type: 'mathematician',
+        summary: fm.hook ?? fm.summary ?? '',
+        forthcoming: false,
       });
     }
     continue;
@@ -189,6 +232,7 @@ for (const entry of topLevelEntries) {
       const fm = parseFrontmatter(filePath);
       if (!fm || !fm.title) continue;
       const slug = sub.replace(/^\d+-/, '');
+      const url = `/90-history/${sub}`;
       records.push({
         title: fm.title,
         section: 'A Brief History of Mathematics',
@@ -197,7 +241,17 @@ for (const entry of topLevelEntries) {
         summary: fm.summary ?? '',
         tags: fm.tags ?? [],
         mathematicians: fm.key_figures ?? [],
-        url: `/90-history/${sub}`,
+        url,
+      });
+
+      const nodeId = `history:${sub}`;
+      pageData.set(nodeId, {
+        fm,
+        url,
+        title: fm.title,
+        node_type: fm.node_type ?? 'history',
+        summary: fm.summary ?? '',
+        forthcoming: false,
       });
 
       // Backlinks: theorems appearing in this era
@@ -222,6 +276,53 @@ for (const entry of topLevelEntries) {
     continue;
   }
 
+  // ---------- Nature section (97-nature) ----------
+  if (entry === '97-nature') {
+    for (const sub of readdirSync(entryPath)) {
+      const subPath = join(entryPath, sub);
+      if (!statSync(subPath).isDirectory()) continue;
+      const filePath = join(subPath, 'index.mdx');
+      const fm = parseFrontmatter(filePath);
+      if (!fm || !fm.title) continue;
+      const slug = sub.replace(/^\d+-/, '');
+      const url = `/97-nature/${sub}`;
+
+      const nodeId = `nature:${sub}`;
+      pageData.set(nodeId, {
+        fm,
+        url,
+        title: fm.title,
+        node_type: fm.node_type ?? 'nature',
+        summary: fm.summary ?? '',
+        forthcoming: false,
+      });
+    }
+    continue;
+  }
+
+  // ---------- Definitions (95-definitions) ----------
+  if (entry === '95-definitions') {
+    for (const file of readdirSync(entryPath)) {
+      if (extname(file) !== '.mdx') continue;
+      const slug = basename(file, '.mdx');
+      if (slug === 'index' || slug.startsWith('_')) continue;
+      const fm = parseFrontmatter(join(entryPath, file));
+      if (!fm || !fm.title) continue;
+      const url = `/definitions/${slug}`;
+
+      const nodeId = `definition:${slug}`;
+      pageData.set(nodeId, {
+        fm,
+        url,
+        title: fm.title,
+        node_type: fm.node_type ?? 'definition',
+        summary: fm.summary ?? '',
+        forthcoming: false,
+      });
+    }
+    continue;
+  }
+
   // ---------- Theorems (93-theorems) ----------
   if (entry === '93-theorems') {
     // Load slug map for stubs
@@ -242,6 +343,7 @@ for (const entry of topLevelEntries) {
       const fm = parseFrontmatter(filePath);
       if (!fm) continue;
       const title = fm.title ?? slug;
+      const url = `/theorems/${slug}`;
 
       records.push({
         title,
@@ -251,7 +353,17 @@ for (const entry of topLevelEntries) {
         summary: fm.summary ?? '',
         tags: fm.tags ?? [],
         mathematicians: fm.attributed_to ?? [],
-        url: `/theorems/${slug}`,
+        url,
+      });
+
+      const nodeId = `theorem:${slug}`;
+      pageData.set(nodeId, {
+        fm,
+        url,
+        title,
+        node_type: fm.node_type ?? 'theorem',
+        summary: fm.summary ?? '',
+        forthcoming: false,
       });
 
       // Backlinks from frontmatter
@@ -270,29 +382,34 @@ for (const entry of topLevelEntries) {
 
       // Scan body links
       const { theoremLinks, appLinks } = scanBodyLinks(filePath);
-      for (const tSlug of theoremLinks) {
-        if (tSlug !== slug) {
-          const otherBl = ensureBacklink(tSlug);
-          // cross-reference: this theorem's body links to tSlug — record that in a related field
-        }
-      }
       for (const aSlug of appLinks) {
         if (!bl.used_in_applications.includes(aSlug)) bl.used_in_applications.push(aSlug);
       }
     }
 
-    // Add slug-map stubs not already in MDX
+    // Add slug-map stubs not already in MDX (forthcoming theorems)
     for (const [slug, entry2] of Object.entries(slugMap)) {
       if (foundSlugs.has(slug)) continue;
+      const title = entry2.title ?? slug;
+      const url = `/theorems/${slug}`;
       records.push({
-        title: entry2.title ?? slug,
+        title,
         section: 'Theorems',
         slug,
         kind: 'theorem',
         summary: '',
         tags: [],
         mathematicians: entry2.attributed_to ?? [],
-        url: `/theorems/${slug}`,
+        url,
+      });
+      const nodeId = `theorem:${slug}`;
+      pageData.set(nodeId, {
+        fm: { attributed_to: entry2.attributed_to ?? [] },
+        url,
+        title,
+        node_type: 'theorem',
+        summary: '',
+        forthcoming: true, // slug-map stubs are forthcoming
       });
       const bl = ensureBacklink(slug);
       bl.attributed_to = entry2.attributed_to ?? [];
@@ -310,6 +427,7 @@ for (const entry of topLevelEntries) {
       const fm = parseFrontmatter(filePath);
       if (!fm) continue;
       const title = fm.title ?? slug;
+      const url = `/applications/${slug}`;
 
       records.push({
         title,
@@ -319,7 +437,17 @@ for (const entry of topLevelEntries) {
         summary: fm.summary ?? '',
         tags: fm.tags ?? [],
         mathematicians: [],
-        url: `/applications/${slug}`,
+        url,
+      });
+
+      const nodeId = `application:${slug}`;
+      pageData.set(nodeId, {
+        fm,
+        url,
+        title,
+        node_type: fm.node_type ?? 'application',
+        summary: fm.summary ?? '',
+        forthcoming: false,
       });
 
       // Backlinks
@@ -344,6 +472,9 @@ for (const entry of topLevelEntries) {
     continue;
   }
 
+  // ---------- Excluded meta/programming sections ----------
+  if (GRAPH_EXCLUDED.has(entry)) continue;
+
   // ---------- Main year sections (01–04) ----------
   let sectionTitle = entry.replace(/^\d+-/, '').replace(/-/g, ' ');
   const sectionJsonPath = join(entryPath, '_section.json');
@@ -365,6 +496,7 @@ for (const entry of topLevelEntries) {
 
     const topicSlug = sub.replace(/^\d+-/, '');
     const topicPath = `${entry}/${sub}`;
+    const url = `/${entry}/${sub}`;
 
     records.push({
       title: fm.title,
@@ -374,7 +506,17 @@ for (const entry of topLevelEntries) {
       summary: fm.summary ?? '',
       tags: fm.tags ?? [],
       mathematicians: fm.mathematicians ?? [],
-      url: `/${entry}/${sub}`,
+      url,
+    });
+
+    const nodeId = `topic:${topicPath}`;
+    pageData.set(nodeId, {
+      fm,
+      url,
+      title: fm.title,
+      node_type: fm.node_type ?? 'topic',
+      summary: fm.summary ?? '',
+      forthcoming: false,
     });
 
     // Backlinks from topic frontmatter
@@ -410,3 +552,177 @@ console.log(`[build-index] wrote ${records.length} records → ${outputFile}`);
 
 writeFileSync(backlinksFile, JSON.stringify(backlinks, null, 2), 'utf8');
 console.log(`[build-index] wrote ${Object.keys(backlinks).length} backlink entries → ${backlinksFile}`);
+
+// ── Graph generation ───────────────────────────────────────────────────────────
+
+// Helper: resolve a ref + kind to a node id
+function refToNodeId(kind, ref) {
+  switch (kind) {
+    case 'topic':        return `topic:${ref}`;
+    case 'theorem':      return `theorem:${ref}`;
+    case 'application':  return `application:${ref}`;
+    case 'mathematician': return `mathematician:${ref}`;
+    case 'history':      return `history:${ref}`;
+    case 'definition':   return `definition:${ref}`;
+    case 'nature':       return `nature:${ref}`;
+    default:             return `${kind}:${ref}`;
+  }
+}
+
+// Ensure a node exists; if not, create a forthcoming stub
+function ensureNode(id, kind, ref, nodesMap) {
+  if (!nodesMap.has(id)) {
+    const label = ref.split('/').pop().replace(/^\d+-/, '').replace(/-/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase());
+    nodesMap.set(id, {
+      id,
+      label,
+      node_type: kind,
+      url: null,
+      summary: '',
+      forthcoming: true,
+    });
+  }
+  return nodesMap.get(id);
+}
+
+// Build nodes map from pageData
+const nodesMap = new Map();
+for (const [id, data] of pageData) {
+  nodesMap.set(id, {
+    id,
+    label: data.title,
+    node_type: data.node_type,
+    url: data.url,
+    summary: data.summary,
+    forthcoming: data.forthcoming,
+  });
+}
+
+// Build edges with deduplication
+const edgeSet = new Set(); // serialised "{source}|{target}|{type}"
+const edges = [];
+
+function addEdge(source, target, type) {
+  const key = `${source}|${target}|${type}`;
+  if (edgeSet.has(key)) return;
+  edgeSet.add(key);
+  edges.push({ source, target, type });
+}
+
+// Validation error collection
+const validationErrors = [];
+const validationWarnings = [];
+
+for (const [nodeId, data] of pageData) {
+  const fm = data.fm;
+
+  // Warn on missing node_type for graph-relevant pages
+  if (!fm.node_type && !data.forthcoming) {
+    validationWarnings.push(`${nodeId}: missing node_type field (inferred as ${data.node_type})`);
+  }
+
+  // page.related[] → undirected edge (type: "related")
+  const related = Array.isArray(fm.related) ? fm.related : [];
+  for (const relRef of related) {
+    // related entries on topic pages are sibling topic slugs in the same section
+    // We try to match them to existing topic nodes
+    let relId = null;
+    for (const [eid] of pageData) {
+      if (eid.endsWith(`/${relRef}`) || eid === `topic:${relRef}`) {
+        relId = eid;
+        break;
+      }
+    }
+    if (relId) {
+      addEdge(nodeId, relId, 'related');
+    }
+  }
+
+  // suggested_pre_reading → directed edges (type: "pre-reading")
+  const spr = Array.isArray(fm.suggested_pre_reading) ? fm.suggested_pre_reading : [];
+  for (const entry of spr) {
+    // Validate entry structure
+    if (!entry.kind || !entry.ref || !entry.why) {
+      validationErrors.push(
+        `${data.url ?? nodeId}: suggested_pre_reading entry missing required field(s) — ` +
+        `kind=${entry.kind}, ref=${entry.ref}, why=${entry.why}`
+      );
+      continue;
+    }
+    const targetId = refToNodeId(entry.kind, entry.ref);
+    ensureNode(targetId, entry.kind, entry.ref, nodesMap);
+    addEdge(nodeId, targetId, 'pre-reading');
+  }
+
+  // Topic: theorems[] → "appears-in"
+  if (data.node_type === 'topic') {
+    for (const tSlug of fm.theorems ?? []) {
+      const targetId = `theorem:${tSlug}`;
+      ensureNode(targetId, 'theorem', tSlug, nodesMap);
+      addEdge(nodeId, targetId, 'appears-in');
+    }
+    // Topic: applications[] → "applies-to"
+    for (const aSlug of fm.applications ?? []) {
+      const targetId = `application:${aSlug}`;
+      ensureNode(targetId, 'application', aSlug, nodesMap);
+      addEdge(nodeId, targetId, 'applies-to');
+    }
+    // Topic: mathematicians[] → "attributed-to"
+    for (const mSlug of fm.mathematicians ?? []) {
+      const targetId = `mathematician:${mSlug}`;
+      ensureNode(targetId, 'mathematician', mSlug, nodesMap);
+      addEdge(nodeId, targetId, 'attributed-to');
+    }
+  }
+
+  // Theorem: attributed_to[] → "attributed-to"
+  if (data.node_type === 'theorem') {
+    for (const mSlug of fm.attributed_to ?? []) {
+      const targetId = `mathematician:${mSlug}`;
+      ensureNode(targetId, 'mathematician', mSlug, nodesMap);
+      addEdge(nodeId, targetId, 'attributed-to');
+    }
+  }
+
+  // Application: uses_theorems[] → "uses-theorem", uses_topics[] → "uses-topic"
+  if (data.node_type === 'application') {
+    for (const tSlug of fm.uses_theorems ?? []) {
+      const targetId = `theorem:${tSlug}`;
+      ensureNode(targetId, 'theorem', tSlug, nodesMap);
+      addEdge(nodeId, targetId, 'uses-theorem');
+    }
+    for (const topRef of fm.uses_topics ?? []) {
+      const targetId = `topic:${topRef}`;
+      ensureNode(targetId, 'topic', topRef, nodesMap);
+      addEdge(nodeId, targetId, 'uses-topic');
+    }
+  }
+}
+
+const nodes = Array.from(nodesMap.values());
+
+// Summary counts
+const typeCounts = {};
+for (const n of nodes) {
+  typeCounts[n.node_type] = (typeCounts[n.node_type] ?? 0) + 1;
+}
+const typeCountStr = Object.entries(typeCounts)
+  .map(([k, v]) => `${v} ${k}s`)
+  .join(', ');
+
+writeFileSync(graphFile, JSON.stringify({ nodes, edges }, null, 2), 'utf8');
+console.log(`[build-index] graph.json: ${nodes.length} nodes (${typeCountStr}), ${edges.length} edges`);
+
+// ── Validation gate ────────────────────────────────────────────────────────────
+
+if (validationWarnings.length > 0) {
+  console.warn(`[build-index] ${validationWarnings.length} node_type warning(s):`);
+  for (const w of validationWarnings) console.warn(`  WARN  ${w}`);
+}
+
+if (validationErrors.length > 0) {
+  console.error(`[build-index] ${validationErrors.length} validation error(s):`);
+  for (const e of validationErrors) console.error(`  ERROR ${e}`);
+  process.exit(1);
+}

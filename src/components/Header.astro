@@ -51,6 +51,8 @@ function buildSectionNavItem(slug: string): NavItem {
     href = '/definitions';
   } else if (slug === '98-about') {
     href = '/about';
+  } else if (slug === '99-graph') {
+    href = '/graph';
   } else {
     href = `/${slug}`;
   }
@@ -133,6 +135,7 @@ const shortLabels: Record<string, string> = {
   '97-nature': 'Nature',
   '98-r': 'R',
   '98-about': 'About',
+  '99-graph': 'Graph',
 };
 
 // Flatten groups for the desktop chip strip — show each child as its own chip

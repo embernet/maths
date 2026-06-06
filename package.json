@@ -1,11 +1,14 @@
 {
-  "name": "maths-companion",
+  "name": "maths",
   "type": "module",
   "version": "0.1.0",
   "scripts": {
+    "start": "node server.js",
     "prebuild": "node src/scripts/build-index.mjs",
     "dev": "node src/scripts/build-index.mjs && astro dev",
     "build": "astro build",
+    "postbuild": "node tools/check-katex-hide-rule.mjs",
+    "check:katex": "node tools/check-katex-hide-rule.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -14,7 +17,9 @@
     "@astrojs/tailwind": "^5.1.5",
     "@tailwindcss/typography": "^0.5.0",
     "astro": "^4.16.19",
+    "express": "^4.19.2",
     "fuse.js": "^7.0.0",
+    "js-yaml": "^4.2.0",
     "katex": "^0.16.0",
     "rehype-katex": "^7.0.0",
     "remark-math": "^6.0.0",

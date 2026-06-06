@@ -10,6 +10,28 @@
     "url": "/"
   },
   {
+    "title": "Numbers, Sets and Proof",
+    "section": "Foundations",
+    "slug": "numbers-sets-and-proof",
+    "kind": "topic",
+    "summary": "The grammar of mathematics. Sets and functions, proof by induction, cardinality and countability — the foundations that everything else builds on.",
+    "tags": [
+      "foundations",
+      "proof",
+      "induction",
+      "sets",
+      "functions",
+      "cardinality",
+      "countability"
+    ],
+    "mathematicians": [
+      "euclid",
+      "cantor",
+      "dedekind"
+    ],
+    "url": "/01-foundations/00-numbers-sets-and-proof"
+  },
+  {
     "title": "Algebra and Linear Algebra",
     "section": "Foundations",
     "slug": "algebra-and-linear-algebra",
@@ -154,7 +176,7 @@
     "url": "/02-core-mathematics/02-real-analysis-2"
   },
   {
-    "title": "Complex Analysis: Analytic Functions and Cauchy''s Theorem",
+    "title": "Complex Analysis: Analytic Functions and Cauchy's Theorem",
     "section": "Core Mathematics",
     "slug": "complex-analysis",
     "kind": "topic",
@@ -354,7 +376,7 @@
     "section": "Specialist Areas",
     "slug": "mathematical-biology",
     "kind": "topic",
-    "summary": "ODEs and PDEs applied to biology: population dynamics, predator-prey models, epidemic spread, and Turing''s reaction-diffusion mechanism for pattern formation on animal coats.",
+    "summary": "ODEs and PDEs applied to biology: population dynamics, predator-prey models, epidemic spread, and Turing's reaction-diffusion mechanism for pattern formation on animal coats.",
     "tags": [
       "mathematical-biology",
       "ODEs",
@@ -389,11 +411,11 @@
     "url": "/03-specialist-areas/07-stochastic-processes"
   },
   {
-    "title": "Advanced Differential Equations: Green''s Functions and Calculus of Variations",
+    "title": "Advanced Differential Equations: Green's Functions and Calculus of Variations",
     "section": "Specialist Areas",
     "slug": "differential-equations-advanced",
     "kind": "topic",
-    "summary": "Advanced ODE and PDE theory: rigorous existence and uniqueness for ODEs via contraction mapping, Green''s functions as integral representations of PDE solutions, and the calculus of variations.",
+    "summary": "Advanced ODE and PDE theory: rigorous existence and uniqueness for ODEs via contraction mapping, Green's functions as integral representations of PDE solutions, and the calculus of variations.",
     "tags": [
       "PDEs",
       "Greens-functions",
@@ -425,6 +447,190 @@
     ],
     "mathematicians": [],
     "url": "/03-specialist-areas/09-change-point-detection"
+  },
+  {
+    "title": "Representation Theory",
+    "section": "Specialist Areas",
+    "slug": "representation-theory",
+    "kind": "topic",
+    "summary": "Group representations turn abstract group structure into linear algebra. Characters, irreducibles, and Schur's lemma make finite groups computable and connect algebra to quantum mechanics.",
+    "tags": [
+      "representation-theory",
+      "group-theory",
+      "characters",
+      "irreducible-representations",
+      "schurs-lemma",
+      "maschke",
+      "finite-groups",
+      "linear-algebra"
+    ],
+    "mathematicians": [
+      "gauss",
+      "noether",
+      "galois"
+    ],
+    "url": "/03-specialist-areas/10-representation-theory"
+  },
+  {
+    "title": "Mathematical Logic",
+    "section": "Specialist Areas",
+    "slug": "logic",
+    "kind": "topic",
+    "summary": "Formal logic studies the structure of mathematical proof itself. Propositional and predicate calculus, completeness, soundness, and the limits set by Gödel define what mathematics can and cannot know.",
+    "tags": [
+      "logic",
+      "mathematical-logic",
+      "propositional",
+      "predicate-logic",
+      "completeness",
+      "soundness",
+      "compactness",
+      "model-theory",
+      "first-order-logic"
+    ],
+    "mathematicians": [
+      "godel",
+      "turing",
+      "hilbert"
+    ],
+    "url": "/03-specialist-areas/11-logic"
+  },
+  {
+    "title": "Set Theory",
+    "section": "Specialist Areas",
+    "slug": "set-theory",
+    "kind": "topic",
+    "summary": "The mathematics of collections, sizes, and infinity. ZFC axioms, ordinals, cardinals, and the Axiom of Choice provide the formal foundation on which all of modern mathematics rests.",
+    "tags": [
+      "set-theory",
+      "axiom-of-choice",
+      "ordinals",
+      "cardinals",
+      "infinity",
+      "continuum-hypothesis",
+      "zfc",
+      "foundations",
+      "transfinite"
+    ],
+    "mathematicians": [
+      "cantor",
+      "godel",
+      "dedekind",
+      "hilbert"
+    ],
+    "url": "/03-specialist-areas/12-set-theory"
+  },
+  {
+    "title": "Combinatorics and Graph Theory",
+    "section": "Specialist Areas",
+    "slug": "combinatorics-and-graph-theory",
+    "kind": "topic",
+    "summary": "Counting, structure, and the probabilistic method. Extremal graph theory, Ramsey theory, and random graphs reveal surprising order in finite mathematics — and show that randomness is a powerful tool for proving existence.",
+    "tags": [
+      "combinatorics",
+      "graph-theory",
+      "ramsey",
+      "turan",
+      "probabilistic-method",
+      "random-graphs",
+      "extremal",
+      "erdos"
+    ],
+    "mathematicians": [
+      "euler",
+      "erdos",
+      "kolmogorov"
+    ],
+    "url": "/03-specialist-areas/13-combinatorics-and-graph-theory"
+  },
+  {
+    "title": "Information Theory",
+    "section": "Specialist Areas",
+    "slug": "information-theory",
+    "kind": "topic",
+    "summary": "Measuring uncertainty. Entropy, mutual information, channel capacity, and Shannon's source and channel coding theorems — the mathematics that defined the digital age.",
+    "tags": [
+      "information-theory",
+      "entropy",
+      "mutual-information",
+      "shannon",
+      "channel-capacity",
+      "source-coding",
+      "kullback-leibler"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/03-specialist-areas/14-information-theory"
+  },
+  {
+    "title": "Optimisation",
+    "section": "Specialist Areas",
+    "slug": "optimisation",
+    "kind": "topic",
+    "summary": "Finding the best solution under constraints. Linear and convex programming, gradient methods, and duality provide the mathematical foundations of machine learning, logistics, and operations research.",
+    "tags": [
+      "optimisation",
+      "convex-optimisation",
+      "linear-programming",
+      "gradient-descent",
+      "kkt",
+      "duality",
+      "lagrange-multipliers",
+      "convex-functions"
+    ],
+    "mathematicians": [
+      "lagrange",
+      "gauss",
+      "euler"
+    ],
+    "url": "/03-specialist-areas/15-optimisation"
+  },
+  {
+    "title": "Dynamical Systems",
+    "section": "Specialist Areas",
+    "slug": "dynamical-systems",
+    "kind": "topic",
+    "summary": "How systems evolve over time. Phase portraits, Lyapunov stability, bifurcations, and chaos — the qualitative theory of differential equations reveals how deterministic rules produce apparently random behaviour.",
+    "tags": [
+      "dynamical-systems",
+      "phase-space",
+      "lyapunov-stability",
+      "bifurcation",
+      "chaos",
+      "hopf-bifurcation",
+      "strange-attractors",
+      "lorenz"
+    ],
+    "mathematicians": [
+      "poincare",
+      "newton",
+      "euler"
+    ],
+    "url": "/03-specialist-areas/16-dynamical-systems"
+  },
+  {
+    "title": "Projective Geometry",
+    "section": "Specialist Areas",
+    "slug": "projective-geometry",
+    "kind": "topic",
+    "summary": "What happens when you add points at infinity. Projective spaces, homogeneous coordinates, duality, and cross-ratio — the geometry that underlies perspective, computer vision, and algebraic geometry.",
+    "tags": [
+      "projective-geometry",
+      "homogeneous-coordinates",
+      "duality",
+      "cross-ratio",
+      "bezouts-theorem",
+      "conics",
+      "perspective"
+    ],
+    "mathematicians": [
+      "descartes",
+      "gauss",
+      "hilbert",
+      "pascal"
+    ],
+    "url": "/03-specialist-areas/17-projective-geometry"
   },
   {
     "title": "Algebraic Geometry",
@@ -515,11 +721,341 @@
     "url": "/04-advanced-topics/04-mathematical-physics-and-fluids"
   },
   {
+    "title": "Algebraic Topology",
+    "section": "Advanced Topics",
+    "slug": "algebraic-topology",
+    "kind": "topic",
+    "summary": "Turning shapes into algebra. Fundamental group, homology, and cohomology — invariants that distinguish topological spaces and prove deep theorems by reducing geometry to algebraic computation.",
+    "tags": [
+      "algebraic-topology",
+      "fundamental-group",
+      "homology",
+      "cohomology",
+      "covering-spaces",
+      "homotopy",
+      "mayer-vietoris"
+    ],
+    "mathematicians": [
+      "poincare",
+      "hilbert",
+      "noether",
+      "riemann"
+    ],
+    "url": "/04-advanced-topics/05-algebraic-topology"
+  },
+  {
+    "title": "Differential Geometry",
+    "section": "Advanced Topics",
+    "slug": "differential-geometry",
+    "kind": "topic",
+    "summary": "The geometry of smooth shapes. Manifolds, tangent spaces, differential forms, and curvature — the mathematics behind general relativity and modern gauge theory.",
+    "tags": [
+      "differential-geometry",
+      "manifolds",
+      "tangent-spaces",
+      "differential-forms",
+      "curvature",
+      "riemannian",
+      "levi-civita"
+    ],
+    "mathematicians": [
+      "gauss",
+      "riemann",
+      "poincare",
+      "noether"
+    ],
+    "url": "/04-advanced-topics/06-differential-geometry"
+  },
+  {
+    "title": "Algebraic Number Theory",
+    "section": "Advanced Topics",
+    "slug": "algebraic-number-theory",
+    "kind": "topic",
+    "summary": "Number fields and their integers. Ideal class groups, the ring of integers, and Dirichlet's unit theorem — the arithmetic that fixes unique factorisation when ordinary integers fail.",
+    "tags": [
+      "algebraic-number-theory",
+      "number-fields",
+      "ring-of-integers",
+      "ideal-class-group",
+      "dedekind-domain",
+      "dirichlet-unit-theorem"
+    ],
+    "mathematicians": [
+      "gauss",
+      "dedekind",
+      "noether",
+      "hilbert",
+      "fermat"
+    ],
+    "url": "/04-advanced-topics/07-algebraic-number-theory"
+  },
+  {
+    "title": "Lie Groups and Lie Algebras",
+    "section": "Advanced Topics",
+    "slug": "lie-groups-and-lie-algebras",
+    "kind": "topic",
+    "summary": "Continuous symmetry. The exponential map, root systems, and the classification of simple Lie algebras — the mathematics behind quantum mechanics, particle physics, and integrable systems.",
+    "tags": [
+      "lie-groups",
+      "lie-algebras",
+      "exponential-map",
+      "root-systems",
+      "cartan",
+      "classification-of-simple-lie-algebras"
+    ],
+    "mathematicians": [
+      "noether",
+      "hilbert",
+      "poincare",
+      "gauss"
+    ],
+    "url": "/04-advanced-topics/08-lie-groups-and-lie-algebras"
+  },
+  {
+    "title": "Algebraic Curves",
+    "section": "Advanced Topics",
+    "slug": "algebraic-curves",
+    "kind": "topic",
+    "summary": "Plane curves through algebraic eyes. Smooth and singular points, genus, and the Riemann–Roch theorem — the gateway from algebraic geometry to elliptic curves and Riemann surfaces.",
+    "tags": [
+      "algebraic-curves",
+      "riemann-roch",
+      "genus",
+      "bezout",
+      "elliptic-curves",
+      "singularities",
+      "projective-curves"
+    ],
+    "mathematicians": [
+      "gauss",
+      "riemann",
+      "noether",
+      "abel"
+    ],
+    "url": "/04-advanced-topics/09-algebraic-curves"
+  },
+  {
+    "title": "Commutative Algebra",
+    "section": "Advanced Topics",
+    "slug": "commutative-algebra",
+    "kind": "topic",
+    "summary": "The algebra of polynomial rings. Localisation, primary decomposition, and the Hilbert Nullstellensatz — the algebraic machinery underlying algebraic geometry and algebraic number theory.",
+    "tags": [
+      "commutative-algebra",
+      "rings",
+      "ideals",
+      "noetherian",
+      "localisation",
+      "nullstellensatz",
+      "modules"
+    ],
+    "mathematicians": [
+      "noether",
+      "hilbert",
+      "dedekind"
+    ],
+    "url": "/04-advanced-topics/10-commutative-algebra"
+  },
+  {
+    "title": "Riemann Surfaces",
+    "section": "Advanced Topics",
+    "slug": "riemann-surfaces",
+    "kind": "topic",
+    "summary": "Where complex analysis meets topology and algebra. Holomorphic functions on complex curves, divisors, and the Riemann–Roch theorem — the home of modular forms and elliptic functions.",
+    "tags": [
+      "riemann-surfaces",
+      "holomorphic-functions",
+      "divisors",
+      "riemann-roch",
+      "uniformisation",
+      "complex-curves",
+      "modular-forms"
+    ],
+    "mathematicians": [
+      "riemann",
+      "gauss",
+      "poincare",
+      "abel"
+    ],
+    "url": "/04-advanced-topics/11-riemann-surfaces"
+  },
+  {
+    "title": "Gödel's Incompleteness Theorems",
+    "section": "Advanced Topics",
+    "slug": "godels-incompleteness-theorems",
+    "kind": "topic",
+    "summary": "The limits of formal proof. Gödel's first and second incompleteness theorems show that any sufficiently rich consistent formal system contains true statements it cannot prove — and cannot prove its own consistency.",
+    "tags": [
+      "godels-theorems",
+      "incompleteness",
+      "formal-systems",
+      "hilberts-programme",
+      "godel-numbering",
+      "diagonal-lemma",
+      "foundations"
+    ],
+    "mathematicians": [
+      "godel",
+      "hilbert",
+      "turing"
+    ],
+    "url": "/04-advanced-topics/12-godels-incompleteness-theorems"
+  },
+  {
+    "title": "Statistical Mechanics",
+    "section": "Advanced Topics",
+    "slug": "statistical-mechanics",
+    "kind": "topic",
+    "summary": "From microscopic states to macroscopic laws. Entropy, ensembles, partition functions, and phase transitions — the bridge between probability and thermodynamics.",
+    "tags": [
+      "statistical-mechanics",
+      "entropy",
+      "partition-function",
+      "ensembles",
+      "ising-model",
+      "phase-transitions",
+      "boltzmann-distribution"
+    ],
+    "mathematicians": [
+      "kolmogorov",
+      "gauss"
+    ],
+    "url": "/04-advanced-topics/13-statistical-mechanics"
+  },
+  {
+    "title": "General Relativity",
+    "section": "Advanced Topics",
+    "slug": "general-relativity",
+    "kind": "topic",
+    "summary": "Geometry as gravity. The Einstein field equations turn spacetime curvature into the source of gravitational dynamics, with predictions from gravitational lensing to gravitational waves.",
+    "tags": [
+      "general-relativity",
+      "einstein-field-equations",
+      "schwarzschild",
+      "black-holes",
+      "gravitational-waves",
+      "curved-spacetime",
+      "geodesics"
+    ],
+    "mathematicians": [
+      "riemann",
+      "hilbert",
+      "gauss"
+    ],
+    "url": "/04-advanced-topics/14-general-relativity"
+  },
+  {
+    "title": "Quantum Information and Computation",
+    "section": "Advanced Topics",
+    "slug": "quantum-information-and-computation",
+    "kind": "topic",
+    "summary": "Information processing with quantum states. Qubits, entanglement, Shor's and Grover's algorithms, and quantum error correction — where linear algebra meets computer science meets foundations of physics.",
+    "tags": [
+      "quantum-information",
+      "qubits",
+      "entanglement",
+      "no-cloning-theorem",
+      "bell-inequality",
+      "shor-algorithm",
+      "grover-algorithm",
+      "quantum-error-correction"
+    ],
+    "mathematicians": [
+      "hilbert",
+      "turing"
+    ],
+    "url": "/04-advanced-topics/15-quantum-information-and-computation"
+  },
+  {
+    "title": "Mathematical Finance",
+    "section": "Advanced Topics",
+    "slug": "mathematical-finance",
+    "kind": "topic",
+    "summary": "Pricing risk under uncertainty. Itô calculus, the Black–Scholes equation, and risk-neutral measures — the mathematics that built modern derivative markets.",
+    "tags": [
+      "mathematical-finance",
+      "black-scholes",
+      "itos-lemma",
+      "risk-neutral-measure",
+      "stochastic-volatility",
+      "option-pricing",
+      "geometric-brownian-motion"
+    ],
+    "mathematicians": [
+      "kolmogorov",
+      "gauss"
+    ],
+    "url": "/04-advanced-topics/16-mathematical-finance"
+  },
+  {
+    "title": "Deep Learning Theory",
+    "section": "Advanced Topics",
+    "slug": "deep-learning-theory",
+    "kind": "topic",
+    "summary": "Why do neural networks work? Universal approximation, overparameterisation, implicit regularisation, and the neural tangent kernel — the emerging mathematics behind modern AI.",
+    "tags": [
+      "deep-learning-theory",
+      "universal-approximation",
+      "pac-learning",
+      "double-descent",
+      "implicit-regularisation",
+      "neural-tangent-kernel",
+      "overparameterisation"
+    ],
+    "mathematicians": [
+      "kolmogorov"
+    ],
+    "url": "/04-advanced-topics/17-deep-learning-theory"
+  },
+  {
+    "title": "Mathematics of Machine Learning",
+    "section": "Advanced Topics",
+    "slug": "mathematics-of-machine-learning",
+    "kind": "topic",
+    "summary": "The mathematical core of supervised, unsupervised, and reinforcement learning. Linear models, kernel methods, ensemble theory, and convex optimisation — the toolkit underneath every machine learning algorithm.",
+    "tags": [
+      "machine-learning",
+      "kernel-methods",
+      "svm",
+      "gradient-boosting",
+      "em-algorithm",
+      "pca",
+      "reinforcement-learning"
+    ],
+    "mathematicians": [
+      "fisher",
+      "kolmogorov",
+      "gauss"
+    ],
+    "url": "/04-advanced-topics/18-mathematics-of-machine-learning"
+  },
+  {
+    "title": "Optimal Transport",
+    "section": "Advanced Topics",
+    "slug": "optimal-transport",
+    "kind": "topic",
+    "summary": "The mathematics of moving mass efficiently. The Monge–Kantorovich problem, Kantorovich duality, Wasserstein distances, and Brenier's theorem — connecting probability, geometry, and PDEs.",
+    "tags": [
+      "optimal-transport",
+      "monge-kantorovich",
+      "wasserstein-distance",
+      "kantorovich-duality",
+      "brenier",
+      "couplings",
+      "displacement-interpolation"
+    ],
+    "mathematicians": [
+      "gauss",
+      "kolmogorov"
+    ],
+    "url": "/04-advanced-topics/19-optimal-transport"
+  },
+  {
     "title": "Era 1 — Ancient Origins",
     "section": "A Brief History of Mathematics",
     "slug": "ancient-origins",
     "kind": "era",
-    "summary": "From clay tablets to Euclid''s Elements: how mathematics moved from practical calculation to the idea of proof, and why that transition changed everything.",
+    "summary": "From clay tablets to Euclid's Elements: how mathematics moved from practical calculation to the idea of proof, and why that transition changed everything.",
     "tags": [],
     "mathematicians": [
       "pythagoras",
@@ -680,7 +1216,7 @@
     "section": "Mathematicians",
     "slug": "archimedes",
     "kind": "mathematician",
-    "summary": "Allegedly ran naked through Syracuse shouting ''Eureka!'' on discovering the principle of buoyancy. Was killed by a Roman soldier during the siege of Syracuse while drawing geometry in the sand, having reportedly told the soldier: ''Do not disturb my circles.''",
+    "summary": "Allegedly ran naked through Syracuse shouting 'Eureka!' on discovering the principle of buoyancy. Was killed by a Roman soldier during the siege of Syracuse while drawing geometry in the sand, having reportedly told the soldier: 'Do not disturb my circles.'",
     "tags": [
       "history",
       "integration",
@@ -839,7 +1375,7 @@
     "section": "Mathematicians",
     "slug": "euclid",
     "kind": "mathematician",
-    "summary": "When Ptolemy I asked if there was a shorter route to geometry than the Elements, Euclid reportedly replied: ''There is no royal road to geometry.'' Almost nothing else is known about him personally.",
+    "summary": "When Ptolemy I asked if there was a shorter route to geometry than the Elements, Euclid reportedly replied: 'There is no royal road to geometry.' Almost nothing else is known about him personally.",
     "tags": [
       "foundations",
       "proof",
@@ -870,7 +1406,7 @@
     "section": "Mathematicians",
     "slug": "fermat",
     "kind": "mathematician",
-    "summary": "A lawyer by profession and amateur mathematician by avocation. Wrote his Last Theorem in the margin of a book: ''I have discovered a truly marvellous proof, which this margin is too narrow to contain.'' The proof was not found for 358 years.",
+    "summary": "A lawyer by profession and amateur mathematician by avocation. Wrote his Last Theorem in the margin of a book: 'I have discovered a truly marvellous proof, which this margin is too narrow to contain.' The proof was not found for 358 years.",
     "tags": [
       "number-theory",
       "history",
@@ -1027,7 +1563,7 @@
     "section": "Mathematicians",
     "slug": "laplace",
     "kind": "mathematician",
-    "summary": "When Napoleon asked why his celestial mechanics book contained no mention of God, Laplace replied: ''Sire, I had no need of that hypothesis.'' Independently derived Bayes'' theorem.",
+    "summary": "When Napoleon asked why his celestial mechanics book contained no mention of God, Laplace replied: 'Sire, I had no need of that hypothesis.' Independently derived Bayes' theorem.",
     "tags": [
       "PDEs",
       "probability",
@@ -1129,7 +1665,7 @@
     "section": "Mathematicians",
     "slug": "ramanujan",
     "kind": "mathematician",
-    "summary": "He had essentially no formal mathematical training beyond a single undergraduate textbook. He filled notebooks with thousands of results, mostly without proofs. When Hardy received his letter in 1913, he initially dismissed it — then read more carefully. 'They must be true,' he later wrote, 'because if they were not true, no one would have had the imagination to invent them.",
+    "summary": "He had essentially no formal mathematical training beyond a single undergraduate textbook. He filled notebooks with thousands of results, mostly without proofs. When Hardy received his letter in 1913, he initially dismissed it — then read more carefully. 'They must be true,' he later wrote, 'because if they were not true, no one would have had the imagination to invent them.'",
     "tags": [
       "number-theory",
       "analysis",
@@ -3638,7 +4174,7 @@
     "section": "Theorems",
     "slug": "ramsey-theory",
     "kind": "theorem",
-    "summary": "Complete disorder is impossible: any large enough structure must contain a highly ordered substructure. Ramsey theory quantifies exactly how large is ''large enough''.",
+    "summary": "Complete disorder is impossible: any large enough structure must contain a highly ordered substructure. Ramsey theory quantifies exactly how large is 'large enough'.",
     "tags": [
       "combinatorics",
       "graph-theory",
@@ -4450,7 +4986,7 @@
     "section": "Real-world applications",
     "slug": "spam-filtering",
     "kind": "application",
-    "summary": "The filter that keeps your inbox clean uses Bayes'' theorem: given that this email contains the word ''Viagra'', how likely is it to be spam?",
+    "summary": "The filter that keeps your inbox clean uses Bayes' theorem: given that this email contains the word 'Viagra', how likely is it to be spam?",
     "tags": [
       "Bayes",
       "classification",
@@ -4489,657 +5025,5 @@
     ],
     "mathematicians": [],
     "url": "/applications/weather-forecasting"
-  },
-  {
-    "title": "Lean 4: Mathematics a Computer Can Check",
-    "section": "Lean 4",
-    "slug": "introduction",
-    "kind": "topic",
-    "summary": "What Lean 4 is, why it was built, what the mathematical community is doing with it, and how to get started — including your first one-line proof.",
-    "tags": [
-      "lean4",
-      "formal-proof",
-      "theorem-prover",
-      "foundations",
-      "mathlib",
-      "interactive-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/01-introduction"
-  },
-  {
-    "title": "Lean 4: A Language Overview",
-    "section": "Lean 4",
-    "slug": "language-overview",
-    "kind": "topic",
-    "summary": "The essential Lean 4 syntax in ten minutes: definitions, types, propositions, the main tactics, and how to work with Mathlib.",
-    "tags": [
-      "lean4",
-      "formal-proof",
-      "theorem-prover",
-      "tactics",
-      "curry-howard",
-      "mathlib"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/02-language-overview"
-  },
-  {
-    "title": "Proof 1: Add Zero",
-    "section": "Lean 4",
-    "slug": "add-zero",
-    "kind": "topic",
-    "summary": "The simplest possible Lean proof: n + 0 = n follows directly from the definition of addition, closed by a single rfl.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/03-add-zero"
-  },
-  {
-    "title": "Proof 2: Conjunction is Commutative",
-    "section": "Lean 4",
-    "slug": "and-comm",
-    "kind": "topic",
-    "summary": "A first tactic proof: p ∧ q → q ∧ p, using intro and exact to construct the conjunction by hand.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/04-and-comm"
-  },
-  {
-    "title": "Proof 3: Zero Add",
-    "section": "Lean 4",
-    "slug": "zero-add",
-    "kind": "topic",
-    "summary": "The first induction proof: 0 + n = n cannot be proved by rfl because addition recurses on the right, so we induct on n.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/05-zero-add"
-  },
-  {
-    "title": "Proof 4: Addition is Commutative",
-    "section": "Lean 4",
-    "slug": "add-comm",
-    "kind": "topic",
-    "summary": "A compound induction proof: m + n = n + m, reusing the zero_add lemma in the base case and add_succ in the step.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/06-add-comm"
-  },
-  {
-    "title": "Proof 5: Divisibility is Transitive",
-    "section": "Lean 4",
-    "slug": "divides-trans",
-    "kind": "topic",
-    "summary": "Existential statements in Lean: if a divides b and b divides c, then a divides c — proved by destructuring two existential hypotheses with obtain.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/07-divides-trans"
-  },
-  {
-    "title": "Proof 6: Squares are Non-Negative",
-    "section": "Lean 4",
-    "slug": "square-non-negative",
-    "kind": "topic",
-    "summary": "For any integer n, n * n ≥ 0 — proved by splitting on sign and using nlinarith for the arithmetic.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/08-square-non-negative"
-  },
-  {
-    "title": "Proof 7: √2 is Irrational",
-    "section": "Lean 4",
-    "slug": "sqrt-two-irrational",
-    "kind": "topic",
-    "summary": "The classical parity-and-descent proof that √2 is irrational, formalised in Lean 4 using Mathlib number theory lemmas.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/09-sqrt-two-irrational"
-  },
-  {
-    "title": "Proof 8: Infinitely Many Primes",
-    "section": "Lean 4",
-    "slug": "infinitude-of-primes",
-    "kind": "topic",
-    "summary": "Euclid's proof that there are infinitely many primes, formalised in Lean 4: for any finite set of primes, their product plus one is divisible by a prime outside the set.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/10-infinitude-of-primes"
-  },
-  {
-    "title": "Proof 9: The Gauss Sum",
-    "section": "Lean 4",
-    "slug": "sum-of-first-n",
-    "kind": "topic",
-    "summary": "Gauss''s formula 2 * (0 + 1 + ... + n) = n * (n + 1), proved in Lean by induction on n using Finset.sum.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/11-sum-of-first-n"
-  },
-  {
-    "title": "Proof 10: The Binomial Square",
-    "section": "Lean 4",
-    "slug": "binomial-theorem-base-case",
-    "kind": "topic",
-    "summary": "(x + y)^2 = x^2 + 2xy + y^2 proved by ring in one line; plus the general binomial theorem as it appears in Mathlib (add_pow).",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/12-binomial-theorem-base-case"
-  },
-  {
-    "title": "Proof 11: Fermat's Little Theorem",
-    "section": "Lean 4",
-    "slug": "fermat-little",
-    "kind": "topic",
-    "summary": "Fermat's little theorem — a^p ≡ a (mod p) for prime p — stated and applied from Mathlib, showing how real-world formal mathematics looks.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/13-fermat-little"
-  },
-  {
-    "title": "Proof 12: Monotone Convergence",
-    "section": "Lean 4",
-    "slug": "monotone-convergence",
-    "kind": "topic",
-    "summary": "A real-analysis result in Lean: a bounded monotone sequence of reals converges, stated and sketched using Mathlib filter machinery.",
-    "tags": [
-      "lean4",
-      "formal-proof"
-    ],
-    "mathematicians": [],
-    "url": "/96-lean4/14-monotone-convergence"
-  },
-  {
-    "title": "Mathematics in Nature",
-    "section": "Mathematics in Nature",
-    "slug": "section-opener",
-    "kind": "topic",
-    "summary": "Where the equations meet the living world — from D''Arcy Thompson''s seashells to Mandelbrot''s coastlines to Turing''s leopard spots.",
-    "tags": [
-      "nature",
-      "patterns",
-      "fractals",
-      "fibonacci",
-      "turing",
-      "morphogenesis",
-      "allometry",
-      "phyllotaxis"
-    ],
-    "mathematicians": [
-      "fibonacci",
-      "turing",
-      "hardy"
-    ],
-    "url": "/97-nature/00-section-opener"
-  },
-  {
-    "title": "The Golden Ratio",
-    "section": "Mathematics in Nature",
-    "slug": "the-golden-ratio",
-    "kind": "topic",
-    "summary": "The golden ratio is one of the most mythologised numbers in mathematics. Here is what is real, what is folklore, and why phi genuinely does appear in nature — in continued fractions, Fibonacci spirals, and the optimal packing of seeds.",
-    "tags": [
-      "golden-ratio",
-      "phi",
-      "fibonacci",
-      "continued-fractions",
-      "phyllotaxis",
-      "irrational-numbers",
-      "nature"
-    ],
-    "mathematicians": [
-      "euclid",
-      "fibonacci"
-    ],
-    "url": "/97-nature/01-the-golden-ratio"
-  },
-  {
-    "title": "Fibonacci Numbers in Nature",
-    "section": "Mathematics in Nature",
-    "slug": "fibonacci-numbers-in-nature",
-    "kind": "topic",
-    "summary": "The Fibonacci sequence is everywhere in the plant kingdom — and for a concrete mathematical reason, not a mystical one. Seed heads, pine cones, and pineapples all count in Fibonacci numbers because of how plants solve an optimisation problem as they grow.",
-    "tags": [
-      "fibonacci",
-      "nature",
-      "pine-cones",
-      "sunflowers",
-      "spirals",
-      "phyllotaxis",
-      "recurrence",
-      "golden-ratio"
-    ],
-    "mathematicians": [
-      "fibonacci"
-    ],
-    "url": "/97-nature/02-fibonacci-numbers-in-nature"
-  },
-  {
-    "title": "Phyllotaxis and the Golden Angle",
-    "section": "Mathematics in Nature",
-    "slug": "phyllotaxis-and-the-golden-angle",
-    "kind": "topic",
-    "summary": "Why do so many plants place their leaves at an angle of 137.5 degrees? The answer involves the most irrational number, the theory of continued fractions, and a packing problem that evolution solves with remarkable precision.",
-    "tags": [
-      "phyllotaxis",
-      "golden-angle",
-      "continued-fractions",
-      "diophantine-approximation",
-      "optimization",
-      "plant-mathematics",
-      "fibonacci"
-    ],
-    "mathematicians": [
-      "fibonacci",
-      "euclid"
-    ],
-    "url": "/97-nature/03-phyllotaxis-and-the-golden-angle"
-  },
-  {
-    "title": "Spirals: from Nautilus to Galaxies",
-    "section": "Mathematics in Nature",
-    "slug": "spirals-from-nautilus-to-galaxies",
-    "kind": "topic",
-    "summary": "Logarithmic spirals appear in nautilus shells, hurricanes, spider webs, and spiral galaxies. They are self-similar curves defined by a single differential equation — and the nautilus is not a golden spiral, whatever the internet says.",
-    "tags": [
-      "logarithmic-spiral",
-      "archimedean-spiral",
-      "nautilus",
-      "spirals",
-      "self-similarity",
-      "differential-equations",
-      "nature"
-    ],
-    "mathematicians": [
-      "descartes",
-      "bernoulli-family"
-    ],
-    "url": "/97-nature/04-spirals-from-nautilus-to-galaxies"
-  },
-  {
-    "title": "Fractals and Self-Similarity",
-    "section": "Mathematics in Nature",
-    "slug": "fractals-and-self-similarity",
-    "kind": "topic",
-    "summary": "How long is the coastline of Britain? It depends on the length of your ruler. Mandelbrot''s answer — that coastlines have fractional dimension — opened a new geometry for irregular shapes. Lungs, lightning, rivers, and broccoli all have measurable fractal dimensions.",
-    "tags": [
-      "fractals",
-      "self-similarity",
-      "fractal-dimension",
-      "mandelbrot",
-      "coastlines",
-      "power-laws",
-      "box-counting",
-      "chaos"
-    ],
-    "mathematicians": [
-      "cantor",
-      "weierstrass"
-    ],
-    "url": "/97-nature/05-fractals-and-self-similarity"
-  },
-  {
-    "title": "Tree Branching and Leonardo's Rule",
-    "section": "Mathematics in Nature",
-    "slug": "tree-branching-and-leonardos-rule",
-    "kind": "topic",
-    "summary": "Leonardo da Vinci noticed that the cross-sectional area of a trunk equals the sum of cross-sections of all branches at a given height. Five hundred years later we understand why — and the same mathematics governs blood vessels, river networks, and the airways of your lung.",
-    "tags": [
-      "tree-branching",
-      "leonardos-rule",
-      "murrays-law",
-      "pipe-model",
-      "hydraulics",
-      "fractals",
-      "fluid-dynamics",
-      "biology"
-    ],
-    "mathematicians": [],
-    "url": "/97-nature/06-tree-branching-and-leonardos-rule"
-  },
-  {
-    "title": "Honeycombs and the Hexagon Theorem",
-    "section": "Mathematics in Nature",
-    "slug": "honeycombs-and-the-hexagon-theorem",
-    "kind": "topic",
-    "summary": "Bees build hexagonal cells, basalt columns form hexagonal pillars, and foam bubbles pack in hexagonal arrays. The hexagon is the unique solution to the problem of partitioning a flat space into equal cells with minimum total wall length — a fact proved rigorously only in 1999.",
-    "tags": [
-      "honeycomb",
-      "hexagon",
-      "tiling",
-      "optimal-partitions",
-      "soap-bubbles",
-      "basalt",
-      "geometry",
-      "isoperimetric"
-    ],
-    "mathematicians": [
-      "euclid"
-    ],
-    "url": "/97-nature/07-honeycombs-and-the-hexagon-theorem"
-  },
-  {
-    "title": "Voronoi Tessellations in Nature",
-    "section": "Mathematics in Nature",
-    "slug": "voronoi-tessellations-in-nature",
-    "kind": "topic",
-    "summary": "The Voronoi diagram — each point owns the region of space closest to it — generates the patterns on giraffe hides, the facets of dragonfly eyes, the cracks in dried mud, and the large-scale clustering of galaxies. One geometric rule, everywhere.",
-    "tags": [
-      "voronoi",
-      "tessellation",
-      "giraffe",
-      "dragonfly",
-      "nearest-neighbour",
-      "computational-geometry",
-      "cell-biology",
-      "cosmology"
-    ],
-    "mathematicians": [
-      "descartes"
-    ],
-    "url": "/97-nature/08-voronoi-tessellations-in-nature"
-  },
-  {
-    "title": "Turing Patterns and Animal Coats",
-    "section": "Mathematics in Nature",
-    "slug": "turing-patterns-and-animal-coats",
-    "kind": "topic",
-    "summary": "In 1952, Alan Turing showed that two diffusing chemicals can spontaneously produce stripes, spots, or mazes from a uniform initial state. His equations predict how a fish''s markings should change with body size — and experiments have now confirmed the mechanism in real animals.",
-    "tags": [
-      "turing-patterns",
-      "reaction-diffusion",
-      "morphogenesis",
-      "animal-coats",
-      "spots",
-      "stripes",
-      "pdes",
-      "mathematical-biology"
-    ],
-    "mathematicians": [
-      "turing"
-    ],
-    "url": "/97-nature/09-turing-patterns-and-animal-coats"
-  },
-  {
-    "title": "Allometric Scaling and Kleiber's Law",
-    "section": "Mathematics in Nature",
-    "slug": "allometric-scaling-and-kleibers-law",
-    "kind": "topic",
-    "summary": "A mouse weighs about 20 grams; an elephant weighs about 4,000 kilograms — a factor of 200,000. But the elephant's metabolic rate is only about 80,000 times the mouse's, not 200,000 times. The three-quarters power law that governs metabolism across all of life turns out to follow from fractal network geometry.",
-    "tags": [
-      "allometry",
-      "kleibers-law",
-      "scaling",
-      "power-laws",
-      "metabolic-rate",
-      "network-theory",
-      "biology",
-      "fractal"
-    ],
-    "mathematicians": [],
-    "url": "/97-nature/10-allometric-scaling-and-kleibers-law"
-  },
-  {
-    "title": "The Mathematics of Sand Dunes and Waves",
-    "section": "Mathematics in Nature",
-    "slug": "the-mathematics-of-sand-dunes-and-waves",
-    "kind": "topic",
-    "summary": "Why are sand dunes the same shape everywhere? Why do waves break the way they do? From dimensional analysis of aeolian transport to the Korteweg-de Vries soliton and the geometry of river meanders, the mathematics of moving fluids and granular media is surprisingly rich.",
-    "tags": [
-      "sand-dunes",
-      "waves",
-      "solitons",
-      "fluid-mechanics",
-      "dimensional-analysis",
-      "pdes",
-      "korteweg-de-vries",
-      "river-meanders"
-    ],
-    "mathematicians": [
-      "fourier",
-      "laplace"
-    ],
-    "url": "/97-nature/11-the-mathematics-of-sand-dunes-and-waves"
-  },
-  {
-    "title": "The Genetic Code as Mathematics",
-    "section": "Mathematics in Nature",
-    "slug": "the-genetic-code-as-mathematics",
-    "kind": "topic",
-    "summary": "DNA''s double helix is a packing solution. Population genetics obeys an equilibrium theorem. The codon table has unexpected symmetry structure. And the family tree of all life is a metric space. Molecular biology, it turns out, is full of mathematics.",
-    "tags": [
-      "genetics",
-      "dna",
-      "hardy-weinberg",
-      "population-genetics",
-      "phylogenetics",
-      "coding-theory",
-      "information-theory",
-      "metric-spaces"
-    ],
-    "mathematicians": [
-      "hardy",
-      "fisher"
-    ],
-    "url": "/97-nature/12-the-genetic-code-as-mathematics"
-  },
-  {
-    "title": "Python: The Lingua Franca of Scientific Computing",
-    "section": "Python",
-    "slug": "introduction",
-    "kind": "topic",
-    "summary": "Where Python came from, why mathematicians and scientists adopted it so widely, and what makes it suited to mathematical work — from numerical linear algebra to large language models.",
-    "tags": [
-      "python",
-      "scientific-computing",
-      "history",
-      "overview"
-    ],
-    "mathematicians": [],
-    "url": "/97-python/01-introduction"
-  },
-  {
-    "title": "Python: A Language Overview",
-    "section": "Python",
-    "slug": "language-overview",
-    "kind": "topic",
-    "summary": "The bones of Python: dynamic typing, indentation as syntax, the data model, comprehensions, generators, classes, and decorators. Enough to read and write idiomatic Python.",
-    "tags": [
-      "python",
-      "language-overview",
-      "syntax"
-    ],
-    "mathematicians": [],
-    "url": "/97-python/02-language-overview"
-  },
-  {
-    "title": "Numerical Computing in Python: NumPy and SciPy",
-    "section": "Python",
-    "slug": "numerical-computing",
-    "kind": "topic",
-    "summary": "NumPy gives Python fast n-dimensional arrays and the linear algebra to manipulate them. SciPy builds the numerical methods — optimisation, ODEs, quadrature, signal processing, statistics — on top.",
-    "tags": [
-      "python",
-      "numpy",
-      "scipy",
-      "numerical-analysis",
-      "linear-algebra"
-    ],
-    "mathematicians": [],
-    "url": "/97-python/03-numerical-computing"
-  },
-  {
-    "title": "Symbolic Mathematics in Python: SymPy",
-    "section": "Python",
-    "slug": "symbolic-mathematics",
-    "kind": "topic",
-    "summary": "SymPy treats mathematical expressions as objects you can manipulate exactly. Algebra, calculus, equation-solving, and LaTeX output — all in pure Python, no proprietary licence required.",
-    "tags": [
-      "python",
-      "sympy",
-      "computer-algebra",
-      "symbolic-mathematics"
-    ],
-    "mathematicians": [],
-    "url": "/97-python/04-symbolic-mathematics"
-  },
-  {
-    "title": "Data and Visualisation: pandas and matplotlib",
-    "section": "Python",
-    "slug": "data-and-visualisation",
-    "kind": "topic",
-    "summary": "pandas brings tabular data and labelled axes to Python; matplotlib draws the picture. Together they handle the import, cleaning, exploration, and presentation of data — the stages on either side of the mathematical work.",
-    "tags": [
-      "python",
-      "pandas",
-      "matplotlib",
-      "data-analysis",
-      "visualisation"
-    ],
-    "mathematicians": [],
-    "url": "/97-python/05-data-and-visualisation"
-  },
-  {
-    "title": "Machine Learning in Python: scikit-learn, PyTorch, JAX",
-    "section": "Python",
-    "slug": "machine-learning",
-    "kind": "topic",
-    "summary": "Why Python dominates machine learning. scikit-learn for classical ML, PyTorch for deep learning, and JAX for differentiable programming — plus the mathematical ideas (gradients, automatic differentiation, optimisers) that underpin them all.",
-    "tags": [
-      "python",
-      "machine-learning",
-      "scikit-learn",
-      "pytorch",
-      "jax",
-      "deep-learning"
-    ],
-    "mathematicians": [],
-    "url": "/97-python/06-machine-learning"
-  },
-  {
-    "title": "R: The Native Language of Statistics",
-    "section": "R",
-    "slug": "introduction",
-    "kind": "topic",
-    "summary": "Where R came from — the S language at Bell Labs, the Auckland rewrite — and why it remains the language of choice for statisticians, biostatisticians, and anyone who works at the precise intersection of mathematics and data.",
-    "tags": [
-      "r",
-      "statistics",
-      "history",
-      "overview"
-    ],
-    "mathematicians": [],
-    "url": "/98-r/01-introduction"
-  },
-  {
-    "title": "R: A Language Overview",
-    "section": "R",
-    "slug": "language-overview",
-    "kind": "topic",
-    "summary": "How R thinks. Vectors as the fundamental type, recycling, formulas, environments, S3 and S4 object systems, and the parts of the language a Python programmer finds surprising.",
-    "tags": [
-      "r",
-      "language-overview",
-      "syntax",
-      "vectors",
-      "formulas"
-    ],
-    "mathematicians": [],
-    "url": "/98-r/02-language-overview"
-  },
-  {
-    "title": "Statistical Modelling in R",
-    "section": "R",
-    "slug": "statistical-modelling",
-    "kind": "topic",
-    "summary": "Where R really earns its keep. Linear and generalised linear models, mixed-effects models, model diagnostics, and the statistical-inference tooling that makes R hard to beat for serious data analysis.",
-    "tags": [
-      "r",
-      "statistics",
-      "linear-models",
-      "glm",
-      "mixed-effects"
-    ],
-    "mathematicians": [],
-    "url": "/98-r/03-statistical-modelling"
-  },
-  {
-    "title": "The Tidyverse and ggplot2",
-    "section": "R",
-    "slug": "tidyverse-and-ggplot2",
-    "kind": "topic",
-    "summary": "The tidyverse is the modern dialect of R for data manipulation and visualisation. dplyr verbs read like recipes; ggplot2 builds plots from a grammar. Together they are arguably the most pleasant data-analysis tooling in any language.",
-    "tags": [
-      "r",
-      "tidyverse",
-      "dplyr",
-      "ggplot2",
-      "data-analysis"
-    ],
-    "mathematicians": [],
-    "url": "/98-r/04-tidyverse-and-ggplot2"
-  },
-  {
-    "title": "Machine Learning in R: tidymodels, caret, and the big algorithms",
-    "section": "R",
-    "slug": "machine-learning",
-    "kind": "topic",
-    "summary": "Modern machine learning in R: random forests, gradient boosting, the tidymodels framework, and where R does and does not match Python for ML work.",
-    "tags": [
-      "r",
-      "machine-learning",
-      "tidymodels",
-      "caret",
-      "xgboost",
-      "random-forest"
-    ],
-    "mathematicians": [],
-    "url": "/98-r/05-machine-learning"
-  },
-  {
-    "title": "Choosing Python or R",
-    "section": "R",
-    "slug": "choosing-python-or-r",
-    "kind": "topic",
-    "summary": "A practical comparison: when Python is the better tool for the job, when R is, and when the answer is \"both — at different parts of the workflow\".",
-    "tags": [
-      "r",
-      "python",
-      "comparison",
-      "tooling"
-    ],
-    "mathematicians": [],
-    "url": "/98-r/06-choosing-python-or-r"
   }
 ]
