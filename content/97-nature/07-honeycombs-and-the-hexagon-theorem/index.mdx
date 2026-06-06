@@ -1,0 +1,66 @@
+---
+title: 'Honeycombs and the Hexagon Theorem'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 7
+tags: [honeycomb, hexagon, tiling, optimal-partitions, soap-bubbles, basalt, geometry, isoperimetric]
+related: ['08-voronoi-tessellations-in-nature']
+mathematicians: [euclid]
+reading_time_min: 10
+summary: 'Bees build hexagonal cells, basalt columns form hexagonal pillars, and foam bubbles pack in hexagonal arrays. The hexagon is the unique solution to the problem of partitioning a flat space into equal cells with minimum total wall length — a fact proved rigorously only in 1999.'
+theorems: [euclidean-geometry]
+applications: []
+---
+
+If you look into a beehive, you see hexagons. Every cell in a honeycomb is a regular hexagon, sharing walls with six neighbours. Bees have been building this way for at least 34 million years, according to fossil evidence. Why hexagons?
+
+The question is not just about bees. Hexagonal patterns appear when basalt lava cools and contracts (the Giant's Causeway in County Antrim, the Devil's Postpile in California), when thin layers of fluid are heated from below (Rayleigh-Bénard convection cells), and when biological tissues grow under compressive stress. The hexagon appears to be the universe's preferred answer to a specific geometric problem.
+
+## The honeycomb conjecture
+
+The problem is this: divide the plane into cells of equal area using a network of curves, in such a way that the total length of the curves is minimised. What is the optimal shape for the cells?
+
+The answer — that the regular hexagonal tiling is optimal — was conjectured by the ancient Greeks (Pappus of Alexandria wrote about it around 340 CE) and finally *proved* by the American mathematician Thomas Hales in 1999. This is the **Honeycomb Theorem**.
+
+The proof is non-trivial. Hales's paper runs to more than twenty pages and handles the full generality of the problem — not just tilings by polygons, but tilings by arbitrary curves, including curved sides. The key difficulty is showing that no cleverly curved partition can beat the straight-sided hexagon. The isoperimetric inequality for polygons tells you that among polygons with a given perimeter, the regular polygon has the largest area; the honeycomb theorem is a tiling analogue of this, and the proof requires substantially more machinery.
+
+## Why hexagons specifically
+
+Here is the intuition, which is not a proof but shows why hexagons are at least plausible.
+
+Among all regular polygons that tile the plane (triangles, squares, and hexagons are the only ones), the hexagon uses the least total edge length per unit area. Specifically:
+
+- A tiling by equilateral triangles (area $A$ per cell, side $s$): $A = \frac{\sqrt{3}}{4} s^2$, and each unit cell contributes $2s$ to the total edge length (each edge shared with one neighbour). So edge length per unit area $\propto s / A \propto 1/s \propto A^{-1/2}$, with constant $2/\sqrt{3}^{1/2} \cdot \ldots$ — the calculation gives about $3.72 / \sqrt{A}$ per unit area.
+- A tiling by squares: about $4 / \sqrt{A}$ per unit area.
+- A tiling by regular hexagons: about $2 \times 3^{1/4} \cdot \sqrt{2/\sqrt{3}} \approx 3.31 / \sqrt{A}$ per unit area.
+
+The hexagon wins among regular polygon tilings. Hales's theorem shows it wins in the entire class of equal-area tilings.
+
+## Bees and optimality
+
+Do bees "know" they are solving an optimisation problem? No — they have evolved a behavioural programme that produces hexagonal cells, and that programme has been strongly selected for because wax is metabolically expensive to produce (bees consume about 8 kg of honey to produce 1 kg of wax). A geometry that uses less wax for the same storage volume is worth millions of years of selection pressure.
+
+The remarkable thing is the precision. Measurements of natural honeycombs show that the angle between adjacent faces is $120° \pm 1°$, extremely close to the optimal $120°$ of a regular hexagon. The cells are also not flat-ended: the base of each cell is a rhombic dodecahedron, which is the optimal shape for packing hexagonal prisms back-to-back in three dimensions. Bees have solved both the two-dimensional and the three-dimensional packing problems.
+
+## The Giant's Causeway
+
+The Giant's Causeway on the north-east coast of Northern Ireland consists of about 40,000 interlocking basalt columns, the majority of which are hexagonal, formed by the cooling and contraction of a lava flow about 60 million years ago. As lava cools, it contracts. Contraction under stress leads to cracking, and the cracks propagate to relieve stress. The pattern that minimises total crack length per unit area, subject to the constraint that the cracks partition the surface into roughly equal areas, is — by the Honeycomb Theorem — the hexagonal tiling.
+
+The analogy with the honeycomb is exact in mathematical structure, and it explains why similar hexagonal basalt formations appear worldwide: Fingal's Cave in Scotland, the Svartifoss waterfall in Iceland, Devils Postpile in California.
+
+## Soap bubbles and foam
+
+A foam of bubbles obeying the pressure-equilibrium conditions of minimal surface energy also segregates into hexagonal arrays when constrained to two dimensions (a thin film between two glass plates). Three films meeting at a junction in a foam always meet at $120°$ — Plateau's laws, derived from the calculus of variations — which is the angle of the regular hexagon. Foam between two plates reliably produces hexagonal cells in the interior, even when the initial arrangement was random, as the bubbles rearrange under pressure to reach the minimum-energy configuration.
+
+This is different from the honeycomb in one important way: soap bubble cells are not equal in area, and the question of whether the honeycomb theorem applies to unequal-area foams is harder. Weaire and Phelan's foam (1994) shows that in three dimensions, the optimal partition of equal-volume cells is *not* the regular hexagonal prism — it is a more complex structure involving irregular polyhedra. The two-dimensional optimality of the hexagon does not automatically extend to three dimensions.
+
+## What is true and what is overstated
+
+The hexagonal tiling is optimal for equal-area partitions of the plane. It is not always optimal in three dimensions. Real honeycombs are not perfectly hexagonal — individual cells deviate, particularly at the edges of the comb. And the claim that bees "choose" hexagons is misleading; they execute a construction programme that produces approximately hexagonal cells, which is close enough to optimal for natural selection to maintain.
+
+## Where to read more
+
+- Thomas C. Hales, 'The Honeycomb Conjecture', *Discrete and Computational Geometry* 25 (2001) — the proof
+- D'Arcy Thompson, *On Growth and Form*, Chapter VII — 'On the Forms of Tissues, or Cell-Aggregates'
+- [Wikipedia: Honeycomb conjecture](https://en.wikipedia.org/wiki/Honeycomb_conjecture) — accessible summary of Hales's proof with history

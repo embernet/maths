@@ -1,0 +1,90 @@
+---
+title: 'Commutative Algebra'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 10
+tags: [commutative-algebra, rings, ideals, noetherian, localisation, nullstellensatz, modules]
+related:
+- 01-algebraic-geometry
+- 07-algebraic-number-theory
+- 02-abstract-algebra
+mathematicians: [noether, hilbert, dedekind]
+reading_time_min: 10
+summary: 'The algebra of polynomial rings. Localisation, primary decomposition, and the Hilbert Nullstellensatz — the algebraic machinery underlying algebraic geometry and algebraic number theory.'
+theorems: [noetherian-rings, modern-abstract-algebra-rings-ideals-modules, ideals-in-ring-theory, dedekind-domains-algebraic-number-theory, hilbert-s-23-problems, invariant-theory]
+applications: [rsa-public-key-cryptography, error-correcting-codes]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 02-core-mathematics/01-abstract-algebra
+    why: 'Rings, ideals, modules, and homomorphisms are the main objects of commutative algebra; a solid grounding here is essential.'
+  - kind: topic
+    ref: 04-advanced-topics/01-algebraic-geometry
+    why: 'Commutative algebra is the algebraic engine of algebraic geometry; the Nullstellensatz and primary decomposition are most naturally motivated geometrically.'
+  - kind: mathematician
+    ref: noether
+    why: 'Emmy Noether put commutative algebra on its modern axiomatic footing; Noetherian rings are named after her fundamental insight.'
+  - kind: mathematician
+    ref: hilbert
+    why: 'Hilbert''s basis theorem and Nullstellensatz are the foundational results that made the subject possible.'
+  - kind: mathematician
+    ref: dedekind
+    why: 'Dedekind''s theory of ideals in rings of algebraic integers is the historical root of commutative algebra.'
+---
+
+Commutative algebra studies commutative rings and their modules — the algebraic structures that polynomial rings and rings of integers exemplify. It is the language in which algebraic geometry and algebraic number theory are written. The two foundational theorems are Hilbert's: the basis theorem (polynomial rings are Noetherian) and the Nullstellensatz (algebra determines geometry).
+
+## Rings, ideals, and prime ideals
+
+A **commutative ring** $R$ is a set with addition and multiplication satisfying the usual axioms, with $ab = ba$ for all $a, b \in R$. The leading examples are: $\mathbb{Z}$, the integers; $k[x_1, \ldots, x_n]$, the polynomial ring over a field $k$; $\mathbb{Z}[i] = \{a + bi : a, b \in \mathbb{Z}\}$, the Gaussian integers; and any quotient of these by an ideal.
+
+An **ideal** $I \subset R$ is a subgroup closed under multiplication by ring elements: $r \in R$, $a \in I$ implies $ra \in I$. Ideals are the kernels of ring homomorphisms, by the first isomorphism theorem $R/I$.
+
+A **prime ideal** $\mathfrak{p}$ satisfies: $ab \in \mathfrak{p}$ implies $a \in \mathfrak{p}$ or $b \in \mathfrak{p}$. Equivalently, $R/\mathfrak{p}$ is an integral domain. A **maximal ideal** $\mathfrak{m}$ is one for which $R/\mathfrak{m}$ is a field. Every maximal ideal is prime; in $\mathbb{Z}$, the prime ideals are $(0)$ and $(p)$ for each prime $p$.
+
+The **spectrum** $\mathrm{Spec}(R)$ — the set of prime ideals of $R$, equipped with the Zariski topology — is the fundamental geometric object attached to $R$. This is Grothendieck's great insight: geometry is the study of spectra of rings.
+
+## Noetherian rings and Hilbert's basis theorem
+
+A ring $R$ is **Noetherian** if every ascending chain of ideals $I_1 \subseteq I_2 \subseteq \cdots$ eventually stabilises. Equivalently, every ideal of $R$ is finitely generated.
+
+**Hilbert's basis theorem** (1890): if $R$ is Noetherian, so is $R[x]$. By induction, $k[x_1, \ldots, x_n]$ is Noetherian for any field $k$. This means every algebraic variety is defined by finitely many polynomial equations — a non-trivial fact that underpins all of algebraic geometry.
+
+Hilbert proved this theorem by a non-constructive existence argument that was controversial at the time (Gordan famously objected). It settled — with a radical method — a question about invariant rings that had resisted explicit construction for decades, and it marks the transition from computational to abstract algebra.
+
+## Modules
+
+A **module** $M$ over a ring $R$ is an abelian group with a compatible $R$-action: $R \times M \to M$ satisfying $r(m + n) = rm + rn$, $(r + s)m = rm + sm$, $(rs)m = r(sm)$. Modules generalise vector spaces (where $R$ is a field) and abelian groups (where $R = \mathbb{Z}$).
+
+Free modules, finitely generated modules, and projective modules are the central objects. The **structure theorem for finitely generated modules over a PID** (principal ideal domain) states that every such module is a direct sum of cyclic modules $R/(d_i)$ with $d_1 \mid d_2 \mid \cdots$. This single theorem simultaneously generalises the classification of finite abelian groups (take $R = \mathbb{Z}$) and the Jordan normal form for matrices (take $R = k[x]$).
+
+## Localisation
+
+Given a multiplicative subset $S \subset R$ (closed under multiplication, not containing 0), the **localisation** $S^{-1}R$ is the ring of formal fractions $\{r/s : r \in R,\, s \in S\}$ with the obvious arithmetic. This inverts the elements of $S$.
+
+Key examples: $S = R \setminus \mathfrak{p}$ for a prime ideal $\mathfrak{p}$ gives the **localisation at $\mathfrak{p}$**, $R_\mathfrak{p}$ — a local ring with unique maximal ideal $\mathfrak{p}R_\mathfrak{p}$. For $R = \mathbb{Z}$ and $\mathfrak{p} = (p)$, this gives $\mathbb{Z}_{(p)} = \{a/b : p \nmid b\}$, the integers with all primes except $p$ inverted.
+
+Localisation is the algebraic analogue of restricting attention to a neighbourhood of a point. Schemes — the objects of modern algebraic geometry — are built by gluing together localised rings just as manifolds are built by gluing together patches of Euclidean space.
+
+## Primary decomposition
+
+**Primary decomposition** (Lasker–Noether theorem) is the generalisation of prime factorisation to ideals in Noetherian rings. An ideal $I$ is **primary** if $ab \in I$ implies $a \in I$ or $b^n \in I$ for some $n$. Every ideal in a Noetherian ring has a primary decomposition: $I = \mathfrak{q}_1 \cap \mathfrak{q}_2 \cap \cdots \cap \mathfrak{q}_r$ with each $\mathfrak{q}_i$ primary. The associated primes $\sqrt{\mathfrak{q}_i}$ are unique, though the $\mathfrak{q}_i$ themselves may not be.
+
+Geometrically, the primary decomposition of the ideal $I(V)$ of a variety $V$ decomposes $V$ into its irreducible components and records the embedded components (points or subvarieties that appear for algebraic rather than set-theoretic reasons).
+
+## Integral extensions and Hilbert's Nullstellensatz
+
+An element $\alpha$ of a ring extension $R \subset S$ is **integral** over $R$ if it satisfies a monic polynomial $\alpha^n + r_{n-1}\alpha^{n-1} + \cdots + r_0 = 0$ with $r_i \in R$. The **integral closure** of $R$ in $S$ is the ring of all such elements. For $R = \mathbb{Z}$, $S = K$ a number field, the integral closure is precisely $\mathcal{O}_K$, the ring of integers.
+
+**Noether normalisation lemma**: for any finitely generated $k$-algebra $A \neq 0$, there exist algebraically independent elements $y_1, \ldots, y_d \in A$ such that $A$ is integral over $k[y_1, \ldots, y_d]$. This reduces questions about finitely generated algebras to polynomial rings, and $d$ equals the Krull dimension of $A$.
+
+**Hilbert's Nullstellensatz** (Zero-Locus Theorem): let $k$ be algebraically closed and $I \subset k[x_1, \ldots, x_n]$ an ideal. Then $I(V(I)) = \sqrt{I}$ — the polynomials vanishing on the zero set of $I$ are precisely the elements of the radical $\sqrt{I} = \{f : f^n \in I\, \text{for some } n\}$. This establishes the fundamental bijection between radical ideals in $k[x_1, \ldots, x_n]$ and algebraic varieties in $k^n$.
+
+## Real-world applications
+
+The algebraic structure of polynomial rings over finite fields underpins [error-correcting codes](/applications/error-correcting-codes): BCH codes, Reed–Solomon codes, and algebraic geometry codes are all defined by ideals in quotients of polynomial rings, and decoding algorithms exploit primary decomposition and localisation. [RSA cryptography](/applications/rsa-public-key-cryptography) depends on arithmetic in $\mathbb{Z}/n\mathbb{Z}$, a quotient ring whose ideal structure (the Chinese Remainder Theorem) is pure commutative algebra.
+
+## Why this matters
+
+Commutative algebra is the invisible infrastructure of modern mathematics. Every theorem in algebraic geometry is a theorem about commutative rings; every result in algebraic number theory uses properties of $\mathcal{O}_K$ as a Dedekind domain. The Noetherian condition, which seems like a mild technical hypothesis, is in practice the assumption that makes geometry finitistic and computable. Emmy Noether's abstraction — taking the theory of ideals in specific rings of integers and generalising it to axiomatically defined classes of rings — is a template for how mathematics advances: strip away the inessential, identify the structural core, and gain theorems that apply everywhere at once.

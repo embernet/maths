@@ -1,0 +1,121 @@
+---
+title: 'Lean 4: Mathematics a Computer Can Check'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 1
+tags: [lean4, formal-proof, theorem-prover, foundations, mathlib, interactive-proof]
+prerequisites: []
+related: [02-language-overview]
+mathematicians: []
+reading_time_min: 12
+summary: 'What Lean 4 is, why it was built, what the mathematical community is doing with it, and how to get started — including your first one-line proof.'
+---
+
+There is a question that follows every textbook proof, usually unasked: *but how do you know you haven't made a mistake?* Mathematicians are human. Referees are human. Papers containing errors have been cited for decades before the flaw came to light. For most of mathematics, this is fine — the corpus self-corrects, slowly. But for a result at the frontier, where a proof runs to hundreds of pages and rests on dozens of prior lemmas, the question becomes genuinely pressing.
+
+**Lean** is one answer to that question. It is a piece of software that will not let a proof pass until every logical step is accounted for. If Lean accepts your proof, it is correct — not probably correct, not correct modulo a few details, but correct in the strictest logical sense the system can enforce. And the current version, **Lean 4**, is fast enough, ergonomic enough, and backed by a large enough library of existing mathematics that working mathematicians are beginning to use it seriously.
+
+## What Lean is
+
+Lean is simultaneously two things, and the combination is unusual.
+
+First, it is a **functional programming language** — you can write ordinary programs in it, compile them, and run them. It has a modern syntax, a powerful type system with dependent types, and a metaprogramming framework that lets you extend the language itself.
+
+Second, it is an **interactive theorem prover** — you can state a mathematical proposition and then provide a proof, and Lean will verify that the proof is logically valid. The same type system that governs programs also governs proofs: a proof of proposition $P$ is literally a *term* of type $P$. This identity between programs and proofs (the **Curry–Howard correspondence**) is not a metaphor; in Lean it is the literal implementation.
+
+Lean 4, released in 2021, is a complete rewrite of Lean 3. It is *self-hosting*: the Lean 4 compiler is written in Lean 4 and compiled by itself. The rewrite was driven by performance and metaprogramming — Lean 4 is fast enough to compile millions of lines of formalised mathematics in minutes, and its macro system lets you define new tactics and notation in the language itself.
+
+## Why it was built
+
+[Leonardo de Moura](https://leodemoura.github.io) began building Lean at Microsoft Research around 2013. The earlier generation of interactive theorem provers — Coq, Isabelle/HOL, Agda, Mizar — had each achieved remarkable things, but de Moura wanted to address ergonomic and metaprogramming limitations that made large-scale formalisation projects awkward. Coq's tactic language is a separate language from Gallina (the proof term language); Isabelle's automation is excellent but extending it requires Isabelle/ML, a specialised dialect; Agda treats programs and proofs uniformly but its proof automation is limited.
+
+Lean's design goals were: a uniform language for programs and proofs, a powerful and extensible tactic framework, and performance sufficient for the scale of modern mathematics. Lean 4 achieved all three. You define new tactics in the same Lean 4 you use for everything else. The `simp` tactic's lemma sets are ordinary Lean data structures you can extend with an attribute.
+
+## What it is good at
+
+The signature achievement of the Lean ecosystem is **Mathlib** — a single, unified library of formalised mathematics maintained by a global community of contributors. As of 2025, Mathlib contains over one million lines of Lean 4 code covering undergraduate and graduate mathematics across number theory, algebra, analysis, topology, combinatorics, and more. It is the largest coherent library of machine-verified mathematics in existence, and it grows by thousands of lines every week.
+
+Lean's high-profile recent wins include:
+
+- **The Liquid Tensor Experiment** (2020–2022): Peter Scholze posted a challenge — formalise the hardest lemma in his condensed mathematics programme. A team led by Johan Commelin completed it in Lean within about a year. Scholze described the experience as giving him "a sense of security" about the result.
+- **The polynomial Freiman–Ruzsa conjecture** (2023): A proof appeared in November 2023; it was formalised in Lean within weeks of the paper's publication, a new record for the speed of formalisation.
+- **Terence Tao's recent work**: Tao has publicly described formalising recent published results in Lean within hours. For a Fields medallist to reach for a proof assistant as a routine tool is a significant cultural shift.
+
+Beyond mathematics, Lean is used for **software verification** (proving that programs meet their specifications), **dependent-type programming** (writing programs whose types carry logical guarantees), and teaching formal logic to undergraduates.
+
+## The community
+
+The primary communal resource is **[Mathlib](https://leanprover-community.github.io)**, hosted on GitHub and discussed on the **[Lean Zulip chat](https://leanprover.zulipchat.com)**. The Zulip is unusually welcoming: questions from beginners sit beside research-level formalisation discussions, and the maintainers are active.
+
+The **[Natural Number Game](https://adam.math.hhu.de/#/g/leanprover-community/nng4)** is the standard first encounter for newcomers: a browser-based puzzle game in which you prove theorems about natural numbers in Lean, with no installation required. It is genuinely fun. Most people who have used it recommend starting there before reading any documentation.
+
+Summer schools and workshops on formalisation appear regularly under the **Lean for the Curious Mathematician** banner. If you want to go deeper, these are the fastest path from beginner to contributor.
+
+## A first taste
+
+Here is a theorem in Lean:
+
+```lean
+theorem add_zero (n : Nat) : n + 0 = n := rfl
+```
+
+Let us read every token.
+
+- `theorem` — we are making a declaration that is a proof, not a definition.
+- `add_zero` — the name we are giving this theorem.
+- `(n : Nat)` — a parameter: $n$ is a natural number (Lean's `Nat` is the type of non-negative integers $0, 1, 2, \ldots$).
+- `: n + 0 = n` — the type of the theorem, which is also its statement: "$n + 0 = n$".
+- `:= rfl` — the proof. `rfl` is the **reflexivity** proof term. It works here because Lean's definition of `Nat.add` is recursive on the second argument: `add n 0` is *definitionally equal* to `n` by the base case of the recursion. Lean can see this without any computation — it is a judgement about definitions, not a rewrite.
+
+That single line is a complete, machine-verified proof. Lean will reject it if it is wrong. The ellipsis `...` you see in informal proofs — "and so by similar reasoning" — is not available in Lean: every step must be accounted for.
+
+## How to run Lean locally
+
+The standard installation route uses **elan**, a version manager for Lean (analogous to rustup for Rust):
+
+```
+curl https://elan.lean-lang.org/elan-init.sh -sSf | sh
+```
+
+Once elan is installed, you create a Lean project with Mathlib by running:
+
+```
+lake new my-project math
+cd my-project
+lake exe cache get
+```
+
+The last command downloads the precompiled Mathlib cache — without it, Lean would compile all of Mathlib from source, which takes an hour. With the cache, you are ready in minutes.
+
+The recommended editor is **VS Code** with the **Lean 4 extension** (`leanprover.lean4`). Install it from the Extensions panel. Once installed, open any `.lean` file and the extension communicates with a running Lean server, showing you the proof state in the **InfoView** panel — a live display of what Lean knows at the cursor position, including the current goal and the hypotheses in scope.
+
+If you prefer not to install anything, the **[Lean Live](https://live.lean-lang.org)** web editor lets you write and check Lean code in the browser, though without Mathlib.
+
+## What is in this section
+
+The pages that follow take you through twelve worked proofs, in order of difficulty, from a one-line `rfl` proof up to results that a working mathematician would recognise as substantive theorems.
+
+| Page | Theorem | Key idea |
+|------|---------|----------|
+| [Add zero](/96-lean4/03-add-zero) | `n + 0 = n` | `rfl` — definitional equality |
+| [And comm](/96-lean4/04-and-comm) | $p \wedge q \to q \wedge p$ | `intro`, `exact` |
+| [Zero add](/96-lean4/05-zero-add) | `0 + n = n` | First induction proof |
+| [Add comm](/96-lean4/06-add-comm) | `m + n = n + m` | Compound induction |
+| [Divides trans](/96-lean4/07-divides-trans) | $a \mid b \wedge b \mid c \to a \mid c$ | `obtain`, existentials |
+| [Square non-negative](/96-lean4/08-square-non-negative) | `n * n ≥ 0` for integers | `nlinarith`, sign splitting |
+| [√2 irrational](/96-lean4/09-sqrt-two-irrational) | $\sqrt{2} \notin \mathbb{Q}$ | Parity and descent |
+| [Infinitely many primes](/96-lean4/10-infinitude-of-primes) | $\forall n,\, \exists p > n,\, p$ is prime | Euclid's argument |
+| [Gauss sum](/96-lean4/11-sum-of-first-n) | $2 \cdot \sum_{i=0}^{n} i = n(n+1)$ | Induction on a sum |
+| [Binomial base case](/96-lean4/12-binomial-theorem-base-case) | $(x+y)^2 = x^2 + 2xy + y^2$ | `ring`; and `add_pow` |
+| [Fermat's little theorem](/96-lean4/13-fermat-little) | $a^p \equiv a \pmod{p}$ | Citing Mathlib |
+| [Monotone convergence](/96-lean4/14-monotone-convergence) | Bounded monotone sequences converge | Real analysis in Lean |
+
+The [Resources](/resources) page lists external Lean tutorials and further reading.
+
+## Where to go next
+
+If you have never seen a proof assistant before, start with the [Natural Number Game](https://adam.math.hhu.de/#/g/leanprover-community/nng4) — it takes about two hours and leaves you with a working understanding of induction proofs in Lean. Then come back and work through the pages here in order.
+
+If you are already comfortable with a language like Haskell or Coq, the [Language overview](/96-lean4/02-language-overview) is your fastest path to productive Lean, and the later proof pages (from [Divides trans](/96-lean4/07-divides-trans) onwards) will feel familiar.
+
+Either way, the single most important thing to know is this: **Lean tells you what it knows.** At every point in a proof, the InfoView shows you the goal — what remains to be proved — and the hypotheses — what you have to work with. Learning to read that display is learning to think in Lean.

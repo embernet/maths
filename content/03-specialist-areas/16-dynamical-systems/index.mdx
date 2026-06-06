@@ -1,0 +1,100 @@
+---
+title: 'Dynamical Systems'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 16
+tags: [dynamical-systems, phase-space, lyapunov-stability, bifurcation, chaos, hopf-bifurcation, strange-attractors, lorenz]
+prerequisites:
+- 03-specialist-areas/08-differential-equations-advanced
+- 01-foundations/03-calculus-and-methods
+related:
+- 08-differential-equations-advanced
+- 06-mathematical-biology
+- 07-stochastic-processes
+mathematicians: [poincare, newton, euler]
+reading_time_min: 11
+summary: 'How systems evolve over time. Phase portraits, Lyapunov stability, bifurcations, and chaos — the qualitative theory of differential equations reveals how deterministic rules produce apparently random behaviour.'
+theorems: [chaos-theory-three-body-problem, poincare-conjecture, automorphic-functions, celestial-mechanics, contributions-to-topology-and-analysis]
+applications: [climate-modelling, epidemiological-modelling, weather-forecasting, population-dynamics-ecology]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 03-specialist-areas/08-differential-equations-advanced
+    why: 'ODEs and PDEs are the models; dynamical systems theory provides their qualitative analysis.'
+  - kind: topic
+    ref: 01-foundations/03-calculus-and-methods
+    why: 'Derivatives, Taylor series, and linear approximation are used throughout.'
+  - kind: topic
+    ref: 03-specialist-areas/04-topology
+    why: 'Topological ideas — compactness, connectedness, fixed-point theorems — appear in the qualitative theory.'
+  - kind: mathematician
+    ref: poincare
+    why: 'Poincaré invented qualitative dynamics and first identified the possibility of chaotic behaviour.'
+  - kind: topic
+    ref: 03-specialist-areas/06-mathematical-biology
+    why: 'Many of the canonical examples — predator-prey, epidemic models — arise in mathematical biology.'
+---
+
+A dynamical system is a rule for how a state evolves over time. The rule can be a differential equation, a map, or something more abstract — but in every case, the question is not just *what* happens, but *why*: which states are stable, what happens near equilibrium, and whether small changes in initial conditions lead to small or catastrophically large differences later.
+
+## Phase space and phase portraits
+
+The state of an autonomous ODE system $\dot{x} = f(x)$, $x \in \mathbb{R}^n$, is a point in **phase space** $\mathbb{R}^n$. The function $f$ defines a **vector field** — at each point it assigns a velocity vector. Solutions are curves (trajectories) in phase space that are everywhere tangent to $f$.
+
+A **phase portrait** is the picture of these trajectories. For a two-dimensional system $(\dot{x}, \dot{y}) = (f(x,y), g(x,y))$, the portrait can often be sketched qualitatively, revealing the global behaviour without solving the equations explicitly. Fixed points, limit cycles, stable and unstable manifolds, and separatrices are the organising features.
+
+## Equilibria and linearisation
+
+An **equilibrium** (or fixed point) $x^*$ satisfies $f(x^*) = 0$. Near $x^*$, linearise: let $u = x - x^*$, so $\dot{u} \approx Df(x^*)\,u$ where $Df$ is the Jacobian matrix. The linearisation governs local behaviour. The eigenvalues of $Df(x^*)$ determine the type of equilibrium:
+
+- All eigenvalues have negative real part: **stable node or spiral** — trajectories approach $x^*$.
+- All have positive real part: **unstable node or spiral** — trajectories depart.
+- Mixed signs: **saddle point** — stable manifold approaches, unstable manifold departs.
+- Pure imaginary eigenvalues: the linearisation gives a **centre**; the nonlinear system may spiral in, out, or cycle (needs a Lyapunov analysis).
+
+The **Hartman–Grobman theorem** justifies linearisation: near a hyperbolic equilibrium (no eigenvalues on the imaginary axis), the nonlinear flow is topologically conjugate to the linearised flow. This is the rigorous version of "linearise and understand".
+
+## Lyapunov stability
+
+**Lyapunov's direct method** establishes stability without solving the ODE. A function $V : \mathbb{R}^n \to \mathbb{R}$ is a **Lyapunov function** for the system at $x^*$ if:
+1. $V(x^*) = 0$ and $V(x) > 0$ for $x \neq x^*$ (near $x^*$).
+2. $\dot{V}(x) = \nabla V(x) \cdot f(x) \le 0$ along trajectories.
+
+If such $V$ exists, $x^*$ is **Lyapunov stable**. If $\dot{V} < 0$ (strictly), then $x^*$ is **asymptotically stable** — trajectories approach $x^*$ as $t \to \infty$.
+
+Intuitively, $V$ is an energy-like function that decreases (or at least doesn't increase) along trajectories. The method is constructive: you must find $V$, but once found, stability follows without integration. For many mechanical systems, $V = \text{kinetic} + \text{potential energy}$ works directly.
+
+## Bifurcation theory
+
+A **bifurcation** occurs when the qualitative behaviour of a system changes as a parameter $\mu$ varies. The three most common local bifurcations:
+
+- **Saddle-node bifurcation**: two equilibria collide and annihilate as $\mu$ changes. Normal form: $\dot{x} = \mu - x^2$. For $\mu > 0$, two fixed points at $\pm\sqrt{\mu}$; at $\mu = 0$, one degenerate; for $\mu < 0$, none.
+
+- **Transcritical bifurcation**: two equilibria exchange stability. Normal form: $\dot{x} = \mu x - x^2$.
+
+- **Hopf bifurcation**: a stable equilibrium loses stability and a **limit cycle** (closed periodic orbit) appears. Normal form (in $\mathbb{R}^2$): a pair of complex eigenvalues of the Jacobian crosses the imaginary axis as $\mu$ increases through zero. The Hopf bifurcation explains the onset of oscillation in many physical and biological systems — a linear instability triggers a nonlinear periodic solution.
+
+Bifurcation diagrams plot the position and stability of equilibria as functions of $\mu$, revealing how qualitative structure changes.
+
+## Deterministic chaos
+
+In 1963, Edward Lorenz simplified a fluid convection model to the three-dimensional system:
+
+$$\dot{x} = \sigma(y - x), \quad \dot{y} = x(\rho - z) - y, \quad \dot{z} = xy - \beta z.$$
+
+For parameter values $\sigma = 10$, $\rho = 28$, $\beta = 8/3$, numerical simulation revealed a **strange attractor**: trajectories remain bounded but never repeat, and two nearby initial conditions diverge exponentially. This is **sensitive dependence on initial conditions** — the defining property of a chaotic system.
+
+The Lorenz attractor is not a fixed point or a limit cycle but a fractal object in phase space: a set of non-integer Hausdorff dimension to which almost all trajectories are attracted. The practical consequence is that long-term prediction is impossible even for a completely deterministic system: small errors in specifying the initial state grow exponentially, eventually dominating any prediction.
+
+[Henri Poincaré](/mathematicians/poincare) had anticipated this possibility in his study of the three-body problem in celestial mechanics, but the computing power to visualise and study chaotic attractors directly only arrived in the 1960s.
+
+## Real-world applications
+
+Where this turns up in the world: [weather forecasting](/applications/weather-forecasting) is inherently limited by chaos — the atmosphere is governed by deterministic fluid equations, but the Lyapunov exponent of the system means that forecasts beyond roughly ten days are unreliable regardless of computational power. [Climate modelling](/applications/climate-modelling) operates on much longer time scales where statistical properties of the attractor (rather than individual trajectories) become predictable. [Epidemiological modelling](/applications/epidemiological-modelling) — SIR models and their descendants — uses phase portrait analysis to determine whether an epidemic equilibrates, oscillates, or grows. [Population dynamics](/applications/population-dynamics-ecology) and predator-prey systems (Lotka–Volterra) exhibit bifurcations and limit cycles that are directly visible in field data.
+
+## Why this matters
+
+Dynamical systems theory is the meeting point of geometry, analysis, and physics. Its central insight — that a system described by simple deterministic rules can behave in ways that are computationally irreducible over long times — is one of the most important discoveries of twentieth-century science. Chaos is not noise; it is structure so sensitive that it mimics noise.
+
+The qualitative methods introduced here — phase portraits, Lyapunov functions, bifurcation analysis — replace the brute-force integration of ODEs with geometric reasoning about the shape of solution spaces. [Poincaré](/mathematicians/poincare) recognised that asking the right qualitative question is often more powerful than trying to write down an explicit solution: his invention of the phase portrait and his work on the three-body problem laid the foundations for what is now an entire discipline.

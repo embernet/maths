@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: gps-positioning
 domains: [engineering, navigation, physics]
 uses_theorems: [method-of-least-squares, gaussian-distribution-normal-distribution]
-uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 01-foundations-year-one/03-calculus-and-methods, 03-specialisation-year-three/05-numerical-analysis]
+uses_topics: [01-foundations/01-algebra-and-linear-algebra, 01-foundations/03-calculus-and-methods, 03-specialist-areas/05-numerical-analysis]
 related_applications: [climate-modelling, robotics-and-control, seismic-imaging-oil-exploration]
 tags: [navigation, linear-algebra, relativity, applied]
 real_world_examples: [Smartphone navigation, Aircraft autopilot, Precision farming, Autonomous vehicles]
@@ -23,7 +23,7 @@ Each satellite broadcasts its position $(x_i, y_i, z_i)$ and the time $t_i$ of t
 
 $$r_i^2 = (x - x_i)^2 + (y - y_i)^2 + (z - z_i)^2.$$
 
-With four satellites you have four equations and four unknowns (including an unknown receiver clock offset). With more satellites — modern receivers use twelve or more — the system is **over-determined**: more equations than unknowns. No exact solution exists (every measurement has noise), so you instead minimise the sum of squared residuals. This is the **method of least squares**, developed by [Gauss](/mathematicians/gauss) and [Legendre](/mathematicians/legendre) at the turn of the nineteenth century.
+With four satellites you have four equations and four unknowns (including an unknown receiver clock offset). With more satellites — modern receivers use twelve or more — the system is **over-determined**: more equations than unknowns. No exact solution exists (every measurement has noise), so you instead minimise the sum of squared residuals. This is the **method of least squares**, developed by [Gauss](/mathematicians/gauss) and Legendre at the turn of the nineteenth century.
 
 In matrix form, $A\mathbf{x} \approx \mathbf{b}$ where $A$ encodes the linearised geometry and $\mathbf{b}$ encodes the measured pseudoranges. The least-squares solution is $\hat{\mathbf{x}} = (A^T A)^{-1} A^T \mathbf{b}$. Ill-conditioning (which occurs when satellites cluster in one part of the sky) inflates errors — monitored via the *dilution of precision* (DOP) statistic, which is the square root of $\text{tr}(A^T A)^{-1}$.
 
@@ -39,4 +39,4 @@ The first GPS satellite was launched in 1978; the system became fully operationa
 
 ## Links
 
-The linear algebra and least-squares ideas are developed in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra) and the numerical aspects in [Numerical Analysis](/03-specialisation-year-three/05-numerical-analysis). The PDEs underlying relativistic corrections connect to [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes).
+The linear algebra and least-squares ideas are developed in [Algebra and Linear Algebra](/01-foundations/01-algebra-and-linear-algebra) and the numerical aspects in [Numerical Analysis](/03-specialist-areas/05-numerical-analysis). The PDEs underlying relativistic corrections connect to [Vector Calculus and PDEs](/02-core-mathematics/04-vector-calculus-and-pdes).

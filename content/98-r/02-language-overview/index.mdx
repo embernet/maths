@@ -1,0 +1,263 @@
+---
+title: 'R: A Language Overview'
+section: 'R'
+section_slug: 98-r
+order: 2
+tags: [r, language-overview, syntax, vectors, formulas]
+prerequisites: [01-introduction]
+related: [01-introduction, 03-statistical-modelling]
+mathematicians: []
+reading_time_min: 12
+summary: 'How R thinks. Vectors as the fundamental type, recycling, formulas, environments, S3 and S4 object systems, and the parts of the language a Python programmer finds surprising.'
+---
+
+R is, syntactically, a small language. It is also full of choices that are unfamiliar if you have come from Python or C. This page walks through them in the order they confuse newcomers.
+
+## Assignment: `<-` and `=`
+
+```r
+x <- 3       # the idiomatic R style
+x = 3        # works, but reads as "set the function argument x to 3" — avoid
+3 -> x       # right-to-left assignment — legal but rare
+```
+
+The `<-` operator is the convention. RStudio's shortcut `Alt + -` types it in one keystroke. `=` is reserved for naming function arguments at call sites.
+
+## Everything is a vector
+
+R has no scalar. A "single number" is just a numeric vector of length 1.
+
+```r
+x <- 3.14
+length(x)        # 1
+is.vector(x)     # TRUE
+```
+
+A vector is built with `c()` — *combine*.
+
+```r
+xs <- c(1, 4, 9, 16, 25)
+length(xs)         # 5
+xs[2]              # 4   (R uses 1-based indexing!)
+xs[2:4]            # 4 9 16
+xs[xs > 5]         # 9 16 25
+xs[-1]             # 4 9 16 25  (negative indices DROP elements)
+```
+
+**Indexing starts at 1.** This is the single biggest surprise from a Python background.
+
+## Recycling
+
+When you operate on vectors of different lengths, R **recycles** the shorter one — repeating it cyclically.
+
+```r
+c(1, 2, 3, 4, 5, 6) + c(10, 100)
+# 11 102 13 104 15 106
+```
+
+Recycling is convenient when intentional, frustrating when accidental. Always think about lengths.
+
+## Types
+
+R's main atomic types are `numeric` (double), `integer` (write `1L`), `character`, `logical`, and `complex`.
+
+```r
+typeof(3.14)         # "double"
+typeof(3L)           # "integer"
+typeof("hello")      # "character"
+typeof(TRUE)         # "logical"
+typeof(1 + 2i)       # "complex"
+```
+
+`NA` represents missing data; `NULL` represents absence; `NaN` is not-a-number; `Inf` and `-Inf` are infinities. The first of these — `NA` — is the one R cares about most: virtually every statistical function in the language has well-thought-out behaviour around missingness.
+
+```r
+mean(c(1, 2, NA, 4))               # NA — propagates
+mean(c(1, 2, NA, 4), na.rm = TRUE) # 2.333... — drops NA
+```
+
+## Lists
+
+A `list` is a heterogeneous container — like a Python dict but ordered. Many statistical results in R are returned as lists.
+
+```r
+result <- list(estimate = 0.234, se = 0.045, p = 0.0017, n = 124)
+result$p              # 0.0017
+result[["se"]]        # 0.045
+```
+
+The `$name` and `[["name"]]` patterns are nearly interchangeable.
+
+## Data frames
+
+A `data.frame` is a list of equal-length vectors, displayed as a table.
+
+```r
+df <- data.frame(
+  name   = c("Alice", "Bob", "Carol"),
+  height = c(165, 180, 158),
+  weight = c(60, 80, 55)
+)
+
+df$height           # 165 180 158
+df[1, ]             # first row
+df[, "weight"]      # weight column
+df[df$height > 160, ]   # rows where height > 160
+```
+
+The newer **tibble** type (from the tidyverse) refines `data.frame` with better printing and stricter behaviour, but is interchangeable for most purposes.
+
+## Functions
+
+Functions are first-class.
+
+```r
+square <- function(x) {
+  x * x
+}
+square(5)            # 25
+
+# Anonymous form
+sapply(1:5, function(n) n^2)
+# 1 4 9 16 25
+
+# R 4.1+ shorthand
+sapply(1:5, \(n) n^2)
+```
+
+Functions take named arguments with defaults:
+
+```r
+greet <- function(name, greeting = "Hello") {
+  cat(greeting, name, "\n")
+}
+greet("Alice")                   # Hello Alice
+greet("Alice", "Bonjour")        # Bonjour Alice
+greet(greeting = "Hi", name = "Alice")
+```
+
+R is permissive about partial argument matching: `greet(n = "A", g = "Hi")` works as long as the prefixes are unambiguous.
+
+## The apply family
+
+Looping in R is possible but slow and unidiomatic. The vectorised pattern is to use **apply**-family functions.
+
+```r
+M <- matrix(1:12, nrow = 3)
+
+apply(M, 1, sum)    # row sums:    22 26 30
+apply(M, 2, mean)   # column means
+
+sapply(1:5, function(n) n^2)        # simple vectorised map
+lapply(1:5, function(n) n^2)        # returns a list instead
+
+# Two-argument map: combine each element of x with each element of y
+mapply(function(a, b) a^b, 2:5, 1:4)
+```
+
+In the tidyverse style, `purrr::map`, `map_dbl`, `map_chr`, etc. are the modern preference — they enforce return-type guarantees that `sapply` does not.
+
+## Formulas
+
+The killer feature. A **formula** is a piece of unevaluated code that describes a relationship between variables.
+
+```r
+fit <- lm(y ~ x1 + x2 + x1:x2, data = my_data)
+```
+
+| Formula syntax | Meaning |
+|---|---|
+| `y ~ x` | $y$ as a function of $x$, with intercept |
+| `y ~ x - 1` | $y$ as a function of $x$, no intercept |
+| `y ~ x1 + x2` | additive in $x_1$ and $x_2$ |
+| `y ~ x1 * x2` | shorthand for `x1 + x2 + x1:x2` |
+| `y ~ x1:x2` | only the interaction (rare on its own) |
+| `y ~ .` | all variables in the data frame |
+| `y ~ poly(x, 3)` | cubic polynomial in $x$ |
+| `y ~ s(x)` | smooth spline in $x$ (with `mgcv` package) |
+| `y ~ x + (1 | group)` | random intercept by group (with `lme4`) |
+
+The formula gets compiled into a **model matrix** at model-fitting time. The same formula syntax is used by `lm`, `glm`, `lme4::lmer`, `survival::coxph`, `ggplot2::stat_smooth`, and dozens of other functions — that consistency is the reason R is so productive for statistical modelling.
+
+## Environments and lexical scoping
+
+Variables live in **environments**. Functions capture their defining environment lexically (just like Python closures).
+
+```r
+make_counter <- function() {
+  count <- 0
+  function() {
+    count <<- count + 1   # <<- assigns in the enclosing environment
+    count
+  }
+}
+
+next_id <- make_counter()
+next_id()       # 1
+next_id()       # 2
+```
+
+The `<<-` super-assignment is unusual: it walks up parent environments until it finds the name. Use it sparingly — it is essentially R's escape hatch from purity.
+
+## Packages
+
+```r
+install.packages("ggplot2")   # one-time
+library(ggplot2)              # per session
+
+# Or call directly without attaching
+ggplot2::ggplot(mtcars, aes(wt, mpg)) + ggplot2::geom_point()
+```
+
+Packages from **CRAN** are installed by name. **Bioconductor** has its own installer (`BiocManager::install`) for genomics packages.
+
+## Object systems: S3 and S4
+
+R has not one but **three** object-oriented systems built in (and a fourth, R6, in a package). The most-used is **S3**, which is the lightest possible OO: an "object" is just a value with a `class` attribute, and a method is a function whose name has a class suffix.
+
+```r
+print.lm        # the print method for objects of class "lm"
+summary.lm      # the summary method for "lm"
+plot.lm         # the plot method for "lm"
+```
+
+When you call `summary(fit)` on an `lm` object, R dispatches to `summary.lm`. This is why `summary` of a linear model looks different from `summary` of a data frame.
+
+**S4** is a more formal object system used heavily in Bioconductor. **R6** is closer to Python-style classes with mutable state. For everyday statistics, S3 is what you encounter most.
+
+## NSE — non-standard evaluation
+
+This is the strangest part of R for outsiders. Some functions evaluate their arguments differently from how Python would: they capture the *expression* you wrote, not its value.
+
+```r
+library(dplyr)
+
+mtcars |> filter(mpg > 25, cyl == 4)
+# `mpg` and `cyl` are not variables in the surrounding scope —
+# they are column names that dplyr resolves inside the data frame.
+```
+
+This is what makes the tidyverse readable. It's also what occasionally surprises Python programmers, because it means functions can do things that aren't possible in most languages.
+
+## The pipe operators
+
+R has two pipe operators. The newer, **native** pipe is `|>` (R 4.1+):
+
+```r
+mtcars |> filter(mpg > 25) |> select(mpg, cyl, wt)
+```
+
+The older, **magrittr** pipe is `%>%`. Both pass the left-hand value as the first argument to the right-hand function. Use whichever — they are nearly interchangeable for everyday work.
+
+## What this gets you
+
+That is enough R to read the rest of the section. The key adjustments from Python:
+
+- Index from 1, not 0.
+- Use `<-` for assignment.
+- Vectors are everywhere; scalars are vectors of length 1.
+- Formulas with `~` describe statistical models.
+- `NA` propagates through arithmetic; `na.rm = TRUE` removes it.
+- `library(pkg)` attaches a package for the session.
+
+Now on to actual statistical modelling.

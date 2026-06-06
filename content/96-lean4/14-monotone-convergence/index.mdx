@@ -1,0 +1,98 @@
+---
+title: 'Proof 12: Monotone Convergence'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 14
+tags: [lean4, formal-proof]
+prerequisites: [13-fermat-little]
+related: []
+mathematicians: []
+reading_time_min: 7
+summary: 'A real-analysis result in Lean: a bounded monotone sequence of reals converges, stated and sketched using Mathlib filter machinery.'
+---
+
+## What we are proving
+
+A sequence of real numbers that is **monotone increasing** and **bounded above** converges:
+
+$$\text{If } a_n \leq a_{n+1} \text{ for all } n \text{ and } \exists M,\; \forall n,\; a_n \leq M, \text{ then } a_n \to L \text{ for some } L \in \mathbb{R}.$$
+
+This is the **monotone convergence theorem** for sequences — sometimes called the monotone sequence theorem. It is one of the cornerstones of real analysis, equivalent over the reals to the least-upper-bound property (completeness). Establishing it in Lean requires Mathlib's considerable real-analysis infrastructure: filters, `Filter.Tendsto`, `iSup`, and the completeness of `ℝ`.
+
+This page is the most advanced in the section. The proof is a sketch showing how Mathlib's machinery applies; the full formalisation is in Mathlib itself.
+
+## The proof
+
+```lean
+-- 14-monotone-convergence.lean
+import Mathlib.Tactic
+import Mathlib.Topology.Algebra.Order.LiminfLimsup
+import Mathlib.Topology.Order.MonotoneContinuity
+
+namespace MathsCompanion
+
+-- The monotone convergence theorem for sequences.
+-- A monotone bounded sequence of reals converges to its supremum.
+
+-- Setup: a : ℕ → ℝ is monotone and bounded above.
+theorem monotone_convergence
+    (a : ℕ → ℝ)
+    (hmono : Monotone a)
+    (hbdd : BddAbove (Set.range a)) :
+    ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L) := by
+  -- The limit is the supremum of the range of a
+  use iSup (fun n => a n)
+  -- Mathlib's tendsto_atTop_iSup handles monotone bounded sequences:
+  exact tendsto_atTop_ciSup hmono hbdd
+
+-- Let us also state the version for filters directly:
+-- tendsto_atTop_ciSup :
+--   Monotone a → BddAbove (range a) →
+--   Tendsto a atTop (nhds (⨆ n, a n))
+-- (Name may appear as tendsto_atTop_ciSup or similar — check docs.)
+
+#check tendsto_atTop_ciSup
+-- tendsto_atTop_ciSup :
+--   ∀ {α : Type u_1} {β : Type u_2} [inst : ConditionallyCompleteLinearOrder α]
+--     [inst_1 : TopologicalSpace α] [inst_2 : OrderTopology α]
+--     {f : β → α} [inst_3 : SemilatticeSup β] [inst_4 : Nonempty β],
+--     Monotone f → BddAbove (Set.range f) →
+--     Filter.Tendsto f Filter.atTop (nhds (⨆ i, f i))
+
+-- The decreasing case follows by symmetry:
+theorem antitone_convergence
+    (a : ℕ → ℝ)
+    (hanti : Antitone a)
+    (hbdd : BddBelow (Set.range a)) :
+    ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L) := by
+  use iInf (fun n => a n)
+  exact tendsto_atTop_ciInf hanti hbdd
+
+end MathsCompanion
+```
+
+## Walk-through
+
+This proof touches Lean's most sophisticated mathematical infrastructure. Let us unpack each piece.
+
+**`Monotone a`** — `Monotone f` in Lean means `∀ m n, m ≤ n → f m ≤ f n`. For a sequence `a : ℕ → ℝ`, this captures "non-decreasing".
+
+**`BddAbove (Set.range a)`** — `Set.range a` is the set of values $\{a(n) \mid n \in \mathbb{N}\}$, and `BddAbove` says this set has an upper bound: `∃ M, ∀ x ∈ Set.range a, x ≤ M`.
+
+**`iSup (fun n => a n)`** — the **supremum** (least upper bound) of the range. In Lean's `ConditionallyCompleteLinearOrder` (which `ℝ` is), `iSup` (`⨆`) is the conditional supremum — it exists and equals the least upper bound when the set is non-empty and bounded above.
+
+**`Filter.Tendsto a Filter.atTop (nhds L)`** — this is the rigorous definition of $a_n \to L$ as $n \to \infty$. `Filter.atTop` on `ℕ` is the filter of sets that contain `{n, n+1, n+2, ...}` for some $n$ — representing "eventually". `nhds L` is the neighbourhood filter of $L$ in `ℝ`. `Tendsto a atTop (nhds L)` means: for every neighbourhood $U$ of $L$, the sequence is eventually in $U$.
+
+**`tendsto_atTop_ciSup`** — this Mathlib lemma does all the work. It says: for a monotone function from a semilattice (here `ℕ` with `≤`) to a conditionally complete ordered topological space (here `ℝ`), if the range is bounded above, then the function converges to its supremum. The proof inside Mathlib uses the completeness of `ℝ` (the fact that every non-empty bounded-above set has a supremum) and the fact that for a monotone sequence bounded above, values eventually get arbitrarily close to the supremum.
+
+**Why completeness is needed:** The theorem fails over `ℚ`. The sequence $a_n = \lfloor n \cdot \sqrt{2} \rfloor / n$ is a monotone bounded sequence of rationals that converges to $\sqrt{2}$ — but $\sqrt{2} \notin \mathbb{Q}$. So the sequence converges in $\mathbb{R}$ but not in $\mathbb{Q}$. The completeness of $\mathbb{R}$ (every Cauchy sequence converges, equivalently every bounded monotone sequence converges) is what distinguishes $\mathbb{R}$ from $\mathbb{Q}$.
+
+**Mathlib name note:** `tendsto_atTop_ciSup` is the current name as of Mathlib4. The `c` in `ciSup` stands for *conditional* (it applies when boundedness is assumed, not unconditionally). If this name has changed, search `exact?` or the Mathlib documentation for "monotone convergence" or "tendsto_atTop".
+
+## Download
+
+[Download the Lean file](/lean/14-monotone-convergence.lean)
+
+## Try it yourself
+
+State and prove the **Bolzano–Weierstrass theorem**: every bounded sequence of reals has a convergent subsequence. This is harder — it requires constructing the subsequence, not just finding a limit. Mathlib has `tendsto_subseq_of_ne_tendsto_atTop` and related results; try `#check BoundedSequence` or search for "Bolzano" in the docs. For a more accessible exercise, prove that any convergent sequence is Cauchy: if `a_n → L` then `|a_m - a_n| → 0`.

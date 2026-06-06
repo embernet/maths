@@ -1,0 +1,107 @@
+---
+title: 'Optimal Transport'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 19
+node_type: topic
+tags: [optimal-transport, monge-kantorovich, wasserstein-distance, kantorovich-duality, brenier, couplings, displacement-interpolation]
+prerequisites: []
+related:
+  - 03-measure-and-lebesgue-integration
+  - 03-advanced-pdes
+  - 18-mathematics-of-machine-learning
+mathematicians: [gauss, kolmogorov]
+reading_time_min: 10
+summary: 'The mathematics of moving mass efficiently. The Monge–Kantorovich problem, Kantorovich duality, Wasserstein distances, and Brenier''s theorem — connecting probability, geometry, and PDEs.'
+theorems: []
+applications: [machine-learning-deep-neural-networks]
+suggested_pre_reading:
+  - kind: topic
+    ref: 03-specialist-areas/03-measure-and-lebesgue-integration
+    why: 'Optimal transport is formulated in the language of measures; Lebesgue integration and the theory of probability measures are essential foundations.'
+  - kind: topic
+    ref: 03-specialist-areas/07-stochastic-processes
+    why: 'Probability distributions over paths (measures on path space) appear in the Benamou–Brenier dynamical formulation.'
+  - kind: topic
+    ref: 04-advanced-topics/03-advanced-pdes
+    why: 'The Monge–Ampère equation and the connection to fluid mechanics both draw on PDE theory.'
+  - kind: topic
+    ref: 04-advanced-topics/18-mathematics-of-machine-learning
+    why: 'Wasserstein distances are used in generative modelling (Wasserstein GANs) and domain adaptation — the main applied context of this page.'
+  - kind: topic
+    ref: 04-advanced-topics/06-differential-geometry
+    why: 'The geodesic structure of the space of probability measures (Otto calculus) is a Riemannian geometry on an infinite-dimensional manifold.'
+---
+
+Gaspard Monge posed the problem in 1781: given a pile of sand and a set of holes to fill, how do you transport the sand into the holes at minimum total cost? The mathematics needed to answer this question rigorously took almost two centuries to develop, but the resulting theory — optimal transport — turned out to connect probability, geometry, PDE theory, and (most recently) machine learning in a remarkably unified way.
+
+## The Monge problem
+
+Let $\mu$ and $\nu$ be probability measures on $\mathbb{R}^d$, representing two mass distributions. A **transport map** is a measurable function $T : \mathbb{R}^d \to \mathbb{R}^d$ such that $T_\#\mu = \nu$ (the pushforward of $\mu$ under $T$ equals $\nu$): for every measurable set $A$, $\mu(T^{-1}(A)) = \nu(A)$. Informally, $T(x)$ is the destination of the mass at $x$.
+
+The **Monge problem** is to find the map $T$ that minimises the total transport cost:
+
+$$\inf_{T : T_\#\mu = \nu} \int_{\mathbb{R}^d} c(x, T(x))\,d\mu(x),$$
+
+where $c(x, y)$ is the cost of moving a unit of mass from $x$ to $y$ — typically $c(x,y) = |x - y|$ or $c(x,y) = |x-y|^2$.
+
+The Monge problem is a notoriously difficult optimisation problem: the constraint $T_\#\mu = \nu$ is highly nonlinear, no optimal map may exist (consider $\mu = \delta_0$ and $\nu = (\delta_{-1} + \delta_1)/2$, where any map from a single point must split mass), and the space of admissible maps has no good convex structure.
+
+## Kantorovich's relaxation
+
+Leonid Kantorovich's 1942 insight was to replace maps with **couplings**. A coupling (or transport plan) of $\mu$ and $\nu$ is a probability measure $\pi$ on $\mathbb{R}^d \times \mathbb{R}^d$ with marginals $\mu$ and $\nu$:
+
+$$\pi(A \times \mathbb{R}^d) = \mu(A), \qquad \pi(\mathbb{R}^d \times B) = \nu(B).$$
+
+The **Kantorovich problem** relaxes Monge's by optimising over couplings:
+
+$$\inf_{\pi \in \Pi(\mu,\nu)} \int_{\mathbb{R}^d \times \mathbb{R}^d} c(x,y)\,d\pi(x,y),$$
+
+where $\Pi(\mu,\nu)$ is the set of all couplings. This is a linear programme over a convex set — the relaxation from maps to couplings is the key to tractability. Every Monge map $T$ induces a coupling $\pi_T = (\mathrm{id}\times T)_\#\mu$ supported on the graph of $T$, so the Kantorovich problem is genuinely a relaxation.
+
+## Kantorovich duality
+
+The linear programme of the Kantorovich problem has a **dual**. Define a pair of functions $(f, g)$ on $\mathbb{R}^d$ as **$c$-conjugate** (or admissible potentials) if $f(x) + g(y) \le c(x,y)$ for all $x, y$. The **Kantorovich duality theorem** states:
+
+$$\inf_{\pi \in \Pi(\mu,\nu)} \int c\,d\pi = \sup_{f \oplus g \le c} \left(\int f\,d\mu + \int g\,d\nu\right).$$
+
+For the cost $c(x,y) = |x-y|$ (the $\ell_1$ case), the duality takes the form:
+
+$$W_1(\mu, \nu) = \sup_{\|f\|_{\mathrm{Lip}} \le 1} \left(\int f\,d\mu - \int f\,d\nu\right),$$
+
+a characterisation of the **Wasserstein-1 distance** $W_1$ as a dual norm over Lipschitz functions. This representation is computationally powerful: instead of computing a transport plan, one optimises over scalar functions.
+
+## Wasserstein distances
+
+For $p \ge 1$, the **Wasserstein-$p$ distance** between $\mu$ and $\nu$ is
+
+$$W_p(\mu, \nu) = \left(\inf_{\pi \in \Pi(\mu,\nu)} \int |x - y|^p\,d\pi(x,y)\right)^{1/p}.$$
+
+$W_1$ is the earth mover's distance: the minimum total work to transform $\mu$ into $\nu$, where work = mass $\times$ distance. $W_2$ metrises the space $\mathcal{P}_2(\mathbb{R}^d)$ of probability measures with finite second moment, turning it into a geodesic metric space. The Wasserstein distances are genuine metrics on probability measures, with the important property that convergence in $W_p$ is equivalent to weak convergence plus convergence of moments — making $W_p$ more informative than the total variation distance for distributions with non-overlapping support.
+
+## Brenier's theorem
+
+For the quadratic cost $c(x,y) = |x-y|^2$ and absolutely continuous $\mu$, the optimal transport problem has a unique solution and it is a Monge map. **Brenier's theorem** (1991) states: there exists a convex function $\varphi : \mathbb{R}^d \to \mathbb{R}$ such that the optimal transport map is $T = \nabla\varphi$. Moreover, $T$ is uniquely determined $\mu$-almost everywhere.
+
+The map $T = \nabla\varphi$ must satisfy $(\nabla\varphi)_\#\mu = \nu$. If $\mu$ has density $\rho_0$ and $\nu$ has density $\rho_1$, this is the **Monge–Ampère equation**:
+
+$$\rho_0(x) = \rho_1(\nabla\varphi(x))\,\det(D^2\varphi(x)),$$
+
+a fully nonlinear second-order PDE for the convex potential $\varphi$. Brenier's theorem reduces optimal transport, for the quadratic cost, to the study of this PDE — a deep connection to the analysis of convex functions.
+
+## Geodesics and the Benamou–Brenier formula
+
+The space $(\mathcal{P}_2(\mathbb{R}^d), W_2)$ has a Riemannian-like structure discovered by Felix Otto. Geodesics (shortest paths) in $W_2$ are **displacement interpolations**: given $\mu$ and $\nu$, the geodesic at time $t$ is $\mu_t = ((1-t)\mathrm{id} + tT)_\#\mu$, where $T = \nabla\varphi$ is the Brenier map. Masses travel in straight lines; only their destinations differ.
+
+The **Benamou–Brenier formula** gives a fluid-dynamic interpretation of $W_2$: transport a density $\rho$ from $\rho_0$ to $\rho_1$ by a velocity field $v$ satisfying the continuity equation $\partial_t\rho + \nabla\cdot(\rho v) = 0$, minimising kinetic energy $\int_0^1\int |v|^2\rho\,dx\,dt$. The minimum equals $W_2(\mu,\nu)^2$.
+
+## Real-world applications
+
+The most prominent recent application is in generative machine learning. A **Wasserstein GAN** trains a generator by minimising the $W_1$ distance between the generated distribution and the data distribution — using the dual representation to estimate $W_1$ via a neural network Lipschitz function. This sidesteps the mode collapse and gradient vanishing issues of KL-divergence-based training. Optimal transport also underlies **domain adaptation** (aligning two datasets from different distributions before training) and **computational biology** (comparing single-cell gene expression profiles). See [deep learning applications](/applications/machine-learning-deep-neural-networks) for the generative modelling context.
+
+Computationally, the Sinkhorn algorithm solves an **entropic regularisation** of the Kantorovich problem in $O(n^2)$ operations using matrix scaling — making optimal transport practical at scale.
+
+## Why this matters
+
+Optimal transport is one of the most fertile mathematical theories of the last three decades. It provides a metric on the space of probability measures that is both geometrically natural (Wasserstein geodesics are displacement interpolations) and analytically tractable (Kantorovich duality, Brenier's theorem). It has found unexpected applications in economics (the Monge–Kantorovich problem is a model of matching markets), fluid mechanics (the Benamou–Brenier formulation), and partial differential equations (gradient flows in Wasserstein space explain the diffusion equation and the Fokker–Planck equation as steepest descent). The field is active at the highest level: Cédric Villani won the Fields Medal in 2010 in part for his work on optimal transport and its connections to Ricci curvature.

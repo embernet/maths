@@ -1,0 +1,80 @@
+---
+title: Galois Theory
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 1
+tags: [algebra, Galois-theory, field-extensions, group-theory, solvability, polynomials]
+prerequisites:
+- 01-abstract-algebra
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 02-core-mathematics/01-abstract-algebra
+    why: 'Groups, ring homomorphisms, and field arithmetic are the objects Galois theory classifies — you need them before the correspondence theorem makes sense.'
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Field extensions are vector spaces over their base fields; the degree of an extension is a dimension in the linear-algebraic sense.'
+  - kind: mathematician
+    ref: galois
+    why: "Galois's own story and the letter he wrote the night before his duel is the motivation for the entire subject — reading it first makes the theory feel urgent."
+  - kind: mathematician
+    ref: abel
+    why: "Abel proved the general quintic unsolvable by radicals — the problem Galois then solved completely, explaining which polynomials are solvable."
+related:
+- 02-analytic-number-theory
+- 01-abstract-algebra
+- 01-algebraic-geometry
+mathematicians: [galois, abel, noether, lagrange]
+reading_time_min: 10
+summary: 'Galois theory answers the question that plagued mathematicians for centuries: which polynomial equations can be solved by radicals? The answer involves a profound correspondence between field extensions and group theory.'
+theorems: [galois-theory, galois-groups, characterisation-of-solvable-polynomials, normal-subgroups, proof-that-the-general-quintic-has-no-radical-solution, abel-s-theorem, dedekind-domains-algebraic-number-theory]
+applications: [error-correcting-codes, quantum-computing-algorithms, cryptocurrency-blockchain]
+---
+
+
+For thousands of years, mathematicians sought explicit formulas for the roots of polynomial equations. The quadratic formula was known to the Babylonians; cubic and quartic formulas were found in sixteenth-century Italy. The search for a quintic formula occupied mathematicians for two and a half centuries after that — and the answer, when it came, was that no such formula exists.
+
+[Niels Henrik Abel](/mathematicians/abel) proved the impossibility for the general degree-five polynomial in 1824 (published 1826). But the deeper question remained: *which* polynomials are solvable by radicals? The general theory was developed by [Évariste Galois](/mathematicians/galois) in the period 1830–32 — years of intense mathematical activity that ended with his death in a duel at age twenty. He wrote a summary letter to his friend Auguste Chevalier the night before the duel (29 May 1832), annotating and revising work he had developed over preceding years. The popular legend that he invented the theory in that single night is a myth; the mathematics had been built over years.
+
+## Field extensions
+
+Start with the rational numbers $\mathbb{Q}$. Adjoin $\sqrt{2}$: the field $\mathbb{Q}(\sqrt{2}) = \{a + b\sqrt{2} : a, b \in \mathbb{Q}\}$ is a **field extension** of $\mathbb{Q}$ of **degree** $[\mathbb{Q}(\sqrt{2}) : \mathbb{Q}] = 2$ (it is a 2-dimensional vector space over $\mathbb{Q}$).
+
+More generally, given a field $F$ and a polynomial $p(x) \in F[x]$, the **splitting field** $K$ of $p$ over $F$ is the smallest field extension of $F$ containing all roots of $p$.
+
+An extension $K/F$ is **Galois** if it is normal (contains all roots of every irreducible polynomial over $F$ with one root in $K$) and separable (every element is a root of a separable polynomial). For perfect fields like $\mathbb{Q}$, separability is automatic; splitting fields over $\mathbb{Q}$ are always Galois.
+
+## The Galois group
+
+The **Galois group** $\text{Gal}(K/F)$ is the group of all field automorphisms $\sigma : K \to K$ that fix $F$ pointwise. An automorphism permutes the roots of each irreducible polynomial over $F$.
+
+The **fundamental theorem of Galois theory** establishes a perfect correspondence:
+$$\left\{\text{subfields of } K \text{ containing } F\right\} \longleftrightarrow \left\{\text{subgroups of } \text{Gal}(K/F)\right\}.$$
+
+The correspondence reverses inclusion (larger subfields correspond to smaller subgroups) and respects normality (normal subfields correspond to normal subgroups, giving Galois sub-extensions).
+
+**Example.** The splitting field of $x^4 - 2$ over $\mathbb{Q}$ is $\mathbb{Q}(\sqrt[4]{2}, i)$, with $\text{Gal}(K/\mathbb{Q}) \cong D_4$ (the dihedral group of order 8). The eight subgroups of $D_4$ correspond to the eight intermediate fields between $\mathbb{Q}$ and $K$.
+
+## Solvability by radicals
+
+A polynomial $p(x) \in \mathbb{Q}[x]$ is **solvable by radicals** if its roots can be expressed using $+, -, \times, \div, \sqrt[n]{\phantom{x}}$ starting from $\mathbb{Q}$. The connection to group theory:
+
+**Theorem (Galois).** $p(x)$ is solvable by radicals over $\mathbb{Q}$ if and only if $\text{Gal}(K/\mathbb{Q})$ is a **solvable group** — one that has a composition series with abelian factors.
+
+The Galois group of a general degree-$n$ polynomial over $\mathbb{Q}$ is the symmetric group $S_n$. For $n \ge 5$, $S_n$ is not solvable (its only normal subgroup is $A_n$, and $A_n$ is simple and non-abelian). Therefore the general quintic is unsolvable by radicals.
+
+This is a positive theorem, not just a negative one. It tells you exactly which quintics are solvable: those whose Galois group is a solvable subgroup of $S_5$.
+
+## Constructibility
+
+As a beautiful application, Galois theory answers the classical Greek problems:
+- **Doubling the cube** ($\sqrt[3]{2}$): impossible by ruler and compass, since $[\mathbb{Q}(\sqrt[3]{2}):\mathbb{Q}] = 3$, not a power of 2.
+- **Squaring the circle** ($\pi$): impossible since $\pi$ is transcendental (proved by Lindemann, 1882), so it is not algebraic over $\mathbb{Q}$ at all.
+- **Regular polygon construction**: a regular $n$-gon is constructible if and only if $n = 2^k p_1 \cdots p_r$ where $p_1, \ldots, p_r$ are distinct Fermat primes ($p = 2^{2^m} + 1$). [Gauss](/mathematicians/gauss) proved the regular 17-gon ($17 = 2^{2^2} + 1$) is constructible at age 19.
+
+Galois theory is the first place in the degree where algebra and geometry are unified through abstract structural reasoning. It is widely regarded as one of the most beautiful theories in mathematics.
+
+## Real-world applications
+
+Where this turns up in the world: [Error-correcting codes](/applications/error-correcting-codes) — particularly Reed-Solomon codes used in QR codes and CDs — are built on finite field extensions, whose structure Galois theory classifies. [Quantum computing algorithms](/applications/quantum-computing-algorithms) exploit Fourier analysis over groups; the hidden subgroup formulation that unifies Shor's algorithm requires the Galois correspondence between field extensions and groups. [Elliptic-curve cryptography](/applications/cryptocurrency-blockchain) in Bitcoin and TLS relies on finite field arithmetic — the theory of which descends directly from Galois's work on field extensions.

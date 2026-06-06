@@ -1,0 +1,90 @@
+---
+title: 'Optimisation'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 15
+tags: [optimisation, convex-optimisation, linear-programming, gradient-descent, kkt, duality, lagrange-multipliers, convex-functions]
+prerequisites:
+- 01-foundations/01-algebra-and-linear-algebra
+- 01-foundations/03-calculus-and-methods
+- 02-core-mathematics/02-real-analysis-2
+related:
+- 05-numerical-analysis
+- 08-differential-equations-advanced
+- 07-stochastic-processes
+mathematicians: [lagrange, gauss, euler]
+reading_time_min: 10
+summary: 'Finding the best solution under constraints. Linear and convex programming, gradient methods, and duality provide the mathematical foundations of machine learning, logistics, and operations research.'
+theorems: [lagrange-multipliers, lagrangian-mechanics, euler-lagrange-equation, method-of-least-squares]
+applications: [machine-learning-deep-neural-networks, robotics-and-control, traffic-flow-modelling, option-pricing-finance]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/03-calculus-and-methods
+    why: 'Derivatives, gradients, and the conditions for stationary points are the starting language of optimisation.'
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Linear programming lives entirely in linear algebra; convex optimisation uses matrix inequalities.'
+  - kind: topic
+    ref: 02-core-mathematics/02-real-analysis-2
+    why: 'Rigorous notions of continuity and compactness are needed to guarantee that minima exist.'
+  - kind: mathematician
+    ref: lagrange
+    why: 'Lagrange multipliers — the central tool for constrained optimisation — bear his name.'
+  - kind: topic
+    ref: 03-specialist-areas/05-numerical-analysis
+    why: 'Numerical methods (line search, Newton steps) implement the theoretical algorithms in practice.'
+---
+
+Almost every scientific and engineering problem involves optimising something — minimising cost, maximising performance, fitting a model to data. Optimisation theory provides the language, conditions, and algorithms, and its reach extends from the simplex method on a 1940s tabletop to the gradient descent that trains a neural network.
+
+## Unconstrained optimisation
+
+Given $f : \mathbb{R}^n \to \mathbb{R}$ (smooth), a local minimiser $x^*$ satisfies the **first-order necessary condition** $\nabla f(x^*) = 0$ and the **second-order sufficient condition** that the Hessian $H = \nabla^2 f(x^*)$ is positive definite.
+
+**Gradient descent** iterates $x_{k+1} = x_k - \alpha_k \nabla f(x_k)$ for a step size $\alpha_k$ chosen by line search. It converges for smooth convex $f$; in the strongly convex case with Lipschitz gradient, the convergence rate is geometric: $f(x_k) - f^* \le C \cdot \rho^k$ for some $\rho < 1$.
+
+**Newton's method** replaces the gradient step with $x_{k+1} = x_k - H_k^{-1} \nabla f(x_k)$. Near a non-degenerate minimiser, Newton's method converges **quadratically** — the error squares at each step. The cost is forming and inverting the Hessian (prohibitive for large $n$), which motivates quasi-Newton methods (BFGS) that approximate $H^{-1}$ from gradient information.
+
+## Convex sets and convex functions
+
+A set $C \subseteq \mathbb{R}^n$ is **convex** if the line segment between any two of its points lies in $C$: $x, y \in C \Rightarrow \lambda x + (1-\lambda)y \in C$ for all $\lambda \in [0,1]$.
+
+A function $f : C \to \mathbb{R}$ is **convex** if
+
+$$f(\lambda x + (1-\lambda)y) \le \lambda f(x) + (1-\lambda)f(y)$$
+
+for all $x, y \in C$ and $\lambda \in [0,1]$. For smooth $f$: convexity is equivalent to $\nabla^2 f \succeq 0$ (positive semidefinite Hessian) everywhere, and to $f(y) \ge f(x) + \nabla f(x)^T(y-x)$ (the function lies above its tangent planes).
+
+The critical property: **every local minimum of a convex function over a convex set is a global minimum**. This is what makes convex optimisation tractable — solving a convex problem is, in principle, always possible to guaranteed accuracy.
+
+## Linear programming
+
+A **linear programme** (LP) minimises a linear objective $c^T x$ subject to linear inequality constraints $Ax \le b$ and $x \ge 0$. The feasible region is a convex polyhedron, and the minimum (if it exists and the problem is bounded) is attained at a **vertex** of that polyhedron.
+
+The **simplex method** (Dantzig, 1947) moves from vertex to vertex along edges of the polyhedron, always improving the objective. In the worst case it visits exponentially many vertices, but in practice it is fast. Interior-point methods (Karmarkar, 1984) offer polynomial-time guarantees by traversing the interior of the feasible region.
+
+## Lagrangians, duality, and KKT conditions
+
+For a constrained problem
+
+$$\min f(x) \text{ subject to } g_i(x) \le 0, \; h_j(x) = 0,$$
+
+the **Lagrangian** is $L(x, \lambda, \mu) = f(x) + \sum_i \lambda_i g_i(x) + \sum_j \mu_j h_j(x)$ with **multipliers** $\lambda_i \ge 0$, $\mu_j$ free. The **dual function** $d(\lambda, \mu) = \inf_x L(x, \lambda, \mu)$ gives a lower bound on the primal value. **Strong duality** — primal value equals dual value — holds under Slater's condition (a strictly feasible point exists) for convex problems.
+
+The **KKT conditions** (Karush–Kuhn–Tucker) are necessary (and for convex problems, sufficient) for optimality:
+
+$$\nabla_x L = 0, \quad \lambda_i g_i(x^*) = 0, \quad \lambda_i \ge 0, \quad g_i(x^*) \le 0, \quad h_j(x^*) = 0.$$
+
+The **complementary slackness** condition $\lambda_i g_i(x^*) = 0$ says that a Lagrange multiplier is non-zero only for an active constraint. [Lagrange's](/mathematicians/lagrange) original multiplier method (for equality constraints) is the special case.
+
+## Real-world applications
+
+Where this turns up in the world: training [deep neural networks](/applications/machine-learning-deep-neural-networks) is large-scale non-convex optimisation — stochastic gradient descent (SGD) and its variants (Adam, AdaGrad) are the workhorses, and convex analysis supplies the theory that makes convergence analysis possible. [Robotics and control](/applications/robotics-and-control) uses model predictive control, which solves a constrained quadratic programme at every time step. [Traffic flow modelling](/applications/traffic-flow-modelling) uses network flow optimisation (an LP) to minimise travel times or maximise throughput. [Option pricing](/applications/option-pricing-finance) involves quadratic programming when calibrating model parameters to market data.
+
+## Why this matters
+
+Optimisation is the invisible engine behind machine learning, logistics, finance, and engineering design. Every time a recommendation system ranks content, a logistics company routes deliveries, or a bank prices a derivative, an optimisation problem is being solved — often many thousands per second.
+
+The distinction between convex and non-convex problems is the fault line of the subject: convex problems are provably solvable; non-convex problems (which include neural network training) are not. Understanding when a problem is convex, and how to reformulate one that isn't, is a mathematical skill with immediate practical value. The duality theory of linear and convex programming — one of the most elegant structures in applied mathematics — says that every optimisation problem has a shadow problem (its dual) whose solution bounds and illuminates the original.

@@ -1,0 +1,151 @@
+---
+title: 'Choosing Python or R'
+section: 'R'
+section_slug: 98-r
+order: 6
+tags: [r, python, comparison, tooling]
+prerequisites: [01-introduction, 02-language-overview]
+related: [01-introduction, 03-statistical-modelling, 05-machine-learning]
+mathematicians: []
+reading_time_min: 9
+summary: 'A practical comparison: when Python is the better tool for the job, when R is, and when the answer is "both — at different parts of the workflow".'
+---
+
+The most common question someone learning data work asks is: *should I learn Python or R?* The honest answer is *both, eventually*, but the more useful answer is: it depends on what you intend to do. The two languages overlap so much that a worked tabular data analysis looks similar in either; the differences show up at the edges.
+
+This page lays out the comparison fairly, with the same problem solved in both, and offers a rule-of-thumb for picking.
+
+## The same problem in both
+
+Take a small canonical task: fit a linear regression of fuel efficiency on car weight and horsepower, summarise the model, and plot the diagnostic residuals-vs-fitted chart.
+
+### Python
+
+```python
+import pandas as pd
+import statsmodels.formula.api as smf
+import matplotlib.pyplot as plt
+
+mtcars = pd.read_csv(
+    "https://raw.githubusercontent.com/tidyverse/dplyr/main/data-raw/mtcars.csv"
+)
+
+fit = smf.ols("mpg ~ wt + hp", data=mtcars).fit()
+print(fit.summary())
+
+fitted = fit.fittedvalues
+resid = fit.resid
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.scatter(fitted, resid)
+ax.axhline(0, color="grey", linewidth=0.5)
+ax.set_xlabel("Fitted values")
+ax.set_ylabel("Residuals")
+ax.set_title("Residuals vs Fitted")
+fig.tight_layout()
+plt.show()
+```
+
+### R
+
+```r
+data(mtcars)
+fit <- lm(mpg ~ wt + hp, data = mtcars)
+summary(fit)
+plot(fit, which = 1)   # residuals-vs-fitted is plot #1 of the diagnostic suite
+```
+
+Both work; the R version is shorter, and the `plot(fit)` output is a polished diagnostic chart with annotation that the Python version would need extra code to match.
+
+For a *machine-learning* task, the comparison reverses:
+
+### Python (scikit-learn)
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+
+X, y = ...
+scores = cross_val_score(RandomForestClassifier(), X, y, cv=5)
+print(scores.mean())
+```
+
+### R (tidymodels)
+
+```r
+library(tidymodels)
+library(ranger)
+
+splits <- vfold_cv(my_data, v = 5)
+spec <- rand_forest(trees = 500) |> set_engine("ranger") |> set_mode("classification")
+wf <- workflow() |> add_formula(target ~ .) |> add_model(spec)
+results <- fit_resamples(wf, resamples = splits, metrics = metric_set(accuracy))
+collect_metrics(results)
+```
+
+R takes more lines for the same effect. Not by a huge margin — but enough that for routine ML, Python's brevity matters.
+
+## Strengths and weaknesses, side by side
+
+| | Python | R |
+|--|--------|---|
+| General-purpose programming | Excellent | Awkward |
+| Web services / APIs | Excellent (Flask, FastAPI, Django) | Possible (plumber) but rare |
+| Tabular data manipulation | Very good (pandas / Polars) | Excellent (dplyr / data.table) |
+| Statistical modelling | Good (statsmodels), but lags R | Excellent — the gold standard |
+| Deep learning | Excellent (PyTorch, JAX, TF) | Workable (torch, keras), not leading-edge |
+| Classical ML | Excellent (scikit-learn) | Excellent (tidymodels) |
+| Static plotting | Good (matplotlib, plotnine) | Best in class (ggplot2) |
+| Interactive plots | Excellent (plotly, bokeh) | Excellent (plotly, htmlwidgets) |
+| Reproducible reports | Good (Quarto, Jupyter) | Excellent (Quarto, R Markdown) |
+| Bayesian modelling | Good (PyMC, NumPyro) | Excellent (Stan / brms / rstanarm) |
+| Survival analysis | Workable (lifelines) | Best in class (survival) |
+| Mixed-effects models | Workable (statsmodels, pymer4) | Best in class (lme4, glmmTMB) |
+| Speed of pure-language loops | Slow | Slow |
+| Calling C/C++/Fortran | Excellent (Cython, pybind11) | Excellent (Rcpp) |
+| GPU and TPU | Excellent | Workable |
+| Production deployment | Excellent | Workable |
+| Community size | Vastly larger | Smaller but very deep in statistics |
+| Hiring availability | Easier | Harder outside statistics roles |
+
+## How experts actually use both
+
+The most common arrangement in industry is: **Python for the engineering, R for the analysis**.
+
+A data-science team might:
+
+- Run ETL pipelines, microservices, and the production model in Python.
+- Do exploratory analysis, statistical inference, and final reports in R.
+- Move data between the two via Parquet files or a shared database.
+
+The `reticulate` package lets you call Python from R; the `rpy2` package lets you call R from Python. Tools like Quarto can mix R and Python chunks in the same document. The two ecosystems are friends, not enemies.
+
+## When to choose Python
+
+- The deliverable is a *system* (a service, an app, a model deployed behind an API).
+- The task is deep learning, NLP, computer vision, generative AI.
+- You need to do general-purpose programming alongside the analysis.
+- The downstream consumers (engineers, ML platforms) expect Python.
+- The team is engineering-heavy.
+
+## When to choose R
+
+- The deliverable is an *analysis* — a report, a paper, an explanation.
+- The mathematics is statistical — mixed models, survival, time series, Bayesian inference.
+- The output is publication-quality charts and tables.
+- The team is statisticians, biostatisticians, social scientists, ecologists.
+- You'll value the tidyverse's expressive data manipulation and ggplot2.
+
+## When to use both
+
+- The exploratory work is statistical (R) but the production model is engineering (Python).
+- A paper has both deep-learning experiments (Python) and statistical analysis (R).
+- A team has both engineers (Python-fluent) and analysts (R-fluent) and wants both to contribute.
+
+## A pragmatic recommendation
+
+If you are starting your career and the field is open: **learn Python first**. It is the more general-purpose tool, the more in-demand skill, and the broader software-engineering investment. You will not regret knowing Python.
+
+Then, if your work drifts towards statistics, biostatistics, social science, ecology, or any field where the *mathematical* side of data is what matters — **add R**. You will find that the things R does well, it does dramatically better than Python, and once you internalise its idioms, much of your daily work moves there for the simple reason that the code reads more naturally.
+
+The boring truth is that a good practitioner can solve almost any problem in either language. The difference is one of *fit* — and the fit is much sharper than the marketing usually allows. Try both, on real problems, and notice which one you reach for when no-one is watching. That's your answer.

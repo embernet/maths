@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: computer-graphics-3d
 domains: [computer-science, engineering, art]
 uses_theorems: [euler-s-formula-e-i-cos-i-sin, riemannian-geometry]
-uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 01-foundations-year-one/03-calculus-and-methods, 03-specialisation-year-three/04-topology]
+uses_topics: [01-foundations/01-algebra-and-linear-algebra, 01-foundations/03-calculus-and-methods, 03-specialist-areas/04-topology]
 related_applications: [machine-learning-deep-neural-networks, robotics-and-control, protein-folding-alphafold]
 tags: [graphics, linear-algebra, geometry, applied]
 real_world_examples: [Film CGI and visual effects, Video game rendering, Architectural visualisation, Surgical simulation]
@@ -21,7 +21,7 @@ Every rendered scene in a film or video game involves the same sequence of mathe
 
 **Transformations and homogeneous coordinates**: a 3D point $(x,y,z)$ is represented as a 4D vector $(x,y,z,1)^T$. Translations, rotations, and perspective projections are all represented as $4 \times 4$ matrix multiplications, composable by matrix product. The full rendering pipeline — model transform, view transform, projection — is a sequence of matrix multiplications, performed in hardware by the GPU.
 
-**Rotations and quaternions**: representing 3D rotations as $3 \times 3$ orthogonal matrices ($\det = +1$) is standard, but for animation and interpolation, **quaternions** are superior. A quaternion $q = w + xi + yj + zk$ (with $i^2 = j^2 = k^2 = ijk = -1$) of unit norm $|q| = 1$ represents a rotation of angle $2\theta$ about axis $\hat{n}$ as $q = \cos\theta + \sin\theta(n_x i + n_y j + n_z k)$. Spherical linear interpolation (**SLERP**) between two unit quaternions gives the smoothest rotation path, avoiding the gimbal lock of Euler angles. The quaternion group is the unit sphere in $\mathbb{R}^4$ — a topic in [topology](/03-specialisation-year-three/04-topology).
+**Rotations and quaternions**: representing 3D rotations as $3 \times 3$ orthogonal matrices ($\det = +1$) is standard, but for animation and interpolation, **quaternions** are superior. A quaternion $q = w + xi + yj + zk$ (with $i^2 = j^2 = k^2 = ijk = -1$) of unit norm $|q| = 1$ represents a rotation of angle $2\theta$ about axis $\hat{n}$ as $q = \cos\theta + \sin\theta(n_x i + n_y j + n_z k)$. Spherical linear interpolation (**SLERP**) between two unit quaternions gives the smoothest rotation path, avoiding the gimbal lock of Euler angles. The quaternion group is the unit sphere in $\mathbb{R}^4$ — a topic in [topology](/03-specialist-areas/04-topology).
 
 **Differential geometry and shading**: realistic lighting requires computing surface normals and curvatures. A smooth surface in 3D is described by a parametrisation $\mathbf{r}(u,v)$; the **first fundamental form** $(E\, du^2 + 2F\, du\, dv + G\, dv^2)$ encodes distances, and the **second fundamental form** encodes curvatures. Normal maps encode perturbations to the normal vector for high-frequency surface detail without increasing polygon count.
 
@@ -41,4 +41,4 @@ Ivan Sutherland's Sketchpad (1963) and GRAIL (1969) were the first interactive c
 
 ## Links
 
-Matrix transformations, eigenvalues, and linear maps are in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra). The differential geometry of surfaces connects to the Riemannian geometry content in [Algebraic Geometry](/04-advanced-topics-year-four/01-algebraic-geometry). Topology underlies the quaternion group and surface classification, covered in [Topology](/03-specialisation-year-three/04-topology).
+Matrix transformations, eigenvalues, and linear maps are in [Algebra and Linear Algebra](/01-foundations/01-algebra-and-linear-algebra). The differential geometry of surfaces connects to the Riemannian geometry content in [Algebraic Geometry](/04-advanced-topics/01-algebraic-geometry). Topology underlies the quaternion group and surface classification, covered in [Topology](/03-specialist-areas/04-topology).

@@ -1,0 +1,74 @@
+---
+title: 'Proof 1: Add Zero'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 3
+tags: [lean4, formal-proof]
+prerequisites: [01-introduction, 02-language-overview]
+related: [05-zero-add, 06-add-comm]
+mathematicians: []
+reading_time_min: 4
+summary: 'The simplest possible Lean proof: n + 0 = n follows directly from the definition of addition, closed by a single rfl.'
+---
+
+## What we are proving
+
+For any natural number $n$, adding zero on the right leaves it unchanged:
+
+$$n + 0 = n.$$
+
+This looks trivially true — and in Lean it is, but for a specific reason that is worth understanding. Lean's natural numbers are defined inductively, and addition is defined recursively on the *second* argument. The base case of that recursion is precisely `n + 0 = n`. So this is not a theorem Lean must deduce; it is a *definitional* equality.
+
+In Lean syntax:
+
+```lean
+theorem add_zero (n : Nat) : n + 0 = n := rfl
+```
+
+## The proof
+
+```lean
+-- 03-add-zero.lean
+import Mathlib.Tactic
+
+namespace MathsCompanion
+
+-- The main theorem: n + 0 = n
+theorem add_zero' (n : Nat) : n + 0 = n := rfl
+
+-- Mirror form: written as a tactic proof for comparison
+theorem add_zero_tactic (n : Nat) : n + 0 = n := by
+  rfl
+
+-- The symmetric form: 0 + n = n requires induction (see 05-zero-add)
+-- This version shows what rfl can and cannot do
+#check Nat.add_zero   -- the Mathlib version of this theorem
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**`theorem add_zero' (n : Nat) : n + 0 = n`** — we declare a theorem named `add_zero'` (we use a prime to avoid clashing with Lean's built-in `Nat.add_zero`). The parameter `(n : Nat)` introduces a universally quantified natural number. The proposition `: n + 0 = n` is the statement.
+
+**`:= rfl`** — the proof. `rfl` is the *reflexivity* proof term. It inhabits any goal of the form `a = a` where `a` and its right-hand side are *definitionally equal* — meaning Lean can reduce both sides to the same normal form using only the definitions of the functions involved.
+
+Why does this work here? Lean's natural numbers use the following recursive definition of addition:
+
+```
+Nat.add : Nat → Nat → Nat
+Nat.add n 0       := n          -- base case
+Nat.add n (m + 1) := (Nat.add n m) + 1   -- recursive case
+```
+
+The base case states, by definition, that `n + 0` *is* `n`. There is nothing to prove — it is true by definition. `rfl` simply witnesses this.
+
+The tactic-mode version `by rfl` does the same thing; `by` opens a tactic block, and `rfl` is also available as a tactic (it applies the `rfl` proof term to the current goal).
+
+## Download
+
+[Download the Lean file](/lean/03-add-zero.lean)
+
+## Try it yourself
+
+The mirror result, `0 + n = n`, looks equally obvious but `rfl` cannot close it — because addition is defined recursively on the *second* argument, not the first, and `0 + n` does not reduce definitionally to `n`. Try writing `theorem zero_add' (n : Nat) : 0 + n = n := rfl` and watch Lean reject it. Then look at how the next page ([Zero add](/96-lean4/05-zero-add)) proves it by induction. The contrast is instructive: definition matters, and where you recurse matters.

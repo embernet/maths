@@ -1,0 +1,66 @@
+---
+title: 'Spirals: from Nautilus to Galaxies'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 4
+tags: [logarithmic-spiral, archimedean-spiral, nautilus, spirals, self-similarity, differential-equations, nature]
+related: ['01-the-golden-ratio', '03-phyllotaxis-and-the-golden-angle']
+mathematicians: [descartes, bernoulli-family]
+reading_time_min: 10
+summary: 'Logarithmic spirals appear in nautilus shells, hurricanes, spider webs, and spiral galaxies. They are self-similar curves defined by a single differential equation — and the nautilus is not a golden spiral, whatever the internet says.'
+theorems: [cartesian-coordinates]
+applications: []
+---
+
+Two families of spirals dominate the natural world, and they are completely different in character.
+
+An **Archimedean spiral** is one where successive coils are equally spaced: the distance from the centre increases at a constant rate as you wind around. A coiled garden hose, a watch spring, a flat roll of paper tape. The defining equation in polar coordinates is $r = a\theta$ for constant $a$.
+
+A **logarithmic spiral** is one where the distance from the centre grows exponentially with angle: $r = ae^{b\theta}$. Each successive coil is *wider than the last by a constant factor*. This is the spiral of the nautilus shell, the spider web, and the spiral arms of galaxies — and it has a striking property: it is self-similar. If you rotate a logarithmic spiral by any angle, you get a shape identical to the original, just scaled. 
+
+These two types look superficially similar, but they are mathematically — and biologically — utterly different.
+
+## The logarithmic spiral
+
+The logarithmic spiral was first studied by [René Descartes](/mathematicians/descartes) in 1638 and later analysed deeply by Jakob Bernoulli (of the [Bernoulli family](/mathematicians/bernoulli-family)), who was so enchanted by its properties that he requested it be engraved on his tombstone with the motto *Eadem mutata resurgo* — "though changed, I arise again the same." (The engraver accidentally carved an Archimedean spiral instead. Mathematics professors have been using this story ever since.)
+
+In Cartesian coordinates, the logarithmic spiral satisfies
+
+$$x(t) = ae^{bt}\cos t, \quad y(t) = ae^{bt}\sin t.$$
+
+The key property is that the *angle* between the tangent to the spiral and the radial line is constant, equal to $\arctan(1/b)$. This is why the logarithmic spiral is also called the equiangular spiral. It is the unique spiral with this property, and that property is the biological reason for its ubiquity.
+
+## The nautilus: what is true
+
+The nautilus shell (*Nautilus pompilius*) is a logarithmic spiral. The shell grows by accretion at its open end, and because the growth rate of each new layer is proportional to the existing size of the shell, the shape is self-similar. The animal is always the same shape, just larger — a consequence of this single mathematical property.
+
+What the nautilus shell is *not* is a golden spiral. A golden spiral is a specific logarithmic spiral in which the growth factor per quarter-turn is $\varphi$. The actual growth factor per quarter-turn of a nautilus shell is approximately 4, not $\varphi \approx 1.618$. Careful measurements across many specimens give values clustering around 3 to 4 per turn, varying between individuals. The golden-spiral claim is repeated in almost every popular account of the golden ratio; it is consistently contradicted by measurement.
+
+This is the bit that catches students out: two things can both be logarithmic spirals without being the same logarithmic spiral. The logarithmic spiral is a family, parameterised by $b$. The nautilus belongs to this family. So does a golden spiral. But they have different values of $b$.
+
+## Why shells are logarithmic spirals
+
+The argument is elegant. A growing shell adds new material at its opening. If the shell grows at a rate proportional to its current size — a common biological growth pattern — then successive cross-sections of the shell are geometrically similar: the shell is always the same shape, just scaled up. The unique spiral with this property is the logarithmic spiral. It is not a coincidence; it is a theorem about self-similar curves. The biology (proportional growth) forces the mathematics (logarithmic spiral).
+
+This argument was first made rigorous by D'Arcy Thompson in *On Growth and Form*, and it remains one of the most satisfying connections in mathematical biology.
+
+## Spider webs: a mixture
+
+Orb-weaver spiders spin webs with a radial structure and a connecting spiral. The radial threads are straight lines from the centre. The spiral connecting thread looks logarithmic in some species and Archimedean in others, depending on whether the spider uses dry or sticky silk. Dry silk spirals (found in the inner "scaffold spiral" built first) are approximately logarithmic. The sticky capture spiral wound over them is closer to Archimedean — equally spaced coils, designed to maximise the area of sticky surface covering a given zone.
+
+## Hurricanes and galaxies
+
+Tropical cyclones seen from satellite photographs show a striking logarithmic-spiral structure in their cloud bands. This is not a coincidence of aesthetics; it reflects the combination of rotational and radial flow in the storm. The Coriolis effect introduces angular momentum, and the logarithmic spiral is the shape of a flow field in which rotational and radial velocities are in a constant ratio — which is, to first approximation, what a mature tropical cyclone achieves.
+
+Spiral galaxies — the Milky Way is one — show the same pattern. The arms of *M51 (Whirlpool Galaxy)* follow logarithmic spirals with a pitch angle of about 15°–20°. The mechanism is different from the cyclone: spiral density waves in the disc of stars and gas are maintained by self-gravity, and the mathematical structure of these density waves under differential rotation turns out to produce logarithmic arms.
+
+## Archimedean spirals in nature
+
+The Archimedean spiral is rarer in biology because uniform spacing requires the organism to "know" how far it has grown from the centre — a more complex growth control than the simple proportional rule that gives logarithmic spirals. But it does appear: the inner scaffold spiral of an orb-web, as noted; the spiral feeding path of some snails; and the cross-section of some horns.
+
+## Where to read more
+
+- D'Arcy Wentworth Thompson, *On Growth and Form* (1917) — Chapter VI, 'On the Theory of Transformations'
+- H. E. Huntley, *The Divine Proportion* (1970) — enthusiastic but worth checking claims against measurements
+- [Wikipedia: Logarithmic spiral](https://en.wikipedia.org/wiki/Logarithmic_spiral) — comprehensive treatment with the equiangular property and examples

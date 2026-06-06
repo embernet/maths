@@ -1,0 +1,68 @@
+---
+title: 'Fractals and Self-Similarity'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 5
+tags: [fractals, self-similarity, fractal-dimension, mandelbrot, coastlines, power-laws, box-counting, chaos]
+related: ['06-tree-branching-and-leonardos-rule', '10-allometric-scaling-and-kleibers-law']
+mathematicians: [cantor, weierstrass]
+reading_time_min: 12
+summary: 'How long is the coastline of Britain? It depends on the length of your ruler. Mandelbrot''s answer — that coastlines have fractional dimension — opened a new geometry for irregular shapes. Lungs, lightning, rivers, and broccoli all have measurable fractal dimensions.'
+theorems: [cantor-set, weierstrass-function-continuous-everywhere-differentiable-nowhere]
+applications: []
+---
+
+Take an atlas. Measure the coastline of Britain with a ruler set to 100 kilometres. You get about 2,800 km. Now reset the ruler to 50 km and measure again; now you can trace in peninsulas and bays you had previously smoothed over, and you get about 3,400 km. Reset to 10 km and you get 5,000 km. Reset to 1 km and you get over 17,000 km. The coastline is growing without bound as your measuring scale shrinks.
+
+This observation, which Benoît Mandelbrot published in 1967 under the title 'How Long Is the Coast of Britain?', is not a failure of measurement. It is a fundamental property of the geometric object. Coastlines are *fractal*: they have structure at every scale, and the conventional concept of length does not apply to them.
+
+## Fractal dimension
+
+For a smooth curve, doubling the resolution of your measurement roughly doubles the number of segments you need to cover it, and the total measured length stays approximately constant. For a fractal, doubling the resolution increases the count of segments by a factor greater than 2, and the measured length keeps growing.
+
+Specifically, if covering the object with segments of length $\epsilon$ requires $N(\epsilon)$ segments, then for a fractal
+
+$$N(\epsilon) \sim \epsilon^{-D}$$
+
+where $D$ is the *fractal dimension* (also called the Hausdorff or box-counting dimension). For a smooth curve, $D = 1$. For a flat region, $D = 2$. For a fractal, $D$ is typically not an integer.
+
+The coastline of Britain has $D \approx 1.25$. Norway's more jagged coastline has $D \approx 1.52$. South Africa's smoother coastline has $D \approx 1.02$. These are not vague estimates; they are measurable from maps.
+
+You can compute the box-counting dimension directly: cover the coastline with a grid of boxes of side $\epsilon$, count how many boxes contain part of the coastline, and plot $\log N(\epsilon)$ against $\log \epsilon$. The slope of the resulting line is $-D$. This is a genuine measurement of a genuine property.
+
+## Mathematical fractals
+
+The natural setting for understanding fractal dimension is the study of self-similar sets — sets that look the same at every scale.
+
+The **Cantor set** is the simplest example. Start with $[0,1]$. Remove the middle third. Remove the middle third of each remaining interval. Repeat infinitely. What you are left with is uncountable, has zero length, and has fractal dimension $D = \log 2 / \log 3 \approx 0.631$. It is the foundational example in fractal geometry, and it was constructed by [Cantor](/mathematicians/cantor) in the 1880s as a counterexample in analysis — a set that was everywhere totally disconnected but still uncountable.
+
+The **Koch snowflake** starts from an equilateral triangle, replaces the middle third of each edge by two sides of a smaller equilateral triangle, and repeats. The resulting curve has infinite length and fractal dimension $D = \log 4 / \log 3 \approx 1.26$ — remarkably close to the coastline of Britain.
+
+The [Weierstrass function](/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere) — continuous everywhere but differentiable nowhere — is a fractal curve in the time domain. When [Weierstrass](/mathematicians/weierstrass) presented it in 1872, it was considered pathological, a monster constructed to refute an intuition. From the fractal geometry perspective, it is simply a curve whose dimension is greater than 1.
+
+## Fractals in the living world
+
+**Lungs.** The human lung has a surface area of about 70 square metres, contained in a volume of about 4 litres. This extraordinary ratio is achieved by fractal branching: the bronchial tree divides roughly 23 times from trachea to alveolus, with each division reducing the diameter by a constant factor. The total number of alveoli is about 480 million. The fractal dimension of the bronchial tree surface is approximately 2.97 — close to the theoretical maximum of 3 for a surface filling a volume. Evolution has used fractal architecture to pack a gymnasium-sized surface into a chest cavity.
+
+**River networks.** River basins show fractal structure in their branching, obeying a relation known as Hack's law: the length $L$ of the main stream in a basin of area $A$ scales as $L \propto A^{0.6}$. The fractal dimension of river networks, measured by box-counting, is typically around 1.8 to 2.0. The geometry of drainage networks is now understood to arise from the process of erosion optimising flow gradients — another case where an optimisation problem produces a fractal structure.
+
+**Lightning.** Electrical discharge in air propagates along the path of least resistance, which at a microscopic level is determined by the random distribution of ionised molecules. The resulting discharge path is a fractal with dimension approximately 1.7 to 1.8. Dielectric breakdown — the same process that creates Lichtenberg figures when a high-voltage discharge propagates through a solid insulator — produces similar fractal structures that can be preserved in perspex blocks and are sold as ornaments.
+
+**Romanesco broccoli.** This is perhaps the most visually dramatic example. Each head of Romanesco is composed of spiralling florets, each of which is itself a miniature version of the whole head, which is itself a miniature version of the larger structure. The self-similarity is visible to the naked eye across three or four scales. The fractal dimension is approximately 2.66.
+
+## Power laws
+
+Fractal dimension is intimately related to power laws. If a quantity $Y$ scales with a size $X$ as $Y \propto X^{\alpha}$, and if this relation holds across multiple orders of magnitude, then the underlying structure is likely fractal or self-similar. Many biological and physical quantities obey power laws of this type: the sizes of cities, the energies of earthquakes, the frequencies of words in a text, the surface areas of organs. The Gaussian distribution (the bell curve; see the [normal distribution](/theorems/gaussian-distribution-normal-distribution)) does not describe these phenomena well; power-law distributions do, and fractal geometry provides the mathematical framework for understanding them.
+
+## What is true and what is overstated
+
+Not every irregular shape is a fractal in the technical sense. For a fractal dimension to be meaningful, the power-law scaling must hold over at least two or three orders of magnitude. Many natural objects are self-similar over a limited range of scales and then become smooth or random at other scales. Biologists who claim "the lung is a fractal" are using "fractal" as a shorthand for "has more structure at smaller scales than classical geometry would predict" — which is true and useful, but is not the same as having a well-defined fractal dimension over all scales.
+
+Also: fractal dimension is not a uniquely determined property. Box-counting dimension, Hausdorff dimension, correlation dimension, and information dimension can give different values for the same object. For a genuine mathematical fractal (Cantor set, Koch snowflake), they all agree. For a noisy natural object, they differ, and the choice of which to use depends on what question you are asking.
+
+## Where to read more
+
+- Benoît Mandelbrot, *The Fractal Geometry of Nature* (1982, W.H. Freeman) — the foundational text; readable and illustrated
+- Mandelbrot's original 1967 paper: 'How Long Is the Coast of Britain? Statistical Self-Similarity and Fractional Dimension', *Science* 156, pp. 636–638
+- [Wikipedia: Fractal dimension](https://en.wikipedia.org/wiki/Fractal_dimension) — a careful treatment of the different notions of dimension

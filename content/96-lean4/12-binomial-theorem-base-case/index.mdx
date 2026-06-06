@@ -1,0 +1,92 @@
+---
+title: 'Proof 10: The Binomial Square'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 12
+tags: [lean4, formal-proof]
+prerequisites: [11-sum-of-first-n]
+related: [11-sum-of-first-n, 13-fermat-little]
+mathematicians: []
+reading_time_min: 5
+summary: '(x + y)^2 = x^2 + 2xy + y^2 proved by ring in one line; plus the general binomial theorem as it appears in Mathlib (add_pow).'
+---
+
+## What we are proving
+
+The binomial square identity: for any $x, y$ in a commutative ring,
+
+$$(x + y)^2 = x^2 + 2xy + y^2.$$
+
+And, as a capstone, the general binomial theorem:
+
+$$(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k.$$
+
+The base case $n = 2$ is a ring identity, closed by `ring` in a single line. The general theorem requires Mathlib's `Finset.sum` machinery and is considerably harder to prove from scratch. We state it and show where it lives in Mathlib.
+
+```lean
+theorem sq_sum (x y : ℤ) : (x + y) ^ 2 = x ^ 2 + 2 * x * y + y ^ 2
+```
+
+## The proof
+
+```lean
+-- 12-binomial-theorem-base-case.lean
+import Mathlib.Tactic
+import Mathlib.RingTheory.Binomial
+
+namespace MathsCompanion
+
+-- The base case: (x + y)^2 = x^2 + 2xy + y^2
+-- ring closes this in one line for any commutative ring
+theorem sq_sum (x y : ℤ) : (x + y) ^ 2 = x ^ 2 + 2 * x * y + y ^ 2 := by
+  ring
+
+-- Works over ℝ too:
+theorem sq_sum_real (x y : ℝ) : (x + y) ^ 2 = x ^ 2 + 2 * x * y + y ^ 2 := by
+  ring
+
+-- The general binomial theorem is Mathlib's `add_pow`:
+-- add_pow (x y : α) (n : ℕ) :
+--   (x + y) ^ n = ∑ k in Finset.range (n + 1), x ^ k * y ^ (n - k) * n.choose k
+-- where α is a CommSemiring.
+-- (Note: the exact form in Mathlib is Commute.add_pow for the non-commutative case
+--  and add_pow for commutative rings. Search with exact? or check the docs if renamed.)
+
+#check add_pow
+-- add_pow : ∀ {R : Type u_1} [inst : CommSemiring R] (x y : R) (n : ℕ),
+--   (x + y) ^ n = ∑ k ∈ Finset.range (n + 1), x ^ k * y ^ (n - k) * ↑(Nat.choose n k)
+
+-- Example: (x + y)^3 = x^3 + 3x^2y + 3xy^2 + y^3
+theorem cube_sum (x y : ℤ) : (x + y) ^ 3 = x ^ 3 + 3 * x ^ 2 * y + 3 * x * y ^ 2 + y ^ 3 := by
+  ring
+
+-- Demonstrating add_pow for n = 2, recovering our base case:
+example (x y : ℤ) : (x + y) ^ 2 = ∑ k in Finset.range 3, x ^ k * y ^ (2 - k) * (Nat.choose 2 k) := by
+  rw [add_pow]
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**`ring`** — Lean's `ring` tactic proves identities in any commutative ring by normalising both sides to a canonical polynomial form and checking they are equal. For `(x + y) ^ 2 = x ^ 2 + 2 * x * y + y ^ 2`, it expands the left side, collects terms, and finds them identical to the right side. This works for `ℤ`, `ℝ`, `ℚ`, `ℤ/nℤ`, polynomial rings, and anything else that is a `CommRing`.
+
+The key observation is that `ring` does *not* need to know what `x` and `y` are — it works for all values simultaneously, treating them as indeterminates. This is the algebraic content of a ring identity.
+
+**The general binomial theorem** (`add_pow` in Mathlib) states:
+
+$$(x + y)^n = \sum_{k=0}^{n} x^k y^{n-k} \binom{n}{k}$$
+
+for $x, y$ in any `CommSemiring` (a structure with addition and multiplication, but not necessarily subtraction or inverses — includes $\mathbb{N}$, $\mathbb{Z}$, $\mathbb{R}$, polynomials, etc.). Note the indexing: the Mathlib convention sums $k$ from $0$ to $n$, with $x^k$ and $y^{n-k}$; some textbooks swap the exponents.
+
+**The Mathlib lemma name** is `add_pow` as of Mathlib4. Use `#check add_pow` in your Lean file to confirm. If you are in a non-commutative setting, look for `Commute.add_pow`, which applies when `x` and `y` commute.
+
+`ring` handles any particular case ($n = 2$, $n = 3$, etc.) without needing `add_pow` at all. `add_pow` is what you use when $n$ is a variable and you need the full general formula.
+
+## Download
+
+[Download the Lean file](/lean/12-binomial-theorem-base-case.lean)
+
+## Try it yourself
+
+Expand $(1 + x)^n$ modulo a prime $p$ using the binomial theorem. The key fact (used in the proof of Fermat's little theorem by the multinomial approach) is that $\binom{p}{k} \equiv 0 \pmod{p}$ for $0 < k < p$, so $(1 + x)^p \equiv 1 + x^p \pmod{p}$. Try stating this in Lean and see how far `ring` and `omega` can take you before you need number theory lemmas.

@@ -1,0 +1,127 @@
+---
+title: 'Python: The Lingua Franca of Scientific Computing'
+section: 'Python'
+section_slug: 97-python
+order: 1
+tags: [python, scientific-computing, history, overview]
+prerequisites: []
+related: [02-language-overview, 03-numerical-computing, 06-machine-learning]
+mathematicians: []
+reading_time_min: 10
+summary: 'Where Python came from, why mathematicians and scientists adopted it so widely, and what makes it suited to mathematical work — from numerical linear algebra to large language models.'
+---
+
+If you talk to a research mathematician under fifty about the computer they keep on their desk, the conversation almost always lands on Python. Not because the language is mathematically special — it is not — but because in the last twenty-five years a community has built around it a stack of libraries so deep and so well integrated that picking up almost any branch of computational mathematics now means, in practice, picking up Python.
+
+This was not the plan. Python was designed for general programming, not for mathematics. It got here by being open, readable, and easy to glue to fast code written in other languages.
+
+## A short history
+
+**Guido van Rossum** started Python over the 1989–1990 Christmas break at CWI in Amsterdam. He wanted a language that read like English, did away with the ceremony of C, and let you script almost anything. The first public release was in **1991**. For most of the 1990s it was a niche scripting language with a small but devoted following.
+
+The shift began in the early 2000s. Two communities turned out to need exactly what Python offered:
+
+- **Scientists and engineers** who were tired of writing Fortran or MATLAB scripts and wanted a free, programmable environment with proper data structures and a sane standard library.
+- **Web developers** drawn to the readability and the early frameworks (Zope, then Django).
+
+The scientific community built its own arithmetic engine. **Numeric** (1995) and then **NumPy** (2006) gave Python fast array operations comparable to MATLAB; **SciPy** (2001) added the algorithms (optimisation, linear algebra, signal processing, statistics); **matplotlib** (2003) added plotting. By the late 2000s these three were the de facto numerical Python.
+
+Then machine learning happened. **scikit-learn** (2007) made classical ML approachable. **Theano** (2007), **TensorFlow** (2015), and especially **PyTorch** (2016) made deep learning practical. The neural-network revolution happened in Python because Python was already where the numerical community lived.
+
+Today's Python ecosystem is the result: a small, readable core language with thousands of mature libraries, used by physicists, statisticians, financial analysts, biologists, climate scientists, and AI researchers — and used as the *interface* to vast amounts of C, C++, Fortran, and CUDA code that does the actual numerical heavy lifting.
+
+## Why mathematicians adopted it
+
+A few reasons stand out.
+
+**Readability.** Python's syntax was designed to look like the pseudocode in an algorithms textbook. A nested loop or a list comprehension can be read aloud and makes sense.
+
+```python
+# Sum of the first n squares
+total = sum(i**2 for i in range(1, n + 1))
+```
+
+There is no boilerplate to skip past. For someone whose primary expertise is mathematics and whose secondary expertise is programming, this matters.
+
+**Glue.** Python is slow, and everyone knows it. The interpreter is unhurried; loops are unhurried; arithmetic on Python `int` and `float` carries overhead that a compiled language does not. But Python is excellent at calling *other* languages. NumPy's array operations are written in C and Fortran; SciPy wraps LAPACK and BLAS; PyTorch's tensor operations run on CUDA kernels. The pattern is: orchestrate in Python, compute in C. You write the high-level algorithm in legible Python and the heavy work happens at native speed underneath.
+
+**Interactivity.** The **REPL** (read–eval–print loop) and especially **Jupyter notebooks** make Python feel like an enhanced calculator. You can examine intermediate results, plot a function, redefine it, and plot again — without recompiling or rerunning a whole program. For mathematical exploration, where you often don't know what you're looking for until you see it, this is essential.
+
+**Open culture.** Almost every major scientific Python library is open-source, MIT- or BSD-licensed, and developed in the open on GitHub. You can read the source. You can file a bug against scikit-learn or PyTorch and a maintainer will probably reply within a day. For mathematics, where understanding *why* something works is half the point, this transparency is far more valuable than a polished proprietary alternative.
+
+## What Python is good at
+
+Within mathematics, Python excels at:
+
+- **Numerical linear algebra** — large matrix operations via NumPy (BLAS/LAPACK), sparse matrices via SciPy.
+- **Numerical analysis** — quadrature, root-finding, optimisation, ODE solvers (SciPy).
+- **Symbolic mathematics** — SymPy: algebraic manipulation, calculus, equation solving, generating $\LaTeX$.
+- **Probability and statistics** — SciPy.stats, statsmodels, PyMC; though here R is a close peer (see the next section).
+- **Data manipulation and visualisation** — pandas, matplotlib, seaborn, plotly.
+- **Machine learning** — scikit-learn for classical methods, PyTorch and TensorFlow for deep learning, Hugging Face for transformers.
+- **Computer algebra at scale** — when Mathematica or Maple would be the natural tool, SymPy is the open alternative.
+- **Glue-code for HPC** — orchestrating C, C++, Fortran, and CUDA routines.
+
+What Python is *not* especially good at:
+
+- **Speed of pure-Python code.** A tight numerical loop in pure Python is roughly 50× slower than the same loop in C. This is why everything performance-critical lives in a library.
+- **Formal correctness.** Python has no proof system; type checking is optional and runtime-flavoured. If you want machine-verified mathematics, you want [Lean 4](/96-lean4/01-introduction), not Python.
+- **Specialised statistical modelling.** R remains stronger for mixed-effects models, survival analysis, and the parts of statistics where statisticians publish methods as R packages first and only later (if at all) as Python ports.
+
+## What you'll see in this section
+
+This section is a tour, not a textbook. Six pages, roughly in order:
+
+| Page | What it covers |
+|------|----------------|
+| [Language overview](/97-python/02-language-overview) | The Python language itself: types, comprehensions, classes, generators, decorators |
+| [Numerical computing](/97-python/03-numerical-computing) | NumPy arrays and SciPy algorithms — the workhorse of the stack |
+| [Symbolic mathematics](/97-python/04-symbolic-mathematics) | SymPy: algebra, calculus, equations, exact arithmetic |
+| [Data and visualisation](/97-python/05-data-and-visualisation) | pandas and matplotlib |
+| [Machine learning](/97-python/06-machine-learning) | scikit-learn, PyTorch, and the modern ML workflow |
+
+If you have already programmed in another language, you can read the language overview in fifteen minutes and skip straight to whichever library matches the problem in front of you. If you haven't, work through the overview first.
+
+## Installing Python
+
+The single best entry point for scientific work is **[Anaconda](https://www.anaconda.com/download)** or its lighter sibling **Miniconda**: a Python distribution that bundles the scientific stack and a package manager (`conda`) that handles native dependencies (BLAS, CUDA, etc.) cleanly. If you only want vanilla Python, install it from **[python.org](https://www.python.org/downloads/)** and use `pip` for packages.
+
+For learning and exploration, **[Google Colab](https://colab.research.google.com)** is hard to beat: a free, browser-based Jupyter environment with NumPy, SciPy, PyTorch, and a free GPU preinstalled. You can be running mathematical Python in two minutes without installing anything.
+
+The recommended editor is **[VS Code](https://code.visualstudio.com)** with the Python extension, or **[JupyterLab](https://jupyter.org)** for notebook-style work.
+
+## A first taste
+
+Solve $x^2 - 5x + 6 = 0$ symbolically:
+
+```python
+from sympy import symbols, solve
+
+x = symbols('x')
+roots = solve(x**2 - 5*x + 6, x)
+print(roots)   # [2, 3]
+```
+
+Numerically integrate $\int_0^\pi \sin(x)\,dx$:
+
+```python
+from scipy.integrate import quad
+import numpy as np
+
+value, error = quad(np.sin, 0, np.pi)
+print(value)   # 2.0000000000000004
+```
+
+Fit a line to noisy data:
+
+```python
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+y = 2 * x + 1 + np.random.normal(scale=0.5, size=100)
+
+slope, intercept = np.polyfit(x, y, 1)
+print(slope, intercept)   # ≈ 2.0, ≈ 1.0
+```
+
+Three lines each. Three different branches of computational mathematics. Same language. That is what Python buys you.

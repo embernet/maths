@@ -1,0 +1,106 @@
+---
+title: 'Mathematics of Machine Learning'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 18
+node_type: topic
+tags: [machine-learning, kernel-methods, svm, gradient-boosting, em-algorithm, pca, reinforcement-learning]
+prerequisites: []
+related:
+  - 17-deep-learning-theory
+  - 03-specialist-areas/15-optimisation
+  - 03-specialist-areas/07-stochastic-processes
+mathematicians: [fisher, kolmogorov, gauss]
+reading_time_min: 11
+summary: 'The mathematical core of supervised, unsupervised, and reinforcement learning. Linear models, kernel methods, ensemble theory, and convex optimisation — the toolkit underneath every machine learning algorithm.'
+theorems: [bayes-theorem, method-of-least-squares]
+applications: [machine-learning-bayesian-inference, machine-learning-deep-neural-networks]
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Linear models, the kernel trick, and PCA are formulated in the language of matrices and vector spaces.'
+  - kind: topic
+    ref: 02-core-mathematics/03-probability-and-statistics
+    why: 'Statistical learning is built on probability distributions, expectations, and inference — this page assumes a working knowledge of both.'
+  - kind: theorem
+    ref: bayes-theorem
+    why: 'Bayesian inference, regularisation, and the probabilistic interpretation of learning all rest on Bayes'' theorem.'
+  - kind: theorem
+    ref: method-of-least-squares
+    why: 'Least squares is the canonical linear model and the starting point from which ridge regression, lasso, and PCA all extend.'
+  - kind: topic
+    ref: 03-specialist-areas/15-optimisation
+    why: 'Convex optimisation — duality, gradient methods, Newton steps — is the computational engine of nearly every learning algorithm.'
+---
+
+Machine learning is applied mathematics with a particular empirical flavour: algorithms are assessed by their performance on data, not their elegance. But underneath every successful algorithm is a mathematical structure — a loss function, a hypothesis class, an optimisation method, a statistical guarantee. Understanding these structures is what distinguishes a practitioner from a theoretician, and it is what makes the field cumulative rather than a collection of engineering tricks.
+
+**Note:** this page covers the broad mathematical toolkit of machine learning — linear models, kernels, ensembles, dimensionality reduction, and reinforcement learning. For the specific mathematics of deep networks (universal approximation, the neural tangent kernel, double descent), see [Deep Learning Theory](/04-advanced-topics/17-deep-learning-theory).
+
+## The supervised learning setup
+
+In supervised learning, we observe pairs $(x_i, y_i)_{i=1}^n$ drawn i.i.d. from an unknown distribution $\mathcal{D}$ over $\mathcal{X} \times \mathcal{Y}$. We seek a function $h : \mathcal{X} \to \mathcal{Y}$ from a hypothesis class $\mathcal{H}$ that minimises the **expected risk** $L(h) = \mathbb{E}_{(x,y)\sim\mathcal{D}}[\ell(h(x), y)]$ for a loss function $\ell$.
+
+Since $\mathcal{D}$ is unknown, we minimise the **empirical risk** $L_S(h) = \frac{1}{n}\sum_i \ell(h(x_i), y_i)$ instead. The gap between $L_S$ and $L$ is the **generalisation error**, controlled by the complexity of $\mathcal{H}$ (VC dimension, Rademacher complexity) and the sample size $n$. Choosing $\mathcal{H}$ to balance approximation error (how well $\mathcal{H}$ can fit the true function) against estimation error (how well we can identify the best element of $\mathcal{H}$ from $n$ samples) is the bias–variance tradeoff.
+
+## Linear models and regularisation
+
+**Least squares** fits $\hat y = w^\top x$ by minimising $\sum (y_i - w^\top x_i)^2$, giving the normal equations $X^\top X w = X^\top y$ and explicit solution $\hat w = (X^\top X)^{-1}X^\top y$ when $X^\top X$ is invertible. When $p > n$ (more features than examples), the matrix is singular and the system is underdetermined.
+
+**Ridge regression** adds an $\ell_2$ penalty: minimise $\|y - Xw\|^2 + \lambda\|w\|^2$. The unique solution $\hat w_\lambda = (X^\top X + \lambda I)^{-1}X^\top y$ always exists. **Lasso** replaces $\ell_2$ with $\ell_1$: minimise $\|y - Xw\|^2 + \lambda\|w\|_1$. Lasso induces sparsity — many components of $\hat w$ are exactly zero — making it a feature selection procedure. The difference between $\ell_1$ and $\ell_2$ penalties is geometric: the $\ell_1$ ball has corners at the coordinate axes, which are the points a regularisation path hits first.
+
+## The kernel trick and reproducing kernel Hilbert spaces
+
+Many learning algorithms depend on the data only through inner products $\langle x_i, x_j\rangle$. The **kernel trick** replaces these with a **positive definite kernel** $k(x, x') = \langle \phi(x), \phi(x')\rangle_{\mathcal{H}}$, where $\phi : \mathcal{X} \to \mathcal{H}$ is a (possibly infinite-dimensional) feature map into a **reproducing kernel Hilbert space (RKHS)**. One never computes $\phi$ explicitly — only evaluations of $k$.
+
+The **representer theorem** states: the minimiser of a regularised empirical risk over an RKHS always has the form $f^*(x) = \sum_{i=1}^n \alpha_i k(x, x_i)$. This reduces an infinite-dimensional optimisation problem to an $n$-dimensional one: solve for the $\alpha_i$ coefficients.
+
+Popular kernels: the RBF (Gaussian) kernel $k(x,x') = e^{-\|x-x'\|^2/2\ell^2}$; the polynomial kernel $k(x,x') = (x^\top x' + c)^d$; the Matérn family used in Gaussian processes.
+
+## Support vector machines
+
+A **support vector machine** (SVM) finds the maximum-margin linear classifier. For linearly separable data with labels $y_i \in \{-1, +1\}$, the **hard-margin SVM** solves:
+
+$$\min_{w,b} \tfrac{1}{2}\|w\|^2 \quad \text{subject to} \quad y_i(w^\top x_i + b) \ge 1 \quad \forall i.$$
+
+The **margin** is $2/\|w\|$; the support vectors are the training points with $y_i(w^\top x_i + b) = 1$. The dual of this quadratic programme involves only inner products $\langle x_i, x_j\rangle$, so kernel substitution applies directly. The **soft-margin SVM** introduces slack variables $\xi_i \ge 0$:
+
+$$\min_{w,b,\xi} \tfrac{1}{2}\|w\|^2 + C\sum_i \xi_i \quad \text{s.t.} \quad y_i(w^\top x_i + b) \ge 1 - \xi_i.$$
+
+## Boosting and gradient boosting
+
+An **ensemble** method combines many weak learners (models slightly better than random) into a strong predictor. **Boosting** (Freund–Schapire, 1995) trains learners sequentially, each focusing on examples misclassified by the ensemble so far. **Gradient boosting** (Friedman, 2001) generalises this: view boosting as gradient descent in function space, and at each step fit a weak learner to the negative gradient of the loss. The update is
+
+$$f_{m+1}(x) = f_m(x) + \eta\, h_m(x),$$
+
+where $h_m$ is the learner fit to $\{(x_i, -\partial\ell(y_i, f_m(x_i))/\partial f)\}$ and $\eta$ is a step size. Gradient boosting with decision tree base learners (XGBoost, LightGBM) is consistently among the strongest algorithms on tabular data.
+
+## The EM algorithm
+
+Many probabilistic models include **latent variables** $Z$ that are unobserved. The **expectation-maximisation (EM) algorithm** maximises the marginal log-likelihood $\log p(X|\theta) = \log \sum_Z p(X, Z|\theta)$ by alternating between:
+
+- **E-step:** compute $Q(\theta, \theta^{(t)}) = \mathbb{E}_{Z|X, \theta^{(t)}}[\log p(X, Z|\theta)]$ (the expected complete-data log-likelihood).
+- **M-step:** set $\theta^{(t+1)} = \arg\max_\theta Q(\theta, \theta^{(t)})$.
+
+The log-likelihood is guaranteed non-decreasing at each iteration. Applications: Gaussian mixture models (where EM recovers the $k$-means algorithm as a degenerate case), hidden Markov models, and factor analysis.
+
+## PCA and dimensionality reduction
+
+**Principal component analysis** finds the orthonormal directions that maximise explained variance. Given centred data matrix $X \in \mathbb{R}^{n\times p}$, the principal components are the eigenvectors of the sample covariance $\hat\Sigma = X^\top X / n$. The top-$k$ components project the data onto a $k$-dimensional subspace that retains maximum variance — equivalently, they minimise reconstruction error. By the Eckart–Young theorem, the rank-$k$ truncated SVD $X \approx U_k\Sigma_k V_k^\top$ is the optimal rank-$k$ approximation in Frobenius norm.
+
+## Reinforcement learning and Bellman equations
+
+**Reinforcement learning (RL)** addresses sequential decision-making: an agent takes actions in an environment, receives rewards, and learns a policy to maximise cumulative reward. The formal framework is the **Markov decision process (MDP)** $(\mathcal{S}, \mathcal{A}, P, R, \gamma)$: states, actions, transition probabilities, reward function, and discount factor. The **value function** $V^\pi(s) = \mathbb{E}^\pi[\sum_{t=0}^\infty \gamma^t R_t | s_0 = s]$ satisfies the **Bellman equations**:
+
+$$V^\pi(s) = R(s, \pi(s)) + \gamma\sum_{s'} P(s'|s,\pi(s))\,V^\pi(s').$$
+
+The optimal value function $V^*(s) = \max_\pi V^\pi(s)$ satisfies the Bellman optimality equation; dynamic programming and temporal-difference methods (Q-learning, SARSA) solve for $V^*$ or approximate it.
+
+## Real-world applications
+
+The mathematics on this page underlies [Bayesian inference in machine learning](/applications/machine-learning-bayesian-inference) — Gaussian processes for regression and uncertainty quantification, Bayesian neural networks, and variational inference all draw on RKHS theory, EM, and [Bayes' theorem](/theorems/bayes-theorem). [Deep learning systems](/applications/machine-learning-deep-neural-networks) use gradient boosting and SVMs as baselines; the kernel trick inspired the attention mechanism in transformers. [Ronald Fisher's](/mathematicians/fisher) maximum likelihood framework and his geometric intuition for statistical spaces underlie much of the probabilistic language here.
+
+## Why this matters
+
+The mathematics of machine learning is the layer that makes machine learning a science rather than a collection of empirical recipes. Understanding it allows you to diagnose when an algorithm will fail (not enough data for the model's complexity, loss landscape has bad local minima, features are not representative), to derive new algorithms from first principles, and to prove guarantees. The connection to the [deep learning theory page](/04-advanced-topics/17-deep-learning-theory) is deliberate: the tools here — PAC bounds, kernels, optimisation — appear in deep learning theory applied to the specific, surprising regime of massively over-parameterised networks.

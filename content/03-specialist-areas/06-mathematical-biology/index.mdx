@@ -1,0 +1,86 @@
+---
+title: Mathematical Biology
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 6
+tags: [mathematical-biology, ODEs, population-dynamics, epidemiology, reaction-diffusion, pattern-formation, Turing]
+prerequisites:
+- 03-calculus-and-methods
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/03-calculus-and-methods
+    why: 'ODEs and partial derivatives are the primary language of every biological model on this page; foundational calculus is the direct prerequisite.'
+  - kind: topic
+    ref: 02-core-mathematics/04-vector-calculus-and-pdes
+    why: "Turing's reaction-diffusion mechanism uses PDEs — specifically Laplacian diffusion — and Fourier methods from this core course."
+  - kind: topic
+    ref: 03-specialist-areas/07-stochastic-processes
+    why: 'Stochastic versions of the deterministic models (birth-death processes, epidemic SDEs) extend the biological models into a probabilistic framework.'
+  - kind: mathematician
+    ref: turing
+    why: "Turing's 1952 morphogenesis paper — the source of the pattern-formation section — is one of the most surprising applications of mathematics to biology."
+related:
+- 08-differential-equations-advanced
+- 07-stochastic-processes
+- 05-numerical-analysis
+mathematicians: [turing]
+reading_time_min: 8
+summary: 'ODEs and PDEs applied to biology: population dynamics, predator-prey models, epidemic spread, and Turing''s reaction-diffusion mechanism for pattern formation on animal coats.'
+theorems: [morphogenesis-mathematical-biology, chaos-theory-three-body-problem]
+applications: [epidemiological-modelling, population-dynamics-ecology]
+---
+
+
+Biology is messy. Nevertheless, many biological phenomena — from the spread of an epidemic to the markings on a zebra's coat — yield to mathematical modelling. The tool of choice is differential equations, combined with a willingness to abstract away biological complexity and focus on the key structural features.
+
+## Population dynamics
+
+The simplest population model is **exponential growth**: $\dot{N} = rN$, giving $N(t) = N_0 e^{rt}$. Realistic for short periods; eventually populations hit resource limits.
+
+The **logistic equation** (due to Verhulst, 1838):
+
+$$\dot{N} = rN\!\left(1 - \frac{N}{K}\right)$$
+
+adds a carrying capacity $K$. The term $1 - N/K$ acts as a brake: growth slows as $N$ approaches $K$. The equilibria are $N^* = 0$ (unstable) and $N^* = K$ (stable). Solutions approach $K$ from any positive initial condition.
+
+**Harvesting models** modify this: if you harvest at rate $H$, the sustainable yield is maximised at $N = K/2$, giving maximum sustainable yield $rK/4$. Fishing at this rate, a population regenerates itself indefinitely.
+
+## Predator-prey: Lotka-Volterra
+
+The **Lotka-Volterra system**:
+
+$$\dot{x} = \alpha x - \beta xy, \qquad \dot{y} = \delta xy - \gamma y.$$
+
+Here $x$ is prey (grows at rate $\alpha$, killed by predators at rate $\beta xy$) and $y$ is predator (dies at rate $\gamma$, grows by eating prey at rate $\delta xy$). The interior equilibrium is $(y^*, x^*) = (\alpha/\beta, \gamma/\delta)$.
+
+Linearisation shows the equilibrium is a centre (purely imaginary eigenvalues), and exact integration reveals a conserved quantity: solutions circle around the equilibrium in closed orbits in phase space. Prey and predator populations oscillate out of phase — the same phenomenon documented in Canadian lynx and snowshoe hare data from the Hudson's Bay Company (though the data is also consistent with other explanations).
+
+## Epidemiology: the SIR model
+
+The **SIR model** divides a population into Susceptible, Infected, and Recovered:
+
+$$\dot{S} = -\beta SI, \qquad \dot{I} = \beta SI - \gamma I, \qquad \dot{R} = \gamma I.$$
+
+The **basic reproductive number** $R_0 = \beta N / \gamma$ (where $N$ is total population) determines epidemic dynamics: if $R_0 > 1$, an initial infection grows; if $R_0 < 1$, it dies out. This is the mathematical basis of **herd immunity**: you need to vaccinate $1 - 1/R_0$ of the population to reduce the effective $R$ below 1.
+
+The **final size equation** relates the fraction $z$ of the population ultimately infected to $R_0$: $1 - z = e^{-R_0 z}$. This implicit equation shows that not everyone gets infected even in a large epidemic — the epidemic "runs out of susceptibles" before everyone is reached.
+
+## Reaction-diffusion and Turing patterns
+
+[Alan Turing's](/mathematicians/turing) 1952 paper "The Chemical Basis of Morphogenesis" is one of the most remarkable papers in the history of science. Turing proposed that two chemical species (a "morphogen" activator and an inhibitor), diffusing and reacting in a tissue, could spontaneously break spatial symmetry and generate periodic patterns — even from a spatially uniform starting state. This is now called **Turing instability** or **diffusion-driven instability**.
+
+The mechanism: a short-range activator $u$ excites itself and promotes $v$; a long-range inhibitor $v$ suppresses $u$. If the inhibitor diffuses much faster than the activator, spatially uniform states become unstable to periodic perturbations. The resulting patterns depend on the domain geometry and the reaction kinetics.
+
+The equations are:
+
+$$\frac{\partial u}{\partial t} = D_u \nabla^2 u + f(u, v), \qquad \frac{\partial v}{\partial t} = D_v \nabla^2 v + g(u, v)$$
+
+with $D_v \gg D_u$ (fast inhibitor). Linear stability analysis of the homogeneous steady state reveals a **Turing space** in parameter space where patterns form.
+
+The biological applications are wide: coat patterns on fish and mammals (spots, stripes, and more complex patterns), skeletal development, and cell differentiation. The Turing mechanism remains actively studied and is now supported by experimental evidence in real biological systems.
+
+## Real-world applications
+
+Where this turns up in the world: [Epidemiological modelling](/applications/epidemiological-modelling) uses the SIR framework from this course directly — the $R_0$ calculations and herd-immunity thresholds that guided COVID-19 vaccine policy were computed from exactly the equations studied here. [Population dynamics and conservation ecology](/applications/population-dynamics-ecology) rely on logistic and Lotka-Volterra models to set sustainable harvest quotas, plan wildlife reintroductions, and predict the effects of habitat loss; the maximum sustainable yield formula in this course determines fishing limits in international treaties. Both fields illustrate how differential equations that are simple enough to analyse on paper can carry immediate, large-scale real-world consequence.

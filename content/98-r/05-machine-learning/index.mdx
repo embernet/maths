@@ -1,0 +1,241 @@
+---
+title: 'Machine Learning in R: tidymodels, caret, and the big algorithms'
+section: 'R'
+section_slug: 98-r
+order: 5
+tags: [r, machine-learning, tidymodels, caret, xgboost, random-forest]
+prerequisites: [02-language-overview, 03-statistical-modelling]
+related: [03-statistical-modelling, 04-tidyverse-and-ggplot2, 06-choosing-python-or-r]
+mathematicians: []
+reading_time_min: 10
+summary: 'Modern machine learning in R: random forests, gradient boosting, the tidymodels framework, and where R does and does not match Python for ML work.'
+---
+
+For decades, R was where machine learning got *invented* but Python was where most people *did* it. That gap has narrowed. The **tidymodels** framework (a modern successor to the older **caret** package) gives R a unified, pipe-friendly ML interface that compares well with scikit-learn for tabular work. Algorithms like random forests, gradient boosting, regularised regression, and support vector machines all have first-class implementations on CRAN.
+
+This page tours the modern R ML stack. If you have read [scikit-learn for Python](/97-python/06-machine-learning), you'll find the structure familiar — only the syntax differs.
+
+## The algorithms
+
+| Algorithm | R package | Notes |
+|-----------|-----------|-------|
+| Linear models | `stats::lm`, `glmnet` | Ridge, lasso, elastic net all in `glmnet` |
+| Random forest | `ranger`, `randomForest` | `ranger` is the modern fast one |
+| Gradient boosting | `xgboost`, `lightgbm`, `gbm` | Same libraries as Python — R bindings of the same C++ |
+| Support vector machine | `e1071`, `kernlab` | |
+| K-nearest neighbours | `class::knn` | |
+| K-means / hierarchical clustering | `stats::kmeans`, `stats::hclust` | Base R |
+| Principal components | `stats::prcomp` | Base R |
+| Decision trees | `rpart` | Classic CART implementation |
+| Naive Bayes | `naivebayes`, `e1071` | |
+| Neural networks (small) | `nnet` | Single hidden layer |
+| Deep learning | `torch`, `keras` | R interfaces to PyTorch and TensorFlow |
+
+For tabular ML, R is essentially feature-complete. For deep learning the Python ecosystem remains deeper, and most active research still happens there.
+
+## A first model with `ranger`
+
+```r
+library(ranger)
+library(dplyr)
+
+data(iris)
+set.seed(123)
+
+# 70/30 train-test split
+n <- nrow(iris)
+train_idx <- sample(seq_len(n), size = floor(0.7 * n))
+train <- iris[train_idx, ]
+test  <- iris[-train_idx, ]
+
+fit <- ranger(Species ~ ., data = train, num.trees = 500)
+preds <- predict(fit, data = test)$predictions
+
+mean(preds == test$Species)   # accuracy ≈ 0.96
+```
+
+`ranger` is a fast random forest implementation (written in C++); `randomForest` is the older Breiman/Cutler implementation in Fortran. Both work. `ranger` is the modern default.
+
+## tidymodels: a unified ML interface
+
+`tidymodels` is to R ML what scikit-learn's pipelines and grid search are to Python's: a way to declare a *preprocessing recipe*, a *model specification*, a *resampling strategy*, and let the framework wire them together.
+
+```r
+library(tidymodels)
+library(ranger)
+
+data(iris)
+
+# 1. Split the data
+set.seed(123)
+splits <- initial_split(iris, prop = 0.7, strata = Species)
+train  <- training(splits)
+test   <- testing(splits)
+
+# 2. Define the preprocessing
+rec <- recipe(Species ~ ., data = train) |>
+  step_normalize(all_numeric_predictors())
+
+# 3. Define the model
+spec <- rand_forest(trees = 500, mtry = 2) |>
+  set_engine("ranger") |>
+  set_mode("classification")
+
+# 4. Bundle into a workflow
+wf <- workflow() |>
+  add_recipe(rec) |>
+  add_model(spec)
+
+# 5. Fit
+fit <- wf |> fit(data = train)
+
+# 6. Predict and assess
+predict(fit, new_data = test) |>
+  bind_cols(test) |>
+  metrics(truth = Species, estimate = .pred_class)
+```
+
+Once you've internalised the four objects — split, recipe, model spec, workflow — every model swap is changing one line of `rand_forest(...)` to `boost_tree(...)` or `logistic_reg(...)`.
+
+### Tuning hyperparameters
+
+```r
+spec_tune <- rand_forest(trees = 500, mtry = tune(), min_n = tune()) |>
+  set_engine("ranger") |>
+  set_mode("classification")
+
+wf_tune <- workflow() |>
+  add_recipe(rec) |>
+  add_model(spec_tune)
+
+# 5-fold cross-validation
+folds <- vfold_cv(train, v = 5, strata = Species)
+
+# Grid search
+grid <- grid_regular(
+  mtry(range = c(1, 4)),
+  min_n(range = c(2, 10)),
+  levels = 4
+)
+
+results <- wf_tune |>
+  tune_grid(resamples = folds, grid = grid, metrics = metric_set(accuracy, roc_auc))
+
+show_best(results, metric = "accuracy")
+```
+
+This is `caret::train` plus `caret::trainControl` from the old framework, rebuilt in the tidyverse style.
+
+## Gradient boosting with xgboost
+
+The same XGBoost library that wins Python's Kaggle competitions has an R interface — bindings to the same C++ codebase.
+
+```r
+library(xgboost)
+
+X_train <- as.matrix(train[, 1:4])
+y_train <- as.integer(train$Species) - 1   # xgboost wants 0-based class labels
+
+dtrain <- xgb.DMatrix(data = X_train, label = y_train)
+
+fit <- xgb.train(
+  data = dtrain,
+  nrounds = 200,
+  max_depth = 4,
+  eta = 0.1,
+  objective = "multi:softprob",
+  num_class = 3,
+  verbose = 0,
+)
+
+X_test <- as.matrix(test[, 1:4])
+probs <- predict(fit, X_test, reshape = TRUE)
+preds <- max.col(probs) - 1
+mean(preds == as.integer(test$Species) - 1)
+```
+
+Through tidymodels you can call XGBoost without ever touching its matrix interface:
+
+```r
+spec <- boost_tree(trees = 500, tree_depth = 4, learn_rate = 0.1) |>
+  set_engine("xgboost") |>
+  set_mode("classification")
+```
+
+## Penalised regression with glmnet
+
+For ridge, lasso, and elastic-net regression, `glmnet` is the canonical implementation — the original by Friedman, Hastie, Tibshirani.
+
+```r
+library(glmnet)
+
+X <- model.matrix(mpg ~ . - 1, data = mtcars)
+y <- mtcars$mpg
+
+# Lasso (alpha = 1); for ridge use alpha = 0; for elastic-net 0 < alpha < 1
+fit <- glmnet(X, y, alpha = 1)
+
+# Cross-validation to pick lambda
+cv <- cv.glmnet(X, y, alpha = 1)
+plot(cv)
+print(coef(cv, s = "lambda.min"))
+```
+
+The coefficient paths plot (`plot(fit)`) is one of those R outputs that took years to find a Python equivalent for.
+
+## Deep learning, briefly
+
+The R Torch interface (the `torch` package, by Posit) is a near-direct R port of PyTorch. The Keras interface (`keras` and `tensorflow`) wraps TensorFlow.
+
+```r
+library(torch)
+
+x <- torch_tensor(c(1.0, 2.0, 3.0), requires_grad = TRUE)
+y <- (x^2)$sum()
+y$backward()
+print(x$grad)   # tensor([2, 4, 6])
+```
+
+These interfaces work, and for simple deep-learning tasks they are pleasant. For active deep-learning research, almost everyone uses Python — both because the wider community does and because new architectures appear there first.
+
+## Model interpretation
+
+R's strong suit: a long tradition of model interpretation tools.
+
+- `broom::tidy()` and `broom::glance()` — turn any model into a tidy data frame of estimates/diagnostics.
+- `ggeffects` / `effects` — marginal-effect plots.
+- `DALEX` and `iml` — model-agnostic interpretability (SHAP-style explanations, partial-dependence plots, permutation importance).
+
+```r
+library(broom)
+fit <- lm(mpg ~ wt + hp, data = mtcars)
+tidy(fit)        # one row per coefficient: term, estimate, std.error, statistic, p.value
+glance(fit)      # one row: r.squared, adj.r.squared, AIC, BIC, deviance, ...
+```
+
+This integration of model output with the tidyverse is one of the reasons R remains so productive for analysis.
+
+## Performance
+
+R's ML workhorses (`ranger`, `xgboost`, `glmnet`, `lightgbm`) are written in C++/Fortran and call the same numerical kernels as their Python counterparts. Pure R code that wraps these is slightly slower than Python wrappers — by milliseconds, not minutes. For datasets up to a few million rows, R is fully competitive.
+
+Above that, two strategies:
+
+- **Sparse and big-data extensions:** `data.table` for fast in-memory tables, `arrow` for out-of-core data, `sparklyr` for Spark.
+- **GPU acceleration:** XGBoost with `tree_method = "gpu_hist"`; LightGBM with GPU support; Torch via R's torch package.
+
+## When R is the right choice for ML
+
+- The pipeline downstream of the model is statistical: confidence intervals, hypothesis tests, model comparison, model interpretation. R does this better.
+- The team is statisticians, biostatisticians, or analysts who already think in R.
+- The model class is one R is strong in (`glmnet`, `ranger`, mixed-effects models, GAMs, survival models).
+- The output is a report — Quarto / R Markdown integrate model output and prose so tightly that the report can be the deliverable.
+
+## When to reach for Python instead
+
+- Deep learning is central (transformer models, vision, multimodal).
+- The pipeline includes web services, APIs, or large-scale data engineering.
+- Hugging Face or PyTorch-only libraries are required.
+- The team already lives in Python.
+
+For most tabular ML, either language gets you to a competitive model in similar time. The choice is rarely about capability and almost always about which ecosystem you and your collaborators already inhabit.

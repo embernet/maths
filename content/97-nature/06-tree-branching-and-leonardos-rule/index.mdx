@@ -1,0 +1,76 @@
+---
+title: "Tree Branching and Leonardo's Rule"
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 6
+tags: [tree-branching, leonardos-rule, murrays-law, pipe-model, hydraulics, fractals, fluid-dynamics, biology]
+related: ['05-fractals-and-self-similarity', '10-allometric-scaling-and-kleibers-law']
+mathematicians: []
+reading_time_min: 10
+summary: "Leonardo da Vinci noticed that the cross-sectional area of a trunk equals the sum of cross-sections of all branches at a given height. Five hundred years later we understand why — and the same mathematics governs blood vessels, river networks, and the airways of your lung."
+theorems: []
+applications: []
+---
+
+Around 1500, Leonardo da Vinci was filling his notebooks with observations about trees. One entry stands out for its precision. After sketching an oak in winter silhouette, he wrote: "All the branches of a tree at every stage of its height when put together are equal in thickness to the trunk below them." If you square the diameters of all branches at a given height and add them up, you get the square of the trunk diameter below. Or, equivalently, the total cross-sectional area of all branches at any level equals the cross-sectional area of the trunk.
+
+This is Leonardo's rule, and it has been tested across hundreds of tree species. It holds, approximately, for most of them.
+
+## The mathematics
+
+If a branch of diameter $d$ splits into sub-branches of diameters $d_1, d_2, \ldots, d_n$, Leonardo's rule says:
+
+$$d^2 = d_1^2 + d_2^2 + \cdots + d_n^2.$$
+
+For a binary branching (two daughter branches), this becomes $d^2 = d_1^2 + d_2^2$. If the two daughters are equal, $d_1 = d_2 = d/\sqrt{2}$, so each daughter has $1/\sqrt{2}$ the diameter of the parent.
+
+Leonardo's rule is a special case of a more general branching relation:
+
+$$d^{\alpha} = d_1^{\alpha} + d_2^{\alpha} + \cdots + d_n^{\alpha}$$
+
+with exponent $\alpha = 2$. The value of $\alpha$ has consequences: it determines how the cross-sectional area — and therefore the capacity for fluid flow — distributes across the hierarchy of branches.
+
+## Murray's law for blood vessels
+
+In 1926, the biologist Cecil Murray derived a different exponent from a different principle. In a blood vessel of radius $r$, the flow rate is given by the Hagen-Poiseuille equation:
+
+$$Q = \frac{\pi r^4 \Delta P}{8 \eta L}$$
+
+where $\Delta P$ is the pressure drop, $\eta$ is the viscosity, and $L$ is the length. The cost of maintaining the blood in the vessel — the metabolic cost of pumping plus the cost of producing and maintaining the blood itself — has a minimum when
+
+$$r^3 = r_1^3 + r_2^3 + \cdots + r_n^3.$$
+
+This is Murray's law: the cube of the parent radius equals the sum of cubes of daughter radii. For a binary symmetric branching, each daughter has radius $r/2^{1/3}$, so each daughter's cross-section is a factor $2^{-2/3} \approx 0.63$ smaller. Total cross-sectional area *increases* at each branching, which matches what we observe: blood slows down as it moves from arteries through arterioles to capillaries.
+
+Murray's law ($\alpha = 3$) applies to blood vessels; Leonardo's rule ($\alpha = 2$) applies to trees. The difference reflects the different optimisation objectives: blood vessels minimise metabolic cost of flow; trees (in the "pipe model" interpretation) maximise mechanical stability and xylem transport area.
+
+## The pipe model of trees
+
+The theoretical justification for Leonardo's rule in trees was provided in 1964 by the plant physiologists Kōichiro Shinozaki and colleagues in what they called the "pipe model theory." In this model, every leaf in the canopy is supported by a single continuous "pipe" of functional sapwood running from the leaf down to the root. Each pipe has a constant cross-sectional area. The total number of active pipes at any height therefore equals the number of leaves above that height; the total cross-sectional area of all pipes at that height equals that number times the pipe area.
+
+Since every branch at height $h$ contains only the pipes that serve leaves above $h$, and the branches at height $h$ together contain all such pipes, the total cross-section at height $h$ is constant regardless of $h$ — which is precisely Leonardo's rule.
+
+Measurements of conifer forests support this model well. In Douglas fir and Scots pine, sapwood cross-sectional area per unit leaf area (specific conductance) is roughly constant across the tree, consistent with the pipe model.
+
+## Real measurements
+
+The rule is approximate, not exact. A large-scale study by Christophe Eloy in 2011 found that the exponent $\alpha$ in real trees ranges from about 1.8 to 2.5, with a mean close to 2. The departures from $\alpha = 2$ are partly explained by the mechanical stresses the tree needs to withstand: a tree in a windy location needs extra wood in branches that experience bending, shifting $\alpha$ slightly above 2.
+
+Recent work by Brummer, Yindra and others using lidar scans of forest canopies has allowed large-scale testing of both Leonardo's rule and its deviations. The approximate validity of the rule across species separated by hundreds of millions of years of evolution strongly suggests it reflects a deep optimisation principle, not a coincidence.
+
+## River networks
+
+The same mathematical structure appears in river networks. The branching of tributaries into a main river also approximately follows a power law of cross-sectional areas, with an exponent closer to Murray's 3 than Leonardo's 2 — consistent with the interpretation that river networks optimise flow efficiency (which depends on volume flow, not on cross-section). Horton's laws of drainage networks and Hack's law (mentioned on the [fractals page](/97-nature/05-fractals-and-self-similarity)) are expressions of the same underlying branching optimality.
+
+## Why nature gets here
+
+The connecting thread across trees, blood vessels, and rivers is this: each is a hierarchical distribution network that has been shaped by selection (biological or physical) to optimise some measure of efficiency. The mathematical form of the optimisation problem — given a fixed total volume of pipe, distribute it to minimise cost or maximise transport — leads naturally to a branching rule of the form $d^\alpha = d_1^\alpha + d_2^\alpha + \cdots$, with the value of $\alpha$ determined by the specific cost function.
+
+This is the kind of result that should make you pay attention to optimisation problems in applied mathematics. When nature solves an optimisation problem repeatedly, across many taxa and many scales, the result is a mathematical pattern. Finding that pattern — and then proving the optimisation theorem that explains it — is what mathematical biology does at its best.
+
+## Where to read more
+
+- Cecil Murray, 'The Physiological Principle of Minimum Work', *Proceedings of the National Academy of Sciences* 12 (1926) — the original derivation of Murray's law
+- Christophe Eloy, 'Leonardo's Rule, Self-Similarity and Wind-Induced Stresses in Trees', *Physical Review Letters* 107 (2011)
+- [Wikipedia: Murray's law](https://en.wikipedia.org/wiki/Murray%27s_law) — comprehensive treatment with the derivation from Hagen-Poiseuille

@@ -1,0 +1,98 @@
+---
+title: 'Representation Theory'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 10
+tags: [representation-theory, group-theory, characters, irreducible-representations, schurs-lemma, maschke, finite-groups, linear-algebra]
+prerequisites:
+- 02-core-mathematics/01-abstract-algebra
+related:
+- 01-galois-theory
+- 02-functional-analysis
+- 04-topology
+mathematicians: [gauss, noether, galois]
+reading_time_min: 10
+summary: 'Group representations turn abstract group structure into linear algebra. Characters, irreducibles, and Schur''s lemma make finite groups computable and connect algebra to quantum mechanics.'
+theorems: [galois-theory, galois-groups, group-theory-foundations, group-theory-permutation-groups, normal-subgroups, noether-s-theorem-symmetry-and-conservation-laws-in-physics]
+applications: [quantum-computing-algorithms, error-correcting-codes]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 02-core-mathematics/01-abstract-algebra
+    why: 'Groups, homomorphisms, and quotient groups are the objects being represented.'
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Vector spaces, linear maps, and matrix algebra are the target language of representations.'
+  - kind: topic
+    ref: 03-specialist-areas/01-galois-theory
+    why: 'Galois groups are the historical source of finite group theory; representations make them computable.'
+  - kind: mathematician
+    ref: noether
+    why: 'Emmy Noether''s work on modules and abstract algebra underlies the modern formulation of representation theory.'
+---
+
+A representation of a group turns its abstract symmetry into something you can compute with — matrices acting on a vector space — and the astonishing fact is that every finite group can be completely understood by studying a small, finite list of these matrix representations.
+
+## Representations and homomorphisms
+
+Let $G$ be a group and $V$ a vector space over a field $k$. A **representation** of $G$ on $V$ is a group homomorphism
+
+$$\rho : G \to \mathrm{GL}(V),$$
+
+where $\mathrm{GL}(V)$ denotes the group of invertible linear maps from $V$ to itself. Each group element $g$ acts on $V$ via the invertible linear map $\rho(g)$, and the homomorphism condition ensures that $\rho(gh) = \rho(g)\rho(h)$.
+
+If $\dim V = n < \infty$, choosing a basis expresses $\rho$ as a group homomorphism into the matrix group $\mathrm{GL}_n(k)$. The dimension $n$ is the **degree** of the representation.
+
+## Irreducible representations and Maschke's theorem
+
+A subspace $W \subseteq V$ is **$G$-invariant** if $\rho(g)W \subseteq W$ for every $g \in G$. This gives a representation on $W$ (a **subrepresentation**). A representation is **irreducible** if it has no proper non-zero $G$-invariant subspaces.
+
+**Maschke's theorem**: if $G$ is a finite group and $\mathrm{char}(k)$ does not divide $|G|$ (in particular, if $k = \mathbb{C}$), then every representation of $G$ decomposes as a direct sum of irreducibles. The representation theory over $\mathbb{C}$ is therefore **semisimple**: every finite-dimensional representation is completely determined by knowing how many times each irreducible appears.
+
+This makes the problem of understanding all representations equivalent to classifying all irreducibles — a finite problem, since there are exactly as many irreducible representations (up to isomorphism) as there are conjugacy classes in $G$.
+
+## Schur's lemma
+
+**Schur's lemma** is the key structural result. Let $\rho_1 : G \to \mathrm{GL}(V_1)$ and $\rho_2 : G \to \mathrm{GL}(V_2)$ be irreducible representations, and let $T : V_1 \to V_2$ be a linear map intertwining the actions ($T\rho_1(g) = \rho_2(g)T$ for all $g \in G$). Then:
+
+1. Either $T = 0$ or $T$ is an isomorphism.
+2. If $V_1 = V_2 = V$ and $k = \mathbb{C}$, then $T = \lambda I$ for some scalar $\lambda \in \mathbb{C}$.
+
+The second part is the powerful one: over $\mathbb{C}$, the only endomorphisms of an irreducible representation are scalar multiples of the identity. This has immediate consequences — it restricts what maps can exist between representations and forces the character table to be square.
+
+## Characters and the character table
+
+The **character** of a representation $\rho$ is the function $\chi_\rho : G \to \mathbb{C}$ defined by
+
+$$\chi_\rho(g) = \mathrm{tr}\,\rho(g).$$
+
+Characters are constant on conjugacy classes (class functions), so they are determined by their values on conjugacy class representatives. The character table of $G$ is the square matrix with rows indexed by irreducible representations and columns by conjugacy classes.
+
+**Orthogonality relations**: the irreducible characters $\chi_1, \ldots, \chi_r$ form an orthonormal basis for the space of class functions with respect to the inner product
+
+$$\langle \chi, \psi \rangle = \frac{1}{|G|}\sum_{g \in G} \chi(g)\overline{\psi(g)}.$$
+
+In particular, $\langle \chi_i, \chi_j \rangle = \delta_{ij}$. This means: two representations are isomorphic if and only if they have the same character; and the multiplicity with which the irreducible $\rho_i$ appears in any representation $\rho$ is exactly $\langle \chi_\rho, \chi_i \rangle$.
+
+## A worked example: $S_3$
+
+The symmetric group $S_3$ has three conjugacy classes: $\{e\}$, $\{(12),(13),(23)\}$, $\{(123),(132)\}$. It therefore has exactly three irreducible representations:
+
+| Rep | Degree | $e$ | $(12)$ | $(123)$ |
+|-----|--------|-----|--------|---------|
+| trivial $\rho_1$ | 1 | 1 | 1 | 1 |
+| sign $\rho_2$ | 1 | 1 | $-1$ | 1 |
+| standard $\rho_3$ | 2 | 2 | 0 | $-1$ |
+
+The sum of squares of degrees is $1^2 + 1^2 + 2^2 = 6 = |S_3|$ — a constraint that holds for any finite group. The standard representation on $\mathbb{C}^2$ is the action by permutation matrices restricted to the orthogonal complement of the all-ones vector.
+
+## Real-world applications
+
+Where this turns up in the world: [quantum computing](/applications/quantum-computing-algorithms) relies on representation theory — the irreducible representations of the unitary group classify how quantum systems transform under symmetry, and Clebsch–Gordan decompositions describe how quantum states combine. [Error-correcting codes](/applications/error-correcting-codes) with algebraic structure exploit group representations to make decoding tractable. In physics, the representation theory of the Poincaré group classifies all elementary particles by mass and spin.
+
+## Why this matters
+
+Representation theory is one of the great unifying tools in modern mathematics. It connects algebra, analysis, and geometry through a single organising idea: a group action on a vector space. The same theory that classifies the irreducible representations of finite groups underlies the representation theory of compact Lie groups (where Peter–Weyl gives a complete decomposition of $L^2(G)$), the classification of elementary particles in physics (where the representations of $SU(2)$ and $SU(3)$ determine particle multiplets), and Langlands' programme (which conjectures deep connections between Galois representations and automorphic forms).
+
+[Emmy Noether](/mathematicians/noether) played a decisive role in abstracting the theory into its modern module-theoretic form. Her theorem that symmetries correspond to conserved quantities can be understood as a statement about representations: a symmetry group acting on a physical system determines, via its representations, which quantities are preserved under the dynamics.

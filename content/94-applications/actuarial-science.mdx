@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: actuarial-science
 domains: [finance, statistics, economics]
 uses_theorems: [gaussian-distribution-normal-distribution, axiomatic-foundations-of-probability, maximum-likelihood-estimation]
-uses_topics: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference, 03-specialisation-year-three/07-stochastic-processes]
+uses_topics: [01-foundations/04-probability-and-statistics, 02-core-mathematics/05-probability-and-statistical-inference, 03-specialist-areas/07-stochastic-processes]
 related_applications: [option-pricing-finance, clinical-trials-design, census-and-survey-statistics]
 tags: [actuarial, probability, finance, applied]
 real_world_examples: [Life insurance pricing, Defined-benefit pension liability valuation, Car insurance premium calculation, Solvency II regulatory capital]
@@ -31,7 +31,7 @@ where $v = 1/(1+i)$ is the discount factor at interest rate $i$. This is a weigh
 
 The EPV of a whole-life insurance paying £1 on death is $A_x = 1 - d\, \ddot{a}_x$ (where $d = i/(1+i)$), following from the fundamental actuarial identity. These formulas translate a probability distribution over lifetimes into a price.
 
-**Mortality modelling**: modern actuarial practice fits parametric models to observed mortality data. The **Lee-Carter model** decomposes log-mortality $\ln \mu_{x,t} = \alpha_x + \beta_x \kappa_t + \varepsilon_{x,t}$ where $\kappa_t$ is a mortality index whose future values follow an ARIMA time-series model. This is essentially principal component analysis on a mortality matrix, combined with time-series forecasting — all within the framework of [maximum likelihood estimation](/02-core-year-two/05-probability-and-statistical-inference).
+**Mortality modelling**: modern actuarial practice fits parametric models to observed mortality data. The **Lee-Carter model** decomposes log-mortality $\ln \mu_{x,t} = \alpha_x + \beta_x \kappa_t + \varepsilon_{x,t}$ where $\kappa_t$ is a mortality index whose future values follow an ARIMA time-series model. This is essentially principal component analysis on a mortality matrix, combined with time-series forecasting — all within the framework of [maximum likelihood estimation](/02-core-mathematics/05-probability-and-statistical-inference).
 
 ## A concrete example
 
@@ -43,4 +43,4 @@ The first life table was constructed by John Graunt in 1662 from London's Bills 
 
 ## Links
 
-Probability theory and distributions are in [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics). Estimation and statistical inference are in [Probability and Statistical Inference](/02-core-year-two/05-probability-and-statistical-inference). The interest rate modelling aspects connect to [Stochastic Processes and Martingales](/03-specialisation-year-three/07-stochastic-processes). See also [Option Pricing](/applications/option-pricing-finance) for the related continuous-time finance mathematics.
+Probability theory and distributions are in [Probability and Statistics](/01-foundations/04-probability-and-statistics). Estimation and statistical inference are in [Probability and Statistical Inference](/02-core-mathematics/05-probability-and-statistical-inference). The interest rate modelling aspects connect to [Stochastic Processes and Martingales](/03-specialist-areas/07-stochastic-processes). See also [Option Pricing](/applications/option-pricing-finance) for the related continuous-time finance mathematics.

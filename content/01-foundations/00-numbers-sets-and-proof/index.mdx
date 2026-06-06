@@ -1,0 +1,103 @@
+---
+title: 'Numbers, Sets and Proof'
+section: 'Foundations: foundational topics'
+section_slug: 01-foundations
+year: 1
+order: 0
+tags: [foundations, proof, induction, sets, functions, cardinality, countability]
+prerequisites: []
+related:
+- 01-algebra-and-linear-algebra
+- 02-real-analysis-foundations
+mathematicians: [euclid, cantor, dedekind]
+reading_time_min: 10
+summary: The grammar of mathematics. Sets and functions, proof by induction, cardinality and countability — the foundations that everything else builds on.
+theorems: [euclid-s-elements, cantor-s-diagonal-argument, cardinality-of-infinite-sets, dedekind-cuts-rigorous-construction-of-real-numbers, formal-axiomatic-systems]
+applications: []
+node_type: topic
+suggested_pre_reading:
+  - kind: mathematician
+    ref: euclid
+    why: 'Euclid''s Elements is the model of what axiomatic proof looks like — reading about him grounds the historical dimension of this page.'
+---
+
+Mathematics is not calculation. It is careful argument. Before you can do analysis, algebra, or any of the courses that follow, you need the language in which every mathematical statement is made: the language of sets, functions, and rigorous proof.
+
+## Sets and their operations
+
+A **set** is a well-defined collection of objects, called its **elements** or **members**. The notation $x \in A$ means "$x$ is an element of $A$"; $x \notin A$ means it is not. Two sets are equal if and only if they have exactly the same elements.
+
+The standard number sets: $\mathbb{N} = \{0, 1, 2, \ldots\}$ (natural numbers), $\mathbb{Z}$ (integers), $\mathbb{Q}$ (rationals), $\mathbb{R}$ (reals), $\mathbb{C}$ (complex numbers). Each is a subset of the next.
+
+$B$ is a **subset** of $A$, written $B \subseteq A$, if every element of $B$ is an element of $A$. The **power set** $\mathcal{P}(A)$ is the set of all subsets of $A$: if $|A| = n$, then $|\mathcal{P}(A)| = 2^n$.
+
+The core operations:
+
+- **Union**: $A \cup B = \{x : x \in A \text{ or } x \in B\}$
+- **Intersection**: $A \cap B = \{x : x \in A \text{ and } x \in B\}$
+- **Difference**: $A \setminus B = \{x : x \in A \text{ and } x \notin B\}$
+- **Complement**: $A^c = \{x \in U : x \notin A\}$ (relative to a universal set $U$)
+
+De Morgan's laws: $(A \cup B)^c = A^c \cap B^c$ and $(A \cap B)^c = A^c \cup B^c$. These are the set-theoretic versions of the logical laws you will use constantly in proofs.
+
+## Functions and bijections
+
+A **function** $f : A \to B$ assigns to each element $a \in A$ a unique element $f(a) \in B$. The set $A$ is the domain, $B$ is the codomain, and the image $f(A) = \{f(a) : a \in A\}$ is the range.
+
+A function is:
+
+- **Injective** (one-to-one): $f(a_1) = f(a_2) \Rightarrow a_1 = a_2$.
+- **Surjective** (onto): every $b \in B$ has some $a$ with $f(a) = b$.
+- **Bijective**: both injective and surjective — a perfect pairing between $A$ and $B$.
+
+A bijection $f : A \to B$ has an inverse $f^{-1} : B \to A$ satisfying $f^{-1}(f(a)) = a$ for all $a \in A$ and $f(f^{-1}(b)) = b$ for all $b \in B$.
+
+The **composition** $g \circ f : A \to C$ is defined by $(g \circ f)(a) = g(f(a))$. Composition is associative but not in general commutative.
+
+## Proof techniques
+
+A mathematical **proof** is a finite sequence of statements, each following by logical necessity from the previous ones or from accepted axioms. There are four standard techniques:
+
+**Direct proof**: assume the hypotheses, argue step by step to the conclusion. Example: prove that if $n$ is even then $n^2$ is even. Write $n = 2k$; then $n^2 = 4k^2 = 2(2k^2)$, which is even.
+
+**Proof by contradiction**: assume the conclusion is false, derive a contradiction with the hypotheses or with known truths. Example: the classic proof that $\sqrt{2}$ is irrational — assume $\sqrt{2} = p/q$ in lowest terms, square both sides, derive that $p$ and $q$ are both even, contradicting "lowest terms".
+
+**Proof by contrapositive**: to prove $P \Rightarrow Q$, instead prove $\neg Q \Rightarrow \neg P$ (logically equivalent). Often cleaner when the negation of the conclusion is easier to work with.
+
+**Proof by construction**: prove that something exists by explicitly building it. Much of combinatorics and algorithm design is constructive in this sense.
+
+## Mathematical induction
+
+Induction is the proof technique for statements about natural numbers. The **principle of mathematical induction** says: if $P(0)$ holds (base case), and whenever $P(n)$ holds it follows that $P(n+1)$ holds (inductive step), then $P(n)$ holds for all $n \in \mathbb{N}$.
+
+**Strong induction** is equivalent but sometimes more convenient: if $P(0)$ holds and whenever $P(0), P(1), \ldots, P(n)$ all hold it follows that $P(n+1)$ holds, then $P(n)$ holds for all $n$.
+
+A closely related principle is the **well-ordering principle**: every non-empty subset of $\mathbb{N}$ has a least element. This is logically equivalent to induction; proofs by "minimal counterexample" are essentially well-ordering arguments.
+
+**Example**: prove that $\sum_{k=0}^{n} k = \frac{n(n+1)}{2}$. Base case: $n = 0$ gives $0 = 0$. Inductive step: assuming $\sum_{k=0}^{n} k = \frac{n(n+1)}{2}$, add $n+1$ to both sides to get $\frac{n(n+1)}{2} + (n+1) = \frac{(n+1)(n+2)}{2}$, which is the formula with $n$ replaced by $n+1$.
+
+## Cardinality and countability
+
+Two sets have the same **cardinality** (size) if there is a bijection between them. For finite sets this agrees with counting. For infinite sets, it is stranger.
+
+A set is **countable** if it is finite or in bijection with $\mathbb{N}$. The integers $\mathbb{Z}$ are countable (list them $0, 1, -1, 2, -2, \ldots$). The rationals $\mathbb{Q}$ are countable (dovetail the array $p/q$ by diagonals). Both seem surprising — you have "more" integers than naturals in one sense, yet they are the same cardinality.
+
+The real numbers $\mathbb{R}$ are **not** countable. [Georg Cantor's](/mathematicians/cantor) diagonal argument shows this elegantly: suppose we list all real numbers in $[0,1]$ as a sequence $r_1, r_2, r_3, \ldots$ Define a new number $d$ whose $n$-th decimal digit differs from the $n$-th decimal digit of $r_n$. Then $d$ is not in the list — every entry $r_n$ disagrees with $d$ at position $n$. Contradiction.
+
+The cardinality of $\mathbb{R}$ is called $|\mathbb{R}| = \mathfrak{c}$, the cardinality of the continuum. It is strictly larger than $|\mathbb{N}| = \aleph_0$. Cantor showed further that $|\mathcal{P}(A)| > |A|$ for any set $A$ — there is no largest infinity.
+
+[Richard Dedekind](/mathematicians/dedekind) gave the construction of the real numbers from rationals (Dedekind cuts), making precise the intuition that $\mathbb{R}$ consists of all "limits" of rational sequences — a construction that closes the gap and gives analysis its foundation.
+
+## Axiomatic foundations
+
+All the arguments above rest on axioms — statements accepted without proof from which everything else follows. The standard foundation is **ZFC set theory** (Zermelo-Fraenkel with the axiom of choice): a small collection of axioms about what sets exist and how they behave. Gödel proved in 1931 that any consistent formal system rich enough to contain arithmetic must contain statements that are true but unprovable within the system. This is not a licence for sloppy reasoning — it is a precise theorem about the limits of formal systems, and it has no practical effect on most mathematics. But it should make you think carefully about what "axiom" and "proof" actually mean.
+
+## Real-world applications
+
+Foundations are rarely applied directly — they are the bedrock. But they show up in: [RSA cryptography](/applications/rsa-public-key-cryptography) relies on the precise properties of the integers (modular arithmetic, Euclid's algorithm, prime factorisation) that are first stated carefully here. [Error-correcting codes](/applications/error-correcting-codes) use finite sets and bijective mappings — the counting arguments you learn in this course underlie the combinatorial design of codes. [Data compression](/applications/data-compression) connects to cardinality: the fact that there are uncountably many real-valued functions but only countably many finite programs means that most functions are incompressible — an insight that foreshadows information theory.
+
+## Why this matters
+
+Everything else you study rests on the ideas in this course. The word "function" appears on every page of your degree; the concept of a bijection is what makes two mathematical structures "essentially the same"; proof by induction is the workhorse of discrete mathematics and algorithm analysis; and cardinality is where your intuitions about size are forced to become precise.
+
+[Euclid's](/mathematicians/euclid) *Elements* (c. 300 BCE) is the original model: begin with a small list of axioms, deduce theorems by logic alone, never smuggle in assumptions you haven't stated. That discipline — which took two millennia to become completely rigorous — is what a mathematics degree is training you in.

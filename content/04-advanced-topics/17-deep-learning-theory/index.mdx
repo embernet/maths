@@ -1,0 +1,90 @@
+---
+title: 'Deep Learning Theory'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 17
+node_type: topic
+tags: [deep-learning-theory, universal-approximation, pac-learning, double-descent, implicit-regularisation, neural-tangent-kernel, overparameterisation]
+prerequisites: []
+related:
+  - 18-mathematics-of-machine-learning
+  - 15-optimisation
+  - 01-foundations/01-algebra-and-linear-algebra
+mathematicians: [kolmogorov]
+reading_time_min: 10
+summary: 'Why do neural networks work? Universal approximation, overparameterisation, implicit regularisation, and the neural tangent kernel — the emerging mathematics behind modern AI.'
+theorems: []
+applications: [machine-learning-deep-neural-networks]
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Deep networks are compositions of linear maps and nonlinearities; their analysis requires fluency in matrix algebra and spectral theory.'
+  - kind: topic
+    ref: 03-specialist-areas/15-optimisation
+    why: 'Gradient descent and its variants are the optimisation algorithms used to train networks; their convergence analysis is central to the theory.'
+  - kind: topic
+    ref: 04-advanced-topics/18-mathematics-of-machine-learning
+    why: 'The broader mathematical toolkit of machine learning — PAC learning, kernel methods, empirical risk minimisation — provides the framework this page builds on.'
+  - kind: topic
+    ref: 03-specialist-areas/07-stochastic-processes
+    why: 'Stochastic gradient descent introduces randomness into the training dynamics; the mean-field theory of networks uses tools from probability and random matrix theory.'
+---
+
+Neural networks have achieved remarkable empirical success across language, vision, and scientific computing — yet the theoretical understanding of why they work lags far behind the practice. The mathematics of deep learning theory is a rapidly developing field that combines approximation theory, statistical learning theory, optimisation, and the theory of random matrices.
+
+## Universal approximation
+
+The **universal approximation theorem** (Cybenko 1989; Hornik 1991) states: for any continuous function $f : [0,1]^d \to \mathbb{R}$ and any $\varepsilon > 0$, there exists a single-hidden-layer neural network
+
+$$\hat f(x) = \sum_{j=1}^N \alpha_j\,\sigma(w_j^\top x + b_j)$$
+
+with a non-polynomial activation function $\sigma$ such that $\|f - \hat f\|_\infty < \varepsilon$.
+
+Universal approximation is an **existence** result: it guarantees a network exists but says nothing about how large $N$ must be, whether gradient descent finds it, or how many training examples are needed. Depth analogues (Hanin, Barron) show that deeper networks can represent certain functions exponentially more efficiently than shallow ones — explaining in part the empirical preference for depth.
+
+## PAC learning and generalisation bounds
+
+The **Probably Approximately Correct (PAC)** framework (Valiant 1984) asks: given a hypothesis class $\mathcal{H}$ and $m$ training examples drawn i.i.d. from a distribution $\mathcal{D}$, how large must $m$ be to ensure that the empirical risk minimiser generalises?
+
+The classical answer invokes the **VC dimension** $\mathrm{VC}(\mathcal{H})$: with probability $\geq 1 - \delta$ over the draw of training data, every $h \in \mathcal{H}$ satisfies
+
+$$L_{\mathcal{D}}(h) \le L_S(h) + O\!\left(\sqrt{\frac{\mathrm{VC}(\mathcal{H}) + \log(1/\delta)}{m}}\right),$$
+
+where $L_{\mathcal{D}}$ is the true risk and $L_S$ is the empirical (training) risk. For neural networks with bounded weights, $\mathrm{VC}(\mathcal{H})$ grows with the number of parameters — yet large over-parameterised networks generalise well in practice. This is the **generalisation puzzle**: classical bounds are far too loose to explain the observed behaviour.
+
+## Overparameterisation and double descent
+
+Classical statistical intuition says: as model complexity increases past the interpolation threshold (the point where training loss reaches zero), test loss should increase — the model is **overfitting**. The observed **double descent** phenomenon refutes this for sufficiently over-parameterised models: after an initial overfitting peak near the interpolation threshold, test loss decreases again as the number of parameters grows.
+
+Formally, let $n$ be the number of training examples and $p$ the number of parameters. Classical bias–variance tradeoff applies for $p \ll n$. At $p \approx n$, the model interpolates and test error peaks. For $p \gg n$, in the **overparameterised regime**, the minimum-norm interpolating solution (the one gradient descent converges to) exhibits implicit regularisation: it is biased towards smooth or simple solutions in ways that reduce generalisation error. This phenomenon has been documented rigorously for linear models and is the subject of active research for deep networks.
+
+## Implicit regularisation by gradient descent
+
+When many global minima of the training loss exist (as they do for over-parameterised networks), **gradient descent does not choose arbitrarily among them**. For linear models trained with gradient descent on the squared loss, starting from zero, the algorithm converges to the **minimum-$\ell_2$-norm solution** — equivalent to ridge regression in the limit of small regularisation. For deep linear networks, gradient descent induces an implicit nuclear-norm bias on the product of weight matrices.
+
+For nonlinear networks the picture is less complete, but empirically and theoretically, gradient descent trajectories are attracted to solutions with small norm, low rank, or some form of spectral simplicity. The key mathematical insight is that gradient descent is not a neutral search algorithm: its implicit regularisation reflects the geometry of the loss landscape and the initialisation.
+
+## The neural tangent kernel
+
+In the limit of infinite width, the training dynamics of a neural network simplify dramatically. Define the **neural tangent kernel (NTK)** as
+
+$$\Theta(x, x') = \nabla_\theta f(x;\theta_0)^\top \nabla_\theta f(x';\theta_0),$$
+
+where $\theta_0$ are the parameters at initialisation and $f(x;\theta)$ is the network output. As width $\to \infty$ with appropriate initialisation, the NTK converges to a deterministic limit $\Theta^*$ and remains constant throughout training (Jacot, Gabriel, Hongler 2018). In this regime, gradient descent on the squared loss gives
+
+$$f(x;\theta_t) = f(x;\theta_0) + \int_0^t \Theta^*(x, X)(y - f(X;\theta_s))\,ds,$$
+
+and convergence is governed by the eigenvalues of the kernel matrix $\Theta^*_{ij} = \Theta^*(x_i, x_j)$. The NTK limit shows that infinitely wide networks are equivalent to kernel regression — a linear method — which explains generalisation in this regime but also shows that feature learning (the ability to adapt representations) is absent.
+
+## Mean field theory and feature learning
+
+Beyond the NTK regime, networks at finite (but large) width exhibit **feature learning**: the representations in intermediate layers change meaningfully during training. The **mean field theory** of deep networks (one approach: the $\mu$P parametrisation of Yang and Hu) provides a scaling analysis of how signal propagates through random weights at initialisation, and identifies the parametrisation under which gradients remain well-conditioned as width grows. In this wider theory, the NTK is a degenerate limit, not the generic behaviour.
+
+## Real-world applications
+
+The theory of [deep neural networks](/applications/machine-learning-deep-neural-networks) has direct consequences for practice: understanding double descent guides the choice of model size and training regime; NTK theory motivates kernel approximation methods for large-scale learning; implicit regularisation analysis informs optimiser choices and initialisation strategies. These ideas underlie the transformer architectures used in large language models and the convolutional architectures used in image recognition.
+
+## Why this matters
+
+Deep learning theory is one of the most active frontiers in applied mathematics today. It connects classical subjects — approximation theory, statistical learning, convex optimisation, random matrix theory — to a new set of phenomena that classical theory did not predict and cannot fully explain. The field is moving rapidly: theorems proved this year will likely be superseded within five years. For a mathematically trained reader, the opportunity is not merely to understand existing AI systems, but to help develop the theory that will explain and improve future ones. The [mathematics of machine learning](/04-advanced-topics/18-mathematics-of-machine-learning) page covers the broader toolkit; this page is specifically about the emerging theory of deep networks and their distinctive behaviour.

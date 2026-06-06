@@ -1,0 +1,95 @@
+---
+title: 'Algebraic Curves'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 9
+tags: [algebraic-curves, riemann-roch, genus, bezout, elliptic-curves, singularities, projective-curves]
+related:
+- 01-algebraic-geometry
+- 11-riemann-surfaces
+- 02-analytic-number-theory
+- 07-algebraic-number-theory
+mathematicians: [gauss, riemann, noether, abel]
+reading_time_min: 10
+summary: 'Plane curves through algebraic eyes. Smooth and singular points, genus, and the Riemann–Roch theorem — the gateway from algebraic geometry to elliptic curves and Riemann surfaces.'
+theorems: [riemann-surfaces, fermat-s-last-theorem, abelian-groups-posthumous-attribution, abel-s-theorem]
+applications: [cryptocurrency-blockchain, digital-signatures, rsa-public-key-cryptography]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 04-advanced-topics/01-algebraic-geometry
+    why: 'Algebraic curves are the one-dimensional case of algebraic geometry; varieties, the Nullstellensatz, and projective space are assumed here.'
+  - kind: topic
+    ref: 02-core-mathematics/03-complex-analysis
+    why: 'Over the complex numbers, smooth projective curves are compact Riemann surfaces; complex analysis gives the function theory.'
+  - kind: topic
+    ref: 02-core-mathematics/01-abstract-algebra
+    why: 'The ring of functions on a curve, divisors, and the Picard group are all algebraic objects requiring fluency with rings and groups.'
+  - kind: mathematician
+    ref: riemann
+    why: 'Riemann introduced the genus of a curve and proved the Riemann–Roch theorem, the central result of this page.'
+  - kind: mathematician
+    ref: abel
+    why: 'Abel''s theorem on the Abel–Jacobi map is the classical form of the main result connecting divisors to the Jacobian variety.'
+---
+
+An algebraic curve is the set of solutions to a polynomial equation $f(x, y) = 0$. The circle, the conic sections, and the cubic $y^2 = x^3 + ax + b$ are all plane algebraic curves. This page develops the tools — smooth and singular points, projective closure, genus, and the Riemann–Roch theorem — that transform these elementary objects into one of the richest areas of mathematics, with direct applications to cryptography and number theory.
+
+## Plane algebraic curves and smooth points
+
+Fix an algebraically closed field $k$ (take $k = \mathbb{C}$ for intuition). An **affine plane curve** is the zero set $C = \{(x, y) \in k^2 : f(x, y) = 0\}$ for a polynomial $f \in k[x, y]$.
+
+A point $p \in C$ is **smooth** if $\nabla f(p) = (\partial f/\partial x, \partial f/\partial y)|_p \neq (0, 0)$. At a smooth point, the implicit function theorem gives $C$ locally the structure of a smooth curve (a 1-dimensional manifold over $k$). A **singular point** is one where $\nabla f(p) = (0, 0)$; the curve fails to have a well-defined tangent line there.
+
+Singularities come in recognisable types. A **node** is a singularity where two smooth branches cross transversally — the simplest example is the origin on $y^2 = x^2(x+1)$. A **cusp** is a more degenerate singularity where the branches are tangent, like the origin on $y^2 = x^3$. The local structure is captured by the **tangent cone**: the lowest-degree terms of $f$ at $p$, which determine the directions from which the curve approaches $p$.
+
+## Projective closure and Bézout's theorem
+
+Affine curves omit behaviour "at infinity". The **projective closure** $\bar{C} \subset \mathbb{P}^2_k$ is obtained by homogenising $f$: if $f(x, y) = \sum a_{ij} x^i y^j$, set $F(X, Y, Z) = Z^{\deg f} f(X/Z, Y/Z)$ and define $\bar{C} = \{[X:Y:Z] : F(X, Y, Z) = 0\}$. The affine curve $C$ is recovered by setting $Z = 1$.
+
+**Bézout's theorem**: two projective plane curves $C$ and $D$ of degrees $m$ and $n$ over an algebraically closed field, with no common component, intersect in exactly $mn$ points counted with multiplicity. This is the fundamental counting theorem of plane algebraic geometry. Examples: two distinct lines ($m = n = 1$) meet in exactly 1 point; a line and a conic ($m = 1, n = 2$) meet in 2 points (possibly at infinity or complex, but always 2 counted with multiplicity).
+
+Bézout's theorem explains why the cubic $y^2 = x^3 + ax + b$ (genus 1, degree 3) has the property that any line meets it in exactly 3 points — the group law on an elliptic curve exploits precisely this.
+
+## Smooth projective curves and genus
+
+For a **smooth projective curve** $C$ over $\mathbb{C}$, the Riemann surface structure gives it a topological type: it is homeomorphic to a compact orientable surface of some **genus** $g \ge 0$ (a sphere with $g$ handles). The genus is the fundamental topological invariant.
+
+For a smooth plane curve of degree $d$, the genus is given by the degree-genus formula:
+
+$$g = \frac{(d-1)(d-2)}{2}.$$
+
+So degree-1 curves (lines) have genus 0; conics (degree 2) have genus 0; cubics (degree 3) have genus 1; quartics (degree 4) have genus 3. Singular curves have lower genus than the formula predicts — each node reduces $g$ by 1.
+
+The genus also measures the space of holomorphic differentials on $C$: $\dim H^0(C, \Omega_C) = g$.
+
+## Divisors and the Riemann–Roch theorem
+
+A **divisor** on a smooth projective curve $C$ is a formal finite sum of points $D = \sum_{p \in C} n_p \cdot p$ with $n_p \in \mathbb{Z}$. The **degree** of $D$ is $\deg D = \sum n_p$. A function $f \in k(C)^*$ determines a divisor $\mathrm{div}(f) = \sum_p v_p(f) \cdot p$ where $v_p(f)$ is the order of vanishing (or pole) at $p$; principal divisors have degree 0.
+
+The **Picard group** $\mathrm{Pic}(C) = \{\text{divisors}\}/\{\text{principal divisors}\}$ classifies line bundles on $C$. The degree-0 part $\mathrm{Pic}^0(C)$ is the **Jacobian** of $C$ — itself a complex torus of dimension $g$ (an abelian variety).
+
+The **Riemann–Roch theorem** is the central result. For a divisor $D$ on a smooth projective curve of genus $g$, let $\ell(D) = \dim H^0(C, \mathcal{O}(D))$ be the dimension of the space of meromorphic functions with poles bounded by $D$, and let $K$ be the canonical divisor (divisor of a holomorphic 1-form). Then:
+
+$$\ell(D) - \ell(K - D) = \deg(D) + 1 - g.$$
+
+This theorem controls which functions exist on a curve. For $\deg D \ge 2g - 1$, the term $\ell(K - D) = 0$ and the formula gives $\ell(D) = \deg(D) + 1 - g$ directly. Consequence: every smooth curve of genus 0 embeds in $\mathbb{P}^1$; every genus-1 curve (elliptic curve) can be written as a plane cubic.
+
+## Elliptic curves: the genus-1 case
+
+An **elliptic curve** over a field $k$ is a smooth projective curve of genus 1 with a distinguished base point $O$. By Riemann–Roch, it can always be brought into **Weierstrass form**:
+
+$$y^2 = x^3 + ax + b,$$
+
+where $4a^3 + 27b^2 \neq 0$ (the smoothness condition). The key feature is the **group law**: three collinear points on the curve always sum to zero with respect to $O$. This makes the set of points $E(k)$ into an abelian group, classified by the Mordell–Weil theorem over $\mathbb{Q}$.
+
+Elliptic curves over finite fields $\mathbb{F}_p$ are the objects in modern elliptic-curve cryptography. Their group structure is computationally hard to invert (the discrete logarithm problem), making them ideal for public-key cryptography with smaller keys than RSA.
+
+## Real-world applications
+
+The group law on elliptic curves is the foundation of [elliptic-curve cryptography](/applications/cryptocurrency-blockchain), which secures Bitcoin, Ethereum, and most modern TLS connections. [Digital signatures](/applications/digital-signatures) using ECDSA and EdDSA are computed in the group $E(\mathbb{F}_p)$ using the Weierstrass model. The security of [RSA and related systems](/applications/rsa-public-key-cryptography) is analysed using the arithmetic of algebraic curves over number fields, and the Wiles–Taylor proof of Fermat's Last Theorem is a theorem about elliptic curves — specifically, that semi-stable elliptic curves over $\mathbb{Q}$ are modular.
+
+## Why this matters
+
+Algebraic curves are the meeting point of algebraic geometry, complex analysis, number theory, and arithmetic. The Riemann–Roch theorem is one of the great results in all of mathematics — it controls spaces of functions via a formula that depends only on the topology (genus) and combinatorics (degree) of the curve. The theory of elliptic curves is the subject of several millennium problems: the Birch and Swinnerton-Dyer conjecture predicts the rank of $E(\mathbb{Q})$ from the behaviour of the $L$-function $L(E, s)$ at $s = 1$, connecting arithmetic directly to analysis. Modern cryptographic security depends on the difficulty of discrete logarithm problems in $E(\mathbb{F}_p)$ — problems that have no known efficient classical algorithm.

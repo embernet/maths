@@ -1,0 +1,119 @@
+---
+title: 'Complex Analysis: Analytic Functions and Cauchy''s Theorem'
+section: 'Core Mathematics: core mathematics'
+section_slug: 02-core-mathematics
+year: 2
+order: 3
+tags: [complex-analysis, Cauchy, analytic-functions, contour-integration, residues, Laurent-series]
+prerequisites:
+- 02-real-analysis-foundations
+- 01-algebra-and-linear-algebra
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/02-real-analysis-foundations
+    why: 'Complex differentiability is defined via the same limit that defines real differentiability; the epsilon–delta fluency from foundational analysis is essential.'
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Complex numbers as a two-dimensional vector space, and the algebra of matrices, underpin the Cauchy-Riemann equations and linear maps.'
+  - kind: topic
+    ref: 02-core-mathematics/02-real-analysis-2
+    why: 'Metric space completeness and uniform convergence are needed to justify the power-series results and Cauchy estimates proved here.'
+  - kind: theorem
+    ref: euler-s-formula-e-i-cos-i-sin
+    why: "Euler's formula is cited throughout this page; a prior reading makes the exponential map familiar before the complex analysis begins."
+related:
+- 02-real-analysis-2
+- 08-differential-equations-advanced
+- 02-analytic-number-theory
+mathematicians: [cauchy, riemann, weierstrass, euler]
+reading_time_min: 13
+summary: Complex analysis studies functions of a complex variable. The requirement of differentiability in the complex sense is so strong that it forces functions to be infinitely differentiable and equal to their Taylor series — a rigidity with spectacular consequences.
+theorems: [complex-analysis-and-cauchy-s-theorem, euler-s-formula-e-i-cos-i-sin, riemann-surfaces, riemann-zeta-function, riemann-hypothesis, cauchy-sequences]
+applications: [airfoil-and-aerodynamics]
+---
+
+
+
+The complex numbers look like the real numbers, just with an extra dimension. You might expect complex analysis — calculus over $\mathbb{C}$ — to look like two-dimensional real analysis. It does not. Complex differentiability is a far more restrictive condition than real differentiability, and functions that satisfy it (called **analytic** or **holomorphic** functions) have extraordinary properties: they are automatically infinitely differentiable, they are determined by their values on any small open set, they cannot have local maxima of their modulus inside a domain, and their zeros are isolated. This is one of the most beautiful and surprising areas in the entire degree.
+
+## Complex differentiability and the Cauchy-Riemann equations
+
+A function $f : U \subseteq \mathbb{C} \to \mathbb{C}$ is **holomorphic** (complex differentiable) at $z_0$ if the limit
+
+$$f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}$$
+
+exists, where $h \in \mathbb{C}$ approaches $0$ from any direction.
+
+Writing $f(x + iy) = u(x,y) + iv(x,y)$ for real-valued functions $u, v$, the requirement that the derivative exists regardless of the direction of approach forces:
+
+$$\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \qquad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}.$$
+
+These are the **Cauchy-Riemann equations**. They are necessary conditions for complex differentiability (with continuous partial derivatives, also sufficient). They say that the real and imaginary parts of an analytic function are not independent — they are deeply intertwined. Each is a **harmonic function**: $\nabla^2 u = u_{xx} + u_{yy} = 0$ and $\nabla^2 v = 0$. Harmonic functions are solutions of Laplace's equation and appear throughout physics.
+
+## Contour integration
+
+A **contour** (or path) in $\mathbb{C}$ is a piecewise smooth curve $\gamma : [a,b] \to \mathbb{C}$. The **contour integral** is:
+
+$$\int_\gamma f(z)\, dz = \int_a^b f(\gamma(t))\, \gamma'(t)\, dt.$$
+
+**Cauchy's theorem** (the central theorem of complex analysis): if $f$ is holomorphic on and inside a simple closed contour $\gamma$, then
+
+$$\oint_\gamma f(z)\, dz = 0.$$
+
+This is extraordinary: the integral of an analytic function around any closed loop is zero. For real analysis, $\oint f(x)\, dx$ around a closed curve in $\mathbb{R}^2$ can be anything. The complex structure is so rigid that it forces the integral to vanish.
+
+**Cauchy's integral formula** follows: if $f$ is holomorphic inside and on a simple closed contour $\gamma$ enclosing $z_0$, then
+
+$$f(z_0) = \frac{1}{2\pi i} \oint_\gamma \frac{f(z)}{z - z_0}\, dz.$$
+
+The value of $f$ at any interior point is completely determined by its values on the boundary. Differentiate both sides to get $f'(z_0)$, $f''(z_0)$, and so on: every holomorphic function is automatically infinitely differentiable.
+
+## Taylor and Laurent series
+
+Every holomorphic function on a disk $|z - z_0| < R$ has a **Taylor series**:
+
+$$f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!} (z - z_0)^n,$$
+
+and the series converges on the whole disk. This is profoundly different from real analysis, where a $C^\infty$ function need not equal its Taylor series (e.g., $e^{-1/x^2}$ at $x=0$).
+
+When $f$ has a **singularity** at $z_0$ (it is not holomorphic there), the **Laurent series** extends the Taylor expansion to include negative powers:
+
+$$f(z) = \sum_{n=-\infty}^\infty c_n (z - z_0)^n, \quad 0 < |z - z_0| < R.$$
+
+The **principal part** consists of terms with $n < 0$. A singularity is:
+- **Removable** if all $c_n = 0$ for $n < 0$ (the singularity can be "filled in").
+- A **pole of order $m$** if $c_{-m} \ne 0$ but $c_n = 0$ for all $n < -m$.
+- An **essential singularity** if infinitely many $c_n \ne 0$ for $n < 0$.
+
+The **residue** of $f$ at $z_0$ is the coefficient $c_{-1}$.
+
+## The residue theorem and applications
+
+The **residue theorem** generalises Cauchy's theorem: if $f$ is holomorphic inside a simple closed contour $\gamma$ except at finitely many singularities $z_1, \ldots, z_n$, then
+
+$$\oint_\gamma f(z)\, dz = 2\pi i \sum_{k=1}^n \text{Res}(f, z_k).$$
+
+This is one of the most powerful computational tools in mathematics. Many real integrals that resist all other methods yield immediately to contour integration:
+
+$$\int_{-\infty}^\infty \frac{1}{1 + x^2}\, dx = \pi \quad \text{(Res at } z = i \text{ of } \frac{1}{1+z^2}\text{)}.$$
+
+$$\int_0^{2\pi} \frac{d\theta}{a + b\cos\theta} = \frac{2\pi}{\sqrt{a^2 - b^2}} \quad (a > b > 0).$$
+
+The residue theorem also proves the **fundamental theorem of algebra**: every polynomial $p(z)$ of degree $n \ge 1$ with complex coefficients has exactly $n$ roots in $\mathbb{C}$ (counting multiplicity).
+
+## Conformal mappings
+
+A holomorphic function with non-zero derivative is **conformal**: it preserves angles (though not generally lengths). The **Riemann mapping theorem** states that any simply connected proper open subset of $\mathbb{C}$ can be mapped conformally onto the unit disk. This has applications in fluid dynamics (transforming complicated geometries into simple ones) and electrostatics.
+
+The complex logarithm $\log z = \ln|z| + i\arg z$ is multi-valued: the argument is defined only modulo $2\pi$. This is the first glimpse of **Riemann surfaces** — multi-sheeted covers of the complex plane on which multi-valued functions become single-valued — which appear in advanced topics for students who continue.
+
+## Real-world applications
+
+Where this turns up in the world: [Airfoil design](/applications/airfoil-and-aerodynamics) uses conformal mappings from this course to transform the flow around a cylinder into the flow around a wing — the Joukowski transformation is the central technique that made early aeronautical engineering possible. Analytic continuation and the Riemann zeta function (introduced in [Analytic Number Theory](/04-advanced-topics/02-analytic-number-theory)) give the deepest tools for understanding prime number distribution. The residue theorem provides the fastest way to compute many real integrals that arise in signal processing and physics.
+
+## Why complex analysis is extraordinary
+
+Students sometimes ask why complex analysis is so much richer than real analysis. The reason is rigidity: demanding that $f'(z)$ exists in all complex directions simultaneously is an enormously strong constraint. It is equivalent to requiring $f$ to be the sum of a convergent power series (analytic), which in turn implies it is determined by local data anywhere in its domain of holomorphicity. The "extra" structure of $\mathbb{C}$ over $\mathbb{R}$ — the fact that $\mathbb{C}$ is both a field and a 2D real vector space — creates this rigidity.
+
+This rigidity is used in analytic number theory (advanced topics), where the Riemann zeta function $\zeta(s) = \sum n^{-s}$ is studied as a function of a complex variable, and its zeros are connected (by the Prime Number Theorem) to the distribution of prime numbers.

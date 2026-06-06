@@ -1,0 +1,72 @@
+---
+title: 'Fibonacci Numbers in Nature'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 2
+tags: [fibonacci, nature, pine-cones, sunflowers, spirals, phyllotaxis, recurrence, golden-ratio]
+related: ['01-the-golden-ratio', '03-phyllotaxis-and-the-golden-angle']
+mathematicians: [fibonacci]
+reading_time_min: 10
+summary: 'The Fibonacci sequence is everywhere in the plant kingdom — and for a concrete mathematical reason, not a mystical one. Seed heads, pine cones, and pineapples all count in Fibonacci numbers because of how plants solve an optimisation problem as they grow.'
+theorems: [fibonacci-sequence]
+applications: []
+---
+
+Count the spirals on a sunflower head. The tightly packed seeds spiral in two directions simultaneously, and in almost every sunflower you count a Fibonacci number in each direction: 34 spirals one way, 55 the other. Or 55 and 89. Or 89 and 144. Try it on a pine cone: typically 8 spirals going one way, 13 the other. On a pineapple: 8 and 13, or 13 and 21. The numbers change between species, but they are always consecutive terms in the same sequence:
+
+$$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, \ldots$$
+
+where each term is the sum of the two before it:
+
+$$F_n = F_{n-1} + F_{n-2}, \quad F_1 = F_2 = 1.$$
+
+This is the [Fibonacci sequence](/theorems/fibonacci-sequence), named after Leonardo of Pisa — [Fibonacci](/mathematicians/fibonacci) — who introduced it to European mathematics in 1202 in his *Liber Abaci*, via the rabbit problem.
+
+## The rabbit problem and population dynamics
+
+Fibonacci's original scenario was contrived: imagine a pair of rabbits that takes one month to reach maturity, then produces one new pair every month thereafter, and never dies. How many pairs are there after $n$ months? The answer is $F_n$, and the recurrence $F_n = F_{n-1} + F_{n-2}$ captures the logic directly: this month's population equals last month's (all existing adults survive) plus the month before last (all adults who were mature two months ago produce one new pair).
+
+The specific rabbit model is biologically unrealistic, but the mathematical structure — a linear recurrence of the form $F_n = F_{n-1} + F_{n-2}$ — appears in a wide range of genuine population models. Whenever a population has an age-structured birth-delay structure, similar sequences arise. The general theory of such models is the Perron–Frobenius theorem applied to the Leslie matrix of the population, which is one of the topics in [probability and statistics](/01-foundations/04-probability-and-statistics) and [linear algebra](/01-foundations/01-algebra-and-linear-algebra). The Fibonacci sequence is the simplest example of a much larger class.
+
+## Why sunflowers specifically
+
+The connection between Fibonacci numbers and plant structure is not a coincidence, and it is not a mystical resonance. It follows from a specific geometric argument.
+
+A plant growing new seeds or leaves from a central growing tip (meristem) places each new element at a fixed angular offset $\theta$ from the previous one, and at a slightly greater distance from the centre. The pattern that results after many steps depends entirely on $\theta$.
+
+If $\theta$ is a rational multiple of $360°$ — say $\theta = (p/q) \times 360°$ — then after $q$ steps, you are back to exactly the same angle. The seeds line up in $q$ straight spokes, with large gaps between them. This is terrible for packing density.
+
+If $\theta$ is an irrational multiple of $360°$, the seeds never exactly align, and the structure is much more uniformly distributed. But the density of the packing depends on *how irrational* the angle is, in the sense of how well it can be approximated by rationals. The worst-approximated irrational — the one for which the rational approximations converge the most slowly — is the golden ratio $\varphi$. And the corresponding angle is the golden angle:
+
+$$\theta^* = 360° \times \left(1 - \frac{1}{\varphi}\right) \approx 137.508°.$$
+
+At this angle, seeds are packed as uniformly as it is possible to pack them. Natural selection has converged on this angle in many plant lineages independently, because it maximises seed count in a given area, maximises light access for leaves, and maximises pollinator access for florets. This is not metaphor; it is the outcome of a well-defined optimisation problem.
+
+The Fibonacci numbers enter because the best rational approximations to $1/\varphi$ are the ratios $F_{n-1}/F_n$ of consecutive Fibonacci numbers. Each time you look at a sunflower head at a coarser scale, the dominant spiral count jumps to the next Fibonacci number. The spirals you count are always consecutive Fibonacci numbers because they are the denominators of the successive best rational approximations to the golden angle.
+
+## A specific example: 34 and 55
+
+A sunflower with 34 clockwise spirals and 55 anticlockwise spirals has seeds arranged at approximately the golden angle. The ratio $34/55 \approx 0.6182$ is the best rational approximation to $1/\varphi \approx 0.6180$ with denominator $\le 55$. At the scale of 34 spirals, the seeds look like they are almost on 34 radial lines; at the scale of 55 spirals, they look almost on 55 radial lines. Both are consequences of the same underlying angle.
+
+You can verify this computationally. Place $n$ seeds at polar coordinates $(r_k, k \times 137.508°)$ with $r_k = \sqrt{k}$, and plot. For any $n$ that is a Fibonacci number, the spiral pattern is particularly clean and symmetric. For non-Fibonacci values of $n$, the pattern is less uniform.
+
+## What is true and what is overstated
+
+The Fibonacci-in-plants story is largely correct, but there are important caveats.
+
+The pattern is approximate. Real plants do not have exactly the golden angle; they have an angle close to it, because the gene regulation that positions each new organ is noisy. Sunflowers with 33 and 55 spirals, or with 34 and 54 spirals, have been observed, and they are not considered abnormal.
+
+The pattern is not universal. Not all plants show Fibonacci phyllotaxis; some species use different patterns. The Fibonacci structure is dominant but not the only solution evolution has found.
+
+The connection to the rabbit problem is historical, not biological. Rabbits do not actually breed this way. Fibonacci numbers appear in plant spirals because of optimal packing geometry, not because plants are solving a rabbit-breeding problem.
+
+## Why nature gets here
+
+The biological mechanism involves the concentration gradient of a plant growth hormone (auxin) near the meristem. Each new organ primordium forms at the location where auxin concentration is highest, which is at maximum distance from existing primordia. This turns out to be an analogue of a Voronoi or packing problem (you'll see [Voronoi structures](/97-nature/08-voronoi-tessellations-in-nature) again later), and the solution is the golden angle. The mathematics of auxin gradients in plant meristems has been experimentally verified; it is genuine biophysics, not numerology.
+
+## Where to read more
+
+- D'Arcy Wentworth Thompson, *On Growth and Form* (1917; Cambridge University Press reprint 1992) — the original, readable, and still astonishing
+- Stéphane Douady and Yves Couder, 'Phyllotaxis as a physical self-organized growth process', *Physical Review Letters* 68 (1992) — the experiment that proved the auxin model
+- [Wikipedia: Fibonacci sequence — in nature](https://en.wikipedia.org/wiki/Fibonacci_sequence#In_nature) — a good starting survey

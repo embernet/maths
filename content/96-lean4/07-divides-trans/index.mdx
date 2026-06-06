@@ -1,0 +1,76 @@
+---
+title: 'Proof 5: Divisibility is Transitive'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 7
+tags: [lean4, formal-proof]
+prerequisites: [06-add-comm]
+related: [10-infinitude-of-primes, 13-fermat-little]
+mathematicians: []
+reading_time_min: 5
+summary: 'Existential statements in Lean: if a divides b and b divides c, then a divides c — proved by destructuring two existential hypotheses with obtain.'
+---
+
+## What we are proving
+
+If $a$ divides $b$ and $b$ divides $c$, then $a$ divides $c$:
+
+$$a \mid b \;\wedge\; b \mid c \;\implies\; a \mid c.$$
+
+This is one of the first things you prove when studying divisibility, and it illustrates an important Lean technique: working with **existential statements**. The definition of $a \mid b$ is $\exists k, b = a \cdot k$. To use this hypothesis you must extract the witness $k$ and its associated proof.
+
+```lean
+theorem dvd_trans (a b c : Nat) (h1 : a ∣ b) (h2 : b ∣ c) : a ∣ c
+```
+
+## The proof
+
+```lean
+-- 07-divides-trans.lean
+import Mathlib.Tactic
+
+namespace MathsCompanion
+
+theorem dvd_trans' (a b c : Nat) (h1 : a ∣ b) (h2 : b ∣ c) : a ∣ c := by
+  obtain ⟨k, hk⟩ := h1   -- b = a * k
+  obtain ⟨j, hj⟩ := h2   -- c = b * j
+  exact ⟨k * j, by rw [hj, hk, Nat.mul_assoc]⟩
+
+-- Alternative with explicit term construction
+theorem dvd_trans'' (a b c : Nat) (h1 : a ∣ b) (h2 : b ∣ c) : a ∣ c := by
+  obtain ⟨k, hk⟩ := h1
+  obtain ⟨j, hj⟩ := h2
+  use k * j
+  rw [hj, hk, Nat.mul_assoc]
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**`obtain ⟨k, hk⟩ := h1`** — `h1 : a ∣ b` unfolds to `∃ k, b = a * k`. The `obtain` tactic destructs this existential: it introduces a witness `k : Nat` and a proof `hk : b = a * k` into the context. The goal is unchanged.
+
+**`obtain ⟨j, hj⟩ := h2`** — similarly, from `h2 : b ∣ c` we extract `j : Nat` and `hj : c = b * j`.
+
+Now the goal is `a ∣ c`, which means we need to exhibit a natural number $m$ such that `c = a * m`.
+
+The witness is $k \cdot j$: substituting, $c = b \cdot j = (a \cdot k) \cdot j = a \cdot (k \cdot j)$ by associativity of multiplication.
+
+**`exact ⟨k * j, by rw [hj, hk, Nat.mul_assoc]⟩`** — we produce the existential witness `k * j` and the proof. Inside `by rw [...]`:
+- `rw [hj]` replaces `c` with `b * j`
+- `rw [hk]` replaces `b` with `a * k`, giving `(a * k) * j`
+- `rw [Nat.mul_assoc]` rewrites `(a * k) * j` to `a * (k * j)`
+
+The goal then becomes `a * (k * j) = a * (k * j)`, closed by `rfl` (implicit at the end of `rw`).
+
+The alternative using **`use k * j`** is sometimes cleaner: `use e` both provides the witness and changes the goal from `∃ x, P x` to `P e`. Then we just need to prove `c = a * (k * j)`, which the `rw` sequence closes.
+
+Notice what `obtain` is doing here: it is Lean's way of saying "since this existential is true, let me give a name to the thing that exists." Without naming the witness, you cannot talk about it. This pattern — `obtain ⟨witness, proof⟩ := h` — appears in nearly every proof that involves divisibility, set membership, or any other existential concept.
+
+## Download
+
+[Download the Lean file](/lean/07-divides-trans.lean)
+
+## Try it yourself
+
+Prove that divisibility is reflexive: `theorem dvd_refl (a : Nat) : a ∣ a`. You need to exhibit a witness — what is it? Then try `dvd_antisymm : a ∣ b → b ∣ a → a = b` for natural numbers. (Hint: if $a \mid b$ and $b \mid a$ with both positive, then $a \le b$ and $b \le a$, so $a = b$. In Lean, `Nat.le_antisymm` combined with `Nat.le_of_dvd` may be useful — try `exact?`.)

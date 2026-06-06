@@ -15,6 +15,10 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex, rehypeBoldAutolinks, rehypeTheoremAutolinks],
+    shikiConfig: {
+      theme: 'github-light',
+      wrap: true,
+    },
   },
   vite: {
     // Workaround: prevent Vite from trying to find tsconfig for virtual Astro entry modules.

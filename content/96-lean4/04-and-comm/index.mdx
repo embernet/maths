@@ -1,0 +1,79 @@
+---
+title: 'Proof 2: Conjunction is Commutative'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 4
+tags: [lean4, formal-proof]
+prerequisites: [01-introduction, 02-language-overview]
+related: [03-add-zero, 05-zero-add]
+mathematicians: []
+reading_time_min: 4
+summary: 'A first tactic proof: p ∧ q → q ∧ p, using intro and exact to construct the conjunction by hand.'
+---
+
+## What we are proving
+
+If you know both $p$ and $q$, then you know both $q$ and $p$. In logical notation:
+
+$$p \wedge q \to q \wedge p.$$
+
+This is trivial as a mathematical fact, but as a Lean proof it introduces two fundamental tactics: `intro`, which moves a hypothesis from the goal into the context, and `exact`, which closes a goal by providing a term of exactly the right type. It also gives you a first encounter with the `⟨_, _⟩` anonymous constructor syntax.
+
+In Lean syntax:
+
+```lean
+theorem and_comm (p q : Prop) : p ∧ q → q ∧ p
+```
+
+## The proof
+
+```lean
+-- 04-and-comm.lean
+import Mathlib.Tactic
+
+namespace MathsCompanion
+
+-- Tactic-style proof
+theorem and_comm (p q : Prop) : p ∧ q → q ∧ p := by
+  intro h
+  exact ⟨h.2, h.1⟩
+
+-- Term-style proof (equivalent, more concise)
+theorem and_comm' (p q : Prop) : p ∧ q → q ∧ p :=
+  fun h => ⟨h.2, h.1⟩
+
+-- Using And.intro explicitly
+theorem and_comm'' (p q : Prop) : p ∧ q → q ∧ p := by
+  intro h
+  constructor
+  · exact h.2
+  · exact h.1
+
+end MathsCompanion
+```
+
+## Walk-through
+
+We have three proofs of the same statement. Let us work through each.
+
+**Tactic-style proof:**
+
+`intro h` — the goal begins as `p ∧ q → q ∧ p`. An implication `A → B` can be introduced just like a function: `intro h` moves the antecedent `A` into the context as hypothesis `h : p ∧ q`, leaving the goal as `q ∧ p`.
+
+`exact ⟨h.2, h.1⟩` — we need to produce a term of type `q ∧ p`. In Lean, `And` is a structure with two fields: `And.left` (type `p`) and `And.right` (type `q`). The dot notation `h.1` accesses `h.left` (which is `p`) and `h.2` accesses `h.right` (which is `q`). We build the conjunction `q ∧ p` using the anonymous constructor `⟨h.2, h.1⟩` — first the `q` component, then the `p` component. `exact` closes the goal because the term has precisely the required type.
+
+**Term-style proof:**
+
+`fun h => ⟨h.2, h.1⟩` — this is the Curry–Howard translation directly. The proof is a function that takes a proof of `p ∧ q` and returns a proof of `q ∧ p`. The body constructs that proof by swapping the two components.
+
+**Using `constructor`:**
+
+The `constructor` tactic splits a conjunction goal `q ∧ p` into two subgoals: first prove `q`, then prove `p`. The bullet `·` focuses on each subgoal in turn. This is more verbose but sometimes clearer when each component needs non-trivial work.
+
+## Download
+
+[Download the Lean file](/lean/04-and-comm.lean)
+
+## Try it yourself
+
+Can you prove `p ∨ q → q ∨ p`? (Disjunction is also commutative.) You will need the `Or.inl` and `Or.inr` constructors, or the `cases` tactic to split on which disjunct holds. Try `cases h` after `intro h` — it will give you two goals, one where `h : p` and one where `h : q`, and in each case you build the other disjunction.

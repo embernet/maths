@@ -1,0 +1,72 @@
+---
+title: 'Voronoi Tessellations in Nature'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 8
+tags: [voronoi, tessellation, giraffe, dragonfly, nearest-neighbour, computational-geometry, cell-biology, cosmology]
+related: ['07-honeycombs-and-the-hexagon-theorem']
+mathematicians: [descartes]
+reading_time_min: 10
+summary: 'The Voronoi diagram — each point owns the region of space closest to it — generates the patterns on giraffe hides, the facets of dragonfly eyes, the cracks in dried mud, and the large-scale clustering of galaxies. One geometric rule, everywhere.'
+theorems: [euclidean-geometry]
+applications: []
+---
+
+Imagine scattering a set of seed points across a flat surface. Around each seed, colour every point on the surface according to which seed it is closest to. The result is a tessellation — the surface divided into cells, one per seed. Each cell is a convex polygon, and adjacent cells share an edge that is equidistant from the two seeds on either side of it.
+
+This is the Voronoi tessellation, named after the Ukrainian mathematician Georgy Voronoi who formalised it in 1908. It is one of the most useful geometric constructions in mathematics and one of the most common patterns in the natural world.
+
+## The mathematics
+
+Formally, given a set of seed points $\{p_1, p_2, \ldots, p_n\}$ in the plane (or in any metric space), the Voronoi cell for seed $p_i$ is
+
+$$V_i = \{x : d(x, p_i) \le d(x, p_j) \text{ for all } j \ne i\}$$
+
+where $d$ is the Euclidean distance. The collection of all cells is the Voronoi tessellation.
+
+Each cell is a convex polygon (in the plane) bounded by perpendicular bisectors of line segments joining neighbouring seeds. The dual of the Voronoi tessellation — connect two seeds if their Voronoi cells share an edge — is the Delaunay triangulation, which has the useful property that no seed lies inside the circumscribed circle of any Delaunay triangle.
+
+Voronoi tessellations are intimately related to [Euclidean geometry](/theorems/euclidean-geometry) and to computational geometry more broadly. Computing the Voronoi tessellation of $n$ points takes $O(n \log n)$ time, using Fortune's algorithm. The structure connects to optimal point sets, sphere packing, and the theory of lattices — topics that recur in [analysis](/01-foundations/02-real-analysis-foundations) and [number theory](/02-core-mathematics/06-programming-and-discrete-mathematics).
+
+## Giraffe coats
+
+The pattern of patches on a giraffe's coat is a Voronoi tessellation. During embryonic development, cells of different pigmentation compete for territory, and each melanocyte patch "claims" the region of skin closest to it. The resulting boundaries are approximately equidistant from the nearest patch centres on each side — the definition of Voronoi edges.
+
+This is not the only possible mechanism for producing patch patterns; Turing reaction-diffusion (see the [Turing patterns page](/97-nature/09-turing-patterns-and-animal-coats)) can produce similar-looking results. But measurements of giraffe patches show that the statistical properties of the tessellation — the distribution of cell areas, the distribution of vertex degrees — match Voronoi statistics more closely than Turing statistics. The two mechanisms produce distinguishably different statistics, and giraffe coats favour Voronoi.
+
+## Dragonfly wings
+
+The wing of a dragonfly is a marvel of lightweight engineering: a thin membrane supported by a network of veins. The venation pattern is a Voronoi tessellation, where the seeds are the junctions of the primary veins. The secondary venation fills in by the nearest-seed rule — each vein segment extends along the perpendicular bisector between existing vein junctions.
+
+Finite element analysis of dragonfly wing venation has shown that the Voronoi tessellation minimises stress concentrations at vein junctions compared to alternative regular tilings (hexagonal, square). The irregular Voronoi structure distributes mechanical load more uniformly than any regular structure, because it adapts to the local geometry. This is a practical lesson in structural engineering.
+
+## Dried mud
+
+The cracks in a drying mud flat are a Voronoi tessellation in reverse. As mud dries, it contracts. The first cracks propagate from the points of highest stress, which are the points of maximum distance from any other crack. As each crack propagates, it relieves stress in its vicinity. The result is that cracks form a pattern that approximately divides the surface into cells centred on stress nucleation points — which is the Voronoi construction.
+
+The angle between cracks at junctions is approximately $120°$ in mature mud-crack networks, close to the $120°$ angles of the hexagonal Voronoi tessellation. This is the same condition as Plateau's laws for soap bubble foams, and it arises from the same variational principle: crack junctions in a stress-relieving network settle to the minimum-energy configuration, which is $120°$ equal angles.
+
+## Drosophila wing cells
+
+The wing of the fruit fly *Drosophila melanogaster* is covered with about 30,000 cells called epithelial cells, each of which produces a single hair (seta) at its centre. The cells are approximately hexagonal near the centre of the wing and become more irregular near the edges and veins. Quantitative analysis of *Drosophila* wing cell geometry shows that the cell pattern is close to a Voronoi tessellation of the hair positions — the cell boundaries are approximately equidistant from adjacent hairs.
+
+This has a functional interpretation: the hair positions are determined by a reaction-diffusion mechanism (Turing-type), and once the hair positions are fixed, the cell boundaries settle by a physical minimisation of boundary energy — which, for equal-tension boundaries, gives the Voronoi partition.
+
+## The large-scale structure of the universe
+
+At the largest scales in the universe, the distribution of galaxies forms a cosmic web: dense sheets and filaments of galaxies separated by vast under-dense voids. This structure is the three-dimensional Voronoi tessellation of the locations of early density fluctuations in the primordial universe. Matter fell gravitationally toward the walls between early high-density seeds, leaving the interiors of cells (the voids) progressively empty. The resulting pattern — known as the cosmic web — has cell sizes of tens to hundreds of megaparsecs, and its statistical properties match Voronoi tessellations of appropriate random point processes.
+
+The Voronoi foam model of large-scale structure, proposed by Zel'dovich and collaborators in the 1970s and 1980s, was one of the first successful models of the cosmic web, and it remains a useful first approximation. It is perhaps the most extreme example in this section: the geometry of the largest structures in the observable universe is described by the same "nearest seed wins" rule that describes the patches on a giraffe's hide.
+
+## What is true and what is overstated
+
+Not every irregular polygonal pattern is a Voronoi tessellation. The claim requires that the cell boundaries are perpendicular bisectors of lines connecting neighbouring cell centres, which is a specific quantitative prediction that can be tested. In giraffe coats and dragonfly wings, this test has been carried out and passes reasonably well. In casual descriptions of patterns as "Voronoi-like", the claim is often vaguer and should be treated as a description of visual appearance rather than a mathematical fact.
+
+Also: Voronoi tessellations in nature use weighted or anisotropic distance metrics, not the plain Euclidean distance. Cells on curved surfaces, in three dimensions, or in the presence of directional growth signals require generalisations of the basic Voronoi construction. The mathematics extends naturally to all these cases.
+
+## Where to read more
+
+- Atsuyuki Okabe et al., *Spatial Tessellations: Concepts and Applications of Voronoi Diagrams* (2000, Wiley) — the standard reference
+- Jan van de Craats and Jan Kramer, 'Voronoi tessellations in nature' — a readable survey article available on arXiv
+- [Wikipedia: Voronoi diagram](https://en.wikipedia.org/wiki/Voronoi_diagram) — thorough treatment with applications

@@ -10,20 +10,20 @@ apps/maths-guide/
 │   ├── _site.json                    # site-wide config (title, tagline, nav order)
 │   ├── 00-welcome/
 │   │   └── index.mdx
-│   ├── 01-foundations-year-one/
+│   ├── 01-foundations/
 │   │   ├── _section.json
 │   │   ├── 01-algebra-and-linear-algebra/
 │   │   │   ├── index.mdx
 │   │   │   └── quiz.json
 │   │   ├── 02-real-analysis-foundations/
 │   │   ...
-│   ├── 02-core-year-two/
+│   ├── 02-core-mathematics/
 │   │   ├── _section.json
 │   │   ...
-│   ├── 03-specialisation-year-three/
+│   ├── 03-specialist-areas/
 │   │   ├── _section.json
 │   │   ...
-│   ├── 04-advanced-topics-year-four/
+│   ├── 04-advanced-topics/
 │   │   ├── _section.json
 │   │   ...
 │   ├── 90-history/                   # Appendix A: era-based narrative
@@ -63,7 +63,7 @@ apps/maths-guide/
 ---
 title: "Sequences, Limits and the ε–δ Definition"
 section: "Foundations: Year One"
-section_slug: "01-foundations-year-one"
+section_slug: "01-foundations"
 year: 1
 order: 2
 tags: [analysis, sequences, limits, foundations, epsilon-delta]
@@ -116,7 +116,7 @@ summary: "After two centuries of brilliant but informal calculus, nineteenth-cen
 ```json
 {
   "title": "Foundations: Year One",
-  "slug": "01-foundations-year-one",
+  "slug": "01-foundations",
   "order": 1,
   "blurb": "The four pillars of a maths degree: algebra, analysis, probability, and the methods that connect them to the world.",
   "icon": "year-1"
@@ -139,10 +139,10 @@ summary: "After two centuries of brilliant but informal calculus, nineteenth-cen
   },
   "navigation_order": [
     "00-welcome",
-    "01-foundations-year-one",
-    "02-core-year-two",
-    "03-specialisation-year-three",
-    "04-advanced-topics-year-four",
+    "01-foundations",
+    "02-core-mathematics",
+    "03-specialist-areas",
+    "04-advanced-topics",
     "90-history",
     "91-mathematicians",
     "92-resources"

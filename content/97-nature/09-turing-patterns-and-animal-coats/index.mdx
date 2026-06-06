@@ -1,0 +1,84 @@
+---
+title: 'Turing Patterns and Animal Coats'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 9
+tags: [turing-patterns, reaction-diffusion, morphogenesis, animal-coats, spots, stripes, pdes, mathematical-biology]
+related: ['08-voronoi-tessellations-in-nature']
+mathematicians: [turing]
+reading_time_min: 12
+summary: 'In 1952, Alan Turing showed that two diffusing chemicals can spontaneously produce stripes, spots, or mazes from a uniform initial state. His equations predict how a fish''s markings should change with body size — and experiments have now confirmed the mechanism in real animals.'
+theorems: [turing-machines-theory-of-computation, morphogenesis-mathematical-biology]
+applications: []
+---
+
+In 1952, two years before his death and at a time when he was under severe personal pressure from the British government's prosecution of him for his sexuality, Alan Turing published a paper called 'The Chemical Basis of Morphogenesis'. It was not about computation. It was about biology. Specifically, it addressed one of the deepest questions in developmental biology: how does a uniform ball of cells — an early embryo — spontaneously break its symmetry and develop spatial structure?
+
+The paper introduced a mathematical mechanism that produces spatial pattern from apparent uniformity. That mechanism, now called a Turing instability or reaction-diffusion mechanism, underlies the spots on a leopard, the stripes on a zebrafish, the ridges on a cat's palate, and the spacing of hair follicles in a developing embryo.
+
+## The equations
+
+Turing considered two chemical species, which he called morphogens, diffusing through a tissue. Let $u(x,t)$ be the concentration of the first morphogen (the activator) and $v(x,t)$ be the concentration of the second (the inhibitor). They obey the reaction-diffusion system:
+
+$$\frac{\partial u}{\partial t} = D_u \nabla^2 u + f(u, v)$$
+
+$$\frac{\partial v}{\partial t} = D_v \nabla^2 v + g(u, v)$$
+
+where $D_u$ and $D_v$ are diffusion coefficients, $\nabla^2$ is the Laplacian (the sum of second spatial derivatives), and $f$ and $g$ describe the local chemistry of the reaction between the two morphogens.
+
+Turing showed that under certain conditions on $f$, $g$, $D_u$, and $D_v$, a spatially uniform state that is stable without diffusion can become unstable when diffusion is added. This is Turing instability or diffusion-driven instability, and it is counterintuitive: diffusion normally smooths out differences, yet here it creates them.
+
+The condition for instability involves the diffusion coefficients in a crucial way: it requires $D_v \gg D_u$ — the inhibitor must diffuse much faster than the activator. The intuitive picture is local self-activation and long-range inhibition: the activator stimulates itself (local positive feedback) and also stimulates the inhibitor; but the inhibitor spreads rapidly and suppresses the activator at long range. This produces peaks of activator concentration separated by valleys — the beginning of a spatial pattern.
+
+## Stripes versus spots
+
+Whether the pattern that emerges from Turing's equations consists of stripes, spots, or more complex mazes depends on the specific parameters $D_u$, $D_v$, and the reaction functions $f$ and $g$.
+
+For some parameter ranges, the most unstable mode is a single spatial frequency, producing nearly parallel stripes. For others, modes in multiple directions are simultaneously unstable, producing a roughly hexagonal spot pattern. The distinction is analogous to the difference between a one-dimensional and a two-dimensional instability.
+
+Critically, the scale of the pattern — the stripe width or spot spacing — is determined by the diffusion coefficients. Specifically, the characteristic length scale is
+
+$$\ell \sim \sqrt{D_u \tau}$$
+
+where $\tau$ is the characteristic reaction timescale. A larger tissue with the same chemistry produces the same-scale pattern — spots or stripes at the same absolute spacing — unless the parameters change.
+
+This prediction is testable and has been tested.
+
+## A concrete example: zebrafish and their changing stripes
+
+The zebrafish *Danio rerio* has alternating dark blue and yellow horizontal stripes. As the fish grows from a juvenile to an adult, the stripes get wider, but the number of stripes stays approximately constant. This is exactly what a Turing mechanism predicts: as the fish gets longer, the tissue grows, but the characteristic pattern scale grows with it if the diffusion coefficients scale proportionally with tissue size.
+
+More specifically: Kondo and Asai (1995) showed that the stripe pattern on related species of *Pomacanthus* — the emperor angelfish — changes as the fish grows in a way that exactly matches Turing dynamics. On a small fish, five stripes cover the body. As the body grows, new stripes insert between existing ones. If the pattern were simply stretched (a passive process), no new stripes would appear. The fact that new stripes insert at predictable positions as the fish grows is diagnostic of an active pattern-forming process with a fixed characteristic length scale — which is precisely the Turing mechanism.
+
+This is a beautiful example: Turing not only predicted the existence of such patterns, but his equations predict quantitatively *how* the pattern must change as the animal grows — and the prediction was borne out by experiment.
+
+## Experimental verification
+
+For decades, Turing's mechanism was accepted as theoretically elegant but lacking direct experimental support. No one had identified the activator-inhibitor pair responsible for any specific animal pattern.
+
+That changed from the 1990s onwards. In 2012, Shigeru Kondo and colleagues showed, using genetic manipulation, that stripe formation in zebrafish is controlled by a Turing-like interaction between two pigment cells, melanophores (dark) and xanthophores (yellow), which interact via short-range activation and long-range inhibition — exactly the abstract structure Turing described.
+
+In the same year, Jeremy Green and colleagues demonstrated that the ridges (rugae) on the roof of a mouse's mouth are formed by a Turing mechanism, and identified the specific signalling molecules (Eda and its receptor) playing the roles of activator and inhibitor. Changing the concentrations of these molecules in experiments predictably changed the number and spacing of the ridges — quantitative confirmation of the Turing equations.
+
+The spacing of hair follicles in mouse skin has also been shown to follow a Turing mechanism, with Wnt (activator) and Dkk (inhibitor) as the morphogens. The predicted follicle spacing matched measured spacings when the diffusion coefficients were estimated from molecular sizes.
+
+## What is true and what is overstated
+
+Turing's paper demonstrated that reaction-diffusion systems *can* produce pattern. It did not demonstrate that all biological patterns *are* produced by reaction-diffusion systems. Other mechanisms — positional information gradients (Wolpert's "French flag model"), mechanical instabilities of growing epithelia, and Voronoi-type cell competition — also produce spatial patterns, and they produce patterns that can look similar to Turing patterns when inspected by eye.
+
+The challenge, which occupies mathematical biologists today, is to discriminate between mechanisms. Statistical fingerprints of the different mechanisms do exist — Turing patterns have characteristic power spectra and correlation functions that differ from Voronoi or gradient patterns — but distinguishing them in noisy biological data requires careful quantitative analysis.
+
+Also: the specific morphogen molecules for most animal coat patterns have not been identified. Leopard spots and zebra stripes are consistent with Turing dynamics, but the underlying molecular biology is not yet as clear as it is for zebrafish or mouse rugae. Consistency is not confirmation.
+
+## The mathematics in context
+
+The Turing mechanism belongs to the theory of [partial differential equations](/02-core-mathematics/04-vector-calculus-and-pdes). Linear stability analysis of the reaction-diffusion system reduces to an eigenvalue problem for the Laplacian, which connects directly to [Fourier analysis](/theorems/fourier-series) and the theory of [differential operators](/03-specialist-areas/08-differential-equations-advanced). The nonlinear dynamics beyond the onset of instability require [bifurcation theory](/03-specialist-areas/06-mathematical-biology), which is a rich subject in its own right.
+
+Turing's 1952 paper is remarkable for something else too: he performed the stability calculations by hand — this was three years before he had access to a genuine computer — and he was already thinking about how the analysis might extend to three-dimensional embryos. The paper has the character of a first exploration: it opens a research programme that is still running 70 years later.
+
+## Where to read more
+
+- Alan Turing, 'The Chemical Basis of Morphogenesis', *Philosophical Transactions of the Royal Society B* 237 (1952) — the original paper, surprisingly readable
+- Shigeru Kondo and Takashi Miura, 'Reaction-Diffusion Model as a Framework for Understanding Biological Pattern Formation', *Science* 329 (2010) — a modern review
+- [Wikipedia: Turing pattern](https://en.wikipedia.org/wiki/Turing_pattern) — a clear exposition with parameter diagrams

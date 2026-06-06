@@ -1,0 +1,7 @@
+{
+  "title": "Python",
+  "slug": "97-python",
+  "order": 11,
+  "blurb": "The default language of scientific computing and machine learning. A friendly walkthrough of Python for mathematicians — its history, the language itself, and the libraries (NumPy, SciPy, SymPy, pandas, matplotlib, scikit-learn, PyTorch) that turned it into a universal mathematical workbench.",
+  "icon": "python"
+}

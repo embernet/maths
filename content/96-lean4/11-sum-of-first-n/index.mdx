@@ -1,0 +1,84 @@
+---
+title: 'Proof 9: The Gauss Sum'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 11
+tags: [lean4, formal-proof]
+prerequisites: [06-add-comm]
+related: [12-binomial-theorem-base-case]
+mathematicians: []
+reading_time_min: 6
+summary: 'Gauss''s formula 2 * (0 + 1 + ... + n) = n * (n + 1), proved in Lean by induction on n using Finset.sum.'
+---
+
+## What we are proving
+
+The sum of the first $n + 1$ natural numbers (from $0$ to $n$) satisfies:
+
+$$2 \cdot \sum_{i=0}^{n} i = n \cdot (n + 1).$$
+
+The story that nine-year-old Carl Friedrich [Gauss](https://leanprover-community.github.io) instantly computed $1 + 2 + \cdots + 100 = 5050$ by pairing numbers from both ends is almost certainly apocryphal, but the formula is real and the proof by induction is a standard exercise. In Lean, we use `Finset.range` and `Finset.sum` to represent $\sum_{i=0}^{n} i$ rigorously.
+
+```lean
+theorem gauss_sum (n : Nat) : 2 * (∑ i in Finset.range (n + 1), i) = n * (n + 1)
+```
+
+## The proof
+
+```lean
+-- 11-sum-of-first-n.lean
+import Mathlib.Tactic
+import Mathlib.Algebra.BigOperators.Group.Finset
+
+namespace MathsCompanion
+
+open Finset in
+theorem gauss_sum (n : Nat) :
+    2 * (∑ i in range (n + 1), i) = n * (n + 1) := by
+  induction n with
+  | zero => simp
+  | succ k ih =>
+    rw [Finset.sum_range_succ]
+    ring_nf
+    linarith
+
+-- Alternatively, a more explicit induction:
+open Finset in
+theorem gauss_sum' (n : Nat) :
+    2 * (∑ i in range (n + 1), i) = n * (n + 1) := by
+  induction n with
+  | zero => rfl
+  | succ k ih =>
+    rw [sum_range_succ, Nat.mul_add, ih]
+    ring
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**`Finset.range (n + 1)`** — the finite set $\{0, 1, \ldots, n\}$. In Lean, `Finset.range m` is $\{0, 1, \ldots, m-1\}$, so `range (n + 1)` gives $\{0, \ldots, n\}$.
+
+**`∑ i in Finset.range (n + 1), i`** — the sum of all elements of `range (n + 1)`, i.e. $\sum_{i=0}^{n} i$. This uses Lean's `Finset.sum` notation.
+
+**Base case (`n = 0`):** The sum is $\sum_{i=0}^{0} i = 0$, and $2 \cdot 0 = 0 \cdot 1 = 0$. `simp` or `rfl` closes this.
+
+**Inductive step (`n = k + 1`):** We have `ih : 2 * (∑ i in range (k + 1), i) = k * (k + 1)`.
+
+`rw [Finset.sum_range_succ]` — the key lemma: $\sum_{i \in \{0,\ldots,k\}} i = \left(\sum_{i \in \{0,\ldots,k-1\}} i\right) + k$. This rewrites the goal to involve the sum over `range (k + 1)` plus the new term `k + 1`.
+
+After the rewrite, the goal is a numerical identity involving `k`, and `ring_nf` normalises it into a form where `linarith` (using `ih`) can close it.
+
+The `gauss_sum'` version using `ring` is cleaner: after `rw [sum_range_succ, Nat.mul_add, ih]`, the goal becomes a pure ring identity that `ring` closes in one step.
+
+**`ring_nf` and `ring`** — `ring_nf` normalises ring expressions without closing the goal (useful when you need to see the intermediate form or then apply a hypothesis). `ring` both normalises and closes the goal if both sides are definitionally equal as ring expressions.
+
+This proof is a microcosm of a large family of combinatorial identities that can be handled in Lean by the same pattern: state the sum using `Finset.sum`, use `Finset.sum_range_succ` to peel off the last term, and close with `ring` plus the inductive hypothesis.
+
+## Download
+
+[Download the Lean file](/lean/11-sum-of-first-n.lean)
+
+## Try it yourself
+
+Prove the sum of squares: $\sum_{i=0}^{n} i^2 = n(n+1)(2n+1)/6$. In natural-number arithmetic, multiply through to avoid fractions: prove `6 * (∑ i in Finset.range (n+1), i^2) = n * (n+1) * (2*n+1)`. The structure is the same: base case by `simp`, inductive step by `sum_range_succ` then `ring` and `linarith`. You may find it needs `omega` instead of `linarith` for the final step.

@@ -1,0 +1,7 @@
+{
+  "title": "Lean 4",
+  "slug": "96-lean4",
+  "order": 9,
+  "blurb": "Mathematics that a computer can check. A friendly introduction to the Lean 4 theorem prover, with a dozen worked proofs you can download and run.",
+  "icon": "lean4"
+}

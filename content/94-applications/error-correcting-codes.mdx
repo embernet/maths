@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: error-correcting-codes
 domains: [computer-science, engineering, telecommunications]
 uses_theorems: [galois-theory, galois-groups, modular-arithmetic-and-number-theory]
-uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/01-abstract-algebra, 03-specialisation-year-three/01-galois-theory]
+uses_topics: [01-foundations/01-algebra-and-linear-algebra, 02-core-mathematics/01-abstract-algebra, 03-specialist-areas/01-galois-theory]
 related_applications: [rsa-public-key-cryptography, data-compression, digital-signatures]
 tags: [coding-theory, algebra, finite-fields, applied]
 real_world_examples: [QR codes, CD and DVD error correction, Deep-space communications (Voyager), RAID storage systems, 4G/5G mobile communications]
@@ -23,7 +23,7 @@ A **linear code** $\mathcal{C}$ is a subspace of $\mathbb{F}_q^n$ (the vector sp
 
 The minimum **Hamming distance** $d$ of a code — the minimum number of positions in which any two codewords differ — determines its error-correction capability: the code can correct $\lfloor (d-1)/2 \rfloor$ errors. The **Singleton bound** and **Hamming bound** limit $d$ as a function of $n$ and $k$.
 
-**Reed-Solomon codes** (1960) achieve the Singleton bound: they are the most efficient possible codes for their parameters. A Reed-Solomon code over $\mathbb{F}_{q}$ treats a message as a polynomial $m(x) = m_0 + m_1 x + \cdots + m_{k-1} x^{k-1}$ and encodes it as the vector of evaluations $(m(\alpha^0), m(\alpha^1), \ldots, m(\alpha^{n-1}))$, where $\alpha$ is a primitive root of $\mathbb{F}_q$. Error correction uses polynomial interpolation and the algebraic structure of $\mathbb{F}_q$ — specifically, the factorisation theory of polynomials over finite fields, which requires [Galois theory](/03-specialisation-year-three/01-galois-theory).
+**Reed-Solomon codes** (1960) achieve the Singleton bound: they are the most efficient possible codes for their parameters. A Reed-Solomon code over $\mathbb{F}_{q}$ treats a message as a polynomial $m(x) = m_0 + m_1 x + \cdots + m_{k-1} x^{k-1}$ and encodes it as the vector of evaluations $(m(\alpha^0), m(\alpha^1), \ldots, m(\alpha^{n-1}))$, where $\alpha$ is a primitive root of $\mathbb{F}_q$. Error correction uses polynomial interpolation and the algebraic structure of $\mathbb{F}_q$ — specifically, the factorisation theory of polynomials over finite fields, which requires [Galois theory](/03-specialist-areas/01-galois-theory).
 
 **QR codes** use a specific Reed-Solomon code over $\mathbb{F}_{256} = \mathbb{F}_{2^8}$ (a degree-8 field extension of $\mathbb{F}_2$, constructed via an irreducible polynomial). The high-redundancy levels allow up to 30% of a QR code to be obscured — which is why you can print a logo on top of a QR code and it still scans.
 
@@ -37,4 +37,4 @@ Richard Hamming at Bell Labs invented the first systematic error-correcting code
 
 ## Links
 
-The linear algebra over finite fields used in coding theory is introduced in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra) and the field theory in [Abstract Algebra](/02-core-year-two/01-abstract-algebra). [Galois Theory](/03-specialisation-year-three/01-galois-theory) provides the theory of field extensions over $\mathbb{F}_p$ that underpins Reed-Solomon and BCH codes.
+The linear algebra over finite fields used in coding theory is introduced in [Algebra and Linear Algebra](/01-foundations/01-algebra-and-linear-algebra) and the field theory in [Abstract Algebra](/02-core-mathematics/01-abstract-algebra). [Galois Theory](/03-specialist-areas/01-galois-theory) provides the theory of field extensions over $\mathbb{F}_p$ that underpins Reed-Solomon and BCH codes.

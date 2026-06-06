@@ -1,0 +1,90 @@
+---
+title: 'The Genetic Code as Mathematics'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 12
+tags: [genetics, dna, hardy-weinberg, population-genetics, phylogenetics, coding-theory, information-theory, metric-spaces]
+related: ['09-turing-patterns-and-animal-coats', '10-allometric-scaling-and-kleibers-law']
+mathematicians: [hardy, fisher]
+reading_time_min: 12
+summary: 'DNA''s double helix is a packing solution. Population genetics obeys an equilibrium theorem. The codon table has unexpected symmetry structure. And the family tree of all life is a metric space. Molecular biology, it turns out, is full of mathematics.'
+theorems: [hardyweinberg-equilibrium-genetics, gaussian-distribution-normal-distribution, population-genetics-modern-synthesis]
+applications: []
+---
+
+It is easy to think of genetics as a branch of chemistry — DNA is a molecule, genes are sequences of nucleotides, proteins are chains of amino acids. But underneath the chemistry is a surprising amount of mathematics. The double helix is the solution to a geometric packing problem. The distribution of gene variants across a population is governed by an algebraic equilibrium theorem. The codon table has a group-theoretic structure. And the evolutionary history of life is, in a precise sense, a metric space.
+
+## DNA's double helix as geometry
+
+The DNA double helix was published by Watson and Crick in 1953 — one of the most celebrated papers in the history of science. What is less often stated is that the structure they proposed was the solution to a geometric packing problem.
+
+DNA is a polymer of four nucleotide bases: adenine (A), thymine (T), guanine (G), and cytosine (C). The constraints are:
+- The backbone (sugar-phosphate chain) has a fixed bond geometry.
+- The bases are planar and relatively rigid.
+- In solution, the hydrophobic bases prefer to be in the interior, away from water.
+- Base pairing: A pairs with T (two hydrogen bonds), G pairs with C (three hydrogen bonds).
+
+Given these constraints, what is the optimal geometry? The answer is a double helix with a pitch of 3.4 nm per full turn and about 10.5 base pairs per turn. This is not one of many possible structures; it is essentially forced by the constraints. Rosalind Franklin's X-ray diffraction images showed the helical symmetry; the geometry of the base pairing explained the 1:1 ratio of A to T and G to C observed earlier by Erwin Chargaff.
+
+The helix geometry is a consequence of the same kind of geometric packing argument that appears in [Voronoi tessellations](/97-nature/08-voronoi-tessellations-in-nature) and [honeycombs](/97-nature/07-honeycombs-and-the-hexagon-theorem): given a set of geometric constraints, the only stable structure has a specific symmetry.
+
+## Hardy–Weinberg equilibrium
+
+Suppose a gene has two versions (alleles), $A$ and $a$, with frequencies $p$ and $q = 1-p$ in a large randomly mating population. What are the expected genotype frequencies in the next generation?
+
+A simple calculation: the probability that an offspring receives allele $A$ from both parents is $p \times p = p^2$; the probability of $aa$ is $q^2$; the probability of $Aa$ is $2pq$. These are the Hardy–Weinberg proportions:
+
+$$P(AA) = p^2, \quad P(Aa) = 2pq, \quad P(aa) = q^2.$$
+
+The remarkable fact is that these proportions are maintained in every subsequent generation, as long as the population is large, random mating occurs, and there is no selection, mutation, or migration. The allele frequencies $p$ and $q$ do not change; only the genotype frequencies matter, and they reach equilibrium in a single generation.
+
+This was proved independently by G.H. Hardy and Wilhelm Weinberg in 1908. Hardy's proof — published in *Science* after he was challenged by a biologist at a meeting — takes half a page and is one of the simplest pieces of mathematics in biology. It follows immediately from the [binomial expansion](/theorems/binomial-theorem): $(p + q)^2 = p^2 + 2pq + q^2$.
+
+Hardy — who is famous for considering pure mathematics the only truly beautiful kind, and for his disdain of applications — found himself having proved one of the foundational results of genetics. He reportedly considered the result trivially obvious. It was; but it wasn't obvious until Hardy pointed it out.
+
+The [Hardy–Weinberg theorem](/theorems/hardyweinberg-equilibrium-genetics) is the baseline for all population genetics. Deviations from it are diagnostically useful: a population with fewer heterozygotes than expected is experiencing inbreeding; one with more is experiencing heterozygote advantage (as in sickle-cell anaemia in malaria-endemic regions). The theorem gives you the null model.
+
+## The codon table and its symmetry
+
+DNA encodes proteins by specifying amino acids via codons: triplets of nucleotides. There are $4^3 = 64$ possible codons, encoding 20 amino acids plus three stop signals. The map from 64 codons to 23 outcomes is highly redundant: most amino acids are encoded by more than one codon.
+
+The redundancy pattern has mathematical structure. Francis Crick noticed in the 1960s that the redundancy is not random: codons that differ only in the third position (the "wobble position") tend to encode the same amino acid. The reason is chemical: the ribosome is less precise in reading the third base. But beyond this, there is additional structure.
+
+The 64 codons can be organised into a 4×4×4 hypercube, where each dimension corresponds to one nucleotide position and each axis has four values (A, U, G, C). When you colour this hypercube by which amino acid each codon encodes, the pattern has a remarkable regularity. Codons within a "family box" (same first two nucleotides) often encode related amino acids.
+
+Mathematical biologists have proposed that the codon table has an approximate group-theoretic structure, related to the representation theory of the group $\mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2$ acting on the four nucleotides. Whether this reflects a deep design principle or is a consequence of chemical evolution under specific mutation pressures remains debated — but the symmetry is real and measurable.
+
+## Phylogenetic trees as metric spaces
+
+The evolutionary relationships between species are traditionally represented as a phylogenetic tree: a branching diagram in which terminal nodes (leaves) represent living species and internal nodes represent common ancestors. The branch lengths represent evolutionary time or genetic divergence.
+
+A phylogenetic tree is a mathematical object: it is a metric tree, a specific kind of metric space. The distance between two species in the tree is the total branch length along the path connecting them. This distance satisfies the four-point condition:
+
+$$d(A,C) + d(B,D) \le \max(d(A,B) + d(C,D),\; d(A,D) + d(B,C))$$
+
+for all four species $A, B, C, D$. A metric satisfying the four-point condition is called a tree metric, and the converse holds: any metric satisfying the four-point condition can be realised as a metric tree.
+
+This mathematical characterisation has practical consequences. Methods for inferring phylogenies from DNA sequence data — maximum likelihood, neighbour-joining, Bayesian inference — all use the metric structure of tree space. The space of all phylogenetic trees on $n$ taxa is itself a geometric object (known as the BHV space after Billera, Holmes, and Vogtmann), which has positive curvature in a specific sense and allows geometric methods to be applied to evolutionary analysis.
+
+## Protein folding and the energy landscape
+
+Proteins fold from a one-dimensional sequence of amino acids into a specific three-dimensional shape, and the shape determines the function. The number of possible conformations of a protein chain of length 100 is astronomical — roughly $3^{100} \approx 5 \times 10^{47}$ — yet proteins fold to their native structure in milliseconds. How?
+
+The answer involves an energy landscape: a function on the space of conformations, where the native fold is a global minimum and the folding process is a rapid descent through this landscape. The mathematical structure of the landscape — the distribution of local minima, the connectivity of basins, the height of transition barriers — determines the folding kinetics.
+
+This is an active area where ideas from [statistical mechanics](/04-advanced-topics/04-mathematical-physics-and-fluids), [topology](/03-specialist-areas/04-topology), and [optimisation theory](/03-specialist-areas/05-numerical-analysis) all contribute. The protein-folding problem was regarded as one of the great unsolved problems in biology; AlphaFold2 (2020) achieved remarkable practical success using deep learning, but the mathematical understanding of why proteins fold the way they do — from first principles — remains incomplete.
+
+## What is true and what is overstated
+
+The Hardy–Weinberg theorem is exactly true under its stated conditions and is a clean piece of mathematics. Real populations deviate from it in systematic ways that are biologically informative.
+
+The symmetry of the codon table is real but the extent to which it reflects deep mathematics versus chemical accident is contested. Be cautious of claims that the codon table "is a group" in any strict algebraic sense.
+
+Phylogenetic trees are genuine metric spaces, and the mathematics of tree metrics is well-established. What is harder — and the subject of ongoing research — is how to infer the "true" tree from noisy molecular data, which involves statistics and Bayesian inference as much as pure geometry.
+
+## Where to read more
+
+- G.H. Hardy, 'Mendelian proportions in a mixed population', *Science* 28 (1908) — the original half-page proof
+- W. Fitch and E. Margoliash, 'Construction of phylogenetic trees', *Science* 155 (1967) — early use of trees as metric objects
+- [Wikipedia: Hardy–Weinberg principle](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle) — thorough treatment with applications to real populations

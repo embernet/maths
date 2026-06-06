@@ -3,7 +3,11 @@
  * LeftSidebar.astro
  * Desktop-only left navigation sidebar (≥1024px).
  * Renders full site hierarchy with collapsible sections.
- * Uses is:inline vanilla JS to avoid Vite null-byte issues.
+ *
+ * navigation_order entries may be:
+ *   - a string slug (existing behaviour)
+ *   - an object { label, id, children: [slug, ...] } that groups several
+ *     sections under a shared collapsible heading.
  */
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -17,22 +21,34 @@ const { currentPath = Astro.url?.pathname ?? '/' } = Astro.props;
 // --- Build hierarchy from content/ ---
 const contentDir = join(process.cwd(), 'content');
 const siteConfigPath = join(contentDir, '_site.json');
-let siteConfig: { navigation_order?: string[] } = {};
+
+interface NavGroup { label: string; id: string; blurb?: string; children: string[]; }
+type NavEntry = string | NavGroup;
+
+let siteConfig: { navigation_order?: NavEntry[] } = {};
 if (existsSync(siteConfigPath)) {
   try { siteConfig = JSON.parse(readFileSync(siteConfigPath, 'utf8')); } catch { /* ignore */ }
 }
 
-const navOrder: string[] = siteConfig.navigation_order ?? [];
+const navOrder: NavEntry[] = siteConfig.navigation_order ?? [];
 
 interface TopicLink { label: string; href: string; slug: string; }
 interface SidebarSection {
+  kind: 'section';
   sectionSlug: string;
   label: string;
   href: string;
   children: TopicLink[];
   countBadge?: number;
-  isSpecial?: boolean; // Theorems, Applications, Mathematicians — link to index, no inline children
+  isSpecial?: boolean;
 }
+interface SidebarGroup {
+  kind: 'group';
+  id: string;
+  label: string;
+  sections: SidebarSection[];
+}
+type SidebarEntry = SidebarSection | SidebarGroup;
 
 function readSectionTitle(sectionSlug: string): string {
   const secPath = join(contentDir, sectionSlug, '_section.json');
@@ -82,55 +98,51 @@ if (existsSync(mathDir)) {
   mathCount = readdirSync(mathDir).filter(f => f.endsWith('.mdx') && f !== 'index.mdx').length;
 }
 
-const sections: SidebarSection[] = [];
-
-for (const slug of navOrder) {
+function buildSection(slug: string): SidebarSection | null {
   const label = readSectionTitle(slug);
 
   if (slug === '00-welcome') {
-    sections.push({ sectionSlug: slug, label: 'Welcome', href: '/', children: [] });
-    continue;
+    return { kind: 'section', sectionSlug: slug, label: 'Welcome', href: '/', children: [] };
   }
 
   if (slug === '91-mathematicians') {
-    sections.push({
+    return {
+      kind: 'section',
       sectionSlug: slug,
       label: 'Mathematicians',
       href: '/mathematicians',
       children: [],
       countBadge: mathCount,
       isSpecial: true,
-    });
-    continue;
+    };
   }
 
   if (slug === '92-resources') {
-    sections.push({ sectionSlug: slug, label: 'Resources', href: '/resources', children: [] });
-    continue;
+    return { kind: 'section', sectionSlug: slug, label: 'Resources', href: '/resources', children: [] };
   }
 
   if (slug === '93-theorems') {
-    sections.push({
+    return {
+      kind: 'section',
       sectionSlug: slug,
       label: 'Theorems',
       href: '/theorems',
       children: [],
       countBadge: theoremCount,
       isSpecial: true,
-    });
-    continue;
+    };
   }
 
   if (slug === '94-applications') {
-    sections.push({
+    return {
+      kind: 'section',
       sectionSlug: slug,
       label: 'Real-world applications',
       href: '/applications',
       children: [],
       countBadge: appCount || undefined,
       isSpecial: true,
-    });
-    continue;
+    };
   }
 
   if (slug === '95-definitions') {
@@ -141,23 +153,22 @@ for (const slug of navOrder) {
         defCount = readdirSync(dir).filter(f => f.endsWith('.mdx') && !f.startsWith('_')).length;
       }
     } catch { /* ignore */ }
-    sections.push({
+    return {
+      kind: 'section',
       sectionSlug: slug,
       label: 'Definitions',
       href: '/definitions',
       children: [],
       countBadge: defCount || undefined,
       isSpecial: true,
-    });
-    continue;
+    };
   }
 
   if (slug === '98-about') {
-    sections.push({ sectionSlug: slug, label: 'About', href: '/about', children: [] });
-    continue;
+    return { kind: 'section', sectionSlug: slug, label: 'About', href: '/about', children: [] };
   }
 
-  // Year sections and history — build children
+  // Generic section with topic children (year sections, programming sub-sections, history, nature, etc.)
   const sectionPath = join(contentDir, slug);
   const children: TopicLink[] = [];
 
@@ -177,16 +188,28 @@ for (const slug of navOrder) {
     }
   }
 
-  // Special href for history
   const href = slug === '90-history' ? `/90-history` : `/${slug}`;
-  sections.push({ sectionSlug: slug, label, href, children });
+  return { kind: 'section', sectionSlug: slug, label, href, children };
 }
 
-// Determine which section is active (current)
+const entries: SidebarEntry[] = [];
+for (const item of navOrder) {
+  if (typeof item === 'string') {
+    const sec = buildSection(item);
+    if (sec) entries.push(sec);
+  } else {
+    const groupSections: SidebarSection[] = [];
+    for (const slug of item.children) {
+      const sec = buildSection(slug);
+      if (sec) groupSections.push(sec);
+    }
+    entries.push({ kind: 'group', id: item.id, label: item.label, sections: groupSections });
+  }
+}
+
 function isCurrentSection(sec: SidebarSection): boolean {
   if (sec.href === '/' && currentPath === '/') return true;
   if (sec.href !== '/' && currentPath.startsWith(sec.href)) return true;
-  // Year sections: match /{sectionSlug}/
   if (currentPath.startsWith(`/${sec.sectionSlug}`)) return true;
   return false;
 }
@@ -194,11 +217,93 @@ function isCurrentSection(sec: SidebarSection): boolean {
 function isCurrentChild(href: string): boolean {
   return currentPath === href || currentPath.startsWith(href + '/');
 }
+
+function isCurrentGroup(g: SidebarGroup): boolean {
+  return g.sections.some(isCurrentSection);
+}
 ---
 
 <aside class="left-sidebar no-print" aria-label="Site navigation">
   <nav>
-    {sections.map((sec, idx) => {
+    {entries.map((entry, idx) => {
+      if (entry.kind === 'group') {
+        const groupActive = isCurrentGroup(entry);
+        const groupId = `sidebar-group-${idx}`;
+        return (
+          <div class={`sidebar-group${groupActive ? ' is-active' : ''}`} data-active={groupActive ? 'true' : 'false'}>
+            <button
+              class="group-header group-toggle"
+              aria-expanded={groupActive ? 'true' : 'false'}
+              aria-controls={groupId}
+              data-group-id={groupId}
+            >
+              <span class="group-label">{entry.label}</span>
+              <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id={groupId} class="group-children" hidden={!groupActive}>
+              {entry.sections.map((sec, sidx) => {
+                const active = isCurrentSection(sec);
+                const hasChildren = sec.children.length > 0;
+                const sectionId = `sidebar-sec-${idx}-${sidx}`;
+                return (
+                  <div class={`sidebar-section nested-section${active ? ' is-active' : ''}`} data-active={active ? 'true' : 'false'}>
+                    {hasChildren ? (
+                      <button
+                        class="sec-header sec-toggle"
+                        aria-expanded={active ? 'true' : 'false'}
+                        aria-controls={sectionId}
+                        data-section-id={sectionId}
+                      >
+                        <span class="sec-label">
+                          <a href={sec.href} class="sec-link" tabindex="-1">{sec.label}</a>
+                        </span>
+                        {sec.countBadge !== undefined && (
+                          <span class="count-badge">{sec.countBadge}</span>
+                        )}
+                        <svg class="chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                          <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </button>
+                    ) : (
+                      <div class="sec-header sec-plain">
+                        <a href={sec.href} class={`sec-link${active ? ' active' : ''}`} aria-current={active ? 'page' : undefined}>
+                          {sec.label}
+                        </a>
+                        {sec.countBadge !== undefined && (
+                          <span class="count-badge">{sec.countBadge}</span>
+                        )}
+                      </div>
+                    )}
+                    {hasChildren && (
+                      <ul id={sectionId} class="sec-children" role="list" hidden={!active}>
+                        {sec.children.map((child) => {
+                          const childActive = isCurrentChild(child.href);
+                          return (
+                            <li>
+                              <a
+                                href={child.href}
+                                class={`child-link${childActive ? ' active' : ''}`}
+                                aria-current={childActive ? 'page' : undefined}
+                              >
+                                {child.label}
+                              </a>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+
+      // Plain section (existing behaviour)
+      const sec = entry;
       const active = isCurrentSection(sec);
       const hasChildren = sec.children.length > 0;
       const sectionId = `sidebar-sec-${idx}`;
@@ -231,14 +336,8 @@ function isCurrentChild(href: string): boolean {
               )}
             </div>
           )}
-
           {hasChildren && (
-            <ul
-              id={sectionId}
-              class="sec-children"
-              role="list"
-              hidden={!active}
-            >
+            <ul id={sectionId} class="sec-children" role="list" hidden={!active}>
               {sec.children.map((child) => {
                 const childActive = isCurrentChild(child.href);
                 return (
@@ -266,23 +365,32 @@ function isCurrentChild(href: string): boolean {
   var sidebar = document.querySelector('.left-sidebar');
   if (!sidebar) return;
 
+  function toggle(btn, panelAttr) {
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    var panelId = btn.getAttribute(panelAttr);
+    var panel = panelId ? document.getElementById(panelId) : null;
+    if (expanded) {
+      btn.setAttribute('aria-expanded', 'false');
+      if (panel) panel.hidden = true;
+    } else {
+      btn.setAttribute('aria-expanded', 'true');
+      if (panel) panel.hidden = false;
+    }
+  }
+
   sidebar.querySelectorAll('.sec-toggle').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
-      // Allow click on the sec-link <a> inside to navigate
       if (e.target && e.target.tagName === 'A') return;
       e.preventDefault();
+      toggle(btn, 'data-section-id');
+    });
+  });
 
-      var expanded = btn.getAttribute('aria-expanded') === 'true';
-      var sectionId = btn.getAttribute('data-section-id');
-      var panel = sectionId ? document.getElementById(sectionId) : null;
-
-      if (expanded) {
-        btn.setAttribute('aria-expanded', 'false');
-        if (panel) panel.hidden = true;
-      } else {
-        btn.setAttribute('aria-expanded', 'true');
-        if (panel) panel.hidden = false;
-      }
+  sidebar.querySelectorAll('.group-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      if (e.target && e.target.tagName === 'A') return;
+      e.preventDefault();
+      toggle(btn, 'data-group-id');
     });
   });
 })();
@@ -301,7 +409,6 @@ function isCurrentChild(href: string): boolean {
     padding: 1rem 0;
     border-right: 1px solid var(--color-border);
     background: var(--color-bg);
-    /* Hidden on mobile by default; parent layout controls display */
     display: none;
   }
 
@@ -309,13 +416,55 @@ function isCurrentChild(href: string): boolean {
     .left-sidebar { display: block; }
   }
 
-  /* Scrollbar styling (webkit) */
   .left-sidebar::-webkit-scrollbar { width: 4px; }
   .left-sidebar::-webkit-scrollbar-track { background: transparent; }
   .left-sidebar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
 
   .sidebar-section {
     border-bottom: 1px solid var(--color-border);
+  }
+  .nested-section {
+    border-bottom: none;
+    border-top: 1px solid var(--color-border);
+  }
+  .nested-section:first-child {
+    border-top: none;
+  }
+
+  .sidebar-group {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .group-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.55rem 0.75rem 0.55rem 1rem;
+    gap: 0.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-serif);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.12s;
+  }
+  .group-header:hover { background: var(--color-surface); }
+  .group-header[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+
+  .group-label { flex: 1 1 0; min-width: 0; }
+
+  .sidebar-group.is-active > .group-header {
+    color: var(--color-accent);
+  }
+
+  .group-children {
+    padding-left: 0.5rem;
+    background: rgba(0, 0, 0, 0.015);
   }
 
   .sec-header {
@@ -324,6 +473,10 @@ function isCurrentChild(href: string): boolean {
     width: 100%;
     padding: 0.5rem 0.75rem 0.5rem 1rem;
     gap: 0.4rem;
+  }
+
+  .nested-section .sec-header {
+    padding-left: 1.25rem;
   }
 
   .sec-toggle {
@@ -364,7 +517,6 @@ function isCurrentChild(href: string): boolean {
   .sec-link:hover { color: var(--color-accent); }
   .sec-link.active, .is-active .sec-link { color: var(--color-accent); }
 
-  /* sec-plain inherits from sec-header layout */
   .sec-plain .sec-link {
     font-size: 0.82rem;
     font-weight: 600;
@@ -411,6 +563,9 @@ function isCurrentChild(href: string): boolean {
     border-radius: 0;
     transition: background 0.1s, color 0.1s;
   }
+  .nested-section .child-link {
+    padding-left: 2rem;
+  }
   .child-link:hover {
     background: var(--color-surface);
     color: var(--color-primary);
@@ -421,5 +576,8 @@ function isCurrentChild(href: string): boolean {
     background: var(--color-surface);
     border-left: 2px solid var(--color-accent);
     padding-left: calc(1.75rem - 2px);
+  }
+  .nested-section .child-link.active {
+    padding-left: calc(2rem - 2px);
   }
 </style>

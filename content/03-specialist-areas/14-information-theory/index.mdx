@@ -1,0 +1,104 @@
+---
+title: 'Information Theory'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 14
+tags: [information-theory, entropy, mutual-information, shannon, channel-capacity, source-coding, kullback-leibler]
+prerequisites:
+- 04-probability-and-statistics
+related:
+- 04-probability-and-statistics
+- 05-probability-and-statistical-inference
+- 09-change-point-detection
+mathematicians: [kolmogorov]
+reading_time_min: 10
+summary: Measuring uncertainty. Entropy, mutual information, channel capacity, and Shannon's source and channel coding theorems — the mathematics that defined the digital age.
+theorems: [kolmogorov-complexity-algorithmic-information-theory, axiomatic-foundations-of-probability]
+applications: [data-compression, error-correcting-codes, rsa-public-key-cryptography]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/04-probability-and-statistics
+    why: 'Entropy is defined in terms of probability distributions — you need the machinery of random variables, expectation, and conditional probability.'
+  - kind: topic
+    ref: 02-core-mathematics/05-probability-and-statistical-inference
+    why: 'The KL divergence and its role in model selection connect directly to statistical inference; maximum-likelihood estimation is an information-theoretic quantity.'
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Linear codes and channel matrices are handled with linear algebra; vector spaces over finite fields underpin algebraic coding theory.'
+  - kind: mathematician
+    ref: kolmogorov
+    why: 'Kolmogorov complexity — the length of the shortest program that produces a string — is the algorithmic counterpart to Shannon entropy, and Kolmogorov''s axiomatic probability framework underpins the whole theory.'
+---
+
+In 1948, Claude Shannon asked a question no-one had quite pinned down before: how do you measure information? The answer he found — a number he called entropy — turned out to govern everything from the fundamental limits of data compression to the maximum rate at which information can be transmitted reliably across a noisy channel.
+
+## Shannon entropy
+
+Let $X$ be a discrete random variable taking values in a finite alphabet $\mathcal{X}$ with probability mass function $p(x) = \Pr[X = x]$. The **Shannon entropy** of $X$ is
+
+$$H(X) = -\sum_{x \in \mathcal{X}} p(x) \log_2 p(x),$$
+
+measured in bits (using $\log_2$; using $\ln$ gives nats). The convention $0 \log 0 = 0$ handles events of probability zero.
+
+Entropy measures the average uncertainty or surprise in $X$: if $X$ is deterministic, $H(X) = 0$; if $X$ is uniform over $n$ outcomes, $H(X) = \log_2 n$ (maximum uncertainty). The entropy of a fair coin flip is $H = 1$ bit; of a fair die toss, $H = \log_2 6 \approx 2.58$ bits.
+
+**Joint and conditional entropy**: for a pair of random variables $(X, Y)$,
+$$H(X, Y) = -\sum_{x,y} p(x,y)\log p(x,y), \qquad H(Y \mid X) = -\sum_{x,y} p(x,y)\log p(y \mid x).$$
+
+The chain rule: $H(X, Y) = H(X) + H(Y \mid X)$. Conditioning reduces entropy (on average): $H(Y \mid X) \le H(Y)$.
+
+## Mutual information and KL divergence
+
+The **mutual information** between $X$ and $Y$ is
+
+$$I(X; Y) = H(X) - H(X \mid Y) = H(Y) - H(Y \mid X) = H(X) + H(Y) - H(X,Y).$$
+
+It measures how much knowing $Y$ reduces uncertainty about $X$, and vice versa. $I(X;Y) = 0$ if and only if $X$ and $Y$ are independent.
+
+The **Kullback–Leibler divergence** (relative entropy) from distribution $q$ to $p$ is
+
+$$D_{\mathrm{KL}}(p \| q) = \sum_x p(x) \log \frac{p(x)}{q(x)}.$$
+
+It is not a metric (it is asymmetric and violates the triangle inequality) but it measures the "cost" of using model $q$ when the truth is $p$. Crucially, $D_{\mathrm{KL}}(p \| q) \ge 0$ with equality iff $p = q$ — this is the **information inequality** (also called Gibbs' inequality), which underlies virtually all of Shannon's fundamental bounds. Mutual information can be written as $I(X;Y) = D_{\mathrm{KL}}(p(x,y) \| p(x)p(y))$.
+
+## Source coding theorem
+
+The **source coding theorem** (Shannon, 1948) makes entropy precise as a compression limit: the average number of bits needed to represent each symbol of a source with entropy $H(X)$ bits per symbol is at least $H(X)$, and codes approaching this limit exist.
+
+More formally: for a source emitting i.i.d. symbols with distribution $p$, any uniquely decodable code has average codeword length $\bar{L} \ge H(X)$. Huffman coding achieves $\bar{L} < H(X) + 1$; arithmetic coding and asymmetric numeral systems (ANS) approach $H(X)$ arbitrarily closely.
+
+The key insight is the **asymptotic equipartition property (AEP)**: for a sequence $X_1, \ldots, X_n$ of i.i.d. random variables with entropy $H$,
+
+$$-\frac{1}{n}\log p(X_1, \ldots, X_n) \xrightarrow{p} H.$$
+
+Almost all long sequences concentrate in a "typical set" of size roughly $2^{nH}$, each with probability roughly $2^{-nH}$. You need $nH$ bits to describe a typical sequence, no matter how large the alphabet — this is why compression ratios improve with block length.
+
+## Channel capacity and the channel coding theorem
+
+A **discrete memoryless channel** is a triple $(\mathcal{X}, p(y \mid x), \mathcal{Y})$: an input alphabet, an output alphabet, and a conditional distribution $p(y \mid x)$ describing the channel noise. The **capacity** of the channel is
+
+$$C = \max_{p(x)} I(X; Y),$$
+
+maximised over all input distributions $p(x)$.
+
+Shannon's **channel coding theorem** asserts: for any rate $R < C$, there exist codes of rate $R$ with error probability approaching zero as block length increases. For $R > C$, reliable communication is impossible.
+
+The binary symmetric channel (BSC) with crossover probability $\varepsilon$ has capacity $C = 1 - H_b(\varepsilon)$ bits per channel use, where $H_b(\varepsilon) = -\varepsilon \log_2 \varepsilon - (1-\varepsilon)\log_2(1-\varepsilon)$ is the binary entropy function. The additive white Gaussian noise (AWGN) channel of bandwidth $W$ and signal-to-noise ratio $S/N$ has capacity $C = W\log_2(1 + S/N)$ — the famous Shannon–Hartley formula, the bedrock of modern wireless engineering.
+
+## Algorithmic information and Kolmogorov complexity
+
+Shannon entropy measures the average compressibility of a distribution. [Kolmogorov's](/mathematicians/kolmogorov) complexity $K(x)$ asks a different question: how short is the shortest program that outputs a specific string $x$? Formally, $K(x)$ is the length of the shortest description of $x$ in some fixed universal Turing machine.
+
+Kolmogorov complexity is uncomputable (no algorithm can compute it for all strings), but it captures a deeper notion of randomness: a string is random if $K(x) \approx |x|$ — it has no shorter description than itself. The connection to Shannon entropy is that, for typical sequences drawn from a source with entropy $H$, Kolmogorov complexity concentrates near $nH$, matching the source coding theorem.
+
+## Real-world applications
+
+Where this turns up in the world: [data compression](/applications/data-compression) (ZIP, gzip, FLAC, MP3) is direct implementation of the source coding theorem — every lossless compressor is a Huffman or arithmetic code in disguise, and the entropy of the source determines the compression ceiling. [Error-correcting codes](/applications/error-correcting-codes) (Reed-Solomon codes in CDs and QR codes, LDPC codes in 5G, turbo codes in satellites) implement the channel coding theorem — they push transmission rates arbitrarily close to Shannon capacity with vanishing error. [RSA and public-key cryptography](/applications/rsa-public-key-cryptography) connects to information theory via the notion of computational indistinguishability — a ciphertext should be information-theoretically close to a uniformly random string.
+
+## Why this matters
+
+Shannon's 1948 paper "A Mathematical Theory of Communication" is one of the most consequential scientific papers of the twentieth century. In a single work it introduced entropy, mutual information, source coding, and channel coding — creating a mathematical theory from scratch and simultaneously proving fundamental limits for the entire field of communications engineering.
+
+The theory is beautiful precisely because it is limits-based: it tells you what is impossible, regardless of how clever your algorithm is. No scheme can compress a source below its entropy rate; no scheme can communicate reliably above channel capacity. These are theorems, not engineering constraints. Every MP3 player, every 5G base station, and every fibre-optic cable operates in the regime Shannon's theory defines.

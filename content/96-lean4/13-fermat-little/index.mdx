@@ -1,0 +1,94 @@
+---
+title: "Proof 11: Fermat's Little Theorem"
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 13
+tags: [lean4, formal-proof]
+prerequisites: [12-binomial-theorem-base-case]
+related: [10-infinitude-of-primes, 07-divides-trans]
+mathematicians: []
+reading_time_min: 6
+summary: "Fermat's little theorem — a^p ≡ a (mod p) for prime p — stated and applied from Mathlib, showing how real-world formal mathematics looks."
+---
+
+## What we are proving
+
+For any prime $p$ and any integer $a$:
+
+$$a^p \equiv a \pmod{p}.$$
+
+Equivalently, if $p \nmid a$: $a^{p-1} \equiv 1 \pmod{p}$.
+
+This is [Fermat's little theorem](/theorems/fermat-s-little-theorem), stated by Pierre de Fermat in 1640 and first proved by Leonhard [Euler](/mathematicians/euler) in 1736. It is the foundation of RSA cryptography: the security of RSA relies on the fact that exponentiation modulo $n = pq$ (for large primes $p, q$) is easy to compute but hard to invert without knowing $p$ and $q$, and Fermat's little theorem is what guarantees correct decryption.
+
+In Lean, this is a theorem in Mathlib. We show how to state it, find it, and apply it.
+
+```lean
+-- The statement in ZMod
+theorem fermat_little (p : ℕ) [hp : Fact p.Prime] (a : ZMod p) : a ^ p = a
+```
+
+## The proof
+
+```lean
+-- 13-fermat-little.lean
+import Mathlib.Tactic
+import Mathlib.Data.ZMod.Basic
+import Mathlib.FieldTheory.Finite.Basic
+
+namespace MathsCompanion
+
+-- Fermat's little theorem in Lean / Mathlib:
+-- For a prime p and any element a of ZMod p, we have a^p = a.
+-- The Mathlib lemma is ZMod.pow_card.
+
+-- ZMod p is the ring ℤ/pℤ. When p is prime, it is a field.
+-- Fact p.Prime is a typeclass assumption that p is prime.
+
+example (p : ℕ) [hp : Fact p.Prime] (a : ZMod p) : a ^ p = a := by
+  exact ZMod.pow_card a
+
+-- The classical form over ℤ: p ∣ a^p - a
+theorem fermat_little_int (p : ℕ) (hp : p.Prime) (a : ℤ) : (p : ℤ) ∣ a ^ p - a := by
+  have : (a : ZMod p) ^ p = a := ZMod.pow_card a |>.trans rfl
+  -- The divisibility over ℤ follows from the ZMod version:
+  rw [Int.dvd_iff_emod_eq_zero]
+  have := ZMod.intCast_zmod_eq_zero_iff_dvd (a ^ p - a) p
+  rw [this]
+  push_cast
+  simp [ZMod.pow_card]
+
+-- The multiplicative form (a^(p-1) ≡ 1 when gcd(a,p) = 1):
+-- This is ZMod.units_pow_card_sub_one_eq_one, or equivalently
+-- the fact that the multiplicative group (ZMod p)× has order p - 1.
+#check ZMod.pow_card
+-- ZMod.pow_card : ∀ {p : ℕ} [inst : Fact (Nat.Prime p)] (x : ZMod p), x ^ p = x
+-- (Note: confirm the exact name and signature with #check;
+--  Mathlib names can shift between versions.)
+
+#check ZMod.units_pow_card_sub_one_eq_one
+-- If this name is not found, search for "Fermat" in mathlib4_docs
+-- or use: exact? with goal `a ^ (p - 1) = 1` in the ZMod p context.
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**`ZMod p`** is Lean's representation of $\mathbb{Z}/p\mathbb{Z}$ — the integers modulo $p$. When $p$ is prime (enforced by the `[Fact p.Prime]` typeclass instance), `ZMod p` is a finite field with $p$ elements.
+
+**`ZMod.pow_card`** states `x ^ p = x` in `ZMod p` for any `x`. This is Fermat's little theorem in its cleanest form: in the ring $\mathbb{Z}/p\mathbb{Z}$, the $p$-th power map is the identity. The name `pow_card` reflects the general principle: in a finite field of order $q$, every element satisfies $x^q = x$.
+
+**The classical form** (`p ∣ a^p - a` for any integer $a$) follows from the `ZMod` version by casting. The tactic `Int.dvd_iff_emod_eq_zero` and `ZMod.intCast_zmod_eq_zero_iff_dvd` bridge between the two representations.
+
+**Mathlib name note:** `ZMod.pow_card` is the current name as of Mathlib4 (2024–2025). The multiplicative group version (`a^(p-1) = 1` for `a ≠ 0`) involves `ZMod.units_pow_card_sub_one_eq_one` or similar — search the Mathlib documentation if this name has changed. Use `exact?` after stating the goal in Lean to find the current name automatically.
+
+**Why this matters in practice:** RSA encryption works as follows. Choose primes $p, q$; let $n = pq$. Choose $e$ with $\gcd(e, (p-1)(q-1)) = 1$. The public key is $(n, e)$. To encrypt $m$, compute $m^e \pmod{n}$. To decrypt $c$, find $d$ with $ed \equiv 1 \pmod{(p-1)(q-1)}$ and compute $c^d \pmod{n}$. That $c^d \equiv m$ is a consequence of Fermat's little theorem applied to each prime factor. Lean's Mathlib has RSA formalised too, though we will not go there here.
+
+## Download
+
+[Download the Lean file](/lean/13-fermat-little.lean)
+
+## Try it yourself
+
+Using `ZMod.pow_card`, prove Wilson's theorem: $(p - 1)! \equiv -1 \pmod{p}$ for prime $p$. This is harder — it requires knowing that the product of all nonzero elements of $\mathbb{Z}/p\mathbb{Z}$ is $-1$, which follows from the fact that in a finite field, the only solutions to $x^2 = 1$ are $x = \pm 1$. Try `#check ZMod.wilsons_lemma` to see if Mathlib has it already.

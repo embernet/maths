@@ -22,7 +22,7 @@ interface SectionCard {
   href: string;
 }
 
-const yearSections = ['01-foundations-year-one', '02-core-year-two', '03-specialisation-year-three', '04-advanced-topics-year-four'];
+const yearSections = ['01-foundations', '02-core-mathematics', '03-specialist-areas', '04-advanced-topics'];
 const cards: SectionCard[] = [];
 
 for (const slug of yearSections) {
@@ -50,18 +50,18 @@ for (const slug of yearSections) {
 }
 ---
 
-<BaseLayout title="The Undergraduate Mathematics Companion">
+<BaseLayout title="The Mathematics Companion">
   <div class="welcome-page">
     {hasWelcome ? (
       <!-- When Silas has written the welcome MDX we render it via the section below -->
       <div class="welcome-prose prose-content">
-        <h1>The Undergraduate Mathematics Companion</h1>
+        <h1>The Mathematics Companion</h1>
         <p class="tagline">A friendly map of the curriculum a maths undergraduate meets in their first four years.</p>
         <!-- MDX content rendered separately via the mdx route below -->
       </div>
     ) : (
       <div class="welcome-prose prose-content">
-        <h1>The Undergraduate Mathematics Companion</h1>
+        <h1>The Mathematics Companion</h1>
         <p class="tagline">A friendly map of the curriculum a maths undergraduate meets in their first four years.</p>
         <p>
           Use the navigation above to explore topics by year, browse

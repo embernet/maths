@@ -1,0 +1,95 @@
+---
+title: 'Differential Geometry'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 6
+tags: [differential-geometry, manifolds, tangent-spaces, differential-forms, curvature, riemannian, levi-civita]
+related:
+- 04-topology
+- 03-advanced-pdes
+- 04-mathematical-physics-and-fluids
+- 01-algebraic-geometry
+mathematicians: [gauss, riemann, poincare, noether]
+reading_time_min: 11
+summary: 'The geometry of smooth shapes. Manifolds, tangent spaces, differential forms, and curvature — the mathematics behind general relativity and modern gauge theory.'
+theorems: [riemannian-geometry, riemann-surfaces, noether-s-theorem-symmetry-and-conservation-laws-in-physics, fundamental-theorem-of-calculus]
+applications: [gravitational-wave-detection, gps-positioning, computer-graphics-3d]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 02-core-mathematics/04-vector-calculus-and-pdes
+    why: 'The gradient, divergence, curl, and Stokes'' theorem from vector calculus are the precursors to differential forms and the exterior derivative.'
+  - kind: topic
+    ref: 03-specialist-areas/04-topology
+    why: 'Manifolds are topological spaces with extra smooth structure; topology provides the underlying language.'
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Tangent spaces are vector spaces; the tensor algebra underlying the Riemann curvature tensor is built from linear algebra.'
+  - kind: mathematician
+    ref: gauss
+    why: 'Gauss''s Theorema Egregium — that curvature is intrinsic — is the conceptual seed of the whole subject.'
+  - kind: mathematician
+    ref: riemann
+    why: 'Riemann''s 1854 lecture introduced the abstract notion of a manifold with a metric, launching the modern era of the subject.'
+---
+
+Differential geometry asks: what geometric quantities — lengths, angles, curvatures — are intrinsic to a smooth surface or higher-dimensional shape, and how do they constrain its global form? The subject grew from Gauss's study of surfaces in space into the language in which Einstein wrote general relativity, and it now saturates modern physics, geometry, and analysis.
+
+## Smooth manifolds and atlases
+
+An $n$-dimensional **smooth manifold** $M$ is a topological space that locally resembles $\mathbb{R}^n$, equipped with a consistent way to do calculus. Formally: an atlas is a collection of charts $\{(U_\alpha, \phi_\alpha)\}$, where $U_\alpha \subset M$ is open, $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ is a homeomorphism onto an open set, and on overlaps $U_\alpha \cap U_\beta$ the transition maps $\phi_\beta \circ \phi_\alpha^{-1}$ are smooth ($C^\infty$).
+
+Examples: the 2-sphere $S^2$, the torus $T^2 = S^1 \times S^1$, and the group of orthogonal matrices $\mathrm{SO}(n)$ are all smooth manifolds. Crucially, a manifold has no preferred global coordinate system — the whole point of the atlas is to patch together local coordinates consistently.
+
+A **smooth map** $f : M \to N$ between manifolds is one that looks smooth in every pair of charts. A diffeomorphism is a smooth bijection with a smooth inverse — the isomorphism of smooth manifolds.
+
+## Tangent spaces, cotangent spaces, and vector fields
+
+At each point $p \in M$, the **tangent space** $T_pM$ is the $n$-dimensional vector space of "velocity vectors" of smooth curves through $p$. More formally, a tangent vector is a derivation on the algebra of smooth functions at $p$: a linear map $v : C^\infty(M) \to \mathbb{R}$ satisfying the Leibniz rule $v(fg) = f(p)v(g) + g(p)v(f)$.
+
+In local coordinates $(x^1, \ldots, x^n)$, the tangent vectors $\partial/\partial x^i$ form a basis for $T_pM$. The disjoint union $TM = \bigsqcup_{p \in M} T_pM$ is the **tangent bundle**, itself a $2n$-dimensional manifold. A **vector field** is a smooth section of $TM$: a smooth assignment $p \mapsto X_p \in T_pM$.
+
+The **cotangent space** $T^*_pM = \mathrm{Hom}(T_pM, \mathbb{R})$ is the dual. Its sections are **1-forms**. The Lie bracket $[X, Y]$ of two vector fields captures their failure to commute and gives the space of vector fields the structure of a Lie algebra.
+
+## Differential forms and the exterior derivative
+
+A **differential $k$-form** $\omega$ on $M$ assigns to each point $p$ an alternating multilinear map $T_pM^k \to \mathbb{R}$. The wedge product $\alpha \wedge \beta$ produces a $(p+q)$-form from a $p$-form $\alpha$ and a $q$-form $\beta$. In local coordinates, every $k$-form is a linear combination of terms $f_{i_1 \cdots i_k}\, dx^{i_1} \wedge \cdots \wedge dx^{i_k}$.
+
+The **exterior derivative** $d$ sends $k$-forms to $(k+1)$-forms and satisfies $d^2 = 0$ — the algebraic shadow of "the boundary of a boundary is empty". The de Rham complex
+
+$$0 \to \Omega^0(M) \xrightarrow{d} \Omega^1(M) \xrightarrow{d} \cdots \xrightarrow{d} \Omega^n(M) \to 0$$
+
+encodes the topology of $M$ in analytical terms; its cohomology $H^k_{\mathrm{dR}}(M)$ equals the singular cohomology $H^k(M; \mathbb{R})$ (de Rham's theorem).
+
+**Stokes' theorem on manifolds** unifies all the classical integral theorems of vector calculus into a single statement: for a smooth oriented $n$-manifold with boundary $M$ and a compactly supported $(n-1)$-form $\omega$,
+
+$$\int_M d\omega = \int_{\partial M} \omega.$$
+
+Gauss's divergence theorem, Green's theorem, and the classical Stokes' theorem are all special cases with $n = 3$.
+
+## Riemannian metrics and the Levi-Civita connection
+
+A **Riemannian metric** $g$ on $M$ is a smoothly varying inner product on each tangent space: $g_p : T_pM \times T_pM \to \mathbb{R}$, symmetric and positive-definite. In local coordinates it is expressed by a matrix $(g_{ij})$ where $g_{ij} = g(\partial/\partial x^i, \partial/\partial x^j)$. The metric determines lengths of curves, angles between vectors, and volumes of regions.
+
+Given a Riemannian metric, there is a unique **connection** — a rule for differentiating vector fields — that is compatible with the metric and torsion-free. This is the **Levi–Civita connection** $\nabla$. It generalises the directional derivative to curved spaces: $\nabla_X Y$ is the covariant derivative of $Y$ in the direction $X$.
+
+**Geodesics** are the "straightest possible curves" on $M$: paths $\gamma(t)$ satisfying $\nabla_{\dot\gamma}\dot\gamma = 0$. On the sphere, geodesics are great circles. In general relativity, freely falling particles travel along geodesics of the spacetime metric.
+
+## Curvature: Riemann, Ricci, and scalar
+
+The **Riemann curvature tensor** $R(X, Y)Z$ measures the failure of the covariant derivative to commute:
+
+$$R(X, Y)Z = \nabla_X \nabla_Y Z - \nabla_Y \nabla_X Z - \nabla_{[X,Y]}Z.$$
+
+It is a $(1,3)$ tensor encoding all curvature information. The **Ricci tensor** $\mathrm{Ric}(X, Y) = \mathrm{tr}(Z \mapsto R(Z, X)Y)$ is the trace, and the **scalar curvature** $s$ is the trace of the Ricci tensor. These are precisely the quantities appearing in Einstein's field equations $\mathrm{Ric} - \tfrac{1}{2}sg = 8\pi G \cdot T$, where $T$ is the stress-energy tensor of matter.
+
+Gauss's **Theorema Egregium** (1827) states that the Gaussian curvature $K$ of a surface embedded in $\mathbb{R}^3$ is an intrinsic quantity — it depends only on the metric, not on how the surface sits in space. This was the founding insight of intrinsic differential geometry, later generalised by Riemann to all dimensions.
+
+## Real-world applications
+
+[Gravitational wave detection](/applications/gravitational-wave-detection) by LIGO and Virgo is predicated entirely on general relativity, which is differential geometry in physical clothing — the field equations that govern spacetime curvature are Riemannian in character. [GPS positioning](/applications/gps-positioning) corrects for relativistic time dilation using geodesic calculations in a curved spacetime metric. [Computer graphics and 3D rendering](/applications/computer-graphics-3d) use Riemannian geometry for mesh parameterisation, curvature-dependent rendering, and shape analysis in computer vision.
+
+## Why this matters
+
+Differential geometry is the native language of modern theoretical physics and a core part of contemporary pure mathematics. Einstein's general relativity is the prime exhibit — the curvature of spacetime is the Riemann tensor, and gravity is geodesic motion. Beyond physics, the Atiyah–Singer index theorem (which counts solutions to differential equations by topological invariants), Perelman's proof of the Poincaré conjecture via Ricci flow, and the mirror symmetry conjectures in string theory all live in this language. The Levi–Civita connection, the exterior derivative, and the covariant Riemann tensor are tools that appear, under various names, across differential topology, mathematical physics, and algebraic geometry alike.

@@ -1,0 +1,199 @@
+---
+title: 'Symbolic Mathematics in Python: SymPy'
+section: 'Python'
+section_slug: 97-python
+order: 4
+tags: [python, sympy, computer-algebra, symbolic-mathematics]
+prerequisites: [02-language-overview]
+related: [03-numerical-computing, 02-language-overview]
+mathematicians: []
+reading_time_min: 9
+summary: 'SymPy treats mathematical expressions as objects you can manipulate exactly. Algebra, calculus, equation-solving, and LaTeX output — all in pure Python, no proprietary licence required.'
+---
+
+NumPy works with *numbers*. SymPy works with *expressions*. When you write `x**2 + 2*x + 1` in NumPy, you must already have a numerical value for `x`. When you write the same in SymPy, the result is an algebraic expression you can factor, differentiate, integrate, simplify, or substitute into.
+
+SymPy is the open-source equivalent of Mathematica or Maple. It is pure Python, so it integrates with the rest of the scientific stack — but the trade-off is that it is slower than the proprietary CAS for very large problems. For everyday symbolic work it is excellent.
+
+## Defining symbols
+
+The fundamental object is a **symbol**. Symbols carry no value — they are placeholders for an unknown.
+
+```python
+from sympy import symbols, Symbol
+
+x, y, z = symbols("x y z")
+n = Symbol("n", integer=True, positive=True)   # assumption: n is a positive integer
+```
+
+The assumptions (`integer=True`, `positive=True`, `real=True`, `rational=True`, …) let SymPy reason more powerfully — for instance, $\sqrt{n^2} = n$ when $n$ is positive but not in general.
+
+## Algebra
+
+Expressions are ordinary Python objects with `+`, `-`, `*`, `/`, and `**` overloaded.
+
+```python
+from sympy import expand, factor, simplify, collect
+
+expr = (x + 2)**2 * (x - 3)
+expanded = expand(expr)
+print(expanded)
+# x**3 + x**2 - 8*x - 12
+
+# And back again
+print(factor(expanded))
+# (x - 3)*(x + 2)**2
+
+# Substitute values
+print(expr.subs(x, 1))
+# (1 + 2)**2 * (1 - 3) = -18
+
+# Multiple substitutions
+print((x*y + y*z).subs({x: 1, z: 2}))   # 3*y
+```
+
+`simplify` is the catch-all "tidy this up" operation. For more directed work, prefer specific functions: `expand`, `factor`, `collect`, `cancel`, `apart`, `together`.
+
+## Calculus
+
+Differentiation and integration are direct.
+
+```python
+from sympy import diff, integrate, limit, series, oo, sin, cos, exp, log
+
+# Derivatives
+print(diff(sin(x) * exp(x), x))
+# exp(x)*sin(x) + exp(x)*cos(x)
+
+# Second derivative
+print(diff(sin(x), x, 2))
+# -sin(x)
+
+# Indefinite integral
+print(integrate(x**2 * exp(x), x))
+# x**2*exp(x) - 2*x*exp(x) + 2*exp(x)
+
+# Definite integral
+print(integrate(1 / (1 + x**2), (x, 0, oo)))
+# pi/2
+
+# Limits
+print(limit(sin(x) / x, x, 0))         # 1
+print(limit((1 + 1/x)**x, x, oo))      # E
+
+# Taylor series at x = 0, to order 5
+print(series(exp(x), x, 0, 6))
+# 1 + x + x**2/2 + x**3/6 + x**4/24 + x**5/120 + O(x**6)
+```
+
+`oo` is SymPy's symbol for infinity. `pi`, `E`, `I` (the imaginary unit), `nan`, and `zoo` (complex infinity) round out the special constants.
+
+## Solving equations
+
+```python
+from sympy import solve, Eq, symbols
+
+x, a, b, c = symbols("x a b c")
+
+# Quadratic
+print(solve(a*x**2 + b*x + c, x))
+# [(-b - sqrt(-4*a*c + b**2))/(2*a), (-b + sqrt(-4*a*c + b**2))/(2*a)]
+
+# Systems
+y = symbols("y")
+print(solve([Eq(x + y, 10), Eq(x - y, 4)], [x, y]))
+# {x: 7, y: 3}
+
+# Transcendental — when an answer exists in closed form
+print(solve(exp(x) - 3, x))
+# [log(3)]
+```
+
+When a closed form does not exist, SymPy can fall back to numerical solvers (`nsolve`), or you can hand the problem to SciPy.
+
+## Linear algebra, symbolically
+
+SymPy has its own `Matrix` type that holds expressions rather than floats.
+
+```python
+from sympy import Matrix, symbols, eye
+
+x = symbols("x")
+A = Matrix([[1, x],
+            [x, 1]])
+
+print(A.det())              # 1 - x**2
+print(A.eigenvals())        # {1 - x: 1, x + 1: 1}
+print(A.inv())              # [[-1/(x**2 - 1),  x/(x**2 - 1)],
+                            #  [ x/(x**2 - 1), -1/(x**2 - 1)]]
+print(A.charpoly().as_expr())  # x**2 - 2*x*... — wait — actually char poly is in λ
+```
+
+Symbolic eigenvalues and inverses are exactly the kind of computation you want a CAS for: by hand it is tedious and error-prone, and the answer is informative for understanding the matrix.
+
+## $\LaTeX$ output
+
+SymPy converts any expression to $\LaTeX$. This is invaluable for notebooks and papers.
+
+```python
+from sympy import latex, sin, integrate, x
+
+print(latex(integrate(sin(x)**2, x)))
+# x/2 - \sin{\left(x \right)} \cos{\left(x \right)}/2
+```
+
+In a Jupyter notebook, `sympify` expressions render automatically as typeset mathematics. The integration with `mathjax`/`KaTeX` is invisible — you just see the formula.
+
+## Generating numerical code from symbolic expressions
+
+A common workflow: derive an expression symbolically, then evaluate it many times numerically. SymPy's **lambdify** generates a NumPy-vectorised function from a SymPy expression.
+
+```python
+from sympy import symbols, sin, lambdify
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = symbols("x")
+expr = sin(x) / x
+f = lambdify(x, expr, "numpy")    # NumPy-vectorised function
+
+xs = np.linspace(-10, 10, 1000)
+xs[xs == 0] = 1e-12               # avoid /0
+plt.plot(xs, f(xs))
+plt.title("sinc(x)")
+```
+
+`f` is now an ordinary fast NumPy function. The symbolic step gave you a guaranteed-correct closed form; the numerical step plots it efficiently.
+
+## A worked example: the matrix exponential
+
+The matrix exponential $e^{At}$ is the solution operator for the linear ODE $\dot x = Ax$. SymPy can compute it symbolically:
+
+```python
+from sympy import Matrix, symbols, exp
+
+t = symbols("t", real=True)
+A = Matrix([[0, 1],
+            [-1, 0]])           # rotation generator
+
+print((A * t).exp())
+# Matrix([[cos(t), sin(t)],
+#         [-sin(t), cos(t)]])
+```
+
+The matrix exponential of the rotation generator is the rotation matrix. We have just *derived* this from the series definition — and unlike a hand derivation, SymPy did it without arithmetic mistakes.
+
+## When to reach for SymPy
+
+- You want a *closed-form* answer that a numerical solver cannot give you.
+- You want to *check* a hand calculation.
+- You want to derive a formula and then evaluate it many times — derive in SymPy, evaluate with `lambdify`.
+- You want $\LaTeX$ output for a paper or notebook.
+
+When *not* to reach for SymPy:
+
+- Performance-critical numerics — SymPy is much slower than NumPy.
+- Anything involving very large matrices or polynomials with thousands of terms — Mathematica still wins on raw size.
+- When approximate answers are fine — float arithmetic is faster and usually sufficient.
+
+The pattern that works well in practice is: prototype symbolically, derive closed forms where they exist, and drop into NumPy/SciPy for the heavy numerical evaluation.

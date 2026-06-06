@@ -1,0 +1,94 @@
+---
+title: 'Statistical Mechanics'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 13
+node_type: topic
+tags: [statistical-mechanics, entropy, partition-function, ensembles, ising-model, phase-transitions, boltzmann-distribution]
+prerequisites: []
+related:
+  - 04-mathematical-physics-and-fluids
+  - 07-stochastic-processes
+  - 03-measure-and-lebesgue-integration
+mathematicians: [kolmogorov, gauss]
+reading_time_min: 10
+summary: 'From microscopic states to macroscopic laws. Entropy, ensembles, partition functions, and phase transitions — the bridge between probability and thermodynamics.'
+theorems: [axiomatic-foundations-of-probability, ergodic-theory, law-of-large-numbers]
+applications: [climate-modelling, weather-forecasting]
+suggested_pre_reading:
+  - kind: topic
+    ref: 07-stochastic-processes
+    why: 'Probability spaces and random variables are the language in which ensembles and distributions are expressed.'
+  - kind: topic
+    ref: 03-measure-and-lebesgue-integration
+    why: 'Measure theory underpins the rigorous definition of entropy and the passage from discrete to continuous state spaces.'
+  - kind: topic
+    ref: 04-mathematical-physics-and-fluids
+    why: 'Thermodynamic systems and fluid dynamics share macroscopic conservation laws that statistical mechanics derives from first principles.'
+  - kind: theorem
+    ref: law-of-large-numbers
+    why: 'The equivalence of time averages and ensemble averages (ergodicity) rests on concentration-of-measure ideas closely related to the strong law.'
+  - kind: theorem
+    ref: axiomatic-foundations-of-probability
+    why: 'Ensembles are probability measures; Kolmogorov's axioms provide the formal foundation.'
+---
+
+Statistical mechanics is the art of deriving the macroscopic laws of thermodynamics — temperature, pressure, entropy — from the microscopic dynamics of $10^{23}$ particles. The bridge is probability theory: rather than tracking every molecule, you describe the system by a probability distribution over its possible states.
+
+## Microstates and macrostates
+
+A **microstate** is a complete specification of a physical system: the position and momentum of every particle. A **macrostate** is a coarse-grained description — total energy, volume, number of particles — that is compatible with enormously many microstates. If a macrostate $M$ is compatible with $W$ microstates, the **Boltzmann entropy** is
+
+$$S = k_B \log W,$$
+
+where $k_B \approx 1.38 \times 10^{-23}\ \mathrm{J\,K^{-1}}$ is Boltzmann's constant. The second law of thermodynamics — entropy never decreases in an isolated system — reflects the combinatorial fact that high-$W$ macrostates are overwhelmingly more probable than low-$W$ ones.
+
+The number $W$ is computed by counting: for $N$ distinguishable particles with total energy $E$, $W$ counts the number of ways of distributing that energy among the particles' quantum levels. This counting is the subject of combinatorics and the origin of Stirling's approximation $\log N! \approx N\log N - N$.
+
+## Ensembles and the Gibbs framework
+
+An **ensemble** is a probability distribution over microstates. Josiah Willard Gibbs' ensemble formalism makes statistical mechanics rigorous by asking: what distribution should we assign when we know certain macroscopic quantities?
+
+Three canonical answers:
+
+- **Microcanonical ensemble** — isolated system with fixed energy $E$, volume $V$, and particle number $N$. All microstates with energy exactly $E$ are equally likely (uniform measure on the energy shell).
+- **Canonical ensemble** — system in contact with a heat bath at temperature $T$. The probability of a microstate with energy $\epsilon$ is the **Boltzmann distribution**:
+
+$$p(\epsilon) = \frac{e^{-\epsilon/k_BT}}{Z}, \qquad Z = \sum_{\text{states}} e^{-\epsilon/k_BT}.$$
+
+- **Grand-canonical ensemble** — system that can also exchange particles with a reservoir, characterised by temperature $T$ and chemical potential $\mu$.
+
+## The partition function and free energy
+
+The quantity $Z$ in the Boltzmann distribution is the **partition function**. Everything about the thermodynamics of the system can be read off from $Z$: the mean energy is
+
+$$\langle E \rangle = -\frac{\partial}{\partial \beta}\log Z, \qquad \beta = \frac{1}{k_B T},$$
+
+and the **Helmholtz free energy** is $F = -k_BT \log Z$. The entropy, pressure, and specific heat all follow by differentiation. This is the central payoff of the formalism: a single generating function encodes all macroscopic thermodynamics.
+
+For a monatomic ideal gas, $Z$ factorises over particles, and $\log Z$ is computable in closed form — giving $pV = Nk_BT$ (the ideal gas law) as a theorem rather than an empirical fact.
+
+## Phase transitions and order parameters
+
+At a **phase transition**, a macroscopic property changes abruptly as a control parameter (temperature, pressure) is varied. The ferromagnetic transition in iron is a canonical example: below the Curie temperature, iron spontaneously magnetises; above it, the magnetisation vanishes. The **order parameter** is the quantity that is zero in the disordered phase and non-zero in the ordered phase.
+
+The **Ising model** captures this with the simplest possible model: a lattice of spins $\sigma_i \in \{+1,-1\}$ with energy
+
+$$H = -J\sum_{\langle i,j\rangle}\sigma_i\sigma_j - h\sum_i \sigma_i,$$
+
+where the first sum is over nearest-neighbour pairs and $h$ is an external field. Despite its simplicity, the two-dimensional Ising model has a genuine phase transition at a critical temperature $T_c$, and its exact solution (by Lars Onsager in 1944) was a landmark in mathematical physics.
+
+## The renormalisation group
+
+Near a critical point, the system is scale-invariant: fluctuations occur at every length scale simultaneously. The **renormalisation group** (RG) is the mathematical framework for studying this scale invariance. The idea is to systematically integrate out short-wavelength degrees of freedom to obtain an effective theory at longer scales.
+
+A key insight: the renormalisation group flow on the space of Hamiltonians has fixed points. Near a fixed point, the system is characterised by a small number of **critical exponents** that govern how thermodynamic quantities diverge at $T_c$. Universality — the fact that very different physical systems share the same critical exponents — is explained by the fact that they flow to the same fixed point.
+
+## Real-world applications
+
+Statistical mechanics underlies [climate modelling](/applications/climate-modelling) and [weather forecasting](/applications/weather-forecasting), where the atmosphere is modelled as a fluid of $\sim 10^{44}$ air molecules — understood statistically and then coupled to continuum fluid equations. The theory of phase transitions appears in materials science (why ice melts, why alloys order), in neural network theory (spin-glass models of memory), and in machine learning (the temperature parameter in simulated annealing and diffusion models has a direct statistical-mechanical interpretation). Quantum statistical mechanics — where Bose–Einstein and Fermi–Dirac statistics replace Boltzmann's — explains superconductivity, superfluidity, and the behaviour of the electron gas in metals.
+
+## Why this matters
+
+Statistical mechanics is one of the most intellectually surprising theories in all of science: from the assumption that microscopic laws are time-reversible and deterministic, it derives the Second Law of Thermodynamics — the irreversible increase of entropy — as a consequence of probability alone. The mathematics is a meeting point for combinatorics (counting microstates), measure theory (ensembles), complex analysis (evaluating partition functions), and PDE theory (renormalisation group flows). [Andrei Kolmogorov's](/mathematicians/kolmogorov) work on probability theory, and in particular on ergodic theory, gave rigorous foundations to the equivalence between time averages and ensemble averages — the ergodic hypothesis — that Boltzmann had invoked heuristically a century earlier.

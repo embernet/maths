@@ -59,7 +59,7 @@ if (defPages[matchKey]) {
 }
 
 function pageUrl(p: string): string {
-  // p is like "01-foundations-year-one/01-algebra-and-linear-algebra/index"
+  // p is like "01-foundations/01-algebra-and-linear-algebra/index"
   // or "91-mathematicians/cauchy" etc.
   const trimmed = p.replace(/\/index$/, '');
   // Mathematicians → /mathematicians/{slug}; same for theorems / applications / definitions

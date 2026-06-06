@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: protein-folding-alphafold
 domains: [biology, chemistry, computer-science]
 uses_theorems: [cauchyschwarz-inequality, gaussian-distribution-normal-distribution, method-of-least-squares]
-uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 03-specialisation-year-three/05-numerical-analysis, 04-advanced-topics-year-four/03-advanced-pdes]
+uses_topics: [01-foundations/01-algebra-and-linear-algebra, 03-specialist-areas/05-numerical-analysis, 04-advanced-topics/03-advanced-pdes]
 related_applications: [machine-learning-deep-neural-networks, robotics-and-control, population-dynamics-ecology]
 tags: [biology, optimisation, deep-learning, geometry, applied]
 real_world_examples: [Drug target identification, Vaccine design, Enzyme engineering, Fundamental biology research]
@@ -25,7 +25,7 @@ Traditional physics-based approaches — sampling this space by molecular dynami
 
 The attention mechanism computes pairwise relationships between all residue pairs simultaneously: $\text{Attention}(Q, K, V) = \text{softmax}(QK^T / \sqrt{d}) V$. This is an $n \times n$ matrix of inner products — the **Cauchy–Schwarz inequality** bounds the attention scores and is implicit in the scaling by $\sqrt{d}$.
 
-**Equivariance** means the network's output respects rotations and translations of the input structure: if you rotate the protein coordinates, the predicted structure rotates accordingly. This is a statement about the representation theory of the rotation group $\text{SO}(3)$ — related to the group theory in [Abstract Algebra](/02-core-year-two/01-abstract-algebra).
+**Equivariance** means the network's output respects rotations and translations of the input structure: if you rotate the protein coordinates, the predicted structure rotates accordingly. This is a statement about the representation theory of the rotation group $\text{SO}(3)$ — related to the group theory in [Abstract Algebra](/02-core-mathematics/01-abstract-algebra).
 
 ## A concrete example
 
@@ -37,4 +37,4 @@ The CASP (Critical Assessment of protein Structure Prediction) competition, runn
 
 ## Links
 
-The deep learning architecture is related to [Machine Learning: Deep Neural Networks](/applications/machine-learning-deep-neural-networks). The geometric and group-theoretic aspects connect to [Abstract Algebra](/02-core-year-two/01-abstract-algebra) and [Topology](/03-specialisation-year-three/04-topology). Optimisation methods are in [Numerical Analysis](/03-specialisation-year-three/05-numerical-analysis).
+The deep learning architecture is related to [Machine Learning: Deep Neural Networks](/applications/machine-learning-deep-neural-networks). The geometric and group-theoretic aspects connect to [Abstract Algebra](/02-core-mathematics/01-abstract-algebra) and [Topology](/03-specialist-areas/04-topology). Optimisation methods are in [Numerical Analysis](/03-specialist-areas/05-numerical-analysis).

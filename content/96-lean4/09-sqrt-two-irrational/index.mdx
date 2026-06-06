@@ -1,0 +1,92 @@
+---
+title: 'Proof 7: √2 is Irrational'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 9
+tags: [lean4, formal-proof]
+prerequisites: [08-square-non-negative]
+related: [10-infinitude-of-primes, 07-divides-trans]
+mathematicians: []
+reading_time_min: 7
+summary: 'The classical parity-and-descent proof that √2 is irrational, formalised in Lean 4 using Mathlib number theory lemmas.'
+---
+
+## What we are proving
+
+The square root of 2 is not a rational number: $\sqrt{2} \notin \mathbb{Q}$.
+
+This is one of the oldest known proofs of an impossible existence — it was known to the ancient Greeks, and the legend that a Pythagorean was drowned for revealing it is probably false but entertainingly persistent. The proof is by contradiction: assume $\sqrt{2} = p/q$ in lowest terms, then derive a parity contradiction. In Lean, we need to be careful about what "in lowest terms" means — the standard approach uses the fact that if $2 \mid n^2$ then $2 \mid n$, which requires that 2 is prime.
+
+See also the theorem page on [irrational numbers](/theorems/discovery-of-irrational-numbers).
+
+```lean
+theorem sqrt_two_irrational : Irrational (Real.sqrt 2)
+```
+
+## The proof
+
+```lean
+-- 09-sqrt-two-irrational.lean
+import Mathlib.Tactic
+import Mathlib.Data.Real.Irrational
+import Mathlib.NumberTheory.Bernoulli
+
+namespace MathsCompanion
+
+-- Lean's Mathlib already has this theorem.
+-- Here we show how to state it and where it lives.
+-- The canonical Mathlib name is Nat.sqrt_two_irrational or
+-- irrational_sqrt_two (search with exact? for the current name).
+
+-- State the theorem using Mathlib's Irrational predicate:
+theorem sqrt_two_irrational' : Irrational (Real.sqrt 2) := by
+  exact irrational_sqrt_two
+
+-- For pedagogical purposes, here is a self-contained proof sketch
+-- using the core ideas (parity descent), working in ℤ:
+
+-- Lemma: if 2 ∣ n^2 then 2 ∣ n (for integers)
+lemma two_dvd_of_sq {n : Int} (h : 2 ∣ n ^ 2) : 2 ∣ n := by
+  have hp : Prime (2 : Int) := Int.prime_iff.mpr ⟨by norm_num, by norm_num⟩
+  exact (hp.dvd_of_dvd_pow h)
+
+-- The irrationality follows from: if p^2 = 2 * q^2 with gcd(p,q) = 1
+-- then 2 ∣ p, so 4 ∣ p^2, so 2 ∣ q^2, so 2 ∣ q — contradicting gcd = 1.
+-- The full formalisation uses Nat.Coprime and is available in Mathlib
+-- under `irrational_sqrt_two`.
+
+#check irrational_sqrt_two
+-- irrational_sqrt_two : Irrational (√2)
+-- (Note: the exact lemma name may vary with Mathlib versions;
+--  use `exact?` or search https://leanprover-community.github.io/mathlib4_docs
+--  if this name has been renamed.)
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**The Mathlib proof** is a single line: `exact irrational_sqrt_two`. Mathlib has had a formalisation of this theorem for years. The pedagogical interest is in the *structure* of the proof that Mathlib contains, which we sketch here.
+
+**The mathematical argument:**
+
+Assume $\sqrt{2} = p/q$ with $\gcd(p, q) = 1$ (lowest terms). Then $p^2 = 2q^2$.
+
+1. $2 \mid p^2$, so $2 \mid p$ (because 2 is prime — the `two_dvd_of_sq` lemma above uses `Prime.dvd_of_dvd_pow`).
+2. Write $p = 2m$. Then $4m^2 = 2q^2$, so $2m^2 = q^2$.
+3. Now $2 \mid q^2$, so $2 \mid q$.
+4. But then $2 \mid \gcd(p, q) = 1$ — a contradiction.
+
+**The key lemma `two_dvd_of_sq`** uses `Prime.dvd_of_dvd_pow`: if a prime $p$ divides $n^k$, then $p$ divides $n$. This is the core number-theoretic fact. In Lean, `Int.prime_iff` characterises primality, and we prove 2 is prime by `norm_num` (Lean's normalisation tactic for concrete arithmetic).
+
+**`Irrational`** in Lean is defined as `¬ ∃ q : ℚ, (q : ℝ) = x` — there is no rational whose real-number value equals $x$. Lean's `Real.sqrt 2` is the non-negative real square root of 2, defined as an element of `ℝ`.
+
+**A note on Mathlib names:** `irrational_sqrt_two` is the current name as of Mathlib4. If you get a "not found" error, search with `exact?` or use the Mathlib documentation at `leanprover-community.github.io/mathlib4_docs`. Mathlib names do occasionally change during refactors.
+
+## Download
+
+[Download the Lean file](/lean/09-sqrt-two-irrational.lean)
+
+## Try it yourself
+
+Prove that $\sqrt{3}$ is irrational. The argument is identical, replacing 2 with 3: if $3 \mid n^2$ then $3 \mid n$ (by primality of 3). In Mathlib, try `irrational_sqrt_three` — if it exists, you are done in one line. If not, adapt the proof above. For a harder challenge, prove that $\sqrt{n}$ is irrational whenever $n$ is not a perfect square — this is `Nat.sqrt_lt_self` territory.

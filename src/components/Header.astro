@@ -10,19 +10,29 @@ import { join } from 'node:path';
 
 // Load site config
 const siteConfigPath = join(process.cwd(), 'content/_site.json');
-let siteConfig = { title: 'The Undergraduate Mathematics Companion', navigation_order: [] as string[] };
+interface NavGroup { label: string; id: string; blurb?: string; children: string[]; }
+type NavEntry = string | NavGroup;
+let siteConfig: { title?: string; navigation_order?: NavEntry[] } = { title: 'The Mathematics Companion', navigation_order: [] };
 if (existsSync(siteConfigPath)) {
   try { siteConfig = JSON.parse(readFileSync(siteConfigPath, 'utf8')); } catch { /* use default */ }
 }
 
 // Build nav items from navigation_order + colocated _section.json files
-interface NavItem { slug: string; label: string; href: string; children: { label: string; href: string; slug: string; }[]; }
+interface NavItem {
+  slug: string;
+  label: string;
+  href: string;
+  children: { label: string; href: string; slug: string; }[];
+  groupLabel?: string;  // present when this item belongs to a navigation group
+  isGroupParent?: boolean;  // true when this item IS a group (no own page; expands to its children)
+  groupChildren?: NavItem[]; // populated for group parents
+}
 const navItems: NavItem[] = [];
 
 const contentDir = join(process.cwd(), 'content');
 import { readdirSync, statSync } from 'node:fs';
 
-for (const slug of siteConfig.navigation_order ?? []) {
+function buildSectionNavItem(slug: string): NavItem {
   let label = slug.replace(/^\d+-/, '').replace(/-/g, ' ');
   label = label.charAt(0).toUpperCase() + label.slice(1);
 
@@ -45,7 +55,6 @@ for (const slug of siteConfig.navigation_order ?? []) {
     href = `/${slug}`;
   }
 
-  // Try to read a prettier title from _section.json
   const sectionJsonPath = join(contentDir, slug, '_section.json');
   if (existsSync(sectionJsonPath)) {
     try {
@@ -54,7 +63,6 @@ for (const slug of siteConfig.navigation_order ?? []) {
     } catch { /* keep derived label */ }
   }
 
-  // Build first-level children for year sections and history
   const children: { label: string; href: string; slug: string; }[] = [];
   const sectionPath = join(contentDir, slug);
   if (
@@ -84,24 +92,58 @@ for (const slug of siteConfig.navigation_order ?? []) {
     } catch { /* ignore */ }
   }
 
-  navItems.push({ slug, label, href, children });
+  return { slug, label, href, children };
+}
+
+for (const entry of siteConfig.navigation_order ?? []) {
+  if (typeof entry === 'string') {
+    navItems.push(buildSectionNavItem(entry));
+  } else {
+    const groupChildren: NavItem[] = entry.children.map(slug => {
+      const item = buildSectionNavItem(slug);
+      item.groupLabel = entry.label;
+      return item;
+    });
+    navItems.push({
+      slug: entry.id,
+      label: entry.label,
+      href: '#',
+      children: [],
+      isGroupParent: true,
+      groupChildren,
+    });
+  }
 }
 
 // Short labels for the compact desktop chip nav
 const shortLabels: Record<string, string> = {
   '00-welcome': 'Welcome',
-  '01-foundations-year-one': 'Year 1',
-  '02-core-year-two': 'Year 2',
-  '03-specialisation-year-three': 'Year 3',
-  '04-advanced-topics-year-four': 'Year 4',
+  '01-foundations': 'Foundations',
+  '02-core-mathematics': 'Core',
+  '03-specialist-areas': 'Specialist',
+  '04-advanced-topics': 'Advanced',
   '90-history': 'History',
   '91-mathematicians': 'Mathematicians',
   '92-resources': 'Resources',
   '93-theorems': 'Theorems',
   '94-applications': 'Applications',
   '95-definitions': 'Definitions',
+  '96-lean4': 'Lean 4',
+  '97-python': 'Python',
+  '97-nature': 'Nature',
+  '98-r': 'R',
   '98-about': 'About',
 };
+
+// Flatten groups for the desktop chip strip — show each child as its own chip
+const flatNavItems: NavItem[] = [];
+for (const item of navItems) {
+  if (item.isGroupParent && item.groupChildren) {
+    for (const child of item.groupChildren) flatNavItems.push(child);
+  } else {
+    flatNavItems.push(item);
+  }
+}
 ---
 
 <header class="site-header" role="banner">
@@ -119,7 +161,7 @@ const shortLabels: Record<string, string> = {
     </button>
 
     <!-- Logo / site title -->
-    <a href="/" class="site-logo" aria-label="Home — The Undergraduate Mathematics Companion">
+    <a href="/" class="site-logo" aria-label="Home — The Mathematics Companion">
       <span class="logo-symbol" aria-hidden="true">∑</span>
       <span class="logo-text">Maths Companion</span>
     </a>
@@ -127,7 +169,7 @@ const shortLabels: Record<string, string> = {
     <!-- Desktop chip nav (slim row; supplementary to hamburger overlay) -->
     <nav class="desktop-nav no-print" aria-label="Section navigation">
       <ul role="list">
-        {navItems.map((item) => (
+        {flatNavItems.map((item) => (
           <li>
             <a href={item.href} data-slug={item.slug}>
               {shortLabels[item.slug] ?? item.label}
@@ -186,8 +228,63 @@ const shortLabels: Record<string, string> = {
     </div>
     <ul class="overlay-list" role="list">
       {navItems.map((item, idx) => {
-        const hasChildren = item.children.length > 0;
         const childId = `overlay-children-${idx}`;
+        if (item.isGroupParent && item.groupChildren) {
+          return (
+            <li class="overlay-item overlay-group">
+              <div class="overlay-row">
+                <span class="overlay-link overlay-group-label">{item.label}</span>
+                <button
+                  class="overlay-expand-btn"
+                  aria-expanded="false"
+                  aria-controls={childId}
+                  aria-label={`Expand ${item.label} sections`}
+                >
+                  <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+              <ul id={childId} class="overlay-children" hidden role="list">
+                {item.groupChildren.map((sub, subIdx) => {
+                  const subChildId = `overlay-grandchildren-${idx}-${subIdx}`;
+                  const hasGrand = sub.children.length > 0;
+                  return (
+                    <li>
+                      {hasGrand ? (
+                        <>
+                          <div class="overlay-row overlay-row-nested">
+                            <a href={sub.href} class="overlay-child-link">{sub.label}</a>
+                            <button
+                              class="overlay-expand-btn"
+                              aria-expanded="false"
+                              aria-controls={subChildId}
+                              aria-label={`Expand ${sub.label} pages`}
+                            >
+                              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                              </svg>
+                            </button>
+                          </div>
+                          <ul id={subChildId} class="overlay-grandchildren" hidden role="list">
+                            {sub.children.map(grand => (
+                              <li>
+                                <a href={grand.href} class="overlay-grandchild-link">{grand.label}</a>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : (
+                        <a href={sub.href} class="overlay-child-link">{sub.label}</a>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          );
+        }
+        const hasChildren = item.children.length > 0;
         return (
           <li class="overlay-item">
             {hasChildren ? (
@@ -826,8 +923,40 @@ const shortLabels: Record<string, string> = {
     min-height: 44px;
     display: flex;
     align-items: center;
+    flex: 1 1 0;
   }
   .overlay-child-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+  .overlay-row-nested {
+    display: flex;
+    align-items: center;
+  }
+
+  .overlay-grandchildren {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(0,0,0,0.22);
+  }
+  .overlay-grandchild-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem 0.5rem 3.25rem;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.83rem;
+    min-height: 40px;
+    transition: background 0.1s, color 0.1s;
+  }
+  .overlay-grandchild-link:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+  .overlay-group-label {
+    text-transform: uppercase;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.65) !important;
+    cursor: default;
+  }
 
   /* ---- Search drawer (mobile) ---- */
   .search-drawer {

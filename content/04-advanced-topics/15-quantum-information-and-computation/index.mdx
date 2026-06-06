@@ -1,0 +1,90 @@
+---
+title: 'Quantum Information and Computation'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 15
+node_type: topic
+tags: [quantum-information, qubits, entanglement, no-cloning-theorem, bell-inequality, shor-algorithm, grover-algorithm, quantum-error-correction]
+prerequisites: []
+related:
+  - 02-functional-analysis
+  - 10-representation-theory
+  - 12-godels-incompleteness-theorems
+mathematicians: [hilbert, turing]
+reading_time_min: 11
+summary: 'Information processing with quantum states. Qubits, entanglement, Shor''s and Grover''s algorithms, and quantum error correction — where linear algebra meets computer science meets foundations of physics.'
+theorems: []
+applications: [quantum-computing-algorithms, cryptocurrency-blockchain, cybersecurity-anomaly-detection]
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Quantum states are vectors in a Hilbert space; quantum gates are unitary matrices. Linear algebra is the native language of quantum information.'
+  - kind: topic
+    ref: 03-specialist-areas/02-functional-analysis
+    why: 'The infinite-dimensional formalism of quantum mechanics lives in Hilbert space; functional analysis provides its rigorous foundations.'
+  - kind: topic
+    ref: 04-advanced-topics/12-godels-incompleteness-theorems
+    why: 'Quantum complexity theory inherits questions about computability from classical computer science, where Gödel and Turing set the foundations.'
+  - kind: topic
+    ref: 03-specialist-areas/07-stochastic-processes
+    why: 'Quantum measurement introduces intrinsic probability; a grounding in classical probability sharpens the contrast with quantum randomness.'
+---
+
+Classical computers manipulate bits — 0 or 1. Quantum computers manipulate **qubits**, which can exist in superpositions of 0 and 1. The gap between these two models of computation is not merely one of hardware: it is a mathematical distinction that implies some problems have quantum algorithms exponentially faster than any known classical algorithm, while others provably resist any speedup.
+
+## Qubits and the Bloch sphere
+
+A **qubit** is a unit vector in a two-dimensional complex Hilbert space $\mathbb{C}^2$. Its state is
+
+$$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle, \qquad |\alpha|^2 + |\beta|^2 = 1,$$
+
+where $|0\rangle$ and $|1\rangle$ form the computational basis. Measuring in this basis yields outcome 0 with probability $|\alpha|^2$ and outcome 1 with probability $|\beta|^2$, collapsing the state.
+
+Global phase is unobservable, so the space of distinct qubit states is the **Bloch sphere** $S^2$: writing $\alpha = \cos(\theta/2)$ and $\beta = e^{i\varphi}\sin(\theta/2)$, the angles $(\theta, \varphi)$ parametrise the sphere. The north and south poles correspond to $|0\rangle$ and $|1\rangle$; the equator to equal-weight superpositions.
+
+An $n$-qubit system has state space $(\mathbb{C}^2)^{\otimes n} \cong \mathbb{C}^{2^n}$: the state is a unit vector in a $2^n$-dimensional space. This exponential growth is the source of quantum computational power.
+
+## Quantum gates and circuits
+
+A **quantum gate** is a unitary operator on one or more qubits. The Hadamard gate
+
+$$H = \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\1&-1\end{pmatrix}$$
+
+maps $|0\rangle \mapsto (|0\rangle + |1\rangle)/\sqrt{2}$ and creates a uniform superposition. The Pauli gates $X, Y, Z$ and the phase gate $S$ generate the single-qubit unitaries. The CNOT gate (controlled-NOT) acts on two qubits, flipping the target if the control is $|1\rangle$; together with single-qubit gates, CNOT forms a universal gate set — any unitary on $n$ qubits can be approximated to any precision.
+
+A **quantum circuit** is a sequence of gates applied to qubits, followed by measurement. Unlike classical circuits, every gate is reversible (being unitary); irreversibility enters only at measurement.
+
+## Entanglement and the EPR pair
+
+Two qubits in the state
+
+$$|\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}$$
+
+are **entangled**: the state cannot be written as a product $|\psi_1\rangle \otimes |\psi_2\rangle$. Measuring the first qubit in the computational basis yields 0 or 1 with equal probability and simultaneously collapses the second qubit to the same value — regardless of their spatial separation. This is the Einstein–Podolsky–Rosen (EPR) phenomenon.
+
+**Bell inequalities** quantify the correlations between measurements on entangled pairs. Any local hidden-variable theory (classical probability with pre-shared randomness) satisfies Bell's inequality $|E(a,b) - E(a,b')| + |E(a',b) + E(a',b')| \le 2$, where $E(a,b)$ is the correlation between measurements in directions $a$ and $b$. Quantum mechanics predicts violations up to $2\sqrt{2}$ (the Tsirelson bound). Experimental violations of Bell inequalities confirm that quantum correlations are genuinely non-classical.
+
+## The no-cloning theorem
+
+The **no-cloning theorem** states: there is no unitary operation $U$ such that $U|\psi\rangle|0\rangle = |\psi\rangle|\psi\rangle$ for all states $|\psi\rangle$. The proof is one line: if such $U$ existed, applying it to $(|0\rangle + |1\rangle)/\sqrt{2}$ and comparing with $(U|0\rangle|0\rangle + U|1\rangle|0\rangle)/\sqrt{2}$ shows a contradiction via linearity. This theorem has profound consequences: quantum information cannot be freely copied, which simultaneously prevents certain attacks on quantum cryptography and complicates quantum error correction.
+
+## Quantum algorithms
+
+**Deutsch–Jozsa** provides the simplest exponential quantum speedup: given a black-box function $f:\{0,1\}^n \to \{0,1\}$ promised to be either constant or balanced, determine which it is. Classically, $2^{n-1}+1$ queries suffice but are necessary in the worst case. The quantum algorithm uses a single query via the Hadamard transform, creating superposition over all inputs simultaneously.
+
+**Shor's algorithm** (1994) factors an $n$-bit integer in time $O(n^3)$ using quantum Fourier transform-based period-finding — exponentially faster than the best known classical algorithm ($\exp(O(n^{1/3}))$ for the number field sieve). Its implications for [cryptography](/applications/cybersecurity-anomaly-detection) and [post-quantum security](/applications/cryptocurrency-blockchain) are profound: all RSA-based public-key systems become breakable by a sufficiently large quantum computer.
+
+**Grover's algorithm** (1996) searches an unsorted database of $N$ items in $O(\sqrt{N})$ queries, providing a quadratic speedup over classical linear search. This speedup is provably optimal.
+
+## Quantum error correction
+
+Physical qubits decohere and are subject to gate errors. Classical redundancy (copy a bit) is forbidden by the no-cloning theorem. Nevertheless, **quantum error correction** is possible via **stabiliser codes**: encode one logical qubit into multiple physical qubits such that errors leave signatures in the syndrome (a set of multi-qubit Pauli measurements) without revealing the logical state. The 9-qubit Shor code protects against arbitrary single-qubit errors; the 5-qubit code achieves this optimally.
+
+## Real-world applications
+
+[Quantum computing algorithms](/applications/quantum-computing-algorithms) are the direct target of the theory developed here. The post-quantum threat posed by Shor's algorithm motivates the entire field of post-quantum cryptography — new cryptographic standards resistant to quantum attack — with direct implications for [cryptocurrency and blockchain](/applications/cryptocurrency-blockchain) systems and broader [cybersecurity](/applications/cybersecurity-anomaly-detection). Quantum key distribution (BB84 protocol) uses the no-cloning theorem and Bell inequality violations to guarantee information-theoretically secure communication.
+
+## Why this matters
+
+Quantum information theory sits at the intersection of [linear algebra](/01-foundations/01-algebra-and-linear-algebra), [functional analysis](/03-specialist-areas/02-functional-analysis), complexity theory, and foundational physics. The question of whether quantum computers can solve NP-complete problems efficiently (the BQP vs NP question) is one of the great open problems in theoretical computer science. [David Hilbert's](/mathematicians/hilbert) formalism of Hilbert spaces and [Alan Turing's](/mathematicians/turing) model of computation form the two mathematical pillars on which quantum information rests. The field has also fed back into pure mathematics: quantum algorithms for algebraic problems have inspired new classical algorithms, and the study of entanglement has deepened the connection between quantum information and the geometry of many-body systems.

@@ -1,4 +1,4 @@
-# The Undergraduate Mathematics Companion
+# The Mathematics Companion
 
 A static site — built with Astro — that maps the undergraduate mathematics curriculum across four years of study. Topics include full explanations, worked examples, KaTeX-rendered mathematics, quizzes, and biographical pages for the mathematicians who shaped each field.
 

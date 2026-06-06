@@ -1,0 +1,7 @@
+{
+  "title": "R",
+  "slug": "98-r",
+  "order": 12,
+  "blurb": "The native language of statistics. A guide to R for mathematicians and analysts — its history at Bell Labs and Auckland, the language itself, the tidyverse, statistical modelling, and the long argument over when to choose R rather than Python.",
+  "icon": "r"
+}

@@ -1,0 +1,213 @@
+---
+title: 'Statistical Modelling in R'
+section: 'R'
+section_slug: 98-r
+order: 3
+tags: [r, statistics, linear-models, glm, mixed-effects]
+prerequisites: [02-language-overview]
+related: [02-language-overview, 04-tidyverse-and-ggplot2, 05-machine-learning]
+mathematicians: []
+reading_time_min: 11
+summary: 'Where R really earns its keep. Linear and generalised linear models, mixed-effects models, model diagnostics, and the statistical-inference tooling that makes R hard to beat for serious data analysis.'
+---
+
+This is the page that explains why R has not been displaced. For routine statistical modelling — fitting models, diagnosing them, comparing them, reporting them — R offers a coherent, well-debugged, decades-old set of tools whose Python equivalents do not yet match in either depth or ergonomics.
+
+## Linear regression
+
+The basic linear model in R is `lm()`.
+
+```r
+data(mtcars)
+
+fit <- lm(mpg ~ wt + hp + cyl, data = mtcars)
+summary(fit)
+```
+
+The `summary` output is the canonical statistical-software view: coefficient estimates, standard errors, $t$-statistics, $p$-values, residual standard error, $R^2$, adjusted $R^2$, $F$-statistic. This output has been the same since S-PLUS in the early 1990s and is what statisticians expect to see.
+
+```
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) 38.75179    1.78686   21.687  < 2e-16 ***
+wt          -3.16697    0.74058   -4.276 0.000199 ***
+hp          -0.01804    0.01188   -1.519 0.140015
+cyl         -0.94162    0.55092   -1.709 0.098534 .
+
+Residual standard error: 2.512 on 28 degrees of freedom
+Multiple R-squared:  0.8431, Adjusted R-squared:  0.8263
+F-statistic: 50.17 on 3 and 28 DF,  p-value: 2.184e-11
+```
+
+The model object holds more than the summary shows:
+
+```r
+coef(fit)            # named vector of coefficients
+fitted(fit)          # predicted values for the data
+residuals(fit)       # raw residuals
+predict(fit, newdata = data.frame(wt = 3, hp = 100, cyl = 6))
+confint(fit)         # confidence intervals
+vcov(fit)            # variance-covariance matrix of estimates
+```
+
+## Diagnostics
+
+A four-panel diagnostic plot is one line:
+
+```r
+par(mfrow = c(2, 2))   # 2x2 grid of plots
+plot(fit)
+```
+
+The four panels are: residuals-vs-fitted (linearity and equal variance), Q-Q plot of standardised residuals (normality), scale-location (homoscedasticity), residuals-vs-leverage (influential points and Cook's distance). Knowing how to read these is part of doing applied statistics; R makes them effortlessly available.
+
+For more diagnostics: `car::vif()` for variance inflation factors, `lmtest::bptest()` for the Breusch–Pagan test for heteroscedasticity, `lmtest::dwtest()` for the Durbin–Watson test for autocorrelation.
+
+## Categorical predictors and contrasts
+
+R handles factors automatically. Pass a factor variable to `lm` and R generates dummy variables behind the scenes.
+
+```r
+mtcars$cyl_f <- factor(mtcars$cyl)
+fit <- lm(mpg ~ wt + cyl_f, data = mtcars)
+summary(fit)
+# Two dummy columns appear: cyl_f6 and cyl_f8 (cyl_f4 is the reference)
+```
+
+You control which level is the reference with `relevel()`. You control which contrast coding to use (treatment, sum, Helmert, polynomial) with `contrasts()` or `options(contrasts = ...)`. These options matter for interpreting coefficients in ANOVA-style models.
+
+## Generalised linear models
+
+`glm()` handles regression where the response is not normal: binary (logistic), count (Poisson), proportions, etc. The interface is the same; you specify a `family`.
+
+```r
+# Logistic regression
+data(iris)
+iris$is_virginica <- as.integer(iris$Species == "virginica")
+fit_log <- glm(
+  is_virginica ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
+  data = iris,
+  family = binomial
+)
+summary(fit_log)
+
+# Poisson regression for count data
+# (toy example using mtcars cyl counts as a "count")
+fit_pois <- glm(cyl ~ wt + hp, data = mtcars, family = poisson)
+```
+
+The `family` argument selects the link function and the error distribution. Standard choices: `gaussian` (the default — same as `lm`), `binomial` (logistic), `poisson`, `Gamma`, `inverse.gaussian`, `quasibinomial` (overdispersed binary), `quasipoisson`. The `MASS::glm.nb()` extension handles negative-binomial regression for overdispersed counts.
+
+## Mixed-effects models
+
+This is one of R's signature strengths. The `lme4` package is the reference implementation.
+
+```r
+library(lme4)
+data(sleepstudy)   # reaction times by subject over days of sleep deprivation
+
+# Random intercept and random slope per subject
+fit <- lmer(Reaction ~ Days + (1 + Days | Subject), data = sleepstudy)
+summary(fit)
+```
+
+The formula `(1 + Days | Subject)` says "each subject has their own intercept and their own slope on `Days`". `lme4` fits the variance components by restricted maximum likelihood (REML), reports the random-effect variances, and gives you BLUPs (best linear unbiased predictors) for each subject's deviation from the population.
+
+For generalised mixed models — logistic, Poisson — use `glmer()` with the same syntax. For more complex random-effect structures, `nlme::lme` and `glmmTMB::glmmTMB` cover further ground.
+
+There is no equivalent of this in Python's standard ML libraries; **statsmodels** has linear mixed models but the implementation is years behind `lme4`.
+
+## Survival analysis
+
+The `survival` package, originally by Terry Therneau and now part of base R, is the reference for event-time analysis.
+
+```r
+library(survival)
+data(lung)
+
+# Kaplan-Meier estimate
+km <- survfit(Surv(time, status) ~ sex, data = lung)
+plot(km, col = c("steelblue", "firebrick"), xlab = "Days", ylab = "Survival")
+
+# Cox proportional-hazards model
+cox <- coxph(Surv(time, status) ~ age + sex + ph.ecog, data = lung)
+summary(cox)
+```
+
+`Surv()` constructs a censored-time response. `coxph` fits the Cox model. The diagnostics (`cox.zph` for proportionality, `martingale residuals`, `Schoenfeld residuals`) all live in the same package.
+
+## Time series
+
+`stats::arima()`, `forecast` (Rob Hyndman's package), and the newer `fable` ecosystem cover ARIMA, ETS, and state-space models.
+
+```r
+library(forecast)
+data(AirPassengers)
+
+fit <- auto.arima(AirPassengers)
+forecast(fit, h = 24) |> plot()
+```
+
+`auto.arima` searches over $(p, d, q) \times (P, D, Q)_s$ models and reports AIC for each. For most time-series exploration this is the first stop.
+
+## ANOVA and post-hoc tests
+
+```r
+fit <- aov(yield ~ block + N * P * K, data = npk)
+summary(fit)
+
+# Type II / III ANOVA
+car::Anova(fit, type = 2)
+
+# Pairwise comparisons with Tukey adjustment
+TukeyHSD(fit, "N")
+```
+
+The split between Type I, II, and III sums of squares matters in unbalanced designs; R supports all three (Type I by default, Type II and III via the `car` package).
+
+## Hypothesis tests
+
+All the standard tests are functions:
+
+```r
+t.test(extra ~ group, data = sleep)              # two-sample t-test
+wilcox.test(extra ~ group, data = sleep)          # Mann–Whitney
+chisq.test(table(mtcars$cyl, mtcars$am))         # chi-squared
+ks.test(rnorm(100), "pnorm")                     # Kolmogorov–Smirnov
+shapiro.test(rnorm(100))                         # Shapiro–Wilk for normality
+cor.test(mtcars$wt, mtcars$mpg)                  # correlation test
+fisher.test(matrix(c(8, 2, 1, 9), 2, 2))         # Fisher's exact
+prop.test(c(60, 40), c(100, 100))                # two-proportion z-test
+```
+
+Each returns a list with the same conventional names: `statistic`, `parameter` (degrees of freedom), `p.value`, `conf.int`, `estimate`, `method`. The uniformity is what makes the language pleasant for statistical work.
+
+## Probability distributions
+
+Each distribution comes with four functions: `d` (density / pmf), `p` (cumulative), `q` (quantile), `r` (random samples). Examples:
+
+```r
+dnorm(0)              # density at 0 → 0.3989...
+pnorm(1.96)           # P(Z < 1.96) → 0.975
+qnorm(0.975)          # 97.5th percentile → 1.96
+rnorm(5)              # five random standard normal values
+
+dbinom(3, size = 10, prob = 0.5)    # P(X = 3) for Binomial(10, 0.5)
+qchisq(0.95, df = 5)                # 95th percentile of chi-squared
+rpois(20, lambda = 3)               # 20 Poisson(3) samples
+```
+
+There are dozens: `norm`, `t`, `chisq`, `f`, `unif`, `exp`, `gamma`, `beta`, `binom`, `pois`, `geom`, `nbinom`, `hyper`, `weibull`, `cauchy`, `lnorm`, … . Need the inverse-Gaussian or stable distribution? Install `statmod` or `stabledist`. The point is the **uniformity of naming** — once you know `dXXX/pXXX/qXXX/rXXX`, you can use any distribution.
+
+## A mathematical perspective
+
+The thread through all of these is that R was built around the *mathematics* of statistics:
+
+- **Estimation** — least squares, maximum likelihood, restricted maximum likelihood, method of moments.
+- **Inference** — standard errors, confidence intervals, hypothesis tests with explicit null hypotheses.
+- **Model comparison** — likelihood-ratio tests, AIC, BIC, cross-validation.
+- **Diagnostics** — residual analysis grounded in the assumptions of the model.
+
+Each of these is a topic in statistical theory, and R's design encodes that theory in code. When you fit an `lm` and call `summary`, you are reading the output of formulas from a graduate course in linear models. When you fit a `glm` with `family = binomial`, you are using maximum likelihood on a non-linear link. When you fit an `lmer`, you are getting REML estimates of variance components — the same estimates that statisticians have been computing for half a century.
+
+Python's ML libraries are tuned for prediction. R's modelling libraries are tuned for *understanding*. Both are valuable; they are answering different questions. R's answer is statistics, and the answer is excellent.

@@ -1,0 +1,131 @@
+---
+title: 'Lean 4: A Language Overview'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 2
+tags: [lean4, formal-proof, theorem-prover, tactics, curry-howard, mathlib]
+prerequisites: [01-introduction]
+related: [03-add-zero]
+mathematicians: []
+reading_time_min: 9
+summary: 'The essential Lean 4 syntax in ten minutes: definitions, types, propositions, the main tactics, and how to work with Mathlib.'
+---
+
+Lean 4 is a large language, but you need only a small subset to write the proofs in this section. This page is a compact reference — read it top-to-bottom once, then use it as a lookup.
+
+## Syntax in ten minutes
+
+**`def`** introduces a definition — a name for a value or a function.
+
+```lean
+def double (n : Nat) : Nat := n + n
+```
+
+**`theorem`** (or equivalently `lemma`) introduces a named proof. The type of a theorem is its statement; the body is the proof.
+
+```lean
+theorem double_eq (n : Nat) : double n = 2 * n := rfl
+```
+
+**`example`** is an anonymous theorem — useful for experiments and exercises where you do not want to name the result.
+
+```lean
+example (n : Nat) : n + 0 = n := rfl
+```
+
+**`#check`** asks Lean to tell you the type of an expression. Use it constantly while exploring.
+
+```lean
+#check Nat.add_comm   -- Nat.add_comm : ∀ (n m : Nat), n + m = m + n
+```
+
+**`#eval`** evaluates an expression and prints the result.
+
+```lean
+#eval 2 ^ 10          -- 1024
+#eval Nat.gcd 48 18   -- 6
+```
+
+None of these are statements about mathematics — they are queries to the Lean system. The InfoView panel in VS Code shows you the result inline, next to the line.
+
+## Types and `Prop`
+
+Lean has a universe hierarchy. Most programming happens in `Type` — the type of data-carrying types like `Nat`, `List α`, `String`. Logical propositions live in **`Prop`** — a separate universe whose members are statements that are either true or false.
+
+The key rule: two proofs of the same `Prop` are *definitionally equal* to Lean (proof irrelevance). This means `Prop` is not just another type — it is the logical world.
+
+The **Curry–Howard correspondence** is the principle that makes this all work: a proof of proposition $P$ is a *term* of type $P$ (which lives in `Prop`). To prove $P \wedge Q$, you construct a term of type `P ∧ Q` — which in Lean is `And P Q`, a structure with two fields, one of type `P` and one of type `Q`. To prove $P \to Q$, you provide a function of type `P → Q`. Universally quantified statements $\forall x, P(x)$ are dependent function types `(x : α) → P x`.
+
+This correspondence is not a metaphor. In Lean, every proof is literally a typed term, and the type checker is the proof verifier.
+
+```lean
+-- A proof of P ∧ Q → Q ∧ P as a function
+theorem and_comm' (p q : Prop) (h : p ∧ q) : q ∧ p :=
+  ⟨h.2, h.1⟩
+```
+
+## Tactics
+
+Most proofs in Lean are written in **tactic mode** — you enter a `by` block and issue commands that transform the proof state step by step.
+
+```lean
+theorem and_comm (p q : Prop) : p ∧ q → q ∧ p := by
+  intro h
+  exact ⟨h.2, h.1⟩
+```
+
+The essential tactics:
+
+**`intro h`** — introduces a hypothesis. If the goal is `P → Q`, `intro h` gives you hypothesis `h : P` and changes the goal to `Q`. Works for universal quantifiers too: `intro n` for `∀ n, ...`.
+
+**`rfl`** — closes a goal of the form `a = a` (or any definitionally equal pair). The name is short for *reflexivity*.
+
+**`simp`** — simplifies the goal using a built-in library of simplification lemmas. Very powerful, sometimes too powerful — it can close goals you were hoping to understand manually. `simp [lemma1, lemma2]` adds extra lemmas to the simp set.
+
+**`exact e`** — closes the goal by providing a term `e` that has exactly the right type. The most precise tactic.
+
+**`apply f`** — applies a function or lemma `f` to the goal. If the goal is `Q` and `f : P → Q`, then `apply f` changes the goal to `P`.
+
+**`rw [h]`** — rewrites the goal using equation `h`. If `h : a = b`, then `rw [h]` replaces `a` with `b` in the goal. `rw [← h]` rewrites in the other direction.
+
+**`induction n`** — performs induction on `n`. Produces two goals: the base case and the inductive step, with an inductive hypothesis available.
+
+**`ring`** — proves ring identities (equalities in any commutative ring) by normalisation. Will close `(x + y)^2 = x^2 + 2*x*y + y^2` in one line.
+
+**`linarith`** — proves linear arithmetic goals (inequalities and equalities over ordered fields/rings) by Fourier-Motzkin elimination. Will close `a ≤ b → b ≤ c → a ≤ c`.
+
+**`omega`** — an arithmetic decision procedure for goals over `Nat` and `Int` involving `+`, `-`, `*` by constants, and `%`. Stronger than `linarith` in the natural-number setting.
+
+**`nlinarith`** — nonlinear arithmetic. Handles goals with products of variables. Will close `n * n ≥ 0` for integers.
+
+**`obtain ⟨a, ha⟩ := h`** — destructs a hypothesis. If `h : ∃ x, P x`, then `obtain ⟨a, ha⟩ := h` introduces `a : α` and `ha : P a`.
+
+**`constructor`** — splits a goal of the form `P ∧ Q` into two subgoals, or `P ↔ Q` into two implications.
+
+**`cases h`** — case-splits a hypothesis or type. Used for `Or`, `And`, `Bool`, custom inductive types.
+
+## The Mathlib mindset
+
+You will rarely prove anything from scratch in Lean 4 once you know Mathlib. The practical skill is **finding the lemma that already does what you want**.
+
+The tools for this are:
+
+- **`exact?`** — asks Lean to search Mathlib for a term that closes the current goal. Works surprisingly often.
+- **`apply?`** — asks Lean to search for a lemma that could be applied to the current goal (reducing it to subgoals).
+- **`simp?`** — runs `simp` and tells you which lemmas it used, so you can make your proof explicit if you wish.
+- **[Loogle](https://loogle.lean-lang.org)** — a web search engine for Mathlib that lets you search by type signature or name pattern.
+- **[Mathlib documentation](https://leanprover-community.github.io/mathlib4_docs)** — fully searchable; every lemma is there.
+
+Mathlib's naming convention is systematic. `Nat.add_comm` is the lemma about `Nat` that says `add` is `comm`utative. `List.length_append` says the `length` of an `append`ed list is the sum. `Int.mul_nonneg` says the product of two nonneg integers is nonneg. Once you internalise the pattern — `Namespace.concept_adjective` — you can guess lemma names with reasonable success and confirm them with `#check`.
+
+## Errors as conversations
+
+The single most important thing about working in Lean is that **errors are information**. When you are stuck, the InfoView in VS Code tells you:
+
+- The **goal** — the proposition you currently need to prove.
+- The **hypotheses** — the named terms in scope, with their types.
+- Any **error** — including what went wrong and, often, what Lean expected.
+
+A typical tactic proof session looks like this: you write `by`, you read the goal, you apply a tactic that partially transforms the goal, you read the new goal, and you repeat. The InfoView is your dialogue partner. When `ring` fails, the error message tells you the goal it saw; when `apply?` finds candidates, it shows you their names. This iterative, read-the-state loop is the Lean proof style, and it is much closer to how a mathematician actually thinks through a proof than the polished "let $\varepsilon > 0$..." you read in a textbook.
+
+A common first reaction is that Lean is too strict — it demands details you consider obvious. The second reaction, which usually arrives around your fifth or sixth proof, is that the strictness is the point: every time Lean balks at something you thought was obvious, it is telling you something real about the mathematics.

@@ -1,0 +1,234 @@
+---
+title: 'Numerical Computing in Python: NumPy and SciPy'
+section: 'Python'
+section_slug: 97-python
+order: 3
+tags: [python, numpy, scipy, numerical-analysis, linear-algebra]
+prerequisites: [02-language-overview]
+related: [02-language-overview, 04-symbolic-mathematics, 05-data-and-visualisation]
+mathematicians: []
+reading_time_min: 12
+summary: 'NumPy gives Python fast n-dimensional arrays and the linear algebra to manipulate them. SciPy builds the numerical methods — optimisation, ODEs, quadrature, signal processing, statistics — on top.'
+---
+
+NumPy is the foundation of scientific Python. Almost every other numerical library — SciPy, pandas, matplotlib, scikit-learn, PyTorch (its tensor type is a deliberate echo of NumPy's array) — is built on or compatible with the NumPy array. Learning NumPy is therefore the single most leveraged thing you can do as a numerical Python programmer.
+
+## The array
+
+A NumPy array, `ndarray`, is a *typed*, *fixed-shape*, *contiguous* block of memory holding numbers. The shape can be any number of dimensions: a vector is rank 1, a matrix is rank 2, a colour image is rank 3, a batch of images is rank 4.
+
+```python
+import numpy as np
+
+a = np.array([1, 2, 3, 4])               # rank 1, shape (4,)
+b = np.array([[1, 2, 3], [4, 5, 6]])     # rank 2, shape (2, 3)
+c = np.zeros((3, 3))                     # 3×3 of zeros
+d = np.ones((2, 4))                      # 2×4 of ones
+e = np.eye(5)                            # 5×5 identity
+f = np.arange(0, 10, 0.5)                # 0.0, 0.5, 1.0, ..., 9.5
+g = np.linspace(0, 1, 11)                # 11 evenly spaced points in [0, 1]
+```
+
+Internally these are buffers of `double` (or `int`, or `complex`, …). Operating on them is *fast* because the inner loop runs in C, not Python.
+
+## Vectorisation: the whole point
+
+In pure Python, you would compute element-wise operations with a loop. In NumPy, you write the operation as if on scalars, and it applies to every element. This is **vectorisation**.
+
+```python
+x = np.linspace(0, 2 * np.pi, 1000)
+y = np.sin(x) + 0.5 * np.cos(3 * x)
+```
+
+`np.sin(x)` returns an array the same shape as `x` with the sine of each element. The whole expression is one C-level loop. No Python-level iteration is happening — the array operations are tens to hundreds of times faster than the equivalent Python loop.
+
+The rule of thumb in NumPy is: **if you find yourself writing a `for` loop over array elements, you probably want a vectorised expression instead.**
+
+## Broadcasting
+
+If you add a vector to a matrix, what should happen? NumPy chooses a rule called **broadcasting**: when shapes don't match, NumPy tries to *stretch* the smaller one along the missing dimensions.
+
+```python
+A = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+row = np.array([10, 20, 30])
+
+A + row
+# array([[11, 22, 33],
+#        [14, 25, 36],
+#        [17, 28, 39]])
+```
+
+`row` (shape `(3,)`) is *broadcast* against `A` (shape `(3, 3)`) by treating it as if it were a `(1, 3)` matrix repeated down the rows. No copying happens — the broadcasting is virtual.
+
+Broadcasting saves enormous amounts of loop-writing and is one of the things that, once you internalise, makes NumPy feel like a notation rather than a library.
+
+## Linear algebra
+
+NumPy includes the standard linear algebra operations. The `@` operator is matrix multiplication.
+
+```python
+A = np.array([[2, 1],
+              [1, 3]])
+b = np.array([5, 10])
+
+# Solve Ax = b
+x = np.linalg.solve(A, b)
+print(x)           # [1. 3.]
+
+# Eigenvalues and eigenvectors
+evals, evecs = np.linalg.eig(A)
+print(evals)       # [1.38..., 3.61...]
+
+# Inverse, determinant, singular value decomposition
+A_inv = np.linalg.inv(A)
+det_A = np.linalg.det(A)
+U, S, Vt = np.linalg.svd(A)
+```
+
+The implementations call LAPACK (the same Fortran library that powers MATLAB and Julia's linear algebra). For dense matrices up to a few thousand on a side, performance is excellent. For larger or sparse problems, see SciPy.
+
+## A small example: least squares from first principles
+
+Given data $(x_i, y_i)$ we want the linear fit $y = mx + c$ that minimises $\sum (y_i - mx_i - c)^2$.
+
+```python
+import numpy as np
+
+rng = np.random.default_rng(seed=42)
+x = np.linspace(0, 10, 50)
+y = 2.0 * x + 1.0 + rng.normal(scale=0.5, size=x.shape)
+
+# Build the design matrix X = [x | 1]
+X = np.column_stack([x, np.ones_like(x)])
+
+# Solve the normal equations: (X^T X) β = X^T y
+beta, *_ = np.linalg.lstsq(X, y, rcond=None)
+m, c = beta
+print(f"slope = {m:.4f}, intercept = {c:.4f}")
+# slope ≈ 2.0, intercept ≈ 1.0
+```
+
+`lstsq` is a numerically robust routine (it uses SVD under the hood). For this small problem the explicit normal-equation formula `np.linalg.inv(X.T @ X) @ X.T @ y` would also work, but is less stable for ill-conditioned matrices.
+
+## SciPy: algorithms on top
+
+SciPy is a layer above NumPy with the standard numerical algorithms. A quick tour:
+
+### Quadrature (numerical integration)
+
+```python
+from scipy.integrate import quad
+
+# ∫₀^π sin(x) dx = 2
+value, error = quad(np.sin, 0, np.pi)
+print(value, error)   # 2.0, ~2e-14
+```
+
+`quad` is adaptive — it chooses its own step size to hit the requested tolerance.
+
+### Root finding and optimisation
+
+```python
+from scipy.optimize import brentq, minimize
+
+# Solve cos(x) = x in [0, 1]
+root = brentq(lambda x: np.cos(x) - x, 0, 1)
+print(root)   # 0.7390851332151606 (the Dottie number)
+
+# Minimise the Rosenbrock function
+def rosenbrock(p):
+    x, y = p
+    return (1 - x)**2 + 100 * (y - x**2)**2
+
+result = minimize(rosenbrock, x0=[-1.0, 1.0])
+print(result.x)        # [1., 1.] — the global minimum
+```
+
+### Ordinary differential equations
+
+```python
+from scipy.integrate import solve_ivp
+
+# dy/dt = -y, y(0) = 1   →   y(t) = e^(-t)
+sol = solve_ivp(lambda t, y: -y, t_span=(0, 5), y0=[1.0], dense_output=True)
+print(sol.sol(2.0))    # [0.1353...] ≈ e^(-2)
+```
+
+### Fourier transforms
+
+```python
+from scipy.fft import rfft, rfftfreq
+
+t = np.linspace(0, 1, 1024, endpoint=False)
+signal = np.sin(2 * np.pi * 50 * t) + 0.5 * np.sin(2 * np.pi * 120 * t)
+
+spectrum = rfft(signal)
+freqs = rfftfreq(len(t), d=t[1] - t[0])
+# Peaks in |spectrum| at f = 50 Hz and 120 Hz
+```
+
+### Statistics
+
+```python
+from scipy import stats
+
+# Two-sample t-test
+a = rng.normal(loc=0.0, scale=1.0, size=200)
+b = rng.normal(loc=0.5, scale=1.0, size=200)
+t_stat, p_value = stats.ttest_ind(a, b)
+print(t_stat, p_value)
+```
+
+SciPy's `stats` module covers the standard families (normal, t, chi-squared, beta, gamma, …), hypothesis tests, and summary statistics. For full statistical modelling (mixed-effects, survival, etc.) Python users often reach for **statsmodels** or fall back to [R](/98-r/01-introduction).
+
+## Sparse matrices
+
+When matrices have mostly zero entries (very common in PDE discretisations, network graphs, and recommendation systems), storing every zero is wasteful. SciPy's sparse module provides specialised formats.
+
+```python
+from scipy.sparse import diags
+from scipy.sparse.linalg import spsolve
+
+n = 1000
+# Tridiagonal: 2 on the diagonal, -1 above and below
+A = diags([-1, 2, -1], offsets=[-1, 0, 1], shape=(n, n), format="csr")
+
+b = np.ones(n)
+x = spsolve(A, b)
+# Solved a 1000×1000 system in milliseconds; the dense version would
+# need 8 MB of memory and considerably more time.
+```
+
+## Random numbers
+
+The modern NumPy interface uses a `Generator` object you create explicitly:
+
+```python
+rng = np.random.default_rng(seed=42)
+
+samples = rng.normal(loc=0, scale=1, size=10_000)
+print(samples.mean(), samples.std())   # ≈ 0.0, ≈ 1.0
+
+# Monte Carlo estimate of π: throw points into a unit square; count how many
+# fall inside the unit quarter-circle.
+n = 10_000_000
+x = rng.uniform(size=n)
+y = rng.uniform(size=n)
+pi_est = 4 * np.mean(x*x + y*y < 1)
+print(pi_est)   # ~3.1414...
+```
+
+This is the kind of computation NumPy was built for: ten million points in a fraction of a second, three lines of code, no explicit loops.
+
+## When NumPy is not enough
+
+NumPy and SciPy will take you a very long way. They run out of steam when:
+
+- You need **automatic differentiation** (gradients of arbitrary functions). Reach for [PyTorch or JAX](/97-python/06-machine-learning).
+- You need to run on a **GPU**. Same — PyTorch, JAX, or CuPy (a drop-in NumPy replacement on CUDA).
+- You need **symbolic** rather than numerical computation. Reach for [SymPy](/97-python/04-symbolic-mathematics).
+- You're doing **large-scale data processing** beyond what fits in memory. Reach for pandas, Polars, or Dask.
+
+But for the everyday business of "evaluate this function on a grid, fit a model, find a root, integrate a thing" — NumPy and SciPy are usually the right answer.

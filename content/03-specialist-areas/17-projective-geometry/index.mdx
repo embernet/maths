@@ -1,0 +1,94 @@
+---
+title: 'Projective Geometry'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 2
+order: 17
+tags: [projective-geometry, homogeneous-coordinates, duality, cross-ratio, bezouts-theorem, conics, perspective]
+prerequisites:
+- 01-algebra-and-linear-algebra
+- 02-core-mathematics/01-abstract-algebra
+related:
+- 01-galois-theory
+- 04-topology
+- 01-algebra-and-linear-algebra
+mathematicians: [descartes, gauss, hilbert, pascal]
+reading_time_min: 10
+summary: What happens when you add points at infinity. Projective spaces, homogeneous coordinates, duality, and cross-ratio — the geometry that underlies perspective, computer vision, and algebraic geometry.
+theorems: [pascal-s-theorem-on-hexagons-in-conics, foundations-of-geometry, analytic-geometry, non-euclidean-geometry-unpublished]
+applications: [computer-graphics-3d, cellular-network-design]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/01-algebra-and-linear-algebra
+    why: 'Projective transformations are linear maps on homogeneous coordinates — vector spaces and linear maps are the working language throughout.'
+  - kind: topic
+    ref: 02-core-mathematics/01-abstract-algebra
+    why: 'The projective linear group PGL(n+1) is a quotient group; the algebraic structure of transformation groups is needed to understand projective equivalence.'
+  - kind: mathematician
+    ref: descartes
+    why: 'Cartesian coordinates are the language projective geometry generalises; understanding the affine picture first makes the projective extension natural.'
+  - kind: mathematician
+    ref: pascal
+    why: 'Pascal''s theorem on hexagons inscribed in conics is a striking projective result that motivates the whole theory — and it was discovered by Pascal at age sixteen.'
+---
+
+Parallel lines never meet — or so Euclidean geometry insists. Projective geometry begins by asking what happens if you add new points, one for each "direction," where parallel lines notionally converge. The resulting geometry is in some ways simpler than Euclidean geometry: there are no special cases for parallel lines, and the beautiful duality between points and lines becomes exact.
+
+## The projective plane and homogeneous coordinates
+
+The **real projective plane** $\mathbb{P}^2$ is the set of lines through the origin in $\mathbb{R}^3$, equivalently the set of equivalence classes of non-zero vectors $(X, Y, Z) \in \mathbb{R}^3 \setminus \{0\}$ under the relation $(X, Y, Z) \sim (\lambda X, \lambda Y, \lambda Z)$ for any $\lambda \ne 0$. The equivalence class of $(X, Y, Z)$ is written $[X : Y : Z]$ and called a point in homogeneous coordinates.
+
+The affine plane $\mathbb{R}^2$ embeds in $\mathbb{P}^2$ via $(x, y) \mapsto [x : y : 1]$. The remaining points, where $Z = 0$, form a **line at infinity** $\ell_\infty$: a single point $[a : b : 0]$ for each "direction" $(a, b)$. Parallel lines in $\mathbb{R}^2$ with direction $(a, b)$ both pass through $[a : b : 0]$.
+
+More generally, **projective $n$-space** $\mathbb{P}^n$ is the set of lines through the origin in $\mathbb{R}^{n+1}$: equivalence classes $[X_0 : X_1 : \cdots : X_n]$ of non-zero $(n+1)$-tuples. It has dimension $n$ as a geometric object.
+
+## Projective transformations
+
+A **projective transformation** (collineation) of $\mathbb{P}^n$ is induced by an invertible linear map $A : \mathbb{R}^{n+1} \to \mathbb{R}^{n+1}$: the map $[X] \mapsto [AX]$ is well-defined on equivalence classes. Two matrices $A$ and $\lambda A$ induce the same projective transformation, so the group of projective transformations is $\mathrm{PGL}(n+1, \mathbb{R}) = \mathrm{GL}(n+1, \mathbb{R}) / \{\lambda I : \lambda \ne 0\}$.
+
+In $\mathbb{P}^2$, a projective transformation is described by a $3 \times 3$ invertible matrix up to scalar multiple — eight degrees of freedom. It maps lines to lines and preserves incidence (which points lie on which lines), but it does not in general preserve distances, angles, or the cross-ratio of four collinear points (see below). However, it does preserve the **cross-ratio**, which is therefore a projective invariant.
+
+## Duality
+
+The **principle of duality** is one of the most elegant features of projective geometry: in $\mathbb{P}^2$, the words "point" and "line" can be systematically exchanged in any true statement to produce another true statement.
+
+This is not a coincidence. In homogeneous coordinates, a line in $\mathbb{P}^2$ is the set $\{[X:Y:Z] : aX + bY + cZ = 0\}$, determined by the coefficient vector $[a:b:c]$. But $[a:b:c]$ is itself a point in $\mathbb{P}^2$. The space of lines is thus another copy of $\mathbb{P}^2$ — the **dual projective plane** $(\mathbb{P}^2)^*$. A point $p$ in $\mathbb{P}^2$ determines a line in $(\mathbb{P}^2)^*$ (the set of lines through $p$), and vice versa.
+
+In $\mathbb{P}^3$: points and planes are dual; lines are self-dual (the dual of a line is a line in the dual space).
+
+**Pascal's theorem**: if six points lie on a conic, then the three pairs of opposite sides of the hexagon they form meet in three collinear points. **The dual** (Brianchon's theorem): if six lines are tangent to a conic, then the three diagonals of the resulting hexagon are concurrent. Both theorems follow from each other by duality, and neither has an elementary Euclidean proof.
+
+## Cross-ratio
+
+Let $A, B, C, D$ be four distinct points on a projective line (equivalently, four distinct lines through a point in $\mathbb{P}^2$, viewed dually). The **cross-ratio** is
+
+$$(A, B; C, D) = \frac{AC \cdot BD}{BC \cdot AD},$$
+
+where $AC$ denotes the signed ratio of the coordinates of $C$ and $A$ on the affine line. The cross-ratio is preserved by every projective transformation — it is the fundamental projective invariant. Two configurations of four collinear points are projectively equivalent if and only if they have the same cross-ratio.
+
+Historically, the cross-ratio arises in perspective drawing: the apparent ratios of distances change as you change viewpoint, but the cross-ratio of four collinear points is preserved under any central projection. This is why a perspective drawing of a railway track with equally spaced sleepers does not look equally spaced — but the cross-ratio of any four sleepers is the same in the drawing as in reality.
+
+## Conics in the projective plane
+
+A **conic** in $\mathbb{P}^2$ is the zero set of a homogeneous quadratic polynomial $F(X, Y, Z) = 0$. In matrix form: $F([X]) = [X]^T M [X] = 0$ for a symmetric $3 \times 3$ matrix $M$.
+
+A conic is **non-degenerate** if $\det M \ne 0$. Over $\mathbb{R}$, all non-degenerate conics are projectively equivalent (the affine distinction between ellipse, parabola, and hyperbola disappears: a parabola is an ellipse tangent to the line at infinity, and a hyperbola meets the line at infinity in two points). A **degenerate** conic ($\det M = 0$) is a union of two lines or a double line.
+
+**Bézout's theorem** (stated for degree $d$ and degree $e$ curves): two algebraic curves in $\mathbb{P}^2$ of degrees $d$ and $e$ with no common component meet in exactly $de$ points, counted with multiplicity. For two conics ($d = e = 2$): four intersection points, counted with multiplicity and over $\mathbb{C}$. Two distinct circles in $\mathbb{R}^2$ seem to intersect in at most two points; in $\mathbb{P}^2_{\mathbb{C}}$ they always meet in exactly four: the two real intersections (if any) and two "circular points at infinity" $[1 : \pm i : 0]$, which every circle passes through.
+
+## The relationship to affine and Euclidean geometry
+
+Euclidean geometry is projective geometry with extra structure: a fixed conic (the "absolute conic" or the pair of circular points at infinity) whose stabiliser in $\mathrm{PGL}(3)$ is the Euclidean symmetry group. Distance and angle are defined using this extra structure.
+
+Affine geometry sits between: fix a line at infinity but no conic. Parallel lines are lines meeting at the line at infinity; ratios of lengths (but not lengths or angles) are affine invariants. The hierarchy is Euclidean $\subsetneq$ affine $\subsetneq$ projective, with each enlargement of the symmetry group discarding more structure — Felix Klein's **Erlangen Programme** (1872) made this hierarchy precise.
+
+## Real-world applications
+
+Where this turns up in the world: [computer graphics and 3D rendering](/applications/computer-graphics-3d) represent all geometric transformations — including perspective projection onto the screen — as $4 \times 4$ matrix multiplications in homogeneous coordinates. The GPU pipeline is projective geometry in hardware. [Cellular network design](/applications/cellular-network-design) uses projective planes over finite fields to construct Costas arrays and frequency-hopping spread-spectrum patterns with optimal cross-correlation — the combinatorial structure of finite projective planes (where every two points determine a unique line and every two lines meet in a unique point) provides exactly the regularity properties radio engineers need.
+
+## Why this matters
+
+Projective geometry is the natural setting for algebraic geometry: curves and surfaces are best studied in projective space, where Bézout's theorem and duality hold without exceptions. The modern proof of Fermat's Last Theorem is, at heart, a statement about algebraic curves in projective space.
+
+[Carl Friedrich Gauss](/mathematicians/gauss) and [David Hilbert](/mathematicians/hilbert) both contributed to the rigorous foundations of projective geometry as part of the nineteenth-century project of putting all of geometry on axiomatic grounds. Hilbert's *Grundlagen der Geometrie* (1899) showed how to axiomatise projective geometry independently of Euclidean assumptions — and in the process clarified what the continuum of "real points" actually contributes to geometry. The projective viewpoint, by removing the special role of the Euclidean distance, reveals a cleaner structure underneath.

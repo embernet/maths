@@ -4,8 +4,10 @@
       "euclid"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra",
+      "97-nature/01-the-golden-ratio",
+      "97-nature/03-phyllotaxis-and-the-golden-angle"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -21,7 +23,7 @@
       "euclid"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -36,7 +38,9 @@
       "euclid"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "97-nature/07-honeycombs-and-the-hexagon-theorem",
+      "97-nature/08-voronoi-tessellations-in-nature"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -53,8 +57,9 @@
       "fermat"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra",
+      "96-lean4/13-fermat-little"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -71,8 +76,8 @@
       "gauss"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -90,9 +95,9 @@
       "gauss"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "03-specialisation-year-three/05-numerical-analysis",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "03-specialist-areas/05-numerical-analysis",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -112,7 +117,8 @@
       "descartes"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "97-nature/04-spirals-from-nautilus-to-galaxies"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -129,7 +135,7 @@
       "fermat"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -145,7 +151,7 @@
       "pythagoras"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -164,8 +170,8 @@
       "euclid-s-algorithm"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra"
     ]
   },
   "pagerank-google": {
@@ -174,9 +180,9 @@
       "axiomatic-foundations-of-probability"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/06-programming-and-discrete-mathematics",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "03-specialist-areas/07-stochastic-processes"
     ]
   },
   "gps-positioning": {
@@ -185,9 +191,9 @@
       "gaussian-distribution-normal-distribution"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "01-foundations-year-one/03-calculus-and-methods",
-      "03-specialisation-year-three/05-numerical-analysis"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "01-foundations/03-calculus-and-methods",
+      "03-specialist-areas/05-numerical-analysis"
     ]
   },
   "machine-learning-deep-neural-networks": {
@@ -197,9 +203,9 @@
       "cauchyschwarz-inequality"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "01-foundations-year-one/03-calculus-and-methods",
-      "03-specialisation-year-three/05-numerical-analysis"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "01-foundations/03-calculus-and-methods",
+      "03-specialist-areas/05-numerical-analysis"
     ]
   },
   "cauchy-sequences": {
@@ -207,9 +213,9 @@
       "cauchy"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations",
-      "02-core-year-two/02-real-analysis-2",
-      "02-core-year-two/03-complex-analysis"
+      "01-foundations/02-real-analysis-foundations",
+      "02-core-mathematics/02-real-analysis-2",
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -225,9 +231,9 @@
       "weierstrass"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations",
-      "02-core-year-two/02-real-analysis-2",
-      "03-specialisation-year-three/04-topology"
+      "01-foundations/02-real-analysis-foundations",
+      "02-core-mathematics/02-real-analysis-2",
+      "03-specialist-areas/04-topology"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -242,7 +248,7 @@
       "bolzano"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations"
+      "01-foundations/02-real-analysis-foundations"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -256,7 +262,7 @@
       "cauchy"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations"
+      "01-foundations/02-real-analysis-foundations"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -267,7 +273,7 @@
       "weierstrass"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations"
+      "01-foundations/02-real-analysis-foundations"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -278,16 +284,15 @@
       "weierstrass"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations",
-      "02-core-year-two/02-real-analysis-2"
+      "01-foundations/02-real-analysis-foundations",
+      "02-core-mathematics/02-real-analysis-2"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
     ],
     "used_in_applications": [
       "signal-processing-jpeg-mp3",
-      "computer-graphics-3d",
-      "computer-graphics-and-visualisation"
+      "computer-graphics-3d"
     ]
   },
   "uniform-convergence": {
@@ -295,8 +300,8 @@
       "weierstrass"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations",
-      "02-core-year-two/02-real-analysis-2"
+      "01-foundations/02-real-analysis-foundations",
+      "02-core-mathematics/02-real-analysis-2"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -307,9 +312,9 @@
       "riemann"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/02-real-analysis-foundations",
-      "02-core-year-two/02-real-analysis-2",
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+      "01-foundations/02-real-analysis-foundations",
+      "02-core-mathematics/02-real-analysis-2",
+      "03-specialist-areas/03-measure-and-lebesgue-integration"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -325,9 +330,9 @@
       "fourier-transform"
     ],
     "uses_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "03-specialisation-year-three/08-differential-equations-advanced",
-      "01-foundations-year-one/04-probability-and-statistics"
+      "01-foundations/03-calculus-and-methods",
+      "03-specialist-areas/08-differential-equations-advanced",
+      "01-foundations/04-probability-and-statistics"
     ]
   },
   "heat-equation": {
@@ -335,9 +340,9 @@
       "fourier"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "01-foundations/03-calculus-and-methods",
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "04-advanced-topics/03-advanced-pdes"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -355,10 +360,11 @@
       "laplace"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "04-advanced-topics-year-four/03-advanced-pdes",
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+      "01-foundations/03-calculus-and-methods",
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "04-advanced-topics/03-advanced-pdes",
+      "04-advanced-topics/04-mathematical-physics-and-fluids",
+      "97-nature/11-the-mathematics-of-sand-dunes-and-waves"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -375,7 +381,7 @@
       "newton"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods"
+      "01-foundations/03-calculus-and-methods"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -391,7 +397,7 @@
       "leibniz"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods"
+      "01-foundations/03-calculus-and-methods"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -407,7 +413,7 @@
       "newton"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods"
+      "01-foundations/03-calculus-and-methods"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -424,7 +430,7 @@
       "fermat"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods"
+      "01-foundations/03-calculus-and-methods"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -439,8 +445,8 @@
       "bernoulli-family"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+      "01-foundations/03-calculus-and-methods",
+      "04-advanced-topics/04-mathematical-physics-and-fluids"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -458,9 +464,9 @@
       "fourier-series"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "04-advanced-topics/04-mathematical-physics-and-fluids",
+      "04-advanced-topics/03-advanced-pdes"
     ]
   },
   "epidemiological-modelling": {
@@ -469,9 +475,9 @@
       "gaussian-distribution-normal-distribution"
     ],
     "uses_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "03-specialisation-year-three/06-mathematical-biology",
-      "01-foundations-year-one/04-probability-and-statistics"
+      "01-foundations/03-calculus-and-methods",
+      "03-specialist-areas/06-mathematical-biology",
+      "01-foundations/04-probability-and-statistics"
     ]
   },
   "option-pricing-finance": {
@@ -481,9 +487,9 @@
       "axiomatic-foundations-of-probability"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/07-stochastic-processes",
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/07-stochastic-processes",
+      "03-specialist-areas/03-measure-and-lebesgue-integration"
     ]
   },
   "bayes-theorem": {
@@ -491,8 +497,8 @@
       "bayes"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -512,10 +518,10 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference",
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "03-specialist-areas/03-measure-and-lebesgue-integration",
+      "03-specialist-areas/07-stochastic-processes"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -537,9 +543,13 @@
       "gauss"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "03-specialisation-year-three/05-numerical-analysis",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "03-specialist-areas/05-numerical-analysis",
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "97-nature/00-section-opener",
+      "97-nature/05-fractals-and-self-similarity",
+      "97-nature/10-allometric-scaling-and-kleibers-law",
+      "97-nature/12-the-genetic-code-as-mathematics"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -566,8 +576,8 @@
       "fisher"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -588,8 +598,8 @@
       "bayes"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -605,8 +615,8 @@
       "laplace"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -622,7 +632,7 @@
       "pascal"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics"
+      "01-foundations/04-probability-and-statistics"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -639,8 +649,8 @@
       "axiomatic-foundations-of-probability"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ]
   },
   "spam-filtering": {
@@ -649,8 +659,8 @@
       "maximum-likelihood-estimation"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ]
   },
   "clinical-trials-design": {
@@ -661,8 +671,8 @@
       "analysis-of-variance-anova"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ]
   },
   "galois-theory": {
@@ -670,9 +680,9 @@
       "galois"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory",
-      "04-advanced-topics-year-four/01-algebraic-geometry"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory",
+      "04-advanced-topics/01-algebraic-geometry"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -688,8 +698,8 @@
       "galois"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -704,8 +714,8 @@
       "galois"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -719,8 +729,8 @@
       "cauchy"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -737,7 +747,7 @@
       "noether"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -752,8 +762,8 @@
       "noether"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -768,7 +778,7 @@
       "dedekind"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -782,8 +792,8 @@
       "abel"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -799,8 +809,8 @@
       "lagrange"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/08-differential-equations-advanced"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/08-differential-equations-advanced"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -816,8 +826,8 @@
       "abel"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -833,9 +843,9 @@
       "modular-arithmetic-and-number-theory"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory"
     ]
   },
   "quantum-computing-algorithms": {
@@ -846,10 +856,10 @@
       "modular-arithmetic-and-number-theory"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra",
-      "03-specialisation-year-three/01-galois-theory",
-      "03-specialisation-year-three/02-functional-analysis"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra",
+      "03-specialist-areas/01-galois-theory",
+      "03-specialist-areas/02-functional-analysis"
     ]
   },
   "banach-fixed-point-theorem": {
@@ -857,10 +867,10 @@
       "banach"
     ],
     "appears_in_topics": [
-      "02-core-year-two/02-real-analysis-2",
-      "03-specialisation-year-three/02-functional-analysis",
-      "03-specialisation-year-three/08-differential-equations-advanced",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "02-core-mathematics/02-real-analysis-2",
+      "03-specialist-areas/02-functional-analysis",
+      "03-specialist-areas/08-differential-equations-advanced",
+      "04-advanced-topics/03-advanced-pdes"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -877,14 +887,14 @@
       "weierstrass"
     ],
     "appears_in_topics": [
-      "02-core-year-two/02-real-analysis-2"
+      "02-core-mathematics/02-real-analysis-2",
+      "97-nature/05-fractals-and-self-similarity"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
     ],
     "used_in_applications": [
-      "option-pricing-finance",
-      "mathematical-finance-and-stochastic-calculus"
+      "option-pricing-finance"
     ]
   },
   "complex-analysis-and-cauchy-s-theorem": {
@@ -892,7 +902,7 @@
       "cauchy"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis"
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -908,7 +918,7 @@
       "euler"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis"
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -925,14 +935,14 @@
       "riemann"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis",
-      "04-advanced-topics-year-four/01-algebraic-geometry"
+      "02-core-mathematics/03-complex-analysis",
+      "04-advanced-topics/01-algebraic-geometry"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
     ],
     "used_in_applications": [
-      "theoretical-physics-and-mathematics"
+      "gravitational-wave-detection"
     ]
   },
   "riemann-zeta-function": {
@@ -940,8 +950,8 @@
       "riemann"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis",
-      "04-advanced-topics-year-four/02-analytic-number-theory"
+      "02-core-mathematics/03-complex-analysis",
+      "04-advanced-topics/02-analytic-number-theory"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -955,8 +965,8 @@
       "riemann"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis",
-      "04-advanced-topics-year-four/02-analytic-number-theory"
+      "02-core-mathematics/03-complex-analysis",
+      "04-advanced-topics/02-analytic-number-theory"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -973,9 +983,9 @@
       "bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel"
     ],
     "uses_topics": [
-      "02-core-year-two/03-complex-analysis",
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "02-core-mathematics/03-complex-analysis",
+      "04-advanced-topics/04-mathematical-physics-and-fluids",
+      "04-advanced-topics/03-advanced-pdes"
     ]
   },
   "fourier-series": {
@@ -983,7 +993,9 @@
       "fourier"
     ],
     "appears_in_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "97-nature/09-turing-patterns-and-animal-coats",
+      "97-nature/11-the-mathematics-of-sand-dunes-and-waves"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1003,7 +1015,9 @@
       "fourier"
     ],
     "appears_in_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "97-nature/00-section-opener",
+      "97-nature/11-the-mathematics-of-sand-dunes-and-waves"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1026,7 +1040,7 @@
       "laplace"
     ],
     "appears_in_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes"
+      "02-core-mathematics/04-vector-calculus-and-pdes"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1042,7 +1056,7 @@
       "gauss"
     ],
     "appears_in_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes"
+      "02-core-mathematics/04-vector-calculus-and-pdes"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1060,8 +1074,8 @@
       "hilbert-spaces"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/02-functional-analysis"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/02-functional-analysis"
     ]
   },
   "medical-imaging-mri-ct": {
@@ -1071,9 +1085,9 @@
       "heat-equation"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/02-functional-analysis",
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/02-functional-analysis",
+      "03-specialist-areas/03-measure-and-lebesgue-integration"
     ]
   },
   "the-fisher-information-matrix": {
@@ -1081,7 +1095,7 @@
       "fisher"
     ],
     "appears_in_topics": [
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1097,7 +1111,7 @@
       "fisher"
     ],
     "appears_in_topics": [
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1113,7 +1127,7 @@
       "fisher"
     ],
     "appears_in_topics": [
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1132,8 +1146,8 @@
       "experimental-design-randomisation-blocking-factorial-design"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ]
   },
   "cybersecurity-anomaly-detection": {
@@ -1143,8 +1157,8 @@
       "bayes-theorem"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ]
   },
   "graph-theory-konigsberg-bridges": {
@@ -1152,7 +1166,7 @@
       "euler"
     ],
     "appears_in_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1168,7 +1182,7 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1184,7 +1198,7 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1199,7 +1213,7 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1213,7 +1227,11 @@
       "fibonacci"
     ],
     "appears_in_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "97-nature/00-section-opener",
+      "97-nature/01-the-golden-ratio",
+      "97-nature/02-fibonacci-numbers-in-nature",
+      "97-nature/03-phyllotaxis-and-the-golden-angle"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -1228,7 +1246,7 @@
       "erdos"
     ],
     "appears_in_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1244,8 +1262,8 @@
       "fourier-transform"
     ],
     "uses_topics": [
-      "02-core-year-two/06-programming-and-discrete-mathematics",
-      "01-foundations-year-one/04-probability-and-statistics"
+      "02-core-mathematics/06-programming-and-discrete-mathematics",
+      "01-foundations/04-probability-and-statistics"
     ]
   },
   "data-compression": {
@@ -1254,8 +1272,8 @@
       "kolmogorov-complexity-algorithmic-information-theory"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/06-programming-and-discrete-mathematics"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/06-programming-and-discrete-mathematics"
     ]
   },
   "characterisation-of-solvable-polynomials": {
@@ -1263,7 +1281,7 @@
       "galois"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/01-galois-theory"
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -1277,8 +1295,8 @@
       "abel"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/01-galois-theory",
-      "02-core-year-two/03-complex-analysis"
+      "03-specialist-areas/01-galois-theory",
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1292,8 +1310,8 @@
       "dedekind"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/01-galois-theory",
-      "04-advanced-topics-year-four/01-algebraic-geometry"
+      "03-specialist-areas/01-galois-theory",
+      "04-advanced-topics/01-algebraic-geometry"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1310,9 +1328,9 @@
       "axiomatic-foundations-of-probability"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra",
-      "04-advanced-topics-year-four/01-algebraic-geometry"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra",
+      "04-advanced-topics/01-algebraic-geometry"
     ]
   },
   "banach-spaces": {
@@ -1320,7 +1338,7 @@
       "banach"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/02-functional-analysis"
+      "03-specialist-areas/02-functional-analysis"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1336,7 +1354,7 @@
       "banach"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/02-functional-analysis"
+      "03-specialist-areas/02-functional-analysis"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -1347,8 +1365,8 @@
       "hilbert"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/02-functional-analysis",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "03-specialist-areas/02-functional-analysis",
+      "04-advanced-topics/03-advanced-pdes"
     ],
     "appears_in_eras": [
       "08-foundations-and-the-twentieth-century-crisis"
@@ -1365,7 +1383,7 @@
       "cauchy"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/02-functional-analysis"
+      "03-specialist-areas/02-functional-analysis"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1383,7 +1401,7 @@
       "banach"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/02-functional-analysis"
+      "03-specialist-areas/02-functional-analysis"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1399,8 +1417,8 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "03-specialist-areas/03-measure-and-lebesgue-integration",
+      "03-specialist-areas/07-stochastic-processes"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1416,7 +1434,7 @@
       "bolzano"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+      "03-specialist-areas/03-measure-and-lebesgue-integration"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1427,7 +1445,7 @@
       "cantor"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+      "03-specialist-areas/03-measure-and-lebesgue-integration"
     ],
     "appears_in_eras": [
       "08-foundations-and-the-twentieth-century-crisis"
@@ -1441,9 +1459,9 @@
       "gaussian-distribution-normal-distribution"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference",
-      "03-specialisation-year-three/03-measure-and-lebesgue-integration"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "03-specialist-areas/03-measure-and-lebesgue-integration"
     ]
   },
   "actuarial-science": {
@@ -1453,9 +1471,9 @@
       "maximum-likelihood-estimation"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "03-specialist-areas/07-stochastic-processes"
     ]
   },
   "topology-algebraic-topology-foundations": {
@@ -1463,7 +1481,7 @@
       "poincare"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/04-topology"
+      "03-specialist-areas/04-topology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1478,7 +1496,7 @@
       "poincare"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/04-topology"
+      "03-specialist-areas/04-topology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1489,7 +1507,7 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/04-topology"
+      "03-specialist-areas/04-topology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1504,9 +1522,9 @@
       "riemannian-geometry"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "01-foundations-year-one/03-calculus-and-methods",
-      "03-specialisation-year-three/04-topology"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "01-foundations/03-calculus-and-methods",
+      "03-specialist-areas/04-topology"
     ]
   },
   "protein-folding-alphafold": {
@@ -1516,9 +1534,9 @@
       "method-of-least-squares"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "03-specialisation-year-three/05-numerical-analysis",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "03-specialist-areas/05-numerical-analysis",
+      "04-advanced-topics/03-advanced-pdes"
     ]
   },
   "lagrange-interpolation": {
@@ -1526,7 +1544,7 @@
       "lagrange"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/05-numerical-analysis"
+      "03-specialist-areas/05-numerical-analysis"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1544,9 +1562,9 @@
       "fourier-series"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "01-foundations-year-one/03-calculus-and-methods",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "01-foundations/03-calculus-and-methods",
+      "04-advanced-topics/03-advanced-pdes"
     ]
   },
   "morphogenesis-mathematical-biology": {
@@ -1554,14 +1572,14 @@
       "turing"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/06-mathematical-biology"
+      "03-specialist-areas/06-mathematical-biology",
+      "97-nature/09-turing-patterns-and-animal-coats"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
     ],
     "used_in_applications": [
-      "epidemiological-modelling",
-      "mathematical-biology-epidemiology"
+      "epidemiological-modelling"
     ]
   },
   "chaos-theory-three-body-problem": {
@@ -1569,7 +1587,7 @@
       "poincare"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/06-mathematical-biology"
+      "03-specialist-areas/06-mathematical-biology"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1585,9 +1603,9 @@
       "chaos-theory-three-body-problem"
     ],
     "uses_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "03-specialisation-year-three/06-mathematical-biology",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "01-foundations/03-calculus-and-methods",
+      "03-specialist-areas/06-mathematical-biology",
+      "03-specialist-areas/07-stochastic-processes"
     ]
   },
   "kolmogorov-complexity-algorithmic-information-theory": {
@@ -1595,7 +1613,7 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/07-stochastic-processes"
+      "03-specialist-areas/07-stochastic-processes"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1610,7 +1628,7 @@
       "bernoulli-family"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/08-differential-equations-advanced"
+      "03-specialist-areas/08-differential-equations-advanced"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1626,14 +1644,13 @@
       "riemann"
     ],
     "appears_in_topics": [
-      "04-advanced-topics-year-four/01-algebraic-geometry"
+      "04-advanced-topics/01-algebraic-geometry"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
     ],
     "used_in_applications": [
       "gps-positioning",
-      "gps-and-satellite-navigation",
       "computer-graphics-3d",
       "gravitational-wave-detection"
     ]
@@ -1645,8 +1662,8 @@
       "euclid-s-algorithm"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "02-core-year-two/01-abstract-algebra"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "02-core-mathematics/01-abstract-algebra"
     ]
   },
   "fermat-s-last-theorem": {
@@ -1654,8 +1671,8 @@
       "fermat"
     ],
     "appears_in_topics": [
-      "04-advanced-topics-year-four/02-analytic-number-theory",
-      "02-core-year-two/01-abstract-algebra"
+      "04-advanced-topics/02-analytic-number-theory",
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -1670,7 +1687,7 @@
       "hardy"
     ],
     "appears_in_topics": [
-      "04-advanced-topics-year-four/02-analytic-number-theory"
+      "04-advanced-topics/02-analytic-number-theory"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1685,9 +1702,9 @@
       "fourier-series"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/08-differential-equations-advanced",
-      "04-advanced-topics-year-four/03-advanced-pdes"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/08-differential-equations-advanced",
+      "04-advanced-topics/03-advanced-pdes"
     ]
   },
   "turbulence-theory-kolmogorov-scaling": {
@@ -1695,7 +1712,7 @@
       "kolmogorov"
     ],
     "appears_in_topics": [
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+      "04-advanced-topics/04-mathematical-physics-and-fluids"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -1714,9 +1731,9 @@
       "gaussian-distribution-normal-distribution"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "04-advanced-topics/04-mathematical-physics-and-fluids",
+      "03-specialist-areas/07-stochastic-processes"
     ]
   },
   "a-mathematician-s-apology": {
@@ -1744,14 +1761,15 @@
     "attributed_to": [
       "turing"
     ],
+    "appears_in_topics": [
+      "97-nature/09-turing-patterns-and-animal-coats"
+    ],
     "appears_in_eras": [
       "08-foundations-and-the-twentieth-century-crisis"
     ],
     "used_in_applications": [
       "machine-learning-deep-neural-networks",
-      "rsa-public-key-cryptography",
-      "cryptography-and-rsa",
-      "artificial-intelligence-and-machine-learning"
+      "rsa-public-key-cryptography"
     ]
   },
   "approximation-of": {
@@ -1790,8 +1808,8 @@
       "bernoulli-family"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1816,7 +1834,7 @@
       "bernoulli-family"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1838,6 +1856,9 @@
   "binomial-theorem": {
     "attributed_to": [
       "newton"
+    ],
+    "appears_in_topics": [
+      "97-nature/12-the-genetic-code-as-mathematics"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -1879,11 +1900,28 @@
       "09-modern-mathematics"
     ],
     "used_in_applications": [
-      "rsa-public-key-cryptography",
-      "cryptography-and-rsa"
+      "rsa-public-key-cryptography"
     ]
   },
-  "fundamental-theorem-of-calculus-newton": {},
+  "fundamental-theorem-of-calculus": {
+    "attributed_to": [
+      "newton",
+      "leibniz",
+      "bernoulli-family"
+    ],
+    "appears_in_topics": [
+      "01-foundations/03-calculus-and-methods",
+      "02-core-mathematics/02-real-analysis-2"
+    ],
+    "appears_in_eras": [
+      "05-the-calculus-revolution"
+    ],
+    "used_in_applications": [
+      "climate-modelling",
+      "signal-processing-jpeg-mp3",
+      "option-pricing-finance"
+    ]
+  },
   "cantor-s-diagonal-argument": {
     "attributed_to": [
       "cantor"
@@ -1898,6 +1936,9 @@
   "cantor-set": {
     "attributed_to": [
       "cantor"
+    ],
+    "appears_in_topics": [
+      "97-nature/05-fractals-and-self-similarity"
     ],
     "appears_in_eras": [
       "08-foundations-and-the-twentieth-century-crisis"
@@ -1919,7 +1960,7 @@
       "cauchy"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis"
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -1948,8 +1989,8 @@
       "gauss"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -2049,8 +2090,8 @@
   },
   "dirichlet-convergence-theorem": {
     "appears_in_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/04-topology"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/04-topology"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -2063,6 +2104,9 @@
   "discovery-of-irrational-numbers": {
     "attributed_to": [
       "pythagoras"
+    ],
+    "appears_in_topics": [
+      "96-lean4/09-sqrt-two-irrational"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -2080,7 +2124,6 @@
       "gravitational-wave-detection"
     ]
   },
-  "fermats-little-theorem": {},
   "proof-by-contradiction": {
     "attributed_to": [
       "euclid"
@@ -2094,8 +2137,8 @@
       "euler"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra",
-      "04-advanced-topics-year-four/02-analytic-number-theory"
+      "02-core-mathematics/01-abstract-algebra",
+      "04-advanced-topics/02-analytic-number-theory"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -2106,13 +2149,12 @@
       "cryptocurrency-blockchain"
     ]
   },
-  "eulers-totient-function": {},
   "first-systematic-use-of-complex-numbers": {
     "attributed_to": [
       "cardano"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis"
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "04-renaissance-and-symbolic-algebra"
@@ -2127,7 +2169,7 @@
       "gauss"
     ],
     "appears_in_topics": [
-      "02-core-year-two/03-complex-analysis"
+      "02-core-mathematics/03-complex-analysis"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -2165,31 +2207,12 @@
       "bridge-and-structural-engineering"
     ]
   },
-  "fundamental-theorem-of-calculus": {
-    "attributed_to": [
-      "newton",
-      "leibniz",
-      "bernoulli-family"
-    ],
-    "appears_in_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "02-core-year-two/02-real-analysis-2"
-    ],
-    "appears_in_eras": [
-      "05-the-calculus-revolution"
-    ],
-    "used_in_applications": [
-      "climate-modelling",
-      "signal-processing-jpeg-mp3",
-      "option-pricing-finance"
-    ]
-  },
   "group-theory-foundations": {
     "attributed_to": [
       "lagrange"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -2250,6 +2273,9 @@
     "attributed_to": [
       "hardy"
     ],
+    "appears_in_topics": [
+      "97-nature/12-the-genetic-code-as-mathematics"
+    ],
     "appears_in_eras": [
       "09-modern-mathematics"
     ],
@@ -2299,7 +2325,7 @@
       "hilbert"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/01-galois-theory"
+      "03-specialist-areas/01-galois-theory"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -2328,7 +2354,7 @@
       "pythagoras"
     ],
     "appears_in_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra"
+      "01-foundations/01-algebra-and-linear-algebra"
     ],
     "appears_in_eras": [
       "02-classical-greece"
@@ -2410,7 +2436,7 @@
       "noether"
     ],
     "appears_in_topics": [
-      "02-core-year-two/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra"
     ],
     "appears_in_eras": [
       "07-the-structural-turn"
@@ -2493,6 +2519,9 @@
     "attributed_to": [
       "fisher"
     ],
+    "appears_in_topics": [
+      "97-nature/12-the-genetic-code-as-mathematics"
+    ],
     "appears_in_eras": [
       "09-modern-mathematics"
     ],
@@ -2507,8 +2536,8 @@
       "riemann"
     ],
     "appears_in_topics": [
-      "03-specialisation-year-three/01-galois-theory",
-      "04-advanced-topics-year-four/02-analytic-number-theory"
+      "03-specialist-areas/01-galois-theory",
+      "04-advanced-topics/02-analytic-number-theory"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"
@@ -2594,8 +2623,7 @@
       "09-modern-mathematics"
     ],
     "used_in_applications": [
-      "machine-learning-deep-neural-networks",
-      "artificial-intelligence-and-machine-learning"
+      "machine-learning-deep-neural-networks"
     ]
   },
   "gambling-and-game-theory": {
@@ -2605,9 +2633,9 @@
       "probability-theory-foundations"
     ],
     "uses_topics": [
-      "01-foundations-year-one/04-probability-and-statistics",
-      "02-core-year-two/05-probability-and-statistical-inference",
-      "03-specialisation-year-three/07-stochastic-processes"
+      "01-foundations/04-probability-and-statistics",
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "03-specialist-areas/07-stochastic-processes"
     ]
   },
   "gravitational-wave-detection": {
@@ -2617,9 +2645,9 @@
       "riemannian-geometry"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/05-numerical-analysis",
-      "04-advanced-topics-year-four/04-mathematical-physics-and-fluids"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/05-numerical-analysis",
+      "04-advanced-topics/04-mathematical-physics-and-fluids"
     ]
   },
   "radar-and-sonar": {
@@ -2629,8 +2657,8 @@
       "gaussian-distribution-normal-distribution"
     ],
     "uses_topics": [
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/05-numerical-analysis"
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/05-numerical-analysis"
     ]
   },
   "recommender-systems": {
@@ -2639,8 +2667,8 @@
       "cauchyschwarz-inequality"
     ],
     "uses_topics": [
-      "01-foundations-year-one/01-algebra-and-linear-algebra",
-      "03-specialisation-year-three/05-numerical-analysis"
+      "01-foundations/01-algebra-and-linear-algebra",
+      "03-specialist-areas/05-numerical-analysis"
     ]
   },
   "traffic-flow-modelling": {
@@ -2648,9 +2676,9 @@
       "heat-equation"
     ],
     "uses_topics": [
-      "01-foundations-year-one/03-calculus-and-methods",
-      "02-core-year-two/04-vector-calculus-and-pdes",
-      "03-specialisation-year-three/08-differential-equations-advanced"
+      "01-foundations/03-calculus-and-methods",
+      "02-core-mathematics/04-vector-calculus-and-pdes",
+      "03-specialist-areas/08-differential-equations-advanced"
     ]
   }
 }

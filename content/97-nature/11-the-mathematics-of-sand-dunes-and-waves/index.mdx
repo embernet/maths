@@ -1,0 +1,78 @@
+---
+title: 'The Mathematics of Sand Dunes and Waves'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 11
+tags: [sand-dunes, waves, solitons, fluid-mechanics, dimensional-analysis, pdes, korteweg-de-vries, river-meanders]
+related: ['05-fractals-and-self-similarity']
+mathematicians: [fourier, laplace]
+reading_time_min: 11
+summary: 'Why are sand dunes the same shape everywhere? Why do waves break the way they do? From dimensional analysis of aeolian transport to the Korteweg-de Vries soliton and the geometry of river meanders, the mathematics of moving fluids and granular media is surprisingly rich.'
+theorems: [fourier-series, fourier-transform, laplace-equation]
+applications: []
+---
+
+Desert sand dunes look remarkably similar whether you find them in the Sahara, the Namib, the Arabian Peninsula, or the Gobi. The barchan dune — a crescent-shaped form with two forward-pointing horns — appears on every continent that has sand deserts, and its proportions are almost universal: the ratio of horn-to-horn width to the dune's forward extent is typically between 2 and 3, regardless of the size of the dune or the strength of the prevailing wind.
+
+This is dimensional analysis doing its work. The shape of a barchan dune, like the shape of a breaking ocean wave or the geometry of a river meander, is determined by the interplay between a small number of physical mechanisms, and the resulting dimensionless ratios are constrained to narrow ranges because the physics is the same everywhere.
+
+## Barchan dunes and dimensional analysis
+
+A barchan dune forms when sand is transported by a unidirectional wind over a hard surface with a limited sand supply. Sand erodes from the windward face, flows over the crest, and deposits on the steep leeward slip face. The horns extend downwind because the edges of the dune lose sand faster than the centre (less sand available at the edges to maintain height), so the edges migrate faster.
+
+The characteristic length scale of a barchan dune is set by the *saturation length* of aeolian sand transport: the distance over which a sand flux in disequilibrium with the wind adjusts to its equilibrium value. This length is approximately
+
+$$\ell_{\text{sat}} \sim \frac{d \rho_s}{\rho_f}$$
+
+where $d$ is the grain diameter, $\rho_s$ is the grain density (about $2650\,\text{kg}\,\text{m}^{-3}$ for quartz), and $\rho_f$ is the fluid density (about $1.2\,\text{kg}\,\text{m}^{-3}$ for air). For typical quartz sand grains of diameter $250\,\mu\text{m}$, this gives $\ell_{\text{sat}} \approx 0.55\,\text{m}$ — close to the observed minimum size of barchan dunes (about 1 metre from horn to horn).
+
+Smaller dunes cannot form because the sand flux cannot adjust to maintain the dune shape at those scales; the dune would disperse. This minimum size is universal: a barchan dune has a minimum size set by grain size and the ratio of densities, and since these are the same everywhere on Earth (and on Mars — barchans have been photographed there by the Mars Reconnaissance Orbiter), the minimum dune size is universal.
+
+## Ocean waves and the deep-water dispersion relation
+
+An ocean wave is a periodic disturbance of the water surface. In deep water (depth much greater than wavelength), the phase velocity of a surface gravity wave is
+
+$$c = \sqrt{\frac{g\lambda}{2\pi}}$$
+
+where $g$ is gravitational acceleration and $\lambda$ is the wavelength. Longer waves travel faster than shorter ones — ocean waves are *dispersive*.
+
+This dispersion relation follows from linearising the Euler equations of fluid mechanics and seeking periodic solutions. The derivation is a standard exercise in [vector calculus and PDEs](/02-core-mathematics/04-vector-calculus-and-pdes), and involves solving the Laplace equation $\nabla^2 \phi = 0$ for the velocity potential $\phi$ with appropriate boundary conditions at the surface and the bottom.
+
+The dispersive character of deep-water waves means that a disturbance at sea (a storm, an earthquake) separates into a series of wave groups, with long-period waves arriving at a distant coast first. This is why seismic sea waves (tsunamis) are detectable at great distances: their very long wavelengths ($\lambda$ up to several hundred kilometres) give them very high phase velocities in deep water. In shallow water (depth much less than wavelength), the dispersion relation changes to $c = \sqrt{gh}$ — waves travel at the same speed regardless of wavelength, which is why tsunamis behave so differently from ordinary sea swells.
+
+## Breaking waves
+
+A wave breaks when the particle velocity at the crest exceeds the phase velocity of the wave. In practice, this happens when the water depth becomes comparable to the wave height, as the wave enters shallow water. The wave steepens asymmetrically, with the crest leaning forward of the trough, until the crest overhangs and the wave breaks.
+
+The geometry of the breaking crest is surprisingly well described by a cuspoid singularity in the surface profile, which is a topic in [catastrophe theory](/03-specialist-areas/04-topology) and the study of singularities of smooth maps. The mathematics of wave breaking remains an active research area; the rigorous existence of singular wave profiles in the water-wave equations was only established in recent decades.
+
+## Solitons and the KdV equation
+
+In 1834, the Scottish engineer John Scott Russell was riding on horseback along the Union Canal near Edinburgh when a barge suddenly stopped. The mound of water pushed forward by the barge did not disperse; instead, it rolled along the canal for several kilometres, maintaining its shape almost perfectly. Russell followed it on horseback and clocked it at about 13 kilometres per hour.
+
+He called it a "wave of translation" and spent years trying to understand it. The theoretical explanation came in 1895, when Diederik Korteweg and Gustav de Vries derived the equation governing long waves in shallow water:
+
+$$\frac{\partial u}{\partial t} + 6u\frac{\partial u}{\partial x} + \frac{\partial^3 u}{\partial x^3} = 0.$$
+
+This is the Korteweg–de Vries (KdV) equation, and it has an exact solution of the form
+
+$$u(x,t) = \frac{c}{2} \operatorname{sech}^2\!\left(\frac{\sqrt{c}}{2}(x - ct)\right),$$
+
+a solitary wave (soliton) that propagates at constant speed $c$ without changing shape. The KdV equation balances the tendency of nonlinearity to steepen the wave (the $6u\,\partial u/\partial x$ term) against the tendency of dispersion to spread it out (the $\partial^3 u/\partial x^3$ term). When these two effects exactly cancel, the wave travels unchanged.
+
+The KdV equation is now known to be completely integrable — it has an infinite family of conserved quantities and can be solved by inverse scattering, a technique that connects it to [spectral theory](/03-specialist-areas/02-functional-analysis). Solitons have been found in plasma physics, fibre-optic communications, and the theory of lattice vibrations in crystals. The wave John Scott Russell saw in 1834 was a physical realisation of an integrable system.
+
+## River meanders
+
+A straight river channel is unstable. Small perturbations — a rock, a slight gradient asymmetry — cause the flow to curve slightly. Once curving, centrifugal force pushes the faster-moving water outward, eroding the outer bank and depositing sediment on the inner bank. The meander grows. Eventually the meander bends back on itself; the river cuts off the loop, leaving an oxbow lake.
+
+The geometry of a mature meandering river is remarkably regular. The ratio of meander wavelength to channel width is approximately 11, across rivers of very different sizes. A stream 1 metre wide meanders with roughly 11-metre wave-length; a river 1 kilometre wide meanders with roughly 11-kilometre wavelength. This universality is another dimensional analysis result: the characteristic scales of flow instability (turbulence, secondary currents) produce a preferred dimensionless ratio of wavelength to width.
+
+The mathematical analysis of meander formation involves stability theory for the shallow-water equations, pattern formation analogous to (but different from) Turing instabilities, and the statistics of random walks under geometric constraints. It remains an active research area, with applications to river engineering, sediment transport, and planetary science (meanders on Mars and Titan have been photographed from orbit).
+
+## Where to read more
+
+- Bruno Andreotti et al., *Desert Dunes Dynamics and Sedimentary Structures* (2013, Wiley) — comprehensive treatment of dune physics
+- G.B. Whitham, *Linear and Nonlinear Waves* (1974, Wiley) — the classic mathematical treatment of wave propagation
+- [Wikipedia: Soliton](https://en.wikipedia.org/wiki/Soliton) — good treatment of KdV, history, and physical examples

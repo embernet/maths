@@ -1,0 +1,122 @@
+---
+title: 'R: The Native Language of Statistics'
+section: 'R'
+section_slug: 98-r
+order: 1
+tags: [r, statistics, history, overview]
+prerequisites: []
+related: [02-language-overview, 03-statistical-modelling, 06-choosing-python-or-r]
+mathematicians: []
+reading_time_min: 9
+summary: 'Where R came from — the S language at Bell Labs, the Auckland rewrite — and why it remains the language of choice for statisticians, biostatisticians, and anyone who works at the precise intersection of mathematics and data.'
+---
+
+In statistics departments around the world, ask which programming language people use and you will almost always hear "R". Not because it is glamorous — it isn't — but because R was designed by statisticians, for statisticians, and its idioms are the idioms of statistics. Variables are vectors. Regression is one line. Plots are part of the language. Probability distributions are first-class. The trade-offs that make R irritating for software engineering are precisely the choices that make it natural for data analysis.
+
+If you have spent time in Python, you will find R different at first. It is worth the adjustment. There are corners of mathematics — mixed-effects models, survival analysis, the joints between probability theory and data — where R remains years ahead of any other open-source tool.
+
+## A short history
+
+R has two lineages. The proximate one begins in **Auckland, New Zealand, around 1992**. Two statisticians at the University of Auckland, **Ross Ihaka** and **Robert Gentleman**, wanted a free, open statistical environment for teaching. The result was R — the name a play on "S" (the predecessor they were modelling on) and on their own initials. The first stable release was in **2000**.
+
+The deeper lineage begins almost two decades earlier, at **Bell Labs**. In **1976**, **John Chambers**, **Rick Becker**, and **Allan Wilks** designed the **S language** as an environment for statistical computing. S introduced ideas that read as standard now: vectorised arithmetic, functions as first-class objects, an interactive REPL aimed at exploratory data analysis. By the 1980s S had become the standard tool in industrial statistics; a commercial version, **S-PLUS**, dominated through the 1990s. R was, in effect, the open-source S that the academic community needed when S-PLUS pricing rose.
+
+Today R is maintained by the **R Core Team** (a small, deliberate group) with thousands of user-contributed packages on **CRAN** (the Comprehensive R Archive Network) and a parallel ecosystem on **Bioconductor** for genomics. Its centre of gravity is academic statistics, biostatistics, epidemiology, ecology, social science, and (increasingly) reproducible-research workflows. Big-tech adoption has stayed mostly with Python, but anywhere the work is *fundamentally* statistical, R remains the local language.
+
+## Why statisticians chose it
+
+A few design choices distinguish R from Python and make it congenial for statistics.
+
+**Vectors first.** In R there is no scalar type. The number `3.14` is a length-1 numeric vector. This sounds pedantic, but it means every operation is vectorised by default — there is no "loop over the array" idiom because the array *is* the natural object.
+
+```r
+x <- c(1, 2, 3, 4, 5)
+y <- 2 * x + 1
+print(y)         # 3 5 7 9 11
+```
+
+`c(...)` (combine) constructs a vector. `<-` is the assignment operator (more common than `=`, although both work).
+
+**Formulas.** R has a built-in syntax for describing statistical models: `y ~ x1 + x2 + x1:x2`. The tilde `~` separates response from predictors; the plus sign means "include", the colon means "interaction". This is the natural way statisticians have always written models on paper; R is the only mainstream language that promotes it to first-class syntax.
+
+```r
+model <- lm(mpg ~ wt + hp + wt:hp, data = mtcars)
+summary(model)
+```
+
+**Data frames.** R's `data.frame` predates pandas by twenty years. A data frame is a table whose columns can be of different types. Most operations in R work directly on data frames.
+
+**Statistics in the standard library.** Hypothesis tests, distributions, linear and generalised linear models, principal components, clustering, time series — none of these are add-ons. They are *base R*. `lm()`, `glm()`, `t.test()`, `kmeans()`, `prcomp()`, `dnorm()`, `pchisq()` all ship with the language.
+
+**Quality of statistical packages.** When a new statistical method is published, an R package implementing it usually appears within months — often written by the methodologists themselves. The Python equivalent often arrives later, or never. For research statisticians this is decisive.
+
+## What R is good at
+
+The places R is strongest:
+
+- **Linear and generalised linear models.** `lm`, `glm`, `glmnet` (penalised regression), `gam` (additive models).
+- **Mixed-effects models.** The `lme4` and `nlme` packages remain the reference implementations.
+- **Survival analysis.** `survival` package, written by Terry Therneau, is the standard tool in medical statistics.
+- **Time series.** `forecast`, `fable`, `bsts` give a mature ecosystem; ARIMA modelling, exponential smoothing, and state-space models are all here.
+- **Bayesian statistics.** `Stan` is technically a separate language but is most-used from R via `rstan` and `brms`. JAGS and the entirely-R `nimble` package round out the alternatives.
+- **Spatial statistics.** `sf`, `terra`, `INLA` cover modern spatial workflows.
+- **Reproducible reporting.** R Markdown and (now) Quarto let you weave code, output, and prose into a single document — PDF, HTML, Word, or slides — that re-runs every time it is rendered.
+- **Statistical graphics.** `ggplot2` (Hadley Wickham, 2005) is widely considered the best general-purpose plotting library in any language. Once you internalise its grammar, drawing publication-quality charts becomes routine.
+
+## What R is not so good at
+
+- **General-purpose software engineering.** R is awkward for building applications, services, or anything that isn't an analysis. Python is the better choice for tooling, automation, and production systems.
+- **Performance for non-vectorised code.** Like Python, R's interpreter is slow. Unlike Python, R has fewer ergonomic fall-throughs to compiled code — though Rcpp closes that gap for those willing to write C++.
+- **Deep learning.** Frameworks exist (Keras for R, Torch for R) but the ecosystem is much smaller and less actively developed than Python's.
+- **Strict typing and large code-bases.** R is loosely typed and rewards quick exploration over robust engineering. Large R projects can become hard to maintain.
+- **GPU and cluster computing.** Possible, but harder than in Python's ecosystem.
+
+## How to install R
+
+Install R from **[CRAN](https://cran.r-project.org)** — choose the binary for your operating system. Then install **[RStudio](https://posit.co/download/rstudio-desktop/)** (now formally renamed Posit RStudio), the standard R IDE. RStudio is to R what Jupyter is to Python: a notebook-and-editor environment tailored to exploratory work. Almost everyone uses it.
+
+You can also use R from VS Code (with the R extension) or run it from the command line.
+
+For a zero-install browser environment, **[posit.cloud](https://posit.cloud)** offers a free hosted RStudio.
+
+## A first taste
+
+Read a dataset, fit a model, plot the result:
+
+```r
+library(ggplot2)
+
+# The built-in 'mtcars' dataset: car attributes vs fuel efficiency
+data(mtcars)
+
+# Fit miles-per-gallon as a linear function of weight
+fit <- lm(mpg ~ wt, data = mtcars)
+summary(fit)
+
+# Plot the data and the fitted line, with a 95% confidence band
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Fuel efficiency vs car weight",
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon"
+  ) +
+  theme_minimal()
+```
+
+Three statements: a model, a summary (with $R^2$, $p$-values, residual diagnostics), and a publication-quality chart. This is the R workflow. The verbosity that Python sometimes requires is absent — but so is much of Python's general-purpose machinery. R is a tool with a sharp focus.
+
+## What you'll see in this section
+
+Five more pages:
+
+| Page | What it covers |
+|------|----------------|
+| [Language overview](/98-r/02-language-overview) | Vectors, formulas, environments, the data-frame model, R's quirks |
+| [Statistical modelling](/98-r/03-statistical-modelling) | `lm`, `glm`, mixed-effects models, model diagnostics |
+| [Tidyverse and ggplot2](/98-r/04-tidyverse-and-ggplot2) | dplyr, tidyr, ggplot2 — the modern R style |
+| [Machine learning](/98-r/05-machine-learning) | `tidymodels`, `caret`, gradient boosting, random forests |
+| [Choosing Python or R](/98-r/06-choosing-python-or-r) | When to pick which — for analysis, modelling, and ML |
+
+R rewards investment. The first few hours feel awkward — variables in vectors, `<-` instead of `=`, formulas everywhere — but the language fits the work. Mathematicians who do statistics often find themselves loving it.

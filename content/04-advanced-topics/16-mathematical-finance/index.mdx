@@ -1,0 +1,105 @@
+---
+title: 'Mathematical Finance'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 16
+node_type: topic
+tags: [mathematical-finance, black-scholes, itos-lemma, risk-neutral-measure, stochastic-volatility, option-pricing, geometric-brownian-motion]
+prerequisites: []
+related:
+  - 07-stochastic-processes
+  - 03-advanced-pdes
+  - 03-measure-and-lebesgue-integration
+mathematicians: [kolmogorov, gauss]
+reading_time_min: 10
+summary: 'Pricing risk under uncertainty. Itô calculus, the Black–Scholes equation, and risk-neutral measures — the mathematics that built modern derivative markets.'
+theorems: [black-scholes-equation, axiomatic-foundations-of-probability]
+applications: [option-pricing-finance]
+suggested_pre_reading:
+  - kind: topic
+    ref: 03-specialist-areas/07-stochastic-processes
+    why: 'Brownian motion, martingales, and stochastic differential equations are the core language of mathematical finance.'
+  - kind: topic
+    ref: 03-specialist-areas/03-measure-and-lebesgue-integration
+    why: 'Change-of-measure arguments (Girsanov) and conditional expectations require measure-theoretic probability.'
+  - kind: topic
+    ref: 04-advanced-topics/03-advanced-pdes
+    why: 'The Black–Scholes equation is a parabolic PDE; its analysis draws on the methods of this course.'
+  - kind: theorem
+    ref: black-scholes-equation
+    why: 'The theorem this page derives — the Black–Scholes pricing formula and PDE — has its own standalone entry.'
+  - kind: theorem
+    ref: axiomatic-foundations-of-probability
+    why: 'Risk-neutral pricing rests on changing probability measures, which requires the full Kolmogorov apparatus.'
+---
+
+The central question of mathematical finance is: how should a rational agent price a contract that pays off depending on a future — and uncertain — asset price? The answer, developed in the 1970s, turns on a deep connection between arbitrage-free pricing and probability theory: a derivative is fairly priced at the expected value of its payoff under a special probability measure, the **risk-neutral measure**.
+
+## Brownian motion as a price model
+
+Let $S_t$ denote the price of a risky asset at time $t$. The simplest model with continuous paths, independent increments, and proportional randomness is **geometric Brownian motion (GBM)**:
+
+$$dS_t = \mu S_t\,dt + \sigma S_t\,dW_t,$$
+
+where $W_t$ is a standard Brownian motion, $\mu$ is the **drift** (expected return), and $\sigma > 0$ is the **volatility**. The solution is
+
+$$S_t = S_0\exp\!\left(\left(\mu - \tfrac{1}{2}\sigma^2\right)t + \sigma W_t\right),$$
+
+so $\log S_t$ is normally distributed with mean $\log S_0 + (\mu - \sigma^2/2)t$ and variance $\sigma^2 t$. GBM was proposed as a price model by Louis Bachelier in his 1900 Paris thesis — fifty years before the mathematical foundations of stochastic calculus were established.
+
+## Itô's formula
+
+Ordinary calculus does not apply to functions of Brownian motion because $W_t$ has infinite variation: $\sum |W_{t_{i+1}} - W_{t_i}|^2 \to t$ almost surely, not zero. **Itô's formula** is the correct chain rule:
+
+$$df(t, W_t) = \left(\frac{\partial f}{\partial t} + \frac{1}{2}\frac{\partial^2 f}{\partial x^2}\right)dt + \frac{\partial f}{\partial x}\,dW_t.$$
+
+The extra term $\frac{1}{2}\partial^2 f/\partial x^2$ arises from the quadratic variation of Brownian motion. More generally, for a process $X_t$ satisfying $dX_t = \mu_t\,dt + \sigma_t\,dW_t$:
+
+$$df(t, X_t) = \left(\frac{\partial f}{\partial t} + \mu_t\frac{\partial f}{\partial x} + \frac{1}{2}\sigma_t^2\frac{\partial^2 f}{\partial x^2}\right)dt + \sigma_t\frac{\partial f}{\partial x}\,dW_t.$$
+
+Applying Itô's formula to $f(S_t) = \log S_t$ recovers the GBM solution above.
+
+## The Black–Scholes equation
+
+Consider a **European call option** — the right to buy the asset at time $T$ for strike price $K$. Its payoff is $(S_T - K)^+$. How much should you pay for it today?
+
+The Black–Scholes argument (1973) constructs a **delta-hedging** portfolio: hold $\Delta$ units of the asset and an amount $B$ in a riskless bond. By choosing $\Delta = \partial V/\partial S$ (the option's sensitivity to the asset price), the stochastic terms in the portfolio's value cancel. The portfolio is then riskless and must earn the risk-free rate $r$. This no-arbitrage condition yields the **Black–Scholes PDE** for the option price $V(t, S)$:
+
+$$\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2\frac{\partial^2 V}{\partial S^2} + rS\frac{\partial V}{\partial S} - rV = 0.$$
+
+This is a backward parabolic PDE (time runs backwards from maturity) with terminal condition $V(T, S) = (S - K)^+$.
+
+## The Black–Scholes pricing formula
+
+Under the substitution $\tau = T - t$, the Black–Scholes PDE transforms into the heat equation and can be solved explicitly. For a European call:
+
+$$V(t, S) = S\,\Phi(d_1) - Ke^{-r(T-t)}\Phi(d_2),$$
+
+where $\Phi$ is the standard normal CDF,
+
+$$d_1 = \frac{\ln(S/K) + (r + \sigma^2/2)(T-t)}{\sigma\sqrt{T-t}}, \qquad d_2 = d_1 - \sigma\sqrt{T-t}.$$
+
+The formula expresses the option price as a risk-adjusted expected payoff: $S\Phi(d_1)$ is the expected receipt (weighted by the asset price), and $Ke^{-r(T-t)}\Phi(d_2)$ is the discounted expected payment.
+
+## Risk-neutral measure
+
+The deeper reason the drift $\mu$ disappears from the pricing formula is the **fundamental theorem of asset pricing**: in an arbitrage-free, complete market, there exists a unique probability measure $\mathbb{Q}$ — the **risk-neutral measure** — under which all discounted asset prices are martingales. Under $\mathbb{Q}$, the asset drifts at the risk-free rate:
+
+$$dS_t = rS_t\,dt + \sigma S_t\,d\widetilde{W}_t,$$
+
+where $\widetilde{W}_t$ is Brownian motion under $\mathbb{Q}$. The change of measure is effected by the **Girsanov theorem**: $d\mathbb{Q}/d\mathbb{P} = \exp(-\theta W_T - \frac{1}{2}\theta^2 T)$ with $\theta = (\mu - r)/\sigma$. The option price is then simply
+
+$$V(0, S_0) = e^{-rT}\,\mathbb{E}^{\mathbb{Q}}[(S_T - K)^+].$$
+
+## Beyond Black–Scholes
+
+Black–Scholes assumes constant volatility — a strong and empirically false assumption. **Stochastic volatility models** treat $\sigma$ itself as a random process: the Heston model replaces constant $\sigma^2$ with $v_t$ satisfying $dv_t = \kappa(\bar v - v_t)\,dt + \xi\sqrt{v_t}\,dW_t^v$, correlated with the asset Brownian motion. This generates the implied volatility smile observed in options markets. Interest rate models (Vasicek, Cox–Ingersoll–Ross) apply the same SDE technology to model the evolution of bond yields.
+
+## Real-world applications
+
+The Black–Scholes formula, published in 1973, directly transformed derivative markets: equity options, currency options, and interest rate caps and floors are all priced using variants of this framework. [Option pricing in finance](/applications/option-pricing-finance) at scale requires Monte Carlo simulation of SDEs, finite-difference methods for the Black–Scholes PDE, and Fourier transform methods for characteristic-function-based models — a fusion of probability, PDE theory, and numerical methods.
+
+## Why this matters
+
+Mathematical finance demonstrates that abstract probability theory — measure changes, martingales, stochastic integration — has direct quantitative consequences worth billions of pounds per day. The field also illustrates the limits of mathematical models: the 2008 financial crisis was partly a failure of risk models that did not capture tail dependence and liquidity effects. [Andrei Kolmogorov's](/mathematicians/kolmogorov) measure-theoretic foundations of probability, and his contributions to stochastic processes, are the indispensable mathematical layer on which the entire edifice rests.

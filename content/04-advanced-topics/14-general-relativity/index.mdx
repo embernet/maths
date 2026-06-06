@@ -1,0 +1,94 @@
+---
+title: 'General Relativity'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 14
+node_type: topic
+tags: [general-relativity, einstein-field-equations, schwarzschild, black-holes, gravitational-waves, curved-spacetime, geodesics]
+prerequisites: []
+related:
+  - 06-differential-geometry
+  - 04-mathematical-physics-and-fluids
+  - 03-advanced-pdes
+mathematicians: [riemann, hilbert, gauss]
+reading_time_min: 11
+summary: 'Geometry as gravity. The Einstein field equations turn spacetime curvature into the source of gravitational dynamics, with predictions from gravitational lensing to gravitational waves.'
+theorems: [riemannian-geometry]
+applications: [gps-positioning, gravitational-wave-detection]
+suggested_pre_reading:
+  - kind: topic
+    ref: 06-differential-geometry
+    why: 'Manifolds, tangent spaces, and connections are the mathematical setting for curved spacetime.'
+  - kind: topic
+    ref: 03-advanced-pdes
+    why: 'The Einstein field equations are a system of nonlinear second-order PDEs; PDE theory informs the well-posedness question.'
+  - kind: mathematician
+    ref: riemann
+    why: 'Riemannian geometry — metrics, curvature, geodesics — was developed by Riemann half a century before Einstein applied it to spacetime.'
+  - kind: topic
+    ref: 04-mathematical-physics-and-fluids
+    why: 'The stress–energy tensor on the right-hand side of Einstein's equations connects to continuum mechanics and fluid dynamics.'
+---
+
+Newton's gravity is a force acting instantaneously across empty space. Einstein's alternative is conceptually different: mass tells spacetime how to curve, and curved spacetime tells mass how to move. The mathematics is [Riemannian geometry](/mathematicians/riemann) promoted to four dimensions — and the result is a theory that explains phenomena from the perihelion of Mercury to the detection of gravitational waves.
+
+## The metric and spacetime intervals
+
+Spacetime is a four-dimensional manifold with a **Lorentzian metric** $g_{\mu\nu}$ (indices $\mu,\nu \in \{0,1,2,3\}$, with 0 the time coordinate). The **line element**
+
+$$ds^2 = g_{\mu\nu}\,dx^\mu\,dx^\nu$$
+
+generalises the Pythagorean theorem to curved spacetime. In flat Minkowski spacetime, $g_{\mu\nu} = \mathrm{diag}(-c^2, 1, 1, 1)$ and $ds^2 = -c^2 dt^2 + dx^2 + dy^2 + dz^2$. The sign of $ds^2$ classifies the separation: timelike ($ds^2 < 0$), spacelike ($ds^2 > 0$), or null ($ds^2 = 0$, the path of light).
+
+The metric encodes everything geometric: distances, angles, volumes, and — via differentiation — the curvature of spacetime.
+
+## Geodesics and the geodesic equation
+
+A **geodesic** is a curve that parallel-transports its own tangent vector — the generalisation of a straight line to curved space. In general relativity, freely-falling particles (no non-gravitational forces) follow geodesics of spacetime. The geodesic equation is
+
+$$\frac{d^2 x^\mu}{d\tau^2} + \Gamma^\mu{}_{\alpha\beta}\frac{dx^\alpha}{d\tau}\frac{dx^\beta}{d\tau} = 0,$$
+
+where $\tau$ is proper time and $\Gamma^\mu{}_{\alpha\beta}$ are the **Christoffel symbols**, computed from the metric and its first derivatives:
+
+$$\Gamma^\mu{}_{\alpha\beta} = \tfrac{1}{2}g^{\mu\lambda}\left(\partial_\alpha g_{\lambda\beta} + \partial_\beta g_{\lambda\alpha} - \partial_\lambda g_{\alpha\beta}\right).$$
+
+What appears to be gravitational acceleration in Newton's theory is, in Einstein's, simply the curving of a geodesic path through curved spacetime.
+
+## Curvature: the Riemann tensor
+
+The **Riemann curvature tensor** $R^\mu{}_{\nu\alpha\beta}$ measures the failure of parallel transport around closed loops. It is built from the Christoffel symbols and their derivatives:
+
+$$R^\mu{}_{\nu\alpha\beta} = \partial_\alpha\Gamma^\mu{}_{\nu\beta} - \partial_\beta\Gamma^\mu{}_{\nu\alpha} + \Gamma^\mu{}_{\alpha\lambda}\Gamma^\lambda{}_{\nu\beta} - \Gamma^\mu{}_{\beta\lambda}\Gamma^\lambda{}_{\nu\alpha}.$$
+
+Contracting the Riemann tensor yields the **Ricci tensor** $R_{\mu\nu} = R^\lambda{}_{\mu\lambda\nu}$, and contracting once more gives the **Ricci scalar** $R = g^{\mu\nu}R_{\mu\nu}$. The **Einstein tensor** is then $G_{\mu\nu} = R_{\mu\nu} - \tfrac{1}{2}Rg_{\mu\nu}$, which satisfies $\nabla^\mu G_{\mu\nu} = 0$ — a conservation law built into the geometry.
+
+## The Einstein field equations
+
+The field equations of general relativity are
+
+$$G_{\mu\nu} = \frac{8\pi G}{c^4}\,T_{\mu\nu},$$
+
+where $T_{\mu\nu}$ is the **stress–energy tensor** encoding the distribution of matter and energy, $G$ is Newton's gravitational constant, and $c$ is the speed of light. These ten coupled nonlinear PDEs determine the metric given a matter distribution — and conversely, the metric determines how matter moves via the geodesic equation. [David Hilbert](/mathematicians/hilbert) derived the same equations from a variational principle (the Einstein–Hilbert action) the same week Einstein published his derivation in November 1915.
+
+A cosmological constant $\Lambda$ may be added — $G_{\mu\nu} + \Lambda g_{\mu\nu} = (8\pi G/c^4)T_{\mu\nu}$ — and is required to match observations of the accelerating expansion of the Universe.
+
+## Schwarzschild solution and black holes
+
+The simplest exact solution describes a spherically symmetric vacuum spacetime. Karl Schwarzschild found it in 1916. The line element is
+
+$$ds^2 = -\left(1 - \frac{r_s}{r}\right)c^2\,dt^2 + \left(1-\frac{r_s}{r}\right)^{-1}dr^2 + r^2\,d\Omega^2,$$
+
+where $r_s = 2GM/c^2$ is the **Schwarzschild radius** and $d\Omega^2 = d\theta^2 + \sin^2\!\theta\,d\varphi^2$. For $r > r_s$ the metric is well-behaved and reduces to Minkowski spacetime as $r\to\infty$. At $r = r_s$ lies the **event horizon**: a surface from which no signal can escape to infinity. Inside, the roles of space and time exchange character, and all future-directed worldlines reach the singularity at $r = 0$.
+
+For the Sun, $r_s \approx 3\ \mathrm{km}$; for a stellar-mass black hole of $10M_\odot$, $r_s \approx 30\ \mathrm{km}$.
+
+## Real-world applications
+
+General relativity is not merely a theoretical curiosity. [GPS satellites](/applications/gps-positioning) must apply relativistic corrections of order $38\ \mu\mathrm{s}\ \mathrm{day}^{-1}$ (special relativistic slowing minus gravitational time dilation) or accumulated position errors would reach kilometres within a day. [Gravitational wave detection](/applications/gravitational-wave-detection) by LIGO and Virgo confirms the theory's prediction of waves in spacetime curvature produced by binary black hole and neutron-star mergers; the first detection in 2015 matched numerical relativity solutions of the Einstein equations to extraordinary precision.
+
+Cosmological solutions describe the expanding Universe: the Friedmann–Lemaître–Robertson–Walker metric, combined with Einstein's equations and an equation of state for matter, predicts the Big Bang, nucleosynthesis, and the formation of large-scale structure.
+
+## Why this matters
+
+General relativity is one of the two pillars of modern physics (alongside quantum mechanics), and their incompatibility at the Planck scale — where quantum effects of gravity become important — is the central open problem of theoretical physics. Mathematically, the Einstein equations pose deep challenges: global existence for small initial data (Christodoulou–Klainerman), the stability of the Kerr black hole (recently proved in restricted cases), and the BKL conjecture on the oscillatory approach to singularities. [Bernhard Riemann's](/mathematicians/riemann) 1854 lecture on the foundations of geometry, in which he introduced the metric and curvature that now bear his name, was a purely mathematical exercise — yet it turned out to be exactly the language the Universe needed.

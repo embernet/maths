@@ -1,0 +1,90 @@
+---
+title: 'Combinatorics and Graph Theory'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 13
+tags: [combinatorics, graph-theory, ramsey, turan, probabilistic-method, random-graphs, extremal, erdos]
+prerequisites:
+- 01-foundations/04-probability-and-statistics
+- 01-foundations/06-programming-and-discrete-mathematics
+related:
+- 06-programming-and-discrete-mathematics
+- 07-stochastic-processes
+- 05-numerical-analysis
+mathematicians: [euler, erdos, kolmogorov]
+reading_time_min: 10
+summary: 'Counting, structure, and the probabilistic method. Extremal graph theory, Ramsey theory, and random graphs reveal surprising order in finite mathematics — and show that randomness is a powerful tool for proving existence.'
+theorems: [graph-theory-konigsberg-bridges, graph-theory-and-number-theory, ramsey-theory, probabilistic-method-in-combinatorics, most-prolific-mathematician-in-history, prolific-collaborator-509-direct-collaborators]
+applications: [error-correcting-codes, pagerank-google, cybersecurity-anomaly-detection]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 01-foundations/04-probability-and-statistics
+    why: 'The probabilistic method requires a solid grip on events, expectations, and independence.'
+  - kind: topic
+    ref: 01-foundations/06-programming-and-discrete-mathematics
+    why: 'Basic graph vocabulary — vertices, edges, paths, cycles — is introduced there and assumed here.'
+  - kind: mathematician
+    ref: erdos
+    why: 'Erdős invented the probabilistic method and Ramsey theory is inseparable from his name.'
+  - kind: mathematician
+    ref: euler
+    why: 'Euler''s solution of the Königsberg bridge problem is the origin of graph theory itself.'
+---
+
+Combinatorics asks how many, and graph theory asks how connected — but in the hands of [Paul Erdős](/mathematicians/erdos) and his collaborators, these questions revealed deep structural truths and a remarkable new method: proving something exists by showing a randomly chosen object has the desired property with positive probability.
+
+## Graphs: structure and colouring
+
+A **graph** $G = (V, E)$ consists of a set of vertices $V$ and edges $E \subseteq \binom{V}{2}$. [Euler's](/mathematicians/euler) 1736 solution to the Königsberg bridge problem — when can you traverse every edge exactly once? — is usually taken as the founding moment of graph theory. His answer: such an **Eulerian path** exists iff the graph has at most two vertices of odd degree.
+
+A **proper $k$-colouring** of a graph assigns one of $k$ colours to each vertex so that no two adjacent vertices share a colour. The **chromatic number** $\chi(G)$ is the minimum such $k$. Planar graphs (those drawable without edge-crossings) satisfy $\chi(G) \le 4$ — the Four Colour Theorem, proved by computer verification in 1976, is the most notorious result in this area.
+
+## Extremal graph theory: Turán's theorem
+
+Extremal graph theory asks: given constraints on a graph (e.g., no copy of a forbidden subgraph), how many edges can it have?
+
+**Turán's theorem (1941)**: the densest graph on $n$ vertices containing no complete subgraph $K_{r+1}$ is the **Turán graph** $T(n,r)$, which partitions $n$ vertices into $r$ equal parts and joins all pairs from different parts. Its edge count is
+
+$$\mathrm{ex}(n, K_{r+1}) = \left(1 - \frac{1}{r}\right)\frac{n^2}{2} + O(n).$$
+
+For $r = 2$ (triangle-free): no more than $n^2/4$ edges. Turán's theorem is the foundation of a vast programme — the Zarankiewicz problem, Kruskal–Katona, Szemerédi's regularity lemma — that characterises extremal combinatorial structures.
+
+## Ramsey theory
+
+Ramsey theory captures the idea that *complete disorder is impossible*: any sufficiently large structure contains a highly organised substructure.
+
+**Ramsey's theorem**: for every $s, t \ge 1$ there exists $N = R(s,t)$ such that any red/blue colouring of the edges of $K_N$ (the complete graph on $N$ vertices) contains either a red $K_s$ or a blue $K_t$.
+
+The **Ramsey numbers** $R(s,t)$ are notoriously hard to compute. The only known exact values for $s, t \ge 3$ are sparse; $R(4,4) = 18$ and even $R(5,5)$ is only known to lie between 43 and 48. The exponential upper bound $R(s,s) \le \binom{2s-2}{s-1} \approx 4^s$ uses a counting argument, while the lower bound $R(s,s) > 2^{s/2}$ is Erdős's probabilistic method.
+
+## The probabilistic method
+
+[Erdős's](/mathematicians/erdos) probabilistic method proves existence without construction: show that a random object has the desired property with positive probability, concluding that such an object must exist.
+
+**Lower bound for Ramsey numbers** (Erdős, 1947): colour each edge of $K_n$ independently red or blue with probability $\frac{1}{2}$ each. The probability that a fixed $s$-clique is monochromatic is $2 \cdot 2^{-\binom{s}{2}}$. By the union bound:
+
+$$\Pr[\exists \text{ monochromatic } K_s] \le \binom{n}{s} \cdot 2^{1-\binom{s}{2}}.$$
+
+If this is less than 1 — which happens when $n < 2^{s/2}$ — then some colouring has no monochromatic $K_s$. Hence $R(s,s) > 2^{s/2}$.
+
+The method extends far beyond Ramsey theory. The **Lovász Local Lemma** and **alteration method** are among its refinements, used to prove the existence of objects in combinatorics, number theory, and algorithm design.
+
+## Random graphs
+
+The **Erdős–Rényi model** $G(n,p)$ is the random graph on $n$ vertices where each edge is included independently with probability $p$. A central phenomenon is **threshold behaviour**: for most graph properties $\mathcal{P}$ there is a sharp threshold $p^*(n)$ such that
+
+$$\Pr[G(n,p) \in \mathcal{P}] \to \begin{cases} 0 & p \ll p^*(n) \\ 1 & p \gg p^*(n). \end{cases}$$
+
+For instance, the threshold for connectivity is $p = \ln n / n$: just below, almost certainly disconnected; just above, almost certainly connected. Random graph theory now connects to statistical physics, network science, and the study of real-world networks such as the internet and social graphs.
+
+## Real-world applications
+
+Where this turns up in the world: [error-correcting codes](/applications/error-correcting-codes) use combinatorial designs and algebraic graph theory — expander graphs (high connectivity, sparse edges) are the key structure behind modern LDPC codes. [PageRank](/applications/pagerank-google) is an eigenvector computation on the graph of the web, and its sensitivity to graph structure makes random graph theory directly relevant. [Cybersecurity anomaly detection](/applications/cybersecurity-anomaly-detection) uses graph-theoretic clustering to identify unusual communication patterns in network flow data.
+
+## Why this matters
+
+Combinatorics is the part of mathematics closest to raw structure and counting, yet it leads to some of the deepest unsolved problems in mathematics — the Hadwiger conjecture, the Erdős–Turán conjecture, and many others. What makes the probabilistic method philosophically striking is its non-constructive character: it proves something exists without ever producing it, by showing that a randomly chosen object *probably* works.
+
+[Paul Erdős](/mathematicians/erdos) — the most prolific mathematician of the twentieth century, with some 1,500 papers and 509 direct collaborators — embodied the combinatorial spirit: concrete problems, elegant arguments, and the belief that the right question, asked precisely, already contains its answer.

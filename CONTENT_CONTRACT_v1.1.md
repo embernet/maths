@@ -19,7 +19,7 @@ This appendix supplements `CONTENT_CONTRACT.md` with the additions for v1.1. Bot
 Update `content/_site.json` `navigation_order` to:
 
 ```json
-["00-welcome","01-foundations-year-one","02-core-year-two","03-specialisation-year-three","04-advanced-topics-year-four","93-theorems","94-applications","90-history","91-mathematicians","92-resources"]
+["00-welcome","01-foundations","02-core-mathematics","03-specialist-areas","04-advanced-topics","93-theorems","94-applications","90-history","91-mathematicians","92-resources"]
 ```
 
 Add `_section.json` for both new sections.
@@ -34,7 +34,7 @@ section_slug: "93-theorems"
 slug: "bayes-theorem"
 attributed_to: [bayes, laplace]              # mathematician slugs — auto from slug map; can extend if work shared
 era: "06-the-rigour-revolution"               # one history-era slug; pick the most relevant
-appears_in: [01-foundations-year-one/04-probability-and-statistics, 02-core-year-two/05-probability-and-statistical-inference]   # topic slugs (section/topic)
+appears_in: [01-foundations/04-probability-and-statistics, 02-core-mathematics/05-probability-and-statistical-inference]   # topic slugs (section/topic)
 related_theorems: [conditional-probability, total-probability]
 applications: [medical-diagnosis-screening, spam-filtering, machine-learning-bayesian-inference]
 tags: [probability, inference, foundations]
@@ -63,7 +63,7 @@ section_slug: "94-applications"
 slug: "rsa-public-key-cryptography"
 domains: [computer-science, security, finance]
 uses_theorems: [fermats-little-theorem, eulers-totient-function, modular-arithmetic]
-uses_topics: [02-core-year-two/01-abstract-algebra, 03-specialisation-year-three/01-galois-theory]
+uses_topics: [02-core-mathematics/01-abstract-algebra, 03-specialist-areas/01-galois-theory]
 related_applications: [digital-signatures, secure-messaging, blockchain]
 tags: [cryptography, security, applied]
 real_world_examples: ["HTTPS / TLS on the web", "PGP email", "WhatsApp end-to-end encryption (variant)"]
@@ -125,13 +125,13 @@ Era pages gain `theorems:` and `applications:` frontmatter (slugs of theorems an
   {
     "bayes-theorem": {
       "attributed_to": ["bayes", "laplace"],
-      "appears_in_topics": ["02-core-year-two/05-probability-and-statistical-inference"],
+      "appears_in_topics": ["02-core-mathematics/05-probability-and-statistical-inference"],
       "appears_in_eras": ["06-the-rigour-revolution"],
       "used_in_applications": ["medical-diagnosis-screening", "spam-filtering"]
     },
     "rsa-public-key-cryptography": {
       "uses_theorems": ["fermats-little-theorem", "eulers-totient-function"],
-      "uses_topics": ["02-core-year-two/01-abstract-algebra"]
+      "uses_topics": ["02-core-mathematics/01-abstract-algebra"]
     }
   }
   ```

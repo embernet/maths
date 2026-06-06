@@ -1,0 +1,76 @@
+---
+title: 'Proof 6: Squares are Non-Negative'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 8
+tags: [lean4, formal-proof]
+prerequisites: [07-divides-trans]
+related: [09-sqrt-two-irrational]
+mathematicians: []
+reading_time_min: 5
+summary: 'For any integer n, n * n ≥ 0 — proved by splitting on sign and using nlinarith for the arithmetic.'
+---
+
+## What we are proving
+
+For any integer $n$:
+
+$$n \cdot n \geq 0.$$
+
+Over the natural numbers, this is trivially true because there are no negative naturals. The interesting case is over the **integers** $\mathbb{Z}$, where $n$ could be negative. A negative times a negative is positive; zero times zero is zero; a positive times a positive is positive. In all cases the result is non-negative.
+
+In Lean, working with `Int` (the integers) rather than `Nat` introduces a sign split that `nlinarith` can handle.
+
+```lean
+theorem sq_nonneg' (n : Int) : n * n ≥ 0
+```
+
+## The proof
+
+```lean
+-- 08-square-non-negative.lean
+import Mathlib.Tactic
+import Mathlib.Data.Int.Order
+
+namespace MathsCompanion
+
+-- Using nlinarith (the simplest proof)
+theorem sq_nonneg' (n : Int) : n * n ≥ 0 := by
+  nlinarith [sq_nonneg n]
+
+-- Explicit sign split
+theorem sq_nonneg_explicit (n : Int) : n * n ≥ 0 := by
+  rcases le_or_lt 0 n with h | h
+  · exact mul_nonneg h h
+  · have hn : n ≤ 0 := Int.le_of_lt_add_one (by linarith)
+    have : n * n = (-n) * (-n) := by ring
+    rw [this]
+    exact mul_nonneg (by linarith) (by linarith)
+
+-- The most direct: Int.mul_self_nonneg is already in Mathlib
+#check Int.mul_self_nonneg  -- Int.mul_self_nonneg : ∀ (a : ℤ), 0 ≤ a * a
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**The `nlinarith` proof** is the most concise. We give it the hint `sq_nonneg n`, which Lean knows as `0 ≤ n ^ 2` (which by `sq` definition equals `n * n * 1 = n * n`). From this hint, `nlinarith` (nonlinear arithmetic) can verify `n * n ≥ 0` automatically. The `nlinarith` tactic works by searching for a sum-of-squares certificate — a way to write the goal as a sum of squares of known non-negative quantities plus a linear combination. Here the certificate is trivially `n * n = n^2 ≥ 0`.
+
+**The explicit sign split** is more instructive:
+
+`rcases le_or_lt 0 n with h | h` — this uses `le_or_lt : ∀ a b, a ≤ b ∨ b < a` to split into two cases: `h : 0 ≤ n` (n is non-negative) and `h : 0 > n` (n is negative, i.e. `n < 0`). The `rcases` tactic destructs the resulting `Or`.
+
+**Non-negative case (`h : 0 ≤ n`):** `mul_nonneg h h` closes the goal directly: Mathlib's `mul_nonneg` says that a product of two non-negatives is non-negative.
+
+**Negative case (`h : n < 0`):** We rewrite `n * n = (-n) * (-n)` using `ring` (which handles the algebra), and then observe that `0 ≤ -n` (since $n < 0$ implies $-n > 0$), and apply `mul_nonneg` again.
+
+The `#check` at the end shows that Mathlib already has `Int.mul_self_nonneg : ∀ (a : ℤ), 0 ≤ a * a`. In a real proof you would just cite this. Writing it yourself is for understanding.
+
+## Download
+
+[Download the Lean file](/lean/08-square-non-negative.lean)
+
+## Try it yourself
+
+Prove `abs_nonneg : ∀ (n : Int), 0 ≤ |n|` — the absolute value of any integer is non-negative. In Lean, `|n|` is notation for `Int.natAbs n` cast back to `Int`, or `abs n` in the `LinearOrder` sense. Try `exact abs_nonneg n` first to see if Mathlib has it — it does; the exercise is to see what `exact?` finds for you. Then try proving it from scratch using `rcases le_or_lt 0 n`.

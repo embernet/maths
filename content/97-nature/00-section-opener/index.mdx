@@ -1,0 +1,54 @@
+---
+title: 'Mathematics in Nature'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 0
+tags: [nature, patterns, fractals, fibonacci, turing, morphogenesis, allometry, phyllotaxis]
+related: []
+mathematicians: [fibonacci, turing, hardy]
+reading_time_min: 7
+summary: 'Where the equations meet the living world — from D''Arcy Thompson''s seashells to Mandelbrot''s coastlines to Turing''s leopard spots.'
+theorems: [fibonacci-sequence, gaussian-distribution-normal-distribution, fourier-transform]
+applications: []
+---
+
+In 1917, a Scottish zoologist named D'Arcy Wentworth Thompson published a book called *On Growth and Form*. It is one of the strangest and most beautiful books in the history of science. Thompson's argument, developed across nearly a thousand pages of extraordinary prose, was simple to state and difficult to absorb: the forms of living things are the visible signatures of physical forces and mathematical constraints acting on growing matter. A bone is shaped the way it is because it carries load the way a bridge does. A cell is spherical because surface tension minimises area. A horn spirals logarithmically because its growth rate is constant in proportion to its existing length.
+
+Thompson was not saying that biology reduces to mathematics, or that natural selection is wrong. He was saying something more specific: that there is a set of shapes and patterns that appear again and again in the living and physical world, and those shapes are not accidental — they are the optimal, or at least the robust, solutions to physical and biological problems that keep recurring in nature. Mathematics is not the description of these patterns. It is the reason for them.
+
+## The two kinds of mathematical pattern
+
+There is a useful distinction to draw before diving in. Some mathematical patterns appear in nature because of *physical law* — the equations of fluid mechanics constrain the shapes of waves, and the shapes of waves are the same wherever you find water. Other patterns appear because of *optimisation under constraint* — living things are under pressure from natural selection, and certain mathematical structures are the inevitable outcome of optimisation problems that matter for survival. Honeycombs are hexagonal because hexagons solve the problem of partitioning a flat space into equal cells with minimum total wall length. Trees branch the way they do because the branching geometry solves a problem of fluid transport. These two classes — physical necessity and evolved optimality — are both genuinely mathematical, but they require different kinds of explanation.
+
+## Mandelbrot and the geometry of irregular things
+
+In 1967, Benoît Mandelbrot published a paper with the deceptively simple title 'How Long Is the Coast of Britain?' The answer, he showed, depends entirely on the length of your ruler. Measure with a 100-kilometre yardstick and you get one answer; switch to a 10-kilometre yardstick and the answer is bigger, because you can now trace in bays and headlands you had been smoothing over; switch to 1 kilometre and it gets bigger still. The coastline does not converge to a finite length as your ruler shrinks. It behaves like a fractal — an object with a dimension that is not a whole number.
+
+This was not merely a curiosity about cartography. Mandelbrot had identified a new kind of geometry, one suited to the irregular, the crumpled, the branching. Classical geometry is the geometry of things that are smooth at small scales: a circle, a cube, a parabola. Nature, Mandelbrot pointed out, is mostly not like this. Clouds are not spheres. Mountains are not cones. Coastlines are not circles. Lightning bolts, river networks, lung bronchioles, the branching of a tree against a winter sky — all of these are fractal objects, and their fractal dimension is a meaningful, measurable quantity.
+
+The mathematics of fractals lives at the intersection of [analysis](/01-foundations/02-real-analysis-foundations), [topology](/03-specialist-areas/04-topology), and the theory of [iterated function systems](/02-core-mathematics/06-programming-and-discrete-mathematics). You do not need all of that to appreciate the patterns, but the rigour is there waiting when you want it.
+
+## Alan Turing's last paper
+
+In 1952, two years before his death, Alan Turing published a paper that had nothing to do with computation. Its title was 'The Chemical Basis of Morphogenesis', and it asked a question that had never been asked in a precise mathematical way: how does a uniform ball of cells — a developing embryo — spontaneously break its own symmetry to produce a structured organism with a head at one end and a tail at the other, stripes on a zebra, spots on a leopard?
+
+[Turing's](/mathematicians/turing) answer was a system of two coupled reaction-diffusion equations, in which two chemical species — an activator and an inhibitor — diffuse through a tissue and react with each other. Under the right conditions, a uniform initial state becomes unstable, and the system spontaneously organises into a spatially structured pattern: stripes, spots, or more complex mazes, depending on the parameters. The mathematics involves eigenvalues of the Laplacian operator, linear stability analysis, and eventually the full nonlinear dynamics — tools from [partial differential equations](/02-core-mathematics/04-vector-calculus-and-pdes) and [functional analysis](/03-specialist-areas/02-functional-analysis).
+
+For forty years, Turing patterns remained a beautiful theoretical prediction with limited experimental support. Then, from the 1990s onwards, the experimental verification began to accumulate. The colour patterns on tropical fish turn out to follow Turing's equations with remarkable precision. The ridges on the roof of a mouse's mouth are a reaction-diffusion pattern. The spacing of hair follicles in a developing embryo obeys the predictions. Turing never knew any of this. He was describing a mechanism, not a specific organism — and the mechanism turned out to be real.
+
+## Mathematics describing nature versus mathematics constraining nature
+
+Here is the distinction that matters most. When we write down a differential equation and observe that a natural system follows it, we might be doing one of two quite different things.
+
+We might be *describing* the system — fitting a mathematical curve to observed data, with no claim that the mathematics explains anything. The curve fits the data; that is all.
+
+Or we might be *deriving* the system — showing that a physical principle or an optimisation problem, stated mathematically, necessarily produces the observed pattern. In this case the mathematics is not merely describing what we see. It is explaining *why* we see it, and predicting what we would see in analogous systems we have not yet looked at.
+
+The topics in this section are overwhelmingly of the second kind. The hexagonal honeycomb is not approximately hexagonal because bees have evolved to cut hexagons; it is exactly hexagonal because hexagons are the unique solution to the minimal-perimeter partition problem, and evolution has found that solution. The Fibonacci spirals on a sunflower head are not approximations; they arise because the optimal packing angle for successive seeds is determined by the golden ratio, and evolution has found the optimal angle. The mathematics is doing the work. The biology is running on the mathematics.
+
+## Where to begin
+
+The twelve topics that follow cover the major themes: the [golden ratio](/97-nature/01-the-golden-ratio) and the related [Fibonacci numbers](/97-nature/02-fibonacci-numbers-in-nature); the [leaf-angle geometry of phyllotaxis](/97-nature/03-phyllotaxis-and-the-golden-angle); the physics of [logarithmic spirals](/97-nature/04-spirals-from-nautilus-to-galaxies); the [fractal geometry of coastlines, lungs, and lightning](/97-nature/05-fractals-and-self-similarity); the [branching architecture of trees and blood vessels](/97-nature/06-tree-branching-and-leonardos-rule); the [hexagonal geometry of honeycombs and basalt columns](/97-nature/07-honeycombs-and-the-hexagon-theorem); the [Voronoi geometry of giraffe coats and cracked mud](/97-nature/08-voronoi-tessellations-in-nature); [Turing's reaction-diffusion spots and stripes](/97-nature/09-turing-patterns-and-animal-coats); the [scaling laws that connect mouse and elephant](/97-nature/10-allometric-scaling-and-kleibers-law); the [fluid mechanics of dunes and waves](/97-nature/11-the-mathematics-of-sand-dunes-and-waves); and the [surprising mathematical structure inside the genetic code](/97-nature/12-the-genetic-code-as-mathematics).
+
+Each page is designed to leave you looking at the world slightly differently. That is not a metaphor either.

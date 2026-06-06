@@ -1,13 +1,15 @@
 /**
- * sw.js — Service Worker for The Undergraduate Mathematics Companion.
+ * sw.js — Service Worker for The Mathematics Companion.
  *
  * Strategy: stale-while-revalidate for all cached resources.
  * Caches the app shell on install, then caches each visited page.
  *
- * The KaTeX CDN stylesheet is cached on first visit (cross-origin, opaque).
+ * BUMP THE CACHE_NAME on every deploy that changes shared assets (CSS, JS,
+ * service-worker behaviour). Old caches are cleared in the `activate` event
+ * for any cache whose name does not match the current CACHE_NAME.
  */
 
-const CACHE_NAME = 'maths-companion-v1';
+const CACHE_NAME = 'maths-companion-v3';
 
 /** Core app-shell assets to pre-cache on install. */
 const APP_SHELL = [

@@ -1,0 +1,97 @@
+---
+title: 'Set Theory'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 12
+tags: [set-theory, axiom-of-choice, ordinals, cardinals, infinity, continuum-hypothesis, zfc, foundations, transfinite]
+prerequisites: []
+related:
+- 11-logic
+- 04-topology
+- 02-core-mathematics/02-real-analysis-2
+mathematicians: [cantor, godel, dedekind, hilbert]
+reading_time_min: 11
+summary: 'The mathematics of collections, sizes, and infinity. ZFC axioms, ordinals, cardinals, and the Axiom of Choice provide the formal foundation on which all of modern mathematics rests.'
+theorems: [cantor-s-diagonal-argument, cardinality-of-infinite-sets, transfinite-numbers, zorns-lemma, russells-paradox, set-theory, contributions-to-set-theory-and-foundations, cantor-set, consistency-of-the-continuum-hypothesis-with-zfc]
+applications: []
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 03-specialist-areas/11-logic
+    why: 'First-order logic is the language in which the ZFC axioms are stated and reasoned about.'
+  - kind: topic
+    ref: 01-foundations/02-real-analysis-foundations
+    why: 'Real analysis already uses orderings, suprema, and informal set language that set theory makes rigorous.'
+  - kind: mathematician
+    ref: cantor
+    why: 'Cantor invented transfinite arithmetic; his diagonal argument and cardinal arithmetic are the heart of this course.'
+  - kind: mathematician
+    ref: godel
+    why: 'Gödel proved that the Continuum Hypothesis is consistent with ZFC — one half of its independence proof.'
+---
+
+Mathematics rests on sets, but sets are dangerous: reasoning carelessly about "the set of all sets" leads immediately to contradiction. Axiomatic set theory — ZFC — is the careful remedy: a small list of rules that is strong enough to build all of mathematics and, as far as we know, free of contradiction.
+
+## Russell's paradox and the need for axioms
+
+Naïve set theory permits comprehension without restriction: for any property $P$, there is a set $\{x : P(x)\}$. In 1901, [Bertrand Russell](/mathematicians/dedekind) noticed the set
+
+$$R = \{x : x \notin x\}$$
+
+leads to contradiction: $R \in R \Leftrightarrow R \notin R$. This is Russell's paradox. The fix is to restrict comprehension: sets may only be formed from elements of an already-given set, not from the entire universe.
+
+The **Zermelo–Fraenkel axioms with the Axiom of Choice** (ZFC) replace naïve comprehension with a controlled list:
+
+- **Extensionality**: sets equal iff they have the same elements.
+- **Pairing**, **Union**, **Power Set**, **Infinity**: constructions producing new sets from old ones.
+- **Separation** (restricted comprehension): $\{x \in A : P(x)\}$ exists for any set $A$.
+- **Replacement**: the image of a set under a definable function is a set.
+- **Foundation**: every set $A$ contains an element disjoint from $A$ (rules out $A \in A$).
+- **Axiom of Choice** (AC): separate axiom, discussed below.
+
+## Ordinals and transfinite induction
+
+The natural numbers are special well-ordered sets: $0, 1, 2, \ldots$ where every element has a successor and every non-empty subset has a least element. **Von Neumann ordinals** represent each ordinal as the set of all smaller ordinals: $0 = \emptyset$, $1 = \{0\}$, $2 = \{0,1\}$, and so on. This extends:
+
+- The **first infinite ordinal** is $\omega = \{0, 1, 2, \ldots\}$ (the natural numbers).
+- The next ordinals are $\omega + 1, \omega + 2, \ldots, \omega + \omega = \omega \cdot 2$, and on through $\omega^2$, $\omega^\omega$, $\varepsilon_0 = \omega^{\omega^{\omega^{\cdots}}}$.
+
+**Transfinite induction** generalises mathematical induction to all ordinals: to prove a property $P(\alpha)$ for every ordinal $\alpha$, it suffices to prove (i) $P(0)$; (ii) $P(\alpha) \Rightarrow P(\alpha+1)$ (successor case); (iii) if $P(\beta)$ for all $\beta < \lambda$ then $P(\lambda)$ (limit ordinal case).
+
+## Cardinals and Cantor's theorem
+
+Two sets have the same **cardinality** if there is a bijection between them. [Cantor](/mathematicians/cantor) proved this defines a sensible notion of size, and that not all infinite sets are the same size.
+
+**Cantor's theorem**: for any set $A$, there is no surjection from $A$ onto its power set $\mathcal{P}(A)$. In particular, $|\mathcal{P}(A)| > |A|$.
+
+**Proof sketch** (diagonal argument): suppose $f : A \to \mathcal{P}(A)$ is any function. Define $D = \{x \in A : x \notin f(x)\}$. Then $D \in \mathcal{P}(A)$, but $D \neq f(x)$ for every $x$ (since $x \in D \Leftrightarrow x \notin f(x)$). So $f$ is not surjective. $\square$
+
+The cardinalities of infinite sets are indexed by the **aleph numbers**: $\aleph_0 = |\mathbb{N}|$, $\aleph_1$ is the next infinite cardinal, and so on. Cantor's theorem gives a strict hierarchy $\aleph_0 < 2^{\aleph_0} < 2^{2^{\aleph_0}} < \cdots$, with $|\mathbb{R}| = 2^{\aleph_0}$.
+
+## The Axiom of Choice
+
+The **Axiom of Choice** (AC) states: given any collection $\{A_i\}_{i \in I}$ of non-empty sets, there exists a function $f$ with $f(i) \in A_i$ for every $i$. For finite collections this is trivial; for infinite ones, existence of such a "choice function" requires an explicit axiom.
+
+AC is equivalent to several important results:
+- **Zorn's lemma**: if every chain in a partially ordered set has an upper bound, the set has a maximal element.
+- **Well-ordering theorem**: every set can be well-ordered.
+- **Tychonoff's theorem**: the product of any family of compact topological spaces is compact.
+
+AC has counterintuitive consequences (the Banach–Tarski paradox: a ball can be decomposed and reassembled into two balls of the same size), but it also proves almost everything analysts and algebraists need. Without it, many vector spaces have no basis and many products of compact spaces fail to be compact.
+
+## The Continuum Hypothesis
+
+Cantor's theorem tells us $|\mathbb{R}| = 2^{\aleph_0} > \aleph_0$. The **Continuum Hypothesis** (CH) asks: is $2^{\aleph_0} = \aleph_1$? Is there any set of reals whose cardinality is strictly between $\aleph_0$ and $|\mathbb{R}|$?
+
+This is one of the most celebrated open questions in mathematics — and its resolution was a surprise. [Gödel](/mathematicians/godel) proved in 1940 that CH is **consistent** with ZFC (cannot be disproved from ZFC). Paul Cohen proved in 1963 that $\lnot$CH is also consistent with ZFC (cannot be proved from ZFC). Together, these results show CH is **independent of ZFC**: neither provable nor disprovable — a formal undecidable statement of exactly the kind Gödel's incompleteness theorems predicted must exist.
+
+## Real-world applications
+
+Set theory is foundational infrastructure rather than a computational tool, but its implications reach everywhere. The independence of CH shows that there are multiple consistent mathematical universes with different answers to questions about infinity — a striking philosophical conclusion. In computer science, domain theory (the semantics of programming languages) is built on partially ordered sets and Zorn's lemma. The axiom of choice appears whenever analysts need to extract convergent subsequences or algebraists need bases for infinite-dimensional vector spaces.
+
+## Why this matters
+
+Set theory is the language in which the rest of mathematics is written. Every definition — function, relation, structure, space — is ultimately a set-theoretic construction. ZFC was designed to be just strong enough to build all of standard mathematics while avoiding the paradoxes that plagued naïve set theory.
+
+The deeper lesson is that foundation matters: the choice of axioms determines what is true. The independence of CH and the Axiom of Choice shows that mathematics is not a single fixed edifice but a family of possible mathematical universes, each consistent, each differing in which infinite sets exist and how large they are. [Georg Cantor's](/mathematicians/cantor) invention of transfinite arithmetic — initially dismissed as "a fog on a fog" by some contemporaries — turned out to be the beginning of the most fundamental investigation in mathematics.

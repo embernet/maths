@@ -1,0 +1,219 @@
+---
+title: 'Machine Learning in Python: scikit-learn, PyTorch, JAX'
+section: 'Python'
+section_slug: 97-python
+order: 6
+tags: [python, machine-learning, scikit-learn, pytorch, jax, deep-learning]
+prerequisites: [02-language-overview, 03-numerical-computing]
+related: [03-numerical-computing, 05-data-and-visualisation]
+mathematicians: []
+reading_time_min: 12
+summary: 'Why Python dominates machine learning. scikit-learn for classical ML, PyTorch for deep learning, and JAX for differentiable programming — plus the mathematical ideas (gradients, automatic differentiation, optimisers) that underpin them all.'
+---
+
+If there is one reason Python became the default scientific language of the 2020s, it is machine learning. Almost every major ML library — scikit-learn, PyTorch, TensorFlow, JAX, Hugging Face Transformers, XGBoost, LightGBM — exposes its primary interface in Python. To do ML today is, almost without exception, to write Python.
+
+This page introduces the three libraries that cover the field: **scikit-learn** for classical machine learning, **PyTorch** for deep learning and research, and **JAX** for differentiable scientific computing.
+
+## scikit-learn: classical ML
+
+scikit-learn is the encyclopedia of classical machine learning algorithms with a single, beautifully consistent API. Almost every model exposes the same four methods: `fit`, `predict`, `transform`, `score`. Once you know one, you know them all.
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
+
+model = RandomForestClassifier(n_estimators=100, random_state=0)
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+print(accuracy_score(y_test, predictions))   # ~0.97
+```
+
+Swap `RandomForestClassifier` for `LogisticRegression`, `SVC`, `KNeighborsClassifier`, `GradientBoostingClassifier`, `MLPClassifier` — the rest of the code does not change. This uniformity is what makes scikit-learn so pleasant to teach with.
+
+### Pipelines
+
+A common pattern in ML is *preprocessing then modelling*. scikit-learn's `Pipeline` composes both into a single object that can be fitted, predicted, and saved as one.
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+
+pipe = Pipeline([
+    ("scale", StandardScaler()),
+    ("model", LogisticRegression(max_iter=1000)),
+])
+pipe.fit(X_train, y_train)
+print(pipe.score(X_test, y_test))
+```
+
+Crucially, the scaling is fit on the training set and applied identically at predict time — a common source of data leakage when handled manually.
+
+### Cross-validation
+
+```python
+from sklearn.model_selection import cross_val_score, GridSearchCV
+
+scores = cross_val_score(pipe, X, y, cv=5)
+print(scores.mean(), scores.std())
+
+# Tune hyperparameters
+grid = GridSearchCV(
+    pipe,
+    param_grid={"model__C": [0.01, 0.1, 1, 10, 100]},
+    cv=5,
+)
+grid.fit(X, y)
+print(grid.best_params_, grid.best_score_)
+```
+
+### What scikit-learn covers
+
+| Task | Models |
+|------|--------|
+| Linear models | LinearRegression, Ridge, Lasso, LogisticRegression |
+| Trees and ensembles | DecisionTree, RandomForest, GradientBoosting (and XGBoost/LightGBM as drop-ins) |
+| Support vector machines | SVC, SVR |
+| Nearest neighbours | KNeighborsClassifier, KNeighborsRegressor |
+| Clustering | KMeans, DBSCAN, AgglomerativeClustering, GaussianMixture |
+| Dimensionality reduction | PCA, t-SNE (via sklearn.manifold), UMAP (separate package) |
+| Model selection | train/test split, k-fold CV, grid/random search |
+| Preprocessing | StandardScaler, OneHotEncoder, imputers, polynomial features |
+| Metrics | accuracy, F1, ROC AUC, MSE, R², log-loss |
+
+For tabular data of any size up to roughly a million rows, scikit-learn is usually the right starting point.
+
+## PyTorch: deep learning and research
+
+For neural networks, the field has converged on PyTorch (with TensorFlow still significant but declining). PyTorch's central abstraction is the **tensor** — an n-dimensional array, like NumPy's, but with two extras: it can live on a GPU, and it can record the computations performed on it so gradients can be computed automatically.
+
+```python
+import torch
+
+x = torch.tensor([1.0, 2.0, 3.0], requires_grad=True)
+y = (x ** 2).sum()         # y = 1 + 4 + 9 = 14
+y.backward()
+print(x.grad)              # tensor([2., 4., 6.])  — dy/dx_i = 2*x_i
+```
+
+That `backward()` call is the **automatic differentiation** trick that powers all of modern deep learning: PyTorch tracks every elementary operation as you build the forward computation, and replays it in reverse to accumulate the chain rule.
+
+### A neural network in twenty lines
+
+```python
+import torch
+from torch import nn
+
+class TinyNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(4, 16)
+        self.fc2 = nn.Linear(16, 3)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        return self.fc2(x)
+
+model = TinyNet()
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+loss_fn = nn.CrossEntropyLoss()
+
+# Suppose X, y are torch tensors derived from the Iris data above
+for epoch in range(200):
+    optimizer.zero_grad()
+    logits = model(X_train_tensor)
+    loss = loss_fn(logits, y_train_tensor)
+    loss.backward()
+    optimizer.step()
+```
+
+The inner loop is the same for every neural network ever written: zero gradients, forward, loss, backward, step. Once you have seen it, you have seen the heart of deep learning. Everything else is a matter of which `nn.Module` you compose.
+
+### What people actually do with PyTorch
+
+- **Computer vision** — convolutional networks, vision transformers. Libraries: `torchvision`, `timm`.
+- **Natural language** — transformer language models. Libraries: `transformers` (Hugging Face), `tokenizers`.
+- **Scientific ML** — physics-informed networks, neural ODEs, graph neural networks. Libraries: `torchdiffeq`, `torch_geometric`.
+- **Audio** — `torchaudio` for spectrograms and pretrained models.
+- **Reinforcement learning** — `gymnasium`, `stable-baselines3`.
+
+The pretrained-model ecosystem is enormous. Loading a state-of-the-art image classifier or text encoder is two lines:
+
+```python
+from transformers import AutoTokenizer, AutoModel
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+model = AutoModel.from_pretrained("bert-base-uncased")
+```
+
+You go from "I want to use BERT" to "I am using BERT" in the time it takes to read this paragraph.
+
+## JAX: differentiable scientific computing
+
+**JAX** (Google, 2018) is what you get if you take NumPy, add automatic differentiation, add a JIT compiler that targets GPU/TPU, and add a `vmap` operator that vectorises *any* function. It is a researcher's tool more than a production one, but for mathematics-heavy work it is becoming the favourite.
+
+```python
+import jax
+import jax.numpy as jnp
+
+def f(x):
+    return jnp.sin(x) * jnp.exp(-x**2 / 4)
+
+df = jax.grad(f)            # analytical derivative of any Python function
+ddf = jax.grad(jax.grad(f)) # second derivative
+
+print(f(1.0), df(1.0), ddf(1.0))
+```
+
+`jax.grad` is the single most beautiful function in scientific Python. You hand it a numerical function; it hands you back the function's derivative as another numerical function. No symbolic manipulation, no numerical finite differences — actual analytical-precision gradients via reverse-mode automatic differentiation.
+
+```python
+@jax.jit                    # compile to XLA for speed
+def loss(params, X, y):
+    preds = X @ params
+    return jnp.mean((preds - y) ** 2)
+
+grad_loss = jax.grad(loss)  # gradient with respect to first argument
+```
+
+For scientific computing — optimising over physical models, fitting differential equations, computing Hessians for second-order methods — JAX is increasingly the right answer.
+
+## The underlying mathematics
+
+What makes ML work is, at its core, three pieces of mathematics:
+
+1. **Function composition.** A neural network is a composition of simple functions (linear maps, non-linearities). Universal approximation theorems guarantee that, in principle, deep enough networks can approximate any continuous function.
+2. **The chain rule.** Differentiating a composition $f \circ g$ gives $f'(g(x)) \cdot g'(x)$. Automatic differentiation is the chain rule applied mechanically through a computation graph.
+3. **Stochastic gradient descent.** Given a function $L(\theta)$ to minimise, repeatedly nudge $\theta$ in the direction $-\nabla L$. Modern optimisers (Adam, AdamW, Lion) are refinements of this idea — adaptive learning rates, momentum, regularisation — but the bones are unchanged.
+
+Every deep learning framework is a system for *automating those three things efficiently on a GPU*. PyTorch tracks operations dynamically; JAX transforms functions; TensorFlow originally built a static graph (it now also supports dynamic). The choice between them is more about ergonomics than capability.
+
+## A grand tour: classical, deep, differentiable
+
+A summary table:
+
+| Library | Best for | Strengths | Cost |
+|---------|----------|-----------|------|
+| scikit-learn | Tabular data, baselines, teaching | Consistent API, robust, well-documented | No deep learning, no GPU |
+| PyTorch | Deep learning, research | Pythonic, dynamic, huge ecosystem | Verbose for simple ML |
+| JAX | Scientific ML, optimisation | Functional purity, JIT, autodiff of pure code | Steeper learning curve |
+| TensorFlow / Keras | Production deployment | Mature serving, mobile, JS | API less idiomatic since v2 |
+| XGBoost / LightGBM | Tabular ML competitions | State-of-the-art on tables | Single algorithm, not a framework |
+
+If you are starting now: learn scikit-learn first to internalise the workflow; learn PyTorch next for neural networks; reach for JAX when you find yourself computing gradients of physical models.
+
+## Where to read more
+
+- **scikit-learn user guide** ([scikit-learn.org](https://scikit-learn.org)) — both reference and tutorial; one of the best library documentation sites in Python.
+- **PyTorch tutorials** ([pytorch.org/tutorials](https://pytorch.org/tutorials/)) — start with "Learn the Basics".
+- **JAX documentation** ([jax.readthedocs.io](https://jax.readthedocs.io)) — start with "JAX in 100 seconds" and then "The Sharp Bits".
+- **Fast.ai** — the practical-deep-learning course built on PyTorch. Excellent for engineers who want to do ML without first wading through dozens of papers.
+
+ML in Python is a deep well. The good news is that the entry point is shallow: ten lines of scikit-learn give you a working classifier, and twenty lines of PyTorch give you a working neural network. From there, you can keep going as deep as the problem demands.

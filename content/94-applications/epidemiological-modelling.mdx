@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: epidemiological-modelling
 domains: [public-health, biology, mathematics]
 uses_theorems: [axiomatic-foundations-of-probability, gaussian-distribution-normal-distribution]
-uses_topics: [01-foundations-year-one/03-calculus-and-methods, 03-specialisation-year-three/06-mathematical-biology, 01-foundations-year-one/04-probability-and-statistics]
+uses_topics: [01-foundations/03-calculus-and-methods, 03-specialist-areas/06-mathematical-biology, 01-foundations/04-probability-and-statistics]
 related_applications: [population-dynamics-ecology, clinical-trials-design, weather-forecasting]
 tags: [epidemiology, ODEs, public-health, applied]
 real_world_examples: [COVID-19 pandemic modelling, Flu vaccine strain selection, Ebola outbreak containment, Childhood vaccination schedules]
@@ -15,7 +15,7 @@ summary: The SIR model — three coupled ordinary differential equations — cap
 
 ## The application
 
-During the COVID-19 pandemic, the concept of $R_0$ (the basic reproductive number) became part of everyday language. Whether an epidemic grows or subsides, what fraction of a population needs to be vaccinated to prevent spread, and when interventions should be relaxed — all of these questions are answered by the mathematical theory of epidemic models. The simplest such model, the SIR model, is three coupled ordinary differential equations whose analysis is Year Three mathematical biology.
+During the COVID-19 pandemic, the concept of $R_0$ (the basic reproductive number) became part of everyday language. Whether an epidemic grows or subsides, what fraction of a population needs to be vaccinated to prevent spread, and when interventions should be relaxed — all of these questions are answered by the mathematical theory of epidemic models. The simplest such model, the SIR model, is three coupled ordinary differential equations whose analysis is specialist areas mathematical biology.
 
 ## The maths behind it
 
@@ -29,7 +29,7 @@ The epidemic threshold: $\dot{I} > 0$ (epidemic grows) if and only if $S(t) > N/
 
 The **final size equation** gives the total fraction $z$ ultimately infected as the solution of $1 - z = e^{-R_0 z}$ — an implicit transcendental equation whose analysis reveals that even a severe epidemic ($R_0 = 4$) does not infect everyone (about 98% in this case, but typically far less).
 
-**Stochastic extensions** model small populations (relevant at the onset or near extinction), using branching processes and continuous-time Markov chains. **Network models** replace the mean-field assumption (homogeneous mixing) with explicit contact graphs, coupling the epidemic dynamics with the graph-colouring and spectral theory of [discrete mathematics](/02-core-year-two/06-programming-and-discrete-mathematics).
+**Stochastic extensions** model small populations (relevant at the onset or near extinction), using branching processes and continuous-time Markov chains. **Network models** replace the mean-field assumption (homogeneous mixing) with explicit contact graphs, coupling the epidemic dynamics with the graph-colouring and spectral theory of [discrete mathematics](/02-core-mathematics/06-programming-and-discrete-mathematics).
 
 ## A concrete example
 
@@ -41,4 +41,4 @@ The mathematical theory of epidemic dynamics was pioneered by William Ogilvy Ker
 
 ## Links
 
-The ODE theory for the SIR model is developed in [Calculus and Methods](/01-foundations-year-one/03-calculus-and-methods) and the biological application in [Mathematical Biology](/03-specialisation-year-three/06-mathematical-biology). The stochastic aspects connect to [Probability and Statistics](/01-foundations-year-one/04-probability-and-statistics) and [Stochastic Processes](/03-specialisation-year-three/07-stochastic-processes). See also [Population Dynamics and Ecology](/applications/population-dynamics-ecology) and [Clinical Trials Design](/applications/clinical-trials-design).
+The ODE theory for the SIR model is developed in [Calculus and Methods](/01-foundations/03-calculus-and-methods) and the biological application in [Mathematical Biology](/03-specialist-areas/06-mathematical-biology). The stochastic aspects connect to [Probability and Statistics](/01-foundations/04-probability-and-statistics) and [Stochastic Processes](/03-specialist-areas/07-stochastic-processes). See also [Population Dynamics and Ecology](/applications/population-dynamics-ecology) and [Clinical Trials Design](/applications/clinical-trials-design).

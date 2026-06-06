@@ -1,0 +1,77 @@
+---
+title: 'Proof 3: Zero Add'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 5
+tags: [lean4, formal-proof]
+prerequisites: [03-add-zero, 04-and-comm]
+related: [03-add-zero, 06-add-comm]
+mathematicians: []
+reading_time_min: 5
+summary: 'The first induction proof: 0 + n = n cannot be proved by rfl because addition recurses on the right, so we induct on n.'
+---
+
+## What we are proving
+
+For any natural number $n$:
+
+$$0 + n = n.$$
+
+You might wonder why this is separate from `add_zero`. After all, $0 + n = n$ and $n + 0 = n$ look equally obvious. But in Lean, they are not equally easy. Addition in `Nat` is defined recursively on the *second* argument: `n + 0 := n` is the base case. `0 + n`, on the other hand, requires following the recursion on `n` itself. For `n = 0` we get `0 + 0 = 0` (base case); for `n = k + 1` we get `0 + (k + 1) = (0 + k) + 1`. To close this we need to know `0 + k = k`, which is the inductive hypothesis. So: induction.
+
+In Lean syntax:
+
+```lean
+theorem zero_add (n : Nat) : 0 + n = n
+```
+
+## The proof
+
+```lean
+-- 05-zero-add.lean
+import Mathlib.Tactic
+
+namespace MathsCompanion
+
+theorem zero_add' (n : Nat) : 0 + n = n := by
+  induction n with
+  | zero      => rfl
+  | succ k ih => simp [Nat.add_succ, ih]
+
+-- Alternative using rw
+theorem zero_add_rw (n : Nat) : 0 + n = n := by
+  induction n with
+  | zero      => rfl
+  | succ k ih =>
+    rw [Nat.add_succ]
+    rw [ih]
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**`induction n with`** — we perform induction on `n`. Lean's `Nat` is an inductive type with two constructors: `Nat.zero` (the number 0) and `Nat.succ k` (the successor of `k`, i.e. $k + 1$). The `induction` tactic generates two proof obligations, one per constructor.
+
+**`| zero => rfl`** — the base case: prove `0 + 0 = 0`. Here `rfl` works because `0 + 0` reduces definitionally to `0` via the base case of the addition definition.
+
+**`| succ k ih =>`** — the inductive step. We now have:
+- `k : Nat` — the predecessor
+- `ih : 0 + k = k` — the **inductive hypothesis**: the statement holds for `k`
+- Goal: `0 + (k + 1) = k + 1`
+
+We need to simplify `0 + (k + 1)`. The relevant lemma is `Nat.add_succ`: `m + (n + 1) = (m + n) + 1`. Applied here: `0 + (k + 1) = (0 + k) + 1`.
+
+**`simp [Nat.add_succ, ih]`** — the `simp` tactic rewrites the goal using `Nat.add_succ` and the inductive hypothesis `ih`. The `simp` set understands that `(0 + k) + 1 = k + 1` once it knows `0 + k = k`.
+
+The `rw` version is more transparent: `rw [Nat.add_succ]` explicitly rewrites the goal from `0 + (k + 1) = k + 1` to `(0 + k) + 1 = k + 1`, and then `rw [ih]` substitutes `k` for `0 + k`, leaving `k + 1 = k + 1`, which `rfl` (applied automatically at the end of `rw`) closes.
+
+Notice the asymmetry: `n + 0 = n` needed no induction (it followed from the definition), but `0 + n = n` required induction. This asymmetry is a consequence of which argument addition recurses on. When you define your own recursive functions in Lean, you will encounter this pattern repeatedly.
+
+## Download
+
+[Download the Lean file](/lean/05-zero-add.lean)
+
+## Try it yourself
+
+Prove `n + 1 = Nat.succ n` by induction, or try proving `n + (m + 1) = (n + m) + 1` — this is `Nat.add_succ` itself. Once you have `zero_add` and `add_succ`, you have all the ingredients for `add_comm`, which comes next.

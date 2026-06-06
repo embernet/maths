@@ -1,0 +1,66 @@
+---
+title: 'The Golden Ratio'
+section: 'Mathematics in Nature'
+section_slug: '97-nature'
+year: 0
+order: 1
+tags: [golden-ratio, phi, fibonacci, continued-fractions, phyllotaxis, irrational-numbers, nature]
+related: ['02-fibonacci-numbers-in-nature', '03-phyllotaxis-and-the-golden-angle']
+mathematicians: [euclid, fibonacci]
+reading_time_min: 10
+summary: 'The golden ratio is one of the most mythologised numbers in mathematics. Here is what is real, what is folklore, and why phi genuinely does appear in nature — in continued fractions, Fibonacci spirals, and the optimal packing of seeds.'
+theorems: [fibonacci-sequence, euclid-s-algorithm]
+applications: []
+---
+
+Walk into any bookshop with a popular-mathematics shelf and you will find at least one book claiming that the golden ratio governs the Parthenon, the Great Pyramid, Leonardo's *Vitruvian Man*, the human face, the nautilus shell, and the proportions of credit cards. Most of those claims are false. A small number are genuine. Separating them requires only a little arithmetic and a willingness to look carefully at the actual evidence — which is itself a useful habit for a mathematician to develop.
+
+## The mathematics
+
+The golden ratio $\varphi$ is defined as the positive solution to the equation
+
+$$x^2 = x + 1,$$
+
+which gives
+
+$$\varphi = \frac{1 + \sqrt{5}}{2} \approx 1.6180339\ldots$$
+
+Equivalently, $\varphi$ is the ratio $a/b$ such that $a/b = (a+b)/a$: a line segment cut so that the ratio of the whole to the larger part equals the ratio of the larger part to the smaller. [Euclid](/mathematicians/euclid) called this "division in extreme and mean ratio" in Book VI of the *Elements*; the term "golden section" appeared much later, in a German mathematics textbook of 1835.
+
+The number $\varphi$ has a remarkable representation as a continued fraction:
+
+$$\varphi = 1 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{1 + \cdots}}}$$
+
+This is the simplest possible continued fraction — all the partial quotients are 1 — and it converges the most slowly of any irrational number. That slowness is not a flaw; it is precisely what makes $\varphi$ the "most irrational" number, in a sense made precise by the theory of Diophantine approximation. The rational approximations to $\varphi$ are the ratios of successive [Fibonacci numbers](/theorems/fibonacci-sequence): $1/1, 2/1, 3/2, 5/3, 8/5, 13/8, \ldots$, each one the best rational approximation of its denominator size.
+
+## Where $\varphi$ genuinely appears in nature
+
+The honest list is shorter than the popular books suggest, but what is on it is genuinely wonderful.
+
+**Phyllotaxis.** The angle between successive leaves, seeds, or florets on a growing plant stem that minimises overlap — and therefore maximises access to sunlight, rain, and pollinating insects — turns out to be $360° \times (1 - 1/\varphi) \approx 137.5°$, the golden angle. This is a consequence of $\varphi$'s irrationality, and is treated in detail on the [phyllotaxis page](/97-nature/03-phyllotaxis-and-the-golden-angle). The spirals you see on a sunflower head or a pine cone are the visible trace of this angle, and their count is always a pair of consecutive Fibonacci numbers.
+
+**Fibonacci limits.** The ratio of consecutive terms in the Fibonacci sequence converges to $\varphi$. This is not circular: it is a consequence of the fact that $\varphi$ is an eigenvalue of the matrix $\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$, so that iterated application of this matrix (which generates Fibonacci numbers) converges in direction to the corresponding eigenvector. Any biological or physical process driven by a linear recurrence with the same structure will produce $\varphi$.
+
+**Quasicrystals.** Penrose tilings — aperiodic tilings of the plane by two tile shapes — have local fivefold symmetry, and the ratio of tile frequencies in any large Penrose tiling is $\varphi$. In 1984, Dan Shechtman discovered a physical alloy (aluminium-manganese) with icosahedral diffraction symmetry, which requires exactly this structure. He won the Nobel Prize in Chemistry in 2011 for it. The golden ratio is literally embedded in the atomic structure of a real material.
+
+## What is a myth
+
+**The Parthenon.** Measurements of the Parthenon do not consistently give golden-ratio proportions. The width-to-height ratio of the façade depends on which points you choose to measure between, and the building predates Euclid's formalisation of $\varphi$. The claim originates with nineteenth-century enthusiasts who were looking for confirmation, not testing a hypothesis.
+
+**The nautilus shell.** This is the single most widely repeated false claim in popular mathematics. Nautilus shells are logarithmic spirals — and a logarithmic spiral does have a self-similar property — but the growth ratio of the nautilus shell is approximately 3 to 4 per turn, not $\varphi \approx 1.618$. The nautilus is not a golden spiral. Detailed measurements by Gary Meisner (who is, it should be said, a golden-ratio enthusiast rather than a sceptic) confirm that the actual ratio varies between individuals and is consistently nowhere near $\varphi$. The [spirals page](/97-nature/04-spirals-from-nautilus-to-galaxies) has the details.
+
+**The human face.** There is no agreed-upon set of facial measurements that consistently give golden-ratio proportions across different people, and the ratio you get depends heavily on exactly which landmarks you measure. Studies that claim to find $\varphi$ in beautiful faces typically suffer from small samples, measurement post-hoc selection, and publication bias. There is no credible scientific evidence that $\varphi$ governs facial attractiveness.
+
+**Great Pyramid, Mona Lisa, Le Corbusier.** All of these require you to choose which measurements to use, and if you are allowed to choose freely among a large number of possible measurements on a complex object, you can always find a ratio close to any target number. This is not evidence; it is cherry-picking.
+
+## Why nature gets here
+
+For the genuine appearances of $\varphi$ in nature — primarily phyllotaxis — the mechanism is well understood. A plant growing new organs (leaves, seeds, florets) at a meristem will produce each one at a fixed angular offset from the previous. The angle that produces the least overlap, and therefore the best light capture and packing density, is the golden angle. This is an optimisation problem, and $\varphi$ is its answer. The plant does not "know about" $\varphi$; evolution has simply selected for the angle that produces the best-packed structures, and that angle happens to be determined by the most irrational number.
+
+The connection between continued fractions, Diophantine approximation, and optimal packing is one of those places where deep pure mathematics — [number theory](/01-foundations/01-algebra-and-linear-algebra) — turns out to have a direct physical consequence. That is always worth pausing over.
+
+## Where to read more
+
+- Ian Stewart, *The Mathematics of Life* (2011) — chapter on spirals and Fibonacci
+- Roger Herz-Fischler, *A Mathematical History of the Golden Number* (1998) — the careful scholarly demolition of the myths
+- [Wikipedia: Golden ratio in art and architecture](https://en.wikipedia.org/wiki/Golden_ratio#Architecture) — a surprisingly sober treatment of which claims hold up

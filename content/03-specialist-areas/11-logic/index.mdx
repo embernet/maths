@@ -1,0 +1,91 @@
+---
+title: 'Mathematical Logic'
+section: 'Specialisation: specialist areas'
+section_slug: 03-specialist-areas
+year: 3
+order: 11
+tags: [logic, mathematical-logic, propositional, predicate-logic, completeness, soundness, compactness, model-theory, first-order-logic]
+prerequisites:
+- 02-core-mathematics/01-abstract-algebra
+related:
+- 12-set-theory
+- 04-topology
+- 01-galois-theory
+mathematicians: [godel, turing, hilbert]
+reading_time_min: 10
+summary: 'Formal logic studies the structure of mathematical proof itself. Propositional and predicate calculus, completeness, soundness, and the limits set by Gödel define what mathematics can and cannot know.'
+theorems: [completeness-theorem-for-first-order-logic, incompleteness-theorems-1931, formal-logic, halting-problem-undecidability, formal-axiomatic-systems, hilbert-s-programme, contributions-to-modal-logic-and-ontology]
+applications: []
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 02-core-mathematics/01-abstract-algebra
+    why: 'Abstract algebraic reasoning — working from axioms and definitions — is the mode of thought logic formalises.'
+  - kind: topic
+    ref: 03-specialist-areas/12-set-theory
+    why: 'Set theory provides the models within which logical sentences are interpreted.'
+  - kind: mathematician
+    ref: godel
+    why: 'Gödel''s completeness and incompleteness theorems are the two pinnacles of this course.'
+  - kind: mathematician
+    ref: hilbert
+    why: 'Hilbert''s formalism programme is the context in which the incompleteness theorems were a shock.'
+---
+
+Mathematics proves things — but what exactly is a proof, and are there things that cannot be proved? Mathematical logic makes the question precise and, in the process, discovers deep limits on what formal systems can know about themselves.
+
+## Propositional logic
+
+**Propositional logic** is the logic of statements that are true or false, connected by the connectives $\land$ (and), $\lor$ (or), $\lnot$ (not), $\to$ (implies), $\leftrightarrow$ (if and only if). A **tautology** is a formula true under every assignment of truth values to its atomic variables; $A \to (B \to A)$ is a simple example.
+
+A **proof system** (or **calculus**) is a finite set of axiom schemas and inference rules. The classical propositional calculus is:
+- **Sound**: every provable formula is a tautology.
+- **Complete**: every tautology is provable.
+
+The proof of completeness for propositional logic is elementary but illustrates the template: if a formula is not provable, construct a truth assignment that falsifies it. Soundness and completeness together mean *provable* and *tautology* are exactly the same thing.
+
+## First-order predicate logic
+
+Propositional logic cannot say "every integer has a prime factorisation" — it lacks the machinery to quantify over objects. **First-order logic** adds:
+- **Variables** ranging over a domain of objects.
+- **Predicate symbols** (e.g., $P(x)$, $x < y$) expressing properties and relations.
+- **Function symbols** (e.g., $f(x)$, $x + y$).
+- **Quantifiers**: $\forall x\,\varphi(x)$ ("for every $x$, $\varphi$ holds") and $\exists x\,\varphi(x)$ ("there exists $x$ such that $\varphi$ holds").
+
+A **model** (or **structure**) $\mathcal{M}$ for a first-order language $\mathcal{L}$ consists of a non-empty domain $M$, an interpretation of each predicate and function symbol. A sentence $\varphi$ is **true in $\mathcal{M}$** (written $\mathcal{M} \models \varphi$) if its quantifiers range over $M$ and the interpretation makes it true. A sentence is a **logical validity** (or **logically valid**) if it is true in every model.
+
+A set of sentences $T$ (a **theory**) has a **model** if there is some $\mathcal{M}$ with $\mathcal{M} \models \varphi$ for every $\varphi \in T$. The theory is **consistent** if no contradiction is provable from it.
+
+## Gödel's completeness theorem
+
+The first-order predicate calculus (standard rules: modus ponens, universal generalisation, plus axiom schemas) is:
+
+> **Gödel's completeness theorem (1930)**: A first-order sentence $\varphi$ is provable from a theory $T$ if and only if $\varphi$ is true in every model of $T$.
+
+Equivalently: if a theory is consistent (no contradiction provable), it has a model.
+
+This is a deeply reassuring theorem: it says the proof rules of first-order logic are strong enough to capture all semantic consequence. It was [Gödel's](/mathematicians/godel) doctoral thesis, completed at twenty-three.
+
+## The compactness theorem
+
+**Compactness theorem**: a set of first-order sentences $T$ has a model if and only if every *finite* subset of $T$ has a model.
+
+The name comes from topology: it is equivalent to the statement that the space of models (in the appropriate topology on truth-value assignments) is compact. The theorem is proved from completeness — if every finite subset is consistent, the whole set is consistent (because a proof is a finite object).
+
+Compactness has striking consequences. It implies the existence of **non-standard models of arithmetic**: models of Peano arithmetic containing elements larger than every standard natural number. It produces non-standard models of analysis. It is also used in model theory to construct models with prescribed properties — for instance, to show that no first-order theory can characterise $\mathbb{N}$ up to isomorphism (any such theory has models of every infinite cardinality).
+
+## Soundness, completeness, and what they do not give
+
+Soundness and completeness together mean the proof system is perfectly calibrated: it proves exactly what is true in all models. But this is completeness *of the logic*, not of any particular theory. The theory of arithmetic (number theory) is not complete: there are sentences about $\mathbb{N}$ that are neither provable nor disprovable within any fixed consistent formal system containing basic arithmetic.
+
+This is the boundary where Gödel's **incompleteness theorems** (1931) begin. The first incompleteness theorem states that any consistent formal system $F$ strong enough to do basic arithmetic contains a sentence $G_F$ that is true (in the standard model) but unprovable within $F$. The second states that $F$ cannot prove its own consistency. These theorems are taken up fully in the advanced topics module at [Gödel's Incompleteness Theorems](/04-advanced-topics/12-godels-incompleteness-theorems) [forthcoming].
+
+## Real-world applications
+
+Mathematical logic underpins computer science directly. [Alan Turing's](/mathematicians/turing) halting problem — proved undecidable in 1936 using the same diagonal argument Gödel used — is the logical foundation of computational complexity and the theory of computation. Type systems in programming languages are built on proof systems: the Curry–Howard correspondence identifies propositions with types and proofs with programmes. Automated theorem provers and proof assistants (Lean, Coq, Isabelle) implement formal proof calculi to verify both mathematical theorems and safety-critical software.
+
+## Why this matters
+
+Logic occupies a peculiar position in mathematics: it is the only branch that takes proof itself as its subject matter. The completeness theorem tells us that first-order logic is powerful enough — any truth that follows logically from a set of axioms can be proved. The incompleteness theorems tell us that no single formal system is powerful enough — there will always be truths that escape any fixed axiom scheme.
+
+[David Hilbert](/mathematicians/hilbert) had hoped for a formal system that was both complete and provably consistent — his programme was to place all of mathematics on a secure, finitary foundation. [Gödel's](/mathematicians/godel) 1931 theorems ended that dream definitively. The residue is not despair but clarity: we understand precisely where the limits lie, and within those limits, first-order logic is a remarkably precise and powerful tool.

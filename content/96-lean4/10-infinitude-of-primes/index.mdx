@@ -1,0 +1,101 @@
+---
+title: 'Proof 8: Infinitely Many Primes'
+section: 'Lean 4'
+section_slug: 96-lean4
+order: 10
+tags: [lean4, formal-proof]
+prerequisites: [09-sqrt-two-irrational]
+related: [07-divides-trans, 13-fermat-little]
+mathematicians: []
+reading_time_min: 7
+summary: "Euclid's proof that there are infinitely many primes, formalised in Lean 4: for any finite set of primes, their product plus one is divisible by a prime outside the set."
+---
+
+## What we are proving
+
+There are infinitely many prime numbers:
+
+$$\forall n \in \mathbb{N},\; \exists p > n,\; p \text{ is prime.}$$
+
+Equivalently: no finite list exhausts all the primes. Euclid's argument, given in the *Elements* around 300 BCE, is one of the most elegant proofs in all of mathematics. In Lean, formalising it requires reasoning about finite sets of primes, products, and the existence of prime factors.
+
+This is also a proof that Mathlib has — `Nat.infinite_setOf_prime` — but here we show the structure of Euclid's argument as it appears in Lean.
+
+```lean
+theorem exists_prime_gt (n : Nat) : ∃ p, n < p ∧ Nat.Prime p
+```
+
+## The proof
+
+```lean
+-- 10-infinitude-of-primes.lean
+import Mathlib.Tactic
+import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.Data.Nat.Prime.Infinite
+
+namespace MathsCompanion
+
+-- Mathlib has this directly:
+theorem exists_prime_gt' (n : Nat) : ∃ p, n < p ∧ Nat.Prime p := by
+  exact Nat.exists_infinite_primes (n + 1) |>.imp fun p ⟨hp_ge, hp_prime⟩ =>
+    ⟨Nat.lt_of_succ_le hp_ge, hp_prime⟩
+
+-- Here is the Euclid-style argument spelled out:
+-- Given any n, consider M = n! + 1.
+-- M has a prime factor p. Since p ∣ M = n! + 1,
+-- and if p ≤ n then p ∣ n!, so p ∣ M - n! = 1, contradiction.
+-- So p > n.
+
+theorem euclid_infinitely_many_primes (n : Nat) : ∃ p, n < p ∧ Nat.Prime p := by
+  -- Consider the number n! + 1
+  have hM : 0 < n.factorial + 1 := Nat.succ_pos _
+  -- Get a prime factor of n! + 1
+  obtain ⟨p, hp_prime, hp_dvd⟩ := Nat.exists_prime_and_dvd (Nat.pos_iff_ne_zero.mp hM)
+  refine ⟨p, ?_, hp_prime⟩
+  -- Show p > n: if p ≤ n then p ∣ n!, so p ∣ 1, impossible
+  by_contra h_le
+  push_neg at h_le
+  have hp_dvd_fact : p ∣ n.factorial :=
+    hp_prime.dvd_factorial.mpr (Nat.lt_succ_of_le (Nat.le_of_succ_le_succ h_le))
+  have hp_dvd_one : p ∣ 1 := by
+    have := Nat.dvd_sub' hp_dvd hp_dvd_fact
+    simp [Nat.factorial_pos] at this
+    exact this
+  exact Nat.Prime.one_lt hp_prime |>.not_le (Nat.le_of_dvd Nat.one_pos hp_dvd_one)
+
+-- Mathlib's canonical version:
+#check Nat.infinite_setOf_prime
+-- Set.Infinite {p | Nat.Prime p}
+
+end MathsCompanion
+```
+
+## Walk-through
+
+**The mathematical argument** (Euclid, *Elements* Book IX, Proposition 20):
+
+Given any natural number $n$, let $M = n! + 1$. Since $M > 1$, it has a prime factor $p$.
+
+Claim: $p > n$. Suppose for contradiction that $p \leq n$. Then $p$ divides $n!$ (since $p$ is at most $n$, it appears in the product $1 \cdot 2 \cdots n$). But $p$ also divides $M = n! + 1$. So $p$ divides $M - n! = 1$. No prime divides 1 (a prime is greater than 1 by definition). Contradiction.
+
+So there exists a prime $p > n$. Since $n$ was arbitrary, there are infinitely many primes. $\square$
+
+**In Lean:**
+
+`Nat.exists_prime_and_dvd` — a Mathlib lemma that says every number greater than 1 has a prime divisor. We apply it to $n! + 1$.
+
+`hp_prime.dvd_factorial.mpr` — the Mathlib lemma `Nat.Prime.dvd_factorial` characterises when a prime divides a factorial: `p ∣ n!` iff `p ≤ n`. We use the `mpr` (reverse) direction to deduce `p ∣ n!` from `p ≤ n`.
+
+`by_contra h_le` / `push_neg` — we assume for contradiction that $p \leq n$, then push the negation of `n < p` into the form `p ≤ n`.
+
+`Nat.dvd_sub'` — if `a ∣ m` and `a ∣ n` and `n ≤ m`, then `a ∣ m - n`. Applied to $M - n! = 1$.
+
+The proof is a faithful Lean rendering of Euclid's 2300-year-old argument.
+
+## Download
+
+[Download the Lean file](/lean/10-infinitude-of-primes.lean)
+
+## Try it yourself
+
+State and prove (or cite from Mathlib) that the $n$-th prime exists for every $n$ — i.e., that the primes can be enumerated. In Mathlib, `Nat.nth` gives the $n$-th element of any infinite set, so `Nat.nth (· ∈ {p | Nat.Prime p})` enumerates the primes. Try `#eval (List.range 10).map (Nat.nth Nat.Prime)` to print the first ten primes.

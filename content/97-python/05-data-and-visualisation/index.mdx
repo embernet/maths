@@ -1,0 +1,208 @@
+---
+title: 'Data and Visualisation: pandas and matplotlib'
+section: 'Python'
+section_slug: 97-python
+order: 5
+tags: [python, pandas, matplotlib, data-analysis, visualisation]
+prerequisites: [02-language-overview, 03-numerical-computing]
+related: [03-numerical-computing, 06-machine-learning]
+mathematicians: []
+reading_time_min: 9
+summary: 'pandas brings tabular data and labelled axes to Python; matplotlib draws the picture. Together they handle the import, cleaning, exploration, and presentation of data — the stages on either side of the mathematical work.'
+---
+
+Most mathematical work in industry begins with a table of data and ends with a chart. pandas and matplotlib are the libraries that own those two ends.
+
+## pandas: tables with labels
+
+A NumPy array is anonymous: it has shape but no column names, no row index. A **pandas DataFrame** is a labelled table — rows have an index, columns have names, and every column can have its own dtype.
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    "name":   ["Alice", "Bob", "Carol", "Dave", "Eve"],
+    "height": [165, 180, 158, 175, 170],
+    "weight": [60, 80, 55, 70, 65],
+    "group":  ["A", "B", "A", "B", "A"],
+})
+
+print(df)
+#     name  height  weight group
+# 0  Alice     165      60     A
+# 1    Bob     180      80     B
+# 2  Carol     158      55     A
+# 3   Dave     175      70     B
+# 4    Eve     170      65     A
+```
+
+### Selection and filtering
+
+```python
+df["height"]                       # one column → Series
+df[["name", "height"]]             # multiple columns → DataFrame
+df.loc[df["height"] > 170]         # rows where height > 170
+df.loc[df["group"] == "A", "weight"].mean()   # mean weight in group A
+```
+
+The pattern `df.loc[row_filter, column_selector]` is the most-used pandas idiom.
+
+### Group-by
+
+The verb you reach for most often:
+
+```python
+df.groupby("group")[["height", "weight"]].mean()
+#        height  weight
+# group
+# A         164.33  60.00
+# B         177.50  75.00
+```
+
+This is the same "split–apply–combine" pattern that R's dplyr and SQL's `GROUP BY` give you, exposed as a method call.
+
+### Reading and writing files
+
+```python
+df = pd.read_csv("data.csv")
+df = pd.read_parquet("data.parquet")
+df = pd.read_excel("data.xlsx")
+df.to_csv("out.csv", index=False)
+```
+
+pandas handles CSV, Excel, JSON, Parquet, SQL, HDF5, and a dozen other formats. For real-world data analysis this is half the value.
+
+### Time series
+
+A DataFrame whose index is a `DatetimeIndex` gets time-series superpowers: resampling, rolling windows, forward/backward filling.
+
+```python
+import numpy as np
+
+dates = pd.date_range("2024-01-01", periods=365, freq="D")
+prices = pd.Series(100 + np.cumsum(np.random.default_rng(0).normal(size=365)), index=dates)
+
+# Monthly average
+monthly = prices.resample("ME").mean()
+
+# 30-day rolling mean
+rolling = prices.rolling(window=30).mean()
+```
+
+For financial time series, climate data, sensor logs — anything timestamped — these methods are everywhere.
+
+## matplotlib: the workhorse plot library
+
+matplotlib's API echoes MATLAB's `plot` interface. It is not the most beautiful library on Python's plotting menu, but it is the most flexible and the most universally supported.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(-2 * np.pi, 2 * np.pi, 400)
+y = np.sin(x) * np.exp(-x**2 / 16)
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.plot(x, y, label=r"$\sin(x)\,e^{-x^2/16}$", linewidth=2)
+ax.axhline(0, color="grey", linewidth=0.5)
+ax.set_xlabel("x")
+ax.set_ylabel("y")
+ax.set_title("A damped oscillation")
+ax.legend()
+fig.tight_layout()
+plt.show()
+```
+
+The two objects to know are **`Figure`** (the whole image) and **`Axes`** (one coordinate system inside it). Calling `plt.subplots(2, 3)` returns a `(Figure, ndarray of Axes)` pair — useful for arranging panels.
+
+### Common chart types
+
+```python
+ax.scatter(x, y, c=z, cmap="viridis", s=8)
+ax.bar(categories, values)
+ax.hist(data, bins=30, density=True)
+ax.contour(X, Y, Z, levels=15)
+ax.imshow(image, cmap="gray")
+ax.plot_surface(X, Y, Z)   # via mpl_toolkits.mplot3d
+```
+
+### Stylistic shortcuts
+
+```python
+plt.style.use("seaborn-v0_8-whitegrid")   # nicer defaults
+plt.rcParams["font.family"] = "STIX Two Text"
+plt.rcParams["mathtext.fontset"] = "stix"
+```
+
+For finer aesthetic control, **seaborn** wraps matplotlib with statistically aware defaults; **plotly** produces interactive HTML charts; **altair** offers a grammar-of-graphics interface; **bokeh** targets web dashboards. But for static, scientific figures destined for a paper or notebook, matplotlib remains the standard.
+
+## A worked example: descriptive analysis end to end
+
+Imagine you have a CSV of daily temperatures from a weather station. The full mathematical-data-analysis workflow:
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 1. Read
+df = pd.read_csv(
+    "temperatures.csv",
+    parse_dates=["date"],
+    index_col="date",
+)
+
+# 2. Clean
+df = df.dropna(subset=["temp_c"])
+df = df[df["temp_c"].between(-50, 50)]   # drop obviously broken readings
+
+# 3. Resample to monthly mean
+monthly = df["temp_c"].resample("ME").mean()
+
+# 4. Decompose into trend + seasonal + residual
+from statsmodels.tsa.seasonal import seasonal_decompose
+decomp = seasonal_decompose(monthly, model="additive", period=12)
+
+# 5. Plot
+fig, axes = plt.subplots(4, 1, figsize=(8, 9), sharex=True)
+monthly.plot(ax=axes[0]); axes[0].set_title("Observed")
+decomp.trend.plot(ax=axes[1]); axes[1].set_title("Trend")
+decomp.seasonal.plot(ax=axes[2]); axes[2].set_title("Seasonal")
+decomp.resid.plot(ax=axes[3]); axes[3].set_title("Residual")
+fig.tight_layout()
+plt.show()
+
+# 6. Quantify the trend
+from scipy.stats import linregress
+years = np.arange(len(monthly)) / 12
+slope, intercept, r, p, se = linregress(years, monthly.values)
+print(f"trend: {slope:.3f} °C / year, p = {p:.2e}")
+```
+
+Six steps, five libraries (pandas, statsmodels, matplotlib, NumPy, SciPy), one consistent dataset flowing through them. This is the pattern: pandas for the data, matplotlib for the picture, NumPy/SciPy/statsmodels for the maths in the middle.
+
+## Pandas idioms worth knowing
+
+A few patterns that appear repeatedly:
+
+- **`assign`**: add or modify columns without reassigning the DataFrame.
+  ```python
+  df = df.assign(bmi=lambda d: d["weight"] / (d["height"] / 100) ** 2)
+  ```
+- **`pipe`**: chain custom functions cleanly.
+  ```python
+  df = (
+      df.pipe(clean)
+        .pipe(add_features)
+        .pipe(remove_outliers)
+  )
+  ```
+- **`merge`**: SQL-style joins between two DataFrames.
+  ```python
+  combined = orders.merge(customers, on="customer_id", how="left")
+  ```
+- **Method chaining** generally: pandas methods almost all return a DataFrame, so they compose. Long chains read like a recipe.
+
+## Where data libraries are heading
+
+pandas is showing its age in a few places (single-threaded, dataframe-in-memory, somewhat inconsistent API). The newer **Polars** library offers a similar interface with significantly better performance for large data. **DuckDB** lets you run SQL against DataFrames. **Apache Arrow** is the common in-memory format that all of these increasingly speak. For now, pandas remains the lingua franca; the next generation of tools is converging on the same shape.

@@ -11,7 +11,7 @@ summary: 'Quick definition of Rotations and quaternions from its appearance in t
 
 ## Definition
 
-**Rotations and quaternions**: representing 3D rotations as $3 \times 3$ orthogonal matrices ($\det = +1$) is standard, but for animation and interpolation, **quaternions** are superior. A quaternion $q = w + xi + yj + zk$ (with $i^2 = j^2 = k^2 = ijk = -1$) of unit norm $|q| = 1$ represents a rotation of angle $2\theta$ about axis $\hat{n}$ as $q = \cos\theta + \sin\theta(n_x i + n_y j + n_z k)$. Spherical linear interpolation (**SLERP**) between two unit quaternions gives the smoothest rotation path, avoiding the gimbal lock of Euler angles. The quaternion group is the unit sphere in $\mathbb{R}^4$ — a topic in [topology](/03-specialisation-year-three/04-topology).
+**Rotations and quaternions**: representing 3D rotations as $3 \times 3$ orthogonal matrices ($\det = +1$) is standard, but for animation and interpolation, **quaternions** are superior. A quaternion $q = w + xi + yj + zk$ (with $i^2 = j^2 = k^2 = ijk = -1$) of unit norm $|q| = 1$ represents a rotation of angle $2\theta$ about axis $\hat{n}$ as $q = \cos\theta + \sin\theta(n_x i + n_y j + n_z k)$. Spherical linear interpolation (**SLERP**) between two unit quaternions gives the smoothest rotation path, avoiding the gimbal lock of Euler angles. The quaternion group is the unit sphere in $\mathbb{R}^4$ — a topic in [topology](/03-specialist-areas/04-topology).
 
 ## Where this appears
 

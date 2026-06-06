@@ -1,0 +1,93 @@
+---
+title: 'Riemann Surfaces'
+section: 'Advanced: advanced topics'
+section_slug: 04-advanced-topics
+year: 4
+order: 11
+tags: [riemann-surfaces, holomorphic-functions, divisors, riemann-roch, uniformisation, complex-curves, modular-forms]
+related:
+- 03-complex-analysis
+- 01-algebraic-geometry
+- 09-algebraic-curves
+- 05-algebraic-topology
+mathematicians: [riemann, gauss, poincare, abel]
+reading_time_min: 10
+summary: 'Where complex analysis meets topology and algebra. Holomorphic functions on complex curves, divisors, and the Riemann–Roch theorem — the home of modular forms and elliptic functions.'
+theorems: [riemann-surfaces, riemann-hypothesis, riemann-zeta-function, contributions-to-algebraic-topology, abel-s-theorem, elliptic-integrals-and-elliptic-functions]
+applications: [cryptocurrency-blockchain, signal-processing-jpeg-mp3, quantum-computing-algorithms]
+node_type: topic
+suggested_pre_reading:
+  - kind: topic
+    ref: 02-core-mathematics/03-complex-analysis
+    why: 'Holomorphic and meromorphic functions, contour integration, and the Cauchy theorem are the analytical starting point.'
+  - kind: topic
+    ref: 03-specialist-areas/04-topology
+    why: 'A Riemann surface is a complex manifold of real dimension 2; the topological classification of surfaces (genus, Euler characteristic) is assumed.'
+  - kind: topic
+    ref: 04-advanced-topics/09-algebraic-curves
+    why: 'Smooth projective algebraic curves over $\mathbb{C}$ are compact Riemann surfaces; the two theories are equivalent.'
+  - kind: mathematician
+    ref: riemann
+    why: 'Riemann invented the concept of a Riemann surface to give multi-valued complex functions — logarithm, square root — a single-valued home.'
+  - kind: mathematician
+    ref: abel
+    why: 'Abel''s theorem on abelian integrals is the classical precursor to the Riemann–Roch theorem and the theory of the Jacobian.'
+---
+
+A Riemann surface is a one-dimensional complex manifold: a topological space that locally looks like the complex plane $\mathbb{C}$, with transition maps that are holomorphic. The concept was introduced by Bernhard Riemann in 1851 to tame multi-valued complex functions — the logarithm, the square root, and the elliptic integrals — by spreading them over a surface on which they become single-valued. The theory that developed is one of the most beautiful in all of mathematics.
+
+## Definition and first examples
+
+A **Riemann surface** $S$ is a connected Hausdorff topological space equipped with a complex atlas: a collection of charts $\{(U_\alpha, \phi_\alpha)\}$ where $U_\alpha \subset S$ is open, $\phi_\alpha : U_\alpha \to \mathbb{C}$ is a homeomorphism onto an open set, and transition maps $\phi_\beta \circ \phi_\alpha^{-1}$ are holomorphic wherever defined.
+
+Three fundamental examples:
+
+**The Riemann sphere** $\hat{\mathbb{C}} = \mathbb{C} \cup \{\infty\}$: covered by two charts, $\mathbb{C}$ and $\hat{\mathbb{C}} \setminus \{0\}$ (using $z \mapsto 1/z$ on the overlap). Topologically it is $S^2$, and it is the unique compact Riemann surface of genus 0.
+
+**Complex tori**: given $\omega_1, \omega_2 \in \mathbb{C}$ with $\mathrm{Im}(\omega_2/\omega_1) > 0$, the quotient $\mathbb{C}/(\mathbb{Z}\omega_1 + \mathbb{Z}\omega_2)$ is a torus — a compact Riemann surface of genus 1. The modular parameter $\tau = \omega_2/\omega_1$ in the upper half-plane $\mathcal{H}$ classifies these tori up to isomorphism; two values $\tau$ and $\tau'$ give isomorphic tori iff $\tau' = (a\tau + b)/(c\tau + d)$ for some $\begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \mathrm{SL}_2(\mathbb{Z})$.
+
+**Hyperelliptic surfaces**: for a polynomial $p(x)$ of degree $2g+1$ or $2g+2$ with distinct roots, the equation $w^2 = p(z)$ defines a compact Riemann surface of genus $g$ (after compactification). For $g=1$ this is an elliptic curve; for $g \ge 2$ it is a hyperelliptic curve.
+
+## Holomorphic and meromorphic functions
+
+A function $f : S \to \mathbb{C}$ is **holomorphic** if it is holomorphic in each chart — that is, if $f \circ \phi_\alpha^{-1}$ is holomorphic as a function on an open subset of $\mathbb{C}$. By the maximum modulus principle, every holomorphic function on a compact Riemann surface is constant.
+
+A function $f : S \to \hat{\mathbb{C}}$ is **meromorphic** if it is holomorphic except at isolated points (poles). Meromorphic functions on $S$ form a field $\mathcal{M}(S)$. For $S = \hat{\mathbb{C}}$, $\mathcal{M}(\hat{\mathbb{C}})$ consists of all rational functions $p(z)/q(z)$. For a compact Riemann surface of genus $g$, $\mathcal{M}(S)$ is a finitely generated field extension of $\mathbb{C}$ of transcendence degree 1 — in fact, $S$ is completely recovered from $\mathcal{M}(S)$.
+
+## Divisors, the degree map, and the Picard group
+
+A **divisor** on $S$ is a formal finite integer combination of points: $D = \sum_{p \in S} n_p \cdot p$ with $n_p \in \mathbb{Z}$, almost all zero. The **degree** of $D$ is $\deg D = \sum n_p$. Any meromorphic function $f$ determines a divisor $\mathrm{div}(f) = \sum_p \mathrm{ord}_p(f) \cdot p$ (orders of zeros and poles, with sign); $\deg\,\mathrm{div}(f) = 0$ for compact $S$.
+
+Divisors modulo principal divisors $\mathrm{div}(f)$ form the **Picard group** $\mathrm{Pic}(S)$. The degree-zero subgroup $\mathrm{Pic}^0(S)$ is the **Jacobian** $J(S)$, a complex torus of dimension $g$ (an abelian variety). The Abel–Jacobi map $S \to J(S)$ embeds the surface into its own Jacobian, and Abel's theorem characterises which divisors of degree 0 are principal.
+
+Associated to each divisor $D$ is a line bundle $\mathcal{O}(D)$. The space of global sections $H^0(S, \mathcal{O}(D))$ consists of meromorphic functions with poles bounded by $D^+ = \sum_{n_p > 0} n_p \cdot p$ and zeros enforced at $D^-$.
+
+## The Riemann–Roch theorem
+
+Set $\ell(D) = \dim_\mathbb{C} H^0(S, \mathcal{O}(D))$. The **canonical divisor** $K$ is the divisor of any non-zero holomorphic 1-form; it has degree $2g - 2$.
+
+**Riemann–Roch theorem**: for any divisor $D$ on a compact Riemann surface of genus $g$,
+
+$$\ell(D) - \ell(K - D) = \deg(D) + 1 - g.$$
+
+For genus 0 (Riemann sphere): every divisor $D$ with $\deg D \ge 1$ satisfies $\ell(D) = \deg D + 1$; meromorphic functions can have poles anywhere and are just rational functions. For genus 1 (torus): $K = 0$, so $\ell(D) - \ell(-D) = \deg D$; if $\deg D = 1$, then $\ell(D) = 1$ — there exists a unique (up to scalar) meromorphic function with a simple pole at a prescribed point, the Weierstrass $\wp$-function.
+
+## Differentials and the canonical bundle
+
+A **holomorphic 1-form** (Abelian differential of the first kind) on $S$ is a holomorphic section of the cotangent bundle — in a chart, an expression $f(z)\,dz$ with $f$ holomorphic and satisfying the obvious transformation law. The space $\Omega^1(S) = H^0(S, \Omega_S)$ has dimension $g$; a basis $\omega_1, \ldots, \omega_g$ of 1-forms provides the period matrix that identifies the Jacobian as $\mathbb{C}^g / \Lambda$ for a lattice $\Lambda$.
+
+A **meromorphic 1-form** may have poles. The **residue theorem** on $S$: the sum of residues of a meromorphic 1-form over all points of a compact Riemann surface is zero.
+
+## Uniformisation
+
+The **uniformisation theorem** (Koebe–Poincaré, 1907) is one of the deepest results in the subject: every simply connected Riemann surface is conformally equivalent to exactly one of the Riemann sphere $\hat{\mathbb{C}}$, the complex plane $\mathbb{C}$, or the upper half-plane $\mathcal{H}$.
+
+As a consequence, every Riemann surface $S$ has a universal cover that is one of these three canonical surfaces. Compact Riemann surfaces of genus $\ge 2$ are all covered by $\mathcal{H}$; the fundamental group $\pi_1(S)$ acts on $\mathcal{H}$ by Möbius transformations (as a Fuchsian group), and $S \cong \mathcal{H}/\pi_1(S)$. This is the starting point of the theory of **modular forms**: functions on $\mathcal{H}$ that transform nicely under the modular group $\mathrm{SL}_2(\mathbb{Z})$.
+
+## Real-world applications
+
+The theory of modular forms on Riemann surfaces is central to [modern cryptography](/applications/cryptocurrency-blockchain): the security of elliptic-curve systems depends on properties of elliptic curves over $\mathbb{C}$ that are Riemann surfaces of genus 1 — and the complex multiplication theory on these surfaces underlies the construction of cryptographically useful curves. Riemann surfaces appear in [signal processing](/applications/signal-processing-jpeg-mp3) through the theory of Hardy spaces and $H^p$ spaces, which control which functions can be reconstructed from one-sided data. In [quantum computing](/applications/quantum-computing-algorithms), topological quantum computation uses Riemann surfaces and braid groups to represent quantum states.
+
+## Why this matters
+
+Riemann surfaces stand at the intersection of complex analysis, algebraic geometry, topology, and number theory — a rare meeting point where each field illuminates the others. The classification of compact Riemann surfaces by genus is the prototype for all classification theorems in geometry. The Riemann–Roch theorem is both the key computational tool in the theory and a direct ancestor of the Atiyah–Singer index theorem, the Grothendieck–Riemann–Roch theorem in algebraic geometry, and the Hirzebruch signature formula. Modular forms on the upper half-plane — studied as functions on modular curves, which are Riemann surfaces — enter the proof of Fermat's Last Theorem, the Langlands programme, and the theory of L-functions. It is hard to overstate how central this subject is.

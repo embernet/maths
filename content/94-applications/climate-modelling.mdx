@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: climate-modelling
 domains: [environmental-science, physics, engineering]
 uses_theorems: [heat-equation, turbulence-theory-kolmogorov-scaling, fourier-series]
-uses_topics: [02-core-year-two/04-vector-calculus-and-pdes, 04-advanced-topics-year-four/04-mathematical-physics-and-fluids, 04-advanced-topics-year-four/03-advanced-pdes]
+uses_topics: [02-core-mathematics/04-vector-calculus-and-pdes, 04-advanced-topics/04-mathematical-physics-and-fluids, 04-advanced-topics/03-advanced-pdes]
 related_applications: [weather-forecasting, airfoil-and-aerodynamics, seismic-imaging-oil-exploration]
 tags: [climate, PDEs, numerical-methods, applied]
 real_world_examples: [IPCC climate projections, Net-zero pathway modelling, Ocean circulation models, Ice-sheet dynamics]
@@ -19,7 +19,7 @@ A global climate model (GCM) simulates the behaviour of the atmosphere, ocean, l
 
 ## The maths behind it
 
-The fluid dynamics of the atmosphere and ocean is governed by the **Navier-Stokes equations** (see [Mathematical Physics and Fluid Dynamics](/04-advanced-topics-year-four/04-mathematical-physics-and-fluids)):
+The fluid dynamics of the atmosphere and ocean is governed by the **Navier-Stokes equations** (see [Mathematical Physics and Fluid Dynamics](/04-advanced-topics/04-mathematical-physics-and-fluids)):
 
 $$\rho\!\left(\frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot\nabla)\mathbf{u}\right) = -\nabla p + \mu\nabla^2\mathbf{u} + \mathbf{f}.$$
 
@@ -31,7 +31,7 @@ Turbulence at scales below the grid resolution (clouds, ocean eddies) cannot be 
 
 ## A concrete example
 
-The UK Met Office Unified Model runs on a grid of roughly 10 million cells with 70 vertical levels. A century-long climate simulation requires $10^{21}$ floating-point operations. Running on the Met Office supercomputer (peak performance ~$10^{16}$ operations per second), this takes weeks. The CMIP6 ensemble — dozens of models worldwide — constitutes hundreds of petabytes of data, analysed using the same statistical methods taught in Year Two probability.
+The UK Met Office Unified Model runs on a grid of roughly 10 million cells with 70 vertical levels. A century-long climate simulation requires $10^{21}$ floating-point operations. Running on the Met Office supercomputer (peak performance ~$10^{16}$ operations per second), this takes weeks. The CMIP6 ensemble — dozens of models worldwide — constitutes hundreds of petabytes of data, analysed using the same statistical methods taught in core mathematics probability.
 
 ## History of the application
 
@@ -39,4 +39,4 @@ Lewis Fry Richardson attempted the first numerical weather forecast by hand in 1
 
 ## Links
 
-The PDEs at the core of climate models are introduced in [Vector Calculus and PDEs](/02-core-year-two/04-vector-calculus-and-pdes) and extended in [Advanced PDEs](/04-advanced-topics-year-four/03-advanced-pdes). Fluid dynamics is the subject of [Mathematical Physics and Fluid Dynamics](/04-advanced-topics-year-four/04-mathematical-physics-and-fluids). For shorter-timescale prediction see the related application [Weather Forecasting](/applications/weather-forecasting).
+The PDEs at the core of climate models are introduced in [Vector Calculus and PDEs](/02-core-mathematics/04-vector-calculus-and-pdes) and extended in [Advanced PDEs](/04-advanced-topics/03-advanced-pdes). Fluid dynamics is the subject of [Mathematical Physics and Fluid Dynamics](/04-advanced-topics/04-mathematical-physics-and-fluids). For shorter-timescale prediction see the related application [Weather Forecasting](/applications/weather-forecasting).

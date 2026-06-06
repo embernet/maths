@@ -5,7 +5,7 @@ section_slug: 94-applications
 slug: digital-signatures
 domains: [computer-science, security, law]
 uses_theorems: [fermat-s-little-theorem, modular-arithmetic-and-number-theory, euclid-s-algorithm]
-uses_topics: [01-foundations-year-one/01-algebra-and-linear-algebra, 02-core-year-two/01-abstract-algebra]
+uses_topics: [01-foundations/01-algebra-and-linear-algebra, 02-core-mathematics/01-abstract-algebra]
 related_applications: [rsa-public-key-cryptography, cryptocurrency-blockchain, error-correcting-codes]
 tags: [cryptography, security, number-theory, applied]
 real_world_examples: [Software code signing, Email authentication (DKIM), Legal electronic signatures (eIDAS), SSL/TLS certificate chains]
@@ -25,7 +25,7 @@ A digital signature scheme has three algorithms: **KeyGen** (produce a public-pr
 
 **Elliptic Curve Digital Signature Algorithm (ECDSA)**, used in Bitcoin, TLS 1.3, and most modern systems, replaces RSA's multiplicative group modulo $n$ with the group of points on an elliptic curve over a finite field. An elliptic curve over $\mathbb{F}_p$ is the set $\{(x,y) \in \mathbb{F}_p^2 : y^2 = x^3 + ax + b\} \cup \{\mathcal{O}\}$ with a group law defined by the chord-and-tangent construction. The discrete logarithm problem on such curves is believed harder than integer factorisation, allowing much smaller key sizes (256-bit ECDSA provides roughly the same security as 3072-bit RSA).
 
-The group theory of elliptic curves over finite fields — structure theorems, Hasse's bound on the group order — comes from algebraic geometry, sitting at the intersection of abstract algebra and [Algebraic Geometry](/04-advanced-topics-year-four/01-algebraic-geometry).
+The group theory of elliptic curves over finite fields — structure theorems, Hasse's bound on the group order — comes from algebraic geometry, sitting at the intersection of abstract algebra and [Algebraic Geometry](/04-advanced-topics/01-algebraic-geometry).
 
 ## A concrete example
 
@@ -37,4 +37,4 @@ Whitfield Diffie and Martin Hellman proposed the concept of digital signatures i
 
 ## Links
 
-The modular arithmetic and number theory is introduced in [Algebra and Linear Algebra](/01-foundations-year-one/01-algebra-and-linear-algebra). The group and ring theory is in [Abstract Algebra](/02-core-year-two/01-abstract-algebra). Elliptic curves appear in [Algebraic Geometry](/04-advanced-topics-year-four/01-algebraic-geometry). See also [RSA and Public-Key Cryptography](/applications/rsa-public-key-cryptography) and [Cryptocurrency and Blockchain](/applications/cryptocurrency-blockchain).
+The modular arithmetic and number theory is introduced in [Algebra and Linear Algebra](/01-foundations/01-algebra-and-linear-algebra). The group and ring theory is in [Abstract Algebra](/02-core-mathematics/01-abstract-algebra). Elliptic curves appear in [Algebraic Geometry](/04-advanced-topics/01-algebraic-geometry). See also [RSA and Public-Key Cryptography](/applications/rsa-public-key-cryptography) and [Cryptocurrency and Blockchain](/applications/cryptocurrency-blockchain).

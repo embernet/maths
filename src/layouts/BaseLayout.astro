@@ -19,8 +19,8 @@ interface Props {
   headSlot?: string;
 }
 
-const { title, description = 'The Undergraduate Mathematics Companion — a friendly map of the undergraduate mathematics curriculum.' } = Astro.props;
-const siteTitle = 'The Undergraduate Mathematics Companion';
+const { title, description = 'The Mathematics Companion — a friendly map of the mathematics curriculum.' } = Astro.props;
+const siteTitle = 'The Mathematics Companion';
 const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
 ---
 
@@ -31,6 +31,29 @@ const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{fullTitle}</title>
+
+    <!--
+      KaTeX MathML hide rule (defence-in-depth).
+      KaTeX renders BOTH a .katex-mathml span (for screen readers) AND a
+      .katex-html span (visible glyphs). The bundled KaTeX stylesheet hides
+      the MathML one, but if that stylesheet ever fails to load — wrong
+      bundle, stale service-worker cache, dev-server quirk — both render
+      visibly and you see doubled output like "f:A→B  f:A→B".
+      This inline rule is a hard backstop that runs regardless of any
+      bundling, scoping, or import-resolution issue downstream.
+    -->
+    <style is:inline>
+      .katex-mathml {
+        position: absolute !important;
+        clip: rect(1px, 1px, 1px, 1px) !important;
+        clip-path: inset(50%) !important;
+        height: 1px !important;
+        width: 1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        border: 0 !important;
+      }
+    </style>
 
     <!-- PWA manifest -->
     <link rel="manifest" href="/manifest.webmanifest" />
