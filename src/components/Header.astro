@@ -454,12 +454,13 @@ for (const item of navItems) {
     if (indexLoaded) { if (callback) callback(); return; }
     indexLoaded = true;
     try {
-      var fuseModule = await import('/node_modules/fuse.js/dist/fuse.mjs').catch(function() { return null; });
+      var base = window.__BASE__ || '/';
+      var fuseModule = await import(base + 'node_modules/fuse.js/dist/fuse.mjs').catch(function() { return null; });
       if (!fuseModule) {
         // fallback: dynamic import from CDN or bundled
         fuseModule = await import('fuse.js').catch(function() { return null; });
       }
-      var res = await fetch('/api/index.json');
+      var res = await fetch(base + 'api/index.json');
       var data = await res.json();
       var FuseClass = fuseModule ? (fuseModule.default || fuseModule) : null;
       if (FuseClass) {

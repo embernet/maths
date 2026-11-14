@@ -7,7 +7,7 @@
     "summary": "A guided map of what you will meet in a UK mathematics degree — written for any student arriving with strong A-Level maths.",
     "tags": [],
     "mathematicians": [],
-    "url": "/"
+    "url": "/maths/"
   },
   {
     "title": "Numbers, Sets and Proof",
@@ -29,7 +29,7 @@
       "cantor",
       "dedekind"
     ],
-    "url": "/01-foundations/00-numbers-sets-and-proof"
+    "url": "/maths/01-foundations/00-numbers-sets-and-proof"
   },
   {
     "title": "Algebra and Linear Algebra",
@@ -54,7 +54,7 @@
       "euler",
       "dedekind"
     ],
-    "url": "/01-foundations/01-algebra-and-linear-algebra"
+    "url": "/maths/01-foundations/01-algebra-and-linear-algebra"
   },
   {
     "title": "Real Analysis: Sequences, Limits, and the ε–δ Language",
@@ -77,7 +77,7 @@
       "weierstrass",
       "archimedes"
     ],
-    "url": "/01-foundations/02-real-analysis-foundations"
+    "url": "/maths/01-foundations/02-real-analysis-foundations"
   },
   {
     "title": "Calculus and Methods: Multivariable, Vector, and Differential Equations",
@@ -102,7 +102,7 @@
       "fourier",
       "laplace"
     ],
-    "url": "/01-foundations/03-calculus-and-methods"
+    "url": "/maths/01-foundations/03-calculus-and-methods"
   },
   {
     "title": "Probability and Statistics",
@@ -125,7 +125,7 @@
       "fisher",
       "kolmogorov"
     ],
-    "url": "/01-foundations/04-probability-and-statistics"
+    "url": "/maths/01-foundations/04-probability-and-statistics"
   },
   {
     "title": "Abstract Algebra: Groups, Rings, and Fields",
@@ -150,7 +150,7 @@
       "lagrange",
       "abel"
     ],
-    "url": "/02-core-mathematics/01-abstract-algebra"
+    "url": "/maths/02-core-mathematics/01-abstract-algebra"
   },
   {
     "title": "Real Analysis II: Metric Spaces, Uniform Convergence, and Integration",
@@ -173,7 +173,7 @@
       "bolzano",
       "riemann"
     ],
-    "url": "/02-core-mathematics/02-real-analysis-2"
+    "url": "/maths/02-core-mathematics/02-real-analysis-2"
   },
   {
     "title": "Complex Analysis: Analytic Functions and Cauchy's Theorem",
@@ -195,7 +195,7 @@
       "weierstrass",
       "euler"
     ],
-    "url": "/02-core-mathematics/03-complex-analysis"
+    "url": "/maths/02-core-mathematics/03-complex-analysis"
   },
   {
     "title": "Vector Calculus and Partial Differential Equations",
@@ -217,7 +217,7 @@
       "laplace",
       "gauss"
     ],
-    "url": "/02-core-mathematics/04-vector-calculus-and-pdes"
+    "url": "/maths/02-core-mathematics/04-vector-calculus-and-pdes"
   },
   {
     "title": "Probability and Statistical Inference",
@@ -240,7 +240,7 @@
       "bayes",
       "laplace"
     ],
-    "url": "/02-core-mathematics/05-probability-and-statistical-inference"
+    "url": "/maths/02-core-mathematics/05-probability-and-statistical-inference"
   },
   {
     "title": "Programming, Graphs, and Discrete Mathematics",
@@ -261,7 +261,7 @@
       "euler",
       "erdos"
     ],
-    "url": "/02-core-mathematics/06-programming-and-discrete-mathematics"
+    "url": "/maths/02-core-mathematics/06-programming-and-discrete-mathematics"
   },
   {
     "title": "Galois Theory",
@@ -283,7 +283,7 @@
       "noether",
       "lagrange"
     ],
-    "url": "/03-specialist-areas/01-galois-theory"
+    "url": "/maths/03-specialist-areas/01-galois-theory"
   },
   {
     "title": "Functional Analysis: Banach and Hilbert Spaces",
@@ -305,7 +305,7 @@
       "hilbert",
       "cauchy"
     ],
-    "url": "/03-specialist-areas/02-functional-analysis"
+    "url": "/maths/03-specialist-areas/02-functional-analysis"
   },
   {
     "title": "Measure Theory and Lebesgue Integration",
@@ -325,7 +325,7 @@
       "kolmogorov",
       "riemann"
     ],
-    "url": "/03-specialist-areas/03-measure-and-lebesgue-integration"
+    "url": "/maths/03-specialist-areas/03-measure-and-lebesgue-integration"
   },
   {
     "title": "Topology",
@@ -346,7 +346,7 @@
       "poincare",
       "cantor"
     ],
-    "url": "/03-specialist-areas/04-topology"
+    "url": "/maths/03-specialist-areas/04-topology"
   },
   {
     "title": "Numerical Analysis",
@@ -369,7 +369,7 @@
       "lagrange",
       "euler"
     ],
-    "url": "/03-specialist-areas/05-numerical-analysis"
+    "url": "/maths/03-specialist-areas/05-numerical-analysis"
   },
   {
     "title": "Mathematical Biology",
@@ -389,7 +389,7 @@
     "mathematicians": [
       "turing"
     ],
-    "url": "/03-specialist-areas/06-mathematical-biology"
+    "url": "/maths/03-specialist-areas/06-mathematical-biology"
   },
   {
     "title": "Stochastic Processes and Martingales",
@@ -408,7 +408,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/03-specialist-areas/07-stochastic-processes"
+    "url": "/maths/03-specialist-areas/07-stochastic-processes"
   },
   {
     "title": "Advanced Differential Equations: Green's Functions and Calculus of Variations",
@@ -429,7 +429,7 @@
       "lagrange",
       "fourier"
     ],
-    "url": "/03-specialist-areas/08-differential-equations-advanced"
+    "url": "/maths/03-specialist-areas/08-differential-equations-advanced"
   },
   {
     "title": "Change Point Detection",
@@ -446,7 +446,7 @@
       "sequential-analysis"
     ],
     "mathematicians": [],
-    "url": "/03-specialist-areas/09-change-point-detection"
+    "url": "/maths/03-specialist-areas/09-change-point-detection"
   },
   {
     "title": "Representation Theory",
@@ -469,7 +469,7 @@
       "noether",
       "galois"
     ],
-    "url": "/03-specialist-areas/10-representation-theory"
+    "url": "/maths/03-specialist-areas/10-representation-theory"
   },
   {
     "title": "Mathematical Logic",
@@ -493,7 +493,7 @@
       "turing",
       "hilbert"
     ],
-    "url": "/03-specialist-areas/11-logic"
+    "url": "/maths/03-specialist-areas/11-logic"
   },
   {
     "title": "Set Theory",
@@ -518,7 +518,7 @@
       "dedekind",
       "hilbert"
     ],
-    "url": "/03-specialist-areas/12-set-theory"
+    "url": "/maths/03-specialist-areas/12-set-theory"
   },
   {
     "title": "Combinatorics and Graph Theory",
@@ -541,7 +541,7 @@
       "erdos",
       "kolmogorov"
     ],
-    "url": "/03-specialist-areas/13-combinatorics-and-graph-theory"
+    "url": "/maths/03-specialist-areas/13-combinatorics-and-graph-theory"
   },
   {
     "title": "Information Theory",
@@ -561,7 +561,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/03-specialist-areas/14-information-theory"
+    "url": "/maths/03-specialist-areas/14-information-theory"
   },
   {
     "title": "Optimisation",
@@ -584,7 +584,7 @@
       "gauss",
       "euler"
     ],
-    "url": "/03-specialist-areas/15-optimisation"
+    "url": "/maths/03-specialist-areas/15-optimisation"
   },
   {
     "title": "Dynamical Systems",
@@ -607,7 +607,7 @@
       "newton",
       "euler"
     ],
-    "url": "/03-specialist-areas/16-dynamical-systems"
+    "url": "/maths/03-specialist-areas/16-dynamical-systems"
   },
   {
     "title": "Projective Geometry",
@@ -630,7 +630,7 @@
       "hilbert",
       "pascal"
     ],
-    "url": "/03-specialist-areas/17-projective-geometry"
+    "url": "/maths/03-specialist-areas/17-projective-geometry"
   },
   {
     "title": "Algebraic Geometry",
@@ -652,7 +652,7 @@
       "galois",
       "descartes"
     ],
-    "url": "/04-advanced-topics/01-algebraic-geometry"
+    "url": "/maths/04-advanced-topics/01-algebraic-geometry"
   },
   {
     "title": "Analytic Number Theory",
@@ -675,7 +675,7 @@
       "euler",
       "hardy"
     ],
-    "url": "/04-advanced-topics/02-analytic-number-theory"
+    "url": "/maths/04-advanced-topics/02-analytic-number-theory"
   },
   {
     "title": "Advanced PDEs: Sobolev Spaces and Weak Solutions",
@@ -696,7 +696,7 @@
       "cauchy",
       "fourier"
     ],
-    "url": "/04-advanced-topics/03-advanced-pdes"
+    "url": "/maths/04-advanced-topics/03-advanced-pdes"
   },
   {
     "title": "Mathematical Physics and Fluid Dynamics",
@@ -718,7 +718,7 @@
       "bernoulli-family",
       "laplace"
     ],
-    "url": "/04-advanced-topics/04-mathematical-physics-and-fluids"
+    "url": "/maths/04-advanced-topics/04-mathematical-physics-and-fluids"
   },
   {
     "title": "Algebraic Topology",
@@ -741,7 +741,7 @@
       "noether",
       "riemann"
     ],
-    "url": "/04-advanced-topics/05-algebraic-topology"
+    "url": "/maths/04-advanced-topics/05-algebraic-topology"
   },
   {
     "title": "Differential Geometry",
@@ -764,7 +764,7 @@
       "poincare",
       "noether"
     ],
-    "url": "/04-advanced-topics/06-differential-geometry"
+    "url": "/maths/04-advanced-topics/06-differential-geometry"
   },
   {
     "title": "Algebraic Number Theory",
@@ -787,7 +787,7 @@
       "hilbert",
       "fermat"
     ],
-    "url": "/04-advanced-topics/07-algebraic-number-theory"
+    "url": "/maths/04-advanced-topics/07-algebraic-number-theory"
   },
   {
     "title": "Lie Groups and Lie Algebras",
@@ -809,7 +809,7 @@
       "poincare",
       "gauss"
     ],
-    "url": "/04-advanced-topics/08-lie-groups-and-lie-algebras"
+    "url": "/maths/04-advanced-topics/08-lie-groups-and-lie-algebras"
   },
   {
     "title": "Algebraic Curves",
@@ -832,7 +832,7 @@
       "noether",
       "abel"
     ],
-    "url": "/04-advanced-topics/09-algebraic-curves"
+    "url": "/maths/04-advanced-topics/09-algebraic-curves"
   },
   {
     "title": "Commutative Algebra",
@@ -854,7 +854,7 @@
       "hilbert",
       "dedekind"
     ],
-    "url": "/04-advanced-topics/10-commutative-algebra"
+    "url": "/maths/04-advanced-topics/10-commutative-algebra"
   },
   {
     "title": "Riemann Surfaces",
@@ -877,7 +877,7 @@
       "poincare",
       "abel"
     ],
-    "url": "/04-advanced-topics/11-riemann-surfaces"
+    "url": "/maths/04-advanced-topics/11-riemann-surfaces"
   },
   {
     "title": "Gödel's Incompleteness Theorems",
@@ -899,7 +899,7 @@
       "hilbert",
       "turing"
     ],
-    "url": "/04-advanced-topics/12-godels-incompleteness-theorems"
+    "url": "/maths/04-advanced-topics/12-godels-incompleteness-theorems"
   },
   {
     "title": "Statistical Mechanics",
@@ -920,7 +920,7 @@
       "kolmogorov",
       "gauss"
     ],
-    "url": "/04-advanced-topics/13-statistical-mechanics"
+    "url": "/maths/04-advanced-topics/13-statistical-mechanics"
   },
   {
     "title": "General Relativity",
@@ -942,7 +942,7 @@
       "hilbert",
       "gauss"
     ],
-    "url": "/04-advanced-topics/14-general-relativity"
+    "url": "/maths/04-advanced-topics/14-general-relativity"
   },
   {
     "title": "Quantum Information and Computation",
@@ -964,7 +964,7 @@
       "hilbert",
       "turing"
     ],
-    "url": "/04-advanced-topics/15-quantum-information-and-computation"
+    "url": "/maths/04-advanced-topics/15-quantum-information-and-computation"
   },
   {
     "title": "Mathematical Finance",
@@ -985,7 +985,7 @@
       "kolmogorov",
       "gauss"
     ],
-    "url": "/04-advanced-topics/16-mathematical-finance"
+    "url": "/maths/04-advanced-topics/16-mathematical-finance"
   },
   {
     "title": "Deep Learning Theory",
@@ -1005,7 +1005,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/04-advanced-topics/17-deep-learning-theory"
+    "url": "/maths/04-advanced-topics/17-deep-learning-theory"
   },
   {
     "title": "Mathematics of Machine Learning",
@@ -1027,7 +1027,7 @@
       "kolmogorov",
       "gauss"
     ],
-    "url": "/04-advanced-topics/18-mathematics-of-machine-learning"
+    "url": "/maths/04-advanced-topics/18-mathematics-of-machine-learning"
   },
   {
     "title": "Optimal Transport",
@@ -1048,7 +1048,7 @@
       "gauss",
       "kolmogorov"
     ],
-    "url": "/04-advanced-topics/19-optimal-transport"
+    "url": "/maths/04-advanced-topics/19-optimal-transport"
   },
   {
     "title": "Era 1 — Ancient Origins",
@@ -1062,7 +1062,7 @@
       "euclid",
       "archimedes"
     ],
-    "url": "/90-history/01-ancient-origins"
+    "url": "/maths/90-history/01-ancient-origins"
   },
   {
     "title": "Era 2 — Classical Greece and the Axiomatic Method",
@@ -1076,7 +1076,7 @@
       "euclid",
       "archimedes"
     ],
-    "url": "/90-history/02-classical-greece"
+    "url": "/maths/90-history/02-classical-greece"
   },
   {
     "title": "Era 3 — The Islamic Golden Age and the Medieval Synthesis",
@@ -1089,7 +1089,7 @@
       "al-khwarizmi",
       "fibonacci"
     ],
-    "url": "/90-history/03-islamic-golden-age"
+    "url": "/maths/90-history/03-islamic-golden-age"
   },
   {
     "title": "Era 4 — Renaissance and Symbolic Algebra",
@@ -1104,7 +1104,7 @@
       "descartes",
       "fermat"
     ],
-    "url": "/90-history/04-renaissance-and-symbolic-algebra"
+    "url": "/maths/90-history/04-renaissance-and-symbolic-algebra"
   },
   {
     "title": "Era 5 — The Calculus Revolution",
@@ -1118,7 +1118,7 @@
       "leibniz",
       "euler"
     ],
-    "url": "/90-history/05-the-calculus-revolution"
+    "url": "/maths/90-history/05-the-calculus-revolution"
   },
   {
     "title": "Era 6 — The Rigour Revolution",
@@ -1135,7 +1135,7 @@
       "cantor",
       "riemann"
     ],
-    "url": "/90-history/06-the-rigour-revolution"
+    "url": "/maths/90-history/06-the-rigour-revolution"
   },
   {
     "title": "Era 7 — The Structural Turn",
@@ -1150,7 +1150,7 @@
       "noether",
       "lagrange"
     ],
-    "url": "/90-history/07-the-structural-turn"
+    "url": "/maths/90-history/07-the-structural-turn"
   },
   {
     "title": "Era 8 — Foundations and the Twentieth-Century Crisis",
@@ -1165,7 +1165,7 @@
       "godel",
       "turing"
     ],
-    "url": "/90-history/08-foundations-and-the-twentieth-century-crisis"
+    "url": "/maths/90-history/08-foundations-and-the-twentieth-century-crisis"
   },
   {
     "title": "Era 9 — Modern Mathematics",
@@ -1181,7 +1181,7 @@
       "banach",
       "turing"
     ],
-    "url": "/90-history/09-modern-mathematics"
+    "url": "/maths/90-history/09-modern-mathematics"
   },
   {
     "title": "Niels Henrik Abel",
@@ -1195,7 +1195,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/abel"
+    "url": "/maths/mathematicians/abel"
   },
   {
     "title": "Al-Khwarizmi",
@@ -1209,7 +1209,7 @@
       "foundations"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/al-khwarizmi"
+    "url": "/maths/mathematicians/al-khwarizmi"
   },
   {
     "title": "Archimedes",
@@ -1223,7 +1223,7 @@
       "foundations"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/archimedes"
+    "url": "/maths/mathematicians/archimedes"
   },
   {
     "title": "Stefan Banach",
@@ -1236,7 +1236,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/banach"
+    "url": "/maths/mathematicians/banach"
   },
   {
     "title": "Thomas Bayes",
@@ -1250,7 +1250,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/bayes"
+    "url": "/maths/mathematicians/bayes"
   },
   {
     "title": "The Bernoulli Family",
@@ -1265,7 +1265,7 @@
       "probability"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/bernoulli-family"
+    "url": "/maths/mathematicians/bernoulli-family"
   },
   {
     "title": "Bernard Bolzano",
@@ -1279,7 +1279,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/bolzano"
+    "url": "/maths/mathematicians/bolzano"
   },
   {
     "title": "Georg Cantor",
@@ -1294,7 +1294,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/cantor"
+    "url": "/maths/mathematicians/cantor"
   },
   {
     "title": "Gerolamo Cardano",
@@ -1308,7 +1308,7 @@
       "complex-numbers"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/cardano"
+    "url": "/maths/mathematicians/cardano"
   },
   {
     "title": "Augustin-Louis Cauchy",
@@ -1323,7 +1323,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/cauchy"
+    "url": "/maths/mathematicians/cauchy"
   },
   {
     "title": "Richard Dedekind",
@@ -1338,7 +1338,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/dedekind"
+    "url": "/maths/mathematicians/dedekind"
   },
   {
     "title": "René Descartes",
@@ -1353,7 +1353,7 @@
       "coordinates"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/descartes"
+    "url": "/maths/mathematicians/descartes"
   },
   {
     "title": "Paul Erdős",
@@ -1368,7 +1368,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/erdos"
+    "url": "/maths/mathematicians/erdos"
   },
   {
     "title": "Euclid",
@@ -1383,7 +1383,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/euclid"
+    "url": "/maths/mathematicians/euclid"
   },
   {
     "title": "Leonhard Euler",
@@ -1399,7 +1399,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/euler"
+    "url": "/maths/mathematicians/euler"
   },
   {
     "title": "Pierre de Fermat",
@@ -1413,7 +1413,7 @@
       "algebra"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/fermat"
+    "url": "/maths/mathematicians/fermat"
   },
   {
     "title": "Fibonacci (Leonardo of Pisa)",
@@ -1427,7 +1427,7 @@
       "number-theory"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/fibonacci"
+    "url": "/maths/mathematicians/fibonacci"
   },
   {
     "title": "Ronald A. Fisher",
@@ -1441,7 +1441,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/fisher"
+    "url": "/maths/mathematicians/fisher"
   },
   {
     "title": "Jean-Baptiste Joseph Fourier",
@@ -1456,7 +1456,7 @@
       "heat-equation"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/fourier"
+    "url": "/maths/mathematicians/fourier"
   },
   {
     "title": "Évariste Galois",
@@ -1470,7 +1470,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/galois"
+    "url": "/maths/mathematicians/galois"
   },
   {
     "title": "Carl Friedrich Gauss",
@@ -1485,7 +1485,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/gauss"
+    "url": "/maths/mathematicians/gauss"
   },
   {
     "title": "Kurt Gödel",
@@ -1499,7 +1499,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/godel"
+    "url": "/maths/mathematicians/godel"
   },
   {
     "title": "G. H. Hardy",
@@ -1513,7 +1513,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/hardy"
+    "url": "/maths/mathematicians/hardy"
   },
   {
     "title": "David Hilbert",
@@ -1527,7 +1527,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/hilbert"
+    "url": "/maths/mathematicians/hilbert"
   },
   {
     "title": "Andrey Kolmogorov",
@@ -1541,7 +1541,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/kolmogorov"
+    "url": "/maths/mathematicians/kolmogorov"
   },
   {
     "title": "Joseph-Louis Lagrange",
@@ -1556,7 +1556,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/lagrange"
+    "url": "/maths/mathematicians/lagrange"
   },
   {
     "title": "Pierre-Simon Laplace",
@@ -1571,7 +1571,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/laplace"
+    "url": "/maths/mathematicians/laplace"
   },
   {
     "title": "Gottfried Wilhelm Leibniz",
@@ -1586,7 +1586,7 @@
       "logic"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/leibniz"
+    "url": "/maths/mathematicians/leibniz"
   },
   {
     "title": "Isaac Newton",
@@ -1601,7 +1601,7 @@
       "foundations"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/newton"
+    "url": "/maths/mathematicians/newton"
   },
   {
     "title": "Emmy Noether",
@@ -1615,7 +1615,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/noether"
+    "url": "/maths/mathematicians/noether"
   },
   {
     "title": "Blaise Pascal",
@@ -1630,7 +1630,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/pascal"
+    "url": "/maths/mathematicians/pascal"
   },
   {
     "title": "Henri Poincaré",
@@ -1644,7 +1644,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/poincare"
+    "url": "/maths/mathematicians/poincare"
   },
   {
     "title": "Pythagoras",
@@ -1658,7 +1658,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/pythagoras"
+    "url": "/maths/mathematicians/pythagoras"
   },
   {
     "title": "Srinivasa Ramanujan",
@@ -1672,7 +1672,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/ramanujan"
+    "url": "/maths/mathematicians/ramanujan"
   },
   {
     "title": "Bernhard Riemann",
@@ -1687,7 +1687,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/riemann"
+    "url": "/maths/mathematicians/riemann"
   },
   {
     "title": "Alan Turing",
@@ -1701,7 +1701,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/turing"
+    "url": "/maths/mathematicians/turing"
   },
   {
     "title": "Karl Weierstrass",
@@ -1715,7 +1715,7 @@
       "history"
     ],
     "mathematicians": [],
-    "url": "/mathematicians/weierstrass"
+    "url": "/maths/mathematicians/weierstrass"
   },
   {
     "title": "Resources",
@@ -1730,7 +1730,7 @@
       "study"
     ],
     "mathematicians": [],
-    "url": "/resources"
+    "url": "/maths/resources"
   },
   {
     "title": "A Mathematician's Apology",
@@ -1747,7 +1747,7 @@
     "mathematicians": [
       "hardy"
     ],
-    "url": "/theorems/a-mathematician-s-apology"
+    "url": "/maths/theorems/a-mathematician-s-apology"
   },
   {
     "title": "Abel's theorem",
@@ -1764,7 +1764,7 @@
     "mathematicians": [
       "abel"
     ],
-    "url": "/theorems/abel-s-theorem"
+    "url": "/maths/theorems/abel-s-theorem"
   },
   {
     "title": "Abelian groups (posthumous attribution)",
@@ -1781,7 +1781,7 @@
     "mathematicians": [
       "abel"
     ],
-    "url": "/theorems/abelian-groups-posthumous-attribution"
+    "url": "/maths/theorems/abelian-groups-posthumous-attribution"
   },
   {
     "title": "Algorithm (name derives from his)",
@@ -1798,7 +1798,7 @@
     "mathematicians": [
       "al-khwarizmi"
     ],
-    "url": "/theorems/algorithm-name-derives-from-his"
+    "url": "/maths/theorems/algorithm-name-derives-from-his"
   },
   {
     "title": "Analysis of variance (ANOVA)",
@@ -1815,7 +1815,7 @@
     "mathematicians": [
       "fisher"
     ],
-    "url": "/theorems/analysis-of-variance-anova"
+    "url": "/maths/theorems/analysis-of-variance-anova"
   },
   {
     "title": "analytic geometry",
@@ -1834,7 +1834,7 @@
       "descartes",
       "fermat"
     ],
-    "url": "/theorems/analytic-geometry"
+    "url": "/maths/theorems/analytic-geometry"
   },
   {
     "title": "Analytic number theory",
@@ -1851,7 +1851,7 @@
     "mathematicians": [
       "hardy"
     ],
-    "url": "/theorems/analytic-number-theory"
+    "url": "/maths/theorems/analytic-number-theory"
   },
   {
     "title": "approximation of π",
@@ -1868,7 +1868,7 @@
     "mathematicians": [
       "archimedes"
     ],
-    "url": "/theorems/approximation-of"
+    "url": "/maths/theorems/approximation-of"
   },
   {
     "title": "Area of parabolic segment (first convergent infinite series)",
@@ -1885,7 +1885,7 @@
     "mathematicians": [
       "archimedes"
     ],
-    "url": "/theorems/area-of-parabolic-segment-first-convergent-infinite-series"
+    "url": "/maths/theorems/area-of-parabolic-segment-first-convergent-infinite-series"
   },
   {
     "title": "Automorphic functions",
@@ -1902,7 +1902,7 @@
     "mathematicians": [
       "poincare"
     ],
-    "url": "/theorems/automorphic-functions"
+    "url": "/maths/theorems/automorphic-functions"
   },
   {
     "title": "Axiomatic foundations of probability",
@@ -1919,7 +1919,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/theorems/axiomatic-foundations-of-probability"
+    "url": "/maths/theorems/axiomatic-foundations-of-probability"
   },
   {
     "title": "Banach fixed-point theorem",
@@ -1936,7 +1936,7 @@
     "mathematicians": [
       "banach"
     ],
-    "url": "/theorems/banach-fixed-point-theorem"
+    "url": "/maths/theorems/banach-fixed-point-theorem"
   },
   {
     "title": "Banach spaces",
@@ -1953,7 +1953,7 @@
     "mathematicians": [
       "banach"
     ],
-    "url": "/theorems/banach-spaces"
+    "url": "/maths/theorems/banach-spaces"
   },
   {
     "title": "Banach–Tarski paradox",
@@ -1970,7 +1970,7 @@
     "mathematicians": [
       "banach"
     ],
-    "url": "/theorems/banachtarski-paradox"
+    "url": "/maths/theorems/banachtarski-paradox"
   },
   {
     "title": "Bayes' theorem",
@@ -1987,7 +1987,7 @@
     "mathematicians": [
       "bayes"
     ],
-    "url": "/theorems/bayes-theorem"
+    "url": "/maths/theorems/bayes-theorem"
   },
   {
     "title": "Bayesian probability (independent derivation)",
@@ -2004,7 +2004,7 @@
     "mathematicians": [
       "laplace"
     ],
-    "url": "/theorems/bayesian-probability-independent-derivation"
+    "url": "/maths/theorems/bayesian-probability-independent-derivation"
   },
   {
     "title": "Bernoulli numbers (Jacob)",
@@ -2021,7 +2021,7 @@
     "mathematicians": [
       "bernoulli-family"
     ],
-    "url": "/theorems/bernoulli-numbers-jacob"
+    "url": "/maths/theorems/bernoulli-numbers-jacob"
   },
   {
     "title": "Bernoulli's equation for fluid flow and kinetic theory (Daniel)",
@@ -2038,7 +2038,7 @@
     "mathematicians": [
       "bernoulli-family"
     ],
-    "url": "/theorems/bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel"
+    "url": "/maths/theorems/bernoulli-s-equation-for-fluid-flow-and-kinetic-theory-daniel"
   },
   {
     "title": "Binary arithmetic",
@@ -2055,7 +2055,7 @@
     "mathematicians": [
       "leibniz"
     ],
-    "url": "/theorems/binary-arithmetic"
+    "url": "/maths/theorems/binary-arithmetic"
   },
   {
     "title": "Binomial theorem",
@@ -2072,7 +2072,7 @@
     "mathematicians": [
       "newton"
     ],
-    "url": "/theorems/binomial-theorem"
+    "url": "/maths/theorems/binomial-theorem"
   },
   {
     "title": "Bolzano–Weierstrass theorem",
@@ -2090,7 +2090,7 @@
       "bolzano",
       "weierstrass"
     ],
-    "url": "/theorems/bolzanoweierstrass-theorem"
+    "url": "/maths/theorems/bolzanoweierstrass-theorem"
   },
   {
     "title": "Brachistochrone and early calculus (Johann)",
@@ -2107,7 +2107,7 @@
     "mathematicians": [
       "bernoulli-family"
     ],
-    "url": "/theorems/brachistochrone-and-early-calculus-johann"
+    "url": "/maths/theorems/brachistochrone-and-early-calculus-johann"
   },
   {
     "title": "Breaking Enigma at Bletchley Park",
@@ -2124,7 +2124,7 @@
     "mathematicians": [
       "turing"
     ],
-    "url": "/theorems/breaking-enigma-at-bletchley-park"
+    "url": "/maths/theorems/breaking-enigma-at-bletchley-park"
   },
   {
     "title": "Calculus (dy/dx notation, ∫ symbol)",
@@ -2142,7 +2142,7 @@
     "mathematicians": [
       "leibniz"
     ],
-    "url": "/theorems/calculus-dy-dx-notation-symbol"
+    "url": "/maths/theorems/calculus-dy-dx-notation-symbol"
   },
   {
     "title": "Calculus (fluxions)",
@@ -2159,7 +2159,7 @@
     "mathematicians": [
       "newton"
     ],
-    "url": "/theorems/calculus-fluxions"
+    "url": "/maths/theorems/calculus-fluxions"
   },
   {
     "title": "Calculus of variations (Jacob and Johann)",
@@ -2176,7 +2176,7 @@
     "mathematicians": [
       "bernoulli-family"
     ],
-    "url": "/theorems/calculus-of-variations-jacob-and-johann"
+    "url": "/maths/theorems/calculus-of-variations-jacob-and-johann"
   },
   {
     "title": "Cantor's diagonal argument",
@@ -2193,7 +2193,7 @@
     "mathematicians": [
       "cantor"
     ],
-    "url": "/theorems/cantor-s-diagonal-argument"
+    "url": "/maths/theorems/cantor-s-diagonal-argument"
   },
   {
     "title": "Cantor set",
@@ -2210,7 +2210,7 @@
     "mathematicians": [
       "cantor"
     ],
-    "url": "/theorems/cantor-set"
+    "url": "/maths/theorems/cantor-set"
   },
   {
     "title": "Cardinality of infinite sets",
@@ -2227,7 +2227,7 @@
     "mathematicians": [
       "cantor"
     ],
-    "url": "/theorems/cardinality-of-infinite-sets"
+    "url": "/maths/theorems/cardinality-of-infinite-sets"
   },
   {
     "title": "Cartesian coordinates",
@@ -2244,7 +2244,7 @@
     "mathematicians": [
       "descartes"
     ],
-    "url": "/theorems/cartesian-coordinates"
+    "url": "/maths/theorems/cartesian-coordinates"
   },
   {
     "title": "Cauchy sequences",
@@ -2261,7 +2261,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/cauchy-sequences"
+    "url": "/maths/theorems/cauchy-sequences"
   },
   {
     "title": "Complex analysis and Cauchy's theorem",
@@ -2278,7 +2278,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/cauchys-integral-theorem"
+    "url": "/maths/theorems/cauchys-integral-theorem"
   },
   {
     "title": "Cauchy–Schwarz inequality",
@@ -2295,7 +2295,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/cauchyschwarz-inequality"
+    "url": "/maths/theorems/cauchyschwarz-inequality"
   },
   {
     "title": "Celestial mechanics",
@@ -2312,7 +2312,7 @@
     "mathematicians": [
       "laplace"
     ],
-    "url": "/theorems/celestial-mechanics"
+    "url": "/maths/theorems/celestial-mechanics"
   },
   {
     "title": "Central limit theorem",
@@ -2329,7 +2329,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/central-limit-theorem"
+    "url": "/maths/theorems/central-limit-theorem"
   },
   {
     "title": "Chaos theory (three-body problem)",
@@ -2346,7 +2346,7 @@
     "mathematicians": [
       "poincare"
     ],
-    "url": "/theorems/chaos-theory-three-body-problem"
+    "url": "/maths/theorems/chaos-theory-three-body-problem"
   },
   {
     "title": "Characterisation of solvable polynomials",
@@ -2363,7 +2363,7 @@
     "mathematicians": [
       "galois"
     ],
-    "url": "/theorems/characterisation-of-solvable-polynomials"
+    "url": "/maths/theorems/characterisation-of-solvable-polynomials"
   },
   {
     "title": "Completeness theorem for first-order logic",
@@ -2380,7 +2380,7 @@
     "mathematicians": [
       "godel"
     ],
-    "url": "/theorems/completeness-theorem-for-first-order-logic"
+    "url": "/maths/theorems/completeness-theorem-for-first-order-logic"
   },
   {
     "title": "Complex analysis and Cauchy's theorem",
@@ -2397,7 +2397,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/complex-analysis-and-cauchy-s-theorem"
+    "url": "/maths/theorems/complex-analysis-and-cauchy-s-theorem"
   },
   {
     "title": "connection of algebra to geometry",
@@ -2414,7 +2414,7 @@
     "mathematicians": [
       "descartes"
     ],
-    "url": "/theorems/connection-of-algebra-to-geometry"
+    "url": "/maths/theorems/connection-of-algebra-to-geometry"
   },
   {
     "title": "Consistency of the continuum hypothesis with ZFC",
@@ -2431,7 +2431,7 @@
     "mathematicians": [
       "godel"
     ],
-    "url": "/theorems/consistency-of-the-continuum-hypothesis-with-zfc"
+    "url": "/maths/theorems/consistency-of-the-continuum-hypothesis-with-zfc"
   },
   {
     "title": "Contributions to algebraic topology",
@@ -2448,7 +2448,7 @@
     "mathematicians": [
       "noether"
     ],
-    "url": "/theorems/contributions-to-algebraic-topology"
+    "url": "/maths/theorems/contributions-to-algebraic-topology"
   },
   {
     "title": "Contributions to modal logic and ontology",
@@ -2465,7 +2465,7 @@
     "mathematicians": [
       "godel"
     ],
-    "url": "/theorems/contributions-to-modal-logic-and-ontology"
+    "url": "/maths/theorems/contributions-to-modal-logic-and-ontology"
   },
   {
     "title": "Contributions to set theory and foundations",
@@ -2482,7 +2482,7 @@
     "mathematicians": [
       "dedekind"
     ],
-    "url": "/theorems/contributions-to-set-theory-and-foundations"
+    "url": "/maths/theorems/contributions-to-set-theory-and-foundations"
   },
   {
     "title": "Contributions to topology and analysis",
@@ -2499,7 +2499,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/theorems/contributions-to-topology-and-analysis"
+    "url": "/maths/theorems/contributions-to-topology-and-analysis"
   },
   {
     "title": "Dedekind cuts (rigorous construction of real numbers)",
@@ -2516,7 +2516,7 @@
     "mathematicians": [
       "dedekind"
     ],
-    "url": "/theorems/dedekind-cuts-rigorous-construction-of-real-numbers"
+    "url": "/maths/theorems/dedekind-cuts-rigorous-construction-of-real-numbers"
   },
   {
     "title": "Dedekind domains (algebraic number theory)",
@@ -2533,7 +2533,7 @@
     "mathematicians": [
       "dedekind"
     ],
-    "url": "/theorems/dedekind-domains-algebraic-number-theory"
+    "url": "/maths/theorems/dedekind-domains-algebraic-number-theory"
   },
   {
     "title": "Dirichlet convergence theorem",
@@ -2547,7 +2547,7 @@
       "convergence"
     ],
     "mathematicians": [],
-    "url": "/theorems/dirichlet-convergence-theorem"
+    "url": "/maths/theorems/dirichlet-convergence-theorem"
   },
   {
     "title": "discovery of irrational numbers",
@@ -2564,7 +2564,7 @@
     "mathematicians": [
       "pythagoras"
     ],
-    "url": "/theorems/discovery-of-irrational-numbers"
+    "url": "/maths/theorems/discovery-of-irrational-numbers"
   },
   {
     "title": "Early work on infinite sets",
@@ -2581,7 +2581,7 @@
     "mathematicians": [
       "bolzano"
     ],
-    "url": "/theorems/early-work-on-infinite-sets"
+    "url": "/maths/theorems/early-work-on-infinite-sets"
   },
   {
     "title": "Elliptic integrals and elliptic functions",
@@ -2598,7 +2598,7 @@
     "mathematicians": [
       "abel"
     ],
-    "url": "/theorems/elliptic-integrals-and-elliptic-functions"
+    "url": "/maths/theorems/elliptic-integrals-and-elliptic-functions"
   },
   {
     "title": "Erdős number",
@@ -2615,7 +2615,7 @@
     "mathematicians": [
       "erdos"
     ],
-    "url": "/theorems/erdos-number"
+    "url": "/maths/theorems/erdos-number"
   },
   {
     "title": "Ergodic theory",
@@ -2632,7 +2632,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/theorems/ergodic-theory"
+    "url": "/maths/theorems/ergodic-theory"
   },
   {
     "title": "Euclid's algorithm",
@@ -2649,7 +2649,7 @@
     "mathematicians": [
       "euclid"
     ],
-    "url": "/theorems/euclid-s-algorithm"
+    "url": "/maths/theorems/euclid-s-algorithm"
   },
   {
     "title": "Euclid's Elements",
@@ -2667,7 +2667,7 @@
     "mathematicians": [
       "euclid"
     ],
-    "url": "/theorems/euclid-s-elements"
+    "url": "/maths/theorems/euclid-s-elements"
   },
   {
     "title": "Euclidean geometry",
@@ -2685,7 +2685,7 @@
     "mathematicians": [
       "euclid"
     ],
-    "url": "/theorems/euclidean-geometry"
+    "url": "/maths/theorems/euclidean-geometry"
   },
   {
     "title": "Euler's formula (e^iθ = cos θ + i sin θ)",
@@ -2702,7 +2702,7 @@
     "mathematicians": [
       "euler"
     ],
-    "url": "/theorems/euler-s-formula-e-i-cos-i-sin"
+    "url": "/maths/theorems/euler-s-formula-e-i-cos-i-sin"
   },
   {
     "title": "Euler's Totient Function",
@@ -2718,7 +2718,7 @@
     "mathematicians": [
       "euler"
     ],
-    "url": "/theorems/euler-s-totient-function"
+    "url": "/maths/theorems/euler-s-totient-function"
   },
   {
     "title": "Experimental design (randomisation, blocking, factorial design)",
@@ -2735,7 +2735,7 @@
     "mathematicians": [
       "fisher"
     ],
-    "url": "/theorems/experimental-design-randomisation-blocking-factorial-design"
+    "url": "/maths/theorems/experimental-design-randomisation-blocking-factorial-design"
   },
   {
     "title": "Fermat's Last Theorem",
@@ -2752,7 +2752,7 @@
     "mathematicians": [
       "fermat"
     ],
-    "url": "/theorems/fermat-s-last-theorem"
+    "url": "/maths/theorems/fermat-s-last-theorem"
   },
   {
     "title": "Fermat's little theorem",
@@ -2769,7 +2769,7 @@
     "mathematicians": [
       "fermat"
     ],
-    "url": "/theorems/fermat-s-little-theorem"
+    "url": "/maths/theorems/fermat-s-little-theorem"
   },
   {
     "title": "Fibonacci sequence",
@@ -2786,7 +2786,7 @@
     "mathematicians": [
       "fibonacci"
     ],
-    "url": "/theorems/fibonacci-sequence"
+    "url": "/maths/theorems/fibonacci-sequence"
   },
   {
     "title": "First systematic use of complex numbers",
@@ -2803,7 +2803,7 @@
     "mathematicians": [
       "cardano"
     ],
-    "url": "/theorems/first-systematic-use-of-complex-numbers"
+    "url": "/maths/theorems/first-systematic-use-of-complex-numbers"
   },
   {
     "title": "Formal axiomatic systems",
@@ -2820,7 +2820,7 @@
     "mathematicians": [
       "hilbert"
     ],
-    "url": "/theorems/formal-axiomatic-systems"
+    "url": "/maths/theorems/formal-axiomatic-systems"
   },
   {
     "title": "Formal logic",
@@ -2837,7 +2837,7 @@
     "mathematicians": [
       "leibniz"
     ],
-    "url": "/theorems/formal-logic"
+    "url": "/maths/theorems/formal-logic"
   },
   {
     "title": "Foundational paper on inverse probability",
@@ -2854,7 +2854,7 @@
     "mathematicians": [
       "bayes"
     ],
-    "url": "/theorems/foundational-paper-on-inverse-probability"
+    "url": "/maths/theorems/foundational-paper-on-inverse-probability"
   },
   {
     "title": "Foundations of geometry",
@@ -2871,7 +2871,7 @@
     "mathematicians": [
       "hilbert"
     ],
-    "url": "/theorems/foundations-of-geometry"
+    "url": "/maths/theorems/foundations-of-geometry"
   },
   {
     "title": "Founding functional analysis",
@@ -2888,7 +2888,7 @@
     "mathematicians": [
       "banach"
     ],
-    "url": "/theorems/founding-functional-analysis"
+    "url": "/maths/theorems/founding-functional-analysis"
   },
   {
     "title": "Fourier series",
@@ -2905,7 +2905,7 @@
     "mathematicians": [
       "fourier"
     ],
-    "url": "/theorems/fourier-series"
+    "url": "/maths/theorems/fourier-series"
   },
   {
     "title": "Fourier transform",
@@ -2922,7 +2922,7 @@
     "mathematicians": [
       "fourier"
     ],
-    "url": "/theorems/fourier-transform"
+    "url": "/maths/theorems/fourier-transform"
   },
   {
     "title": "Fundamental theorem of algebra",
@@ -2939,7 +2939,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/fundamental-theorem-of-algebra"
+    "url": "/maths/theorems/fundamental-theorem-of-algebra"
   },
   {
     "title": "The Fundamental Theorem of Calculus",
@@ -2957,7 +2957,7 @@
       "leibniz",
       "bernoulli-family"
     ],
-    "url": "/theorems/fundamental-theorem-of-calculus"
+    "url": "/maths/theorems/fundamental-theorem-of-calculus"
   },
   {
     "title": "Galois groups",
@@ -2974,7 +2974,7 @@
     "mathematicians": [
       "galois"
     ],
-    "url": "/theorems/galois-groups"
+    "url": "/maths/theorems/galois-groups"
   },
   {
     "title": "Galois theory",
@@ -2991,7 +2991,7 @@
     "mathematicians": [
       "galois"
     ],
-    "url": "/theorems/galois-theory"
+    "url": "/maths/theorems/galois-theory"
   },
   {
     "title": "Gauss's law (electrostatics)",
@@ -3008,7 +3008,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/gauss-s-law-electrostatics"
+    "url": "/maths/theorems/gauss-s-law-electrostatics"
   },
   {
     "title": "Gaussian distribution (normal distribution)",
@@ -3025,7 +3025,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/gaussian-distribution-normal-distribution"
+    "url": "/maths/theorems/gaussian-distribution-normal-distribution"
   },
   {
     "title": "Graph theory and number theory",
@@ -3042,7 +3042,7 @@
     "mathematicians": [
       "erdos"
     ],
-    "url": "/theorems/graph-theory-and-number-theory"
+    "url": "/maths/theorems/graph-theory-and-number-theory"
   },
   {
     "title": "Graph theory (Königsberg bridges)",
@@ -3059,7 +3059,7 @@
     "mathematicians": [
       "euler"
     ],
-    "url": "/theorems/graph-theory-konigsberg-bridges"
+    "url": "/maths/theorems/graph-theory-konigsberg-bridges"
   },
   {
     "title": "group theory foundations",
@@ -3076,7 +3076,7 @@
     "mathematicians": [
       "lagrange"
     ],
-    "url": "/theorems/group-theory-foundations"
+    "url": "/maths/theorems/group-theory-foundations"
   },
   {
     "title": "Group theory (permutation groups)",
@@ -3093,7 +3093,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/group-theory-permutation-groups"
+    "url": "/maths/theorems/group-theory-permutation-groups"
   },
   {
     "title": "Hahn–Banach theorem",
@@ -3110,7 +3110,7 @@
     "mathematicians": [
       "banach"
     ],
-    "url": "/theorems/hahn-banach-theorem"
+    "url": "/maths/theorems/hahn-banach-theorem"
   },
   {
     "title": "Hahn–Banach theorem",
@@ -3127,7 +3127,7 @@
     "mathematicians": [
       "banach"
     ],
-    "url": "/theorems/hahnbanach-theorem"
+    "url": "/maths/theorems/hahnbanach-theorem"
   },
   {
     "title": "Halting problem (undecidability)",
@@ -3144,7 +3144,7 @@
     "mathematicians": [
       "turing"
     ],
-    "url": "/theorems/halting-problem-undecidability"
+    "url": "/maths/theorems/halting-problem-undecidability"
   },
   {
     "title": "Hardy spaces (complex analysis)",
@@ -3161,7 +3161,7 @@
     "mathematicians": [
       "hardy"
     ],
-    "url": "/theorems/hardy-spaces-complex-analysis"
+    "url": "/maths/theorems/hardy-spaces-complex-analysis"
   },
   {
     "title": "Hardy–Ramanujan collaboration",
@@ -3179,7 +3179,7 @@
     "mathematicians": [
       "hardy"
     ],
-    "url": "/theorems/hardyramanujan-collaboration"
+    "url": "/maths/theorems/hardyramanujan-collaboration"
   },
   {
     "title": "Hardy–Weinberg equilibrium (genetics)",
@@ -3196,7 +3196,7 @@
     "mathematicians": [
       "hardy"
     ],
-    "url": "/theorems/hardyweinberg-equilibrium-genetics"
+    "url": "/maths/theorems/hardyweinberg-equilibrium-genetics"
   },
   {
     "title": "Heat equation",
@@ -3213,7 +3213,7 @@
     "mathematicians": [
       "fourier"
     ],
-    "url": "/theorems/heat-equation"
+    "url": "/maths/theorems/heat-equation"
   },
   {
     "title": "Highly composite numbers",
@@ -3230,7 +3230,7 @@
     "mathematicians": [
       "ramanujan"
     ],
-    "url": "/theorems/highly-composite-numbers"
+    "url": "/maths/theorems/highly-composite-numbers"
   },
   {
     "title": "Hilbert's 23 problems",
@@ -3247,7 +3247,7 @@
     "mathematicians": [
       "hilbert"
     ],
-    "url": "/theorems/hilbert-s-23-problems"
+    "url": "/maths/theorems/hilbert-s-23-problems"
   },
   {
     "title": "Hilbert's programme",
@@ -3264,7 +3264,7 @@
     "mathematicians": [
       "hilbert"
     ],
-    "url": "/theorems/hilbert-s-programme"
+    "url": "/maths/theorems/hilbert-s-programme"
   },
   {
     "title": "Hilbert spaces",
@@ -3281,7 +3281,7 @@
     "mathematicians": [
       "hilbert"
     ],
-    "url": "/theorems/hilbert-spaces"
+    "url": "/maths/theorems/hilbert-spaces"
   },
   {
     "title": "Ideals in ring theory",
@@ -3298,7 +3298,7 @@
     "mathematicians": [
       "dedekind"
     ],
-    "url": "/theorems/ideals-in-ring-theory"
+    "url": "/maths/theorems/ideals-in-ring-theory"
   },
   {
     "title": "Incompleteness theorems (1931)",
@@ -3315,7 +3315,7 @@
     "mathematicians": [
       "godel"
     ],
-    "url": "/theorems/incompleteness-theorems-1931"
+    "url": "/maths/theorems/incompleteness-theorems-1931"
   },
   {
     "title": "Intermediate value theorem (first rigorous proof)",
@@ -3332,7 +3332,7 @@
     "mathematicians": [
       "bolzano"
     ],
-    "url": "/theorems/intermediate-value-theorem-first-rigorous-proof"
+    "url": "/maths/theorems/intermediate-value-theorem-first-rigorous-proof"
   },
   {
     "title": "Introduced Hindu-Arabic numerals to Europe via Liber Abaci",
@@ -3349,7 +3349,7 @@
     "mathematicians": [
       "fibonacci"
     ],
-    "url": "/theorems/introduced-hindu-arabic-numerals-to-europe-via-liber-abaci"
+    "url": "/maths/theorems/introduced-hindu-arabic-numerals-to-europe-via-liber-abaci"
   },
   {
     "title": "Introduction of Hindu-Arabic numerals to Islamic scholarship",
@@ -3366,7 +3366,7 @@
     "mathematicians": [
       "al-khwarizmi"
     ],
-    "url": "/theorems/introduction-of-hindu-arabic-numerals-to-islamic-scholarship"
+    "url": "/maths/theorems/introduction-of-hindu-arabic-numerals-to-islamic-scholarship"
   },
   {
     "title": "Invariant theory",
@@ -3383,7 +3383,7 @@
     "mathematicians": [
       "hilbert"
     ],
-    "url": "/theorems/invariant-theory"
+    "url": "/maths/theorems/invariant-theory"
   },
   {
     "title": "Kolmogorov complexity (algorithmic information theory)",
@@ -3400,7 +3400,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/theorems/kolmogorov-complexity-algorithmic-information-theory"
+    "url": "/maths/theorems/kolmogorov-complexity-algorithmic-information-theory"
   },
   {
     "title": "Lagrange interpolation",
@@ -3417,7 +3417,7 @@
     "mathematicians": [
       "lagrange"
     ],
-    "url": "/theorems/lagrange-interpolation"
+    "url": "/maths/theorems/lagrange-interpolation"
   },
   {
     "title": "Lagrange multipliers",
@@ -3434,7 +3434,7 @@
     "mathematicians": [
       "lagrange"
     ],
-    "url": "/theorems/lagrange-multipliers"
+    "url": "/maths/theorems/lagrange-multipliers"
   },
   {
     "title": "Lagrangian mechanics",
@@ -3451,7 +3451,7 @@
     "mathematicians": [
       "lagrange"
     ],
-    "url": "/theorems/lagrangian-mechanics"
+    "url": "/maths/theorems/lagrangian-mechanics"
   },
   {
     "title": "Laplace equation",
@@ -3468,7 +3468,7 @@
     "mathematicians": [
       "laplace"
     ],
-    "url": "/theorems/laplace-equation"
+    "url": "/maths/theorems/laplace-equation"
   },
   {
     "title": "Laplace transform",
@@ -3485,7 +3485,7 @@
     "mathematicians": [
       "laplace"
     ],
-    "url": "/theorems/laplace-transform"
+    "url": "/maths/theorems/laplace-transform"
   },
   {
     "title": "The Law of Cosines",
@@ -3502,7 +3502,7 @@
       "euclid",
       "pythagoras"
     ],
-    "url": "/theorems/law-of-cosines"
+    "url": "/maths/theorems/law-of-cosines"
   },
   {
     "title": "Law of large numbers",
@@ -3519,7 +3519,7 @@
     "mathematicians": [
       "bernoulli-family"
     ],
-    "url": "/theorems/law-of-large-numbers"
+    "url": "/maths/theorems/law-of-large-numbers"
   },
   {
     "title": "Laws of motion and gravitation",
@@ -3536,7 +3536,7 @@
     "mathematicians": [
       "newton"
     ],
-    "url": "/theorems/laws-of-motion-and-gravitation"
+    "url": "/maths/theorems/laws-of-motion-and-gravitation"
   },
   {
     "title": "Maximum likelihood estimation",
@@ -3553,7 +3553,7 @@
     "mathematicians": [
       "fisher"
     ],
-    "url": "/theorems/maximum-likelihood-estimation"
+    "url": "/maths/theorems/maximum-likelihood-estimation"
   },
   {
     "title": "Mean value theorem",
@@ -3570,7 +3570,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/mean-value-theorem"
+    "url": "/maths/theorems/mean-value-theorem"
   },
   {
     "title": "mechanical calculator",
@@ -3587,7 +3587,7 @@
     "mathematicians": [
       "pascal"
     ],
-    "url": "/theorems/mechanical-calculator"
+    "url": "/maths/theorems/mechanical-calculator"
   },
   {
     "title": "method of exhaustion",
@@ -3604,7 +3604,7 @@
     "mathematicians": [
       "archimedes"
     ],
-    "url": "/theorems/method-of-exhaustion"
+    "url": "/maths/theorems/method-of-exhaustion"
   },
   {
     "title": "Method of least squares",
@@ -3621,7 +3621,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/method-of-least-squares"
+    "url": "/maths/theorems/method-of-least-squares"
   },
   {
     "title": "Mock theta functions",
@@ -3638,7 +3638,7 @@
     "mathematicians": [
       "ramanujan"
     ],
-    "url": "/theorems/mock-theta-functions"
+    "url": "/maths/theorems/mock-theta-functions"
   },
   {
     "title": "Modern abstract algebra (rings, ideals, modules)",
@@ -3656,7 +3656,7 @@
     "mathematicians": [
       "noether"
     ],
-    "url": "/theorems/modern-abstract-algebra-rings-ideals-modules"
+    "url": "/maths/theorems/modern-abstract-algebra-rings-ideals-modules"
   },
   {
     "title": "Modular arithmetic and number theory",
@@ -3673,7 +3673,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/modular-arithmetic-and-number-theory"
+    "url": "/maths/theorems/modular-arithmetic-and-number-theory"
   },
   {
     "title": "Morphogenesis (mathematical biology)",
@@ -3690,7 +3690,7 @@
     "mathematicians": [
       "turing"
     ],
-    "url": "/theorems/morphogenesis-mathematical-biology"
+    "url": "/maths/theorems/morphogenesis-mathematical-biology"
   },
   {
     "title": "Most prolific mathematician in history",
@@ -3707,7 +3707,7 @@
     "mathematicians": [
       "euler"
     ],
-    "url": "/theorems/most-prolific-mathematician-in-history"
+    "url": "/maths/theorems/most-prolific-mathematician-in-history"
   },
   {
     "title": "musical ratios and the harmonic series",
@@ -3724,7 +3724,7 @@
     "mathematicians": [
       "pythagoras"
     ],
-    "url": "/theorems/musical-ratios-and-the-harmonic-series"
+    "url": "/maths/theorems/musical-ratios-and-the-harmonic-series"
   },
   {
     "title": "Named algebra (al-jabr)",
@@ -3741,7 +3741,7 @@
     "mathematicians": [
       "al-khwarizmi"
     ],
-    "url": "/theorems/named-algebra-al-jabr"
+    "url": "/maths/theorems/named-algebra-al-jabr"
   },
   {
     "title": "Noether's theorem (symmetry and conservation laws in physics)",
@@ -3758,7 +3758,7 @@
     "mathematicians": [
       "noether"
     ],
-    "url": "/theorems/noether-s-theorem-symmetry-and-conservation-laws-in-physics"
+    "url": "/maths/theorems/noether-s-theorem-symmetry-and-conservation-laws-in-physics"
   },
   {
     "title": "Noetherian rings",
@@ -3775,7 +3775,7 @@
     "mathematicians": [
       "noether"
     ],
-    "url": "/theorems/noetherian-rings"
+    "url": "/maths/theorems/noetherian-rings"
   },
   {
     "title": "Non-Euclidean geometry (unpublished)",
@@ -3792,7 +3792,7 @@
     "mathematicians": [
       "gauss"
     ],
-    "url": "/theorems/non-euclidean-geometry-unpublished"
+    "url": "/maths/theorems/non-euclidean-geometry-unpublished"
   },
   {
     "title": "Normal subgroups",
@@ -3809,7 +3809,7 @@
     "mathematicians": [
       "galois"
     ],
-    "url": "/theorems/normal-subgroups"
+    "url": "/maths/theorems/normal-subgroups"
   },
   {
     "title": "Notation: e, i, f(x), Σ (popularised π)",
@@ -3826,7 +3826,7 @@
     "mathematicians": [
       "euler"
     ],
-    "url": "/theorems/notation-e-i-f-x-popularised"
+    "url": "/maths/theorems/notation-e-i-f-x-popularised"
   },
   {
     "title": "Optics",
@@ -3843,7 +3843,7 @@
     "mathematicians": [
       "newton"
     ],
-    "url": "/theorems/optics"
+    "url": "/maths/theorems/optics"
   },
   {
     "title": "Partitions and the Hardy–Ramanujan formula",
@@ -3861,7 +3861,7 @@
     "mathematicians": [
       "ramanujan"
     ],
-    "url": "/theorems/partitions-and-the-hardyramanujan-formula"
+    "url": "/maths/theorems/partitions-and-the-hardyramanujan-formula"
   },
   {
     "title": "Pascal's theorem on hexagons in conics",
@@ -3878,7 +3878,7 @@
     "mathematicians": [
       "pascal"
     ],
-    "url": "/theorems/pascal-s-theorem-on-hexagons-in-conics"
+    "url": "/maths/theorems/pascal-s-theorem-on-hexagons-in-conics"
   },
   {
     "title": "Pascal's triangle",
@@ -3895,7 +3895,7 @@
     "mathematicians": [
       "pascal"
     ],
-    "url": "/theorems/pascal-s-triangle"
+    "url": "/maths/theorems/pascal-s-triangle"
   },
   {
     "title": "Philosophical monadology",
@@ -3912,7 +3912,7 @@
     "mathematicians": [
       "leibniz"
     ],
-    "url": "/theorems/philosophical-monadology"
+    "url": "/maths/theorems/philosophical-monadology"
   },
   {
     "title": "Philosophy of mathematics (conventionalism)",
@@ -3929,7 +3929,7 @@
     "mathematicians": [
       "poincare"
     ],
-    "url": "/theorems/philosophy-of-mathematics-conventionalism"
+    "url": "/maths/theorems/philosophy-of-mathematics-conventionalism"
   },
   {
     "title": "Poincaré conjecture",
@@ -3946,7 +3946,7 @@
     "mathematicians": [
       "poincare"
     ],
-    "url": "/theorems/poincare-conjecture"
+    "url": "/maths/theorems/poincare-conjecture"
   },
   {
     "title": "Population genetics (modern synthesis)",
@@ -3963,7 +3963,7 @@
     "mathematicians": [
       "fisher"
     ],
-    "url": "/theorems/population-genetics-modern-synthesis"
+    "url": "/maths/theorems/population-genetics-modern-synthesis"
   },
   {
     "title": "The Prime Number Theorem",
@@ -3980,7 +3980,7 @@
       "gauss",
       "riemann"
     ],
-    "url": "/theorems/prime-number-theorem"
+    "url": "/maths/theorems/prime-number-theorem"
   },
   {
     "title": "principle of levers and buoyancy",
@@ -3997,7 +3997,7 @@
     "mathematicians": [
       "archimedes"
     ],
-    "url": "/theorems/principle-of-levers-and-buoyancy"
+    "url": "/maths/theorems/principle-of-levers-and-buoyancy"
   },
   {
     "title": "Probabilistic method in combinatorics",
@@ -4014,7 +4014,7 @@
     "mathematicians": [
       "erdos"
     ],
-    "url": "/theorems/probabilistic-method-in-combinatorics"
+    "url": "/maths/theorems/probabilistic-method-in-combinatorics"
   },
   {
     "title": "probability theory foundations",
@@ -4031,7 +4031,7 @@
     "mathematicians": [
       "pascal"
     ],
-    "url": "/theorems/probability-theory-foundations"
+    "url": "/maths/theorems/probability-theory-foundations"
   },
   {
     "title": "Prolific collaborator (509 direct collaborators)",
@@ -4048,7 +4048,7 @@
     "mathematicians": [
       "erdos"
     ],
-    "url": "/theorems/prolific-collaborator-509-direct-collaborators"
+    "url": "/maths/theorems/prolific-collaborator-509-direct-collaborators"
   },
   {
     "title": "proof by contradiction",
@@ -4065,7 +4065,7 @@
     "mathematicians": [
       "euclid"
     ],
-    "url": "/theorems/proof-by-contradiction"
+    "url": "/maths/theorems/proof-by-contradiction"
   },
   {
     "title": "Proof that the general quintic has no radical solution",
@@ -4082,7 +4082,7 @@
     "mathematicians": [
       "abel"
     ],
-    "url": "/theorems/proof-that-the-general-quintic-has-no-radical-solution"
+    "url": "/maths/theorems/proof-that-the-general-quintic-has-no-radical-solution"
   },
   {
     "title": "proto-calculus",
@@ -4099,7 +4099,7 @@
     "mathematicians": [
       "fermat"
     ],
-    "url": "/theorems/proto-calculus"
+    "url": "/maths/theorems/proto-calculus"
   },
   {
     "title": "Published cubic and quartic formulas",
@@ -4116,7 +4116,7 @@
     "mathematicians": [
       "cardano"
     ],
-    "url": "/theorems/published-cubic-and-quartic-formulas"
+    "url": "/maths/theorems/published-cubic-and-quartic-formulas"
   },
   {
     "title": "Pythagoras' theorem",
@@ -4133,7 +4133,7 @@
     "mathematicians": [
       "pythagoras"
     ],
-    "url": "/theorems/pythagoras-theorem"
+    "url": "/maths/theorems/pythagoras-theorem"
   },
   {
     "title": "Ramanujan's notebooks (thousands of identities and formulae)",
@@ -4150,7 +4150,7 @@
     "mathematicians": [
       "ramanujan"
     ],
-    "url": "/theorems/ramanujan-s-notebooks-thousands-of-identities-and-formulae"
+    "url": "/maths/theorems/ramanujan-s-notebooks-thousands-of-identities-and-formulae"
   },
   {
     "title": "Ramanujan's tau function and modular forms",
@@ -4167,7 +4167,7 @@
     "mathematicians": [
       "ramanujan"
     ],
-    "url": "/theorems/ramanujan-s-tau-function-and-modular-forms"
+    "url": "/maths/theorems/ramanujan-s-tau-function-and-modular-forms"
   },
   {
     "title": "Ramsey theory",
@@ -4184,7 +4184,7 @@
     "mathematicians": [
       "erdos"
     ],
-    "url": "/theorems/ramsey-theory"
+    "url": "/maths/theorems/ramsey-theory"
   },
   {
     "title": "Riemann hypothesis",
@@ -4201,7 +4201,7 @@
     "mathematicians": [
       "riemann"
     ],
-    "url": "/theorems/riemann-hypothesis"
+    "url": "/maths/theorems/riemann-hypothesis"
   },
   {
     "title": "Riemann integral",
@@ -4218,7 +4218,7 @@
     "mathematicians": [
       "riemann"
     ],
-    "url": "/theorems/riemann-integral"
+    "url": "/maths/theorems/riemann-integral"
   },
   {
     "title": "Riemann surfaces",
@@ -4235,7 +4235,7 @@
     "mathematicians": [
       "riemann"
     ],
-    "url": "/theorems/riemann-surfaces"
+    "url": "/maths/theorems/riemann-surfaces"
   },
   {
     "title": "Riemann zeta function",
@@ -4252,7 +4252,7 @@
     "mathematicians": [
       "riemann"
     ],
-    "url": "/theorems/riemann-zeta-function"
+    "url": "/maths/theorems/riemann-zeta-function"
   },
   {
     "title": "Riemannian geometry",
@@ -4269,7 +4269,7 @@
     "mathematicians": [
       "riemann"
     ],
-    "url": "/theorems/riemannian-geometry"
+    "url": "/maths/theorems/riemannian-geometry"
   },
   {
     "title": "Rigorous analysis before Cauchy",
@@ -4286,7 +4286,7 @@
     "mathematicians": [
       "bolzano"
     ],
-    "url": "/theorems/rigorous-analysis-before-cauchy"
+    "url": "/maths/theorems/rigorous-analysis-before-cauchy"
   },
   {
     "title": "Rigorous ε–δ analysis",
@@ -4303,7 +4303,7 @@
     "mathematicians": [
       "weierstrass"
     ],
-    "url": "/theorems/rigorous-analysis"
+    "url": "/maths/theorems/rigorous-analysis"
   },
   {
     "title": "Rigorous foundations of calculus (ε–δ definitions)",
@@ -4321,7 +4321,7 @@
     "mathematicians": [
       "cauchy"
     ],
-    "url": "/theorems/rigorous-foundations-of-calculus-definitions"
+    "url": "/maths/theorems/rigorous-foundations-of-calculus-definitions"
   },
   {
     "title": "Set theory",
@@ -4338,7 +4338,7 @@
     "mathematicians": [
       "cantor"
     ],
-    "url": "/theorems/set-theory"
+    "url": "/maths/theorems/set-theory"
   },
   {
     "title": "The Fisher information matrix",
@@ -4355,7 +4355,7 @@
     "mathematicians": [
       "fisher"
     ],
-    "url": "/theorems/the-fisher-information-matrix"
+    "url": "/maths/theorems/the-fisher-information-matrix"
   },
   {
     "title": "Topology (algebraic topology foundations)",
@@ -4372,7 +4372,7 @@
     "mathematicians": [
       "poincare"
     ],
-    "url": "/theorems/topology-algebraic-topology-foundations"
+    "url": "/maths/theorems/topology-algebraic-topology-foundations"
   },
   {
     "title": "Transfinite numbers",
@@ -4390,7 +4390,7 @@
     "mathematicians": [
       "cantor"
     ],
-    "url": "/theorems/transfinite-numbers"
+    "url": "/maths/theorems/transfinite-numbers"
   },
   {
     "title": "Turbulence theory (Kolmogorov scaling)",
@@ -4407,7 +4407,7 @@
     "mathematicians": [
       "kolmogorov"
     ],
-    "url": "/theorems/turbulence-theory-kolmogorov-scaling"
+    "url": "/maths/theorems/turbulence-theory-kolmogorov-scaling"
   },
   {
     "title": "Turing machines (theory of computation)",
@@ -4424,7 +4424,7 @@
     "mathematicians": [
       "turing"
     ],
-    "url": "/theorems/turing-machines-theory-of-computation"
+    "url": "/maths/theorems/turing-machines-theory-of-computation"
   },
   {
     "title": "Turing test (artificial intelligence)",
@@ -4441,7 +4441,7 @@
     "mathematicians": [
       "turing"
     ],
-    "url": "/theorems/turing-test-artificial-intelligence"
+    "url": "/maths/theorems/turing-test-artificial-intelligence"
   },
   {
     "title": "Uniform convergence",
@@ -4458,7 +4458,7 @@
     "mathematicians": [
       "weierstrass"
     ],
-    "url": "/theorems/uniform-convergence"
+    "url": "/maths/theorems/uniform-convergence"
   },
   {
     "title": "Weierstrass approximation theorem",
@@ -4475,7 +4475,7 @@
     "mathematicians": [
       "weierstrass"
     ],
-    "url": "/theorems/weierstrass-approximation-theorem"
+    "url": "/maths/theorems/weierstrass-approximation-theorem"
   },
   {
     "title": "Weierstrass function (continuous everywhere, differentiable nowhere)",
@@ -4493,7 +4493,7 @@
     "mathematicians": [
       "weierstrass"
     ],
-    "url": "/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere"
+    "url": "/maths/theorems/weierstrass-function-continuous-everywhere-differentiable-nowhere"
   },
   {
     "title": "Actuarial Science: Insurance and Pensions",
@@ -4508,7 +4508,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/actuarial-science"
+    "url": "/maths/applications/actuarial-science"
   },
   {
     "title": "Airfoil Design and Aerodynamics",
@@ -4523,7 +4523,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/airfoil-and-aerodynamics"
+    "url": "/maths/applications/airfoil-and-aerodynamics"
   },
   {
     "title": "Bridge and Structural Engineering",
@@ -4538,7 +4538,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/bridge-and-structural-engineering"
+    "url": "/maths/applications/bridge-and-structural-engineering"
   },
   {
     "title": "Cellular Network Design",
@@ -4553,7 +4553,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/cellular-network-design"
+    "url": "/maths/applications/cellular-network-design"
   },
   {
     "title": "Census and Survey Statistics",
@@ -4568,7 +4568,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/census-and-survey-statistics"
+    "url": "/maths/applications/census-and-survey-statistics"
   },
   {
     "title": "Climate Modelling",
@@ -4583,7 +4583,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/climate-modelling"
+    "url": "/maths/applications/climate-modelling"
   },
   {
     "title": "Clinical Trials Design",
@@ -4598,7 +4598,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/clinical-trials-design"
+    "url": "/maths/applications/clinical-trials-design"
   },
   {
     "title": "Computer Graphics and 3D Rendering",
@@ -4613,7 +4613,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/computer-graphics-3d"
+    "url": "/maths/applications/computer-graphics-3d"
   },
   {
     "title": "Cryptocurrency and Blockchain",
@@ -4628,7 +4628,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/cryptocurrency-blockchain"
+    "url": "/maths/applications/cryptocurrency-blockchain"
   },
   {
     "title": "Cybersecurity: Anomaly Detection",
@@ -4643,7 +4643,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/cybersecurity-anomaly-detection"
+    "url": "/maths/applications/cybersecurity-anomaly-detection"
   },
   {
     "title": "Data Compression",
@@ -4658,7 +4658,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/data-compression"
+    "url": "/maths/applications/data-compression"
   },
   {
     "title": "Digital Signatures",
@@ -4673,7 +4673,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/digital-signatures"
+    "url": "/maths/applications/digital-signatures"
   },
   {
     "title": "Epidemiological Modelling",
@@ -4688,7 +4688,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/epidemiological-modelling"
+    "url": "/maths/applications/epidemiological-modelling"
   },
   {
     "title": "Error-Correcting Codes",
@@ -4703,7 +4703,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/error-correcting-codes"
+    "url": "/maths/applications/error-correcting-codes"
   },
   {
     "title": "Gambling, Game Theory, and Strategic Decision-Making",
@@ -4718,7 +4718,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/gambling-and-game-theory"
+    "url": "/maths/applications/gambling-and-game-theory"
   },
   {
     "title": "GPS Positioning",
@@ -4733,7 +4733,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/gps-positioning"
+    "url": "/maths/applications/gps-positioning"
   },
   {
     "title": "Gravitational Wave Detection",
@@ -4748,7 +4748,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/gravitational-wave-detection"
+    "url": "/maths/applications/gravitational-wave-detection"
   },
   {
     "title": "Machine Learning: Bayesian Inference",
@@ -4764,7 +4764,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/machine-learning-bayesian-inference"
+    "url": "/maths/applications/machine-learning-bayesian-inference"
   },
   {
     "title": "Machine Learning: Deep Neural Networks",
@@ -4779,7 +4779,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/machine-learning-deep-neural-networks"
+    "url": "/maths/applications/machine-learning-deep-neural-networks"
   },
   {
     "title": "Medical Diagnosis and Screening",
@@ -4794,7 +4794,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/medical-diagnosis-screening"
+    "url": "/maths/applications/medical-diagnosis-screening"
   },
   {
     "title": "Medical Imaging: MRI and CT Scanning",
@@ -4810,7 +4810,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/medical-imaging-mri-ct"
+    "url": "/maths/applications/medical-imaging-mri-ct"
   },
   {
     "title": "Option Pricing and Financial Mathematics",
@@ -4825,7 +4825,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/option-pricing-finance"
+    "url": "/maths/applications/option-pricing-finance"
   },
   {
     "title": "PageRank and the Algebra of the Web",
@@ -4840,7 +4840,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/pagerank-google"
+    "url": "/maths/applications/pagerank-google"
   },
   {
     "title": "Population Dynamics and Ecology",
@@ -4856,7 +4856,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/population-dynamics-ecology"
+    "url": "/maths/applications/population-dynamics-ecology"
   },
   {
     "title": "Protein Folding and AlphaFold",
@@ -4872,7 +4872,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/protein-folding-alphafold"
+    "url": "/maths/applications/protein-folding-alphafold"
   },
   {
     "title": "Quantum Computing Algorithms",
@@ -4887,7 +4887,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/quantum-computing-algorithms"
+    "url": "/maths/applications/quantum-computing-algorithms"
   },
   {
     "title": "Radar and Sonar",
@@ -4902,7 +4902,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/radar-and-sonar"
+    "url": "/maths/applications/radar-and-sonar"
   },
   {
     "title": "Recommender Systems",
@@ -4917,7 +4917,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/recommender-systems"
+    "url": "/maths/applications/recommender-systems"
   },
   {
     "title": "Robotics and Control Theory",
@@ -4933,7 +4933,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/robotics-and-control"
+    "url": "/maths/applications/robotics-and-control"
   },
   {
     "title": "RSA and Public-Key Cryptography",
@@ -4948,7 +4948,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/rsa-public-key-cryptography"
+    "url": "/maths/applications/rsa-public-key-cryptography"
   },
   {
     "title": "Seismic Imaging and Oil Exploration",
@@ -4963,7 +4963,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/seismic-imaging-oil-exploration"
+    "url": "/maths/applications/seismic-imaging-oil-exploration"
   },
   {
     "title": "Signal Processing: JPEG and MP3",
@@ -4979,7 +4979,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/signal-processing-jpeg-mp3"
+    "url": "/maths/applications/signal-processing-jpeg-mp3"
   },
   {
     "title": "Spam Filtering",
@@ -4994,7 +4994,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/spam-filtering"
+    "url": "/maths/applications/spam-filtering"
   },
   {
     "title": "Traffic Flow Modelling",
@@ -5009,7 +5009,7 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/traffic-flow-modelling"
+    "url": "/maths/applications/traffic-flow-modelling"
   },
   {
     "title": "Weather Forecasting",
@@ -5024,6 +5024,6 @@
       "applied"
     ],
     "mathematicians": [],
-    "url": "/applications/weather-forecasting"
+    "url": "/maths/applications/weather-forecasting"
   }
 ]

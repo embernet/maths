@@ -9,13 +9,19 @@
  * for any cache whose name does not match the current CACHE_NAME.
  */
 
-const CACHE_NAME = 'maths-companion-v3';
+const CACHE_NAME = 'maths-companion-v4';
+
+// Deployment base path (served under a sub-path). This file is static (not
+// processed by Vite), so the base is hard-coded here. Keep in sync with BASE
+// in src/lib/site-config.mjs. The service worker is served at `${BASE}/sw.js`
+// and therefore scoped to `${BASE}/`.
+const BASE = '/maths';
 
 /** Core app-shell assets to pre-cache on install. */
 const APP_SHELL = [
-  '/',
-  '/manifest.webmanifest',
-  '/api/index.json',
+  `${BASE}/`,
+  `${BASE}/manifest.webmanifest`,
+  `${BASE}/api/index.json`,
 ];
 
 // ---- Install: cache app shell ----------------------------------------

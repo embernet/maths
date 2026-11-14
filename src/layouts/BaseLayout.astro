@@ -32,6 +32,13 @@ const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
     <meta name="description" content={description} />
     <title>{fullTitle}</title>
 
+    <!-- Deployment base path (served under a sub-path). Exposed for inline
+         client scripts, which Vite does not process (so import.meta.env is
+         unavailable there). import.meta.env.BASE_URL is e.g. "/maths/". -->
+    <script define:vars={{ base: import.meta.env.BASE_URL }} is:inline>
+      window.__BASE__ = base;
+    </script>
+
     <!--
       KaTeX MathML hide rule (defence-in-depth).
       KaTeX renders BOTH a .katex-mathml span (for screen readers) AND a
@@ -82,7 +89,8 @@ const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('/sw.js').catch(() => {
+          var base = window.__BASE__ || '/';
+          navigator.serviceWorker.register(base + 'sw.js', { scope: base }).catch(() => {
             // SW registration failed — silently degrade.
           });
         });

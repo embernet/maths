@@ -302,7 +302,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   // ── Main: fetch graph.json and initialise Cytoscape ──────────────────────
-  fetch('/api/graph.json')
+  fetch((window.__BASE__ || '/') + 'api/graph.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       graphData = data;

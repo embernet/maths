@@ -6,8 +6,13 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeTheoremAutolinks from './src/lib/rehype-theorem-autolinks.mjs';
 import rehypeBoldAutolinks from './src/lib/rehype-bold-autolinks.mjs';
+import basePath from './src/lib/integration-base-path.mjs';
+import { BASE } from './src/lib/site-config.mjs';
 
 export default defineConfig({
+  // Deployed under a sub-path via the Cloudflare Workers route
+  // `tapestrylab.net/maths*`, so the whole app is served at `/maths`.
+  base: BASE,
   // `hybrid` prerenders every page by default (so the whole site stays
   // static, as before) while still emitting the Cloudflare Worker entry
   // (`dist/_worker.js/index.js`) that the adapter requires.
@@ -24,6 +29,9 @@ export default defineConfig({
   integrations: [
     mdx(),
     tailwind({ applyBaseStyles: false }),
+    // Prefix author-written root-absolute links (`/theorems`, MDX `](/...)`,
+    // etc.) with the base in the built HTML — Astro does not do this itself.
+    basePath({ base: BASE }),
   ],
   markdown: {
     remarkPlugins: [remarkMath],

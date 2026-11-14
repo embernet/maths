@@ -17,6 +17,7 @@ import { readFileSync, writeFileSync, readdirSync, statSync, mkdirSync, existsSy
 import { join, basename, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
+import { withBase } from '../lib/site-config.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = join(__dirname, '..', '..');
@@ -547,6 +548,11 @@ for (const slug of Object.keys(backlinks)) {
   }
 }
 
+// Prefix every record URL with the deployment base (served under a sub-path).
+for (const r of records) {
+  if (r.url) r.url = withBase(r.url);
+}
+
 writeFileSync(outputFile, JSON.stringify(records, null, 2), 'utf8');
 console.log(`[build-index] wrote ${records.length} records → ${outputFile}`);
 
@@ -710,6 +716,11 @@ for (const n of nodes) {
 const typeCountStr = Object.entries(typeCounts)
   .map(([k, v]) => `${v} ${k}s`)
   .join(', ');
+
+// Prefix every graph node URL with the deployment base (served under a sub-path).
+for (const n of nodes) {
+  if (n.url) n.url = withBase(n.url);
+}
 
 writeFileSync(graphFile, JSON.stringify({ nodes, edges }, null, 2), 'utf8');
 console.log(`[build-index] graph.json: ${nodes.length} nodes (${typeCountStr}), ${edges.length} edges`);
