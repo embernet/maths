@@ -4,6 +4,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "maths",
   "main": "dist/_worker.js/index.js",
+  // Build the Astro site before deploying, so `wrangler deploy` produces
+  // dist/_worker.js/index.js even when the CI deploy command is just
+  // `npx wrangler deploy` with no separate build step configured.
+  "build": {
+    "command": "npm run build"
+  },
   "compatibility_date": "2025-05-01",
   // Astro's prerendered pages read content files at build time via node:* APIs.
   "compatibility_flags": ["nodejs_compat"],

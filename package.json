@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "gray-matter": "^4.0.3",
-    "unist-util-visit-parents": "^6.0.2"
+    "unist-util-visit-parents": "^6.0.2",
+    "wrangler": "^4.162.0"
   }
 }
