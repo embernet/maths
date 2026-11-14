@@ -1,0 +1,14 @@
+{
+  // Cloudflare Workers configuration for the Astro (@astrojs/cloudflare) build.
+  // Committing this prevents Wrangler from auto-generating a config on every build.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "maths",
+  "main": "dist/_worker.js/index.js",
+  "compatibility_date": "2025-05-01",
+  // Astro's prerendered pages read content files at build time via node:* APIs.
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS"
+  }
+}
