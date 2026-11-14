@@ -619,7 +619,7 @@ for (const [nodeId, data] of pageData) {
 
   // Warn on missing node_type for graph-relevant pages
   if (!fm.node_type && !data.forthcoming) {
-    validationWarnings.push(`${nodeId}: missing node_type field (inferred as ${data.node_type})`);
+    validationWarnings.push({ nodeId, node_type: data.node_type });
   }
 
   // page.related[] → undirected edge (type: "related")
@@ -717,8 +717,26 @@ console.log(`[build-index] graph.json: ${nodes.length} nodes (${typeCountStr}), 
 // ── Validation gate ────────────────────────────────────────────────────────────
 
 if (validationWarnings.length > 0) {
-  console.warn(`[build-index] ${validationWarnings.length} node_type warning(s):`);
-  for (const w of validationWarnings) console.warn(`  WARN  ${w}`);
+  // node_type is reliably inferred from the directory prefix, so a missing
+  // explicit field is informational, not an error. Print a one-line summary
+  // (with a per-type breakdown) instead of one line per file to keep CI logs
+  // readable. Set VERBOSE=1 to list every page.
+  const byType = {};
+  for (const { node_type } of validationWarnings) {
+    byType[node_type] = (byType[node_type] ?? 0) + 1;
+  }
+  const breakdown = Object.entries(byType)
+    .map(([k, v]) => `${v} ${k}`)
+    .join(', ');
+  console.warn(
+    `[build-index] ${validationWarnings.length} page(s) missing an explicit node_type ` +
+    `field (inferred from directory: ${breakdown}). Set VERBOSE=1 to list them.`
+  );
+  if (process.env.VERBOSE) {
+    for (const { nodeId, node_type } of validationWarnings) {
+      console.warn(`  WARN  ${nodeId}: missing node_type field (inferred as ${node_type})`);
+    }
+  }
 }
 
 if (validationErrors.length > 0) {
