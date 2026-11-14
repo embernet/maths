@@ -129,7 +129,7 @@ summary: "After two centuries of brilliant but informal calculus, nineteenth-cen
 {
   "title": "The Undergraduate Mathematics Companion",
   "tagline": "A friendly map of the curriculum a maths undergraduate meets in their first four years.",
-  "author_credit": "Compiled by a mathematics professor for any student arriving with strong A-Level mathematics.",
+  "author_credit": "Compiled for any student arriving with strong A-Level mathematics.",
   "theme": {
     "body_font": "STIX Two Text, Latin Modern Roman, Georgia, serif",
     "heading_font": "STIX Two Text, Latin Modern Roman, Georgia, serif",

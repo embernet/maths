@@ -191,7 +191,7 @@ Renders:
 - No `alert()` / `confirm()` / `prompt()`
 - Quizzes inline; no popups
 - Frontmatter `known_for:` is now a slug list, not free text
-- All new MDX bodies follow the v1 voice (warm, expert, slightly storytelling professor)
+- All new MDX bodies follow the v1 voice (warm, expert, slightly storytelling)
 - No Bath references anywhere
 - Verity's must-fixes already applied to v1 must be preserved; new content must avoid the same myths
 
