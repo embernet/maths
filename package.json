@@ -6,7 +6,7 @@
     "start": "node server.js",
     "prebuild": "node src/scripts/build-index.mjs",
     "dev": "node src/scripts/build-index.mjs && astro dev",
-    "build": "astro build",
+    "build": "node tools/build-with-retry.mjs",
     "postbuild": "node tools/write-assetsignore.mjs && node tools/check-katex-hide-rule.mjs",
     "check:katex": "node tools/check-katex-hide-rule.mjs",
     "preview": "astro preview",

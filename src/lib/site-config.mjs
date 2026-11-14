@@ -11,6 +11,15 @@
 export const BASE = '/maths';
 
 /**
+ * Production origin, used to build absolute canonical / Open Graph / sitemap
+ * URLs. NOTE: this is deliberately NOT set as Astro's `site` config option —
+ * doing so perturbs the SSR build's chunking and intermittently triggers an
+ * Astro bug ("Unable to find the module for …"). We only need the origin for
+ * our own URL building, so we keep it here instead.
+ */
+export const SITE_ORIGIN = 'https://tapestrylab.net';
+
+/**
  * Prefix a root-absolute path with BASE. Leaves external URLs, protocol-relative
  * URLs, hash/mailto/tel links and already-prefixed paths untouched.
  */

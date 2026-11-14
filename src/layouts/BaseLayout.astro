@@ -15,13 +15,92 @@ import '../styles/print.css';
 interface Props {
   title: string;
   description?: string;
+  /** Social-share image — root-relative (with base) or absolute URL. */
+  image?: string;
+  /** Open Graph type: 'website' for index pages, 'article' for content. */
+  ogType?: 'website' | 'article';
+  /** Set true to keep a page out of search indexes. */
+  noindex?: boolean;
   /** Extra <head> content (e.g. canonical, og:image) */
   headSlot?: string;
 }
 
-const { title, description = 'The Mathematics Companion — a friendly map of the mathematics curriculum.' } = Astro.props;
+const {
+  title,
+  description = 'The Mathematics Companion — a friendly map of the mathematics curriculum.',
+  image,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
 const siteTitle = 'The Mathematics Companion';
 const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
+
+// ── SEO: canonical + social URLs ────────────────────────────────────────────
+// Normalised base WITH a trailing slash. import.meta.env.BASE_URL is "/maths"
+// (no trailing slash) for this config, so append one to make string
+// concatenation (base + "sitemap.xml" etc.) reliable.
+const rawBase = import.meta.env.BASE_URL;
+const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`; // "/maths/"
+// Pages are served with a trailing slash (non-slash paths 307-redirect), so the
+// canonical URL uses the trailing-slash form.
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+// Origin for absolute canonical/OG URLs. Inlined (rather than Astro.site, which
+// we deliberately don't set — see astro.config.mjs). Keep in sync with
+// SITE_ORIGIN in src/lib/site-config.mjs.
+const siteOrigin = new URL('https://tapestrylab.net');
+const canonicalURL = new URL(path, siteOrigin).href;
+const ogImageURL = new URL(image ?? `${base}og-image.png`, siteOrigin).href;
+const siteHomeURL = new URL(base, siteOrigin).href;
+
+// ── SEO: breadcrumb trail from the URL path ─────────────────────────────────
+function prettify(seg: string): string {
+  return seg
+    .replace(/^\d+[-.]?/, '')           // drop numeric ordering prefixes (01-foundations)
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .trim();
+}
+const relSegments = path.slice(base.length).split('/').filter(Boolean);
+const breadcrumbItems = [
+  { name: 'Home', item: siteHomeURL },
+  ...relSegments.map((seg, i) => ({
+    name: prettify(seg),
+    item: new URL(`${base}${relSegments.slice(0, i + 1).join('/')}/`, siteOrigin).href,
+  })),
+];
+
+// ── SEO: JSON-LD structured data ────────────────────────────────────────────
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteHomeURL}#website`,
+      url: siteHomeURL,
+      name: siteTitle,
+      description: 'A friendly map of the undergraduate mathematics curriculum.',
+      inLanguage: 'en-GB',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalURL}#webpage`,
+      url: canonicalURL,
+      name: fullTitle,
+      description,
+      isPartOf: { '@id': `${siteHomeURL}#website` },
+      inLanguage: 'en-GB',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: b.item,
+      })),
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -32,10 +111,35 @@ const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
     <meta name="description" content={description} />
     <title>{fullTitle}</title>
 
+    <!-- SEO: canonical + indexing -->
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="sitemap" type="application/xml" href={`${base}sitemap.xml`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
     <!-- Deployment base path (served under a sub-path). Exposed for inline
          client scripts, which Vite does not process (so import.meta.env is
          unavailable there). import.meta.env.BASE_URL is e.g. "/maths/". -->
-    <script define:vars={{ base: import.meta.env.BASE_URL }} is:inline>
+    <script define:vars={{ base }} is:inline>
       window.__BASE__ = base;
     </script>
 
