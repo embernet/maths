@@ -1,0 +1,46 @@
+---
+title: 'Continuous systems and numerical integration'
+section: 'Simulation'
+section_slug: '97-simulation'
+node_type: topic
+order: 1
+tags: [simulation, differential-equations, numerical-integration, chaos, euler, runge-kutta]
+related: ['00-section-opener', '02-monte-carlo-and-randomness']
+mathematicians: []
+reading_time_min: 9
+summary: 'Most of the physical world is described by rates of change — differential equations. Simulating it means stepping those rates forward in tiny increments. Do it carelessly and the simulation explodes; do it well and you can still be defeated by chaos.'
+theorems: []
+applications: []
+---
+
+import DoublePendulum from '../../../src/components/sims/DoublePendulum.astro';
+
+Nature rarely tells you *where* things are. It tells you how fast they are *changing*. Newton's law gives the acceleration of a planet, not its position; the heat equation gives how fast a temperature is rising, not its value; an epidemic model gives the *rate* new infections appear. These are **differential equations**, and they describe almost all of continuous physics.
+
+The catch is that most differential equations have no tidy formula for their solution. So instead of solving them, we **simulate** them: start from the current state, ask the equation for the current rate of change, take a tiny step in that direction, and repeat. Thousands of tiny steps later, you have traced out the future.
+
+## Euler's method: the simplest possible step
+
+The most basic recipe is **Euler's method**. If the state is $y$ and the equation says its rate of change is $f(y)$, then after a small time-step $h$:
+
+$$y_{\text{next}} = y + h \, f(y)$$
+
+In words: *new position = old position + (slope × step-size).* Walk in the direction the equation is currently pointing, for a short time, then look again.
+
+It is beautifully simple and often disastrously inaccurate. Because the slope is only sampled at the *start* of each step, Euler's method consistently cuts corners — and if the step-size is too large, the errors compound until the simulation flies off to infinity. This **numerical instability** is exactly what defeated the first-ever numerical weather forecast: in 1922 Lewis Fry Richardson spent six weeks hand-computing a forecast that predicted an impossible pressure surge, because his method was unstable.
+
+## Runge–Kutta: look before you leap
+
+The fix is to sample the slope several times *within* each step and blend them. The standard workhorse, **RK4** (Runge–Kutta, around 1900), takes four slope measurements per step — at the start, twice in the middle, and at the end — and combines them into one far better estimate. For the same step-size it is dramatically more accurate, which is why RK4 and its relatives quietly power most scientific simulation. The double pendulum below is integrated with RK4; try the same thing with crude Euler steps and it visibly gains energy and misbehaves.
+
+## When good integration still isn't enough: chaos
+
+Here is the humbling part. Even with perfect equations and a flawless integrator, some systems are **unpredictable in principle**. The double pendulum is the classic example — two rods, one swinging from the end of the other, governed entirely by Newton's laws. Completely deterministic. And completely unforecastable.
+
+Press **Play**, let it settle into motion, then press **Release a twin**:
+
+<DoublePendulum />
+
+The twin starts just **one-thousandth of a radian** away from the original — a difference you cannot even see. For a few seconds the two move as one. Then they peel apart and are soon doing utterly different things. This is **sensitive dependence on initial conditions**, the defining feature of **chaos**: tiny uncertainties grow exponentially fast until all predictive power is gone.
+
+This is not a flaw in the simulation — it is a fact about the system. It is also *why weather forecasting is fundamentally probabilistic*. The atmosphere is chaotic, so a single forecast from a single best-guess starting state is worthless beyond a few days. Instead, forecasters run the model dozens of times from slightly different starting states — an **ensemble** — and report the *spread* as a probability. Chaos is the reason your weather app says "60% chance of rain" instead of "rain". The humble double pendulum and the global forecast are the same mathematics, at different scales.

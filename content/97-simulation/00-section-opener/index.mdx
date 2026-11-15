@@ -1,0 +1,34 @@
+---
+title: 'Simulation: the computer as a laboratory'
+section: 'Simulation'
+section_slug: '97-simulation'
+node_type: topic
+order: 0
+tags: [simulation, monte-carlo, modelling, chaos, emergence, digital-twin]
+related: []
+mathematicians: []
+reading_time_min: 7
+summary: 'When you cannot run the experiment — because it is too big, too slow, too dangerous, or already happened — you rebuild it in the machine and run it forward. Simulation turns the computer into a laboratory for systems you cannot otherwise touch.'
+theorems: []
+applications: []
+---
+
+You cannot re-run the formation of a galaxy. You cannot deliberately start an epidemic to see how it spreads, or crash a hundred prototype cars to find the safest shape, or wait ten thousand years to watch a climate drift. But you *can* write down equations or rules that stand in for those systems — and let a computer play them out, as fast or as slowly as you like, as many times as you like. That is **simulation**: running a model of a system forward to see what it does.
+
+It is one of the most quietly revolutionary ideas of the twentieth century. Before it, mathematics could only solve the problems that happened to have neat closed-form answers. Simulation let us attack the enormous majority that do not — turbulent air, folding proteins, colliding galaxies, spreading rumours — by brute, patient, repeated arithmetic. The computer became a **laboratory for the unexperimentable**.
+
+## Four ways to fake a world
+
+Almost every simulation is one of four kinds (and real models cheerfully mix them):
+
+- **Continuous simulation** — numerical integration. The system is described by *rates of change*: how fast temperature, velocity or population is changing at each instant. The computer takes tiny time-steps, nudging the state forward by its current rate each step. This is how we simulate weather, orbits, fluids, and electrical circuits. *Flavour: the laws grind forward.* → [Continuous systems and numerical integration](/97-simulation/01-continuous-and-numerical-integration)
+
+- **Monte Carlo** — simulation by randomness. Rather than solve a hard equation, you throw random numbers at it thousands or millions of times and let the averaging turn noise into an answer. Named after the Monaco casino, it was born on the Manhattan Project. *Flavour: guess at random, repeat, average.* → [Monte Carlo and the power of randomness](/97-simulation/02-monte-carlo-and-randomness)
+
+- **Agent-based and cellular models** — give many simple parts (cells, birds, people) local rules, let them interact, and watch global behaviour you never programmed *emerge*. *Flavour: the whole is a surprise the parts didn't plan.* → [Emergence, agents and cellular automata](/97-simulation/03-emergence-and-cellular-automata)
+
+- **Discrete-event simulation** — the world that jumps. Nothing changes, then a customer arrives, a packet is sent, a machine finishes; the simulation holds a queue of future events and leaps from one to the next, skipping the dead air between. This is how we model queues, logistics, and networks.
+
+## A map is not the territory
+
+A model is always a simplification — a deliberate, useful lie. The statistician George Box put it best: *"All models are wrong, but some are useful."* The art of simulation is knowing which details to keep and which to throw away, and staying honest about the difference between the model and the world. The pages in this section each hand you a working model to play with — because the fastest way to understand a simulation is to reach in and perturb it.

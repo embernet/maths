@@ -14513,5 +14513,73 @@
     "tags": [],
     "mathematicians": [],
     "url": "/maths/definitions/zeros"
+  },
+  {
+    "title": "Simulation: the computer as a laboratory",
+    "section": "Simulation",
+    "slug": "section-opener",
+    "kind": "topic",
+    "summary": "When you cannot run the experiment — because it is too big, too slow, too dangerous, or already happened — you rebuild it in the machine and run it forward. Simulation turns the computer into a laboratory for systems you cannot otherwise touch.",
+    "tags": [
+      "simulation",
+      "monte-carlo",
+      "modelling",
+      "chaos",
+      "emergence",
+      "digital-twin"
+    ],
+    "mathematicians": [],
+    "url": "/maths/97-simulation/00-section-opener"
+  },
+  {
+    "title": "Continuous systems and numerical integration",
+    "section": "Simulation",
+    "slug": "continuous-and-numerical-integration",
+    "kind": "topic",
+    "summary": "Most of the physical world is described by rates of change — differential equations. Simulating it means stepping those rates forward in tiny increments. Do it carelessly and the simulation explodes; do it well and you can still be defeated by chaos.",
+    "tags": [
+      "simulation",
+      "differential-equations",
+      "numerical-integration",
+      "chaos",
+      "euler",
+      "runge-kutta"
+    ],
+    "mathematicians": [],
+    "url": "/maths/97-simulation/01-continuous-and-numerical-integration"
+  },
+  {
+    "title": "Monte Carlo and the power of randomness",
+    "section": "Simulation",
+    "slug": "monte-carlo-and-randomness",
+    "kind": "topic",
+    "summary": "Some problems are too tangled to solve directly — so instead you guess at random, millions of times, and average. This is the Monte Carlo method: born on the Manhattan Project, named after a casino, and the reason randomness is one of computing's sharpest tools.",
+    "tags": [
+      "monte-carlo",
+      "randomness",
+      "probability",
+      "pi",
+      "law-of-large-numbers",
+      "manhattan-project"
+    ],
+    "mathematicians": [],
+    "url": "/maths/97-simulation/02-monte-carlo-and-randomness"
+  },
+  {
+    "title": "Emergence, agents and cellular automata",
+    "section": "Simulation",
+    "slug": "emergence-and-cellular-automata",
+    "kind": "topic",
+    "summary": "Some of the most lifelike behaviour in all of science comes from no equations at all — just many simple parts following simple local rules. Out of that, structure you never programmed simply appears. This is emergence.",
+    "tags": [
+      "simulation",
+      "emergence",
+      "cellular-automata",
+      "game-of-life",
+      "boids",
+      "complexity"
+    ],
+    "mathematicians": [],
+    "url": "/maths/97-simulation/03-emergence-and-cellular-automata"
   }
 ]

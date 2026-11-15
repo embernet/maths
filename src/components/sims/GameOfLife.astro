@@ -1,0 +1,134 @@
+---
+/**
+ * GameOfLife.astro — Conway's Game of Life, interactive (no deps).
+ * Four rules on a toroidal grid produce gliders, oscillators and chaos from
+ * nothing. Click/drag to draw cells; play, step, seed, or clear.
+ */
+import '../../styles/sims.css';
+---
+<figure class="sim" data-sim="game-of-life">
+  <figcaption class="sim-caption">
+    Conway's Game of Life. Four rules, applied to every cell at once, produce startling structure. Click or drag to draw living cells.
+  </figcaption>
+  <div class="sim-stage">
+    <canvas id="gol-canvas" width="480" height="320" role="img"
+      aria-label="A grid of living and dead cells evolving under the Game of Life rules"></canvas>
+  </div>
+  <div class="sim-controls">
+    <button type="button" id="gol-toggle" class="sim-btn sim-btn-primary">Play</button>
+    <button type="button" id="gol-step" class="sim-btn">Step</button>
+    <button type="button" id="gol-glider" class="sim-btn">Add glider</button>
+    <button type="button" id="gol-random" class="sim-btn">Random</button>
+    <button type="button" id="gol-clear" class="sim-btn">Clear</button>
+    <label class="sim-slider">Speed
+      <input type="range" id="gol-speed" min="1" max="30" step="1" value="12" />
+    </label>
+    <span class="sim-label" aria-live="polite">gen <span id="gol-gen">0</span></span>
+  </div>
+  <p class="sim-hint">Rules: a living cell with 2 or 3 living neighbours survives; a dead cell with exactly 3 comes alive; everything else dies.</p>
+</figure>
+
+<script is:inline>
+(function () {
+  var fig = document.querySelector('[data-sim="game-of-life"]');
+  if (!fig) return;
+  var canvas = fig.querySelector('#gol-canvas');
+  var ctx = canvas.getContext('2d');
+  var CELL = 8, COLS = canvas.width / CELL, ROWS = canvas.height / CELL;
+  var genEl = fig.querySelector('#gol-gen');
+  var speed = fig.querySelector('#gol-speed');
+
+  var grid = new Int8Array(COLS * ROWS);
+  var next = new Int8Array(COLS * ROWS);
+  var gen = 0, running = false, raf = null, lastT = 0, painting = false, paintVal = 1;
+  var idx = function (x, y) { return y * COLS + x; };
+
+  function colors() {
+    var cs = getComputedStyle(fig);
+    return {
+      alive: (cs.getPropertyValue('--color-accent') || '#a77b3f').trim(),
+      dead: (cs.getPropertyValue('--color-surface') || '#f3f1ec').trim(),
+      grid: (cs.getPropertyValue('--color-border') || '#ddd').trim()
+    };
+  }
+  function draw() {
+    var c = colors();
+    ctx.fillStyle = c.dead; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = c.alive;
+    for (var y = 0; y < ROWS; y++)
+      for (var x = 0; x < COLS; x++)
+        if (grid[idx(x, y)]) ctx.fillRect(x * CELL + 0.5, y * CELL + 0.5, CELL - 1, CELL - 1);
+  }
+  function step() {
+    for (var y = 0; y < ROWS; y++) {
+      for (var x = 0; x < COLS; x++) {
+        var n = 0;
+        for (var dy = -1; dy <= 1; dy++)
+          for (var dx = -1; dx <= 1; dx++) {
+            if (dx === 0 && dy === 0) continue;
+            var xx = (x + dx + COLS) % COLS, yy = (y + dy + ROWS) % ROWS;
+            n += grid[idx(xx, yy)];
+          }
+        var alive = grid[idx(x, y)];
+        next[idx(x, y)] = (alive && (n === 2 || n === 3)) || (!alive && n === 3) ? 1 : 0;
+      }
+    }
+    var tmp = grid; grid = next; next = tmp;
+    gen++; genEl.textContent = gen; draw();
+  }
+  function loop(t) {
+    if (!running) return;
+    var fps = parseInt(speed.value, 10) || 12;
+    if (t - lastT > 1000 / fps) { step(); lastT = t; }
+    raf = requestAnimationFrame(loop);
+  }
+  function setRunning(on) {
+    running = on;
+    fig.querySelector('#gol-toggle').textContent = on ? 'Pause' : 'Play';
+    fig.querySelector('#gol-toggle').classList.toggle('is-running', on);
+    if (on) { lastT = 0; raf = requestAnimationFrame(loop); } else if (raf) cancelAnimationFrame(raf);
+  }
+  function cellFromEvent(e) {
+    var r = canvas.getBoundingClientRect();
+    var p = e.touches ? e.touches[0] : e;
+    var x = Math.floor((p.clientX - r.left) / r.width * COLS);
+    var y = Math.floor((p.clientY - r.top) / r.height * ROWS);
+    return (x >= 0 && x < COLS && y >= 0 && y < ROWS) ? { x: x, y: y } : null;
+  }
+  function paintAt(e) {
+    var c = cellFromEvent(e); if (!c) return;
+    grid[idx(c.x, c.y)] = paintVal; draw();
+  }
+  canvas.addEventListener('mousedown', function (e) {
+    var c = cellFromEvent(e); if (!c) return;
+    painting = true; paintVal = grid[idx(c.x, c.y)] ? 0 : 1; paintAt(e); e.preventDefault();
+  });
+  canvas.addEventListener('mousemove', function (e) { if (painting) paintAt(e); });
+  window.addEventListener('mouseup', function () { painting = false; });
+  canvas.addEventListener('touchstart', function (e) { painting = true; paintVal = 1; paintAt(e); e.preventDefault(); }, { passive: false });
+  canvas.addEventListener('touchmove', function (e) { if (painting) { paintAt(e); e.preventDefault(); } }, { passive: false });
+  window.addEventListener('touchend', function () { painting = false; });
+
+  fig.querySelector('#gol-toggle').addEventListener('click', function () { setRunning(!running); });
+  fig.querySelector('#gol-step').addEventListener('click', function () { setRunning(false); step(); });
+  fig.querySelector('#gol-clear').addEventListener('click', function () {
+    setRunning(false); grid.fill(0); gen = 0; genEl.textContent = 0; draw();
+  });
+  fig.querySelector('#gol-random').addEventListener('click', function () {
+    for (var i = 0; i < grid.length; i++) grid[i] = Math.random() < 0.28 ? 1 : 0;
+    gen = 0; genEl.textContent = 0; draw();
+  });
+  fig.querySelector('#gol-glider').addEventListener('click', function () {
+    var ox = 2 + Math.floor(Math.random() * (COLS - 6));
+    var oy = 2 + Math.floor(Math.random() * (ROWS - 6));
+    var g = [[1, 0], [2, 1], [0, 2], [1, 2], [2, 2]];
+    for (var k = 0; k < g.length; k++) grid[idx((ox + g[k][0]) % COLS, (oy + g[k][1]) % ROWS)] = 1;
+    draw();
+  });
+
+  // Seed with a glider so there is motion on first view.
+  var g0 = [[1, 0], [2, 1], [0, 2], [1, 2], [2, 2]];
+  for (var k = 0; k < g0.length; k++) grid[idx(3 + g0[k][0], 3 + g0[k][1])] = 1;
+  draw();
+})();
+</script>

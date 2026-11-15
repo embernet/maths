@@ -1,0 +1,107 @@
+---
+/**
+ * MonteCarloPi.astro — interactive Monte Carlo estimate of π.
+ * Self-contained: a <canvas> + controls + an is:inline client script (no deps).
+ * Scatter random points in the unit square; the fraction inside the quarter
+ * circle tends to π/4, so π ≈ 4 · inside / total.
+ */
+import '../../styles/sims.css';
+---
+<figure class="sim" data-sim="monte-carlo-pi">
+  <figcaption class="sim-caption">
+    Throwing random darts at a square to measure π. Points inside the quarter-circle are gold.
+  </figcaption>
+  <div class="sim-stage">
+    <canvas id="mc-canvas" width="400" height="400" role="img"
+      aria-label="Random points scattered in a square, coloured by whether they land inside a quarter circle"></canvas>
+    <div class="sim-readout" aria-live="polite">
+      <div><span class="sim-big" id="mc-estimate">—</span><span class="sim-label">π estimate</span></div>
+      <div><span class="sim-big" id="mc-error">—</span><span class="sim-label">error</span></div>
+      <div><span class="sim-big" id="mc-total">0</span><span class="sim-label">points</span></div>
+    </div>
+  </div>
+  <div class="sim-controls">
+    <button type="button" id="mc-toggle" class="sim-btn sim-btn-primary">Run</button>
+    <button type="button" id="mc-add" class="sim-btn">+10,000</button>
+    <button type="button" id="mc-reset" class="sim-btn">Reset</button>
+    <label class="sim-slider">Speed
+      <input type="range" id="mc-speed" min="50" max="5000" step="50" value="800" />
+    </label>
+  </div>
+</figure>
+
+<script is:inline>
+(function () {
+  var fig = document.querySelector('[data-sim="monte-carlo-pi"]');
+  if (!fig) return;
+  var canvas = fig.querySelector('#mc-canvas');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var estEl = fig.querySelector('#mc-estimate');
+  var errEl = fig.querySelector('#mc-error');
+  var totEl = fig.querySelector('#mc-total');
+  var toggleBtn = fig.querySelector('#mc-toggle');
+  var addBtn = fig.querySelector('#mc-add');
+  var resetBtn = fig.querySelector('#mc-reset');
+  var speed = fig.querySelector('#mc-speed');
+
+  var inside = 0, total = 0, running = false, raf = null;
+
+  function colors() {
+    var cs = getComputedStyle(fig);
+    return {
+      accent: (cs.getPropertyValue('--color-accent') || '#a77b3f').trim(),
+      muted: (cs.getPropertyValue('--color-muted') || '#8a8a8a').trim(),
+      border: (cs.getPropertyValue('--color-border') || '#ccc').trim(),
+      bg: (cs.getPropertyValue('--color-surface') || '#f3f1ec').trim()
+    };
+  }
+  function drawFrame() {
+    var c = colors();
+    ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = c.border; ctx.lineWidth = 1;
+    ctx.strokeRect(0.5, 0.5, W - 1, H - 1);
+    ctx.beginPath(); ctx.moveTo(0, H); ctx.arc(0, H, W, -Math.PI / 2, 0, false);
+    ctx.strokeStyle = c.muted; ctx.lineWidth = 1.5; ctx.stroke();
+  }
+  function reset() {
+    inside = 0; total = 0; drawFrame(); update();
+  }
+  function update() {
+    var est = total ? (4 * inside / total) : 0;
+    estEl.textContent = total ? est.toFixed(5) : '—';
+    errEl.textContent = total ? Math.abs(est - Math.PI).toFixed(5) : '—';
+    totEl.textContent = total.toLocaleString('en-GB');
+  }
+  function batch(k) {
+    var c = colors();
+    for (var i = 0; i < k; i++) {
+      var x = Math.random(), y = Math.random();
+      var isIn = (x * x + y * y) <= 1;
+      if (isIn) inside++;
+      total++;
+      ctx.fillStyle = isIn ? c.accent : c.muted;
+      ctx.globalAlpha = isIn ? 0.8 : 0.35;
+      ctx.fillRect(x * W, H - y * H, 2, 2);
+    }
+    ctx.globalAlpha = 1;
+    update();
+  }
+  function loop() {
+    if (!running) return;
+    batch(parseInt(speed.value, 10) || 800);
+    raf = requestAnimationFrame(loop);
+  }
+  function setRunning(on) {
+    running = on;
+    toggleBtn.textContent = on ? 'Pause' : 'Run';
+    toggleBtn.classList.toggle('is-running', on);
+    if (on) loop(); else if (raf) cancelAnimationFrame(raf);
+  }
+  toggleBtn.addEventListener('click', function () { setRunning(!running); });
+  addBtn.addEventListener('click', function () { batch(10000); });
+  resetBtn.addEventListener('click', function () { setRunning(false); reset(); });
+
+  reset();
+})();
+</script>

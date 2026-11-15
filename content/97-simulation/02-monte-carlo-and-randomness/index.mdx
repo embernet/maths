@@ -1,0 +1,44 @@
+---
+title: 'Monte Carlo and the power of randomness'
+section: 'Simulation'
+section_slug: '97-simulation'
+node_type: topic
+order: 2
+tags: [monte-carlo, randomness, probability, pi, law-of-large-numbers, manhattan-project]
+related: ['00-section-opener']
+mathematicians: []
+reading_time_min: 8
+summary: 'Some problems are too tangled to solve directly — so instead you guess at random, millions of times, and average. This is the Monte Carlo method: born on the Manhattan Project, named after a casino, and the reason randomness is one of computing''s sharpest tools.'
+theorems: []
+applications: []
+---
+
+import MonteCarloPi from '../../../src/components/sims/MonteCarloPi.astro';
+
+In **1946**, the mathematician **Stanisław Ulam** was recovering from illness and playing solitaire. He wondered what the chance was that a game would come out — and realised the honest combinatorics were hopeless. But there was another way: *just deal many hands and count how many win.* Don't reason about the probability; **sample** it.
+
+He told **John von Neumann**, and the two of them (with **Nicholas Metropolis**, who supplied the code-name after the **Monte Carlo** casino in Monaco where Ulam's uncle gambled) turned the idea into a method for a desperately hard problem: how neutrons scatter through fissile material in a nuclear weapon. The equations were intractable, but you could *simulate* individual neutrons bouncing at random and average over millions of them. The first runs were done on the **ENIAC** in 1947. The **Monte Carlo method** was born.
+
+## The trick, in one picture
+
+Here is the whole idea, stripped to its simplest form: **estimating π by throwing darts.**
+
+Picture a square, with a quarter-circle inscribed in it. The square has area 1; the quarter-circle has area π/4. So if you scatter points *uniformly at random* across the square, the fraction that land inside the quarter-circle should be about π/4. Multiply that fraction by 4, and you have an estimate of **π** — computed with nothing but a random-number generator and counting.
+
+Press **Run** and watch the estimate converge:
+
+<MonteCarloPi />
+
+Notice two things. First, it *works* — a deterministic, famous constant falls out of pure randomness. Second, it converges **slowly**. The error shrinks roughly like **1/√N**, where N is the number of points: to get one more correct digit you need about a *hundred times* more darts. That is the price of randomness, and it is why Monte Carlo is a blunt instrument for a 2-D problem like this one.
+
+## So why is it one of computing's sharpest tools?
+
+Because that **1/√N** error rate *does not depend on the number of dimensions.* A grid-based method that chops each axis into 100 pieces needs 100 points in 1-D, 10,000 in 2-D, a million in 3-D — and in 20 dimensions, more points than there are atoms in the Earth. This is the **curse of dimensionality**, and it kills ordinary numerical methods stone dead. Monte Carlo strolls straight past it: random sampling needs the same 1/√N no matter how many dimensions you are in.
+
+That is why Monte Carlo quietly runs the modern world. It prices the options and risk on every trading floor; it plans radiotherapy doses; it renders the light in animated films (every pixel of a Pixar frame is a Monte Carlo average of simulated light rays); it powers Bayesian statistics through **Markov-chain Monte Carlo**; and it still simulates particles in reactors and colliders, exactly as it did in 1947.
+
+## How the randomness is made
+
+Computers are relentlessly deterministic, so the "random" numbers are really **pseudorandom** — produced by a recipe that merely *looks* random. The modern workhorse is the **Mersenne Twister** (Matsumoto & Nishimura, 1997). Crucially, you can **seed** the generator to get the exact same "random" sequence again — which sounds like a flaw but is a gift: it makes a simulation perfectly reproducible, so a result can be checked and debugged.
+
+The reason any of this works is one of the most important theorems in probability: the **law of large numbers**. The average of many independent random samples converges to the true expected value. Monte Carlo is simply that law, put to work.
