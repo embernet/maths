@@ -31,7 +31,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p class="lede">
       Pages you save with the bookmark button in the top bar live here, in this browser on this device —
       private to you, nothing sent anywhere. Make folders and <strong>drag bookmarks onto a folder</strong>
-      to file them (or use the “Move to” menu on each row).
+      to file them. Each bookmark can be renamed, and folders can be renamed or deleted.
     </p>
 
     <p class="bm-empty" id="bm-empty" hidden>
@@ -74,19 +74,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
   function removeBookmark(url) { var d = read(); write({ folders: d.folders, bookmarks: d.bookmarks.filter(function (b) { return b.url !== url; }) }); render(); }
 
-  function moveSelect(d, b) {
-    var opts = '<option value=""' + (b.folder == null ? ' selected' : '') + '>Unfiled</option>';
-    d.folders.forEach(function (f) { opts += '<option value="' + esc(f.id) + '"' + (b.folder === f.id ? ' selected' : '') + '>' + esc(f.name) + '</option>'; });
-    return '<select class="bm-move" aria-label="Move to folder" data-url="' + esc(b.url) + '">' + opts + '</select>';
-  }
   function itemHtml(d, b) {
     var date = fmtDate(b.ts);
     return '<li class="bm-item" draggable="true" data-url="' + esc(b.url) + '">' +
       '<span class="bm-grip" aria-hidden="true">⠿</span>' +
       '<a class="bm-link" href="' + esc(b.url) + '">' + esc(b.title || b.url) + '</a>' +
       (date ? '<span class="bm-date">saved ' + esc(date) + '</span>' : '') +
-      moveSelect(d, b) +
-      '<button type="button" class="bm-remove" aria-label="Remove bookmark" data-url="' + esc(b.url) + '">Remove</button>' +
+      '<span class="bm-item-actions">' +
+        '<button type="button" class="bm-rename" aria-label="Rename bookmark" data-url="' + esc(b.url) + '">Rename</button>' +
+        '<button type="button" class="bm-remove" aria-label="Remove bookmark" data-url="' + esc(b.url) + '">Remove</button>' +
+      '</span>' +
       '</li>';
   }
   function sectionHtml(d, title, folderId, items, deletable) {
@@ -126,6 +123,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   root.addEventListener('click', function (e) {
     var t = e.target;
     var rm = t.closest && t.closest('.bm-remove'); if (rm) { removeBookmark(rm.getAttribute('data-url')); return; }
+    var bmRn = t.closest && t.closest('.bm-rename');
+    if (bmRn) {
+      var bUrl = bmRn.getAttribute('data-url'); var dd = read();
+      var bk = dd.bookmarks.find(function (x) { return x.url === bUrl; });
+      if (bk) {
+        window.mcDialog.prompt('Rename this bookmark', { title: 'Rename bookmark', defaultValue: bk.title, okText: 'Rename' }).then(function (nm) {
+          if (nm && nm.trim()) { bk.title = nm.trim(); write(dd); render(); }
+        });
+      }
+      return;
+    }
     var rn = t.closest && t.closest('[data-rename]');
     if (rn) {
       var d = read(); var f = d.folders.find(function (x) { return x.id === rn.getAttribute('data-rename'); });
@@ -147,12 +155,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     }
   });
-  root.addEventListener('change', function (e) {
-    var sel = e.target.closest && e.target.closest('.bm-move');
-    if (sel) moveTo(sel.getAttribute('data-url'), sel.value);
-  });
-
-  // ---- Drag and drop ----
+  // ---- Drag and drop (to move bookmarks between folders) ----
   var dragUrl = null;
   root.addEventListener('dragstart', function (e) {
     var li = e.target.closest && e.target.closest('.bm-item'); if (!li) return;
@@ -259,11 +262,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .bookmarks-page .bm-link { font-weight: 600; color: var(--color-primary); text-decoration: none; font-size: 1.02rem; }
   .bookmarks-page .bm-link:hover { color: var(--color-accent); text-decoration: underline; }
   .bookmarks-page .bm-date { font-size: 0.78rem; color: var(--color-muted); }
-  .bookmarks-page .bm-move { margin-left: auto; font: inherit; font-size: 0.78rem; padding: 0.1rem 0.3rem; border: 1px solid var(--color-border); border-radius: 0.3rem; background: var(--color-surface); color: var(--color-muted); }
+  .bookmarks-page .bm-item-actions { margin-left: auto; display: flex; gap: 0.4rem; }
+  .bookmarks-page .bm-rename,
   .bookmarks-page .bm-remove {
     font: inherit; font-size: 0.78rem; padding: 0.15rem 0.5rem; border: 1px solid var(--color-border);
     border-radius: 0.3rem; background: var(--color-surface); color: var(--color-muted); cursor: pointer;
   }
+  .bookmarks-page .bm-rename:hover,
   .bookmarks-page .bm-remove:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
   .bookmarks-page .bm-dropnote { list-style: none; color: var(--color-muted); font-style: italic; font-size: 0.82rem; padding: 0.4rem 0.3rem; }
 </style>
