@@ -4,6 +4,7 @@
  * Generates one route per .mdx file in content/95-definitions/.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { tagSlug } from '../../lib/tag-slug.mjs';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
 import { renderTitleMath, stripTitleMath } from '../../lib/render-title-math.mjs';
@@ -92,7 +93,7 @@ function pageDisplayName(p: string): string {
     <header class="definition-header">
       <h1 set:html={renderTitleMath(title)}></h1>
       <div class="definition-meta">
-        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+        {tags.map((tag) => <a class="tag-pill" href={`/tags/${tagSlug(tag)}`}>{tag}</a>)}
       </div>
     </header>
 

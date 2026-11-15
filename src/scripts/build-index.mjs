@@ -298,6 +298,18 @@ for (const entry of topLevelEntries) {
         summary: fm.summary ?? '',
         forthcoming: false,
       });
+
+      // Index for search + tags.
+      records.push({
+        title: fm.title,
+        section: 'Mathematics in Nature',
+        slug,
+        kind: 'nature',
+        summary: fm.summary ?? '',
+        tags: Array.isArray(fm.tags) ? fm.tags : [],
+        mathematicians: Array.isArray(fm.mathematicians) ? fm.mathematicians : [],
+        url,
+      });
     }
     continue;
   }
@@ -487,7 +499,30 @@ for (const entry of topLevelEntries) {
   }
 
   // ---------- Excluded meta/programming sections ----------
-  if (GRAPH_EXCLUDED.has(entry)) continue;
+  // These stay out of the knowledge graph, but their multi-page programming
+  // sections should still be searchable and tag-browsable, so index them.
+  if (GRAPH_EXCLUDED.has(entry)) {
+    const progTitles = { '96-lean4': 'Lean 4', '97-python': 'Python', '98-r': 'R' };
+    if (progTitles[entry]) {
+      for (const sub of readdirSync(entryPath)) {
+        const subPath = join(entryPath, sub);
+        if (!statSync(subPath).isDirectory()) continue;
+        const fm = parseFrontmatter(join(subPath, 'index.mdx'));
+        if (!fm || !fm.title) continue;
+        records.push({
+          title: fm.title,
+          section: progTitles[entry],
+          slug: sub.replace(/^\d+-/, ''),
+          kind: 'programming',
+          summary: fm.summary ?? '',
+          tags: Array.isArray(fm.tags) ? fm.tags : [],
+          mathematicians: [],
+          url: `/${entry}/${sub}`,
+        });
+      }
+    }
+    continue;
+  }
 
   // ---------- Main year sections (01–04) ----------
   let sectionTitle = entry.replace(/^\d+-/, '').replace(/-/g, ' ');

@@ -4,6 +4,7 @@
  * Renders a topic page: prose content + sidebar (desktop) + quiz island.
  */
 import BaseLayout from './BaseLayout.astro';
+import { tagSlug } from '../lib/tag-slug.mjs';
 import Sidebar from '../components/Sidebar.astro';
 import Quiz from '../components/Quiz.astro';
 import { readFileSync, existsSync } from 'node:fs';
@@ -102,7 +103,7 @@ const preReading = frontmatter.suggested_pre_reading ?? [];
           {frontmatter.tags && frontmatter.tags.length > 0 && (
             <div class="tag-list" aria-label="Tags">
               {frontmatter.tags.map((tag) => (
-                <span class="tag-pill">{tag}</span>
+                <a class="tag-pill" href={`/tags/${tagSlug(tag)}`}>{tag}</a>
               ))}
             </div>
           )}

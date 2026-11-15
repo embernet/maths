@@ -5,6 +5,7 @@
  * v1.1: known_for slugs → theorem links; "Where their work appears" from backlinks.json
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { tagSlug } from '../../lib/tag-slug.mjs';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
 
@@ -268,7 +269,7 @@ const hasWorkAppears = appearsInTopicsArray.length > 0 || appearsInErasArray.len
 
     {tags.length > 0 && (
       <div class="math-tags" aria-label="Tags">
-        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+        {tags.map((tag) => <a class="tag-pill" href={`/tags/${tagSlug(tag)}`}>{tag}</a>)}
       </div>
     )}
   </div>

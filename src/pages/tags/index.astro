@@ -1,0 +1,56 @@
+---
+/**
+ * /tags — an index of every tag, with counts, linking to each tag's page.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { tagSlug } from '../../lib/tag-slug.mjs';
+
+interface Item { tags?: string[]; }
+let records: Item[] = [];
+try { records = JSON.parse(readFileSync(join(process.cwd(), 'public/api/index.json'), 'utf8')); } catch { /* ignore */ }
+
+const map = new Map<string, { label: string; count: number }>();
+for (const r of records) {
+  for (const tag of r.tags ?? []) {
+    const slug = tagSlug(tag);
+    if (!slug) continue;
+    const e = map.get(slug) ?? { label: tag, count: 0 };
+    e.count += 1;
+    map.set(slug, e);
+  }
+}
+const tags = Array.from(map.entries())
+  .map(([slug, { label, count }]) => ({ slug, label, count }))
+  .sort((a, b) => a.label.localeCompare(b.label, 'en-GB', { sensitivity: 'base' }));
+---
+
+<BaseLayout title="Tags" description="Browse the Mathematics Companion by tag.">
+  <div class="prose-content tags-index">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">Tags</span>
+    </nav>
+
+    <h1>Tags</h1>
+    <p class="lede">{tags.length} tags across the guide. Pick one to see every page that carries it.</p>
+
+    <ul class="tag-cloud" role="list">
+      {tags.map((t) => (
+        <li>
+          <a href={`/tags/${t.slug}`} class="tag-pill">{t.label}<span class="tag-n">{t.count}</span></a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .tags-index { padding: 1.5rem 1rem 4rem; }
+  .lede { color: var(--color-muted); }
+  .tag-cloud { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag-cloud .tag-n { margin-left: 0.4em; font-size: 0.72em; color: var(--color-muted); }
+  .tag-cloud a:hover .tag-n { color: #fff; }
+</style>

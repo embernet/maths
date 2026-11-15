@@ -1,0 +1,88 @@
+---
+/**
+ * /tags/[tag] — every page that carries a given tag.
+ * Built from the prebuilt search index (public/api/index.json), which already
+ * lists title/url/section/tags for all indexed pages.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { tagSlug } from '../../lib/tag-slug.mjs';
+
+interface Item { title: string; url: string; section?: string; kind?: string; tags?: string[]; }
+
+export function getStaticPaths() {
+  // Must be self-contained: getStaticPaths runs before (and apart from) the
+  // component body, so it can't reference helpers defined in the frontmatter.
+  let records: Item[] = [];
+  try { records = JSON.parse(readFileSync(join(process.cwd(), 'public/api/index.json'), 'utf8')); }
+  catch { records = []; }
+  // slug -> { label, items }
+  const map = new Map<string, { label: string; items: Item[] }>();
+  for (const r of records) {
+    for (const tag of r.tags ?? []) {
+      const slug = tagSlug(tag);
+      if (!slug) continue;
+      if (!map.has(slug)) map.set(slug, { label: tag, items: [] });
+      map.get(slug)!.items.push(r);
+    }
+  }
+  return Array.from(map.entries()).map(([slug, { label, items }]) => ({
+    params: { tag: slug },
+    props: {
+      label,
+      items: items.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'en-GB', { sensitivity: 'base' })),
+    },
+  }));
+}
+
+const { label, items } = Astro.props as { label: string; items: Item[] };
+
+// Group by section for a tidy listing.
+const bySection: Record<string, Item[]> = {};
+for (const it of items) {
+  const sec = it.section || 'Other';
+  (bySection[sec] = bySection[sec] ?? []).push(it);
+}
+const sections = Object.keys(bySection).sort();
+---
+
+<BaseLayout title={`Tag: ${label}`} description={`Every page tagged “${label}” in the Mathematics Companion.`}>
+  <div class="prose-content tag-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <a href="/tags">Tags</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">{label}</span>
+    </nav>
+
+    <h1>Tagged “{label}”</h1>
+    <p class="lede">{items.length} {items.length === 1 ? 'page' : 'pages'} carry this tag.</p>
+
+    {sections.map((sec) => (
+      <section class="tag-group">
+        <h2>{sec}</h2>
+        <ul class="tag-list" role="list">
+          {bySection[sec].map((it) => (
+            <li>
+              <a href={it.url}>{it.title}</a>
+              {it.kind && it.kind !== 'topic' && <span class="tag-kind">{it.kind}</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .tag-page { padding: 1.5rem 1rem 4rem; }
+  .lede { color: var(--color-muted); }
+  .tag-group { margin-top: 1.5rem; }
+  .tag-group h2 { font-size: 1.15rem; color: var(--color-accent); border-bottom: 1px solid var(--color-border); padding-bottom: 0.2rem; }
+  .tag-list { list-style: none; margin: 0.4rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.25rem; }
+  .tag-list a { color: var(--color-primary); text-decoration: none; font-weight: 600; }
+  .tag-list a:hover { color: var(--color-accent); text-decoration: underline; }
+  .tag-kind { font-size: 0.72rem; color: var(--color-muted); margin-left: 0.5rem; text-transform: uppercase; letter-spacing: 0.03em; }
+</style>

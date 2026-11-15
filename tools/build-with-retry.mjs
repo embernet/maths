@@ -14,7 +14,7 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const ASTRO = fileURLToPath(new URL('../node_modules/astro/astro.js', import.meta.url));
-const MAX_ATTEMPTS = 5;
+const MAX_ATTEMPTS = 8;
 const TRANSIENT = /Unable to find the (module|manifest) for /;
 
 function runBuild() {

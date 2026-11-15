@@ -4,6 +4,7 @@
  * Generates one route per .mdx file in content/93-theorems/ plus stubs from _slug-map.json.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { tagSlug } from '../../lib/tag-slug.mjs';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
 
@@ -148,7 +149,7 @@ function topicUrl(topicPath: string): string {
         {era && eraLabels[era] && (
           <a href={`/90-history/${era}`} class="meta-chip era-chip">{eraLabels[era]}</a>
         )}
-        {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
+        {tags.map((tag) => <a class="tag-pill" href={`/tags/${tagSlug(tag)}`}>{tag}</a>)}
       </div>
     </header>
 
