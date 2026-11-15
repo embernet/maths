@@ -1,0 +1,55 @@
+---
+title: 'Symbols & Notation: the interface of mathematics'
+section: 'Symbols & Notation'
+section_slug: '97-symbols'
+node_type: topic
+order: 0
+tags: [symbols, notation, symbology, history, language]
+related: []
+mathematicians: [euler, leibniz, descartes]
+reading_time_min: 7
+summary: 'Mathematical notation is an invented technology — every symbol has an author, a date, and usually a story. Why good notation matters, how maths learned to write itself down, and how to read a wall of symbols aloud.'
+theorems: []
+applications: []
+---
+
+Open any page of mathematics and you meet a wall of symbols. It is easy to assume they were always there — handed down with the subject itself. They were not. **Every symbol was invented by somebody**: the equals sign by a Welsh doctor in 1557 who was tired of writing *"is equal to"* over and over; the integral sign by Leibniz on a particular October day in 1675; the ∞ sign by John Wallis in 1655, origin still a mystery. Notation is a *technology* — one of the most successful interfaces ever designed — and like all technology it was built piece by piece, argued over, and improved.
+
+The philosopher and mathematician Alfred North Whitehead put the case perfectly in 1911: *"By relieving the brain of all unnecessary work, a good notation sets it free to concentrate on more advanced problems."* A good symbol is not decoration. It **thinks for you**.
+
+## The three ages of mathematical writing
+
+Historians describe three stages in how mathematics was written down:
+
+1. **Rhetorical** — everything in words. For most of history there were no symbols at all. Al-Khwarizmi's ninth-century algebra — the book that gave algebra its name — contains not a single symbol: equations are full sentences, solved in prose. Try to imagine solving a quadratic when even the *equation* is a paragraph.
+
+2. **Syncopated** — abbreviations. Diophantus of Alexandria (third century) shortened recurring words into stock abbreviations — a halfway house between prose and symbolism.
+
+3. **Symbolic** — the explosion. Between roughly 1480 and 1700, European mathematicians invented most of the basic kit: $+$ and $-$ (1489), $\sqrt{\ }$ (1525), $=$ (1557), $<$ and $>$ (1631), $\times$ (1631), $\infty$ (1655), $\int$ and $\frac{dy}{dx}$ (1675–1686). [Descartes](/mathematicians/descartes) gave us $x$, $y$, $z$ for unknowns and superscript powers like $x^3$ (1637). Then [Euler](/mathematicians/euler), almost single-handedly, standardised the modern language: $e$, $i$, $\pi$ (popularised), $f(x)$, $\Sigma$.
+
+## Notation shapes what you can think
+
+This is the mind-expanding point: notation is not just shorthand — it changes what is *thinkable*.
+
+- Try multiplying CXLVII by XXXIX using only Roman numerals. The *numbers* are the same; the **positional decimal notation** we use is what makes arithmetic easy enough to teach to children. The algorithm lives in the notation.
+- [Newton](/mathematicians/newton) and [Leibniz](/mathematicians/leibniz) invented calculus independently — but Leibniz designed his notation ($\frac{dy}{dx}$, $\int$) with obsessive care, while Newton used terse dots ($\dot{y}$). Leibniz's notation practically *does the chain rule for you* — $\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}$ looks like fractions cancelling, and the manipulation it suggests is correct. British mathematicians loyally stuck with Newton's dots for a century and fell measurably behind Europe — until a group of Cambridge students campaigned to switch, joking that they stood for *"the principles of pure D-ism in opposition to the Dot-age of the University."*
+- Good notation still drives progress: matrix notation turned pages of simultaneous equations into one line ($A\mathbf{x} = \mathbf{b}$); Dirac's bra–ket notation did the same for quantum mechanics; and every programming language is an exercise in notation design.
+
+## How to read mathematics aloud
+
+Symbols are a *written* language, and learning to pronounce it makes it far less alien. Every table in this section has a **"say it as"** column. The skill scales up to whole sentences. This famous string of symbols:
+
+$$\forall \varepsilon > 0 \;\; \exists \delta > 0 : \lvert x - a\rvert < \delta \implies \lvert f(x) - f(a)\rvert < \varepsilon$$
+
+reads aloud as: *"For every positive epsilon, there is a positive delta such that whenever $x$ is within delta of $a$, $f(x)$ is within epsilon of $f(a)$."* — which is a perfectly ordinary English sentence about staying close. Once you can read the symbols as speech, a wall of notation becomes prose.
+
+## In this section
+
+- [Arithmetic, algebra & comparison](/97-symbols/01-arithmetic-algebra-and-comparison) — the everyday kit, from $+$ to $\sum$.
+- [Sets, logic & proof](/97-symbols/02-sets-logic-and-proof) — the language of mathematical statements: $\in$, $\forall$, $\implies$ and friends.
+- [Calculus & analysis](/97-symbols/03-calculus-and-analysis) — limits, derivatives, integrals, and the many faces of $d$.
+- [Probability, statistics & linear algebra](/97-symbols/04-probability-statistics-and-linear-algebra) — $P(A \mid B)$, $\mathbb{E}[X]$, matrices and vectors.
+- [The Greek alphabet](/97-symbols/05-the-greek-alphabet) — all twenty-four letters, how to say them, and the jobs each one usually does.
+- [Where the symbols came from](/97-symbols/06-where-symbols-came-from) — the stories: the parallel lines of Robert Recorde, the harp that named $\nabla$, the bridge Hamilton vandalised, and more.
+
+*A note on this site: every formula here is typeset in **LaTeX**, the standard language for writing mathematics on a computer — the same notation you'll meet in [Python](/97-python/01-introduction)'s SymPy and in [Lean 4](/96-lean4/01-introduction), where symbols become code a machine can check.*

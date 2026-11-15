@@ -1,0 +1,67 @@
+---
+title: 'Probability, statistics & linear algebra'
+section: 'Symbols & Notation'
+section_slug: '97-symbols'
+node_type: topic
+order: 4
+tags: [symbols, notation, probability, statistics, linear-algebra, vectors, matrices]
+related: ['03-calculus-and-analysis', '05-the-greek-alphabet']
+mathematicians: [gauss, hamilton]
+reading_time_min: 8
+summary: 'The notation of chance and of space: the conditional bar, expectation brackets, the tilde of "distributed as", and the bold-and-bracketed language of vectors and matrices.'
+theorems: []
+applications: []
+---
+
+Two of the most applied branches of mathematics, and two of the most notation-dense. Probability's symbols read almost like sentences once you know the idiom; linear algebra's are a typography of *shape* — bold for vectors, capitals for matrices, brackets for everything.
+
+## Probability
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $P(A)$ | probability | "the probability of A" | A number from $0$ to $1$. $A$ here is an **event** — a set of outcomes, so the [set symbols](/97-symbols/02-sets-logic-and-proof) apply: $P(A \cup B)$, $P(A \cap B)$, $P(A^c)$. |
+| $P(A \mid B)$ | conditional probability | "the probability of A **given** B" | The probability of $A$ once you know $B$ happened. The vertical bar reads "given" — the single most important bar in applied mathematics, and the pivot of **Bayes' theorem**. |
+| $\mathbb{E}[X]$ | expectation | "the expected value of X" | The long-run average of random quantity $X$. Square brackets by convention. |
+| $\operatorname{Var}(X)$, $\sigma^2$ | variance | "the variance of X", "sigma squared" | Average squared distance from the mean — the spread. Its square root $\sigma$ is the **standard deviation**. |
+| $X \sim \mathcal{N}(\mu, \sigma^2)$ | distributed as | "X is distributed normally with mean mu and variance sigma squared" | The tilde's probabilistic job: declaring which distribution a random variable follows. $\mathcal{N}$ is the normal (bell curve); you'll meet $\mathrm{Binomial}$, $\mathrm{Poisson}$, $\mathrm{Uniform}$ the same way. |
+| $\mu$, $\bar{x}$ | mean | "mu", "x bar" | Twins with different jobs: $\mu$ is the *true* population mean; $\bar{x}$ (the bar reads "bar") is the mean of your *sample*. Much of statistics lives in the gap between them. |
+| $\hat{\theta}$ | hat | "theta hat" | An *estimate* of the unknown quantity beneath the hat. The hat is statistics' way of saying "our best guess at". |
+| $\binom{n}{k}$ | binomial coefficient | "n choose k" | How many ways to choose $k$ things from $n$: $\binom{n}{k} = \frac{n!}{k!(n-k)!}$. |
+| $X_1, \ldots, X_n \; \text{i.i.d.}$ | i.i.d. | "independent and identically distributed" | The standard assumption that samples are independent draws from one distribution — the fine print under most of statistics. |
+
+## Vectors
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $\mathbf{v}$ or $\vec{v}$ | vector | "the vector v" | Bold in print, an arrow in handwriting — a quantity with direction, or simply a list of numbers. |
+| $\lVert \mathbf{v} \rVert$ | norm | "the norm of v" | The vector's length — double bars, to distinguish from absolute value. |
+| $\mathbf{u} \cdot \mathbf{v}$ | dot product | "u dot v" | A number measuring alignment: $\lVert\mathbf{u}\rVert \lVert\mathbf{v}\rVert \cos\theta$. Zero exactly when the vectors are **perpendicular**. |
+| $\mathbf{u} \times \mathbf{v}$ | cross product | "u cross v" | A vector perpendicular to both ($3$ dimensions only) — the same $\times$ as multiplication, doing a very different job. |
+| $\langle \mathbf{u}, \mathbf{v} \rangle$ | inner product | "the inner product of u and v" | The dot product's abstract generalisation — angle brackets, the doorway to Hilbert spaces and quantum mechanics' $\langle \psi \mid \phi \rangle$. |
+| $\hat{\mathbf{n}}$ | unit vector | "n hat" | A vector of length one — direction only. (A different hat from the statistician's.) |
+
+## Matrices
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $A$, $a_{ij}$ | matrix, entry | "the matrix A", "a i j" | A rectangular grid of numbers; $a_{ij}$ is the entry in row $i$, column $j$ — **row first, then column**, always. |
+| $A^{\top}$ | transpose | "A transpose" | Flip rows and columns. |
+| $A^{-1}$ | inverse | "A inverse" | The matrix that undoes $A$: $A^{-1}A = I$. Exists only when $\det A \neq 0$. |
+| $I$ | identity | "the identity matrix" | Ones on the diagonal, zeros elsewhere — the matrix that does nothing. |
+| $\det A$ or $\lvert A \rvert$ | determinant | "the determinant of A" | A single number encoding how $A$ scales volume; zero means $A$ squashes space flat. |
+| $A\mathbf{x} = \mathbf{b}$ | linear system | "A x equals b" | A whole system of simultaneous equations in four characters — the notation triumph that makes linear algebra feel like ordinary algebra. |
+| $\lambda$ | eigenvalue | "lambda" | In $A\mathbf{v} = \lambda\mathbf{v}$: the factor by which $A$ stretches its special directions (eigenvectors $\mathbf{v}$). |
+| $\operatorname{tr}(A)$ | trace | "the trace of A" | The sum of the diagonal entries — equal, beautifully, to the sum of the eigenvalues. |
+
+## Complex numbers
+
+| Symbol | Say it as | Meaning & notes |
+|---|---|---|
+| $i$ | "i" | The imaginary unit, $i^2 = -1$ — christened by [Euler](/mathematicians/euler) (1777). Engineers write $j$, because $i$ was already taken by electric current. |
+| $z = a + bi$ | "z equals a plus b i" | A complex number; $\operatorname{Re}(z) = a$, $\operatorname{Im}(z) = b$ — "the real/imaginary part of z". |
+| $\bar{z}$ | "z bar", "the conjugate of z" | Flip the sign of the imaginary part: $\overline{a+bi} = a - bi$. |
+| $\lvert z \rvert$, $\arg z$ | "the modulus of z", "the argument of z" | Distance from the origin, and angle from the positive real axis — the polar coordinates of the complex plane. |
+
+And a story hiding in plain sight: [Hamilton](/mathematicians/hamilton)'s quaternions — the four-dimensional cousins of complex numbers whose $i, j, k$ he famously carved into a Dublin bridge — are where our $i, j, k$ *basis-vector* notation and the dot and cross products first came from. The whole toolkit of vector notation is salvage from that one invention. [The story is on the origins page](/97-symbols/06-where-symbols-came-from).
+
+*Next → [The Greek alphabet](/97-symbols/05-the-greek-alphabet): all twenty-four letters and the parts they play.*

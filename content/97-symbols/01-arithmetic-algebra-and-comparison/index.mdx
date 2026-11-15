@@ -1,0 +1,73 @@
+---
+title: 'Arithmetic, algebra & comparison'
+section: 'Symbols & Notation'
+section_slug: '97-symbols'
+node_type: topic
+order: 1
+tags: [symbols, notation, arithmetic, algebra, equality, inequality]
+related: ['00-section-opener', '02-sets-logic-and-proof']
+mathematicians: [euler, gauss]
+reading_time_min: 8
+summary: 'The everyday symbols of arithmetic and algebra — operations, equality and its many cousins, powers and roots, sums and products — with how to say each one aloud, and the odd story along the way.'
+theorems: []
+applications: []
+---
+
+These are the symbols everyone meets first — which makes it easy to miss that each one had to be invented, and that several carry more precise meanings than school lets on.
+
+## Operations
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $+$ | plus | "plus" | Addition. First printed by Johannes Widmann (1489) in a *commercial arithmetic* book, marking surplus and deficit in problems about chests of goods — and plausibly warehouse marks before that. |
+| $-$ | minus | "minus" | Subtraction; also negation ($-x$, "negative x"). |
+| $\times$ | times | "times", "multiplied by" | Multiplication (Oughtred, 1631). Leibniz grumbled that it was too easily confused with the letter $x$ — which is why higher mathematics mostly avoids it. |
+| $\cdot$ | dot | "times" | Multiplication, the grown-up version: $a \cdot b$. Most often multiplication is written by **juxtaposition** — $ab$ means $a \times b$, no symbol at all. |
+| $\div$ | obelus | "divided by" | Division (Rahn, 1659). Rare beyond school; mathematics prefers fractions $\frac{a}{b}$ or the slash $a/b$. |
+| $\pm$, $\mp$ | plus-minus | "plus or minus" | Both options at once: $x = 1 \pm 2$ means $x$ is $3$ or $-1$. $\mp$ is its mirror — in a formula containing both, $\mp$ takes the opposite choice to $\pm$. |
+| $\lvert x \rvert$ | absolute value | "the absolute value of x", "mod x" (an older reading, unrelated to mod-n arithmetic) | The size of $x$ ignoring sign: $\lvert -3\rvert = 3$. Introduced by Weierstrass. |
+| $n!$ | factorial | "n factorial" | $n! = n \times (n-1) \times \cdots \times 2 \times 1$. The startled punctuation is due to Christian Kramp (1808). By convention $0! = 1$. |
+| $\%$ | percent | "percent" | Per hundred. Evolved over centuries from scribbled abbreviations of the Italian *per cento*. |
+
+## Equality and its cousins
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $=$ | equals | "equals", "is" | Invented by Robert Recorde (1557), who chose two parallel lines *"bicause noe 2 thynges can be moare equalle."* |
+| $\neq$ | not equal | "is not equal to" | Negation of equality. |
+| $\approx$ | approximately | "is approximately" | Close but not exact: $\pi \approx 3.14159$. |
+| $\equiv$ | identical / congruent | "is identically equal to"; "is congruent to" | Two jobs: an identity true for *all* values ($\sin^2\theta + \cos^2\theta \equiv 1$), and [Gauss](/mathematicians/gauss)'s congruence notation $a \equiv b \pmod{n}$ — "a is congruent to b mod n" — meaning $n$ divides $a-b$ (from the *Disquisitiones*, 1801). |
+| $\coloneqq$ | defined as | "is defined to be" | Definition, not discovery: $f(x) \coloneqq x^2$ *introduces* $f$. Borrowed from programming's assignment. |
+| $\propto$ | proportional | "is proportional to" | $y \propto x$ means $y = kx$ for some constant $k$. |
+| $\sim$ | tilde | "is asymptotic to"; "is distributed as"; "is equivalent to" | A heavily overloaded symbol — context decides. See the [calculus](/97-symbols/03-calculus-and-analysis) and [probability](/97-symbols/04-probability-statistics-and-linear-algebra) pages. |
+
+## Comparison
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $<$, $>$ | less / greater than | "is less than", "is greater than" | From Thomas Harriot's papers, published posthumously in 1631 (he died in 1621; his editors may share the credit for the printed forms). The small end faces the small quantity — the symbol is a picture. |
+| $\leq$, $\geq$ | less/greater or equal | "is at most", "is at least" | Due to Pierre Bouguer (1734). |
+| $\ll$, $\gg$ | much less / greater | "is much less than" | Informal but everywhere in applied maths and physics: $x \ll 1$ means "x is small enough to neglect its square". |
+
+## Powers, roots, sums and products
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $x^n$ | power | "x to the n", "x squared/cubed" for $n=2,3$ | Repeated multiplication — superscript notation is Descartes (1637). Extended far beyond whole numbers: $x^{1/2} = \sqrt{x}$, $x^{-1} = 1/x$, and $e^{i\pi}$ makes sense too. |
+| $\sqrt{x}$, $\sqrt[3]{x}$ | radical | "the square root of x", "the cube root of x" | From Christoff Rudolff (1525); plausibly a deformed letter **r** for *radix*, "root". By convention $\sqrt{x}$ is the *non-negative* root. |
+| $\sum$ | sigma (sum) | "the sum over i from 1 to n of…" | [Euler](/mathematicians/euler)'s capital Greek S, for *summa* (1755): $\sum_{i=1}^{n} a_i = a_1 + a_2 + \cdots + a_n$. The index $i$ is a **bound variable** — it exists only inside the sum, like a loop counter. |
+| $\prod$ | pi (product) | "the product over…" | The multiplicative twin — capital Greek P for *product*: $\prod_{i=1}^{n} a_i = a_1 a_2 \cdots a_n$. So $n! = \prod_{i=1}^{n} i$. |
+| $\lfloor x \rfloor$, $\lceil x \rceil$ | floor, ceiling | "the floor of x", "the ceiling of x" | Round down / up to a whole number: $\lfloor 2.7 \rfloor = 2$, $\lceil 2.1 \rceil = 3$. Invented by Kenneth Iverson in 1962 — for a *programming language* (APL), and adopted back into mathematics. |
+
+## The unwritten rules: letters and conventions
+
+Half of notation is convention about **which letters play which parts** — a casting system inherited from Descartes (1637), who put unknowns at the end of the alphabet and knowns at the start:
+
+- $x, y, z$ — unknowns and variables; $a, b, c$ — constants and coefficients.
+- $n, m, k$ — whole numbers; $i, j$ — indices (counters), *except* where $i$ is the imaginary unit.
+- $f, g, h$ — functions; $\varepsilon, \delta$ — small positive quantities (see [calculus](/97-symbols/03-calculus-and-analysis)).
+- Capitals for sets ($A$, $S$) and matrices ($M$); bold for vectors ($\mathbf{v}$).
+
+None of this is enforced — but reading mathematics fluently means absorbing the casting, the way a reader of novels knows the butler from the duchess by name alone. Greek letters have their own typecasting — see [the Greek alphabet](/97-symbols/05-the-greek-alphabet).
+
+*Next → [Sets, logic & proof](/97-symbols/02-sets-logic-and-proof): the symbols that turn statements about numbers into statements about statements.*

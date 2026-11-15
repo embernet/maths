@@ -1,0 +1,28 @@
+---
+title: William Rowan Hamilton
+section: Mathematician Profiles
+section_slug: 91-mathematicians
+slug: hamilton
+born: '1805-08-04'
+died: '1865-09-02'
+origin: Dublin, Ireland
+worked_in: ['Dublin, Ireland']
+known_for: [hamiltons-principle, 'Quaternions', 'Hamiltonian mechanics', 'Vector notation']
+appears_in: [02-core-mathematics/01-abstract-algebra]
+tags: [algebra, quaternions, mechanics, physics, history]
+hook: The problem of multiplying triples of numbers haunted him, by his own account, for fifteen years — in that final October his sons would ask at breakfast, "Well, Papa, can you multiply triplets?" On 16 October 1843 the answer came to him on a Dublin canal walk, and he carved it into the stone of Broom Bridge. The trick was to use four numbers, and to give up on the commutative law.
+---
+
+Hamilton was a prodigy — appointed Professor of Astronomy at Trinity College Dublin and Astronomer Royal of Ireland while still an undergraduate — and he made first-rank contributions to optics and mechanics before the work he is now most remembered for: the **quaternions**.
+
+The problem was simple to state. Complex numbers $a + bi$ are pairs of reals with a beautiful arithmetic that captures rotation in the plane. Surely triples $(a, b, c)$ should do the same for three-dimensional space? By Hamilton's own account the problem haunted him for at least fifteen years, and in the final October his two sons would ask each morning at breakfast, *"Well, Papa, can you multiply triplets?"* — to which he could only reply, shaking his head, that he could merely add and subtract them.
+
+The flash came on **16 October 1843**, walking with his wife along the Royal Canal: the arithmetic needs **four** components, not three — and one sacred law must be sacrificed. In quaternions, $a + bi + cj + dk$, multiplication is **not commutative**: $ij = k$ but $ji = -k$. Unable to resist the impulse, Hamilton carved the fundamental relations into the stone of **Broom Bridge**:
+
+$$i^2 = j^2 = k^2 = ijk = -1$$
+
+The carving has weathered away; a plaque marks the spot, and every 16 October mathematicians retrace the walk. It was the first consequential example of a number system that abandons commutativity — a psychological breakthrough as much as a technical one. Once one sacred law had been profitably broken, algebraists realised the other laws were negotiable too, and the floodgates of **abstract algebra** opened: new algebras could be *designed*, with axioms chosen to fit a purpose.
+
+The quaternions themselves had a strange afterlife. For decades they were promoted as the language of physics; then Gibbs and Heaviside broke them apart into the modern **vector** toolkit — and the salvage is everywhere in today's notation: the basis vectors $\mathbf{i}, \mathbf{j}, \mathbf{k}$, the dot and cross products (the two halves of a quaternion product), even the word *vector*, which is Hamilton's coinage, as is *scalar*. The $\nabla$ symbol is his too. Having seemingly lost to vectors, quaternions then staged one of mathematics' great comebacks: they are the standard way to represent 3-D rotation in [computer graphics](/applications/computer-graphics-3d), spacecraft attitude control, and robotics, because they avoid **gimbal lock** — the failure mode of angle-based descriptions where two rotation axes line up and a degree of freedom vanishes — and interpolate smoothly between orientations. The arithmetic carved on a Dublin bridge now runs inside every game engine and most satellites.
+
+His other monument is **Hamiltonian mechanics** (1834–35) — a reformulation of Newton's laws in which a single function, the Hamiltonian $H$ (essentially the total energy), generates the entire time-evolution of a system. A century later this turned out to be exactly the right scaffolding for **quantum mechanics**, where the Hamiltonian operator plays the central role in the Schrödinger equation. Hamilton had, in effect, written the grammar of a physics that would not exist for another hundred years.

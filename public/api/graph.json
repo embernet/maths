@@ -625,6 +625,14 @@
       "forthcoming": false
     },
     {
+      "id": "mathematician:hamilton",
+      "label": "William Rowan Hamilton",
+      "node_type": "mathematician",
+      "url": "/maths/mathematicians/hamilton",
+      "summary": "The problem of multiplying triples of numbers haunted him, by his own account, for fifteen years — in that final October his sons would ask at breakfast, \"Well, Papa, can you multiply triplets?\" On 16 October 1843 the answer came to him on a Dublin canal walk, and he carved it into the stone of Broom Bridge. The trick was to use four numbers, and to give up on the commutative law.",
+      "forthcoming": false
+    },
+    {
       "id": "mathematician:hardy",
       "label": "G. H. Hardy",
       "node_type": "mathematician",
@@ -8905,6 +8913,62 @@
       "forthcoming": false
     },
     {
+      "id": "topic:97-symbols/00-section-opener",
+      "label": "Symbols & Notation: the interface of mathematics",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/00-section-opener",
+      "summary": "Mathematical notation is an invented technology — every symbol has an author, a date, and usually a story. Why good notation matters, how maths learned to write itself down, and how to read a wall of symbols aloud.",
+      "forthcoming": false
+    },
+    {
+      "id": "topic:97-symbols/01-arithmetic-algebra-and-comparison",
+      "label": "Arithmetic, algebra & comparison",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/01-arithmetic-algebra-and-comparison",
+      "summary": "The everyday symbols of arithmetic and algebra — operations, equality and its many cousins, powers and roots, sums and products — with how to say each one aloud, and the odd story along the way.",
+      "forthcoming": false
+    },
+    {
+      "id": "topic:97-symbols/02-sets-logic-and-proof",
+      "label": "Sets, logic & proof",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/02-sets-logic-and-proof",
+      "summary": "The symbols of membership, inclusion, and logical argument — the notation that lets mathematics talk precisely about collections of things and about its own statements. Includes the number-system alphabet ℕ, ℤ, ℚ, ℝ, ℂ.",
+      "forthcoming": false
+    },
+    {
+      "id": "topic:97-symbols/03-calculus-and-analysis",
+      "label": "Calculus & analysis",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/03-calculus-and-analysis",
+      "summary": "The notation of change: limits and arrows, four rival ways to write a derivative, the long S of integration, and the small Greek letters that tamed the infinite.",
+      "forthcoming": false
+    },
+    {
+      "id": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "label": "Probability, statistics & linear algebra",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/04-probability-statistics-and-linear-algebra",
+      "summary": "The notation of chance and of space: the conditional bar, expectation brackets, the tilde of \"distributed as\", and the bold-and-bracketed language of vectors and matrices.",
+      "forthcoming": false
+    },
+    {
+      "id": "topic:97-symbols/05-the-greek-alphabet",
+      "label": "The Greek alphabet",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/05-the-greek-alphabet",
+      "summary": "All twenty-four Greek letters: how to say each one, and the mathematical parts it typically plays — from alpha the angle to omega the end of all things.",
+      "forthcoming": false
+    },
+    {
+      "id": "topic:97-symbols/06-where-symbols-came-from",
+      "label": "Where the symbols came from",
+      "node_type": "topic",
+      "url": "/maths/97-symbols/06-where-symbols-came-from",
+      "summary": "The origin stories: a Welshman's parallel lines, the long S written one October day in 1675, a bridge defaced in Dublin, the harp that named nabla, and the empty set borrowed from Norway.",
+      "forthcoming": false
+    },
+    {
       "id": "theorem:euler-lagrange-equation",
       "label": "Euler Lagrange Equation",
       "node_type": "theorem",
@@ -14678,6 +14742,11 @@
       "type": "uses-topic"
     },
     {
+      "source": "application:rsa-public-key-cryptography",
+      "target": "topic:97-symbols/06-where-symbols-came-from",
+      "type": "uses-topic"
+    },
+    {
       "source": "application:seismic-imaging-oil-exploration",
       "target": "theorem:fourier-transform",
       "type": "uses-theorem"
@@ -14866,6 +14935,171 @@
       "source": "topic:97-simulation/03-emergence-and-cellular-automata",
       "target": "application:traffic-flow-modelling",
       "type": "applies-to"
+    },
+    {
+      "source": "topic:97-symbols/00-section-opener",
+      "target": "mathematician:euler",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/00-section-opener",
+      "target": "mathematician:leibniz",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/00-section-opener",
+      "target": "mathematician:descartes",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/01-arithmetic-algebra-and-comparison",
+      "target": "topic:97-simulation/00-section-opener",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/01-arithmetic-algebra-and-comparison",
+      "target": "topic:97-symbols/02-sets-logic-and-proof",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/01-arithmetic-algebra-and-comparison",
+      "target": "mathematician:euler",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/01-arithmetic-algebra-and-comparison",
+      "target": "mathematician:gauss",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/02-sets-logic-and-proof",
+      "target": "topic:97-symbols/01-arithmetic-algebra-and-comparison",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/02-sets-logic-and-proof",
+      "target": "topic:97-symbols/03-calculus-and-analysis",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/02-sets-logic-and-proof",
+      "target": "mathematician:cantor",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/02-sets-logic-and-proof",
+      "target": "mathematician:godel",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/03-calculus-and-analysis",
+      "target": "topic:97-symbols/02-sets-logic-and-proof",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/03-calculus-and-analysis",
+      "target": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/03-calculus-and-analysis",
+      "target": "mathematician:leibniz",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/03-calculus-and-analysis",
+      "target": "mathematician:newton",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/03-calculus-and-analysis",
+      "target": "mathematician:euler",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/03-calculus-and-analysis",
+      "target": "mathematician:weierstrass",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "target": "topic:97-symbols/03-calculus-and-analysis",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "target": "topic:97-symbols/05-the-greek-alphabet",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "target": "mathematician:gauss",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "target": "mathematician:hamilton",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/05-the-greek-alphabet",
+      "target": "topic:97-symbols/04-probability-statistics-and-linear-algebra",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/05-the-greek-alphabet",
+      "target": "topic:97-symbols/06-where-symbols-came-from",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/05-the-greek-alphabet",
+      "target": "mathematician:euler",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/05-the-greek-alphabet",
+      "target": "mathematician:archimedes",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "topic:97-simulation/00-section-opener",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "topic:97-symbols/05-the-greek-alphabet",
+      "type": "related"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "mathematician:leibniz",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "mathematician:newton",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "mathematician:euler",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "mathematician:gauss",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "mathematician:hamilton",
+      "type": "attributed-to"
+    },
+    {
+      "source": "topic:97-symbols/06-where-symbols-came-from",
+      "target": "mathematician:cantor",
+      "type": "attributed-to"
     }
   ]
 }

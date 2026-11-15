@@ -1502,6 +1502,22 @@
     "url": "/maths/mathematicians/godel"
   },
   {
+    "title": "William Rowan Hamilton",
+    "section": "Mathematicians",
+    "slug": "hamilton",
+    "kind": "mathematician",
+    "summary": "The problem of multiplying triples of numbers haunted him, by his own account, for fifteen years — in that final October his sons would ask at breakfast, \"Well, Papa, can you multiply triplets?\" On 16 October 1843 the answer came to him on a Dublin canal walk, and he carved it into the stone of Broom Bridge. The trick was to use four numbers, and to give up on the commutative law.",
+    "tags": [
+      "algebra",
+      "quaternions",
+      "mechanics",
+      "physics",
+      "history"
+    ],
+    "mathematicians": [],
+    "url": "/maths/mathematicians/hamilton"
+  },
+  {
     "title": "G. H. Hardy",
     "section": "Mathematicians",
     "slug": "hardy",
@@ -15138,6 +15154,152 @@
     ],
     "mathematicians": [],
     "url": "/maths/97-simulation/03-emergence-and-cellular-automata"
+  },
+  {
+    "title": "Symbols & Notation: the interface of mathematics",
+    "section": "Symbols & Notation",
+    "slug": "section-opener",
+    "kind": "topic",
+    "summary": "Mathematical notation is an invented technology — every symbol has an author, a date, and usually a story. Why good notation matters, how maths learned to write itself down, and how to read a wall of symbols aloud.",
+    "tags": [
+      "symbols",
+      "notation",
+      "symbology",
+      "history",
+      "language"
+    ],
+    "mathematicians": [
+      "euler",
+      "leibniz",
+      "descartes"
+    ],
+    "url": "/maths/97-symbols/00-section-opener"
+  },
+  {
+    "title": "Arithmetic, algebra & comparison",
+    "section": "Symbols & Notation",
+    "slug": "arithmetic-algebra-and-comparison",
+    "kind": "topic",
+    "summary": "The everyday symbols of arithmetic and algebra — operations, equality and its many cousins, powers and roots, sums and products — with how to say each one aloud, and the odd story along the way.",
+    "tags": [
+      "symbols",
+      "notation",
+      "arithmetic",
+      "algebra",
+      "equality",
+      "inequality"
+    ],
+    "mathematicians": [
+      "euler",
+      "gauss"
+    ],
+    "url": "/maths/97-symbols/01-arithmetic-algebra-and-comparison"
+  },
+  {
+    "title": "Sets, logic & proof",
+    "section": "Symbols & Notation",
+    "slug": "sets-logic-and-proof",
+    "kind": "topic",
+    "summary": "The symbols of membership, inclusion, and logical argument — the notation that lets mathematics talk precisely about collections of things and about its own statements. Includes the number-system alphabet ℕ, ℤ, ℚ, ℝ, ℂ.",
+    "tags": [
+      "symbols",
+      "notation",
+      "sets",
+      "logic",
+      "proof",
+      "quantifiers"
+    ],
+    "mathematicians": [
+      "cantor",
+      "godel"
+    ],
+    "url": "/maths/97-symbols/02-sets-logic-and-proof"
+  },
+  {
+    "title": "Calculus & analysis",
+    "section": "Symbols & Notation",
+    "slug": "calculus-and-analysis",
+    "kind": "topic",
+    "summary": "The notation of change: limits and arrows, four rival ways to write a derivative, the long S of integration, and the small Greek letters that tamed the infinite.",
+    "tags": [
+      "symbols",
+      "notation",
+      "calculus",
+      "analysis",
+      "limits",
+      "derivatives",
+      "integrals"
+    ],
+    "mathematicians": [
+      "leibniz",
+      "newton",
+      "euler",
+      "weierstrass"
+    ],
+    "url": "/maths/97-symbols/03-calculus-and-analysis"
+  },
+  {
+    "title": "Probability, statistics & linear algebra",
+    "section": "Symbols & Notation",
+    "slug": "probability-statistics-and-linear-algebra",
+    "kind": "topic",
+    "summary": "The notation of chance and of space: the conditional bar, expectation brackets, the tilde of \"distributed as\", and the bold-and-bracketed language of vectors and matrices.",
+    "tags": [
+      "symbols",
+      "notation",
+      "probability",
+      "statistics",
+      "linear-algebra",
+      "vectors",
+      "matrices"
+    ],
+    "mathematicians": [
+      "gauss",
+      "hamilton"
+    ],
+    "url": "/maths/97-symbols/04-probability-statistics-and-linear-algebra"
+  },
+  {
+    "title": "The Greek alphabet",
+    "section": "Symbols & Notation",
+    "slug": "the-greek-alphabet",
+    "kind": "topic",
+    "summary": "All twenty-four Greek letters: how to say each one, and the mathematical parts it typically plays — from alpha the angle to omega the end of all things.",
+    "tags": [
+      "symbols",
+      "notation",
+      "greek",
+      "alphabet",
+      "letters"
+    ],
+    "mathematicians": [
+      "euler",
+      "archimedes"
+    ],
+    "url": "/maths/97-symbols/05-the-greek-alphabet"
+  },
+  {
+    "title": "Where the symbols came from",
+    "section": "Symbols & Notation",
+    "slug": "where-symbols-came-from",
+    "kind": "topic",
+    "summary": "The origin stories: a Welshman's parallel lines, the long S written one October day in 1675, a bridge defaced in Dublin, the harp that named nabla, and the empty set borrowed from Norway.",
+    "tags": [
+      "symbols",
+      "notation",
+      "history",
+      "etymology",
+      "stories"
+    ],
+    "mathematicians": [
+      "leibniz",
+      "newton",
+      "euler",
+      "gauss",
+      "hamilton",
+      "cantor"
+    ],
+    "url": "/maths/97-symbols/06-where-symbols-came-from"
   },
   {
     "title": "R: The Native Language of Statistics",

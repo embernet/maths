@@ -1,0 +1,73 @@
+---
+title: 'Calculus & analysis'
+section: 'Symbols & Notation'
+section_slug: '97-symbols'
+node_type: topic
+order: 3
+tags: [symbols, notation, calculus, analysis, limits, derivatives, integrals]
+related: ['02-sets-logic-and-proof', '04-probability-statistics-and-linear-algebra']
+mathematicians: [leibniz, newton, euler, weierstrass]
+reading_time_min: 9
+summary: 'The notation of change: limits and arrows, four rival ways to write a derivative, the long S of integration, and the small Greek letters that tamed the infinite.'
+theorems: []
+applications: []
+---
+
+Calculus notation is a living museum: the symbols in daily use were designed by rival inventors three centuries ago, and the best designs won by making calculation feel inevitable.
+
+## Functions and mappings
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $f(x)$ | function value | "f of x" | The output of $f$ at input $x$ — notation by [Euler](/mathematicians/euler) (1734). |
+| $f : A \to B$ | function type | "f from A to B" | $f$ takes inputs in $A$ to outputs in $B$. |
+| $x \mapsto x^2$ | maps-to | "x maps to x squared" | Defines a function by its rule without naming it (the tail on the arrow is the giveaway). |
+| $f \circ g$ | composition | "f after g", "f composed with g" | Do $g$ first, then $f$: $(f \circ g)(x) = f(g(x))$. Read right to left. |
+| $f^{-1}$ | inverse | "f inverse" | The function that undoes $f$. **Beware:** $f^{-1}(x)$ is *not* $1/f(x)$ — a genuinely unfortunate notation collision everyone just lives with. |
+| $\exp$, $\ln$, $\log$ | exponential, logarithm | "exp", "natural log", "log" | $\exp(x) = e^x$; $\ln$ is the logarithm base $e$. Bare $\log$ means base $e$ to mathematicians, base 10 to engineers, base 2 in computer science — always check. |
+
+## Limits and arrows
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $\lim_{x \to a} f(x)$ | limit | "the limit of f of x as x tends to a" | The value $f$ approaches near $a$. "lim" is due to l'Huilier (1786); the arrow underneath is J. G. Leathem's (1905), spread by G. H. Hardy's 1908 textbook. |
+| $x \to a$ | tends to | "x tends to a", "x approaches a" | Inside limits; also "$f(x) \to 3$ as $x \to \infty$". |
+| $x \to a^{+}$ | one-sided | "x tends to a from above" | Approach from one side only — from the right ($+$) or left ($-$). |
+| $\infty$ | infinity | "infinity" | John Wallis, 1655 — he never explained the shape. Guesses include the Roman thousand (CIƆ) and a closed final omega; nobody knows. In analysis it is a *direction of travel*, not a number. |
+| $\varepsilon$, $\delta$ | epsilon, delta | "epsilon", "delta" | The tiny tolerances of rigorous analysis, cast by Cauchy and [Weierstrass](/mathematicians/weierstrass): $\varepsilon$ for the allowed output error, $\delta$ for the input wiggle room. See the worked reading on the [section opener](/97-symbols/00-section-opener). |
+| $\sup$, $\inf$ | supremum, infimum | "soop", "inf" | The least upper bound and greatest lower bound — the precise versions of max and min for sets that never quite attain them: $\sup\{x \mid x^2 < 2\} = \sqrt{2}$. |
+| $O$, $o$, $\sim$ | big-O, little-o, asymptotic | "big O of", "little o of", "is asymptotic to" | Growth-rate comparisons (big-O: Bachmann 1894; little-o: Landau 1909, who popularised both). $f \sim g$ means $f/g \to 1$; big-O now runs every algorithms course in computer science. |
+
+## Derivatives — four rival notations
+
+Calculus was invented twice, and we inherited everyone's handwriting. All four of these mean *rate of change*:
+
+| Symbol | Whose | Say it as | Where it shines |
+|---|---|---|---|
+| $\dfrac{dy}{dx}$ | [Leibniz](/mathematicians/leibniz) | "d y by d x" | Remembers *which* variable; makes the chain rule $\frac{dy}{dx} = \frac{dy}{du}\frac{du}{dx}$ look like cancelling fractions (it isn't quite — but the notation's suggestion is reliably correct, which is its genius). |
+| $f'(x)$, $f''(x)$ | Lagrange | "f prime", "f double-prime" | Compact; perfect when the variable is obvious. |
+| $\dot{y}$, $\ddot{y}$ | [Newton](/mathematicians/newton) | "y dot", "y double-dot" | Derivatives with respect to *time* — still the house style of physics and engineering. |
+| $\partial$ | — | "partial", "curly d" | $\frac{\partial f}{\partial x}$: the derivative of a many-variable function with the *other* variables held still. Used by Legendre (1786), made standard by Jacobi. |
+| $\nabla$ | nabla / del | "grad f", "del" | $\nabla f$ bundles all the partial derivatives into one vector pointing uphill. The symbol is Hamilton's; the name is a Greek harp — [the story is here](/97-symbols/06-where-symbols-came-from). |
+| $\Delta$ | capital delta | "delta x", "the change in x" | A finite (not infinitesimal) change: $\Delta x = x_2 - x_1$. Calculus is what happens as $\Delta$ dreams of becoming $d$. |
+
+## Integrals
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $\int f(x)\,dx$ | integral | "the integral of f of x, d x" | Leibniz's elongated **S**, for *summa* — first written in a manuscript dated 29 October 1675. An integral *is* a sum: infinitely many slivers of height $f(x)$ and width $dx$. |
+| $\int_a^b f(x)\,dx$ | definite integral | "the integral from a to b of…" | The signed area under $f$ between $a$ and $b$. |
+| $\oint$ | contour integral | "the integral around a closed curve" | An integral around a loop — the workhorse of complex analysis and electromagnetism. |
+| $\iint$, $\iiint$ | multiple integrals | "the double/triple integral" | Integration over areas and volumes. |
+| $dx$ | differential | "d x" | The ghost of an infinitely small width. Treated informally as a symbol you "integrate against"; made fully rigorous centuries later. |
+| $\sum_{n=1}^{\infty}$ | infinite series | "the sum from n equals one to infinity" | An infinite sum, defined as the limit of its finite partial sums — the bridge between the [algebra page's](/97-symbols/01-arithmetic-algebra-and-comparison) $\Sigma$ and genuine analysis. |
+
+## Sequences
+
+| Symbol | Say it as | Meaning & notes |
+|---|---|---|
+| $(a_n)$ or $(a_n)_{n \geq 1}$ | "the sequence a n" | An infinite list $a_1, a_2, a_3, \ldots$ — subscripts are positions. |
+| $a_n \to L$ | "a n tends to L" | The sequence converges to limit $L$. |
+| $\limsup$, $\liminf$ | "lim-soup", "lim-inf" | The largest and smallest values a sequence keeps returning near, even when it refuses to settle. |
+
+*Next → [Probability, statistics & linear algebra](/97-symbols/04-probability-statistics-and-linear-algebra): expectation brackets, the conditional bar, and why vectors go bold.*

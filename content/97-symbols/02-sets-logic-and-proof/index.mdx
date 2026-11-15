@@ -1,0 +1,77 @@
+---
+title: 'Sets, logic & proof'
+section: 'Symbols & Notation'
+section_slug: '97-symbols'
+node_type: topic
+order: 2
+tags: [symbols, notation, sets, logic, proof, quantifiers]
+related: ['01-arithmetic-algebra-and-comparison', '03-calculus-and-analysis']
+mathematicians: [cantor, godel]
+reading_time_min: 8
+summary: 'The symbols of membership, inclusion, and logical argument — the notation that lets mathematics talk precisely about collections of things and about its own statements. Includes the number-system alphabet ℕ, ℤ, ℚ, ℝ, ℂ.'
+theorems: []
+applications: []
+---
+
+Most of this page's symbols are surprisingly young — late nineteenth and twentieth century. They arrived when mathematicians, led by [Cantor](/mathematicians/cantor), Peano, Frege and Russell, decided mathematics needed a precise language for *collections of things* and for *statements themselves*.
+
+## Sets
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $\{1, 2, 3\}$ | braces | "the set containing…" | A **set**: an unordered collection without repeats. |
+| $\{x \mid x > 0\}$ | set-builder | "the set of all x such that x is positive" | Builds a set by rule. The bar $\mid$ (sometimes a colon) reads **"such that"**. |
+| $\in$, $\notin$ | membership | "is in", "is an element of" | $3 \in \{1,2,3\}$. Due to Peano (1889) — a stylised epsilon abbreviating *est*, Latin for "is" (the rounded ∈ shape itself is Russell's 1903 styling). |
+| $\subseteq$, $\subset$ | subset | "is a subset of" | Every element of one lies in the other. **Beware a live ambiguity:** many books reserve $\subset$ for a *proper* (strictly smaller) subset; $\subsetneq$ says it unambiguously. |
+| $\cup$, $\cap$ | union, intersection | "union", "intersect" | Elements in either set; elements in both. Cup and cap — the picture is the mnemonic. |
+| $A \setminus B$ | set difference | "A minus B" | What's left of $A$ after removing $B$'s elements. |
+| $A^{c}$ or $\overline{A}$ | complement | "A complement" | Everything (in the ambient universe) *not* in $A$. |
+| $\varnothing$ | empty set | "the empty set" | The set with nothing in it. Chosen by André Weil for the Bourbaki group — not a Greek phi but the Norwegian and Danish letter **Ø**, which Weil knew from Scandinavian alphabets. |
+| $\lvert A \rvert$ or $\#A$ | cardinality | "the size of A" | How many elements. For infinite sets this gets genuinely strange — see $\aleph_0$ below. |
+| $A \times B$ | Cartesian product | "A cross B" | The set of ordered pairs $(a, b)$ — named for Descartes, whose coordinates pair numbers this way. |
+| $(a, b)$ | tuple | "the pair a, b" | Ordered, unlike sets: $(1,2) \neq (2,1)$. Beware: $(a,b)$ is *also* interval notation — context decides. |
+| $[a, b]$, $(a, b)$ | intervals | "the closed/open interval from a to b" | All reals between $a$ and $b$ — square brackets include the endpoint, round ones exclude it. |
+| $\aleph_0$ | aleph-null | "aleph null", "aleph nought" | The size of the set of natural numbers — the smallest infinity. [Cantor](/mathematicians/cantor) reached outside Greek and Latin entirely, to the first letter of the Hebrew alphabet, for sizes of infinity. |
+
+## The number-system alphabet
+
+The double-struck capitals name the great number systems, each containing the last:
+
+| Symbol | System | Remember it by |
+|---|---|---|
+| $\mathbb{N}$ | Natural numbers $0, 1, 2, 3, \ldots$ | **N**atural. (Whether $0$ belongs is a genuine, unresolved turf war — check each book's convention.) |
+| $\mathbb{Z}$ | Integers $\ldots, -2, -1, 0, 1, 2, \ldots$ | German ***Z**ahlen*, "numbers". |
+| $\mathbb{Q}$ | Rationals — fractions $p/q$ | **Q**uotient. |
+| $\mathbb{R}$ | Real numbers — the whole continuous line | **R**eal. |
+| $\mathbb{C}$ | Complex numbers $a + bi$ | **C**omplex. |
+
+The "blackboard bold" style has a lovely origin: in print these were simply **bold** letters, but you can't write bold with chalk — so lecturers doubled a stroke to fake it, and the chalkboard improvisation became so standard that printers ended up copying the blackboard.
+
+## Logic and quantifiers
+
+| Symbol | Name | Say it as | Meaning & notes |
+|---|---|---|---|
+| $\neg$ | negation | "not" | $\neg P$: the statement that $P$ is false. |
+| $\wedge$, $\vee$ | and, or | "and", "or" | $\vee$ is the initial of Latin *vel*, inclusive "or" — mathematical "or" always allows both. $\wedge$ is its deliberate mirror. |
+| $\implies$ | implication | "implies", "if … then" | $P \implies Q$: whenever $P$ holds, so does $Q$. It says nothing about when $P$ is false — a subtlety that powers many a trick question. |
+| $\iff$ | equivalence | "if and only if" | Each side implies the other. Mathematicians write and even say the abbreviation **"iff"**. |
+| $\forall$ | universal quantifier | "for all", "for every" | An upside-down **A** ("all") — introduced by Gerhard Gentzen in 1935. |
+| $\exists$, $\exists!$ | existential quantifier | "there exists"; "there exists exactly one" | A backwards **E** ("exists") — Peano, 1897. |
+| $\therefore$, $\because$ | therefore, because | "therefore", "because" | Old-fashioned in print but alive on whiteboards everywhere. |
+| $\vdash$ | turnstile | "proves" | $T \vdash P$: statement $P$ can be *derived* from theory $T$. The syntactic side of logic. |
+| $\models$ | double turnstile | "entails", "models" | The semantic side: true in every model. That $\vdash$ and $\models$ can come apart is the territory of [Gödel](/mathematicians/godel)'s famous theorems. |
+| $\blacksquare$ or □ | tombstone / Halmos | "end of proof" | Marks a finished proof — the typographic descendant of **Q.E.D.** (*quod erat demonstrandum*, "which was to be demonstrated"). Named after Paul Halmos, who borrowed it from magazine typography. |
+
+## Reading a quantified sentence
+
+Quantifier strings read left to right, outside in, and **order matters**:
+
+$$\forall x \in \mathbb{R} \;\; \exists y \in \mathbb{R} : y > x$$
+
+*"For every real number $x$ there is a real number $y$ bigger than it"* — true (there's no largest real). Swap the quantifiers:
+
+$$\exists y \in \mathbb{R} \;\; \forall x \in \mathbb{R} : y > x$$
+
+*"There is a real number $y$ bigger than **every** real number"* — false. Same symbols, different order, opposite truth value. Most early stumbles in analysis are exactly this: reading quantifiers as decoration instead of as a precise word order.
+
+*Next → [Calculus & analysis](/97-symbols/03-calculus-and-analysis): limits, the many faces of $d$, and the most famous S in mathematics.*

@@ -168,6 +168,10 @@ function buildSection(slug: string): SidebarSection | null {
     return { kind: 'section', sectionSlug: slug, label: 'About', href: '/about', children: [] };
   }
 
+  if (slug === '99-graph') {
+    return { kind: 'section', sectionSlug: slug, label: 'Connection Explorer', href: '/graph', children: [] };
+  }
+
   // Generic section with topic children (year sections, programming sub-sections, history, nature, etc.)
   const sectionPath = join(contentDir, slug);
   const children: TopicLink[] = [];

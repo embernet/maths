@@ -75,7 +75,8 @@
     ],
     "uses_topics": [
       "01-foundations/01-algebra-and-linear-algebra",
-      "02-core-mathematics/01-abstract-algebra"
+      "02-core-mathematics/01-abstract-algebra",
+      "97-symbols/06-where-symbols-came-from"
     ]
   },
   "error-correcting-codes": {
