@@ -616,15 +616,24 @@ for (const item of navItems) {
     }
   });
 
-  // ---- Bookmarks (localStorage) ----
+  // ---- Bookmarks (localStorage; folder-aware model, see /bookmarks) ----
   var BM_KEY = 'mc-bookmarks';
-  function readBookmarks() {
-    try { var a = JSON.parse(localStorage.getItem(BM_KEY) || '[]'); return Array.isArray(a) ? a : []; }
-    catch (e) { return []; }
+  // Model: { version:2, folders:[{id,name}], bookmarks:[{url,title,ts,folder}] }.
+  // Older versions stored a plain array; normalize both into the object form.
+  function normalize(raw) {
+    if (Array.isArray(raw)) {
+      return { folders: [], bookmarks: raw.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: null }; }) };
+    }
+    if (raw && typeof raw === 'object' && Array.isArray(raw.bookmarks)) {
+      return {
+        folders: Array.isArray(raw.folders) ? raw.folders : [],
+        bookmarks: raw.bookmarks.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: b.folder != null ? b.folder : null }; })
+      };
+    }
+    return { folders: [], bookmarks: [] };
   }
-  function writeBookmarks(list) {
-    try { localStorage.setItem(BM_KEY, JSON.stringify(list)); } catch (e) {}
-  }
+  function readData() { try { return normalize(JSON.parse(localStorage.getItem(BM_KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
+  function writeData(d) { try { localStorage.setItem(BM_KEY, JSON.stringify({ version: 2, folders: d.folders, bookmarks: d.bookmarks })); } catch (e) {} }
   function pageTitle() {
     var t = (document.title || '').replace(/\s*[—-]\s*Mathematics Companion\s*$/, '').trim();
     return t || 'Mathematics Companion';
@@ -635,13 +644,13 @@ for (const item of navItems) {
 
   function refreshCount() {
     if (!countEl) return;
-    var n = readBookmarks().length;
+    var n = readData().bookmarks.length;
     countEl.textContent = n;
     countEl.hidden = n === 0;
   }
   function refreshToggle() {
     if (!toggleBtn) return;
-    var saved = readBookmarks().some(function (b) { return b.url === here; });
+    var saved = readData().bookmarks.some(function (b) { return b.url === here; });
     toggleBtn.setAttribute('aria-pressed', saved ? 'true' : 'false');
     toggleBtn.classList.toggle('is-saved', saved);
     toggleBtn.setAttribute('aria-label', saved ? 'Remove this bookmark' : 'Bookmark this page');
@@ -649,11 +658,11 @@ for (const item of navItems) {
   }
   if (toggleBtn) {
     toggleBtn.addEventListener('click', function () {
-      var list = readBookmarks();
-      var i = list.findIndex(function (b) { return b.url === here; });
-      if (i >= 0) { list.splice(i, 1); }
-      else { list.unshift({ url: here, title: pageTitle(), ts: Date.now() }); }
-      writeBookmarks(list);
+      var d = readData();
+      var i = d.bookmarks.findIndex(function (b) { return b.url === here; });
+      if (i >= 0) { d.bookmarks.splice(i, 1); }
+      else { d.bookmarks.unshift({ url: here, title: pageTitle(), ts: Date.now(), folder: null }); }
+      writeData(d);
       refreshToggle(); refreshCount();
     });
   }

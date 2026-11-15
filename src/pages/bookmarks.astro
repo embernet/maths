@@ -1,8 +1,12 @@
 ---
 /**
  * /bookmarks — the reader's saved pages, rendered client-side from
- * localStorage (key "mc-bookmarks"). Static shell; the list is built by the
+ * localStorage (key "mc-bookmarks"). Supports folders, drag-and-drop filing,
+ * and export to a standalone HTML file. Static shell; the list is built by the
  * inline script below so it works on the fully static/offline site.
+ *
+ * Model: { version:2, folders:[{id,name}], bookmarks:[{url,title,ts,folder}] }
+ * (folder === null means unfiled). Older plain-array saves are migrated on read.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
@@ -17,74 +21,198 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <header class="bookmarks-header">
       <h1>Your bookmarks</h1>
-      <button type="button" id="bm-clear" class="bm-clear" hidden>Clear all</button>
+      <div class="bm-toolbar">
+        <button type="button" id="bm-new-folder" class="bm-btn">New folder</button>
+        <button type="button" id="bm-save-html" class="bm-btn">Save as HTML</button>
+        <button type="button" id="bm-clear" class="bm-btn" hidden>Clear all</button>
+      </div>
     </header>
 
     <p class="lede">
-      Pages you save with the <span aria-hidden="true">🔖</span> bookmark button in the top bar are kept
-      here, in this browser on this device. They are private to you — nothing is sent anywhere.
+      Pages you save with the bookmark button in the top bar live here, in this browser on this device —
+      private to you, nothing sent anywhere. Make folders and <strong>drag bookmarks onto a folder</strong>
+      to file them (or use the “Move to” menu on each row).
     </p>
 
     <p class="bm-empty" id="bm-empty" hidden>
       You have no bookmarks yet. Open any page and press the bookmark button in the top bar to save it here.
     </p>
 
-    <ul class="bm-list" id="bm-list" role="list"></ul>
+    <div id="bm-root"></div>
   </div>
 </BaseLayout>
 
 <script is:inline>
 (function () {
   var BM_KEY = 'mc-bookmarks';
-  var base = window.__BASE__ || '/';
-  var listEl = document.getElementById('bm-list');
+  var root = document.getElementById('bm-root');
   var emptyEl = document.getElementById('bm-empty');
   var clearBtn = document.getElementById('bm-clear');
-  if (!listEl) return;
+  if (!root) return;
 
-  function read() {
-    try { var a = JSON.parse(localStorage.getItem(BM_KEY) || '[]'); return Array.isArray(a) ? a : []; }
-    catch (e) { return []; }
+  function normalize(raw) {
+    if (Array.isArray(raw)) return { folders: [], bookmarks: raw.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: null }; }) };
+    if (raw && typeof raw === 'object' && Array.isArray(raw.bookmarks)) {
+      return {
+        folders: Array.isArray(raw.folders) ? raw.folders : [],
+        bookmarks: raw.bookmarks.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: b.folder != null ? b.folder : null }; })
+      };
+    }
+    return { folders: [], bookmarks: [] };
   }
-  function write(list) { try { localStorage.setItem(BM_KEY, JSON.stringify(list)); } catch (e) {} }
-  function esc(s) {
-    return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  function read() { try { return normalize(JSON.parse(localStorage.getItem(BM_KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
+  function write(d) { try { localStorage.setItem(BM_KEY, JSON.stringify({ version: 2, folders: d.folders, bookmarks: d.bookmarks })); } catch (e) {} }
+  function esc(s) { return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function fmtDate(ts) { if (!ts) return ''; try { return new Date(ts).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (e) { return ''; } }
+  function newId() { return 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function folderName(d, id) { var f = d.folders.find(function (x) { return x.id === id; }); return f ? f.name : null; }
+
+  function moveTo(url, folderId) {
+    var d = read();
+    var b = d.bookmarks.find(function (x) { return x.url === url; });
+    if (b) { b.folder = folderId || null; write(d); render(); }
   }
-  function fmtDate(ts) {
-    if (!ts) return '';
-    try { return new Date(ts).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
-    catch (e) { return ''; }
+  function removeBookmark(url) { var d = read(); write({ folders: d.folders, bookmarks: d.bookmarks.filter(function (b) { return b.url !== url; }) }); render(); }
+
+  function moveSelect(d, b) {
+    var opts = '<option value=""' + (b.folder == null ? ' selected' : '') + '>Unfiled</option>';
+    d.folders.forEach(function (f) { opts += '<option value="' + esc(f.id) + '"' + (b.folder === f.id ? ' selected' : '') + '>' + esc(f.name) + '</option>'; });
+    return '<select class="bm-move" aria-label="Move to folder" data-url="' + esc(b.url) + '">' + opts + '</select>';
+  }
+  function itemHtml(d, b) {
+    var date = fmtDate(b.ts);
+    return '<li class="bm-item" draggable="true" data-url="' + esc(b.url) + '">' +
+      '<span class="bm-grip" aria-hidden="true">⠿</span>' +
+      '<a class="bm-link" href="' + esc(b.url) + '">' + esc(b.title || b.url) + '</a>' +
+      (date ? '<span class="bm-date">saved ' + esc(date) + '</span>' : '') +
+      moveSelect(d, b) +
+      '<button type="button" class="bm-remove" aria-label="Remove bookmark" data-url="' + esc(b.url) + '">Remove</button>' +
+      '</li>';
+  }
+  function sectionHtml(d, title, folderId, items, deletable) {
+    var list = items.map(function (b) { return itemHtml(d, b); }).join('');
+    return '<section class="bm-folder">' +
+      '<div class="bm-folder-head">' +
+        '<h2 class="bm-folder-name">' + esc(title) + ' <span class="bm-folder-count">(' + items.length + ')</span></h2>' +
+        (deletable ? '<span class="bm-folder-actions">' +
+          '<button type="button" class="bm-mini" data-rename="' + esc(folderId) + '">Rename</button>' +
+          '<button type="button" class="bm-mini" data-delete="' + esc(folderId) + '">Delete</button>' +
+        '</span>' : '') +
+      '</div>' +
+      '<ul class="bm-list" data-drop-folder="' + esc(folderId || '') + '" role="list">' + list +
+        (items.length ? '' : '<li class="bm-dropnote">Drop bookmarks here</li>') +
+      '</ul>' +
+    '</section>';
   }
 
   function render() {
-    var items = read();
-    listEl.innerHTML = '';
-    emptyEl.hidden = items.length > 0;
-    clearBtn.hidden = items.length === 0;
-    items.forEach(function (b) {
-      var li = document.createElement('li');
-      li.className = 'bm-item';
-      var date = fmtDate(b.ts);
-      li.innerHTML =
-        '<a class="bm-link" href="' + esc(b.url) + '">' + esc(b.title || b.url) + '</a>' +
-        (date ? '<span class="bm-date">saved ' + esc(date) + '</span>' : '') +
-        '<button type="button" class="bm-remove" aria-label="Remove bookmark" data-url="' + esc(b.url) + '">Remove</button>';
-      listEl.appendChild(li);
+    var d = read();
+    var totalEmpty = d.bookmarks.length === 0 && d.folders.length === 0;
+    emptyEl.hidden = !totalEmpty;
+    clearBtn.hidden = d.bookmarks.length === 0 && d.folders.length === 0;
+    if (totalEmpty) { root.innerHTML = ''; return; }
+
+    var html = '';
+    var unfiled = d.bookmarks.filter(function (b) { return b.folder == null; });
+    html += sectionHtml(d, 'Unfiled', '', unfiled, false);
+    d.folders.forEach(function (f) {
+      var items = d.bookmarks.filter(function (b) { return b.folder === f.id; });
+      html += sectionHtml(d, f.name, f.id, items, true);
     });
+    root.innerHTML = html;
   }
 
-  listEl.addEventListener('click', function (e) {
-    var btn = e.target.closest ? e.target.closest('.bm-remove') : null;
-    if (!btn) return;
-    var url = btn.getAttribute('data-url');
-    write(read().filter(function (b) { return b.url !== url; }));
-    render();
+  // ---- Interactions ----
+  root.addEventListener('click', function (e) {
+    var t = e.target;
+    var rm = t.closest && t.closest('.bm-remove'); if (rm) { removeBookmark(rm.getAttribute('data-url')); return; }
+    var rn = t.closest && t.closest('[data-rename]');
+    if (rn) {
+      var d = read(); var f = d.folders.find(function (x) { return x.id === rn.getAttribute('data-rename'); });
+      if (f) { var nm = window.prompt('Rename folder', f.name); if (nm && nm.trim()) { f.name = nm.trim(); write(d); render(); } }
+      return;
+    }
+    var del = t.closest && t.closest('[data-delete]');
+    if (del) {
+      var id = del.getAttribute('data-delete'); var d2 = read();
+      if (window.confirm('Delete this folder? Its bookmarks move back to Unfiled.')) {
+        d2.bookmarks.forEach(function (b) { if (b.folder === id) b.folder = null; });
+        d2.folders = d2.folders.filter(function (x) { return x.id !== id; });
+        write(d2); render();
+      }
+    }
+  });
+  root.addEventListener('change', function (e) {
+    var sel = e.target.closest && e.target.closest('.bm-move');
+    if (sel) moveTo(sel.getAttribute('data-url'), sel.value);
+  });
+
+  // ---- Drag and drop ----
+  var dragUrl = null;
+  root.addEventListener('dragstart', function (e) {
+    var li = e.target.closest && e.target.closest('.bm-item'); if (!li) return;
+    dragUrl = li.getAttribute('data-url');
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', dragUrl); } catch (err) {}
+    li.classList.add('dragging');
+  });
+  root.addEventListener('dragend', function (e) {
+    var li = e.target.closest && e.target.closest('.bm-item'); if (li) li.classList.remove('dragging');
+    dragUrl = null;
+  });
+  root.addEventListener('dragover', function (e) {
+    var ul = e.target.closest && e.target.closest('.bm-list'); if (!ul) return;
+    e.preventDefault(); e.dataTransfer.dropEffect = 'move'; ul.classList.add('drop-over');
+  });
+  root.addEventListener('dragleave', function (e) {
+    var ul = e.target.closest && e.target.closest('.bm-list'); if (ul && !ul.contains(e.relatedTarget)) ul.classList.remove('drop-over');
+  });
+  root.addEventListener('drop', function (e) {
+    var ul = e.target.closest && e.target.closest('.bm-list'); if (!ul) return;
+    e.preventDefault(); ul.classList.remove('drop-over');
+    var url = dragUrl || (e.dataTransfer && e.dataTransfer.getData('text/plain'));
+    if (url) moveTo(url, ul.getAttribute('data-drop-folder'));
+  });
+
+  // ---- Toolbar ----
+  document.getElementById('bm-new-folder').addEventListener('click', function () {
+    var name = window.prompt('New folder name'); if (!name || !name.trim()) return;
+    var d = read(); d.folders.push({ id: newId(), name: name.trim() }); write(d); render();
   });
   clearBtn.addEventListener('click', function () {
-    if (!read().length) return;
-    if (window.confirm('Remove all bookmarks from this browser?')) { write([]); render(); }
+    if (window.confirm('Remove all bookmarks and folders from this browser?')) { write({ folders: [], bookmarks: [] }); render(); }
   });
+  document.getElementById('bm-save-html').addEventListener('click', exportHtml);
+
+  function exportHtml() {
+    var d = read();
+    if (!d.bookmarks.length) { window.alert('You have no bookmarks to export yet.'); return; }
+    var groups = [{ name: 'Unfiled', items: d.bookmarks.filter(function (b) { return b.folder == null; }) }];
+    d.folders.forEach(function (f) { groups.push({ name: f.name, items: d.bookmarks.filter(function (b) { return b.folder === f.id; }) }); });
+    var now = new Date().toLocaleString('en-GB');
+    var body = groups.filter(function (g) { return g.items.length; }).map(function (g) {
+      var lis = g.items.map(function (b) {
+        var abs = new URL(b.url, window.location.href).href;
+        return '    <li><a href="' + esc(abs) + '">' + esc(b.title || abs) + '</a></li>';
+      }).join('\n');
+      return '  <h2>' + esc(g.name) + '</h2>\n  <ul>\n' + lis + '\n  </ul>';
+    }).join('\n');
+    var html = '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+      '<title>Mathematics Companion — Bookmarks</title>\n' +
+      '<style>body{font-family:Georgia,serif;max-width:40rem;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#1a1a1a}' +
+      'h1{color:#1a3a52}h2{color:#a77b3f;margin-top:1.6rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}' +
+      'ul{list-style:none;padding:0}li{margin:.3rem 0}a{color:#1a3a52}small{color:#777}</style>\n</head>\n<body>\n' +
+      '<h1>Mathematics Companion — Bookmarks</h1>\n<p><small>Exported ' + esc(now) + '</small></p>\n' +
+      body + '\n</body>\n</html>\n';
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'mathematics-companion-bookmarks.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  }
+
   window.addEventListener('storage', function (e) { if (e.key === BM_KEY) render(); });
   render();
 })();
@@ -95,42 +223,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
      .bookmarks-page so nothing leaks to other pages. -->
 <style is:global>
   .bookmarks-page { padding: 1.5rem 1rem 4rem; }
-  .bookmarks-page .bookmarks-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .bookmarks-page .bookmarks-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .bookmarks-page .bm-toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .bookmarks-page .lede { color: var(--color-muted); max-width: 64ch; }
   .bookmarks-page .bm-empty { color: var(--color-muted); font-style: italic; }
-  .bookmarks-page .bm-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
-  .bookmarks-page .bm-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.4rem 0.9rem;
-    padding: 0.6rem 0.2rem;
-    border-bottom: 1px solid var(--color-border);
+  .bookmarks-page .bm-btn, .bookmarks-page .bm-mini {
+    font: inherit; cursor: pointer; border: 1px solid var(--color-border);
+    border-radius: 0.3rem; background: var(--color-surface); color: var(--color-primary);
   }
+  .bookmarks-page .bm-btn { font-size: 0.85rem; padding: 0.3rem 0.8rem; }
+  .bookmarks-page .bm-btn:hover, .bookmarks-page .bm-mini:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .bookmarks-page .bm-folder { margin-top: 1.5rem; }
+  .bookmarks-page .bm-folder-head { display: flex; align-items: baseline; gap: 0.75rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.25rem; }
+  .bookmarks-page .bm-folder-name { font-size: 1.15rem; color: var(--color-accent); margin: 0; }
+  .bookmarks-page .bm-folder-count { color: var(--color-muted); font-size: 0.85rem; font-weight: 400; }
+  .bookmarks-page .bm-folder-actions { margin-left: auto; display: flex; gap: 0.4rem; }
+  .bookmarks-page .bm-mini { font-size: 0.72rem; padding: 0.1rem 0.45rem; color: var(--color-muted); }
+  .bookmarks-page .bm-list { list-style: none; margin: 0.3rem 0 0; padding: 0.2rem; min-height: 2.2rem; border-radius: 0.3rem; }
+  .bookmarks-page .bm-list.drop-over { outline: 2px dashed var(--color-accent); background: color-mix(in srgb, var(--color-accent) 8%, transparent); }
+  .bookmarks-page .bm-item {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.75rem;
+    padding: 0.5rem 0.3rem; border-bottom: 1px solid var(--color-border);
+  }
+  .bookmarks-page .bm-item.dragging { opacity: 0.4; }
+  .bookmarks-page .bm-grip { cursor: grab; color: var(--color-muted); font-size: 0.9rem; }
   .bookmarks-page .bm-link { font-weight: 600; color: var(--color-primary); text-decoration: none; font-size: 1.02rem; }
   .bookmarks-page .bm-link:hover { color: var(--color-accent); text-decoration: underline; }
   .bookmarks-page .bm-date { font-size: 0.78rem; color: var(--color-muted); }
+  .bookmarks-page .bm-move { margin-left: auto; font: inherit; font-size: 0.78rem; padding: 0.1rem 0.3rem; border: 1px solid var(--color-border); border-radius: 0.3rem; background: var(--color-surface); color: var(--color-muted); }
   .bookmarks-page .bm-remove {
-    margin-left: auto;
-    font: inherit;
-    font-size: 0.78rem;
-    padding: 0.15rem 0.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.3rem;
-    background: var(--color-surface);
-    color: var(--color-muted);
-    cursor: pointer;
+    font: inherit; font-size: 0.78rem; padding: 0.15rem 0.5rem; border: 1px solid var(--color-border);
+    border-radius: 0.3rem; background: var(--color-surface); color: var(--color-muted); cursor: pointer;
   }
   .bookmarks-page .bm-remove:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
-  .bookmarks-page .bm-clear {
-    font: inherit;
-    font-size: 0.82rem;
-    padding: 0.25rem 0.7rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.3rem;
-    background: var(--color-surface);
-    color: var(--color-muted);
-    cursor: pointer;
-  }
-  .bookmarks-page .bm-clear:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+  .bookmarks-page .bm-dropnote { list-style: none; color: var(--color-muted); font-style: italic; font-size: 0.82rem; padding: 0.4rem 0.3rem; }
 </style>
