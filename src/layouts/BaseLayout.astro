@@ -10,6 +10,7 @@ import Footer from '../components/Footer.astro';
 import LeftSidebar from '../components/LeftSidebar.astro';
 import Dialog from '../components/Dialog.astro';
 import BookmarksStore from '../components/BookmarksStore.astro';
+import HistoryStore from '../components/HistoryStore.astro';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import '../styles/print.css';
@@ -145,9 +146,11 @@ const jsonLd = {
       window.__BASE__ = base;
     </script>
 
-    <!-- Shared client APIs (window.mcBookmarks store + window.mcUtil), defined
-         before the header/page scripts that use them. -->
+    <!-- Shared client APIs (window.mcBookmarks + window.mcUtil, then
+         window.mcHistory which uses mcUtil), defined before the header/page
+         scripts that use them. HistoryStore also records this visit. -->
     <BookmarksStore />
+    <HistoryStore />
 
     <!--
       KaTeX MathML hide rule (defence-in-depth).

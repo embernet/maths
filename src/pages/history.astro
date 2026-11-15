@@ -1,0 +1,131 @@
+---
+/**
+ * /history — the reader's visit history, rendered client-side from the shared
+ * window.mcHistory store (see src/components/HistoryStore.astro, which records
+ * each page visit). Mirrors the bookmarks view: grouped list, per-item Remove,
+ * Clear all via the in-app dialog, empty state. Static shell; the list is
+ * built by the inline script so it works on the fully static/offline site.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="History" description="The pages you have read on this device.">
+  <div class="prose-content history-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">History</span>
+    </nav>
+
+    <header class="history-header">
+      <h1>Your reading history</h1>
+      <button type="button" id="hx-clear" class="hx-clear" hidden>Clear all</button>
+    </header>
+
+    <p class="lede">
+      The pages you have visited, newest first — kept in this browser on this device,
+      private to you, nothing sent anywhere. Pages you return to often show a visit count.
+    </p>
+
+    <p class="hx-empty" id="hx-empty" hidden>
+      Nothing here yet. Browse a few pages and they will appear in your history.
+    </p>
+
+    <div id="hx-root"></div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+(function () {
+  var root = document.getElementById('hx-root');
+  var emptyEl = document.getElementById('hx-empty');
+  var clearBtn = document.getElementById('hx-clear');
+  var store = window.mcHistory;              // single source of truth (HistoryStore.astro)
+  if (!root || !store) return;
+  var esc = window.mcUtil.escapeHtml;        // shared util — no local copy
+
+  function dayLabel(ts) {
+    var d = new Date(ts), now = new Date();
+    var startOf = function (x) { return new Date(x.getFullYear(), x.getMonth(), x.getDate()).getTime(); };
+    var diffDays = Math.round((startOf(now) - startOf(d)) / 86400000);
+    if (diffDays === 0) return 'Today';
+    if (diffDays === 1) return 'Yesterday';
+    try { return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+    catch (e) { return ''; }
+  }
+  function timeLabel(ts) {
+    try { return new Date(ts).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }); }
+    catch (e) { return ''; }
+  }
+
+  function render() {
+    var items = store.list();
+    emptyEl.hidden = items.length > 0;
+    clearBtn.hidden = items.length === 0;
+    if (!items.length) { root.innerHTML = ''; return; }
+
+    var html = '', currentDay = null;
+    items.forEach(function (h) {
+      var day = dayLabel(h.ts);
+      if (day !== currentDay) {
+        if (currentDay !== null) html += '</ul></section>';
+        html += '<section class="hx-day"><h2>' + esc(day) + '</h2><ul class="hx-list" role="list">';
+        currentDay = day;
+      }
+      html += '<li class="hx-item">' +
+        '<span class="hx-time">' + esc(timeLabel(h.ts)) + '</span>' +
+        '<a class="hx-link" href="' + esc(h.url) + '">' + esc(h.title || h.url) + '</a>' +
+        (h.count > 1 ? '<span class="hx-count" title="Visited ' + h.count + ' times">&times;' + h.count + '</span>' : '') +
+        '<button type="button" class="hx-remove" aria-label="Remove from history" data-url="' + esc(h.url) + '">Remove</button>' +
+        '</li>';
+    });
+    html += '</ul></section>';
+    root.innerHTML = html;
+  }
+
+  root.addEventListener('click', function (e) {
+    var rm = e.target.closest ? e.target.closest('.hx-remove') : null;
+    if (rm) store.remove(rm.getAttribute('data-url'));
+  });
+  clearBtn.addEventListener('click', function () {
+    window.mcDialog.confirm('Clear your entire reading history on this browser?', { title: 'Clear history', okText: 'Clear all' }).then(function (ok) {
+      if (ok) store.clear();
+    });
+  });
+
+  store.onChange(render);
+  render();
+})();
+</script>
+
+<!-- is:global because the list is created at runtime via innerHTML and doesn't
+     carry Astro's scoped-style attribute. Namespaced under .history-page. -->
+<style is:global>
+  .history-page { padding: 1.5rem 1rem 4rem; }
+  .history-page .history-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .history-page .lede { color: var(--color-muted); max-width: 64ch; }
+  .history-page .hx-empty { color: var(--color-muted); font-style: italic; }
+  .history-page .hx-clear {
+    font: inherit; font-size: 0.82rem; cursor: pointer; padding: 0.25rem 0.7rem;
+    border: 1px solid var(--color-border); border-radius: 0.3rem;
+    background: var(--color-surface); color: var(--color-muted);
+  }
+  .history-page .hx-clear:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+  .history-page .hx-day { margin-top: 1.5rem; }
+  .history-page .hx-day h2 { font-size: 1.05rem; color: var(--color-accent); border-bottom: 1px solid var(--color-border); padding-bottom: 0.2rem; margin: 0 0 0.3rem; }
+  .history-page .hx-list { list-style: none; margin: 0; padding: 0; }
+  .history-page .hx-item {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.75rem;
+    padding: 0.45rem 0.2rem; border-bottom: 1px solid var(--color-border);
+  }
+  .history-page .hx-time { font-size: 0.76rem; color: var(--color-muted); font-variant-numeric: tabular-nums; min-width: 3em; }
+  .history-page .hx-link { font-weight: 600; color: var(--color-primary); text-decoration: none; font-size: 1rem; }
+  .history-page .hx-link:hover { color: var(--color-accent); text-decoration: underline; }
+  .history-page .hx-count { font-size: 0.74rem; color: var(--color-muted); }
+  .history-page .hx-remove {
+    margin-left: auto; font: inherit; font-size: 0.78rem; cursor: pointer;
+    padding: 0.15rem 0.5rem; border: 1px solid var(--color-border); border-radius: 0.3rem;
+    background: var(--color-surface); color: var(--color-muted);
+  }
+  .history-page .hx-remove:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+</style>

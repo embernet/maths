@@ -63,6 +63,12 @@ non-trivial client logic, drive it in a headless DOM (`linkedom`) — load the
 built page, stub `localStorage`/`fetch`, dispatch the events, and assert the
 result. This is how the search regression was caught and verified.
 
+Gotcha when simulating **multiple page loads** in one Node process: linkedom's
+`window` proxies property writes to `globalThis`, so `window.mc*` globals leak
+from one simulated page into the next and the stores' `if (window.mcX) return;`
+guards skip re-initialisation (which a real browser never does). Delete the
+`mc*`/`__BASE__` keys from `globalThis` between loads.
+
 ## Checklist before committing code
 
 - [ ] No helper/function duplicated from another file (grep the name).

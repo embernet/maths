@@ -65,11 +65,16 @@
   };
   window.addEventListener('storage', function (e) { if (e.key === KEY) notify(); });
 
-  // Small shared client utilities (reused by header search and the bookmarks page).
+  // Small shared client utilities (reused by header search, bookmarks, history).
   if (!window.mcUtil) {
     window.mcUtil = {
       escapeHtml: function (s) {
         return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      },
+      // The current page's display title, without the site-name suffix.
+      pageTitle: function () {
+        var t = (document.title || '').replace(/\s*[—-]\s*Mathematics Companion\s*$/, '').trim();
+        return t || 'Mathematics Companion';
       }
     };
   }

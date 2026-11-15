@@ -1,0 +1,54 @@
+---
+/**
+ * HistoryStore.astro — the single source of truth for the reader's visit
+ * history: window.mcHistory. Included once in BaseLayout (after
+ * BookmarksStore, which provides window.mcUtil) and records the current page
+ * on every load — except the /history page itself, so browsing your history
+ * doesn't rewrite it. Stored in localStorage, private to the browser.
+ *
+ * Model: array of { url, title, ts, count }, most recent first, deduped by
+ * url (a revisit moves the entry to the top, bumps count, refreshes ts).
+ * Capped at MAX entries. See docs/ENGINEERING_GUIDE.md for the store pattern.
+ */
+---
+<script is:inline>
+(function () {
+  if (window.mcHistory) return;
+  var KEY = 'mc-history';
+  var MAX = 200;
+  var subs = [];
+
+  function read() {
+    try { var a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function write(list) { try { localStorage.setItem(KEY, JSON.stringify(list.slice(0, MAX))); } catch (e) {} notify(); }
+  function notify() { subs.forEach(function (cb) { try { cb(); } catch (e) {} }); }
+
+  window.mcHistory = {
+    list: read,
+    count: function () { return read().length; },
+    record: function (url, title) {
+      var list = read();
+      var i = list.findIndex(function (h) { return h.url === url; });
+      var entry = i >= 0 ? list.splice(i, 1)[0] : { url: url, title: title, count: 0 };
+      entry.title = title || entry.title;
+      entry.ts = Date.now();
+      entry.count = (entry.count || 0) + 1;
+      list.unshift(entry);
+      write(list);
+    },
+    remove: function (url) { write(read().filter(function (h) { return h.url !== url; })); },
+    clear: function () { write([]); },
+    onChange: function (cb) { if (typeof cb === 'function') subs.push(cb); }
+  };
+  window.addEventListener('storage', function (e) { if (e.key === KEY) notify(); });
+
+  // Record this visit — unless we are on the history page itself.
+  var base = window.__BASE__ || '/';
+  var rel = window.location.pathname.replace(base, '').replace(/\/$/, '');
+  if (rel !== 'history') {
+    window.mcHistory.record(window.location.pathname, window.mcUtil.pageTitle());
+  }
+})();
+</script>

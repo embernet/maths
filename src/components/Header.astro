@@ -224,6 +224,15 @@ for (const item of navItems) {
       </svg>
       <span class="hdr-badge" id="bookmark-count" hidden>0</span>
     </a>
+
+    <!-- View your reading history -->
+    <a href="/history" class="hdr-icon-btn history-link no-print"
+      aria-label="View the pages you have read" title="Your reading history">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none">
+        <circle cx="12" cy="12" r="8.2" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M12 7.5V12l3.2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
   </div>
 </header>
 
@@ -617,10 +626,6 @@ for (const item of navItems) {
   var toggleBtn = document.getElementById('bookmark-toggle');
   var countEl = document.getElementById('bookmark-count');
   var here = window.location.pathname;
-  function pageTitle() {
-    var t = (document.title || '').replace(/\s*[—-]\s*Mathematics Companion\s*$/, '').trim();
-    return t || 'Mathematics Companion';
-  }
   function refreshCount() {
     if (!countEl || !store) return;
     var n = store.count();
@@ -636,7 +641,7 @@ for (const item of navItems) {
     toggleBtn.setAttribute('title', saved ? 'Remove this bookmark' : 'Bookmark this page');
   }
   if (toggleBtn && store) {
-    toggleBtn.addEventListener('click', function () { store.toggle(here, pageTitle()); });
+    toggleBtn.addEventListener('click', function () { store.toggle(here, window.mcUtil.pageTitle()); });
     store.onChange(function () { refreshToggle(); refreshCount(); });
     refreshToggle(); refreshCount();
   }
