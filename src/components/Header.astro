@@ -794,8 +794,10 @@ const navGroups = NAV_GROUPS.map((g) => ({
     .bookmarks-link, .history-link { display: none; }
   }
 
-  /* Bookmark controls */
+  /* Bookmark controls — order 4 puts them at the far right, after the search
+     (hamburger 0, logo 1, group nav 2, search 3). */
   .hdr-icon-btn {
+    order: 4;
     display: inline-flex;
     align-items: center;
     justify-content: center;
