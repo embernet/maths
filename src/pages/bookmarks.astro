@@ -1,0 +1,133 @@
+---
+/**
+ * /bookmarks — the reader's saved pages, rendered client-side from
+ * localStorage (key "mc-bookmarks"). Static shell; the list is built by the
+ * inline script below so it works on the fully static/offline site.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Bookmarks" description="The pages you have saved on this device.">
+  <div class="prose-content bookmarks-page">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span aria-current="page">Bookmarks</span>
+    </nav>
+
+    <header class="bookmarks-header">
+      <h1>Your bookmarks</h1>
+      <button type="button" id="bm-clear" class="bm-clear" hidden>Clear all</button>
+    </header>
+
+    <p class="lede">
+      Pages you save with the <span aria-hidden="true">🔖</span> bookmark button in the top bar are kept
+      here, in this browser on this device. They are private to you — nothing is sent anywhere.
+    </p>
+
+    <p class="bm-empty" id="bm-empty" hidden>
+      You have no bookmarks yet. Open any page and press the bookmark button in the top bar to save it here.
+    </p>
+
+    <ul class="bm-list" id="bm-list" role="list"></ul>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+(function () {
+  var BM_KEY = 'mc-bookmarks';
+  var base = window.__BASE__ || '/';
+  var listEl = document.getElementById('bm-list');
+  var emptyEl = document.getElementById('bm-empty');
+  var clearBtn = document.getElementById('bm-clear');
+  if (!listEl) return;
+
+  function read() {
+    try { var a = JSON.parse(localStorage.getItem(BM_KEY) || '[]'); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function write(list) { try { localStorage.setItem(BM_KEY, JSON.stringify(list)); } catch (e) {} }
+  function esc(s) {
+    return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function fmtDate(ts) {
+    if (!ts) return '';
+    try { return new Date(ts).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+    catch (e) { return ''; }
+  }
+
+  function render() {
+    var items = read();
+    listEl.innerHTML = '';
+    emptyEl.hidden = items.length > 0;
+    clearBtn.hidden = items.length === 0;
+    items.forEach(function (b) {
+      var li = document.createElement('li');
+      li.className = 'bm-item';
+      var date = fmtDate(b.ts);
+      li.innerHTML =
+        '<a class="bm-link" href="' + esc(b.url) + '">' + esc(b.title || b.url) + '</a>' +
+        (date ? '<span class="bm-date">saved ' + esc(date) + '</span>' : '') +
+        '<button type="button" class="bm-remove" aria-label="Remove bookmark" data-url="' + esc(b.url) + '">Remove</button>';
+      listEl.appendChild(li);
+    });
+  }
+
+  listEl.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.bm-remove') : null;
+    if (!btn) return;
+    var url = btn.getAttribute('data-url');
+    write(read().filter(function (b) { return b.url !== url; }));
+    render();
+  });
+  clearBtn.addEventListener('click', function () {
+    if (!read().length) return;
+    if (window.confirm('Remove all bookmarks from this browser?')) { write([]); render(); }
+  });
+  window.addEventListener('storage', function (e) { if (e.key === BM_KEY) render(); });
+  render();
+})();
+</script>
+
+<style>
+  .bookmarks-page { padding: 1.5rem 1rem 4rem; }
+  .bookmarks-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .lede { color: var(--color-muted); max-width: 64ch; }
+  .bm-empty { color: var(--color-muted); font-style: italic; }
+  .bm-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+  .bm-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.9rem;
+    padding: 0.6rem 0.2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .bm-link { font-weight: 600; color: var(--color-primary); text-decoration: none; font-size: 1.02rem; }
+  .bm-link:hover { color: var(--color-accent); text-decoration: underline; }
+  .bm-date { font-size: 0.78rem; color: var(--color-muted); }
+  .bm-remove {
+    margin-left: auto;
+    font: inherit;
+    font-size: 0.78rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .bm-remove:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+  .bm-clear {
+    font: inherit;
+    font-size: 0.82rem;
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
+    background: var(--color-surface);
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .bm-clear:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+</style>
