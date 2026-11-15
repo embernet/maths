@@ -219,6 +219,8 @@ Methods named with double underscores like `__add__` are **dunder methods**: the
 
 Python checks compatibility at runtime by what an object *can do*, not what type it is declared to be. If it has a `__len__`, `len(it)` works. If it has `__iter__`, you can loop over it.
 
+The name comes from the old test attributed to poet James Whitcomb Riley: *"If it walks like a duck and quacks like a duck, then it probably is a duck."* Python doesn't interrogate an object's pedigree — it doesn't ask "are you a duck?" It just tries to make it quack. If the object supports the operation you ask of it, Python treats it as the right kind of thing; if it doesn't, you get an error at that moment, not a declaration up front. So you never write "this argument must be a `list`"; you write code that works on *anything that behaves like what you need*.
+
 ```python
 def total_length(items):
     return sum(len(x) for x in items)
