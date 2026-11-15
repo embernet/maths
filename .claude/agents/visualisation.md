@@ -26,5 +26,17 @@ Principles:
   shift; degrades gracefully if JS is off. Keep bundles lean.
 - **Verify** by building and loading the real page (`npx wrangler dev --local` or a static
   server over `dist/`) and confirming the visual renders and interacts under `/maths`.
+- **Physics/maths sims must be validated against an invariant, not just "stays finite".**
+  "Doesn't blow up" is NOT a correctness test — the double-pendulum sim once shipped with
+  inconsistent equations that passed a finiteness check while gaining 60% energy in 10 s.
+  For mechanics, check **energy conservation** (integrate at a tiny step, e.g. h = 1e-4,
+  and require |ΔE/E| ≈ 0 — ~1e-9 or better — over many periods; that validates the
+  equations themselves, then characterise drift at the shipping step size). For other
+  domains pick the natural invariant: probability mass sums to 1, cell counts under known
+  patterns (a glider stays 5 cells), known closed-form limits (Monte Carlo π → π at the
+  1/√N rate), symplectic/reversibility checks, etc. Run the invariant test on the code
+  **extracted from the built page**, not a hand-copy. Also use **real units and real time**
+  (SI lengths, wall-clock-paced fixed DT via an accumulator — never per-frame steps, which
+  make speed depend on the display's refresh rate; scale to pixels only when drawing).
 
 Deliver the component/asset plus a note on how it was built and how to regenerate it.
