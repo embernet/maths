@@ -211,11 +211,24 @@ const jsonLd = {
     <!-- Service worker registration -->
     <script>
       if ('serviceWorker' in navigator) {
+        // When an updated service worker takes control (skipWaiting + claim),
+        // reload once so the page immediately reflects the new version instead
+        // of showing content served by the previous worker. Guarded so it can
+        // never loop, and skipped on the very first install (controller was null).
+        var hadController = !!navigator.serviceWorker.controller;
+        var reloaded = false;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!hadController || reloaded) return;
+          reloaded = true;
+          window.location.reload();
+        });
         window.addEventListener('load', () => {
           var base = window.__BASE__ || '/';
-          navigator.serviceWorker.register(base + 'sw.js', { scope: base }).catch(() => {
-            // SW registration failed — silently degrade.
-          });
+          navigator.serviceWorker.register(base + 'sw.js', { scope: base })
+            .then((reg) => { if (reg && reg.update) reg.update(); }) // check for a new worker right away
+            .catch(() => {
+              // SW registration failed — silently degrade.
+            });
         });
       }
     </script>
