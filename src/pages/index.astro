@@ -56,13 +56,13 @@ for (const slug of yearSections) {
       <!-- When Silas has written the welcome MDX we render it via the section below -->
       <div class="welcome-prose prose-content">
         <h1>Mathematics Companion</h1>
-        <p class="tagline">A friendly map of mathematics — from foundations to advanced topics.</p>
+        <p class="tagline">A map of mathematics — from foundations to advanced topics.</p>
         <!-- MDX content rendered separately via the mdx route below -->
       </div>
     ) : (
       <div class="welcome-prose prose-content">
         <h1>Mathematics Companion</h1>
-        <p class="tagline">A friendly map of mathematics — from foundations to advanced topics.</p>
+        <p class="tagline">A map of mathematics — from foundations to advanced topics.</p>
         <p>
           Use the navigation above to explore topics by year, browse
           the <a href="/mathematicians">mathematicians</a> who built the subject,
@@ -72,7 +72,7 @@ for (const slug of yearSections) {
     )}
 
     {cards.length > 0 && (
-      <section class="section-grid-wrapper prose-content" aria-label="Curriculum sections">
+      <section class="section-grid-wrapper prose-content" aria-label="Topic sections">
         <h2 class="section-grid-heading">Browse by year</h2>
         <div class="section-grid">
           {cards.map((card) => (

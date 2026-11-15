@@ -58,7 +58,7 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
   <image href="${logoDataUri}" x="90" y="115" width="400" height="400"/>
   <text x="560" y="300" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700" fill="${CREAM}">Mathematics</text>
   <text x="560" y="398" font-family="Georgia, 'Times New Roman', serif" font-size="88" font-weight="700" fill="${CREAM}">Companion</text>
-  <text x="562" y="470" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#9fb4c4">A friendly map of mathematics</text>
+  <text x="562" y="470" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#9fb4c4">A map of mathematics</text>
 </svg>`;
 await sharp(Buffer.from(ogSvg)).png().toFile(publicDir + 'og-image.png');
 

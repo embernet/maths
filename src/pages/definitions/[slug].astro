@@ -6,6 +6,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import { renderTitleMath, stripTitleMath } from '../../lib/render-title-math.mjs';
 
 const defsDir = join(process.cwd(), 'content/95-definitions');
 
@@ -78,18 +79,18 @@ function pageDisplayName(p: string): string {
 }
 ---
 
-<BaseLayout title={title} description={summary ?? `Definition of ${title}`}>
+<BaseLayout title={stripTitleMath(title)} description={summary ?? `Definition of ${stripTitleMath(title)}`}>
   <div class="prose-content definition-page">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span aria-hidden="true"> › </span>
       <a href="/95-definitions">Definitions</a>
       <span aria-hidden="true"> › </span>
-      <span aria-current="page">{title}</span>
+      <span aria-current="page" set:html={renderTitleMath(title)} />
     </nav>
 
     <header class="definition-header">
-      <h1>{title}</h1>
+      <h1 set:html={renderTitleMath(title)}></h1>
       <div class="definition-meta">
         {tags.map((tag) => <span class="tag-pill">{tag}</span>)}
       </div>

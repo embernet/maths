@@ -5,6 +5,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename, extname } from 'node:path';
+import { renderTitleMath } from '../../lib/render-title-math.mjs';
 
 const dir = join(process.cwd(), 'content/95-definitions');
 
@@ -53,7 +54,7 @@ const letters = Object.keys(groups).sort();
         <h2>{l}</h2>
         <ul class="def-list">
           {groups[l].map((it) => (
-            <li><a href={`/definitions/${it.slug}`}>{it.title}</a></li>
+            <li><a href={`/definitions/${it.slug}`} set:html={renderTitleMath(it.title)} /></li>
           ))}
         </ul>
       </section>

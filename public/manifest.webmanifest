@@ -1,7 +1,7 @@
 {
   "name": "Mathematics Companion",
   "short_name": "Maths Companion",
-  "description": "A friendly map of mathematics — from foundations to advanced topics.",
+  "description": "A map of mathematics — from foundations to advanced topics.",
   "start_url": "/maths/",
   "scope": "/maths/",
   "display": "standalone",
