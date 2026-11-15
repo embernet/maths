@@ -1,5 +1,5 @@
 /**
- * sw.js — Service Worker for The Mathematics Companion.
+ * sw.js — Service Worker for Mathematics Companion.
  *
  * Strategy: stale-while-revalidate for all cached resources.
  * Caches the app shell on install, then caches each visited page.

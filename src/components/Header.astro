@@ -12,7 +12,7 @@ import { join } from 'node:path';
 const siteConfigPath = join(process.cwd(), 'content/_site.json');
 interface NavGroup { label: string; id: string; blurb?: string; children: string[]; }
 type NavEntry = string | NavGroup;
-let siteConfig: { title?: string; navigation_order?: NavEntry[] } = { title: 'The Mathematics Companion', navigation_order: [] };
+let siteConfig: { title?: string; navigation_order?: NavEntry[] } = { title: 'Mathematics Companion', navigation_order: [] };
 if (existsSync(siteConfigPath)) {
   try { siteConfig = JSON.parse(readFileSync(siteConfigPath, 'utf8')); } catch { /* use default */ }
 }
@@ -164,9 +164,9 @@ for (const item of navItems) {
     </button>
 
     <!-- Logo / site title -->
-    <a href="/" class="site-logo" aria-label="Home — The Mathematics Companion">
-      <span class="logo-symbol" aria-hidden="true">∑</span>
-      <span class="logo-text">Maths Companion</span>
+    <a href="/" class="site-logo" aria-label="Home — Mathematics Companion">
+      <img class="logo-mark" src="/icons/icon-64.png" width="32" height="32" alt="" aria-hidden="true" />
+      <span class="logo-text">Mathematics Companion</span>
     </a>
 
     <!-- Desktop chip nav (slim row; supplementary to hamburger overlay) -->
@@ -646,10 +646,12 @@ for (const item of navItems) {
     flex-shrink: 0;
     order: 1;
   }
-  .logo-symbol {
-    font-size: 1.5rem;
-    line-height: 1;
-    color: var(--color-accent);
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    display: block;
+    border-radius: 6px;
+    flex-shrink: 0;
   }
   .logo-text {
     font-family: var(--font-serif);

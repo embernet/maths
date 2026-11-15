@@ -1,4 +1,4 @@
-# Content Contract — The Undergraduate Mathematics Companion
+# Content Contract — Mathematics Companion
 
 This file is the agreement between the **content writers** (who fill `content/`) and the **site builders** (who scaffold `src/`, build configuration, and routing). Both sides work to the schema below.
 
@@ -127,7 +127,7 @@ summary: "After two centuries of brilliant but informal calculus, nineteenth-cen
 
 ```json
 {
-  "title": "The Undergraduate Mathematics Companion",
+  "title": "Mathematics Companion",
   "tagline": "A friendly map of the curriculum a maths undergraduate meets in their first four years.",
   "author_credit": "Compiled for any student arriving with strong A-Level mathematics.",
   "theme": {
