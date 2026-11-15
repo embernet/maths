@@ -10,7 +10,7 @@ mathematicians: []
 reading_time_min: 8
 summary: 'Some of the most lifelike behaviour in all of science comes from no equations at all — just many simple parts following simple local rules. Out of that, structure you never programmed simply appears. This is emergence.'
 theorems: []
-applications: []
+applications: [epidemiological-modelling, traffic-flow-modelling]
 ---
 
 import GameOfLife from '../../../src/components/sims/GameOfLife.astro';
@@ -25,11 +25,11 @@ In **1970**, the mathematician **John Horton Conway** invented the most famous e
 - A living cell with fewer than 2 neighbours dies (loneliness); with more than 3, it dies (overcrowding).
 - A dead cell with **exactly 3** living neighbours **comes alive** (birth).
 
-That is the entire "physics". There is no goal, no randomness, no clever code. And yet:
+That is the entire "physics". There is no goal, no randomness, no clever code. Press **Play** and watch — or draw your own living cells, press **Random** to seed chaos, and **Step** through one generation at a time:
 
 <GameOfLife />
 
-Press **Play**. The glider you start with crawls diagonally across the grid forever. Press **Random** and watch the chaos settle into a zoo of stable blocks, blinking oscillators, and more gliders setting off on journeys. Draw your own patterns and see what they become.
+The glider you start with crawls diagonally across the grid forever. (The grid wraps around at its edges, like the surface of a doughnut, so nothing ever falls off — a shape that leaves one side simply reappears on the other.) Press **Random** and watch the chaos settle into a zoo of stable blocks, blinking oscillators, and more gliders setting off on journeys. Draw your own patterns and see what they become.
 
 What makes the Game of Life profound is not that it is pretty — it is that it is **universal**. With the right starting pattern, the Game of Life can compute *anything a computer can compute*: it is **Turing-complete**. People have built working clocks, counters, and even a simulation of the Game of Life *inside* the Game of Life. All of it emerges from four rules about neighbours. It is the cleanest demonstration ever devised that **complexity does not require a complex cause.**
 
@@ -45,4 +45,4 @@ No bird is the leader; no flock shape is programmed. Yet the boids flock, swirl,
 
 ## Why this matters beyond toys
 
-Emergence is not a curiosity; it is how much of the real world actually works. Ant colonies solve logistics with no manager. Traffic jams appear and travel backwards with no crash to cause them. Markets, immune systems, neurons, and cities all produce large-scale order from local interaction. When a system is too tangled to write one equation for — which is most interesting systems — agent-based simulation is often the only way to see what its simple parts will collectively do.
+Emergence is not a curiosity; it is how much of the real world actually works. Ant colonies solve logistics with no manager. Traffic jams appear and travel backwards with no crash to cause them. Markets, immune systems, neurons, and cities all produce large-scale order from local interaction. When a system is too tangled to write one equation for — which is most interesting systems — agent-based simulation is often the only way to see what its simple parts will collectively do. The same idea — simple local rules making global pattern — drives the stripes and spots of animals, explored in [Turing patterns and animal coats](/97-nature/09-turing-patterns-and-animal-coats).

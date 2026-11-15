@@ -1659,7 +1659,8 @@
     ],
     "appears_in_topics": [
       "03-specialist-areas/06-mathematical-biology",
-      "03-specialist-areas/16-dynamical-systems"
+      "03-specialist-areas/16-dynamical-systems",
+      "97-simulation/01-continuous-and-numerical-integration"
     ],
     "appears_in_eras": [
       "09-modern-mathematics"
@@ -2235,7 +2236,8 @@
     "appears_in_topics": [
       "04-advanced-topics/13-statistical-mechanics",
       "01-foundations/04-probability-and-statistics",
-      "02-core-mathematics/05-probability-and-statistical-inference"
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "97-simulation/02-monte-carlo-and-randomness"
     ],
     "appears_in_eras": [
       "05-the-calculus-revolution"
@@ -2383,7 +2385,8 @@
     ],
     "appears_in_topics": [
       "01-foundations/04-probability-and-statistics",
-      "02-core-mathematics/05-probability-and-statistical-inference"
+      "02-core-mathematics/05-probability-and-statistical-inference",
+      "97-simulation/02-monte-carlo-and-randomness"
     ],
     "appears_in_eras": [
       "06-the-rigour-revolution"

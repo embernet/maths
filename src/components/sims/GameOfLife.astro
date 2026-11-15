@@ -11,8 +11,8 @@ import '../../styles/sims.css';
     Conway's Game of Life. Four rules, applied to every cell at once, produce startling structure. Click or drag to draw living cells.
   </figcaption>
   <div class="sim-stage">
-    <canvas id="gol-canvas" width="480" height="320" role="img"
-      aria-label="A grid of living and dead cells evolving under the Game of Life rules"></canvas>
+    <canvas id="gol-canvas" role="img"
+      aria-label="A grid of living and dead cells evolving under the Game of Life rules. Use the Random, Add glider and Step buttons to populate and advance the grid.">A grid of cells evolving under Conway's Game of Life; this interactive needs JavaScript.</canvas>
   </div>
   <div class="sim-controls">
     <button type="button" id="gol-toggle" class="sim-btn sim-btn-primary">Play</button>
@@ -23,7 +23,7 @@ import '../../styles/sims.css';
     <label class="sim-slider">Speed
       <input type="range" id="gol-speed" min="1" max="30" step="1" value="12" />
     </label>
-    <span class="sim-label" aria-live="polite">gen <span id="gol-gen">0</span></span>
+    <span class="sim-label">gen <span id="gol-gen">0</span></span>
   </div>
   <p class="sim-hint">Rules: a living cell with 2 or 3 living neighbours survives; a dead cell with exactly 3 comes alive; everything else dies.</p>
 </figure>
@@ -34,7 +34,11 @@ import '../../styles/sims.css';
   if (!fig) return;
   var canvas = fig.querySelector('#gol-canvas');
   var ctx = canvas.getContext('2d');
-  var CELL = 8, COLS = canvas.width / CELL, ROWS = canvas.height / CELL;
+  var W = 480, H = 320, CELL = 8, COLS = W / CELL, ROWS = H / CELL;
+  var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.maxWidth = W + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   var genEl = fig.querySelector('#gol-gen');
   var speed = fig.querySelector('#gol-speed');
 
@@ -53,7 +57,7 @@ import '../../styles/sims.css';
   }
   function draw() {
     var c = colors();
-    ctx.fillStyle = c.dead; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = c.dead; ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = c.alive;
     for (var y = 0; y < ROWS; y++)
       for (var x = 0; x < COLS; x++)

@@ -12,9 +12,9 @@ import '../../styles/sims.css';
     Throwing random darts at a square to measure π. Points inside the quarter-circle are gold.
   </figcaption>
   <div class="sim-stage">
-    <canvas id="mc-canvas" width="400" height="400" role="img"
-      aria-label="Random points scattered in a square, coloured by whether they land inside a quarter circle"></canvas>
-    <div class="sim-readout" aria-live="polite">
+    <canvas id="mc-canvas" role="img"
+      aria-label="Random points scattered in a square, coloured by whether they land inside a quarter circle">This interactive estimates π by scattering random points in a square and counting how many fall inside a quarter-circle; it needs JavaScript.</canvas>
+    <div class="sim-readout">
       <div><span class="sim-big" id="mc-estimate">—</span><span class="sim-label">π estimate</span></div>
       <div><span class="sim-big" id="mc-error">—</span><span class="sim-label">error</span></div>
       <div><span class="sim-big" id="mc-total">0</span><span class="sim-label">points</span></div>
@@ -36,37 +36,36 @@ import '../../styles/sims.css';
   if (!fig) return;
   var canvas = fig.querySelector('#mc-canvas');
   var ctx = canvas.getContext('2d');
-  var W = canvas.width, H = canvas.height;
+  var W = 400, H = 400; // logical drawing size
+  var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.maxWidth = W + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
   var estEl = fig.querySelector('#mc-estimate');
   var errEl = fig.querySelector('#mc-error');
   var totEl = fig.querySelector('#mc-total');
   var toggleBtn = fig.querySelector('#mc-toggle');
-  var addBtn = fig.querySelector('#mc-add');
-  var resetBtn = fig.querySelector('#mc-reset');
   var speed = fig.querySelector('#mc-speed');
-
   var inside = 0, total = 0, running = false, raf = null;
 
   function colors() {
     var cs = getComputedStyle(fig);
     return {
       accent: (cs.getPropertyValue('--color-accent') || '#a77b3f').trim(),
+      primary: (cs.getPropertyValue('--color-primary') || '#1a3a52').trim(),
       muted: (cs.getPropertyValue('--color-muted') || '#8a8a8a').trim(),
-      border: (cs.getPropertyValue('--color-border') || '#ccc').trim(),
       bg: (cs.getPropertyValue('--color-surface') || '#f3f1ec').trim()
     };
   }
   function drawFrame() {
     var c = colors();
     ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = c.border; ctx.lineWidth = 1;
-    ctx.strokeRect(0.5, 0.5, W - 1, H - 1);
+    // quarter-circle boundary in the strong colour so the geometry reads clearly
     ctx.beginPath(); ctx.moveTo(0, H); ctx.arc(0, H, W, -Math.PI / 2, 0, false);
-    ctx.strokeStyle = c.muted; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.strokeStyle = c.primary; ctx.lineWidth = 2; ctx.stroke();
   }
-  function reset() {
-    inside = 0; total = 0; drawFrame(); update();
-  }
+  function reset() { inside = 0; total = 0; drawFrame(); update(); }
   function update() {
     var est = total ? (4 * inside / total) : 0;
     estEl.textContent = total ? est.toFixed(5) : '—';
@@ -81,17 +80,12 @@ import '../../styles/sims.css';
       if (isIn) inside++;
       total++;
       ctx.fillStyle = isIn ? c.accent : c.muted;
-      ctx.globalAlpha = isIn ? 0.8 : 0.35;
+      ctx.globalAlpha = isIn ? 0.85 : 0.3;
       ctx.fillRect(x * W, H - y * H, 2, 2);
     }
-    ctx.globalAlpha = 1;
-    update();
+    ctx.globalAlpha = 1; update();
   }
-  function loop() {
-    if (!running) return;
-    batch(parseInt(speed.value, 10) || 800);
-    raf = requestAnimationFrame(loop);
-  }
+  function loop() { if (!running) return; batch(parseInt(speed.value, 10) || 800); raf = requestAnimationFrame(loop); }
   function setRunning(on) {
     running = on;
     toggleBtn.textContent = on ? 'Pause' : 'Run';
@@ -99,9 +93,8 @@ import '../../styles/sims.css';
     if (on) loop(); else if (raf) cancelAnimationFrame(raf);
   }
   toggleBtn.addEventListener('click', function () { setRunning(!running); });
-  addBtn.addEventListener('click', function () { batch(10000); });
-  resetBtn.addEventListener('click', function () { setRunning(false); reset(); });
-
+  fig.querySelector('#mc-add').addEventListener('click', function () { batch(10000); });
+  fig.querySelector('#mc-reset').addEventListener('click', function () { setRunning(false); reset(); });
   reset();
 })();
 </script>

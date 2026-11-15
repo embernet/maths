@@ -1,8 +1,9 @@
 ---
 /**
- * DoublePendulum.astro — a chaotic double pendulum, integrated with RK4 (no deps).
- * Deterministic yet unpredictable: release a near-identical "twin" and watch the
- * two diverge — sensitive dependence on initial conditions, made visible.
+ * DoublePendulum.astro — a chaotic double pendulum (no deps).
+ * Deterministic yet unpredictable: release a near-identical "twin" to see
+ * sensitive dependence on initial conditions. Switch RK4 ↔ Euler to see why
+ * the integration method matters (Euler visibly pumps in energy).
  */
 import '../../styles/sims.css';
 ---
@@ -11,18 +12,19 @@ import '../../styles/sims.css';
     A double pendulum. The motion is completely determined by the laws of physics — yet impossible to predict for long. Release a near-identical twin to see why.
   </figcaption>
   <div class="sim-stage">
-    <canvas id="dp-canvas" width="420" height="380" role="img"
-      aria-label="A double pendulum swinging chaotically, with a fading trace of the lower bob"></canvas>
+    <canvas id="dp-canvas" role="img"
+      aria-label="A double pendulum swinging chaotically, with a fading trace of the lower bob">A double pendulum swinging under gravity; this interactive needs JavaScript.</canvas>
   </div>
   <div class="sim-controls">
     <button type="button" id="dp-toggle" class="sim-btn sim-btn-primary">Play</button>
     <button type="button" id="dp-twin" class="sim-btn">Release a twin</button>
+    <button type="button" id="dp-method" class="sim-btn" aria-label="Integration method">Method: RK4</button>
     <button type="button" id="dp-reset" class="sim-btn">Reset</button>
     <label class="sim-slider">Gravity
       <input type="range" id="dp-grav" min="0.1" max="2" step="0.05" value="1" />
     </label>
   </div>
-  <p class="sim-hint">The twin starts just 0.001 radian away from the original. For a while they move as one — then chaos pulls them apart.</p>
+  <p class="sim-hint">Drag <strong>Gravity</strong> to change the pull; <strong>Reset</strong> to start over. Switch <strong>Method</strong> to crude Euler steps and watch the pendulum wrongly gain energy and fling itself around — a vivid lesson in why the integration method matters.</p>
 </figure>
 
 <script is:inline>
@@ -31,11 +33,18 @@ import '../../styles/sims.css';
   if (!fig) return;
   var canvas = fig.querySelector('#dp-canvas');
   var ctx = canvas.getContext('2d');
-  var W = canvas.width, H = canvas.height;
+  var W = 420, H = 380;
+  var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.maxWidth = W + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
   var OX = W / 2, OY = H * 0.34, L1 = 84, L2 = 84, m1 = 1, m2 = 1;
   var gravEl = fig.querySelector('#dp-grav');
+  var methodBtn = fig.querySelector('#dp-method');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var running = false, raf = null, twin = null, trace = [];
+  var running = false, raf = null, twin = null, trace = [], useRK4 = true;
   function startState() { return [Math.PI / 2 + 0.6, 0, Math.PI / 2 + 0.1, 0]; }
   var s = startState();
 
@@ -51,23 +60,19 @@ import '../../styles/sims.css';
       + (m1 + m2) * (g * Math.sin(t1) * Math.cos(d) - L1 * w1 * w1 * Math.sin(d) - g * Math.sin(t2))) / den2;
     return [w1, a1, w2, a2];
   }
-  function rk4(st, g, h) {
-    function add(a, b, f) { return [a[0] + b[0] * f, a[1] + b[1] * f, a[2] + b[2] * f, a[3] + b[3] * f]; }
-    var k1 = deriv(st, g);
-    var k2 = deriv(add(st, k1, h / 2), g);
-    var k3 = deriv(add(st, k2, h / 2), g);
-    var k4 = deriv(add(st, k3, h), g);
-    return [
-      st[0] + h / 6 * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]),
-      st[1] + h / 6 * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]),
-      st[2] + h / 6 * (k1[2] + 2 * k2[2] + 2 * k3[2] + k4[2]),
-      st[3] + h / 6 * (k1[3] + 2 * k2[3] + 2 * k3[3] + k4[3])
-    ];
+  function add(a, b, f) { return [a[0] + b[0] * f, a[1] + b[1] * f, a[2] + b[2] * f, a[3] + b[3] * f]; }
+  function stepOnce(st, g, h) {
+    if (!useRK4) return add(st, deriv(st, g), h); // crude forward Euler
+    var k1 = deriv(st, g), k2 = deriv(add(st, k1, h / 2), g),
+        k3 = deriv(add(st, k2, h / 2), g), k4 = deriv(add(st, k3, h), g);
+    return [st[0] + h / 6 * (k1[0] + 2 * k2[0] + 2 * k3[0] + k4[0]),
+            st[1] + h / 6 * (k1[1] + 2 * k2[1] + 2 * k3[1] + k4[1]),
+            st[2] + h / 6 * (k1[2] + 2 * k2[2] + 2 * k3[2] + k4[2]),
+            st[3] + h / 6 * (k1[3] + 2 * k2[3] + 2 * k3[3] + k4[3])];
   }
   function pts(st) {
     var x1 = OX + L1 * Math.sin(st[0]), y1 = OY + L1 * Math.cos(st[0]);
-    var x2 = x1 + L2 * Math.sin(st[2]), y2 = y1 + L2 * Math.cos(st[2]);
-    return { x1: x1, y1: y1, x2: x2, y2: y2 };
+    return { x1: x1, y1: y1, x2: x1 + L2 * Math.sin(st[2]), y2: y1 + L2 * Math.cos(st[2]) };
   }
   function colors() {
     var cs = getComputedStyle(fig);
@@ -88,19 +93,20 @@ import '../../styles/sims.css';
   function render() {
     var c = colors();
     ctx.fillStyle = c.bg; ctx.fillRect(0, 0, W, H);
-    // fading trace of the lower bob
-    for (var i = 1; i < trace.length; i++) {
-      ctx.strokeStyle = c.bob; ctx.globalAlpha = i / trace.length * 0.5; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(trace[i - 1][0], trace[i - 1][1]); ctx.lineTo(trace[i][0], trace[i][1]); ctx.stroke();
+    if (!reduce) {
+      for (var i = 1; i < trace.length; i++) {
+        ctx.strokeStyle = c.bob; ctx.globalAlpha = i / trace.length * 0.5; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(trace[i - 1][0], trace[i - 1][1]); ctx.lineTo(trace[i][0], trace[i][1]); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
     }
-    ctx.globalAlpha = 1;
     if (twin) drawArm(pts(twin), c.twin, c.twin);
     drawArm(pts(s), c.rod, c.bob);
   }
   function tick() {
     if (!running) return;
     var g = (parseFloat(gravEl.value) || 1) * 0.6;
-    for (var k = 0; k < 4; k++) { s = rk4(s, g, 0.08); if (twin) twin = rk4(twin, g, 0.08); }
+    for (var k = 0; k < 4; k++) { s = stepOnce(s, g, 0.08); if (twin) twin = stepOnce(twin, g, 0.08); }
     var p = pts(s); trace.push([p.x2, p.y2]); if (trace.length > 220) trace.shift();
     render();
     raf = requestAnimationFrame(tick);
@@ -111,14 +117,16 @@ import '../../styles/sims.css';
     fig.querySelector('#dp-toggle').classList.toggle('is-running', on);
     if (on) raf = requestAnimationFrame(tick); else if (raf) cancelAnimationFrame(raf);
   }
-  function reset() {
-    setRunning(false); s = startState(); twin = null; trace = []; render();
-  }
+  function reset() { setRunning(false); s = startState(); twin = null; trace = []; render(); }
   fig.querySelector('#dp-toggle').addEventListener('click', function () { setRunning(!running); });
   fig.querySelector('#dp-reset').addEventListener('click', reset);
   fig.querySelector('#dp-twin').addEventListener('click', function () {
     twin = [s[0] + 0.001, s[1], s[2], s[3]];
     if (!running) setRunning(true);
+  });
+  methodBtn.addEventListener('click', function () {
+    useRK4 = !useRK4;
+    methodBtn.textContent = 'Method: ' + (useRK4 ? 'RK4' : 'Euler');
   });
   render();
 })();

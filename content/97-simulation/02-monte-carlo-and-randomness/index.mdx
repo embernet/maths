@@ -9,8 +9,8 @@ related: ['00-section-opener']
 mathematicians: []
 reading_time_min: 8
 summary: 'Some problems are too tangled to solve directly — so instead you guess at random, millions of times, and average. This is the Monte Carlo method: born on the Manhattan Project, named after a casino, and the reason randomness is one of computing''s sharpest tools.'
-theorems: []
-applications: []
+theorems: [law-of-large-numbers, central-limit-theorem]
+applications: [protein-folding-alphafold]
 ---
 
 import MonteCarloPi from '../../../src/components/sims/MonteCarloPi.astro';
@@ -23,7 +23,7 @@ He told **John von Neumann**, and the two of them (with **Nicholas Metropolis**,
 
 Here is the whole idea, stripped to its simplest form: **estimating π by throwing darts.**
 
-Picture a square, with a quarter-circle inscribed in it. The square has area 1; the quarter-circle has area π/4. So if you scatter points *uniformly at random* across the square, the fraction that land inside the quarter-circle should be about π/4. Multiply that fraction by 4, and you have an estimate of **π** — computed with nothing but a random-number generator and counting.
+Picture a square one unit wide, with a quarter-circle inscribed in it. The square has area 1; the quarter-circle has area π/4 (a full circle of radius 1 has area π, so a quarter of it is π/4). So if you scatter points *uniformly at random* across the square, the fraction that land inside the quarter-circle should be about π/4. Multiply that fraction by 4, and you have an estimate of **π** — computed with nothing but a random-number generator and counting.
 
 Press **Run** and watch the estimate converge:
 
@@ -41,4 +41,6 @@ That is why Monte Carlo quietly runs the modern world. It prices the options and
 
 Computers are relentlessly deterministic, so the "random" numbers are really **pseudorandom** — produced by a recipe that merely *looks* random. The modern workhorse is the **Mersenne Twister** (Matsumoto & Nishimura, 1997). Crucially, you can **seed** the generator to get the exact same "random" sequence again — which sounds like a flaw but is a gift: it makes a simulation perfectly reproducible, so a result can be checked and debugged.
 
-The reason any of this works is one of the most important theorems in probability: the **law of large numbers**. The average of many independent random samples converges to the true expected value. Monte Carlo is simply that law, put to work.
+The reason any of this works is one of the most important theorems in probability: the **law of large numbers**. The average of many independent random samples converges to the true **expected value** (the long-run average you'd get from infinitely many tries). Monte Carlo is simply that law, put to work.
+
+*Next → [Emergence, agents and cellular automata](/97-simulation/03-emergence-and-cellular-automata): simulations with no equation at all, where order you never programmed simply appears.*

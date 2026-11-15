@@ -9,8 +9,8 @@ related: ['00-section-opener', '02-monte-carlo-and-randomness']
 mathematicians: []
 reading_time_min: 9
 summary: 'Most of the physical world is described by rates of change — differential equations. Simulating it means stepping those rates forward in tiny increments. Do it carelessly and the simulation explodes; do it well and you can still be defeated by chaos.'
-theorems: []
-applications: []
+theorems: [chaos-theory-three-body-problem]
+applications: [weather-forecasting, climate-modelling]
 ---
 
 import DoublePendulum from '../../../src/components/sims/DoublePendulum.astro';
@@ -41,6 +41,8 @@ Press **Play**, let it settle into motion, then press **Release a twin**:
 
 <DoublePendulum />
 
-The twin starts just **one-thousandth of a radian** away from the original — a difference you cannot even see. For a few seconds the two move as one. Then they peel apart and are soon doing utterly different things. This is **sensitive dependence on initial conditions**, the defining feature of **chaos**: tiny uncertainties grow exponentially fast until all predictive power is gone.
+The twin starts just **one-thousandth of a radian** away from the original (a radian is simply a unit of angle) — a difference you cannot even see. For a few seconds the two move as one. Then they peel apart and are soon doing utterly different things. This is **sensitive dependence on initial conditions**, the defining feature of **chaos**: tiny uncertainties grow exponentially fast until all predictive power is gone.
 
 This is not a flaw in the simulation — it is a fact about the system. It is also *why weather forecasting is fundamentally probabilistic*. The atmosphere is chaotic, so a single forecast from a single best-guess starting state is worthless beyond a few days. Instead, forecasters run the model dozens of times from slightly different starting states — an **ensemble** — and report the *spread* as a probability. Chaos is the reason your weather app says "60% chance of rain" instead of "rain". The humble double pendulum and the global forecast are the same mathematics, at different scales.
+
+*Next → [Monte Carlo and the power of randomness](/97-simulation/02-monte-carlo-and-randomness): how deliberately **adding** randomness makes impossible problems tractable.*

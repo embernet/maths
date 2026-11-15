@@ -14813,9 +14813,39 @@
       "type": "related"
     },
     {
+      "source": "topic:97-simulation/01-continuous-and-numerical-integration",
+      "target": "theorem:chaos-theory-three-body-problem",
+      "type": "appears-in"
+    },
+    {
+      "source": "topic:97-simulation/01-continuous-and-numerical-integration",
+      "target": "application:weather-forecasting",
+      "type": "applies-to"
+    },
+    {
+      "source": "topic:97-simulation/01-continuous-and-numerical-integration",
+      "target": "application:climate-modelling",
+      "type": "applies-to"
+    },
+    {
       "source": "topic:97-simulation/02-monte-carlo-and-randomness",
       "target": "topic:97-simulation/00-section-opener",
       "type": "related"
+    },
+    {
+      "source": "topic:97-simulation/02-monte-carlo-and-randomness",
+      "target": "theorem:law-of-large-numbers",
+      "type": "appears-in"
+    },
+    {
+      "source": "topic:97-simulation/02-monte-carlo-and-randomness",
+      "target": "theorem:central-limit-theorem",
+      "type": "appears-in"
+    },
+    {
+      "source": "topic:97-simulation/02-monte-carlo-and-randomness",
+      "target": "application:protein-folding-alphafold",
+      "type": "applies-to"
     },
     {
       "source": "topic:97-simulation/03-emergence-and-cellular-automata",
@@ -14826,6 +14856,16 @@
       "source": "topic:97-simulation/03-emergence-and-cellular-automata",
       "target": "topic:97-simulation/01-continuous-and-numerical-integration",
       "type": "related"
+    },
+    {
+      "source": "topic:97-simulation/03-emergence-and-cellular-automata",
+      "target": "application:epidemiological-modelling",
+      "type": "applies-to"
+    },
+    {
+      "source": "topic:97-simulation/03-emergence-and-cellular-automata",
+      "target": "application:traffic-flow-modelling",
+      "type": "applies-to"
     }
   ]
 }
