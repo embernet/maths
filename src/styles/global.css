@@ -33,7 +33,24 @@ html {
   background: var(--color-bg);
   color: var(--color-text);
   scroll-behavior: smooth;
+  /* Reserve the scrollbar gutter permanently, so navigating between long and
+     short pages never shifts the layout horizontally. */
+  scrollbar-gutter: stable;
 }
+
+/* Cross-document view transitions (progressive enhancement; browsers without
+   support simply ignore this). Naming the fixed chrome gives each element its
+   own snapshot: identical before/after, so the header, sidebar and footer
+   appear rock-solid across navigation while only the content changes. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+.site-header { view-transition-name: site-header; }
+.left-sidebar { view-transition-name: left-sidebar; }
+.sidebar-resizer { view-transition-name: sidebar-resizer; }
+.site-footer { view-transition-name: site-footer; }
 
 @media (min-width: 768px) {
   html { font-size: 19px; }
