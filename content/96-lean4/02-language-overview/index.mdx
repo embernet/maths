@@ -92,7 +92,7 @@ The essential tactics:
 
 **`ring`** — proves ring identities (equalities in any commutative ring) by normalisation. Will close `(x + y)^2 = x^2 + 2*x*y + y^2` in one line.
 
-**`linarith`** — proves linear arithmetic goals (inequalities and equalities over ordered fields/rings) by Fourier-Motzkin elimination. Will close `a ≤ b → b ≤ c → a ≤ c`.
+**`linarith`** — proves linear arithmetic goals (inequalities and equalities over ordered fields/rings) by Fourier–Motzkin elimination (a systematic way of eliminating variables from a system of linear inequalities). Will close `a ≤ b → b ≤ c → a ≤ c`.
 
 **`omega`** — an arithmetic decision procedure for goals over `Nat` and `Int` involving `+`, `-`, `*` by constants, and `%`. Stronger than `linarith` in the natural-number setting.
 

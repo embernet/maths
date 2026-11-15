@@ -17,7 +17,7 @@ The sum of the first $n + 1$ natural numbers (from $0$ to $n$) satisfies:
 
 $$2 \cdot \sum_{i=0}^{n} i = n \cdot (n + 1).$$
 
-The story that nine-year-old Carl Friedrich [Gauss](https://leanprover-community.github.io) instantly computed $1 + 2 + \cdots + 100 = 5050$ by pairing numbers from both ends is almost certainly apocryphal, but the formula is real and the proof by induction is a standard exercise. In Lean, we use `Finset.range` and `Finset.sum` to represent $\sum_{i=0}^{n} i$ rigorously.
+The story that nine-year-old Carl Friedrich [Gauss](/mathematicians/gauss) instantly computed $1 + 2 + \cdots + 100 = 5050$ by pairing numbers from both ends is almost certainly apocryphal, but the formula is real and the proof by induction is a standard exercise. In Lean, we use `Finset.range` and `Finset.sum` to represent $\sum_{i=0}^{n} i$ rigorously.
 
 ```lean
 theorem gauss_sum (n : Nat) : 2 * (∑ i in Finset.range (n + 1), i) = n * (n + 1)

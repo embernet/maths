@@ -136,8 +136,13 @@ from scipy.optimize import brentq, minimize
 # Solve cos(x) = x in [0, 1]
 root = brentq(lambda x: np.cos(x) - x, 0, 1)
 print(root)   # 0.7390851332151606 (the Dottie number)
+# The Dottie number is the single real solution of cos(x) = x. The name is a
+# joke: a professor's wife, Dottie, noticed her calculator always drifted to
+# this value when she kept pressing the cosine key.
 
-# Minimise the Rosenbrock function
+# Minimise the Rosenbrock function (Rosenbrock, 1960): the classic
+# "banana-shaped" test function whose long curved valley makes naive
+# descent methods struggle — a standard torture test for optimisers.
 def rosenbrock(p):
     x, y = p
     return (1 - x)**2 + 100 * (y - x**2)**2
@@ -221,6 +226,8 @@ print(pi_est)   # ~3.1414...
 ```
 
 This is the kind of computation NumPy was built for: ten million points in a fraction of a second, three lines of code, no explicit loops.
+
+Computing a number by throwing random points at a problem and averaging is called **Monte Carlo**, after the casino in Monaco — the method was devised at Los Alamos in the 1940s by Stanisław Ulam and John von Neumann, and named by Nicholas Metropolis for the way it leans on chance, like gambling.
 
 ## When NumPy is not enough
 

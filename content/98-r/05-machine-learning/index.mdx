@@ -26,7 +26,7 @@ This page tours the modern R ML stack. If you have read [scikit-learn for Python
 | K-nearest neighbours | `class::knn` | |
 | K-means / hierarchical clustering | `stats::kmeans`, `stats::hclust` | Base R |
 | Principal components | `stats::prcomp` | Base R |
-| Decision trees | `rpart` | Classic CART implementation |
+| Decision trees | `rpart` | Classic CART (Classification And Regression Trees) implementation |
 | Naive Bayes | `naivebayes`, `e1071` | |
 | Neural networks (small) | `nnet` | Single hidden layer |
 | Deep learning | `torch`, `keras` | R interfaces to PyTorch and TensorFlow |
@@ -204,7 +204,7 @@ R's strong suit: a long tradition of model interpretation tools.
 
 - `broom::tidy()` and `broom::glance()` — turn any model into a tidy data frame of estimates/diagnostics.
 - `ggeffects` / `effects` — marginal-effect plots.
-- `DALEX` and `iml` — model-agnostic interpretability (SHAP-style explanations, partial-dependence plots, permutation importance).
+- `DALEX` and `iml` — model-agnostic interpretability (SHAP — SHapley Additive exPlanations — explanations, partial-dependence plots, permutation importance).
 
 ```r
 library(broom)

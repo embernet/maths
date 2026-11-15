@@ -175,7 +175,7 @@ fit <- lm(y ~ x1 + x2 + x1:x2, data = my_data)
 | `y ~ .` | all variables in the data frame |
 | `y ~ poly(x, 3)` | cubic polynomial in $x$ |
 | `y ~ s(x)` | smooth spline in $x$ (with `mgcv` package) |
-| `y ~ x + (1 | group)` | random intercept by group (with `lme4`) |
+| `y ~ x + (1 \| group)` | random intercept by group (with `lme4`) |
 
 The formula gets compiled into a **model matrix** at model-fitting time. The same formula syntax is used by `lm`, `glm`, `lme4::lmer`, `survival::coxph`, `ggplot2::stat_smooth`, and dozens of other functions — that consistency is the reason R is so productive for statistical modelling.
 
@@ -247,7 +247,7 @@ R has two pipe operators. The newer, **native** pipe is `|>` (R 4.1+):
 mtcars |> filter(mpg > 25) |> select(mpg, cyl, wt)
 ```
 
-The older, **magrittr** pipe is `%>%`. Both pass the left-hand value as the first argument to the right-hand function. Use whichever — they are nearly interchangeable for everyday work.
+The older, **magrittr** pipe is `%>%`. Both pass the left-hand value as the first argument to the right-hand function. Use whichever — they are nearly interchangeable for everyday work. (The package is named after René Magritte's painting *The Treachery of Images* — a drawing of a pipe captioned "Ceci n'est pas une pipe", "This is not a pipe" — a pun on its providing a pipe operator.)
 
 ## What this gets you
 
