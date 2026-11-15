@@ -8,14 +8,14 @@
  *
  * Model: array of { url, title, ts, count }, most recent first, deduped by
  * url (a revisit moves the entry to the top, bumps count, refreshes ts).
- * Capped at MAX entries. See docs/ENGINEERING_GUIDE.md for the store pattern.
+ * Capped at MAX (1024) entries. See docs/ENGINEERING_GUIDE.md for the store pattern.
  */
 ---
 <script is:inline>
 (function () {
   if (window.mcHistory) return;
   var KEY = 'mc-history';
-  var MAX = 200;
+  var MAX = 1024;
   var subs = [];
 
   function read() {
