@@ -18,6 +18,7 @@ import { join, basename, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import yaml from 'js-yaml';
 import { withBase } from '../lib/site-config.mjs';
+import { renderTitleMath } from '../lib/render-title-math.mjs';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = join(__dirname, '..', '..');
@@ -320,6 +321,18 @@ for (const entry of topLevelEntries) {
         summary: fm.summary ?? '',
         forthcoming: false,
       });
+
+      // Index definitions for search too (the glossary is what people look up).
+      records.push({
+        title: fm.title,
+        section: 'Definitions',
+        slug,
+        kind: 'definition',
+        summary: fm.summary ?? '',
+        tags: Array.isArray(fm.tags) ? fm.tags : [],
+        mathematicians: [],
+        url,
+      });
     }
     continue;
   }
@@ -548,9 +561,13 @@ for (const slug of Object.keys(backlinks)) {
   }
 }
 
-// Prefix every record URL with the deployment base (served under a sub-path).
+// Prefix every record URL with the deployment base (served under a sub-path),
+// and pre-render KaTeX for any title containing inline math so the search
+// dropdown shows "ε–δ" rather than a raw "$\varepsilon$". Only math titles get
+// titleHtml, to keep the index small.
 for (const r of records) {
   if (r.url) r.url = withBase(r.url);
+  if (r.title && r.title.includes('$')) r.titleHtml = renderTitleMath(r.title);
 }
 
 writeFileSync(outputFile, JSON.stringify(records, null, 2), 'utf8');

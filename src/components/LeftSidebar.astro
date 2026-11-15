@@ -359,6 +359,14 @@ function isCurrentGroup(g: SidebarGroup): boolean {
     })}
   </nav>
 </aside>
+<div
+  class="sidebar-resizer no-print"
+  role="separator"
+  aria-orientation="vertical"
+  aria-label="Resize navigation sidebar"
+  tabindex="0"
+  title="Drag to resize · double-click to reset"
+></div>
 
 <script is:inline>
 (function() {
@@ -393,12 +401,70 @@ function isCurrentGroup(g: SidebarGroup): boolean {
       toggle(btn, 'data-group-id');
     });
   });
+
+  // ---- Resizable width (persisted) ----
+  var root = document.documentElement;
+  var resizer = document.querySelector('.sidebar-resizer');
+  var MIN = 160, MAX = 480, DEFAULT = 220, KEY = 'mc-sidebar-width';
+
+  function applyWidth(px) {
+    var w = Math.max(MIN, Math.min(MAX, Math.round(px)));
+    root.style.setProperty('--sidebar-w', w + 'px');
+    return w;
+  }
+  function currentWidth() {
+    return parseInt(root.style.getPropertyValue('--sidebar-w'), 10) || DEFAULT;
+  }
+  function persist() {
+    try { localStorage.setItem(KEY, String(currentWidth())); } catch (e) {}
+  }
+  try {
+    var saved = parseInt(localStorage.getItem(KEY) || '', 10);
+    if (saved) applyWidth(saved);
+  } catch (e) {}
+
+  if (resizer) {
+    var dragging = false;
+    function move(clientX) { applyWidth(clientX - sidebar.getBoundingClientRect().left); }
+    function start(e) {
+      dragging = true;
+      resizer.classList.add('dragging');
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'col-resize';
+      if (e.cancelable) e.preventDefault();
+    }
+    function end() {
+      if (!dragging) return;
+      dragging = false;
+      resizer.classList.remove('dragging');
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+      persist();
+    }
+    resizer.addEventListener('mousedown', start);
+    document.addEventListener('mousemove', function(e) { if (dragging) move(e.clientX); });
+    document.addEventListener('mouseup', end);
+    resizer.addEventListener('touchstart', start, { passive: false });
+    document.addEventListener('touchmove', function(e) { if (dragging && e.touches[0]) move(e.touches[0].clientX); }, { passive: false });
+    document.addEventListener('touchend', end);
+    resizer.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') applyWidth(currentWidth() - 16);
+      else if (e.key === 'ArrowRight') applyWidth(currentWidth() + 16);
+      else return;
+      e.preventDefault();
+      persist();
+    });
+    resizer.addEventListener('dblclick', function() {
+      applyWidth(DEFAULT);
+      try { localStorage.removeItem(KEY); } catch (e) {}
+    });
+  }
 })();
 </script>
 
 <style>
   .left-sidebar {
-    width: 220px;
+    width: var(--sidebar-w, 220px);
     flex-shrink: 0;
     position: sticky;
     top: calc(var(--header-h) + 1rem);
@@ -414,6 +480,36 @@ function isCurrentGroup(g: SidebarGroup): boolean {
 
   @media (min-width: 1024px) {
     .left-sidebar { display: block; }
+  }
+
+  /* Drag handle to resize the sidebar (desktop only) */
+  .sidebar-resizer { display: none; }
+  @media (min-width: 1024px) {
+    .sidebar-resizer {
+      display: block;
+      flex: 0 0 auto;
+      width: 8px;
+      margin: 0 -3px;           /* overlap the border for a comfortable grab target */
+      cursor: col-resize;
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+      height: calc(100vh - var(--header-h) - 2rem);
+      z-index: 6;
+      background: transparent;
+      transition: background 0.12s ease;
+    }
+    .sidebar-resizer::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      background: transparent;
+    }
+    .sidebar-resizer:hover::before,
+    .sidebar-resizer.dragging::before { background: var(--color-accent); }
+    .sidebar-resizer:focus-visible { outline: 2px solid var(--color-accent); outline-offset: -2px; }
   }
 
   .left-sidebar::-webkit-scrollbar { width: 4px; }
