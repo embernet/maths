@@ -39,6 +39,17 @@ history, biology, other fields, and genuinely cool ideas — don't just restate 
   `SITE_ORIGIN` in `src/lib/site-config.mjs`.
 - **Icons/branding** are generated from `brand/logo-master.png` via `tools/generate-icons.mjs`.
 
+## Engineering principles — see `docs/ENGINEERING_GUIDE.md`
+
+Follow SOLID, DRY, and separation of concerns. **Never copy a helper into a
+second file** — share it: build-time logic in `src/lib/*.mjs` (import it, e.g.
+`tagSlug`); client-side logic as a `window.mc*` API defined once in a component
+in `BaseLayout` (`window.mcDialog`, `window.mcBookmarks`, `window.mcUtil`). All
+`<script is:inline>` blocks share the page scope, so helper names and element ids
+must be unique/prefixed (two `normalize()` in one scope silently broke search).
+Keep data/model, rendering, and event wiring separate; test interactive client
+code in a headless DOM (`linkedom`) before shipping.
+
 ## UI conventions
 
 - **Never use the browser's `alert()` / `confirm()` / `prompt()`** (or any native

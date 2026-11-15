@@ -44,35 +44,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <script is:inline>
 (function () {
-  var BM_KEY = 'mc-bookmarks';
   var root = document.getElementById('bm-root');
   var emptyEl = document.getElementById('bm-empty');
   var clearBtn = document.getElementById('bm-clear');
-  if (!root) return;
-
-  function normalize(raw) {
-    if (Array.isArray(raw)) return { folders: [], bookmarks: raw.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: null }; }) };
-    if (raw && typeof raw === 'object' && Array.isArray(raw.bookmarks)) {
-      return {
-        folders: Array.isArray(raw.folders) ? raw.folders : [],
-        bookmarks: raw.bookmarks.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: b.folder != null ? b.folder : null }; })
-      };
-    }
-    return { folders: [], bookmarks: [] };
-  }
-  function read() { try { return normalize(JSON.parse(localStorage.getItem(BM_KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
-  function write(d) { try { localStorage.setItem(BM_KEY, JSON.stringify({ version: 2, folders: d.folders, bookmarks: d.bookmarks })); } catch (e) {} }
-  function esc(s) { return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  var store = window.mcBookmarks;            // single source of truth (BookmarksStore.astro)
+  if (!root || !store) return;
+  var esc = window.mcUtil.escapeHtml;        // shared util — no local copy
   function fmtDate(ts) { if (!ts) return ''; try { return new Date(ts).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (e) { return ''; } }
-  function newId() { return 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
-  function folderName(d, id) { var f = d.folders.find(function (x) { return x.id === id; }); return f ? f.name : null; }
-
-  function moveTo(url, folderId) {
-    var d = read();
-    var b = d.bookmarks.find(function (x) { return x.url === url; });
-    if (b) { b.folder = folderId || null; write(d); render(); }
-  }
-  function removeBookmark(url) { var d = read(); write({ folders: d.folders, bookmarks: d.bookmarks.filter(function (b) { return b.url !== url; }) }); render(); }
 
   function itemHtml(d, b) {
     var date = fmtDate(b.ts);
@@ -103,7 +81,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   function render() {
-    var d = read();
+    var d = store.read();
     var totalEmpty = d.bookmarks.length === 0 && d.folders.length === 0;
     emptyEl.hidden = !totalEmpty;
     clearBtn.hidden = d.bookmarks.length === 0 && d.folders.length === 0;
@@ -122,36 +100,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   // ---- Interactions ----
   root.addEventListener('click', function (e) {
     var t = e.target;
-    var rm = t.closest && t.closest('.bm-remove'); if (rm) { removeBookmark(rm.getAttribute('data-url')); return; }
+    var rm = t.closest && t.closest('.bm-remove'); if (rm) { store.remove(rm.getAttribute('data-url')); return; }
     var bmRn = t.closest && t.closest('.bm-rename');
     if (bmRn) {
-      var bUrl = bmRn.getAttribute('data-url'); var dd = read();
-      var bk = dd.bookmarks.find(function (x) { return x.url === bUrl; });
+      var bUrl = bmRn.getAttribute('data-url');
+      var bk = store.list().find(function (x) { return x.url === bUrl; });
       if (bk) {
         window.mcDialog.prompt('Rename this bookmark', { title: 'Rename bookmark', defaultValue: bk.title, okText: 'Rename' }).then(function (nm) {
-          if (nm && nm.trim()) { bk.title = nm.trim(); write(dd); render(); }
+          if (nm && nm.trim()) store.rename(bUrl, nm.trim());
         });
       }
       return;
     }
     var rn = t.closest && t.closest('[data-rename]');
     if (rn) {
-      var d = read(); var f = d.folders.find(function (x) { return x.id === rn.getAttribute('data-rename'); });
+      var fid = rn.getAttribute('data-rename');
+      var f = store.folders().find(function (x) { return x.id === fid; });
       if (f) {
         window.mcDialog.prompt('Rename this folder', { title: 'Rename folder', defaultValue: f.name, okText: 'Rename' }).then(function (nm) {
-          if (nm && nm.trim()) { f.name = nm.trim(); write(d); render(); }
+          if (nm && nm.trim()) store.renameFolder(fid, nm.trim());
         });
       }
       return;
     }
     var del = t.closest && t.closest('[data-delete]');
     if (del) {
-      var id = del.getAttribute('data-delete'); var d2 = read();
+      var id = del.getAttribute('data-delete');
       window.mcDialog.confirm('Delete this folder? Its bookmarks move back to Unfiled.', { title: 'Delete folder', okText: 'Delete' }).then(function (ok) {
-        if (!ok) return;
-        d2.bookmarks.forEach(function (b) { if (b.folder === id) b.folder = null; });
-        d2.folders = d2.folders.filter(function (x) { return x.id !== id; });
-        write(d2); render();
+        if (ok) store.deleteFolder(id);
       });
     }
   });
@@ -179,25 +155,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     var ul = e.target.closest && e.target.closest('.bm-list'); if (!ul) return;
     e.preventDefault(); ul.classList.remove('drop-over');
     var url = dragUrl || (e.dataTransfer && e.dataTransfer.getData('text/plain'));
-    if (url) moveTo(url, ul.getAttribute('data-drop-folder'));
+    if (url) store.move(url, ul.getAttribute('data-drop-folder'));
   });
 
   // ---- Toolbar ----
   document.getElementById('bm-new-folder').addEventListener('click', function () {
     window.mcDialog.prompt('Name for the new folder', { title: 'New folder', placeholder: 'e.g. Analysis', okText: 'Create' }).then(function (name) {
-      if (!name || !name.trim()) return;
-      var d = read(); d.folders.push({ id: newId(), name: name.trim() }); write(d); render();
+      if (name && name.trim()) store.addFolder(name.trim());
     });
   });
   clearBtn.addEventListener('click', function () {
     window.mcDialog.confirm('Remove all bookmarks and folders from this browser?', { title: 'Clear all', okText: 'Clear all' }).then(function (ok) {
-      if (ok) { write({ folders: [], bookmarks: [] }); render(); }
+      if (ok) store.clear();
     });
   });
   document.getElementById('bm-save-html').addEventListener('click', exportHtml);
 
   function exportHtml() {
-    var d = read();
+    var d = store.read();
     if (!d.bookmarks.length) { window.mcDialog.alert('You have no bookmarks to export yet.', { title: 'Nothing to export' }); return; }
     var groups = [{ name: 'Unfiled', items: d.bookmarks.filter(function (b) { return b.folder == null; }) }];
     d.folders.forEach(function (f) { groups.push({ name: f.name, items: d.bookmarks.filter(function (b) { return b.folder === f.id; }) }); });
@@ -225,7 +200,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
 
-  window.addEventListener('storage', function (e) { if (e.key === BM_KEY) render(); });
+  // Re-render on any change (this tab's edits via the store, and other tabs).
+  store.onChange(render);
   render();
 })();
 </script>

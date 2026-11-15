@@ -1,0 +1,77 @@
+---
+/**
+ * BookmarksStore.astro — the single source of truth for bookmarks
+ * (window.mcBookmarks) plus small shared client utilities (window.mcUtil).
+ *
+ * Included once in BaseLayout's <head> so it is defined before any header or
+ * page script runs. Pages and the header MUST go through this API rather than
+ * re-implementing the localStorage model — see docs/ENGINEERING_GUIDE.md.
+ * (Duplicating the model is what caused the search/bookmarks name collision.)
+ *
+ * Model: { version:2, folders:[{id,name}], bookmarks:[{url,title,ts,folder}] }
+ * (folder === null means unfiled). Legacy plain-array saves are migrated on read.
+ */
+---
+<script is:inline>
+(function () {
+  if (window.mcBookmarks) return;
+  var KEY = 'mc-bookmarks';
+  var subs = [];
+
+  function normalize(raw) {
+    if (Array.isArray(raw)) {
+      return { folders: [], bookmarks: raw.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: null }; }) };
+    }
+    if (raw && typeof raw === 'object' && Array.isArray(raw.bookmarks)) {
+      return {
+        folders: Array.isArray(raw.folders) ? raw.folders : [],
+        bookmarks: raw.bookmarks.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: b.folder != null ? b.folder : null }; })
+      };
+    }
+    return { folders: [], bookmarks: [] };
+  }
+  function read() { try { return normalize(JSON.parse(localStorage.getItem(KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
+  function write(d) { try { localStorage.setItem(KEY, JSON.stringify({ version: 2, folders: d.folders, bookmarks: d.bookmarks })); } catch (e) {} notify(); }
+  function notify() { subs.forEach(function (cb) { try { cb(); } catch (e) {} }); }
+  function newId() { return 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function find(d, url) { return d.bookmarks.find(function (b) { return b.url === url; }); }
+
+  window.mcBookmarks = {
+    read: read,
+    list: function () { return read().bookmarks; },
+    folders: function () { return read().folders; },
+    count: function () { return read().bookmarks.length; },
+    isSaved: function (url) { return read().bookmarks.some(function (b) { return b.url === url; }); },
+    // Add if absent, remove if present. Returns the new saved state.
+    toggle: function (url, title) {
+      var d = read(); var i = d.bookmarks.findIndex(function (b) { return b.url === url; });
+      if (i >= 0) { d.bookmarks.splice(i, 1); write(d); return false; }
+      d.bookmarks.unshift({ url: url, title: title, ts: Date.now(), folder: null }); write(d); return true;
+    },
+    remove: function (url) { var d = read(); d.bookmarks = d.bookmarks.filter(function (b) { return b.url !== url; }); write(d); },
+    rename: function (url, title) { var d = read(); var b = find(d, url); if (b) { b.title = title; write(d); } },
+    move: function (url, folderId) { var d = read(); var b = find(d, url); if (b) { b.folder = folderId || null; write(d); } },
+    addFolder: function (name) { var d = read(); var id = newId(); d.folders.push({ id: id, name: name }); write(d); return id; },
+    renameFolder: function (id, name) { var d = read(); var f = d.folders.find(function (x) { return x.id === id; }); if (f) { f.name = name; write(d); } },
+    deleteFolder: function (id) {
+      var d = read();
+      d.bookmarks.forEach(function (b) { if (b.folder === id) b.folder = null; });
+      d.folders = d.folders.filter(function (x) { return x.id !== id; });
+      write(d);
+    },
+    clear: function () { write({ folders: [], bookmarks: [] }); },
+    // Subscribe to any change (this tab's writes and cross-tab storage events).
+    onChange: function (cb) { if (typeof cb === 'function') subs.push(cb); }
+  };
+  window.addEventListener('storage', function (e) { if (e.key === KEY) notify(); });
+
+  // Small shared client utilities (reused by header search and the bookmarks page).
+  if (!window.mcUtil) {
+    window.mcUtil = {
+      escapeHtml: function (s) {
+        return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+    };
+  }
+})();
+</script>

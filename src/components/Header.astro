@@ -484,27 +484,23 @@ for (const item of navItems) {
     if (callback) callback();
   }
 
-  function normalize(s) { return (s == null ? '' : String(s)).toLowerCase(); }
-
-  function escapeHtml(s) {
-    return (s == null ? '' : String(s))
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
+  // Search-local lowercaser (named to avoid clashing with anything else in scope).
+  function searchNorm(s) { return (s == null ? '' : String(s)).toLowerCase(); }
 
   // Rank index records against a query. Every query token must appear somewhere;
   // matches in the title outrank tags/people, which outrank the summary.
   function searchIndex(q) {
     if (!searchData) return [];
-    var tokens = normalize(q).split(/\s+/).filter(Boolean);
+    var tokens = searchNorm(q).split(/\s+/).filter(Boolean);
     if (!tokens.length) return [];
     var out = [];
     for (var i = 0; i < searchData.length; i++) {
       var it = searchData[i];
-      var title = normalize(it.title);
-      var section = normalize(it.section);
-      var summary = normalize(it.summary);
-      var tags = normalize((it.tags || []).join(' '));
-      var people = normalize((it.mathematicians || []).join(' '));
+      var title = searchNorm(it.title);
+      var section = searchNorm(it.section);
+      var summary = searchNorm(it.summary);
+      var tags = searchNorm((it.tags || []).join(' '));
+      var people = searchNorm((it.mathematicians || []).join(' '));
       var hay = title + '  ' + tags + '  ' + people + '  ' + section + '  ' + summary;
       var ok = true, score = 0;
       for (var t = 0; t < tokens.length; t++) {
@@ -533,13 +529,13 @@ for (const item of navItems) {
     results.slice(0, 8).forEach(function(r) {
       var li = document.createElement('li');
       li.setAttribute('role', 'option');
-      var kind = r.item.kind ? ' (' + escapeHtml(r.item.kind) + ')' : '';
+      var kind = r.item.kind ? ' (' + window.mcUtil.escapeHtml(r.item.kind) + ')' : '';
       // titleHtml carries KaTeX-rendered math for titles that contain it;
       // otherwise fall back to the escaped plain title.
-      var titleHtml = r.item.titleHtml || escapeHtml(r.item.title);
-      li.innerHTML = '<a href="' + escapeHtml(r.item.url) + '">' +
+      var titleHtml = r.item.titleHtml || window.mcUtil.escapeHtml(r.item.title);
+      li.innerHTML = '<a href="' + window.mcUtil.escapeHtml(r.item.url) + '">' +
         '<span class="result-title">' + titleHtml + kind + '</span>' +
-        '<span class="result-section">' + escapeHtml(r.item.section) + '</span>' +
+        '<span class="result-section">' + window.mcUtil.escapeHtml(r.item.section) + '</span>' +
         '</a>';
       ul.appendChild(li);
     });
@@ -616,59 +612,34 @@ for (const item of navItems) {
     }
   });
 
-  // ---- Bookmarks (localStorage; folder-aware model, see /bookmarks) ----
-  var BM_KEY = 'mc-bookmarks';
-  // Model: { version:2, folders:[{id,name}], bookmarks:[{url,title,ts,folder}] }.
-  // Older versions stored a plain array; normalize both into the object form.
-  function bmNormalize(raw) {
-    if (Array.isArray(raw)) {
-      return { folders: [], bookmarks: raw.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: null }; }) };
-    }
-    if (raw && typeof raw === 'object' && Array.isArray(raw.bookmarks)) {
-      return {
-        folders: Array.isArray(raw.folders) ? raw.folders : [],
-        bookmarks: raw.bookmarks.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: b.folder != null ? b.folder : null }; })
-      };
-    }
-    return { folders: [], bookmarks: [] };
-  }
-  function readData() { try { return bmNormalize(JSON.parse(localStorage.getItem(BM_KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
-  function writeData(d) { try { localStorage.setItem(BM_KEY, JSON.stringify({ version: 2, folders: d.folders, bookmarks: d.bookmarks })); } catch (e) {} }
+  // ---- Bookmark toggle (uses the shared window.mcBookmarks store) ----
+  var store = window.mcBookmarks;
+  var toggleBtn = document.getElementById('bookmark-toggle');
+  var countEl = document.getElementById('bookmark-count');
+  var here = window.location.pathname;
   function pageTitle() {
     var t = (document.title || '').replace(/\s*[—-]\s*Mathematics Companion\s*$/, '').trim();
     return t || 'Mathematics Companion';
   }
-  var toggleBtn = document.getElementById('bookmark-toggle');
-  var countEl = document.getElementById('bookmark-count');
-  var here = window.location.pathname;
-
   function refreshCount() {
-    if (!countEl) return;
-    var n = readData().bookmarks.length;
+    if (!countEl || !store) return;
+    var n = store.count();
     countEl.textContent = n;
     countEl.hidden = n === 0;
   }
   function refreshToggle() {
-    if (!toggleBtn) return;
-    var saved = readData().bookmarks.some(function (b) { return b.url === here; });
+    if (!toggleBtn || !store) return;
+    var saved = store.isSaved(here);
     toggleBtn.setAttribute('aria-pressed', saved ? 'true' : 'false');
     toggleBtn.classList.toggle('is-saved', saved);
     toggleBtn.setAttribute('aria-label', saved ? 'Remove this bookmark' : 'Bookmark this page');
     toggleBtn.setAttribute('title', saved ? 'Remove this bookmark' : 'Bookmark this page');
   }
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', function () {
-      var d = readData();
-      var i = d.bookmarks.findIndex(function (b) { return b.url === here; });
-      if (i >= 0) { d.bookmarks.splice(i, 1); }
-      else { d.bookmarks.unshift({ url: here, title: pageTitle(), ts: Date.now(), folder: null }); }
-      writeData(d);
-      refreshToggle(); refreshCount();
-    });
+  if (toggleBtn && store) {
+    toggleBtn.addEventListener('click', function () { store.toggle(here, pageTitle()); });
+    store.onChange(function () { refreshToggle(); refreshCount(); });
+    refreshToggle(); refreshCount();
   }
-  // Keep in sync across tabs/pages.
-  window.addEventListener('storage', function (e) { if (e.key === BM_KEY) { refreshToggle(); refreshCount(); } });
-  refreshToggle(); refreshCount();
 
 })();
 </script>

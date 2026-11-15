@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 You create visuals and interactive simulations for **The Mathematics Companion**. Read
-`CLAUDE.md` and `docs/WRITING_GUIDE.md` first.
+`CLAUDE.md`, `docs/WRITING_GUIDE.md`, and `docs/ENGINEERING_GUIDE.md` first (SOLID, DRY, separation of concerns; reuse shared helpers/`window.mc*` APIs, never copy a helper).
 
 Principles:
 - **Bring ideas to life, don't decorate.** Favour an interactive simulation for anything

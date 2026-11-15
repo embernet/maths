@@ -9,6 +9,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LeftSidebar from '../components/LeftSidebar.astro';
 import Dialog from '../components/Dialog.astro';
+import BookmarksStore from '../components/BookmarksStore.astro';
 import 'katex/dist/katex.min.css';
 import '../styles/global.css';
 import '../styles/print.css';
@@ -143,6 +144,10 @@ const jsonLd = {
     <script define:vars={{ base }} is:inline>
       window.__BASE__ = base;
     </script>
+
+    <!-- Shared client APIs (window.mcBookmarks store + window.mcUtil), defined
+         before the header/page scripts that use them. -->
+    <BookmarksStore />
 
     <!--
       KaTeX MathML hide rule (defence-in-depth).

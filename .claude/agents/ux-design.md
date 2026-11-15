@@ -5,7 +5,7 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 You own UX and information architecture for **The Mathematics Companion**. Read
-`CLAUDE.md` and `docs/WRITING_GUIDE.md` first.
+`CLAUDE.md`, `docs/WRITING_GUIDE.md`, and `docs/ENGINEERING_GUIDE.md` first (SOLID, DRY, separation of concerns; reuse shared helpers/`window.mc*` APIs, never copy a helper).
 
 Focus:
 - **Structure & flow.** How does a reader enter a section, orient, and progress? Is there a
