@@ -129,17 +129,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     var rn = t.closest && t.closest('[data-rename]');
     if (rn) {
       var d = read(); var f = d.folders.find(function (x) { return x.id === rn.getAttribute('data-rename'); });
-      if (f) { var nm = window.prompt('Rename folder', f.name); if (nm && nm.trim()) { f.name = nm.trim(); write(d); render(); } }
+      if (f) {
+        window.mcDialog.prompt('Rename this folder', { title: 'Rename folder', defaultValue: f.name, okText: 'Rename' }).then(function (nm) {
+          if (nm && nm.trim()) { f.name = nm.trim(); write(d); render(); }
+        });
+      }
       return;
     }
     var del = t.closest && t.closest('[data-delete]');
     if (del) {
       var id = del.getAttribute('data-delete'); var d2 = read();
-      if (window.confirm('Delete this folder? Its bookmarks move back to Unfiled.')) {
+      window.mcDialog.confirm('Delete this folder? Its bookmarks move back to Unfiled.', { title: 'Delete folder', okText: 'Delete' }).then(function (ok) {
+        if (!ok) return;
         d2.bookmarks.forEach(function (b) { if (b.folder === id) b.folder = null; });
         d2.folders = d2.folders.filter(function (x) { return x.id !== id; });
         write(d2); render();
-      }
+      });
     }
   });
   root.addEventListener('change', function (e) {
@@ -176,17 +181,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // ---- Toolbar ----
   document.getElementById('bm-new-folder').addEventListener('click', function () {
-    var name = window.prompt('New folder name'); if (!name || !name.trim()) return;
-    var d = read(); d.folders.push({ id: newId(), name: name.trim() }); write(d); render();
+    window.mcDialog.prompt('Name for the new folder', { title: 'New folder', placeholder: 'e.g. Analysis', okText: 'Create' }).then(function (name) {
+      if (!name || !name.trim()) return;
+      var d = read(); d.folders.push({ id: newId(), name: name.trim() }); write(d); render();
+    });
   });
   clearBtn.addEventListener('click', function () {
-    if (window.confirm('Remove all bookmarks and folders from this browser?')) { write({ folders: [], bookmarks: [] }); render(); }
+    window.mcDialog.confirm('Remove all bookmarks and folders from this browser?', { title: 'Clear all', okText: 'Clear all' }).then(function (ok) {
+      if (ok) { write({ folders: [], bookmarks: [] }); render(); }
+    });
   });
   document.getElementById('bm-save-html').addEventListener('click', exportHtml);
 
   function exportHtml() {
     var d = read();
-    if (!d.bookmarks.length) { window.alert('You have no bookmarks to export yet.'); return; }
+    if (!d.bookmarks.length) { window.mcDialog.alert('You have no bookmarks to export yet.', { title: 'Nothing to export' }); return; }
     var groups = [{ name: 'Unfiled', items: d.bookmarks.filter(function (b) { return b.folder == null; }) }];
     d.folders.forEach(function (f) { groups.push({ name: f.name, items: d.bookmarks.filter(function (b) { return b.folder === f.id; }) }); });
     var now = new Date().toLocaleString('en-GB');

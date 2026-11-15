@@ -39,6 +39,18 @@ history, biology, other fields, and genuinely cool ideas — don't just restate 
   `SITE_ORIGIN` in `src/lib/site-config.mjs`.
 - **Icons/branding** are generated from `brand/logo-master.png` via `tools/generate-icons.mjs`.
 
+## UI conventions
+
+- **Never use the browser's `alert()` / `confirm()` / `prompt()`** (or any native
+  dialog). Every window must be surfaced *by the app* so it matches the site's
+  look and behaviour. Use the in-app equivalents from `src/components/Dialog.astro`
+  (included once in `BaseLayout`), available globally as promise-based calls:
+  `window.mcDialog.alert(msg, opts)`, `.confirm(msg, opts)` → `Promise<boolean>`,
+  `.prompt(msg, opts)` → `Promise<string|null>` (opts: `title, okText, cancelText,
+  placeholder, defaultValue`). They are modal, focus-trapped, Esc=cancel,
+  Enter=OK, restore focus, and serialise. Because they're async, rewrite
+  synchronous `if (confirm(...))` patterns into `.then(ok => { ... })`.
+
 ## Writing & content principles — see `docs/WRITING_GUIDE.md`
 
 1. **Broad audience.** No "your degree / at A-level / in lectures" framing. The curriculum

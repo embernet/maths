@@ -1,0 +1,163 @@
+---
+/**
+ * Dialog.astro — the app's standard in-app dialogs, replacing the browser's
+ * alert()/confirm()/prompt(). Included once in BaseLayout; exposes a global:
+ *
+ *   window.mcDialog.alert(message, opts?)   -> Promise<void>
+ *   window.mcDialog.confirm(message, opts?) -> Promise<boolean>
+ *   window.mcDialog.prompt(message, opts?)  -> Promise<string|null>   (opts.defaultValue)
+ *
+ * opts: { title, okText, cancelText, placeholder, defaultValue }.
+ * Modal, focus-trapped, Esc = cancel, Enter = OK, backdrop click = cancel,
+ * restores focus on close, and serialises overlapping calls.
+ *
+ * HOUSE RULE: never call the browser's alert/confirm/prompt — use these so every
+ * window is surfaced by the app, matching the site's look and behaviour.
+ */
+---
+<div id="mc-dialog" class="mc-dialog no-print" hidden role="dialog" aria-modal="true"
+  aria-labelledby="mc-dialog-title" aria-describedby="mc-dialog-msg">
+  <div class="mc-dialog-backdrop" data-mc-cancel></div>
+  <div class="mc-dialog-panel">
+    <h2 class="mc-dialog-title" id="mc-dialog-title"></h2>
+    <p class="mc-dialog-msg" id="mc-dialog-msg"></p>
+    <input class="mc-dialog-input" id="mc-dialog-input" type="text" hidden autocomplete="off" />
+    <div class="mc-dialog-actions">
+      <button type="button" class="mc-dialog-btn mc-dialog-cancel" id="mc-dialog-cancel">Cancel</button>
+      <button type="button" class="mc-dialog-btn mc-dialog-ok" id="mc-dialog-ok">OK</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  var root = document.getElementById('mc-dialog');
+  if (!root || window.mcDialog) return;
+  var backdrop = root.querySelector('.mc-dialog-backdrop');
+  var titleEl = document.getElementById('mc-dialog-title');
+  var msgEl = document.getElementById('mc-dialog-msg');
+  var input = document.getElementById('mc-dialog-input');
+  var okBtn = document.getElementById('mc-dialog-ok');
+  var cancelBtn = document.getElementById('mc-dialog-cancel');
+  var queue = Promise.resolve();
+  var active = null; // { resolve, type, lastFocus }
+
+  function focusable() {
+    var els = [input, cancelBtn, okBtn].filter(function (el) { return el && !el.hidden && el.offsetParent !== null; });
+    return els;
+  }
+  function close(result) {
+    if (!active) return;
+    var a = active; active = null;
+    root.hidden = true;
+    document.removeEventListener('keydown', onKey, true);
+    if (a.lastFocus && a.lastFocus.focus) { try { a.lastFocus.focus(); } catch (e) {} }
+    a.resolve(result);
+  }
+  function onKey(e) {
+    if (!active) return;
+    if (e.key === 'Escape') { e.preventDefault(); close(active.cancelValue); }
+    else if (e.key === 'Enter') {
+      // In a textarea we'd allow newlines; our input is single-line, so Enter = OK.
+      if (e.target !== cancelBtn) { e.preventDefault(); confirmOk(); }
+    } else if (e.key === 'Tab') {
+      var els = focusable(); if (!els.length) return;
+      var first = els[0], last = els[els.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  function confirmOk() {
+    if (!active) return;
+    if (active.type === 'prompt') close(input.value);
+    else close(true);
+  }
+
+  function open(type, message, opts) {
+    opts = opts || {};
+    return new Promise(function (resolve) {
+      active = {
+        resolve: resolve,
+        type: type,
+        cancelValue: type === 'prompt' ? null : (type === 'confirm' ? false : undefined),
+        lastFocus: document.activeElement
+      };
+      titleEl.textContent = opts.title || (type === 'prompt' ? '' : type === 'confirm' ? 'Please confirm' : '');
+      titleEl.hidden = !titleEl.textContent;
+      msgEl.textContent = message == null ? '' : String(message);
+      if (type === 'prompt') {
+        input.hidden = false;
+        input.value = opts.defaultValue != null ? String(opts.defaultValue) : '';
+        input.placeholder = opts.placeholder || '';
+      } else {
+        input.hidden = true;
+      }
+      cancelBtn.hidden = (type === 'alert');
+      cancelBtn.textContent = opts.cancelText || 'Cancel';
+      okBtn.textContent = opts.okText || 'OK';
+      root.hidden = false;
+      document.addEventListener('keydown', onKey, true);
+      // Focus the input for prompt, otherwise the primary button.
+      setTimeout(function () { (type === 'prompt' ? input : okBtn).focus(); if (type === 'prompt') input.select(); }, 0);
+    });
+  }
+  // Serialise overlapping calls so two dialogs never share the one modal.
+  function enqueue(type, message, opts) {
+    var p = queue.then(function () { return open(type, message, opts); });
+    queue = p.catch(function () {});
+    return p;
+  }
+
+  okBtn.addEventListener('click', confirmOk);
+  cancelBtn.addEventListener('click', function () { if (active) close(active.cancelValue); });
+  backdrop.addEventListener('click', function () { if (active) close(active.cancelValue); });
+
+  window.mcDialog = {
+    alert: function (message, opts) { return enqueue('alert', message, opts); },
+    confirm: function (message, opts) { return enqueue('confirm', message, opts); },
+    prompt: function (message, opts) { return enqueue('prompt', message, opts); }
+  };
+})();
+</script>
+
+<style is:global>
+  .mc-dialog {
+    position: fixed; inset: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .mc-dialog[hidden] { display: none; }
+  .mc-dialog-backdrop { position: absolute; inset: 0; background: rgba(15, 25, 35, 0.5); }
+  .mc-dialog-panel {
+    position: relative;
+    width: min(28rem, 100%);
+    background: var(--color-bg);
+    color: var(--color-text, inherit);
+    border: 1px solid var(--color-border);
+    border-radius: 0.6rem;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    padding: 1.25rem 1.25rem 1rem;
+  }
+  .mc-dialog-title { margin: 0 0 0.5rem; font-size: 1.1rem; color: var(--color-primary); }
+  .mc-dialog-title[hidden] { display: none; }
+  .mc-dialog-msg { margin: 0 0 0.9rem; line-height: 1.5; }
+  .mc-dialog-input {
+    width: 100%; box-sizing: border-box; font: inherit;
+    padding: 0.4rem 0.6rem; margin-bottom: 1rem;
+    border: 1px solid var(--color-border); border-radius: 0.35rem;
+    background: var(--color-surface); color: inherit;
+  }
+  .mc-dialog-input[hidden] { display: none; }
+  .mc-dialog-input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+  .mc-dialog-actions { display: flex; justify-content: flex-end; gap: 0.6rem; }
+  .mc-dialog-btn {
+    font: inherit; font-size: 0.92rem; cursor: pointer;
+    padding: 0.4rem 1rem; border-radius: 0.35rem;
+    border: 1px solid var(--color-border); background: var(--color-surface); color: var(--color-primary);
+  }
+  .mc-dialog-btn:hover { border-color: var(--color-accent); }
+  .mc-dialog-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  .mc-dialog-cancel[hidden] { display: none; }
+  .mc-dialog-ok { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+  .mc-dialog-ok:hover { background: var(--color-accent); border-color: var(--color-accent); }
+</style>
