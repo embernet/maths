@@ -1,616 +1,396 @@
 ---
 /**
- * /graph — Knowledge Graph view
- * Cytoscape.js canvas (left ~60%) + side panel (right ~40%)
- * Data source: /api/graph.json generated at build time by build-index.mjs
+ * /graph — Connection Explorer.
+ *
+ * A simple, dependency-free way to explore how ideas connect. Two views:
+ *  - Overview: every topic, grouped by section — the map of the subject.
+ *  - Focus: one node centred with its direct connections arranged around it,
+ *    grouped by relationship; click any connection to walk the graph.
+ *
+ * Design notes (why not the old hairball): of the 1,100+ graph.json nodes only
+ * ~300 have any edges — a global force layout buried them in disconnected
+ * dust. A local ego view shows a readable number of nodes, answers "what is
+ * this connected to?", and needs no physics and no external library (the old
+ * page pulled Cytoscape from a CDN, breaking the self-contained/offline rule).
+ * State lives in location.hash (#<nodeId>) so views are shareable and the
+ * browser back button works. The side panel mirrors the picture as a grouped
+ * text list — the accessible path.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Knowledge Graph" description="Visual map of mathematics — explore topics, theorems, applications, mathematicians, and their connections.">
-  <div class="graph-page" id="graph-page">
+<BaseLayout title="Connection Explorer" description="Explore how the ideas of mathematics connect — topics, theorems, mathematicians and applications, one step at a time.">
+  <div class="graph-page">
+    <header class="gx-header">
+      <h1>Connection Explorer</h1>
+      <p class="gx-lede">Pick any idea and see everything it touches — the theorems inside it, the people behind it, where it is used. Click a connection to keep exploring; your browser's back button retraces your steps.</p>
+    </header>
 
-    <!-- Search bar (top-left, overlaid on canvas) -->
-    <div class="graph-toolbar">
-      <label for="graph-search" class="sr-only">Filter nodes by name</label>
-      <input
-        type="search"
-        id="graph-search"
-        class="graph-search"
-        placeholder="Filter nodes…"
-        autocomplete="off"
-        aria-label="Filter graph nodes by name"
-      />
-      <span class="graph-node-count" id="graph-node-count" aria-live="polite"></span>
-    </div>
-
-    <!-- Legend (top-right, collapsible) -->
-    <div class="graph-legend" id="graph-legend">
-      <button class="legend-toggle" id="legend-toggle" aria-expanded="true" aria-controls="legend-body">
-        Legend <span class="legend-chevron" aria-hidden="true">▲</span>
-      </button>
-      <div id="legend-body" class="legend-body">
-        <ul id="legend-list" class="legend-list"></ul>
+    <div class="gx-toolbar no-print">
+      <button type="button" id="gx-overview" class="gx-btn">Overview</button>
+      <button type="button" id="gx-back" class="gx-btn" hidden>&larr; Back</button>
+      <div class="gx-searchwrap">
+        <label for="gx-search" class="sr-only">Search for a topic, theorem, mathematician or application</label>
+        <input type="search" id="gx-search" placeholder="Jump to… e.g. Fourier, Gauss, cryptography" autocomplete="off"
+          aria-label="Search for a node" aria-expanded="false" aria-controls="gx-search-list" />
+        <ul id="gx-search-list" class="gx-search-list" role="listbox" hidden></ul>
       </div>
+      <ul id="gx-rel-legend" class="gx-rel-legend" aria-label="Line colours in this view"></ul>
     </div>
 
-    <!-- Cytoscape canvas -->
-    <div class="graph-canvas-wrapper">
-      <div id="cy" class="cy-canvas" aria-label="Mathematics knowledge graph" role="img"></div>
-      <div class="graph-loading" id="graph-loading" aria-live="polite">Loading graph…</div>
-    </div>
-
-    <!-- Side panel -->
-    <aside class="graph-side-panel" id="graph-side-panel" aria-label="Selected node detail">
-      <div class="side-panel-placeholder" id="side-panel-placeholder">
-        <p>Click a node to read its article.</p>
+    <div class="gx-stage-wrap">
+      <div class="gx-stage" id="gx-stage" aria-live="polite">
+        <p class="gx-loading" id="gx-loading">Loading the map&hellip;</p>
       </div>
-      <div class="side-panel-content" id="side-panel-content" hidden></div>
-    </aside>
-
+      <aside class="gx-panel" id="gx-panel" aria-label="Selected idea and its connections"></aside>
+    </div>
   </div>
 </BaseLayout>
 
-<!-- Cytoscape + fcose from CDN -->
-<script is:inline src="https://unpkg.com/cytoscape@3/dist/cytoscape.min.js"></script>
-<script is:inline src="https://unpkg.com/cytoscape-fcose@2/dist/cytoscape-fcose.js"></script>
-
 <script is:inline>
 (function () {
+  var stage = document.getElementById('gx-stage');
+  var panel = document.getElementById('gx-panel');
+  var loading = document.getElementById('gx-loading');
+  var backBtn = document.getElementById('gx-back');
+  var overviewBtn = document.getElementById('gx-overview');
+  var searchInput = document.getElementById('gx-search');
+  var searchList = document.getElementById('gx-search-list');
+  var relLegend = document.getElementById('gx-rel-legend');
+  if (!stage) return;
+  var esc = window.mcUtil.escapeHtml;
+  var SVGNS = 'http://www.w3.org/2000/svg';
 
-  // ── Colour palette (per v1.2 §3) ──────────────────────────────────────────
   var NODE_COLOURS = {
-    topic:         '#1a3a52',
-    theorem:       '#a77b3f',
-    application:   '#5a7a3f',
-    mathematician: '#6a3a5e',
-    history:       '#a7553f',
-    definition:    '#5a6a7a',
-    nature:        '#3f8a5a',
+    topic: '#1a3a52', theorem: '#a77b3f', application: '#5a7a3f',
+    mathematician: '#6a3a5e', history: '#a7553f', definition: '#5a6a7a', nature: '#3f8a5a'
   };
-  var DEFAULT_COLOUR = '#888';
+  var TYPE_LABELS = {
+    topic: 'Topic', theorem: 'Theorem', application: 'Application',
+    mathematician: 'Mathematician', history: 'Era', definition: 'Definition', nature: 'Nature'
+  };
+  var REL_COLOURS = {
+    'related': '#9aa5b1', 'pre-reading': '#8862b5', 'appears-in': '#c9972f',
+    'attributed-to': '#b05f93', 'applies-to': '#5a9a4f', 'uses-theorem': '#d07f4f', 'uses-topic': '#4f93d0'
+  };
+  // [label when the centre is the edge's source, label when it is the target]
+  var REL_LABELS = {
+    'related': ['Related', 'Related'],
+    'pre-reading': ['Suggested pre-reading', 'Prepares you for'],
+    'appears-in': ['Key theorems & results', 'Appears in'],
+    'attributed-to': ['Attributed to', 'Their work'],
+    'applies-to': ['Real-world applications', 'Draws on'],
+    'uses-theorem': ['Uses theorems', 'Used in'],
+    'uses-topic': ['Draws on', 'Used in']
+  };
+  var SECTION_TITLES = {
+    '01-foundations': 'Foundations', '02-core-mathematics': 'Core Mathematics',
+    '03-specialist-areas': 'Specialist Areas', '04-advanced-topics': 'Advanced Topics',
+    '97-simulation': 'Simulation', '97-nature': 'Nature', '90-history': 'History'
+  };
+  var SECTION_ORDER = ['01-foundations', '02-core-mathematics', '03-specialist-areas', '04-advanced-topics', '97-simulation', '97-nature', '90-history'];
 
-  // ── State ─────────────────────────────────────────────────────────────────
-  var cy = null;
-  var graphData = null;
-  var currentFilter = '';
+  var nodesById = {};   // id -> node
+  var adj = {};         // id -> [{id, type, centerIsSource}]
+  var connected = [];   // nodes with >= 1 edge (what we search/explore)
+  var topics = [];      // topic nodes for the overview
 
-  // ── DOM refs ──────────────────────────────────────────────────────────────
-  var cyEl           = document.getElementById('cy');
-  var loadingEl      = document.getElementById('graph-loading');
-  var sideContent    = document.getElementById('side-panel-content');
-  var sidePlaceholder= document.getElementById('side-panel-placeholder');
-  var searchInput    = document.getElementById('graph-search');
-  var nodeCountEl    = document.getElementById('graph-node-count');
-  var legendList     = document.getElementById('legend-list');
-  var legendToggle   = document.getElementById('legend-toggle');
-  var legendBody     = document.getElementById('legend-body');
+  function plainLabel(s) {
+    return String(s == null ? '' : s).replace(/\$([^$]*)\$/g, '$1').replace(/\\[a-zA-Z]+/g, '').replace(/[{}]/g, '');
+  }
+  function sectionOf(node) {
+    var u = node.url || '';
+    var m = u.match(/^\/(?:maths\/)?(\d{2}-[a-z-]+|9\d-[a-z-]+)\//);
+    return m ? m[1] : null;
+  }
 
-  // ── Legend ────────────────────────────────────────────────────────────────
-  function buildLegend(nodes) {
-    var counts = {};
-    for (var i = 0; i < nodes.length; i++) {
-      var t = nodes[i].node_type || 'unknown';
-      counts[t] = (counts[t] || 0) + 1;
-    }
-    legendList.innerHTML = '';
-    Object.keys(NODE_COLOURS).forEach(function (type) {
-      if (!counts[type]) return;
-      var li = document.createElement('li');
-      li.className = 'legend-item';
-      li.innerHTML =
-        '<span class="legend-swatch" style="background:' + NODE_COLOURS[type] + '"></span>' +
-        '<span class="legend-label">' + type.charAt(0).toUpperCase() + type.slice(1) + '</span>' +
-        '<span class="legend-count">' + (counts[type] || 0) + '</span>';
-      legendList.appendChild(li);
+  // ── Views ──────────────────────────────────────────────────────────────────
+  function setLegend(relTypes) {
+    relLegend.innerHTML = relTypes.map(function (t) {
+      return '<li><span class="gx-swatch" style="background:' + REL_COLOURS[t] + '"></span>' + esc(REL_LABELS[t][0].replace('Key theorems & results', 'Appears in / contains')) + '</li>';
+    }).join('');
+  }
+
+  function showOverview() {
+    backBtn.hidden = true;
+    setLegend([]);
+    var groups = {};
+    topics.forEach(function (n) {
+      var sec = sectionOf(n) || 'other';
+      (groups[sec] = groups[sec] || []).push(n);
     });
+    var html = '<div class="gx-overview"><p class="gx-ov-hint">The map of the subject — every topic, by section. Pick one to see its connections.</p>';
+    SECTION_ORDER.concat(Object.keys(groups).filter(function (s) { return SECTION_ORDER.indexOf(s) === -1; })).forEach(function (sec) {
+      var list = groups[sec];
+      if (!list || !list.length) return;
+      html += '<section class="gx-ov-group"><h2>' + esc(SECTION_TITLES[sec] || sec) + '</h2><ul>';
+      list.forEach(function (n) {
+        html += '<li><button type="button" class="gx-chip" data-id="' + esc(n.id) + '">' + esc(plainLabel(n.label)) + '</button></li>';
+      });
+      html += '</ul></section>';
+    });
+    html += '</div>';
+    stage.innerHTML = html;
+
+    panel.innerHTML = '<h2 class="gx-panel-title">Start somewhere interesting</h2><p class="gx-panel-sub">A few well-connected ideas:</p><ul class="gx-conn-list">' +
+      connected.slice().sort(function (a, b) { return (adj[b.id] || []).length - (adj[a.id] || []).length; }).slice(0, 8)
+        .map(function (n) {
+          return '<li><button type="button" class="gx-conn" data-id="' + esc(n.id) + '"><span class="gx-dot" style="background:' + (NODE_COLOURS[n.node_type] || '#888') + '"></span>' + esc(plainLabel(n.label)) + ' <span class="gx-degree">' + (adj[n.id] || []).length + ' connections</span></button></li>';
+        }).join('') + '</ul>';
   }
 
-  legendToggle.addEventListener('click', function () {
-    var expanded = legendToggle.getAttribute('aria-expanded') === 'true';
-    legendToggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    legendBody.hidden = expanded;
-    legendToggle.querySelector('.legend-chevron').textContent = expanded ? '▼' : '▲';
-  });
+  function showFocus(id) {
+    var node = nodesById[id];
+    if (!node) { showOverview(); return; }
+    backBtn.hidden = false;
 
-  // ── Cytoscape style factory ───────────────────────────────────────────────
-  function cytoscapeStyle() {
-    return [
-      {
-        selector: 'node',
-        style: {
-          'background-color': function (ele) {
-            return NODE_COLOURS[ele.data('node_type')] || DEFAULT_COLOUR;
-          },
-          'label': 'data(label)',
-          'font-size': 9,
-          'color': '#fff',
-          'text-valign': 'center',
-          'text-halign': 'center',
-          'text-wrap': 'ellipsis',
-          'text-max-width': 60,
-          'width': 22,
-          'height': 22,
-          'border-width': 0,
-          'min-zoomed-font-size': 8,
-        },
-      },
-      {
-        selector: 'node[?forthcoming]',
-        style: {
-          'opacity': 0.35,
-          'border-width': 2,
-          'border-style': 'dashed',
-          'border-color': '#888',
-          'cursor': 'default',
-        },
-      },
-      {
-        selector: 'node:selected',
-        style: {
-          'border-width': 3,
-          'border-color': '#fff',
-          'width': 30,
-          'height': 30,
-        },
-      },
-      {
-        selector: 'node.faded',
-        style: { 'opacity': 0.15 },
-      },
-      {
-        selector: 'edge',
-        style: {
-          'width': 1,
-          'line-color': '#cbd5e0',
-          'opacity': 0.55,
-          'curve-style': 'bezier',
-        },
-      },
-      {
-        selector: 'edge[type="pre-reading"]',
-        style: {
-          'width': 1,
-          'line-color': '#a0aec0',
-          'target-arrow-shape': 'triangle',
-          'target-arrow-color': '#a0aec0',
-          'arrow-scale': 0.7,
-          'opacity': 0.65,
-        },
-      },
-      {
-        selector: 'edge[type="related"]',
-        style: {
-          'width': 2,
-          'line-color': '#90cdf4',
-          'opacity': 0.5,
-        },
-      },
-      {
-        selector: 'edge.faded',
-        style: { 'opacity': 0.06 },
-      },
-    ];
+    var neighbours = (adj[id] || []).map(function (e) {
+      return { node: nodesById[e.id], type: e.type, centerIsSource: e.centerIsSource };
+    }).filter(function (e) { return e.node; });
+
+    // Group by relationship label for the panel + sort for the ring.
+    var relOrder = ['pre-reading', 'related', 'appears-in', 'applies-to', 'uses-theorem', 'uses-topic', 'attributed-to'];
+    neighbours.sort(function (a, b) {
+      var ra = relOrder.indexOf(a.type), rb = relOrder.indexOf(b.type);
+      if (ra !== rb) return ra - rb;
+      return plainLabel(a.node.label).localeCompare(plainLabel(b.node.label));
+    });
+
+    drawEgo(node, neighbours);
+    drawPanel(node, neighbours);
+    setLegend(Array.from(new Set(neighbours.map(function (e) { return e.type; }))));
   }
 
-  // ── Filter / search ───────────────────────────────────────────────────────
-  function applyFilter(q) {
-    currentFilter = q.toLowerCase().trim();
-    if (!cy) return;
-    if (!currentFilter) {
-      cy.nodes().removeClass('faded').style('display', 'element');
-      cy.edges().removeClass('faded').style('display', 'element');
-      updateNodeCount(cy.nodes(':visible').length);
+  // ── SVG ego view ───────────────────────────────────────────────────────────
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function truncate(s, n) { return s.length > n ? s.slice(0, n - 1) + '…' : s; }
+
+  function drawEgo(center, neighbours) {
+    var W = 900, H = Math.max(560, 200 + neighbours.length * 14);
+    var CX = W / 2, CY = H / 2;
+    var N = neighbours.length;
+    var rings = N <= 14 ? 1 : (N <= 30 ? 2 : 3);
+    var baseR = Math.min(CX, CY) - 120;
+
+    var svg = svgEl('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'group', 'aria-label': 'Connections of ' + plainLabel(center.label) });
+    svg.setAttribute('class', 'gx-svg');
+
+    var edgesG = svgEl('g', {}), nodesG = svgEl('g', {});
+    svg.appendChild(edgesG); svg.appendChild(nodesG);
+
+    neighbours.forEach(function (e, i) {
+      var angle = (i / N) * 2 * Math.PI - Math.PI / 2;
+      var r = baseR - (rings > 1 ? (i % rings) * 54 : 0);
+      var x = CX + r * Math.cos(angle), y = CY + r * Math.sin(angle);
+
+      edgesG.appendChild(svgEl('line', { x1: CX, y1: CY, x2: x, y2: y, stroke: REL_COLOURS[e.type] || '#999', 'stroke-width': 1.5, opacity: 0.55 }));
+
+      var g = svgEl('g', { tabindex: 0, role: 'button', 'aria-label': plainLabel(e.node.label), 'data-id': e.node.id });
+      g.setAttribute('class', 'gx-node');
+      var c = svgEl('circle', { cx: x, cy: y, r: 7, fill: NODE_COLOURS[e.node.node_type] || '#888' });
+      if (e.node.forthcoming) { c.setAttribute('stroke-dasharray', '2 2'); c.setAttribute('stroke', '#888'); c.setAttribute('fill-opacity', '0.45'); }
+      g.appendChild(c);
+      var onLeft = Math.cos(angle) < -0.08;
+      var t = svgEl('text', {
+        x: x + (onLeft ? -11 : 11), y: y + 4,
+        'text-anchor': onLeft ? 'end' : (Math.abs(Math.cos(angle)) <= 0.08 ? 'middle' : 'start')
+      });
+      if (Math.abs(Math.cos(angle)) <= 0.08) t.setAttribute('y', y + (Math.sin(angle) < 0 ? -12 : 20));
+      t.textContent = truncate(plainLabel(e.node.label), 26);
+      var full = svgEl('title', {}); full.textContent = plainLabel(e.node.label);
+      g.appendChild(full); g.appendChild(t);
+      nodesG.appendChild(g);
+    });
+
+    // Centre node on top.
+    var cg = svgEl('g', {});
+    cg.setAttribute('class', 'gx-center');
+    cg.appendChild(svgEl('circle', { cx: CX, cy: CY, r: 13, fill: NODE_COLOURS[center.node_type] || '#888', stroke: '#fff', 'stroke-width': 2.5 }));
+    var ct = svgEl('text', { x: CX, y: CY + 32, 'text-anchor': 'middle' });
+    ct.setAttribute('class', 'gx-center-label');
+    ct.textContent = truncate(plainLabel(center.label), 34);
+    cg.appendChild(ct);
+    nodesG.appendChild(cg);
+
+    stage.innerHTML = '';
+    if (!N) {
+      stage.innerHTML = '<p class="gx-empty">“' + esc(plainLabel(center.label)) + '” has no recorded connections yet.</p>';
       return;
     }
-    cy.nodes().forEach(function (n) {
-      var label = (n.data('label') || '').toLowerCase();
-      var matches = label.includes(currentFilter);
-      n.style('display', matches ? 'element' : 'none');
-    });
-    cy.edges().forEach(function (e) {
-      var srcVisible = e.source().style('display') !== 'none';
-      var tgtVisible = e.target().style('display') !== 'none';
-      e.style('display', srcVisible && tgtVisible ? 'element' : 'none');
-    });
-    updateNodeCount(cy.nodes(':visible').length);
+    stage.appendChild(svg);
   }
 
-  function updateNodeCount(n) {
-    nodeCountEl.textContent = n + ' node' + (n !== 1 ? 's' : '');
+  // ── Side panel ─────────────────────────────────────────────────────────────
+  function drawPanel(node, neighbours) {
+    var colour = NODE_COLOURS[node.node_type] || '#888';
+    var html = '<span class="gx-type-chip" style="background:' + colour + '">' + esc(TYPE_LABELS[node.node_type] || node.node_type) + (node.forthcoming ? ' · forthcoming' : '') + '</span>' +
+      '<h2 class="gx-panel-title">' + esc(plainLabel(node.label)) + '</h2>';
+    if (node.summary) html += '<p class="gx-panel-sub">' + esc(plainLabel(node.summary)) + '</p>';
+    if (node.url) html += '<p><a class="gx-open" href="' + esc(node.url) + '">Open the page &rarr;</a></p>';
+
+    var groups = {};
+    neighbours.forEach(function (e) {
+      var lbl = (REL_LABELS[e.type] || [e.type, e.type])[e.centerIsSource ? 0 : 1];
+      (groups[lbl] = groups[lbl] || { type: e.type, items: [] }).items.push(e.node);
+    });
+    Object.keys(groups).forEach(function (lbl) {
+      var g = groups[lbl];
+      html += '<h3 class="gx-rel-head"><span class="gx-swatch" style="background:' + (REL_COLOURS[g.type] || '#999') + '"></span>' + esc(lbl) + ' <span class="gx-degree">(' + g.items.length + ')</span></h3><ul class="gx-conn-list">';
+      g.items.forEach(function (n) {
+        html += '<li><button type="button" class="gx-conn" data-id="' + esc(n.id) + '"><span class="gx-dot" style="background:' + (NODE_COLOURS[n.node_type] || '#888') + '"></span>' + esc(plainLabel(n.label)) + '</button></li>';
+      });
+      html += '</ul>';
+    });
+    panel.innerHTML = html;
   }
 
-  searchInput.addEventListener('input', function () {
-    applyFilter(searchInput.value);
+  // ── Search ─────────────────────────────────────────────────────────────────
+  function doSearch(q) {
+    q = q.trim().toLowerCase();
+    if (q.length < 2) { searchList.hidden = true; searchInput.setAttribute('aria-expanded', 'false'); return; }
+    var hits = connected.filter(function (n) { return plainLabel(n.label).toLowerCase().indexOf(q) !== -1; })
+      .sort(function (a, b) { return (adj[b.id] || []).length - (adj[a.id] || []).length; }).slice(0, 10);
+    if (!hits.length) { searchList.innerHTML = '<li class="gx-search-empty">No connected idea matches.</li>'; }
+    else {
+      searchList.innerHTML = hits.map(function (n) {
+        return '<li role="option"><button type="button" class="gx-conn" data-id="' + esc(n.id) + '"><span class="gx-dot" style="background:' + (NODE_COLOURS[n.node_type] || '#888') + '"></span>' + esc(plainLabel(n.label)) + ' <span class="gx-degree">' + esc(TYPE_LABELS[n.node_type] || '') + '</span></button></li>';
+      }).join('');
+    }
+    searchList.hidden = false;
+    searchInput.setAttribute('aria-expanded', 'true');
+  }
+
+  // ── Routing (hash) ─────────────────────────────────────────────────────────
+  function go(id) { location.hash = id ? encodeURIComponent(id) : ''; }
+  function route() {
+    var id = decodeURIComponent((location.hash || '').replace(/^#/, ''));
+    searchList.hidden = true; searchInput.value = '';
+    if (id && nodesById[id]) showFocus(id); else showOverview();
+  }
+
+  // Delegated clicks: any element with data-id navigates.
+  document.addEventListener('click', function (ev) {
+    var el = ev.target.closest ? ev.target.closest('[data-id]') : null;
+    if (el) { go(el.getAttribute('data-id')); return; }
+    if (!searchList.hidden && !ev.target.closest('.gx-searchwrap')) { searchList.hidden = true; }
   });
-
-  // ── Side panel ────────────────────────────────────────────────────────────
-  function showSidePanel(html) {
-    sidePlaceholder.hidden = true;
-    sideContent.hidden = false;
-    sideContent.innerHTML = html;
-  }
-
-  function resetSidePanel() {
-    sideContent.hidden = true;
-    sideContent.innerHTML = '';
-    sidePlaceholder.hidden = false;
-  }
-
-  function loadNodeArticle(url) {
-    showSidePanel('<p class="side-loading">Loading…</p>');
-    fetch(url)
-      .then(function (r) { return r.text(); })
-      .then(function (html) {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(html, 'text/html');
-        // Try .topic-article first, then .prose-content, then <article>
-        var article =
-          doc.querySelector('.topic-article') ||
-          doc.querySelector('.prose-content') ||
-          doc.querySelector('article');
-        if (article) {
-          // Make links open in a new tab so they don't navigate away from /graph
-          article.querySelectorAll('a[href]').forEach(function (a) {
-            var href = a.getAttribute('href');
-            if (href && !href.startsWith('#')) {
-              a.setAttribute('target', '_blank');
-              a.setAttribute('rel', 'noopener noreferrer');
-            }
-          });
-          showSidePanel(article.outerHTML);
-        } else {
-          showSidePanel('<p class="side-error">Could not load article content.</p>');
-        }
-      })
-      .catch(function () {
-        showSidePanel('<p class="side-error">Failed to fetch article.</p>');
-      });
-  }
-
-  // ── Build Cytoscape elements from graph.json ───────────────────────────────
-  function buildElements(data) {
-    var elements = [];
-    for (var i = 0; i < data.nodes.length; i++) {
-      var n = data.nodes[i];
-      elements.push({
-        group: 'nodes',
-        data: {
-          id: n.id,
-          label: n.label || n.id,
-          node_type: n.node_type,
-          url: n.url,
-          summary: n.summary || '',
-          forthcoming: n.forthcoming || false,
-        },
-      });
+  stage.addEventListener('keydown', function (ev) {
+    if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.closest) {
+      var el = ev.target.closest('.gx-node[data-id]');
+      if (el) { ev.preventDefault(); go(el.getAttribute('data-id')); }
     }
-    for (var j = 0; j < data.edges.length; j++) {
-      var e = data.edges[j];
-      // Skip edges where either endpoint is missing from nodes
-      elements.push({
-        group: 'edges',
-        data: {
-          id: 'e-' + j,
-          source: e.source,
-          target: e.target,
-          type: e.type,
-        },
-      });
-    }
-    return elements;
-  }
+  });
+  overviewBtn.addEventListener('click', function () { go(''); });
+  backBtn.addEventListener('click', function () { history.back(); });
+  searchInput.addEventListener('input', function () { doSearch(searchInput.value); });
+  window.addEventListener('hashchange', route);
 
-  // ── Main: fetch graph.json and initialise Cytoscape ──────────────────────
+  // ── Load data ──────────────────────────────────────────────────────────────
   fetch((window.__BASE__ || '/') + 'api/graph.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      graphData = data;
-      loadingEl.hidden = true;
-      buildLegend(data.nodes);
-
-      if (typeof cytoscape === 'undefined') {
-        loadingEl.textContent = 'Cytoscape library failed to load.';
-        loadingEl.hidden = false;
-        return;
-      }
-
-      // Register fcose if available
-      if (typeof cytoscapeFcose !== 'undefined') {
-        cytoscape.use(cytoscapeFcose);
-      }
-
-      cy = cytoscape({
-        container: cyEl,
-        elements: buildElements(data),
-        style: cytoscapeStyle(),
-        layout: {
-          name: typeof cytoscapeFcose !== 'undefined' ? 'fcose' : 'cose',
-          animate: false,
-          randomize: false,
-          quality: 'proof',
-          nodeRepulsion: 4500,
-          idealEdgeLength: 80,
-          edgeElasticity: 0.45,
-          nestingFactor: 0.1,
-          gravity: 0.25,
-          numIter: 2500,
-          tile: true,
-          tilingPaddingVertical: 10,
-          tilingPaddingHorizontal: 10,
-        },
-        minZoom: 0.1,
-        maxZoom: 8,
-        wheelSensitivity: 0.3,
+      data.nodes.forEach(function (n) { nodesById[n.id] = n; });
+      data.edges.forEach(function (e) {
+        if (!nodesById[e.source] || !nodesById[e.target]) return;
+        (adj[e.source] = adj[e.source] || []).push({ id: e.target, type: e.type, centerIsSource: true });
+        (adj[e.target] = adj[e.target] || []).push({ id: e.source, type: e.type, centerIsSource: false });
       });
-
-      updateNodeCount(cy.nodes().length);
-
-      // ── Node click: select, fit neighbourhood, load article ──────────────
-      cy.on('tap', 'node', function (evt) {
-        var node = evt.target;
-
-        // Forthcoming nodes: no action, just show tooltip
-        if (node.data('forthcoming')) {
-          return;
-        }
-
-        // Highlight 1-hop neighbourhood
-        cy.nodes().removeClass('faded');
-        cy.edges().removeClass('faded');
-        var neighbourhood = node.closedNeighborhood();
-        cy.elements().not(neighbourhood).addClass('faded');
-
-        // Fit the neighbourhood with padding
-        cy.animate({
-          fit: { eles: neighbourhood, padding: 60 },
-          duration: 380,
-          easing: 'ease-in-out-cubic',
-        });
-
-        // Load article in side panel
-        var url = node.data('url');
-        if (url) {
-          loadNodeArticle(url);
-        } else {
-          resetSidePanel();
-        }
-      });
-
-      // Click on background: reset
-      cy.on('tap', function (evt) {
-        if (evt.target === cy) {
-          cy.nodes().removeClass('faded');
-          cy.edges().removeClass('faded');
-          resetSidePanel();
-        }
-      });
-
-      // Tooltip for forthcoming nodes
-      cy.on('mouseover', 'node[?forthcoming]', function (evt) {
-        var node = evt.target;
-        var pos = node.renderedPosition();
-        var tip = document.getElementById('graph-tooltip');
-        if (!tip) {
-          tip = document.createElement('div');
-          tip.id = 'graph-tooltip';
-          tip.className = 'graph-tooltip';
-          document.querySelector('.graph-canvas-wrapper').appendChild(tip);
-        }
-        tip.textContent = 'Forthcoming';
-        tip.style.left = pos.x + 'px';
-        tip.style.top = (pos.y - 30) + 'px';
-        tip.hidden = false;
-      });
-      cy.on('mouseout', 'node', function () {
-        var tip = document.getElementById('graph-tooltip');
-        if (tip) tip.hidden = true;
-      });
-
-      // Re-apply filter after graph loads (in case user typed before load)
-      if (currentFilter) applyFilter(currentFilter);
+      connected = data.nodes.filter(function (n) { return (adj[n.id] || []).length; });
+      topics = data.nodes.filter(function (n) { return n.node_type === 'topic' && n.url; });
+      if (loading) loading.remove();
+      route();
     })
-    .catch(function (err) {
-      loadingEl.textContent = 'Failed to load graph data.';
-      loadingEl.hidden = false;
-      console.error('[graph] fetch error:', err);
+    .catch(function () {
+      stage.innerHTML = '<p class="gx-empty">Could not load the connection data. Please try again.</p>';
     });
-
 })();
 </script>
 
-<style>
-  /* ── Page layout ── */
-  .graph-page {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 40%;
-    grid-template-rows: auto 1fr;
-    height: calc(100vh - var(--header-h));
-    overflow: hidden;
+<!-- is:global because the view DOM is built at runtime via innerHTML/SVG and
+     doesn't carry Astro's scoped-style attribute. Namespaced under .graph-page. -->
+<style is:global>
+  .graph-page { padding: 1.5rem 1rem 3rem; max-width: 1300px; margin: 0 auto; }
+  .graph-page .gx-header h1 { margin: 0 0 0.3rem; }
+  .graph-page .gx-lede { color: var(--color-muted); max-width: 70ch; margin: 0 0 1rem; }
+
+  .graph-page .gx-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+  .graph-page .gx-btn {
+    font: inherit; font-size: 0.88rem; cursor: pointer; padding: 0.35rem 0.9rem;
+    border: 1px solid var(--color-border); border-radius: 0.4rem;
+    background: var(--color-surface); color: var(--color-primary);
+  }
+  .graph-page .gx-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+  .graph-page .gx-searchwrap { position: relative; flex: 1 1 16rem; max-width: 26rem; }
+  .graph-page #gx-search {
+    width: 100%; box-sizing: border-box; font: inherit; font-size: 0.9rem;
+    padding: 0.4rem 0.7rem; border: 1px solid var(--color-border); border-radius: 0.4rem;
+    background: var(--color-bg); color: inherit;
+  }
+  .graph-page .gx-search-list {
+    position: absolute; z-index: 30; top: calc(100% + 4px); left: 0; right: 0;
+    margin: 0; padding: 0.25rem; list-style: none;
+    background: var(--color-bg); border: 1px solid var(--color-border);
+    border-radius: 0.4rem; box-shadow: 0 8px 24px rgba(0,0,0,0.15); max-height: 310px; overflow-y: auto;
+  }
+  .graph-page .gx-search-empty { padding: 0.5rem; color: var(--color-muted); font-size: 0.85rem; }
+
+  .graph-page .gx-rel-legend { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; list-style: none; margin: 0; padding: 0; font-size: 0.75rem; color: var(--color-muted); }
+  .graph-page .gx-swatch { display: inline-block; width: 0.85em; height: 0.85em; border-radius: 2px; margin-right: 0.35em; vertical-align: -0.08em; }
+
+  .graph-page .gx-stage-wrap { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .graph-page .gx-stage { flex: 1 1 60%; min-width: 0; }
+  .graph-page .gx-panel {
+    flex: 0 0 21rem; max-width: 21rem; position: sticky; top: calc(var(--header-h) + 1rem);
+    max-height: calc(100vh - var(--header-h) - 2rem); overflow-y: auto;
+    border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem;
+    background: var(--color-bg);
+  }
+  @media (max-width: 900px) {
+    .graph-page .gx-stage-wrap { flex-direction: column; }
+    .graph-page .gx-panel { position: static; max-width: none; flex: 1 1 auto; max-height: none; width: 100%; box-sizing: border-box; }
   }
 
-  /* ── Toolbar (search + count) ── */
-  .graph-toolbar {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.5rem 0.75rem;
-    background: rgba(255,255,255,0.92);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 10;
-  }
+  .graph-page .gx-loading, .graph-page .gx-empty { color: var(--color-muted); font-style: italic; }
 
-  .graph-search {
-    font-family: var(--font-serif);
-    font-size: 0.9rem;
-    padding: 0.35rem 0.7rem;
-    border: 1px solid var(--color-border);
-    border-radius: 1rem;
-    background: #fff;
-    color: var(--color-text);
-    width: 14rem;
-    outline: none;
-    transition: border-color 0.15s;
+  /* Overview */
+  .graph-page .gx-ov-hint { color: var(--color-muted); font-size: 0.9rem; margin: 0 0 1rem; }
+  .graph-page .gx-ov-group { margin-bottom: 1.1rem; }
+  .graph-page .gx-ov-group h2 { font-size: 1rem; color: var(--color-accent); margin: 0 0 0.45rem; }
+  .graph-page .gx-ov-group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .graph-page .gx-chip {
+    font: inherit; font-size: 0.84rem; cursor: pointer; padding: 0.25rem 0.7rem;
+    border: 1px solid var(--color-border); border-radius: 999px;
+    background: var(--color-surface); color: var(--color-primary);
   }
-  .graph-search:focus { border-color: var(--color-primary); }
+  .graph-page .gx-chip:hover, .graph-page .gx-chip:focus-visible { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
 
-  .graph-node-count {
-    font-size: 0.8rem;
-    color: var(--color-muted);
+  /* Ego SVG */
+  .graph-page .gx-svg { width: 100%; height: auto; }
+  .graph-page .gx-svg text { font-family: var(--font-serif, Georgia, serif); font-size: 12.5px; fill: var(--color-primary); }
+  .graph-page .gx-node { cursor: pointer; }
+  .graph-page .gx-node:hover circle, .graph-page .gx-node:focus-visible circle { stroke: var(--color-accent); stroke-width: 3; }
+  .graph-page .gx-node:hover text { fill: var(--color-accent); }
+  .graph-page .gx-node:focus-visible { outline: none; }
+  .graph-page .gx-center-label { font-weight: 700; font-size: 14.5px; }
+
+  /* Panel */
+  .graph-page .gx-type-chip { display: inline-block; color: #fff; font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 999px; margin-bottom: 0.5rem; }
+  .graph-page .gx-panel-title { font-size: 1.15rem; margin: 0 0 0.4rem; color: var(--color-primary); }
+  .graph-page .gx-panel-sub { font-size: 0.88rem; color: var(--color-muted); margin: 0 0 0.6rem; }
+  .graph-page .gx-open { font-weight: 600; }
+  .graph-page .gx-rel-head { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-muted); margin: 1rem 0 0.3rem; }
+  .graph-page .gx-conn-list { list-style: none; margin: 0; padding: 0; }
+  .graph-page .gx-conn-list li { margin: 0; }
+  .graph-page .gx-conn {
+    display: flex; align-items: baseline; gap: 0.45rem; width: 100%; text-align: left;
+    font: inherit; font-size: 0.9rem; cursor: pointer; padding: 0.28rem 0.3rem;
+    border: none; background: none; color: var(--color-primary); border-radius: 0.3rem;
   }
-
-  /* ── Legend ── */
-  .graph-legend {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    background: rgba(255,255,255,0.95);
-    border-left: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 10;
-    max-width: 100%;
-  }
-
-  .legend-toggle {
-    width: 100%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-serif);
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    padding: 0.45rem 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-  .legend-toggle:hover { background: var(--color-surface); }
-  .legend-chevron { font-size: 0.7rem; }
-
-  .legend-body { padding: 0.25rem 0.5rem 0.5rem; }
-
-  .legend-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: 0.82rem;
-  }
-
-  .legend-swatch {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .legend-label { flex: 1 1 0; color: var(--color-text); }
-  .legend-count {
-    font-size: 0.75rem;
-    color: var(--color-muted);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ── Canvas ── */
-  .graph-canvas-wrapper {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    position: relative;
-    overflow: hidden;
-    background: #f8fafc;
-  }
-
-  .cy-canvas {
-    width: 100%;
-    height: 100%;
-  }
-
-  .graph-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.95rem;
-    color: var(--color-muted);
-    pointer-events: none;
-  }
-
-  /* ── Side panel ── */
-  .graph-side-panel {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    overflow-y: auto;
-    border-left: 1px solid var(--color-border);
-    background: #fff;
-    padding: 1.25rem 1.5rem 2rem;
-  }
-
-  .side-panel-placeholder p {
-    color: var(--color-muted);
-    font-style: italic;
-    font-size: 0.92rem;
-    margin-top: 2rem;
-    text-align: center;
-  }
-
-  .side-loading,
-  .side-error {
-    color: var(--color-muted);
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-  }
-
-  /* ── Forthcoming tooltip ── */
-  .graph-tooltip {
-    position: absolute;
-    background: rgba(0,0,0,0.72);
-    color: #fff;
-    font-size: 0.78rem;
-    padding: 0.2rem 0.55rem;
-    border-radius: 0.3rem;
-    pointer-events: none;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    z-index: 20;
-  }
-
-  /* ── Screen-reader only ── */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  /* ── Mobile: stack vertically ── */
-  @media (max-width: 768px) {
-    .graph-page {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto 55vh auto;
-    }
-    .graph-toolbar { grid-column: 1; grid-row: 1; }
-    .graph-legend  { grid-column: 1; grid-row: 2; border-left: none; border-bottom: 1px solid var(--color-border); }
-    .graph-canvas-wrapper { grid-column: 1; grid-row: 3; }
-    .graph-side-panel { grid-column: 1; grid-row: 4; border-left: none; border-top: 1px solid var(--color-border); }
-  }
+  .graph-page .gx-conn:hover, .graph-page .gx-conn:focus-visible { background: var(--color-surface); color: var(--color-accent); }
+  .graph-page .gx-dot { flex-shrink: 0; width: 0.6rem; height: 0.6rem; border-radius: 50%; align-self: center; }
+  .graph-page .gx-degree { font-size: 0.74rem; color: var(--color-muted); }
 </style>
