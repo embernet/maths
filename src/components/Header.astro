@@ -620,7 +620,7 @@ for (const item of navItems) {
   var BM_KEY = 'mc-bookmarks';
   // Model: { version:2, folders:[{id,name}], bookmarks:[{url,title,ts,folder}] }.
   // Older versions stored a plain array; normalize both into the object form.
-  function normalize(raw) {
+  function bmNormalize(raw) {
     if (Array.isArray(raw)) {
       return { folders: [], bookmarks: raw.map(function (b) { return { url: b.url, title: b.title, ts: b.ts, folder: null }; }) };
     }
@@ -632,7 +632,7 @@ for (const item of navItems) {
     }
     return { folders: [], bookmarks: [] };
   }
-  function readData() { try { return normalize(JSON.parse(localStorage.getItem(BM_KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
+  function readData() { try { return bmNormalize(JSON.parse(localStorage.getItem(BM_KEY) || 'null')); } catch (e) { return { folders: [], bookmarks: [] }; } }
   function writeData(d) { try { localStorage.setItem(BM_KEY, JSON.stringify({ version: 2, folders: d.folders, bookmarks: d.bookmarks })); } catch (e) {} }
   function pageTitle() {
     var t = (document.title || '').replace(/\s*[—-]\s*Mathematics Companion\s*$/, '').trim();
