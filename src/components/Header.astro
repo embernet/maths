@@ -117,28 +117,7 @@ for (const entry of siteConfig.navigation_order ?? []) {
   }
 }
 
-// Short labels for the compact desktop chip nav
-const shortLabels: Record<string, string> = {
-  '00-welcome': 'Welcome',
-  '01-foundations': 'Foundations',
-  '02-core-mathematics': 'Core',
-  '03-specialist-areas': 'Specialist',
-  '04-advanced-topics': 'Advanced',
-  '90-history': 'History',
-  '91-mathematicians': 'Mathematicians',
-  '92-resources': 'Resources',
-  '93-theorems': 'Theorems',
-  '94-applications': 'Applications',
-  '95-definitions': 'Definitions',
-  '96-lean4': 'Lean 4',
-  '97-python': 'Python',
-  '97-nature': 'Nature',
-  '98-r': 'R',
-  '98-about': 'About',
-  '99-graph': 'Graph',
-};
-
-// Flatten groups for the desktop chip strip — show each child as its own chip
+// Flatten nav groups into a slug → item lookup for the grouped dropdown nav.
 const flatNavItems: NavItem[] = [];
 for (const item of navItems) {
   if (item.isGroupParent && item.groupChildren) {
@@ -147,6 +126,25 @@ for (const item of navItems) {
     flatNavItems.push(item);
   }
 }
+const bySlug: Record<string, NavItem> = {};
+for (const item of flatNavItems) bySlug[item.slug] = item;
+
+// Curated top-bar groups (WAI-ARIA disclosure-navigation pattern). The full
+// hierarchy stays in the mobile overlay and the left sidebar; the top bar
+// shows a scannable, scalable grouping instead of 19 flat chips.
+const NAV_GROUPS: { id: string; label: string; slugs: string[]; labels?: Record<string, string> }[] = [
+  { id: 'topics', label: 'Topics', slugs: ['01-foundations', '02-core-mathematics', '03-specialist-areas', '04-advanced-topics'] },
+  { id: 'explore', label: 'Explore', slugs: ['93-theorems', '94-applications', '97-nature', '97-simulation', '90-history', '91-mathematicians', '99-graph'], labels: { '94-applications': 'Applications', '90-history': 'History', '91-mathematicians': 'Mathematicians', '99-graph': 'Connection Explorer' } },
+  { id: 'reference', label: 'Reference', slugs: ['95-definitions', '97-symbols', '92-resources', '98-about'] },
+  { id: 'programming', label: 'Programming', slugs: ['96-lean4', '97-python', '98-r'] },
+];
+const navGroups = NAV_GROUPS.map((g) => ({
+  id: g.id,
+  label: g.label,
+  items: g.slugs
+    .filter((s) => bySlug[s])
+    .map((s) => ({ slug: s, href: bySlug[s].href, label: (g.labels && g.labels[s]) || bySlug[s].label })),
+}));
 ---
 
 <header class="site-header" role="banner">
@@ -169,14 +167,22 @@ for (const item of navItems) {
       <span class="logo-text">Mathematics Companion</span>
     </a>
 
-    <!-- Desktop chip nav (slim row; supplementary to hamburger overlay) -->
-    <nav class="desktop-nav no-print" aria-label="Section navigation">
+    <!-- Grouped primary nav (desktop; disclosure-navigation pattern) -->
+    <nav class="group-nav no-print" aria-label="Primary">
       <ul role="list">
-        {flatNavItems.map((item) => (
-          <li>
-            <a href={item.href} data-slug={item.slug}>
-              {shortLabels[item.slug] ?? item.label}
-            </a>
+        {navGroups.map((g) => (
+          <li class="gn-item">
+            <button type="button" class="gn-btn" aria-expanded="false" aria-controls={`gn-panel-${g.id}`}>
+              {g.label}
+              <svg class="gn-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <ul id={`gn-panel-${g.id}`} class="gn-panel" hidden>
+              {g.items.map((it) => (
+                <li><a href={it.href} data-slug={it.slug}>{it.label}</a></li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
@@ -255,6 +261,10 @@ for (const item of navItems) {
           <line x1="14" y1="2" x2="2" y2="14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
         </svg>
       </button>
+    </div>
+    <div class="overlay-utils">
+      <a href="/bookmarks" class="overlay-util-link">🔖 Bookmarks</a>
+      <a href="/history" class="overlay-util-link">🕑 History</a>
     </div>
     <ul class="overlay-list" role="list">
       {navItems.map((item, idx) => {
@@ -611,13 +621,45 @@ for (const item of navItems) {
     });
   }
 
+  // ---- Grouped nav disclosures (WAI-ARIA disclosure-navigation pattern) ----
+  var gnButtons = Array.prototype.slice.call(document.querySelectorAll('.gn-btn'));
+  function gnClose(btn) {
+    btn.setAttribute('aria-expanded', 'false');
+    var panel = document.getElementById(btn.getAttribute('aria-controls'));
+    if (panel) panel.hidden = true;
+  }
+  function gnCloseAll(except) {
+    gnButtons.forEach(function (b) { if (b !== except) gnClose(b); });
+  }
+  gnButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      gnCloseAll(btn);
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (panel) panel.hidden = open;
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest || !e.target.closest('.gn-item')) gnCloseAll(null);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var openBtn = gnButtons.filter(function (b) { return b.getAttribute('aria-expanded') === 'true'; })[0];
+    if (openBtn) { gnCloseAll(null); openBtn.focus(); }
+  });
+
   // ---- Mark active nav item ----
   var currentPath = window.location.pathname.replace(/\/$/, '') || '/';
-  document.querySelectorAll('.desktop-nav a, .overlay-link').forEach(function(a) {
+  document.querySelectorAll('.gn-panel a, .overlay-link').forEach(function(a) {
     var href = (a.getAttribute('href') || '').replace(/\/$/, '') || '/';
     if (href === currentPath || (href !== '/' && currentPath.startsWith(href))) {
       a.setAttribute('aria-current', 'page');
       a.classList.add('active');
+      // Highlight the group button containing the current section.
+      var item = a.closest ? a.closest('.gn-item') : null;
+      var btn = item && item.querySelector('.gn-btn');
+      if (btn) btn.classList.add('gn-current');
     }
   });
 
@@ -678,7 +720,7 @@ for (const item of navItems) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 5px; /* mobile-only: hidden ≥900px where the grouped dropdowns + sidebar take over (see media query below) */
     background: none;
     border: none;
     cursor: pointer;
@@ -736,6 +778,22 @@ for (const item of navItems) {
     .logo-text { display: none; }
   }
 
+  /* Hamburger is the mobile nav; desktop uses the grouped dropdowns + sidebar. */
+  @media (min-width: 900px) {
+    .hamburger-btn { display: none; }
+  }
+
+  /* Comfortable touch targets on coarse pointers (44px guideline). */
+  @media (pointer: coarse) {
+    .hdr-icon-btn { width: 2.75rem; height: 2.75rem; }
+  }
+
+  /* Very narrow screens: keep the bookmark toggle; the bookmarks/history
+     views stay reachable via the nav overlay and the footer. */
+  @media (max-width: 560px) {
+    .bookmarks-link, .history-link { display: none; }
+  }
+
   /* Bookmark controls */
   .hdr-icon-btn {
     display: inline-flex;
@@ -778,45 +836,74 @@ for (const item of navItems) {
   }
 
   /* Desktop nav (slim chips, hidden on mobile) */
-  .desktop-nav {
+  /* Grouped primary nav (desktop dropdowns; hidden on mobile where the
+     hamburger overlay is the single nav pattern). */
+  .group-nav {
     display: none;
-    flex: 1 1 0;
-    overflow: hidden;
+    flex: 1 1 auto;
     order: 2;
   }
   @media (min-width: 900px) {
-    .desktop-nav { display: block; }
+    .group-nav { display: block; }
   }
-  .desktop-nav ul {
+  .group-nav > ul {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 0.1rem;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
+    gap: 0.25rem;
   }
-  .desktop-nav ul::-webkit-scrollbar { display: none; }
-  .desktop-nav a {
-    display: block;
-    padding: 0.3rem 0.55rem;
-    border-radius: 0.35rem;
-    color: rgba(255,255,255,0.82);
-    text-decoration: none;
-    font-size: 0.78rem;
+  .gn-item { position: relative; }
+  .gn-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font: inherit;
+    font-size: 0.92rem;
+    padding: 0.4rem 0.75rem;
+    border: none;
+    border-radius: 0.4rem;
+    background: none;
+    color: rgba(255,255,255,0.92);
+    cursor: pointer;
     white-space: nowrap;
     transition: background 0.15s, color 0.15s;
   }
-  .desktop-nav a:hover,
-  .desktop-nav a.active {
-    background: rgba(255,255,255,0.15);
-    color: #fff;
+  .gn-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .gn-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+  .gn-btn[aria-expanded="true"] { background: rgba(255,255,255,0.18); color: #fff; }
+  .gn-btn.gn-current { box-shadow: inset 0 -2px 0 var(--color-accent); }
+  .gn-chevron { width: 12px; height: 12px; transition: transform 0.15s; }
+  .gn-btn[aria-expanded="true"] .gn-chevron { transform: rotate(180deg); }
+  .gn-panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 120;
+    min-width: 14rem;
+    margin: 0;
+    padding: 0.35rem;
+    list-style: none;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
   }
-  .desktop-nav a[aria-current="page"],
-  .desktop-nav a.active {
-    background: var(--color-accent);
-    color: #fff;
+  .gn-panel a {
+    display: block;
+    padding: 0.45rem 0.7rem;
+    border-radius: 0.35rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+  .gn-panel a:hover,
+  .gn-panel a:focus-visible { background: var(--color-surface); color: var(--color-accent); }
+  .gn-panel a[aria-current="page"] {
+    color: var(--color-accent);
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--color-accent);
   }
 
   /* Search wrapper */
@@ -945,6 +1032,24 @@ for (const item of navItems) {
     flex-direction: column;
     box-shadow: 4px 0 24px rgba(0,0,0,0.25);
   }
+
+  .overlay-utils {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1rem 0.75rem;
+  }
+  .overlay-util-link {
+    flex: 1 1 0;
+    text-align: center;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.4rem;
+    background: var(--color-surface);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .overlay-util-link:hover { border-color: var(--color-accent); color: var(--color-accent); }
 
   .overlay-header {
     display: flex;
