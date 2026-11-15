@@ -90,13 +90,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 })();
 </script>
 
-<style>
+<!-- is:global because the list items are created at runtime via innerHTML and
+     therefore don't carry Astro's scoped-style attribute. Namespaced under
+     .bookmarks-page so nothing leaks to other pages. -->
+<style is:global>
   .bookmarks-page { padding: 1.5rem 1rem 4rem; }
-  .bookmarks-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
-  .lede { color: var(--color-muted); max-width: 64ch; }
-  .bm-empty { color: var(--color-muted); font-style: italic; }
-  .bm-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
-  .bm-item {
+  .bookmarks-page .bookmarks-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  .bookmarks-page .lede { color: var(--color-muted); max-width: 64ch; }
+  .bookmarks-page .bm-empty { color: var(--color-muted); font-style: italic; }
+  .bookmarks-page .bm-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+  .bookmarks-page .bm-item {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -104,10 +107,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 0.6rem 0.2rem;
     border-bottom: 1px solid var(--color-border);
   }
-  .bm-link { font-weight: 600; color: var(--color-primary); text-decoration: none; font-size: 1.02rem; }
-  .bm-link:hover { color: var(--color-accent); text-decoration: underline; }
-  .bm-date { font-size: 0.78rem; color: var(--color-muted); }
-  .bm-remove {
+  .bookmarks-page .bm-link { font-weight: 600; color: var(--color-primary); text-decoration: none; font-size: 1.02rem; }
+  .bookmarks-page .bm-link:hover { color: var(--color-accent); text-decoration: underline; }
+  .bookmarks-page .bm-date { font-size: 0.78rem; color: var(--color-muted); }
+  .bookmarks-page .bm-remove {
     margin-left: auto;
     font: inherit;
     font-size: 0.78rem;
@@ -118,8 +121,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-muted);
     cursor: pointer;
   }
-  .bm-remove:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
-  .bm-clear {
+  .bookmarks-page .bm-remove:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+  .bookmarks-page .bm-clear {
     font: inherit;
     font-size: 0.82rem;
     padding: 0.25rem 0.7rem;
@@ -129,5 +132,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-muted);
     cursor: pointer;
   }
-  .bm-clear:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
+  .bookmarks-page .bm-clear:hover { color: #fff; background: var(--color-accent); border-color: var(--color-accent); }
 </style>
