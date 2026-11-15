@@ -6,7 +6,9 @@
  * circle tends to π/4, so π ≈ 4 · inside / total.
  */
 import '../../styles/sims.css';
+import SimRuntime from './SimRuntime.astro';
 ---
+<SimRuntime />
 <figure class="sim" data-sim="monte-carlo-pi">
   <figcaption class="sim-caption">
     Throwing random darts at a square to measure π. Points inside the quarter-circle are gold.
@@ -35,12 +37,8 @@ import '../../styles/sims.css';
   var fig = document.querySelector('[data-sim="monte-carlo-pi"]');
   if (!fig) return;
   var canvas = fig.querySelector('#mc-canvas');
-  var ctx = canvas.getContext('2d');
   var W = 400, H = 400; // logical drawing size
-  var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
-  canvas.width = W * dpr; canvas.height = H * dpr;
-  canvas.style.maxWidth = W + 'px';
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  var ctx = window.mcSim.setupCanvas(canvas, W, H);
 
   var estEl = fig.querySelector('#mc-estimate');
   var errEl = fig.querySelector('#mc-error');
@@ -50,13 +48,12 @@ import '../../styles/sims.css';
   var inside = 0, total = 0, running = false, raf = null;
 
   function colors() {
-    var cs = getComputedStyle(fig);
-    return {
-      accent: (cs.getPropertyValue('--color-accent') || '#a77b3f').trim(),
-      primary: (cs.getPropertyValue('--color-primary') || '#1a3a52').trim(),
-      muted: (cs.getPropertyValue('--color-muted') || '#8a8a8a').trim(),
-      bg: (cs.getPropertyValue('--color-surface') || '#f3f1ec').trim()
-    };
+    return window.mcSim.colors(fig, {
+      accent: ['--color-accent', '#a77b3f'],
+      primary: ['--color-primary', '#1a3a52'],
+      muted: ['--color-muted', '#8a8a8a'],
+      bg: ['--color-surface', '#f3f1ec']
+    });
   }
   function drawFrame() {
     var c = colors();

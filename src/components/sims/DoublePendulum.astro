@@ -6,7 +6,9 @@
  * the integration method matters (Euler visibly pumps in energy).
  */
 import '../../styles/sims.css';
+import SimRuntime from './SimRuntime.astro';
 ---
+<SimRuntime />
 <figure class="sim" data-sim="double-pendulum">
   <figcaption class="sim-caption">
     A double pendulum. The motion is completely determined by the laws of physics — yet impossible to predict for long. Release a near-identical twin to see why.
@@ -32,17 +34,13 @@ import '../../styles/sims.css';
   var fig = document.querySelector('[data-sim="double-pendulum"]');
   if (!fig) return;
   var canvas = fig.querySelector('#dp-canvas');
-  var ctx = canvas.getContext('2d');
   var W = 420, H = 380;
-  var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
-  canvas.width = W * dpr; canvas.height = H * dpr;
-  canvas.style.maxWidth = W + 'px';
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  var ctx = window.mcSim.setupCanvas(canvas, W, H);
 
   var OX = W / 2, OY = H * 0.34, L1 = 84, L2 = 84, m1 = 1, m2 = 1;
   var gravEl = fig.querySelector('#dp-grav');
   var methodBtn = fig.querySelector('#dp-method');
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = window.mcSim.reducedMotion();
 
   var running = false, raf = null, twin = null, trace = [], useRK4 = true;
   function startState() { return [Math.PI / 2 + 0.6, 0, Math.PI / 2 + 0.1, 0]; }
@@ -75,13 +73,12 @@ import '../../styles/sims.css';
     return { x1: x1, y1: y1, x2: x1 + L2 * Math.sin(st[2]), y2: y1 + L2 * Math.cos(st[2]) };
   }
   function colors() {
-    var cs = getComputedStyle(fig);
-    return {
-      rod: (cs.getPropertyValue('--color-primary') || '#1a3a52').trim(),
-      bob: (cs.getPropertyValue('--color-accent') || '#a77b3f').trim(),
-      twin: (cs.getPropertyValue('--color-muted') || '#999').trim(),
-      bg: (cs.getPropertyValue('--color-surface') || '#f3f1ec').trim()
-    };
+    return window.mcSim.colors(fig, {
+      rod: ['--color-primary', '#1a3a52'],
+      bob: ['--color-accent', '#a77b3f'],
+      twin: ['--color-muted', '#999'],
+      bg: ['--color-surface', '#f3f1ec']
+    });
   }
   function drawArm(p, rodC, bobC) {
     ctx.strokeStyle = rodC; ctx.lineWidth = 3; ctx.lineCap = 'round';

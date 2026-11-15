@@ -5,7 +5,9 @@
  * nothing. Click/drag to draw cells; play, step, seed, or clear.
  */
 import '../../styles/sims.css';
+import SimRuntime from './SimRuntime.astro';
 ---
+<SimRuntime />
 <figure class="sim" data-sim="game-of-life">
   <figcaption class="sim-caption">
     Conway's Game of Life. Four rules, applied to every cell at once, produce startling structure. Click or drag to draw living cells.
@@ -33,12 +35,8 @@ import '../../styles/sims.css';
   var fig = document.querySelector('[data-sim="game-of-life"]');
   if (!fig) return;
   var canvas = fig.querySelector('#gol-canvas');
-  var ctx = canvas.getContext('2d');
   var W = 480, H = 320, CELL = 8, COLS = W / CELL, ROWS = H / CELL;
-  var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
-  canvas.width = W * dpr; canvas.height = H * dpr;
-  canvas.style.maxWidth = W + 'px';
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  var ctx = window.mcSim.setupCanvas(canvas, W, H);
   var genEl = fig.querySelector('#gol-gen');
   var speed = fig.querySelector('#gol-speed');
 
@@ -48,12 +46,11 @@ import '../../styles/sims.css';
   var idx = function (x, y) { return y * COLS + x; };
 
   function colors() {
-    var cs = getComputedStyle(fig);
-    return {
-      alive: (cs.getPropertyValue('--color-accent') || '#a77b3f').trim(),
-      dead: (cs.getPropertyValue('--color-surface') || '#f3f1ec').trim(),
-      grid: (cs.getPropertyValue('--color-border') || '#ddd').trim()
-    };
+    return window.mcSim.colors(fig, {
+      alive: ['--color-accent', '#a77b3f'],
+      dead: ['--color-surface', '#f3f1ec'],
+      grid: ['--color-border', '#ddd']
+    });
   }
   function draw() {
     var c = colors();

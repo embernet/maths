@@ -1,0 +1,43 @@
+---
+/**
+ * SimRuntime.astro — shared client runtime for in-content simulations:
+ * window.mcSim. Included (guarded) by each sim component so the helpers are
+ * defined once per page, with no copy-paste across sims. See
+ * docs/ENGINEERING_GUIDE.md. Only loads on pages that actually embed a sim.
+ */
+---
+<script is:inline>
+(function () {
+  if (window.mcSim) return;
+  window.mcSim = {
+    // HiDPI-scale a canvas to a logical WxH and return a 2D context that draws
+    // in logical pixels. CSS (max-width) keeps it responsive.
+    setupCanvas: function (canvas, W, H) {
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.maxWidth = W + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return ctx;
+    },
+    // Resolve theme CSS custom properties off an element. `map` is
+    // { localName: '--var' } or { localName: ['--var', fallback] }.
+    colors: function (el, map) {
+      var cs = getComputedStyle(el);
+      var out = {};
+      for (var k in map) {
+        var spec = map[k];
+        var name = (spec && spec.length && typeof spec !== 'string') ? spec[0] : spec;
+        var fallback = (spec && spec.length && typeof spec !== 'string') ? spec[1] : '';
+        var v = (cs.getPropertyValue(name) || '').trim();
+        out[k] = v || fallback;
+      }
+      return out;
+    },
+    reducedMotion: function () {
+      return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }
+  };
+})();
+</script>
