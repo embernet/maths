@@ -8,6 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tagSlug } from '../../lib/tag-slug.mjs';
+import { renderTitleMath } from '../../lib/render-title-math.mjs';
 
 interface Item { title: string; url: string; section?: string; kind?: string; tags?: string[]; }
 
@@ -66,7 +67,7 @@ const sections = Object.keys(bySection).sort();
         <ul class="tag-list" role="list">
           {bySection[sec].map((it) => (
             <li>
-              <a href={it.url}>{it.title}</a>
+              <a href={it.url} set:html={renderTitleMath(it.title)} />
               {it.kind && it.kind !== 'topic' && <span class="tag-kind">{it.kind}</span>}
             </li>
           ))}
